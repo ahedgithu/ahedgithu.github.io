@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Adobe Audition">
+  <rect width="64" height="64" rx="13" fill="#00005B"/>
+  <rect x="5" y="5" width="54" height="54" rx="9" fill="none" stroke="#9999FF" stroke-width="4"/>
+  <text x="13" y="42" fill="#9999FF" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="800">Au</text>
+</svg>
