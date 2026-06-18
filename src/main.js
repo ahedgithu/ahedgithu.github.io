@@ -328,6 +328,7 @@ const semesterFill = document.getElementById('semester-fill')
 const todayMarker = document.getElementById('today-marker')
 const midtermMarker = document.getElementById('midterm-marker')
 const finalsMarker = document.getElementById('finals-marker')
+const semesterDateScale = document.getElementById('semester-date-scale')
 const nextCheckpoint = document.getElementById('next-checkpoint')
 const bookingForm = document.getElementById('booking-form')
 const bookingName = document.getElementById('booking-name')
@@ -569,6 +570,13 @@ function getTimelinePercent(date, startDate, endDate) {
   return clamp(((date.getTime() - start) / (end - start)) * 100, 0, 100)
 }
 
+function formatTimelineDate(date) {
+  return new Intl.DateTimeFormat('en-US', {
+    month: 'short',
+    day: 'numeric'
+  }).format(date)
+}
+
 function renderSemesterTimeline() {
   if (!semesterFill || !todayMarker || !midtermMarker || !finalsMarker) return
 
@@ -583,6 +591,27 @@ function renderSemesterTimeline() {
   todayMarker.style.left = `${todayPercent}%`
   midtermMarker.style.left = `${midtermPercent}%`
   finalsMarker.style.left = '100%'
+
+  if (semesterDateScale) {
+    const ticks = [
+      { label: 'Start', date: semesterStart },
+      { label: 'Midterm', date: midterm },
+      { label: 'Finals', date: finals }
+    ]
+
+    semesterDateScale.innerHTML = ticks.map((tick) => {
+      const percent = getTimelinePercent(tick.date, semesterStart, finals)
+      const isoDate = tick.date.toISOString().slice(0, 10)
+
+      return `
+        <span class="semester-date-scale__tick" style="left: ${percent}%">
+          <i aria-hidden="true"></i>
+          <strong>${tick.label}</strong>
+          <time datetime="${isoDate}">${formatTimelineDate(tick.date)}</time>
+        </span>
+      `
+    }).join('')
+  }
 
   if (nextCheckpoint) {
     nextCheckpoint.textContent = today < midterm ? 'Midterm - Jul 18, 2026' : 'Finals - Sep 19, 2026'
