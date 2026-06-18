@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>History Taking Tool | Ahmed Sayed</title>
+  <meta name="description" content="A student history-taking tool for MED 401 clinical rounds: biodata, complaint, present history, past history, drugs, family history, habits, and review of systems." />
+  <meta property="og:title" content="History Taking Tool | Ahmed Sayed" />
+  <meta property="og:description" content="Interactive MED 401 checklist and case summary builder for general clinical history taking." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="Ahmed Sayed tracker home">
+      <span class="brand__mark">AS</span>
+      <span>
+        <strong>Ahmed Sayed</strong>
+        <small>MED 401 hub</small>
+      </span>
+    </a>
+
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href="/">Tracker</a>
+      <a href="/news.html">News</a>
+      <a href="/history.html">History</a>
+      <a href="/work.html">Work with me</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="history-hero" aria-labelledby="history-title">
+      <div class="section-heading">
+        <p class="eyebrow">Clinical round tool</p>
+        <h1 id="history-title">History taking</h1>
+        <p>
+          A practical general-history checklist for students: collect the patient story, avoid missing core criteria, then copy a clean presentation summary.
+        </p>
+      </div>
+    </section>
+
+    <div class="history-progress" aria-label="History completion">
+      <div>
+        <strong id="history-progress-count">0 / 0</strong>
+        <span>criteria checked</span>
+      </div>
+      <div class="history-progress__bar" aria-hidden="true">
+        <span id="history-progress-fill"></span>
+      </div>
+    </div>
+
+    <section class="history-tool" aria-label="Interactive history-taking form">
+      <form class="history-form" id="history-form">
+        <article class="history-panel history-panel--wide">
+          <div class="history-panel__top">
+            <p class="card__kicker">Opening</p>
+            <span class="status-pill status-pill--open">Start here</span>
+          </div>
+          <div class="history-check-grid">
+            <label><input type="checkbox" data-history-check /> Introduce yourself and confirm patient identity.</label>
+            <label><input type="checkbox" data-history-check /> Ask permission to take the history and to write notes.</label>
+            <label><input type="checkbox" data-history-check /> Confirm the source of history and reliability when relevant.</label>
+            <label><input type="checkbox" data-history-check /> Use open questions first, then focused questions.</label>
+          </div>
+        </article>
+
+        <article class="history-panel">
+          <p class="card__kicker">Biodata</p>
+          <h2>Patient identity</h2>
+          <div class="history-fields">
+            <label><span>Name or initials</span><input name="patientName" type="text" placeholder="e.g. Mr A.S." /></label>
+            <label><span>Sex</span><select name="sex"><option value="">Choose</option><option>Male</option><option>Female</option></select></label>
+            <label><span>Occupation</span><input name="occupation" type="text" placeholder="Current or previous job" /></label>
+            <label><span>Residence</span><input name="residence" type="text" placeholder="City / rural area / address note" /></label>
+            <label><span>Marital status</span><select name="maritalStatus"><option value="">Choose</option><option>Single</option><option>Married</option><option>Divorced</option><option>Widowed</option></select></label>
+            <label><span>History source</span><select name="source"><option value="">Choose</option><option>Patient</option><option>Relative</option><option>Caregiver</option><option>Medical record</option></select></label>
+          </div>
+
+          <details class="history-age">
+            <summary>Age: choose date of birth or type age manually</summary>
+            <div class="history-fields history-fields--two">
+              <label><span>Date of birth</span><input name="dob" type="date" /></label>
+              <label><span>Manual age</span><input name="ageManual" type="text" placeholder="e.g. 54 years" /></label>
+            </div>
+          </details>
+
+          <div class="history-check-list">
+            <label><input type="checkbox" data-history-check /> Name</label>
+            <label><input type="checkbox" data-history-check /> Age</label>
+            <label><input type="checkbox" data-history-check /> Sex</label>
+            <label><input type="checkbox" data-history-check /> Occupation</label>
+            <label><input type="checkbox" data-history-check /> Residence</label>
+          </div>
+        </article>
+
+        <article class="history-panel">
+          <p class="card__kicker">Complaint</p>
+          <h2>Main problem</h2>
+          <div class="history-fields">
+            <label><span>Chief complaint</span><input name="complaint" type="text" placeholder="Patient's own words if possible" /></label>
+            <label><span>Duration</span><input name="duration" type="text" placeholder="e.g. 3 days, 2 months" /></label>
+            <label><span>Mode of onset</span><select name="onset"><option value="">Choose</option><option>Sudden</option><option>Gradual</option><option>Progressive</option><option>Intermittent</option></select></label>
+          </div>
+          <textarea name="hpi" rows="7" placeholder="History of present illness: chronology, progression, associated symptoms, negatives, prior attacks, and what the patient did before coming."></textarea>
+          <div class="history-check-list">
+            <label><input type="checkbox" data-history-check /> Chief complaint in patient's words</label>
+            <label><input type="checkbox" data-history-check /> Duration</label>
+            <label><input type="checkbox" data-history-check /> Chronology and progression</label>
+            <label><input type="checkbox" data-history-check /> Associated symptoms</label>
+            <label><input type="checkbox" data-history-check /> Important negatives</label>
+          </div>
+        </article>
+
+        <article class="history-panel history-panel--wide">
+          <p class="card__kicker">Symptom analysis</p>
+          <h2>Use when the complaint is pain or a focused symptom</h2>
+          <div class="history-fields history-fields--four">
+            <label><span>Site</span><input name="site" type="text" /></label>
+            <label><span>Onset</span><input name="painOnset" type="text" /></label>
+            <label><span>Character</span><input name="character" type="text" placeholder="Burning, colicky, stabbing..." /></label>
+            <label><span>Radiation</span><input name="radiation" type="text" /></label>
+            <label><span>Associated symptoms</span><input name="associations" type="text" /></label>
+            <label><span>Timing / course</span><input name="timing" type="text" /></label>
+            <label><span>Exacerbating factors</span><input name="exacerbating" type="text" /></label>
+            <label><span>Relieving factors</span><input name="relieving" type="text" /></label>
+            <label><span>Severity</span><select name="severity"><option value="">Choose</option><option>Mild</option><option>Moderate</option><option>Severe</option><option>10/10</option></select></label>
+          </div>
+        </article>
+
+        <article class="history-panel">
+          <p class="card__kicker">Past history</p>
+          <h2>Medical, surgical, and admission history</h2>
+          <div class="history-toggle-grid">
+            <label><input type="checkbox" name="hypertension" /> Hypertension</label>
+            <label><input type="checkbox" name="diabetes" /> Diabetes mellitus</label>
+            <label><input type="checkbox" name="cardiac" /> Cardiac disease</label>
+            <label><input type="checkbox" name="renal" /> Renal disease</label>
+            <label><input type="checkbox" name="hepatic" /> Hepatic disease</label>
+            <label><input type="checkbox" name="asthma" /> Asthma / COPD</label>
+          </div>
+          <textarea name="pastHistory" rows="5" placeholder="Other chronic illnesses, previous admissions, blood transfusion, accidents, similar attacks."></textarea>
+          <textarea name="surgicalHistory" rows="4" placeholder="Previous operations: type, date, indication, complications."></textarea>
+          <div class="history-check-list">
+            <label><input type="checkbox" data-history-check /> Chronic diseases</label>
+            <label><input type="checkbox" data-history-check /> Previous admissions</label>
+            <label><input type="checkbox" data-history-check /> Surgical history</label>
+            <label><input type="checkbox" data-history-check /> Blood transfusion / accidents when relevant</label>
+          </div>
+        </article>
+
+        <article class="history-panel">
+          <p class="card__kicker">Drug and allergy history</p>
+          <h2>Current and previous treatment</h2>
+          <textarea name="drugHistory" rows="5" placeholder="Medication name, dose, frequency, duration, compliance, OTC/herbal drugs."></textarea>
+          <textarea name="allergies" rows="4" placeholder="Drug, food, or latex allergy and reaction type."></textarea>
+          <div class="history-check-list">
+            <label><input type="checkbox" data-history-check /> Current medications</label>
+            <label><input type="checkbox" data-history-check /> Dose and compliance</label>
+            <label><input type="checkbox" data-history-check /> Allergies and reaction</label>
+          </div>
+        </article>
+
+        <article class="history-panel">
+          <p class="card__kicker">Vaccination and family</p>
+          <h2>Prevention and relatives</h2>
+          <textarea name="vaccination" rows="4" placeholder="Childhood vaccines, COVID, hepatitis, tetanus, influenza, special vaccines when relevant."></textarea>
+          <textarea name="familyHistory" rows="5" placeholder="Similar condition, hypertension, diabetes, cardiac disease, malignancy, inherited disease, consanguinity."></textarea>
+          <div class="history-check-list">
+            <label><input type="checkbox" data-history-check /> Vaccination history</label>
+            <label><input type="checkbox" data-history-check /> Similar condition in family</label>
+            <label><input type="checkbox" data-history-check /> Hereditary or common family diseases</label>
+          </div>
+        </article>
+
+        <article class="history-panel">
+          <p class="card__kicker">Social and habits</p>
+          <h2>Daily life and exposures</h2>
+          <div class="history-toggle-grid">
+            <label><input type="checkbox" name="smoking" /> Smoking</label>
+            <label><input type="checkbox" name="alcohol" /> Alcohol</label>
+            <label><input type="checkbox" name="substance" /> Substance use</label>
+            <label><input type="checkbox" name="occupationalExposure" /> Occupational exposure</label>
+          </div>
+          <div class="history-conditional" id="smoking-details" hidden>
+            <h3>Smoking details</h3>
+            <div class="history-fields history-fields--three">
+              <label>
+                <span>Type</span>
+                <select name="smokingType">
+                  <option value="">Choose</option>
+                  <option>Cigarettes</option>
+                  <option>Vape</option>
+                  <option>Shisha</option>
+                  <option>Cigar</option>
+                  <option>Other</option>
+                </select>
+              </label>
+              <label><span>Cigarettes per day</span><input name="cigarettesPerDay" type="number" min="0" inputmode="numeric" placeholder="e.g. 20" /></label>
+              <label><span>Duration</span><input name="smokingDuration" type="text" placeholder="e.g. 10 years" /></label>
+            </div>
+          </div>
+          <div class="history-conditional" id="substance-details" hidden>
+            <h3>Substance use details</h3>
+            <div class="history-fields history-fields--two">
+              <label>
+                <span>Type</span>
+                <select name="substanceType">
+                  <option value="">Choose</option>
+                  <option>Cannabis / hashish</option>
+                  <option>Tramadol / opioids</option>
+                  <option>Benzodiazepines / sedatives</option>
+                  <option>Stimulants</option>
+                  <option>Cocaine</option>
+                  <option>Inhalants</option>
+                  <option>Other</option>
+                </select>
+              </label>
+              <label class="history-other-field" id="substance-other-field" hidden>
+                <span>Other substance</span>
+                <input name="substanceOther" type="text" placeholder="Type substance" />
+              </label>
+            </div>
+          </div>
+          <textarea name="socialHistory" rows="5" placeholder="Smoking index, alcohol/substance details, diet, exercise, living conditions, travel, animal contact, occupational exposure."></textarea>
+          <div class="history-check-list">
+            <label><input type="checkbox" data-history-check /> Smoking</label>
+            <label><input type="checkbox" data-history-check /> Alcohol</label>
+            <label><input type="checkbox" data-history-check /> Substance use</label>
+            <label><input type="checkbox" data-history-check /> Occupation and environmental exposure</label>
+          </div>
+        </article>
+
+        <article class="history-panel history-panel--wide">
+          <p class="card__kicker">Review of systems</p>
+          <h2>Screen related systems without turning it into a full lecture</h2>
+          <div class="history-system-grid">
+            <label><input type="checkbox" data-history-check /> General: fever, weight loss, appetite, fatigue</label>
+            <label><input type="checkbox" data-history-check /> Cardiovascular: chest pain, dyspnea, palpitations, edema</label>
+            <label><input type="checkbox" data-history-check /> Respiratory: cough, sputum, wheeze, hemoptysis</label>
+            <label><input type="checkbox" data-history-check /> Gastrointestinal: vomiting, dysphagia, bowel habit, bleeding</label>
+            <label><input type="checkbox" data-history-check /> Urinary: dysuria, frequency, hematuria, urine output</label>
+            <label><input type="checkbox" data-history-check /> Neurologic: headache, weakness, fits, sensory symptoms</label>
+          </div>
+          <textarea name="ros" rows="5" placeholder="Focused review of systems and important negatives."></textarea>
+        </article>
+      </form>
+
+      <aside class="history-summary" aria-labelledby="summary-title">
+        <div class="history-summary__top">
+          <div>
+            <p class="card__kicker">Presentation draft</p>
+            <h2 id="summary-title">Case summary</h2>
+          </div>
+          <button class="primary-action" id="copy-history-summary" type="button">Copy</button>
+        </div>
+        <pre id="history-summary-text">Fill the form to generate a presentation summary.</pre>
+        <p class="history-note">
+          For learning support only. Students should follow local department instructions and patient privacy rules.
+        </p>
+      </aside>
+    </section>
+  </main>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

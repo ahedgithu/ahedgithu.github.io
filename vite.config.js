@@ -6,7 +6,8 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
-        updates: resolve(__dirname, 'updates.html'),
+        news: resolve(__dirname, 'news.html'),
+        history: resolve(__dirname, 'history.html'),
         work: resolve(__dirname, 'work.html'),
       },
     },

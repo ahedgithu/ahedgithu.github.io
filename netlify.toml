@@ -5,7 +5,22 @@
 
 [[redirects]]
   from = "/updates"
-  to = "/updates.html"
+  to = "/news.html"
+  status = 301
+
+[[redirects]]
+  from = "/updates.html"
+  to = "/news.html"
+  status = 301
+
+[[redirects]]
+  from = "/news"
+  to = "/news.html"
+  status = 200
+
+[[redirects]]
+  from = "/history"
+  to = "/history.html"
   status = 200
 
 [[redirects]]
