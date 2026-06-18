@@ -1,5 +1,3 @@
-import './style.css'
-
 const subjects = [
   {
     code: 'SUR-1',
