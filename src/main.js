@@ -42,7 +42,7 @@ const subjects = [
         label: 'Liver Trauma and Infections',
         state: 'taken',
         art: 3,
-        note: 'Hepatobiliary lecture continued through amoebic hepatitis and abscess.',
+        note: 'Hepatobiliary surgery coverage includes amoebic hepatitis and abscess.',
         lectureUrls: [
           { label: 'Lecture', url: 'https://docs.google.com/presentation/d/1yjIUZolwSkC9DLnvTGCWBsxtPMuqalgY/edit?usp=drivesdk&ouid=109054155258701630059&rtpof=true&sd=true' }
         ],
@@ -52,7 +52,7 @@ const subjects = [
         label: 'Cirrhosis, portal hypertension and hepatic vascular disease',
         state: 'taken',
         art: 8,
-        note: 'Includes esophageal varices, liver transplantation, Budd-Chiari syndrome, portal vein thrombosis, and splenic vein thrombosis.',
+        note: 'Tuesday report: cirrhosis, portal hypertension, esophageal varices, liver transplantation, Budd-Chiari syndrome, portal vein thrombosis, and splenic vein thrombosis.',
         audioUrl: 'https://drive.google.com/file/d/1t1i2zjXOYw9jaSdIRYn1GvBOrsToq30u/view?usp=drivesdk'
       },
       { label: 'Tongue', state: 'remaining', art: 2 },
@@ -171,6 +171,7 @@ const subjects = [
         state: 'taken',
         art: 10,
         section: 'Chest',
+        note: 'Tuesday report: diseases of upper and lower airways and bronchial asthma part 1.',
         lectureUrls: [
           { label: 'Lecture', url: 'https://drive.google.com/file/d/133Ae9Po7wzSJBOf-GqANHRBHmPBufviI/view?usp=drivesdk' }
         ]
@@ -213,7 +214,7 @@ const subjects = [
   {
     code: 'NUT',
     name: 'Nutrition',
-    totalCount: 8,
+    totalCount: 9,
     examNote: 'Midterm starts Jul 18, 2026. Exact NUT schedule pending.',
     topics: [
       {
@@ -233,6 +234,12 @@ const subjects = [
           { label: 'Lecture', url: 'https://drive.google.com/file/d/1q5b51GzxLYXT-iOOLfA1M1KnigeJTE1b/view?usp=drivesdk' }
         ],
         audioUrl: 'https://drive.google.com/file/d/1Lr0LftsOc_-uhH2X82uqzJ0eSkUWgSDz/view?usp=drivesdk'
+      },
+      {
+        label: 'Food Borne Diseases Part 2',
+        state: 'taken',
+        art: 13,
+        note: 'Wednesday report: viral foodborne infections including polio virus and hepatitis A/E viruses.'
       },
       { label: 'Iodine', state: 'remaining', art: 13 },
       { label: 'Nutrition in elderly', state: 'remaining', art: 13 },
@@ -270,7 +277,18 @@ const subjects = [
         audioUrl: 'https://drive.google.com/file/d/168l5PhCSMGsl3GWyVeFpDiw8WEWaJlmC/view?usp=drivesdk'
       },
       { label: 'Clinical Pathology Research Assignment', state: 'remaining', art: 14 },
-      { label: 'Lipid profile', state: 'remaining', art: 14 },
+      {
+        label: 'Diabetes mellitus & disorders of plasma lipids and lipoproteins',
+        state: 'taken',
+        art: 14,
+        note: 'Wednesday report: combined LAB topic. The lecture map currently covers the diabetes/glucose-testing lecture only.',
+        lectureUrls: [
+          { label: 'Diabetes map', url: '/assets/diabetes-glucose-testing-map-v1.png' }
+        ],
+        pdfUrls: [
+          { label: 'Download PDF', url: '/assets/diabetes-glucose-testing-map-v1.pdf', download: true }
+        ]
+      },
       { label: 'WBCs and leukemia', state: 'remaining', art: 12 },
       { label: 'Microbiology', state: 'remaining', art: 14 }
     ]
@@ -294,7 +312,7 @@ const subjects = [
         label: 'Monitoring and Fluid Therapy',
         state: 'taken',
         art: 15,
-        note: 'Continuation taken on Jun 16.',
+        note: 'Tuesday report: continuation of monitoring and fluid therapy.',
         lectureUrls: [
           { label: 'Lecture', url: 'https://drive.google.com/file/d/1ICi7ExmMJ3zhXnp-dfh0rlHo0cEYub0E/view?usp=drivesdk' }
         ],
