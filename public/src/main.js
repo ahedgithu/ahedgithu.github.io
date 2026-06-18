@@ -103,7 +103,11 @@ const subjects = [
         state: 'taken',
         art: 5,
         lectureUrls: [
-          { label: 'Lecture', url: 'https://drive.google.com/file/d/1LQ-zgjWNlzGar7OgfX1WhBxkqvsTIAhQ/view?usp=drivesdk' }
+          { label: 'Lecture', url: 'https://drive.google.com/file/d/1LQ-zgjWNlzGar7OgfX1WhBxkqvsTIAhQ/view?usp=drivesdk' },
+          { label: 'Hepatitis map', url: '/assets/acute-viral-hepatitis-map-v3.png' }
+        ],
+        pdfUrls: [
+          { label: 'Download PDF', url: '/assets/acute-viral-hepatitis-map-v3.pdf', download: true }
         ],
         audioUrl: 'https://drive.google.com/file/d/1pCiruJJQ6rB84pyxeGy_NUY5QMUzDJVi/view?usp=drivesdk'
       },
@@ -173,7 +177,11 @@ const subjects = [
         section: 'Chest',
         note: 'Tuesday report: diseases of upper and lower airways and bronchial asthma part 1.',
         lectureUrls: [
-          { label: 'Lecture', url: 'https://drive.google.com/file/d/133Ae9Po7wzSJBOf-GqANHRBHmPBufviI/view?usp=drivesdk' }
+          { label: 'Lecture', url: 'https://drive.google.com/file/d/133Ae9Po7wzSJBOf-GqANHRBHmPBufviI/view?usp=drivesdk' },
+          { label: 'Asthma map', url: '/assets/asthma-guidelines-map-v1.png' }
+        ],
+        pdfUrls: [
+          { label: 'Download PDF', url: '/assets/asthma-guidelines-map-v1.pdf', download: true }
         ]
       },
       { label: 'COPD', state: 'remaining', art: 10, section: 'Chest' },
@@ -239,7 +247,13 @@ const subjects = [
         label: 'Food Borne Diseases Part 2',
         state: 'taken',
         art: 13,
-        note: 'Wednesday report: viral foodborne infections including polio virus and hepatitis A/E viruses.'
+        note: 'Wednesday report: viral foodborne infections including polio virus and hepatitis A/E viruses.',
+        lectureUrls: [
+          { label: 'Foodborne map', url: '/assets/foodborne-viral-part2-map-v1.png' }
+        ],
+        pdfUrls: [
+          { label: 'Download PDF', url: '/assets/foodborne-viral-part2-map-v1.pdf', download: true }
+        ]
       },
       { label: 'Iodine', state: 'remaining', art: 13 },
       { label: 'Nutrition in elderly', state: 'remaining', art: 13 },
@@ -272,7 +286,11 @@ const subjects = [
         state: 'taken',
         art: 14,
         lectureUrls: [
-          { label: 'Lecture', url: 'https://drive.google.com/file/d/1RkmsX-_jlL3klayg5fvPwk6gk-LYPYHA/view?usp=drivesdk' }
+          { label: 'Lecture', url: 'https://drive.google.com/file/d/1RkmsX-_jlL3klayg5fvPwk6gk-LYPYHA/view?usp=drivesdk' },
+          { label: 'Biomarkers map', url: '/assets/cardiac-biomarkers-map-v1.png' }
+        ],
+        pdfUrls: [
+          { label: 'Download PDF', url: '/assets/cardiac-biomarkers-map-v1.pdf', download: true }
         ],
         audioUrl: 'https://drive.google.com/file/d/168l5PhCSMGsl3GWyVeFpDiw8WEWaJlmC/view?usp=drivesdk'
       },
@@ -314,7 +332,11 @@ const subjects = [
         art: 15,
         note: 'Tuesday report: continuation of monitoring and fluid therapy.',
         lectureUrls: [
-          { label: 'Lecture', url: 'https://drive.google.com/file/d/1ICi7ExmMJ3zhXnp-dfh0rlHo0cEYub0E/view?usp=drivesdk' }
+          { label: 'Lecture', url: 'https://drive.google.com/file/d/1ICi7ExmMJ3zhXnp-dfh0rlHo0cEYub0E/view?usp=drivesdk' },
+          { label: 'Monitoring map', url: '/assets/monitoring-fluid-therapy-map-v1.png' }
+        ],
+        pdfUrls: [
+          { label: 'Download PDF', url: '/assets/monitoring-fluid-therapy-map-v1.pdf', download: true }
         ],
         audioUrl: 'https://drive.google.com/file/d/1o1biv_U_2DBaIVnJPvbN5UXlmPfSkGlq/view?usp=drivesdk'
       },
