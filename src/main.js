@@ -253,7 +253,10 @@ const subjects = [
         state: 'taken',
         art: 5,
         lectureUrls: [
-          { label: 'Lecture', url: 'https://drive.google.com/file/d/154Sxxn2R_Y-6l2i3pvhFtWP_Roi_GR0Q/view?usp=drivesdk' }
+          { label: 'Lecture map', url: '/assets/lft-full-lecture-map-v2.png' }
+        ],
+        pdfUrls: [
+          { label: 'Download PDF', url: '/assets/lft-full-lecture-map-v2.pdf', download: true }
         ],
         audioUrl: 'https://drive.google.com/file/d/122BV8-mfoCWNXt979EaO2ZkMGbGuHpm5/view?usp=drivesdk'
       },
@@ -380,8 +383,9 @@ function getSubjectSummary(subject) {
 
 function getResourceItems(topic) {
   const lectureItems = (topic.lectureUrls || []).map((item) => ({ ...item, type: 'lecture' }))
+  const pdfItems = (topic.pdfUrls || []).map((item) => ({ ...item, type: 'pdf' }))
   const audioItem = topic.audioUrl ? [{ label: 'Audio', url: topic.audioUrl, type: 'audio' }] : []
-  return [...lectureItems, ...audioItem]
+  return [...lectureItems, ...pdfItems, ...audioItem]
 }
 
 function renderResourceLinks(topic) {
@@ -389,7 +393,7 @@ function renderResourceLinks(topic) {
 
   const resources = getResourceItems(topic)
   const links = resources.map((item) => `
-    <a class="topic-resource topic-resource--${item.type}" href="${item.url}" target="_blank" rel="noopener noreferrer">
+    <a class="topic-resource topic-resource--${item.type}" href="${item.url}" target="_blank" rel="noopener noreferrer"${item.download ? ' download' : ''}>
       ${item.label}
     </a>
   `).join('')

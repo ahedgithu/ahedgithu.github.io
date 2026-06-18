@@ -1259,6 +1259,12 @@ main {
   border-color: rgba(54, 211, 153, 0.3);
 }
 
+.topic-resource--pdf {
+  border-color: rgba(216, 178, 77, 0.34);
+  color: #f5d77b;
+  background: rgba(216, 178, 77, 0.1);
+}
+
 .topic-resource--pending {
   color: rgba(244, 245, 247, 0.48);
   border-style: dashed;
