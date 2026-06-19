@@ -358,3 +358,123 @@ window.mcqQuizzes = {
     }
   ]
 }
+
+;(() => {
+  const sourceNote = (page) => `Answer key from Ain Shams 2.pdf, source page ${page}.`
+  const q = (question, choices, answerIndex, page) => ({
+    question,
+    choices,
+    answerIndex,
+    explanation: sourceNote(page)
+  })
+  const addAinShamsSource = (topicLabel, mcqs, description) => {
+    const current = window.mcqQuizzes[topicLabel]
+    if (!current || !mcqs.length) return
+
+    const currentSource = Array.isArray(current)
+      ? { id: 'current', label: 'Current MCQs', mcqs: current }
+      : {
+        id: 'current',
+        label: current.label || 'Current MCQs',
+        mcqs: current.mcqs || [],
+        quizSize: current.quizSize || null,
+        shuffleQuestions: current.shuffleQuestions || false,
+        shuffleOptions: current.shuffleOptions || false
+      }
+
+    const existingSources = current.sources || [currentSource]
+    window.mcqQuizzes[topicLabel] = {
+      ...(!Array.isArray(current) ? current : {}),
+      sources: [
+        ...existingSources.filter((source) => source.id !== 'ain-shams'),
+        {
+          id: 'ain-shams',
+          label: 'Ain Shams MCQs',
+          description,
+          mcqs
+        }
+      ]
+    }
+  }
+
+  addAinShamsSource('Oesophagus: surgical anatomy and physiology', [
+    q('The normal pressure of the lower oesophageal sphincter is:', ['5-40 cm H2O', '10-20 cm H2O', '20-30 cm H2O', '30-40 cm H2O'], 3, 67),
+    q('The most common form of oesophageal atresia is:', ['Lower segment opens into trachea', 'Upper segment opens into trachea', 'Both segments open into trachea', 'Both segments end blindly'], 0, 67),
+    q('The major cause of death in infants with oesophageal atresia is:', ['Aspiration pneumonia', 'Diarrhea and dehydration', 'Anesthetic complications', 'Associated anomalies', 'Vomiting and malnutrition'], 3, 67),
+    q('The carcinoma common in Barrett oesophagus is:', ['Squamous cell cancer', 'Adenocarcinoma', 'Transitional cell carcinoma', 'All of the above'], 1, 67),
+    q('Which tests are helpful in assessing operability of oesophageal cancer?', ['Oesophagoscopy', 'CT scan', 'Barium swallow', 'Endoluminal ultrasonography', 'B and D'], 4, 69),
+    q('Regarding oesophageal cancer, spot the wrong statement:', ['Geographical variation', 'Increasing occurrence of adenocarcinoma', 'Bad prognosis with coeliac node involvement', 'Early endoscopy is the key to good result', 'All are true'], 4, 69),
+    q('The best treatment for ulcerative carcinoma at the cardia is:', ['Radiotherapy', 'Surgery', 'Radiotherapy plus chemotherapy', 'Surgery followed by radiotherapy'], 1, 69),
+    q('Treatment of oesophageal cancer includes all except:', ['Feeding gastrostomy', 'Curative resection', 'Radical radiotherapy', 'Palliative laser ablation and stenting for dysphagia'], 0, 69),
+    q('Massive upper gastrointestinal bleeding after violent retching and vomiting is most likely due to:', ['Hiatus hernia', 'Mallory-Weiss tear', 'Carcinoma of the stomach', 'Duodenal ulcer', 'Gastritis'], 1, 69),
+    q('The most frequent site of spontaneous rupture of the oesophagus is:', ['Lower third', 'Level of carina', 'Above level of cricoid', 'None of the above'], 0, 69),
+    q('A suspected oesophageal perforation should be immediately investigated with:', ['Barium swallow', 'CT chest', 'Oesophagoscopy', 'Gastrografin swallow'], 3, 69),
+    q('In diaphragmatic inflammation, pain is referred to:', ['C8-T1', 'T11-T12', 'T9-T10', 'C3-C5'], 3, 69)
+  ], 'Oesophagus anatomy, atresia, cancer, rupture, and perforation from Ain Shams 2.pdf.')
+
+  addAinShamsSource('Esophagus: achalasia, hiatus hernia, GERD', [
+    q('Which of the following contributes to prevent gastro-oesophageal reflux?', ['Angle of His', 'Pinchcock action of right crus', 'Rosette-like folds of the gastric mucosa at the cardia', 'All of the above'], 3, 67),
+    q('Reflux oesophagitis should be suspected from:', ['Retrosternal pain mimicking angina', 'Dysphagia', 'Heartburn', 'Positive stool occult blood', 'All of the above'], 4, 67),
+    q('The gold standard for measuring gastro-oesophageal reflux is:', ['GI endoscopy', 'Barium study', 'pH measurement', 'CT scan'], 2, 67),
+    q('Which operation is best for gastro-oesophageal reflux?', ['Nissen procedure', 'Belsey operation', 'Hill procedure', 'All are effective'], 3, 67),
+    q('Which form of hiatus hernia is dangerous?', ['Sliding', 'Rolling', 'Both of the above', 'None of the above'], 1, 68),
+    q('In achalasia, the physiologic disturbances include:', ['Loss of ganglion cells in oesophagus', 'Absent peristalsis in the body of oesophagus', 'Incomplete and delayed relaxation of LES', 'All of the above'], 3, 68),
+    q('Manometric findings in achalasia show:', ['Low LES pressure with no relaxation on swallowing', 'High LES pressure with inadequate relaxation on swallowing', 'High LES pressure with normal relaxation on swallowing', 'None of the above'], 1, 68),
+    q('Barium swallow findings of achalasia include:', ['Dilatation, tortuosity and S-shaped bend in lower oesophagus with wide mediastinum', 'Lack of fundal gas', 'Incoordinated peristalsis hypersensitive to acetylcholine', 'All of the above'], 3, 68),
+    q('What is not true of achalasia?', ['Increased incidence of carcinoma', 'Relief with local injection of botulinum toxin', 'Proximal esophagus contains few ganglion cells', 'All are true'], 3, 68),
+    q('In Heller operation for achalasia, the incision should be all except:', ['Longitudinal', 'Placed anteriorly', 'Divides circular muscles only', 'Divides circular and longitudinal muscle fibres up to mucosa'], 2, 68),
+    q('The most common late complication of Heller operation for achalasia is:', ['Recurrent dysphagia', 'Reflux oesophagitis', 'None of the above', 'All of the above'], 1, 68),
+    q('Achalasia is associated with all of the following except:', ['Chagas disease in South America', 'Dysphagia', 'Weight loss', 'Relaxation of the lower oesophageal sphincter with swallowing', 'Aspiration pneumonia, which may cause lung abscesses'], 3, 68)
+  ], 'Reflux, hiatus hernia, and achalasia questions from Ain Shams 2.pdf.')
+
+  addAinShamsSource('Liver Trauma and Infections', [
+    q('Multiple liver abscesses are suggestive of:', ['Pylephlebitis', 'Suppurative cholangitis', 'Septicemia', 'All of the above'], 3, 82),
+    q('All are true of pus of amoebic liver abscess except:', ['Chocolate coloured', 'Very often green due to pseudomonas', 'Contains E. coli and gram-positive cocci', 'Motile amoeba can be discovered in the wall'], 1, 82),
+    q('Regarding pyogenic abscess of the liver, all are true except:', ['The right lobe is more commonly involved than the left lobe', 'Benign or malignant biliary obstruction is the underlying cause in many cases', 'Percutaneous catheter drainage under CT or ultrasound guidance is a good treatment option', 'Mortality is less than amoebic liver abscess'], 3, 82),
+    q('Regarding hydatid disease, all are true except:', ['It is due to Entamoeba histolytica', 'Man is an accidental intermediate host', 'The liver is the commonest site of infection', 'The false capsule is formed by host'], 0, 82),
+    q('Diagnosis of hydatid liver disease is by all except:', ['Ultrasound', 'CT scan', 'Needle aspiration', 'ELISA'], 2, 82),
+    q('The most common complication of hepatic hydatid disease is:', ['Anaphylactic shock', 'Rupture into peritoneal cavity', 'Suppuration', 'Rupture into biliary channel'], 3, 82)
+  ], 'Liver abscess and hydatid disease questions from Ain Shams 2.pdf.')
+
+  addAinShamsSource('Cirrhosis, portal hypertension and hepatic vascular disease', [
+    q('Which is not included in Child classification of liver failure?', ['Severity of encephalopathy', 'Serum albumin', 'Prothrombin time', 'State of nutrition', 'Alanine aminotransferase'], 4, 79),
+    q('An alcoholic patient has bilirubin 3 mg/dL, PT 16 seconds with control 12 seconds, albumin 3 g/dL, no ascites and no encephalopathy. What is the Child-Pugh grade?', ['A', 'B', 'C'], 1, 79),
+    q('The recognized complications of cirrhosis are all except:', ['Ascites', 'Portal hypertension', 'Hepatic failure', 'Hepatic rupture', 'Hepatoma'], 3, 79),
+    q('In long-standing compensated cirrhosis, sudden deterioration can occur due to:', ['Hepatoma', 'Portosystemic encephalopathy', 'Spontaneous bacterial peritonitis', 'All of the above'], 3, 79),
+    q('Pringle maneuver refers to:', ['Clamp over IVC', 'Clamp over hepatic vein', 'Clamp across foramen of Winslow', 'Clamp across splenic artery'], 2, 79),
+    q('In splenic vein thrombosis, collaterals develop around:', ['Lower end of oesophagus', 'Fundus of stomach', 'Umbilicus', 'Anus'], 1, 79),
+    q('Portal pressure 30 mm Hg with normal hepatic venous wedge pressure may be associated with all except:', ['Portal vein thrombosis', 'Alcoholic cirrhosis', 'Schistosomiasis'], 1, 80),
+    q('Which complication of portal hypertension often requires surgical intervention?', ['Hypersplenism', 'Variceal hemorrhage', 'Ascites', 'Encephalopathy'], 1, 80),
+    q('Concerning variceal hemorrhage pathophysiology, choose the correct answer:', ['All patients with portal hypertension develop oesophageal varices', 'All patients with oesophageal varices eventually bleed', 'Variceal size can predict incidence of variceal hemorrhage', 'H2 blockade cannot decrease rebleeding after oesophageal hemorrhage'], 2, 80),
+    q('Spot the wrong statement about gastro-oesophageal bleeding:', ['Bleeding may be severe enough to cause collapse', 'Endoscopic sclerotherapy can arrest bleeding', 'Prophylactic sclerotherapy in GE varices obviates bleeding and prolongs survival', 'Tamponade by Sengstaken tube is effective'], 2, 80),
+    q('Which treatment most effectively preserves hepatic portal perfusion?', ['Distal splenorenal shunt', 'Conventional splenorenal shunt', 'Endoscopic sclerotherapy', 'Side-to-side portacaval shunt'], 2, 81),
+    q('Which shunt is associated with the lowest risk of hepatic encephalopathy?', ['Mesocaval shunt', 'Proximal splenorenal shunt', 'Distal splenorenal shunt (Warren shunt)', 'Side-to-side portocaval shunt'], 2, 81),
+    q('Problems with balloon tamponade for control of variceal bleeding include all except:', ['Pneumonia', 'Aspiration of nasopharyngeal secretions', 'Rebleeding after tube removal', 'Gastritis', 'Oesophageal ulceration or perforation'], 3, 81),
+    q('Variceal bleeding not responding to drug treatment and sclerotherapy is treated by:', ['Embolisation', 'Surgical ligation', 'TIPSS', 'Liver transplant'], 2, 81),
+    q('Before adopting TIPSS one must exclude:', ['Cardiovascular disease', 'Portal vein occlusion', 'IVC obstruction', 'All of the above'], 1, 81),
+    q('Variceal bleeding secondary to portal vein thrombosis is best treated by:', ['TIPSS', 'Sclerotherapy', 'Gastro-oesophageal devascularisation', 'Octreotide'], 2, 81),
+    q('Intrahepatic biliary lakes with stones characterize:', ['Hepatic polycystic disease', 'Primary biliary cirrhosis', 'Caroli disease', 'Cholangitis'], 2, 81),
+    q('The most common benign tumor of liver is:', ['Adenoma', 'Cavernous haemangioma', 'Cholangioadenoma', 'None of the above'], 1, 82),
+    q('Regarding hepatic haemangioma, all are true except:', ['Males are affected more than females', 'Steroids, estrogen and pregnancy can increase the size of an existing haemangioma', 'Usually small and asymptomatic', 'On ultrasound, haemangiomas appear as hyperechoic lesions', 'Spiral CT shows centripetal enhancement'], 0, 83),
+    q('Regarding benign liver tumours, all are true except:', ['Haemangiomas are the most common benign liver tumors', 'Focal nodular hyperplasia is the second most common benign liver tumor', 'Hepatocellular adenomas are less common and may be multiple', 'There is relation between FNH and hepatic adenoma with oral contraceptives', 'Hepatic adenomas do not turn malignant'], 4, 83),
+    q('Concerning focal nodular hyperplasia, all are true except:', ['The lesion predominantly affects young women', 'There is no clear relationship between oral contraceptives and FNH', 'Radionucleotide scanning can be useful in specific diagnosis', 'Excisional biopsy is indicated in almost all cases because of bleeding risk'], 3, 83),
+    q('Worldwide, the most important predisposing factor for hepatocellular carcinoma is:', ['Alcoholic cirrhosis', 'Hepatitis B infection', 'Hepatitis C infection', 'Chronic liver disease of any etiology'], 1, 83),
+    q('Regarding hepatocellular carcinoma, all are true except:', ['May complicate hepatitis B infection', 'May present with rupture and peritoneal bleeding', 'Alpha-fetoprotein is a useful tumor marker', 'Never complicates alcoholic cirrhosis', 'Liver transplantation is an option in some cases'], 3, 84),
+    q('To exclude onset of hepatoma in a cirrhotic patient, the test of choice is:', ['Ultrasound', 'CT', 'Alpha-fetoprotein', 'None of the above'], 2, 84),
+    q('A chronic alcoholic with cirrhosis, a right-lobe liver mass and elevated alpha-fetoprotein most likely has:', ['Hepatocellular adenoma', 'Hepatocellular carcinoma', 'Metastatic colon carcinoma', 'Regenerating nodule of cirrhosis', 'Focal nodular hyperplasia'], 1, 84),
+    q('Most primary and metastatic tumours to the liver derive nearly all their blood supply from:', ['Portal vein', 'Hepatic artery', 'Collateral circulation', 'Coeliac axis'], 1, 84),
+    q('As regards treatment of HCC, choose the correct answer:', ['Liver resection for solitary HCC in Child A and B patients', 'Liver transplantation is indicated in Child C patients with a single HCC up to 5 cm', 'Ablation is considered in selected small tumors', 'Traditional chemotherapy is generally ineffective', 'All are true'], 4, 84),
+    q('As regards treatment of HCC, all are true except:', ['Liver resection is treatment of choice in normal livers and localized Child A cirrhosis', 'Liver transplantation is treatment of choice in Child C patients with limited localized tumor', 'Radiofrequency is successful in tumors up to 10 cm', 'TACE depends on HCC receiving almost all its blood supply from the artery'], 2, 84),
+    q('Concerning treatment and prognosis of HCC, all are true except:', ['Fibrolamellar variant has a better prognosis', 'Untreated HCC rarely survives a year', 'Chemotherapy is extremely effective in HCC', 'Hepatic artery ligation or embolization cannot be used in compromised liver function'], 2, 85),
+    q('Which is not true for patient selection in TACE for HCC?', ['HCC, cholangiocarcinoma and metastatic colorectal tumors are more responsive to TACE', 'TACE can be safely given in compromised liver function', 'Portal vein patency should be evaluated carefully', 'Liver function has to be considered before TACE'], 1, 86),
+    q('Which is a contraindication for radiofrequency ablation of HCC?', ['Close proximity of tumor to bile duct or portal vein', 'RFA has been used as a bridge for liver transplantation', 'RFA is given in multiple lesions fewer than three', 'The upper size limit of a single lesion is 5 cm'], 0, 86),
+    q('Which is not a mechanism of ethanol when used in ablation of liver tumors?', ['Coagulation necrosis of tissues', 'Heat dissipation', 'Thrombosis of blood vessels', 'Decreased platelet function'], 1, 86),
+    q('In a healthy patient with colorectal carcinoma and a 2 cm liver metastasis, treatment of choice is:', ['Resection', 'Ethanol injection', 'Liver transplantation', 'Radiofrequency ablation'], 0, 86),
+    q('Refractory ascites of cirrhosis can be treated by:', ['TIPS', 'IV infusion of salt-poor albumin', 'Peritoneal-jugular shunt', 'All of the above'], 3, 86),
+    q('The most feared complication of Denver shunt is:', ['Infection', 'Malfunction', 'DIC', 'Rupture'], 2, 87),
+    q('In Budd-Chiari syndrome, the occlusion is at the:', ['IVC', 'Renal vein', 'Hepatic vein', 'Splenic vein'], 2, 87),
+    q('All statements regarding Budd-Chiari syndrome are true except:', ['Can occur due to thrombosis of portal vein', 'Presents with abdominal pain, ascites and hepatomegaly', 'Liver transplantation is an effective treatment', 'Caudate lobe hypertrophy is often present'], 0, 87),
+    q('A small cirrhotic liver with grossly enlarged caudate lobe demands exclusion of:', ['Portal vein thrombosis', 'Budd-Chiari syndrome', 'Hepatoma', 'Primary sclerosing cholangitis'], 1, 87),
+    q('Which protein is not primarily synthesized in the liver?', ['Albumin', 'Fibrinogen', 'von Willebrand factor', 'Transferrin', 'Factor VII'], 2, 87)
+  ], 'Cirrhosis, portal hypertension, varices, HCC, ascites, and Budd-Chiari questions from Ain Shams 2.pdf.')
+})()

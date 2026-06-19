@@ -364,6 +364,8 @@ const QUIZ_STORAGE_PREFIX = 'mcq-progress-'
 const mcqQuizzes = window.mcqQuizzes || {}
 const quizState = {
   topicLabel: null,
+  sourceId: 'current',
+  sourceLabel: 'Current MCQs',
   index: 0,
   answers: {}
 }
@@ -560,8 +562,8 @@ function renderResourceLinks(topic) {
   if (!coveredStates.has(topic.state)) return ''
 
   const resources = getResourceItems(topic)
-  const quizConfig = getQuizConfig(topic.label)
-  const quizCount = quizConfig?.mcqs?.length || 0
+  const quizSources = getQuizSources(topic.label)
+  const quizCount = quizSources.reduce((total, source) => total + source.mcqs.length, 0)
   const links = resources.map((item) => `
     <a class="topic-resource topic-resource--${item.type}" href="${item.url}" target="_blank" rel="noopener noreferrer"${item.download ? ' download' : ''}>
       ${item.label}
@@ -682,15 +684,15 @@ function ensureQuizModal() {
   return modal
 }
 
-function getQuizStorageKey(topicLabel) {
-  return `${QUIZ_STORAGE_PREFIX}${encodeURIComponent(topicLabel)}`
+function getQuizStorageKey(topicLabel, sourceId = quizState.sourceId || 'current') {
+  return `${QUIZ_STORAGE_PREFIX}${encodeURIComponent(topicLabel)}::${encodeURIComponent(sourceId)}`
 }
 
-function getSavedQuizState(topicLabel) {
+function getSavedQuizState(topicLabel, sourceId = 'current') {
   try {
-    return JSON.parse(localStorage.getItem(getQuizStorageKey(topicLabel)) || 'null')
+    return JSON.parse(localStorage.getItem(getQuizStorageKey(topicLabel, sourceId)) || 'null')
   } catch {
-    localStorage.removeItem(getQuizStorageKey(topicLabel))
+    localStorage.removeItem(getQuizStorageKey(topicLabel, sourceId))
     return null
   }
 }
@@ -700,6 +702,8 @@ function saveQuizState() {
 
   const payload = {
     topicLabel: quizState.topicLabel,
+    sourceId: quizState.sourceId,
+    sourceLabel: quizState.sourceLabel,
     index: quizState.index,
     answers: quizState.answers,
     completed: quizState.completed,
@@ -710,8 +714,8 @@ function saveQuizState() {
   localStorage.setItem(getQuizStorageKey(quizState.topicLabel), JSON.stringify(payload))
 }
 
-function clearSavedQuizState(topicLabel) {
-  localStorage.removeItem(getQuizStorageKey(topicLabel))
+function clearSavedQuizState(topicLabel, sourceId = quizState.sourceId || 'current') {
+  localStorage.removeItem(getQuizStorageKey(topicLabel, sourceId))
 }
 
 function shuffleArray(array) {
@@ -723,25 +727,47 @@ function shuffleArray(array) {
   return copy
 }
 
-function getQuizConfig(topicLabel) {
+function getQuizSources(topicLabel) {
   const raw = mcqQuizzes[topicLabel]
-  if (!raw) return null
+  if (!raw) return []
+
+  if (raw.sources?.length) {
+    return raw.sources.map((source, index) => ({
+      id: source.id || `source-${index}`,
+      label: source.label || `MCQ source ${index + 1}`,
+      description: source.description || '',
+      mcqs: source.mcqs || [],
+      quizSize: source.quizSize || raw.quizSize || null,
+      shuffleQuestions: source.shuffleQuestions ?? raw.shuffleQuestions ?? false,
+      shuffleOptions: source.shuffleOptions ?? raw.shuffleOptions ?? false
+    })).filter((source) => source.mcqs.length)
+  }
 
   if (Array.isArray(raw)) {
-    return {
+    return [{
+      id: 'current',
+      label: 'Current MCQs',
       mcqs: raw,
       quizSize: raw.quizSize || null,
       shuffleQuestions: raw.shuffleQuestions || false,
       shuffleOptions: raw.shuffleOptions || false
-    }
+    }]
   }
 
-  return {
+  return [{
+    id: 'current',
+    label: raw.label || 'Current MCQs',
+    description: raw.description || '',
     mcqs: raw.mcqs || [],
     quizSize: raw.quizSize || null,
     shuffleQuestions: raw.shuffleQuestions || false,
     shuffleOptions: raw.shuffleOptions || false
-  }
+  }].filter((source) => source.mcqs.length)
+}
+
+function getQuizConfig(topicLabel, sourceId = 'current') {
+  const sources = getQuizSources(topicLabel)
+  return sources.find((source) => source.id === sourceId) || sources[0] || null
 }
 
 function normalizeQuestion(question, index) {
@@ -771,8 +797,8 @@ function getTopicData(topicLabel) {
   return subjects.flatMap((subject) => subject.topics).find((topic) => topic.label === topicLabel)
 }
 
-function initializeQuiz(topicLabel, { useSaved = false, fresh = false } = {}) {
-  const config = getQuizConfig(topicLabel)
+function initializeQuiz(topicLabel, { sourceId = 'current', useSaved = false, fresh = false } = {}) {
+  const config = getQuizConfig(topicLabel, sourceId)
   if (!config || !config.mcqs.length) return false
 
   const normalizedQuestions = config.mcqs.map(normalizeQuestion)
@@ -782,7 +808,7 @@ function initializeQuiz(topicLabel, { useSaved = false, fresh = false } = {}) {
   let answers = {}
   let completed = false
 
-  const savedState = useSaved ? getSavedQuizState(topicLabel) : null
+  const savedState = useSaved ? getSavedQuizState(topicLabel, config.id) : null
   if (savedState && !fresh) {
     order = savedState.order || order
     questionOptionOrder = savedState.questionOptionOrder || {}
@@ -810,6 +836,8 @@ function initializeQuiz(topicLabel, { useSaved = false, fresh = false } = {}) {
     .filter(Boolean)
 
   quizState.topicLabel = topicLabel
+  quizState.sourceId = config.id
+  quizState.sourceLabel = config.label
   quizState.index = Math.min(index, Math.max(0, questions.length - 1))
   quizState.answers = answers
   quizState.completed = completed
@@ -897,20 +925,20 @@ function renderQuizMeta() {
 
   title.textContent = quizState.topicLabel || 'Quiz'
   if (quizState.showResumePrompt) {
-    meta.textContent = 'Resume your previous attempt or start over.'
+    meta.textContent = `${quizState.sourceLabel} - resume your previous attempt or start over.`
     fill.style.width = '0%'
     return
   }
 
   if (quizState.completed) {
     const percent = quiz.length ? Math.round((score / quiz.length) * 100) : 0
-    meta.textContent = `Final score ${score} / ${quiz.length} (${percent}%)`
+    meta.textContent = `${quizState.sourceLabel} - final score ${score} / ${quiz.length} (${percent}%)`
     fill.style.width = '100%'
     return
   }
 
   const answeredCount = Object.keys(quizState.answers).length
-  meta.textContent = `Question ${quizState.index + 1} of ${quiz.length} · Score ${score} / ${answeredCount}`
+  meta.textContent = `${quizState.sourceLabel} - Question ${quizState.index + 1} of ${quiz.length} · Score ${score} / ${answeredCount}`
   fill.style.width = `${((quizState.index + 1) / Math.max(quiz.length, 1)) * 100}%`
 }
 
@@ -1047,13 +1075,40 @@ function triggerCorrectAnswerCelebration() {
   window.setTimeout(() => confetti.classList.remove('quiz-confetti--active'), 1200)
 }
 
-function openQuiz(topicLabel) {
-  const config = getQuizConfig(topicLabel)
+function renderQuizSourcePicker(topicLabel) {
+  const sources = getQuizSources(topicLabel)
+  const modal = ensureQuizModal()
+  const title = modal.querySelector('#quiz-title')
+  const meta = modal.querySelector('#quiz-meta')
+  const fill = modal.querySelector('#quiz-progress-fill')
+  const body = modal.querySelector('#quiz-body')
+  const actions = modal.querySelector('.quiz-modal__actions')
+
+  title.textContent = topicLabel
+  meta.textContent = 'Choose an MCQ source.'
+  fill.style.width = '0%'
+  body.innerHTML = `
+    <article class="quiz-card quiz-source-picker">
+      ${sources.map((source) => `
+        <button class="quiz-source-option" type="button" data-quiz-source="${source.id}" data-quiz-topic="${escapeHtml(topicLabel)}">
+          <strong>${source.label}</strong>
+          <span>${source.mcqs.length} questions${source.description ? ` - ${source.description}` : ''}</span>
+        </button>
+      `).join('')}
+    </article>
+  `
+  actions.innerHTML = '<button class="quiz-action quiz-action--primary" type="button" data-quiz-close>Close</button>'
+  modal.setAttribute('aria-hidden', 'false')
+  document.body.classList.add('panel-open')
+}
+
+function openQuiz(topicLabel, sourceId = 'current') {
+  const config = getQuizConfig(topicLabel, sourceId)
   if (!config || !config.mcqs.length) return
 
-  const savedState = getSavedQuizState(topicLabel)
+  const savedState = getSavedQuizState(topicLabel, config.id)
   const useSaved = Boolean(savedState)
-  initializeQuiz(topicLabel, { useSaved, fresh: false })
+  initializeQuiz(topicLabel, { sourceId: config.id, useSaved, fresh: false })
 
   const modal = ensureQuizModal()
   modal.setAttribute('aria-hidden', 'false')
@@ -1077,9 +1132,17 @@ function closeQuiz() {
 }
 
 function handleQuizClick(event) {
+  const sourceButton = event.target.closest('[data-quiz-source]')
+  if (sourceButton) {
+    openQuiz(sourceButton.dataset.quizTopic, sourceButton.dataset.quizSource)
+    return
+  }
+
   const openButton = event.target.closest('[data-quiz-topic]')
   if (openButton) {
-    openQuiz(openButton.dataset.quizTopic)
+    const sources = getQuizSources(openButton.dataset.quizTopic)
+    if (sources.length > 1) renderQuizSourcePicker(openButton.dataset.quizTopic)
+    else openQuiz(openButton.dataset.quizTopic, sources[0]?.id || 'current')
     return
   }
 
@@ -1096,16 +1159,18 @@ function handleQuizClick(event) {
 
   if (event.target.closest('[data-quiz-start-over]')) {
     const topicLabel = quizState.topicLabel
-    clearSavedQuizState(topicLabel)
-    initializeQuiz(topicLabel, { fresh: true })
+    const sourceId = quizState.sourceId
+    clearSavedQuizState(topicLabel, sourceId)
+    initializeQuiz(topicLabel, { sourceId, fresh: true })
     renderQuizQuestion()
     return
   }
 
   if (event.target.closest('[data-quiz-retake]')) {
     const topicLabel = quizState.topicLabel
-    clearSavedQuizState(topicLabel)
-    initializeQuiz(topicLabel, { fresh: true })
+    const sourceId = quizState.sourceId
+    clearSavedQuizState(topicLabel, sourceId)
+    initializeQuiz(topicLabel, { sourceId, fresh: true })
     renderQuizQuestion()
     return
   }
