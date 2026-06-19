@@ -1,4 +1,6 @@
-const subjects = [
+import { fetchTrackerData, isSupabaseConfigured } from './supabaseClient.js'
+
+let subjects = [
   {
     code: 'SUR-1',
     name: 'Surgery 1',
@@ -372,6 +374,77 @@ const stateLabels = {
   partial: 'Partially taken',
   announced: 'Announced only',
   remaining: 'Remaining'
+}
+
+function makeResourceList(items) {
+  if (!Array.isArray(items)) return []
+  return items
+    .filter((item) => item?.label && item?.url)
+    .map((item) => ({
+      label: item.label,
+      url: item.url,
+      download: Boolean(item.download)
+    }))
+}
+
+function mapDatabaseTopic(topic, index) {
+  const lectureUrls = makeResourceList(topic.lecture_urls)
+  if (topic.lecture_url) {
+    lectureUrls.unshift({ label: 'Lecture', url: topic.lecture_url })
+  }
+
+  const pdfUrls = makeResourceList(topic.pdf_urls)
+  if (topic.pdf_url) {
+    pdfUrls.unshift({ label: topic.pdf_label || 'Download PDF', url: topic.pdf_url, download: true })
+  }
+
+  return {
+    label: topic.title,
+    state: topic.status || 'remaining',
+    art: Number.isFinite(topic.art) ? topic.art : index % 16,
+    section: topic.section || '',
+    note: topic.notes || '',
+    lectureUrls,
+    pdfUrls,
+    audioUrl: topic.audio_url || ''
+  }
+}
+
+function mapDatabaseSubjects(subjectRows, topicRows) {
+  return subjectRows.map((subject) => {
+    const topics = topicRows
+      .filter((topic) => topic.subject_id === subject.id)
+      .map((topic, index) => mapDatabaseTopic(topic, index))
+
+    return {
+      id: subject.id,
+      code: subject.code,
+      name: subject.name,
+      totalCount: subject.total_count || topics.length,
+      examNote: subject.exam_note || '',
+      topics
+    }
+  })
+}
+
+async function loadRemoteTrackerData() {
+  if (!subjectList || !isSupabaseConfigured()) return
+
+  try {
+    const data = await fetchTrackerData()
+    const remoteSubjects = mapDatabaseSubjects(data.subjects, data.topics)
+    if (!remoteSubjects.length) return
+
+    subjects = remoteSubjects
+    const params = new URLSearchParams(window.location.search)
+    const initialRemoteSubject = subjects.find((subject) => subject.code === params.get('subject'))
+    activeSubjectCode = initialRemoteSubject?.code || subjects[0].code
+    expandedSubjectCode = mobileQuery.matches && params.get('tracker') === '1' ? activeSubjectCode : null
+    renderSubjects()
+    setActiveSubject(activeSubjectCode, params.get('tracker') === '1' ? 'open' : 'closed')
+  } catch (error) {
+    console.warn('Supabase tracker data unavailable; using local fallback.', error)
+  }
 }
 
 const subjectList = document.getElementById('subject-list')
@@ -1539,6 +1612,7 @@ if (subjectList) {
   renderSubjects()
   setActiveSubject(activeSubjectCode, initialParams.get('tracker') === '1' ? 'open' : 'closed')
   renderSemesterTimeline()
+  loadRemoteTrackerData()
 }
 
 document.addEventListener('click', handleQuizClick)
@@ -1600,3 +1674,32 @@ if (copyHistorySummary && historySummaryText) {
 
 renderWhatsappFeedback()
 renderAssignmentProgress()
+
+// ========== GLOBAL CLICK GLOW EFFECT ==========
+
+function createClickGlow(event) {
+  // Only trigger on primary pointer (left click/tap)
+  if (event.button !== 0 && event.button !== undefined) return
+  if (!event.isPrimary) return
+  
+  const glow = document.createElement('div')
+  glow.className = 'click-glow'
+  glow.setAttribute('aria-hidden', 'true')
+  glow.style.setProperty('--x', event.clientX + 'px')
+  glow.style.setProperty('--y', event.clientY + 'px')
+  
+  document.body.appendChild(glow)
+  
+  // Clean up after animation
+  glow.addEventListener('animationend', () => {
+    glow.remove()
+  }, { once: true })
+  
+  // Fallback cleanup for safety
+  setTimeout(() => {
+    if (glow.parentNode) glow.remove()
+  }, 700)
+}
+
+// Attach click glow listener
+document.addEventListener('pointerdown', createClickGlow, true)

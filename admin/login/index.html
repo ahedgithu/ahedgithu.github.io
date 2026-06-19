@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Login | Ahmed Sayed</title>
+  <meta name="robots" content="noindex" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="stylesheet" href="/src/style.css?v=20260619-admin" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="Ahmed Sayed tracker home">
+      <span class="brand__mark">AS</span>
+      <span><strong>Ahmed Sayed</strong><small>Admin</small></span>
+    </a>
+    <nav class="site-nav" aria-label="Admin navigation">
+      <a href="/">Tracker</a>
+      <a href="/admin/login/">Login</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="admin-auth" aria-labelledby="admin-login-title">
+      <div class="admin-card">
+        <p class="card__kicker">Private CMS</p>
+        <h1 id="admin-login-title">Log in</h1>
+        <p>Use your approved admin account to manage tracker topics.</p>
+        <form class="admin-form" id="admin-login-form">
+          <label>
+            <span>Email</span>
+            <input id="admin-email" type="email" autocomplete="email" required placeholder="you@example.com" />
+          </label>
+          <label>
+            <span>Password</span>
+            <input id="admin-password" type="password" autocomplete="current-password" required placeholder="Password" />
+          </label>
+          <button class="primary-action" type="submit">Log in</button>
+          <p class="form-message" data-login-message hidden></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    window.SUPABASE_CONFIG = {
+      url: '%VITE_SUPABASE_URL%',
+      anonKey: '%VITE_SUPABASE_ANON_KEY%'
+    }
+  </script>
+  <script type="module" src="/src/admin.js?v=20260619-admin"></script>
+</body>
+</html>

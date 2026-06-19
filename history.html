@@ -262,6 +262,12 @@
     </section>
   </main>
 
-  <script defer src="/src/main.js?v=20260618-3"></script>
+  <script>
+    window.SUPABASE_CONFIG = {
+      url: '%VITE_SUPABASE_URL%',
+      anonKey: '%VITE_SUPABASE_ANON_KEY%'
+    }
+  </script>
+  <script type="module" src="/src/main.js?v=20260619-admin"></script>
 </body>
 </html>

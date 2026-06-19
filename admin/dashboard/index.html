@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard | Ahmed Sayed</title>
+  <meta name="robots" content="noindex" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="stylesheet" href="/src/style.css?v=20260619-admin" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="Ahmed Sayed tracker home">
+      <span class="brand__mark">AS</span>
+      <span><strong>Ahmed Sayed</strong><small>Admin</small></span>
+    </a>
+    <nav class="site-nav" aria-label="Admin navigation">
+      <a href="/">Tracker</a>
+      <a href="/admin/dashboard/" aria-current="page">Dashboard</a>
+      <a href="/admin/topics/">Topics</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="admin-shell" aria-labelledby="dashboard-title">
+      <p class="form-message" data-admin-message hidden></p>
+      <div data-admin-guard hidden>
+        <div class="admin-topbar">
+          <div>
+            <p class="card__kicker">Private CMS</p>
+            <h1 id="dashboard-title">Dashboard</h1>
+            <p data-admin-profile></p>
+          </div>
+          <button class="secondary-action" type="button" data-admin-logout>Log out</button>
+        </div>
+
+        <div class="admin-grid">
+          <a class="admin-card admin-card--link" href="/admin/topics/">
+            <p class="card__kicker">Topics</p>
+            <h2>Manage tracker</h2>
+            <p>Add, edit, or delete MED 401 topics from Supabase.</p>
+          </a>
+          <article class="admin-card">
+            <p class="card__kicker">Public behavior</p>
+            <h2>Safe fallback</h2>
+            <p>If Supabase is not configured or has no topics, the public tracker keeps using the local built-in data.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    window.SUPABASE_CONFIG = {
+      url: '%VITE_SUPABASE_URL%',
+      anonKey: '%VITE_SUPABASE_ANON_KEY%'
+    }
+  </script>
+  <script type="module" src="/src/admin.js?v=20260619-admin"></script>
+</body>
+</html>
