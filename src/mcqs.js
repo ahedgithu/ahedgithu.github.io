@@ -478,3 +478,127 @@ window.mcqQuizzes = {
     q('Which protein is not primarily synthesized in the liver?', ['Albumin', 'Fibrinogen', 'von Willebrand factor', 'Transferrin', 'Factor VII'], 2, 87)
   ], 'Cirrhosis, portal hypertension, varices, HCC, ascites, and Budd-Chiari questions from Ain Shams 2.pdf.')
 })()
+
+;(() => {
+  const sourceNote = (topic) => `Answer checked from HEM/ONCO 401 topic-split past exam bank (${topic}).`
+  const q = (question, choices, answerIndex, topic) => ({
+    question,
+    choices,
+    answerIndex,
+    explanation: sourceNote(topic)
+  })
+  const addHemOncoSource = (topicLabel, mcqs, description) => {
+    const current = window.mcqQuizzes[topicLabel]
+    if (!mcqs.length) return
+
+    const currentSource = Array.isArray(current)
+      ? { id: 'current', label: 'Current MCQs', mcqs: current }
+      : current
+        ? {
+          id: 'current',
+          label: current.label || 'Current MCQs',
+          mcqs: current.mcqs || [],
+          quizSize: current.quizSize || null,
+          shuffleQuestions: current.shuffleQuestions || false,
+          shuffleOptions: current.shuffleOptions || false
+        }
+        : null
+
+    const existingSources = current?.sources || (currentSource ? [currentSource] : [])
+    window.mcqQuizzes[topicLabel] = {
+      ...(!Array.isArray(current) && current ? current : {}),
+      sources: [
+        ...existingSources.filter((source) => source.id !== 'hem-onco-past-exams'),
+        {
+          id: 'hem-onco-past-exams',
+          label: 'HEM/ONCO Past Exams',
+          description,
+          mcqs
+        }
+      ]
+    }
+  }
+
+  const anemiaAllTypes = [
+    q('The most common type of anemia in Egypt is:', ['Thalassemia', 'Iron deficiency anemia', 'Sickle cell anemia', 'Aplastic anemia', 'Megaloblastic anemia'], 1, 'Anemia'),
+    q('All of the following produce microcytic anemia except:', ['Sideroblastic anemia', 'Thalassemia', 'Pernicious anemia', 'Lead poisoning', 'Iron deficiency anemia'], 2, 'Anemia'),
+    q('Increased serum iron with decreased iron-binding capacity is classically found in:', ['Iron deficiency anemia', 'Thalassemia', 'Sideroblastic anemia', 'Anemia of chronic disease'], 3, 'Anemia'),
+    q('Iron deficiency anemia is characterized by all of the following except:', ['Decreased serum iron', 'Hypochromia', 'Decreased iron-binding capacity', 'Decreased serum ferritin'], 2, 'Anemia'),
+    q('Regarding treatment of iron deficiency anemia, which statement is true?', ['Iron is absorbed in the distal jejunum', 'Iron absorption is increased by ascorbic acid', 'Sustained-release iron is preferred for larger doses', 'Parenteral iron acts faster than oral iron'], 1, 'Anemia'),
+    q('Incorrect statement in pernicious anemia is:', ['Hyperchlorhydria', 'Macrocytosis', 'Anti-intrinsic factor antibody may be present', 'Low serum B12 level'], 0, 'Anemia'),
+    q('Megaloblastic anemia is found in:', ['Folate deficiency', 'Thalassemia', 'Iron deficiency', 'G6PD deficiency'], 0, 'Anemia'),
+    q('Anemia of chronic kidney disease is mainly due to:', ['Decreased erythropoietin production', 'Low hepcidin', 'Vitamin B12 deficiency', 'Decreased iron absorption', 'Hypoplastic bone marrow'], 0, 'Anemia'),
+    q('Anemia of chronic disease typically shows:', ['High serum iron and low ferritin', 'Low serum iron with normal or high ferritin', 'High TIBC with low ferritin', 'Macrocytosis with hypersegmented neutrophils'], 1, 'Anemia'),
+    q('Aplastic anemia is best suggested by:', ['Reticulocytosis with hypercellular marrow', 'Pancytopenia with hypocellular marrow', 'Isolated thrombocytopenia', 'High MCV with low B12 only'], 1, 'Anemia')
+  ]
+
+  const hemolyticAnemia = [
+    q('A blood film showing Heinz bodies after oxidant drug exposure suggests:', ['Aplastic anemia', 'Autoimmune hemolytic anemia', 'Folate deficiency', 'G6PD deficiency', 'Spherocytosis'], 3, 'Hemolytic anemia'),
+    q('A Coombs-negative hemolytic anemia with reticulocytes and spherocytes suggests:', ['Autoimmune hemolytic anemia', 'Hereditary spherocytosis', 'Sickle-cell disease', 'Thalassemia major'], 1, 'Hemolytic anemia'),
+    q('Splenectomy is virtually curative in:', ['G6PD deficiency', 'Iron deficiency', 'Thalassemia', 'Hereditary spherocytosis', 'Sickle-cell anemia'], 3, 'Hemolytic anemia'),
+    q('Red cell osmotic fragility is increased in:', ['Thalassemia major', 'Hereditary spherocytosis', 'Hb C disease', 'Iron deficiency anemia', 'PNH'], 1, 'Hemolytic anemia'),
+    q('Cooley anemia is:', ['Sickle cell anemia', 'Megaloblastic anemia', 'Thalassemia major', 'Aplastic anemia'], 2, 'Hemolytic anemia'),
+    q('Commonest cause of jaundice in thalassemia is:', ['Viral hepatitis C', 'Iron deposition in the liver', 'Viral hepatitis B', 'Hemolysis', 'Gall stones'], 3, 'Hemolytic anemia'),
+    q('Diagnosis of beta thalassemia is established by:', ['Plasma protein electrophoresis', 'Hemoglobin electrophoresis', 'HbA1c estimation', 'Target cells in peripheral smear'], 1, 'Hemolytic anemia'),
+    q('All of the following may cause abdominal pain in thalassemia major except:', ['Vasculitis', 'Splenic infarcts', 'Dragging pain due to huge splenomegaly', 'Gallstone-induced biliary colic'], 0, 'Hemolytic anemia'),
+    q('Typical features of hereditary spherocytosis include all except:', ['Splenomegaly', 'Intravascular hemolysis', 'Increased osmotic fragility', 'Transient aplastic crisis', 'Spectrin defect'], 1, 'Hemolytic anemia'),
+    q('All of the following are typically increased in hemolytic anemia except:', ['AST', 'Haptoglobin', 'LDH', 'MCV', 'Reticulocytes'], 1, 'Hemolytic anemia'),
+    q('The typical investigation supporting autoimmune hemolytic anemia is:', ['Positive ANA', 'Positive rheumatoid factor', 'Polyclonal gammopathy', 'Positive Coombs test'], 3, 'Hemolytic anemia'),
+    q('Which test can be used to detect immune hemolytic anemia?', ['Coombs test', 'Bleeding time', 'Prothrombin time', 'Schilling test'], 0, 'Hemolytic anemia'),
+    q('Which of the following is not a manifestation of hemolytic anemia?', ['Pallor', 'Jaundice', 'Splenomegaly', 'Complete heart block'], 3, 'Hemolytic anemia'),
+    q('Non-immune hemolytic anemia can complicate:', ['Megaloblastic anemia', 'Folate deficiency', 'Prosthetic heart valve', 'Amoxicillin therapy'], 2, 'Hemolytic anemia'),
+    q('The mode of inheritance of thalassemia is:', ['Autosomal dominant', 'Autosomal recessive', 'X-linked dominant', 'X-linked recessive'], 1, 'Hemolytic anemia')
+  ]
+
+  const bleedingDisorders = [
+    q('A patient with isolated severe thrombocytopenia, normal PT, and giant platelets most likely has:', ['Amegakaryocytic thrombocytopenia', 'DIC', 'Drug-induced thrombocytopenia', 'Immune thrombocytopenia', 'TTP'], 3, 'Bleeding disorders'),
+    q('A child with mild post-viral ITP and platelet count around 80,000/mcL usually needs:', ['Platelet transfusion', 'Urgent splenectomy', 'No active treatment', 'Blood transfusion', 'FFP'], 2, 'Bleeding disorders'),
+    q('Which is associated with prolonged bleeding time?', ['Polycythemia vera', 'von Willebrand disease', 'Antiphospholipid syndrome', 'Hemophilia'], 1, 'Bleeding disorders'),
+    q('Coagulation factor deficient in stored blood is:', ['VII', 'V', 'IX', 'II'], 1, 'Bleeding disorders'),
+    q('A patient on aspirin will have:', ['Prolonged bleeding time', 'Prolonged APTT', 'Prolonged PT', 'Prolonged clotting time'], 0, 'Bleeding disorders'),
+    q('Henoch-Schonlein purpura is not associated with:', ['Thrombocytopenia', 'Palpable purpura', 'Intussusception', 'Acute diffuse glomerulonephritis'], 0, 'Bleeding disorders'),
+    q('Thrombocytopenia is absent in:', ['DIC', 'Wiskott-Aldrich syndrome', 'Henoch-Schonlein purpura', 'Myelosclerosis'], 2, 'Bleeding disorders'),
+    q('Palpable purpura is seen in:', ['Idiopathic thrombocytopenic purpura', 'Quinine therapy', 'Heparin-associated thrombocytopenia', 'Leucocytoclastic vasculitis'], 3, 'Bleeding disorders'),
+    q('Which isolated coagulation factor deficiency may be associated with thrombosis?', ['Factor V', 'Factor VII', 'Factor XI', 'Factor XII'], 3, 'Bleeding disorders'),
+    q('Gum bleeding is characteristic of all except:', ['Chronic phenytoin therapy', 'Aplastic anemia', 'Scurvy', 'Hemophilia', 'Monocytic leukemia'], 3, 'Bleeding disorders'),
+    q('The outstanding feature of idiopathic thrombocytopenic purpura is:', ['Fever', 'Gum bleeding', 'Moderate splenomegaly', 'Sternal tenderness', 'Fatigue'], 1, 'Bleeding disorders'),
+    q('Which statement is false in hemophilia A?', ['Normal prothrombin time', 'Absent factor VIII coagulant activity', 'Increased partial thromboplastin time', 'Prolonged bleeding time'], 3, 'Bleeding disorders'),
+    q('A boy with post-extraction bleeding, normal platelets, normal PT, mildly prolonged APTT and reduced factor VIII most likely has:', ['DIC', 'Hemophilia A', 'Hemophilia B', 'ITP', 'von Willebrand disease'], 4, 'Bleeding disorders'),
+    q('DIC may be seen in all except:', ['Amniotic fluid embolism', 'Rocky Mountain spotted fever', 'Giant hemangioma', 'Diabetes mellitus', 'Hemorrhagic pancreatitis'], 3, 'Bleeding disorders'),
+    q('A warfarin patient with major bleeding and INR 10 should receive:', ['Vitamin C only', 'Protamine sulfate', 'IV calcium', 'Intravenous vitamin K and fresh frozen plasma'], 3, 'Bleeding disorders')
+  ]
+
+  const polycythemia = [
+    q('One of the following is not present in polycythemia rubra vera:', ['High serum erythropoietin level', 'Splenomegaly', 'Thrombocytosis', 'Normal arterial oxygen saturation'], 0, 'Polycythemia and essential thrombocytosis'),
+    q('Positive findings in primary polycythemia include:', ['Plethoric facies', 'Splenomegaly', 'High hematocrit', 'All of the above'], 3, 'Polycythemia and essential thrombocytosis'),
+    q('All of the following are features of polycythemia rubra vera except:', ['Increased red cell mass', 'Reduced arterial oxygen saturation', 'High leukocyte alkaline phosphatase score', 'Splenomegaly'], 1, 'Polycythemia and essential thrombocytosis'),
+    q('The following are myeloproliferative disorders except:', ['Chronic lymphocytic leukemia', 'Chronic myeloid leukemia', 'Polycythemia rubra vera', 'Myelofibrosis'], 0, 'Polycythemia and essential thrombocytosis'),
+    q('Which of the following is not a myeloproliferative disorder?', ['Chronic myeloid leukemia', 'Polycythemia vera', 'Essential thrombocytosis', 'Myelofibrosis'], 2, 'Polycythemia and essential thrombocytosis'),
+    q('Megakaryocytosis in bone marrow is seen in all except:', ['Myeloid metaplasia', 'Polycythemia vera', 'Chronic myeloid leukemia', 'Idiopathic thrombocytopenic purpura'], 2, 'Polycythemia and essential thrombocytosis'),
+    q('Leukocyte alkaline phosphatase score is high in all except:', ['Chronic myeloid leukemia', 'Polycythemia vera', 'After steroid administration', 'Myelosclerosis'], 0, 'Polycythemia and essential thrombocytosis'),
+    q('Essential thrombocytosis is primarily characterized by:', ['Persistent thrombocytosis from a clonal myeloproliferative disorder', 'Isolated low platelet count', 'Factor VIII deficiency', 'Vitamin K deficiency'], 0, 'Polycythemia and essential thrombocytosis')
+  ]
+
+  addHemOncoSource('Anemia of chronic disease and hemoglobinopathies', [
+    ...hemolyticAnemia,
+    q('A 70-year-old woman with rheumatoid arthritis, normocytic normochromic anemia, normal hematinics, and negative Coombs test most likely has:', ['Iron deficiency anemia', 'Anemia of chronic disease', 'Hemolytic anemia', 'Pernicious anemia'], 1, 'Anemia')
+  ], 'Past exam questions for anemia of chronic disease, hemolysis, thalassemia, sickle cell disease, and spherocytosis.')
+
+  addHemOncoSource('Anemia file completion and sideroblastic anemia', [
+    ...anemiaAllTypes,
+    q('Sideroblastic anemia belongs to which anemia pattern?', ['Microcytic anemia', 'Macrocytic anemia', 'Pure hemolytic anemia', 'Aplastic anemia'], 0, 'Anemia'),
+    q('Causes of folate deficiency include all except:', ['Pregnancy', 'Gluten enteropathy', 'Hemolytic anemia', 'Antibiotic therapy'], 3, 'Anemia')
+  ], 'Past exam questions for anemia classification, sideroblastic anemia, B12/folate, ACD, and iron studies.')
+
+  addHemOncoSource('Anemia approach and iron deficiency anemia', [
+    ...anemiaAllTypes,
+    q('Peripheral blood findings in iron deficiency anemia include all except:', ['Microcytosis', 'Ovalocytosis and poikilocytosis', 'Howell-Jolly bodies', 'Thrombocytosis'], 2, 'Anemia'),
+    q('The best differentiating investigation for a severe microcytic picture suspected to be thalassemia is:', ['Barium enema', 'Bone marrow biopsy', 'Gastroscopy', 'Hemoglobin electrophoresis', 'Ham test'], 3, 'Anemia')
+  ], 'Past exam questions for anemia approach, iron deficiency, microcytosis, and basic hematinic interpretation.')
+
+  addHemOncoSource('Hemolytic anemia', hemolyticAnemia, 'Past exam questions for G6PD, hereditary spherocytosis, autoimmune hemolysis, sickle cell disease, and thalassemia.')
+
+  addHemOncoSource('Polycythemia vera and essential thrombocytosis', polycythemia, 'Past exam questions for polycythemia vera, essential thrombocytosis, and myeloproliferative disorders.')
+
+  addHemOncoSource('Bleeding disorders', bleedingDisorders, 'Past exam questions for platelets, ITP, TTP, hemophilia, von Willebrand disease, DIC, aspirin, and warfarin reversal.')
+})()
