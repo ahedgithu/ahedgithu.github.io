@@ -9,7 +9,7 @@
   <meta property="og:description" content="Track MED 401 university coverage, lecture resources, and work with Ahmed on AI agents or creative medical content." />
   <meta property="og:type" content="website" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="stylesheet" href="/src/style.css?v=20260619-mcq" />
+  <link rel="stylesheet" href="/src/style.css?v=20260619-search-news-2" />
 </head>
 <body>
   <header class="site-header">
@@ -60,6 +60,23 @@
         <div class="semester-date-scale" id="semester-date-scale" aria-label="Semester date scale"></div>
       </div>
 
+      <div class="filter-panel" aria-label="Tracker topic filters">
+        <label>
+          <span>Search topics</span>
+          <input id="tracker-search" type="search" placeholder="Search by topic or subject" autocomplete="off" />
+        </label>
+        <label>
+          <span>Status</span>
+          <select id="tracker-status-filter">
+            <option value="all">All statuses</option>
+            <option value="taken">Taken</option>
+            <option value="partial">Partially taken</option>
+            <option value="announced">Announced only</option>
+            <option value="remaining">Remaining</option>
+          </select>
+        </label>
+      </div>
+
       <div class="tracker-layout tracker-layout--home">
         <div class="subject-list" id="subject-list" aria-label="Subjects"></div>
 
@@ -92,6 +109,6 @@
   </main>
 
   <script defer src="/src/mcqs.js?v=20260619-mcq"></script>
-  <script defer src="/src/main.js?v=20260619-mcq"></script>
+  <script defer src="/src/main.js?v=20260619-search-news-2"></script>
 </body>
 </html>

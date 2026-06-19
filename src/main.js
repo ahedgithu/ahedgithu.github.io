@@ -380,6 +380,8 @@ const selectedCount = document.getElementById('selected-count')
 const selectedPercent = document.getElementById('selected-percent')
 const progressFill = document.getElementById('progress-fill')
 const topicList = document.getElementById('topic-list')
+const trackerSearch = document.getElementById('tracker-search')
+const trackerStatusFilter = document.getElementById('tracker-status-filter')
 const semesterFill = document.getElementById('semester-fill')
 const todayMarker = document.getElementById('today-marker')
 const midtermMarker = document.getElementById('midterm-marker')
@@ -399,6 +401,9 @@ const copyHistorySummary = document.getElementById('copy-history-summary')
 const smokingDetails = document.getElementById('smoking-details')
 const substanceDetails = document.getElementById('substance-details')
 const substanceOtherField = document.getElementById('substance-other-field')
+const newsFeed = document.getElementById('news-feed')
+const newsCourseFilter = document.getElementById('news-course-filter')
+const newsDateFilter = document.getElementById('news-date-filter')
 const whatsappFeedbackUrl = 'https://wa.me/201030469634?text=Hi%20Ahmed%2C%20I%20have%20a%20recommendation%20to%20improve%20the%20MED%20401%20tracker%3A%20'
 
 const initialParams = new URLSearchParams(window.location.search)
@@ -441,6 +446,33 @@ function escapeHtml(value) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#039;')
+}
+
+function getTrackerFilters() {
+  return {
+    query: trackerSearch?.value.trim().toLowerCase() || '',
+    status: trackerStatusFilter?.value || 'all'
+  }
+}
+
+function getFilteredTopics(subject) {
+  const { query, status } = getTrackerFilters()
+
+  return subject.topics.filter((topic) => {
+    const matchesStatus = status === 'all' || topic.state === status
+    const searchable = `${subject.code} ${subject.name} ${topic.label} ${topic.section || ''} ${topic.note || ''}`.toLowerCase()
+    const matchesQuery = !query || searchable.includes(query)
+    return matchesStatus && matchesQuery
+  })
+}
+
+function getFilteredSubjects() {
+  const { query, status } = getTrackerFilters()
+
+  return subjects.filter((subject) => {
+    if (!query && status === 'all') return true
+    return getFilteredTopics(subject).length > 0
+  })
 }
 
 function getResourceItems(topic) {
@@ -505,12 +537,16 @@ function renderTopicCard(topic, index) {
   `
 }
 
-function renderTopicCards(subject) {
-  if (!subject.topics.some((topic) => topic.section)) {
-    return subject.topics.map((topic, index) => renderTopicCard(topic, index)).join('')
+function renderTopicCards(subject, topics = getFilteredTopics(subject)) {
+  if (!topics.length) {
+    return '<li class="topic-empty">No topics match the current filters.</li>'
   }
 
-  const sections = subject.topics.reduce((collection, topic) => {
+  if (!topics.some((topic) => topic.section)) {
+    return topics.map((topic, index) => renderTopicCard(topic, index)).join('')
+  }
+
+  const sections = topics.reduce((collection, topic) => {
     const title = topic.section || 'Topics'
     const section = collection.find((item) => item.title === title)
 
@@ -707,8 +743,20 @@ function handleQuizClick(event) {
 }
 
 function renderSubjects() {
-  subjectList.innerHTML = subjects.map((subject, index) => {
+  const visibleSubjects = getFilteredSubjects()
+
+  if (!visibleSubjects.length) {
+    subjectList.innerHTML = '<div class="topic-empty topic-empty--panel">No subjects match the current filters.</div>'
+    return
+  }
+
+  if (!visibleSubjects.some((subject) => subject.code === activeSubjectCode)) {
+    activeSubjectCode = visibleSubjects[0].code
+  }
+
+  subjectList.innerHTML = visibleSubjects.map((subject, index) => {
     const percent = getPercent(subject)
+    const filteredTopics = getFilteredTopics(subject)
     const isActive = subject.code === activeSubjectCode
     const isExpanded = subject.code === expandedSubjectCode
     const activeClass = isActive ? ' active' : ''
@@ -720,7 +768,7 @@ function renderSubjects() {
           <span>${subject.totalCount - getCoveredCount(subject)} not covered</span>
         </div>
         <ul class="topic-list topic-list--inline">
-          ${renderTopicCards(subject)}
+          ${renderTopicCards(subject, filteredTopics)}
         </ul>
       </div>
     ` : ''
@@ -733,7 +781,7 @@ function renderSubjects() {
             <small>${subject.name}</small>
             <em class="subject-button__summary">${getSubjectSummary(subject)}</em>
           </span>
-          <span class="subject-button__meta">${getCoveredCount(subject)}/${subject.totalCount}</span>
+          <span class="subject-button__meta">${filteredTopics.length}/${subject.totalCount}</span>
           <span class="subject-button__bar" aria-hidden="true">
             <span style="width: ${percent}%"></span>
           </span>
@@ -776,9 +824,10 @@ function setActiveSubject(code, mobileMode = 'toggle') {
   })
 
   const percent = getPercent(subject)
+  const visibleTopics = getFilteredTopics(subject)
   selectedCode.textContent = subject.code
   selectedName.textContent = subject.name
-  selectedCount.textContent = `${getCoveredCount(subject)} / ${subject.totalCount}`
+  selectedCount.textContent = `${visibleTopics.length} shown`
   selectedPercent.textContent = `${percent}%`
 
   progressFill.style.width = '0%'
@@ -792,7 +841,7 @@ function setActiveSubject(code, mobileMode = 'toggle') {
     })
   }
 
-  topicList.innerHTML = renderTopicCards(subject)
+  topicList.innerHTML = renderTopicCards(subject, visibleTopics)
 }
 
 function getTodayLabel() {
@@ -1110,6 +1159,39 @@ function renderWhatsappFeedback() {
   document.body.append(button)
 }
 
+function renderNewsFilters() {
+  if (!newsFeed) return
+
+  const course = newsCourseFilter?.value || 'all'
+  const order = newsDateFilter?.value || 'newest'
+  const cards = [...newsFeed.querySelectorAll('.update-panel')]
+
+  cards
+    .sort((a, b) => {
+      const difference = new Date(a.dataset.date || 0) - new Date(b.dataset.date || 0)
+      return order === 'oldest' ? difference : -difference
+    })
+    .forEach((card) => {
+      card.hidden = course !== 'all' && card.dataset.course !== course
+      newsFeed.append(card)
+    })
+
+  const hasVisibleCards = cards.some((card) => !card.hidden)
+  let emptyState = newsFeed.querySelector('[data-news-empty]')
+
+  if (!hasVisibleCards) {
+    if (!emptyState) {
+      emptyState = document.createElement('div')
+      emptyState.className = 'topic-empty topic-empty--panel'
+      emptyState.dataset.newsEmpty = 'true'
+      emptyState.textContent = 'No updates match the selected filters.'
+      newsFeed.append(emptyState)
+    }
+  } else {
+    emptyState?.remove()
+  }
+}
+
 if (subjectList) {
   renderSubjects()
   setActiveSubject(activeSubjectCode, initialParams.get('tracker') === '1' ? 'open' : 'closed')
@@ -1117,6 +1199,32 @@ if (subjectList) {
 }
 
 document.addEventListener('click', handleQuizClick)
+
+if (trackerSearch && trackerStatusFilter) {
+  ;[trackerSearch, trackerStatusFilter].forEach((control) => {
+    control.addEventListener('input', () => {
+      renderSubjects()
+      setActiveSubject(activeSubjectCode, 'open')
+    })
+  })
+}
+
+if (newsFeed) {
+  renderNewsFilters()
+  ;[newsCourseFilter, newsDateFilter].filter(Boolean).forEach((control) => {
+    control.addEventListener('input', renderNewsFilters)
+    control.addEventListener('change', renderNewsFilters)
+  })
+
+  let newsFilterKey = `${newsCourseFilter?.value || 'all'}:${newsDateFilter?.value || 'newest'}`
+  window.setInterval(() => {
+    const nextKey = `${newsCourseFilter?.value || 'all'}:${newsDateFilter?.value || 'newest'}`
+    if (nextKey !== newsFilterKey) {
+      newsFilterKey = nextKey
+      renderNewsFilters()
+    }
+  }, 300)
+}
 
 requestAnimationFrame(() => {
   const params = new URLSearchParams(window.location.search)

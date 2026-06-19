@@ -9,7 +9,7 @@
   <meta property="og:description" content="Public class board for MED 401 assignments, quiz reminders, and student-submitted corrections." />
   <meta property="og:type" content="website" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="stylesheet" href="/src/style.css?v=20260618-3" />
+  <link rel="stylesheet" href="/src/style.css?v=20260619-search-news-2" />
 </head>
 <body>
   <header class="site-header">
@@ -70,8 +70,28 @@
       </div>
     </section>
 
-    <section class="updates-board" aria-label="Assignments and class news">
-      <article class="update-panel update-panel--compact">
+    <section class="feed-section" aria-label="Assignments and class news">
+      <div class="filter-panel filter-panel--news" aria-label="News filters">
+        <label>
+          <span>Course</span>
+          <select id="news-course-filter">
+            <option value="all">All courses</option>
+            <option value="Anaesthesia">Anaesthesia</option>
+            <option value="SUR401-2">SUR401-2</option>
+            <option value="LAB401">LAB401</option>
+          </select>
+        </label>
+        <label>
+          <span>Date order</span>
+          <select id="news-date-filter">
+            <option value="newest">Newest first</option>
+            <option value="oldest">Oldest first</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="updates-board" id="news-feed" aria-live="polite">
+      <article class="update-panel update-panel--compact" data-course="Anaesthesia" data-date="2026-06-16">
         <div class="update-panel__top">
           <p class="card__kicker">Anaesthesia</p>
           <span class="status-pill status-pill--open">Jun 16</span>
@@ -92,7 +112,7 @@
         </dl>
       </article>
 
-      <article class="update-panel update-panel--compact">
+      <article class="update-panel update-panel--compact" data-course="SUR401-2" data-date="2026-06-16">
         <div class="update-panel__top">
           <p class="card__kicker">SUR401-2</p>
           <span class="status-pill status-pill--open">Jun 16</span>
@@ -117,7 +137,7 @@
         </ul>
       </article>
 
-      <article class="update-panel update-panel--primary">
+      <article class="update-panel update-panel--primary" data-course="LAB401" data-date="2026-09-05">
         <div class="update-panel__top">
           <p class="card__kicker">Required assignment</p>
           <span class="status-pill status-pill--due">Due Sep 5</span>
@@ -167,9 +187,10 @@
           <span>Lipoprotein disorders</span>
         </div>
       </article>
+      </div>
     </section>
   </main>
 
-  <script defer src="/src/main.js?v=20260618-3"></script>
+  <script defer src="/src/main.js?v=20260619-search-news-2"></script>
 </body>
 </html>
