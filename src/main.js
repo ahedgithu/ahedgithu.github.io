@@ -358,6 +358,7 @@ const subjects = [
 
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 const mobileQuery = window.matchMedia('(max-width: 860px)')
+const QUIZ_STORAGE_PREFIX = 'mcq-progress-'
 const mcqQuizzes = window.mcqQuizzes || {}
 const quizState = {
   topicLabel: null,
@@ -454,15 +455,16 @@ function renderResourceLinks(topic) {
   if (!coveredStates.has(topic.state)) return ''
 
   const resources = getResourceItems(topic)
-  const quiz = mcqQuizzes[topic.label]
+  const quizConfig = getQuizConfig(topic.label)
+  const quizCount = quizConfig?.mcqs?.length || 0
   const links = resources.map((item) => `
     <a class="topic-resource topic-resource--${item.type}" href="${item.url}" target="_blank" rel="noopener noreferrer"${item.download ? ' download' : ''}>
       ${item.label}
     </a>
   `).join('')
-  const quizButton = quiz?.length ? `
+  const quizButton = quizCount ? `
     <button class="topic-resource topic-resource--quiz" type="button" data-quiz-topic="${escapeHtml(topic.label)}">
-      MCQs (${quiz.length})
+      MCQs (${quizCount})
     </button>
   ` : ''
 
@@ -571,49 +573,334 @@ function ensureQuizModal() {
   return modal
 }
 
+function getQuizStorageKey(topicLabel) {
+  return `${QUIZ_STORAGE_PREFIX}${encodeURIComponent(topicLabel)}`
+}
+
+function getSavedQuizState(topicLabel) {
+  try {
+    return JSON.parse(localStorage.getItem(getQuizStorageKey(topicLabel)) || 'null')
+  } catch {
+    localStorage.removeItem(getQuizStorageKey(topicLabel))
+    return null
+  }
+}
+
+function saveQuizState() {
+  if (!quizState.topicLabel) return
+
+  const payload = {
+    topicLabel: quizState.topicLabel,
+    index: quizState.index,
+    answers: quizState.answers,
+    completed: quizState.completed,
+    order: quizState.order,
+    questionOptionOrder: quizState.questionOptionOrder
+  }
+
+  localStorage.setItem(getQuizStorageKey(quizState.topicLabel), JSON.stringify(payload))
+}
+
+function clearSavedQuizState(topicLabel) {
+  localStorage.removeItem(getQuizStorageKey(topicLabel))
+}
+
+function shuffleArray(array) {
+  const copy = [...array]
+  for (let i = copy.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[copy[i], copy[j]] = [copy[j], copy[i]]
+  }
+  return copy
+}
+
+function getQuizConfig(topicLabel) {
+  const raw = mcqQuizzes[topicLabel]
+  if (!raw) return null
+
+  if (Array.isArray(raw)) {
+    return {
+      mcqs: raw,
+      quizSize: raw.quizSize || null,
+      shuffleQuestions: raw.shuffleQuestions || false,
+      shuffleOptions: raw.shuffleOptions || false
+    }
+  }
+
+  return {
+    mcqs: raw.mcqs || [],
+    quizSize: raw.quizSize || null,
+    shuffleQuestions: raw.shuffleQuestions || false,
+    shuffleOptions: raw.shuffleOptions || false
+  }
+}
+
+function normalizeQuestion(question, index) {
+  const options = Array.isArray(question.options)
+    ? question.options.map((option) => ({ id: option.id, text: option.text }))
+    : (question.choices || []).map((choice, choiceIndex) => ({
+      id: String.fromCharCode(97 + choiceIndex),
+      text: choice
+    }))
+
+  const correctOptionId = question.correctOptionId || (
+    typeof question.answerIndex === 'number' && options[question.answerIndex]
+      ? options[question.answerIndex].id
+      : options[0]?.id
+  )
+
+  return {
+    id: question.id || `q${index}`,
+    question: question.question,
+    options,
+    correctOptionId,
+    explanation: question.explanation || ''
+  }
+}
+
+function getTopicData(topicLabel) {
+  return subjects.flatMap((subject) => subject.topics).find((topic) => topic.label === topicLabel)
+}
+
+function initializeQuiz(topicLabel, { useSaved = false, fresh = false } = {}) {
+  const config = getQuizConfig(topicLabel)
+  if (!config || !config.mcqs.length) return false
+
+  const normalizedQuestions = config.mcqs.map(normalizeQuestion)
+  let order = normalizedQuestions.map((question) => question.id)
+  let questionOptionOrder = {}
+  let index = 0
+  let answers = {}
+  let completed = false
+
+  const savedState = useSaved ? getSavedQuizState(topicLabel) : null
+  if (savedState && !fresh) {
+    order = savedState.order || order
+    questionOptionOrder = savedState.questionOptionOrder || {}
+    answers = savedState.answers || {}
+    index = Number.isInteger(savedState.index) ? savedState.index : 0
+    completed = !!savedState.completed
+  } else {
+    let questionPool = [...normalizedQuestions]
+    if (config.shuffleQuestions) {
+      questionPool = shuffleArray(questionPool)
+    }
+    if (config.quizSize && config.quizSize < questionPool.length) {
+      questionPool = questionPool.slice(0, config.quizSize)
+    }
+    order = questionPool.map((question) => question.id)
+    if (config.shuffleOptions) {
+      questionPool.forEach((question) => {
+        questionOptionOrder[question.id] = shuffleArray(question.options.map((option) => option.id))
+      })
+    }
+  }
+
+  const questions = order
+    .map((id) => normalizedQuestions.find((question) => question.id === id))
+    .filter(Boolean)
+
+  quizState.topicLabel = topicLabel
+  quizState.index = Math.min(index, Math.max(0, questions.length - 1))
+  quizState.answers = answers
+  quizState.completed = completed
+  quizState.order = order
+  quizState.questionOptionOrder = questionOptionOrder
+  quizState.questions = questions
+  quizState.showResumePrompt = false
+  quizState.lectureUrls = getTopicData(topicLabel)?.lectureUrls || []
+
+  if (savedState && !fresh && !savedState.completed && useSaved) {
+    quizState.showResumePrompt = true
+  }
+
+  return true
+}
+
 function getCurrentQuiz() {
-  return mcqQuizzes[quizState.topicLabel] || []
+  return quizState.questions || []
+}
+
+function getCurrentQuestion() {
+  return getCurrentQuiz()[quizState.index]
 }
 
 function getQuizScore() {
-  return Object.entries(quizState.answers).reduce((score, [questionIndex, answerIndex]) => {
-    const question = getCurrentQuiz()[Number(questionIndex)]
-    return question && question.answerIndex === answerIndex ? score + 1 : score
+  return Object.entries(quizState.answers).reduce((score, [questionId, selectedOptionId]) => {
+    const question = getCurrentQuiz().find((item) => item.id === questionId)
+    return question && question.correctOptionId === selectedOptionId ? score + 1 : score
   }, 0)
+}
+
+function getPerformanceLabel(score, total) {
+  const percent = total ? Math.round((score / total) * 100) : 0
+  if (percent >= 90) return 'Excellent'
+  if (percent >= 70) return 'Good'
+  if (percent >= 50) return 'Needs review'
+  return 'Repeat this topic'
+}
+
+function getOptionOrder(question) {
+  return quizState.questionOptionOrder[question.id] || question.options.map((option) => option.id)
+}
+
+function getOptionById(question, optionId) {
+  return question.options.find((option) => option.id === optionId)
+}
+
+function renderQuizActions() {
+  const modal = ensureQuizModal()
+  const actions = modal.querySelector('.quiz-modal__actions')
+  if (!actions) return
+
+  if (quizState.showResumePrompt) {
+    actions.innerHTML = `
+      <button class="quiz-action quiz-action--secondary" type="button" data-quiz-resume>Resume</button>
+      <button class="quiz-action quiz-action--secondary" type="button" data-quiz-start-over>Start over</button>
+      <button class="quiz-action quiz-action--primary" type="button" data-quiz-close>Close</button>
+    `
+    return
+  }
+
+  if (quizState.completed) {
+    actions.innerHTML = `
+      <button class="quiz-action" type="button" data-quiz-retake>Retake quiz</button>
+      <button class="quiz-action" type="button" data-quiz-reset>Reset</button>
+      <button class="quiz-action quiz-action--primary" type="button" data-quiz-close>Close</button>
+    `
+    return
+  }
+
+  actions.innerHTML = `
+    <button class="quiz-action" type="button" data-quiz-prev>Previous</button>
+    <button class="quiz-action" type="button" data-quiz-reset>Reset</button>
+    <button class="quiz-action quiz-action--primary" type="button" data-quiz-next>Next</button>
+  `
+}
+
+function renderQuizMeta() {
+  const modal = ensureQuizModal()
+  const title = modal.querySelector('#quiz-title')
+  const meta = modal.querySelector('#quiz-meta')
+  const fill = modal.querySelector('#quiz-progress-fill')
+  const quiz = getCurrentQuiz()
+  const score = getQuizScore()
+
+  title.textContent = quizState.topicLabel || 'Quiz'
+  if (quizState.showResumePrompt) {
+    meta.textContent = 'Resume your previous attempt or start over.'
+    fill.style.width = '0%'
+    return
+  }
+
+  if (quizState.completed) {
+    const percent = quiz.length ? Math.round((score / quiz.length) * 100) : 0
+    meta.textContent = `Final score ${score} / ${quiz.length} (${percent}%)`
+    fill.style.width = '100%'
+    return
+  }
+
+  const answeredCount = Object.keys(quizState.answers).length
+  meta.textContent = `Question ${quizState.index + 1} of ${quiz.length} · Score ${score} / ${answeredCount}`
+  fill.style.width = `${((quizState.index + 1) / Math.max(quiz.length, 1)) * 100}%`
+}
+
+function renderResumePrompt() {
+  const modal = ensureQuizModal()
+  const body = modal.querySelector('#quiz-body')
+  body.innerHTML = `
+    <article class="quiz-card quiz-prompt">
+      <p class="quiz-prompt__label">You have a saved attempt for this quiz.</p>
+      <p class="quiz-prompt__message">Resume your previous attempt or start over with a fresh quiz.</p>
+    </article>
+  `
+}
+
+function renderQuizSummary() {
+  const modal = ensureQuizModal()
+  const body = modal.querySelector('#quiz-body')
+  const quiz = getCurrentQuiz()
+  const score = getQuizScore()
+  const percent = quiz.length ? Math.round((score / quiz.length) * 100) : 0
+  const performance = getPerformanceLabel(score, quiz.length)
+  const lectureLink = quizState.lectureUrls?.[0]?.url
+
+  const reviewItems = quiz.map((question, index) => {
+    const selectedOptionId = quizState.answers[question.id]
+    const selectedOption = getOptionById(question, selectedOptionId)
+    const correctOption = getOptionById(question, question.correctOptionId)
+    const isCorrect = selectedOptionId === question.correctOptionId
+    const answerText = selectedOption ? selectedOption.text : 'No answer selected'
+    const correctText = correctOption ? correctOption.text : ''
+
+    return `
+      <li class="quiz-review-item ${isCorrect ? 'quiz-review-item--correct' : 'quiz-review-item--wrong'}">
+        <p class="quiz-review-question"><strong>Q${index + 1}.</strong> ${escapeHtml(question.question)}</p>
+        <p class="quiz-review-answer"><span>Your answer:</span> ${escapeHtml(answerText)}</p>
+        <p class="quiz-review-answer"><span>Correct answer:</span> ${escapeHtml(correctText)}</p>
+        <p class="quiz-review-explanation">${escapeHtml(question.explanation)}</p>
+      </li>
+    `
+  }).join('')
+
+  body.innerHTML = `
+    <article class="quiz-card quiz-summary">
+      <div class="quiz-summary__header">
+        <div>
+          <p class="quiz-summary__score">${score} / ${quiz.length}</p>
+          <p class="quiz-summary__percent">${percent}%</p>
+        </div>
+        <p class="quiz-summary__performance">${performance}</p>
+      </div>
+      <div class="quiz-summary__details">
+        <p>${quiz.length} questions reviewed</p>
+      </div>
+      <div class="quiz-review">
+        <ol>${reviewItems}</ol>
+      </div>
+      ${lectureLink ? `
+        <div class="quiz-summary__links">
+          <a class="quiz-action quiz-action--secondary" href="${lectureLink}" target="_blank" rel="noopener noreferrer">Review lecture</a>
+        </div>
+      ` : ''}
+    </article>
+  `
 }
 
 function renderQuizQuestion() {
   const modal = ensureQuizModal()
-  const quiz = getCurrentQuiz()
-  const question = quiz[quizState.index]
+  const question = getCurrentQuestion()
   const body = modal.querySelector('#quiz-body')
-  const title = modal.querySelector('#quiz-title')
-  const meta = modal.querySelector('#quiz-meta')
-  const fill = modal.querySelector('#quiz-progress-fill')
   const prev = modal.querySelector('[data-quiz-prev]')
   const next = modal.querySelector('[data-quiz-next]')
+  const quiz = getCurrentQuiz()
 
-  if (!question) return
+  if (!question || quizState.completed) {
+    renderQuizSummary()
+    if (prev) prev.disabled = true
+    if (next) next.textContent = 'Finished'
+    return
+  }
 
-  const selected = quizState.answers[quizState.index]
-  const answered = Number.isInteger(selected)
-  const score = getQuizScore()
+  renderQuizMeta()
+  renderQuizActions()
 
-  title.textContent = quizState.topicLabel
-  meta.textContent = `Question ${quizState.index + 1} of ${quiz.length} - Score ${score}/${Object.keys(quizState.answers).length || 0}`
-  fill.style.width = `${((quizState.index + 1) / quiz.length) * 100}%`
-  prev.disabled = quizState.index === 0
-  next.textContent = quizState.index === quiz.length - 1 ? 'Finish' : 'Next'
+  const selectedOptionId = quizState.answers[question.id]
+  const answered = Boolean(selectedOptionId)
+  const optionOrder = getOptionOrder(question)
 
-  const choices = question.choices.map((choice, index) => {
+  const choices = optionOrder.map((optionId, optionIndex) => {
+    const option = getOptionById(question, optionId)
+    const isCorrect = option && option.id === question.correctOptionId
+    const isSelected = option && option.id === selectedOptionId
     let stateClass = ''
-    if (answered && index === question.answerIndex) stateClass = ' quiz-choice--correct'
-    if (answered && index === selected && index !== question.answerIndex) stateClass = ' quiz-choice--wrong'
+    if (answered && isCorrect) stateClass = ' quiz-choice--correct'
+    if (answered && isSelected && !isCorrect) stateClass = ' quiz-choice--wrong'
 
     return `
-      <button class="quiz-choice${stateClass}" type="button" data-quiz-answer="${index}" ${answered ? 'disabled' : ''}>
-        <span>${String.fromCharCode(65 + index)}</span>
-        ${escapeHtml(choice)}
+      <button class="quiz-choice${stateClass}" type="button" data-quiz-answer="${option.id}" ${answered ? 'disabled' : ''}>
+        <span>${String.fromCharCode(65 + optionIndex)}</span>
+        ${escapeHtml(option.text)}
       </button>
     `
   }).join('')
@@ -624,34 +911,54 @@ function renderQuizQuestion() {
       <div class="quiz-choices">${choices}</div>
       ${answered ? `
         <div class="quiz-explanation">
-          <strong>${selected === question.answerIndex ? 'Correct.' : 'Correct answer: ' + escapeHtml(question.choices[question.answerIndex])}</strong>
+          <strong>${selectedOptionId === question.correctOptionId ? 'Correct.' : 'Correct answer: ' + escapeHtml(getOptionById(question, question.correctOptionId)?.text || '')}</strong>
           <p>${escapeHtml(question.explanation)}</p>
         </div>
       ` : ''}
     </article>
   `
+
+  if (prev) prev.disabled = quizState.index === 0
+  if (next) next.textContent = quizState.index === quiz.length - 1 ? 'Finish' : 'Next'
 }
 
-function celebrateCorrectAnswer() {
-  if (prefersReducedMotion) return
-  const confetti = ensureQuizModal().querySelector('#quiz-confetti')
-  confetti.innerHTML = Array.from({ length: 18 }, (_, index) => `<span style="--x:${index};"></span>`).join('')
-  confetti.classList.remove('quiz-confetti--active')
+function triggerCorrectAnswerCelebration() {
+  const modal = ensureQuizModal()
+  const confetti = modal.querySelector('#quiz-confetti')
+  confetti.innerHTML = Array.from({ length: 20 }, (_, index) => `<span style="--x:${index};"></span>`).join('')
+  confetti.classList.remove('quiz-confetti--pulse', 'quiz-confetti--active')
+
+  if (prefersReducedMotion) {
+    confetti.classList.add('quiz-confetti--pulse')
+    window.setTimeout(() => confetti.classList.remove('quiz-confetti--pulse'), 900)
+    return
+  }
+
   requestAnimationFrame(() => confetti.classList.add('quiz-confetti--active'))
+  window.setTimeout(() => confetti.classList.remove('quiz-confetti--active'), 1200)
 }
 
 function openQuiz(topicLabel) {
-  const quiz = mcqQuizzes[topicLabel]
-  if (!quiz?.length) return
+  const config = getQuizConfig(topicLabel)
+  if (!config || !config.mcqs.length) return
 
-  quizState.topicLabel = topicLabel
-  quizState.index = 0
-  quizState.answers = {}
+  const savedState = getSavedQuizState(topicLabel)
+  const useSaved = Boolean(savedState)
+  initializeQuiz(topicLabel, { useSaved, fresh: false })
 
   const modal = ensureQuizModal()
   modal.setAttribute('aria-hidden', 'false')
   document.body.classList.add('panel-open')
-  renderQuizQuestion()
+  renderQuizMeta()
+  renderQuizActions()
+
+  if (quizState.showResumePrompt) {
+    renderResumePrompt()
+  } else if (quizState.completed) {
+    renderQuizSummary()
+  } else {
+    renderQuizQuestion()
+  }
 }
 
 function closeQuiz() {
@@ -672,6 +979,28 @@ function handleQuizClick(event) {
     return
   }
 
+  if (event.target.closest('[data-quiz-resume]')) {
+    quizState.showResumePrompt = false
+    renderQuizQuestion()
+    return
+  }
+
+  if (event.target.closest('[data-quiz-start-over]')) {
+    const topicLabel = quizState.topicLabel
+    clearSavedQuizState(topicLabel)
+    initializeQuiz(topicLabel, { fresh: true })
+    renderQuizQuestion()
+    return
+  }
+
+  if (event.target.closest('[data-quiz-retake]')) {
+    const topicLabel = quizState.topicLabel
+    clearSavedQuizState(topicLabel)
+    initializeQuiz(topicLabel, { fresh: true })
+    renderQuizQuestion()
+    return
+  }
+
   if (event.target.closest('[data-quiz-prev]')) {
     quizState.index = Math.max(0, quizState.index - 1)
     renderQuizQuestion()
@@ -681,10 +1010,16 @@ function handleQuizClick(event) {
   if (event.target.closest('[data-quiz-next]')) {
     const quiz = getCurrentQuiz()
     if (quizState.index === quiz.length - 1) {
-      closeQuiz()
+      quizState.completed = true
+      saveQuizState()
+      renderQuizSummary()
+      renderQuizActions()
+      renderQuizMeta()
       return
     }
+
     quizState.index = Math.min(quiz.length - 1, quizState.index + 1)
+    saveQuizState()
     renderQuizQuestion()
     return
   }
@@ -692,17 +1027,25 @@ function handleQuizClick(event) {
   if (event.target.closest('[data-quiz-reset]')) {
     quizState.answers = {}
     quizState.index = 0
+    quizState.completed = false
+    clearSavedQuizState(quizState.topicLabel)
     renderQuizQuestion()
     return
   }
 
   const answerButton = event.target.closest('[data-quiz-answer]')
   if (answerButton) {
-    const answerIndex = Number(answerButton.dataset.quizAnswer)
-    const question = getCurrentQuiz()[quizState.index]
-    quizState.answers[quizState.index] = answerIndex
+    const selectedOptionId = answerButton.dataset.quizAnswer
+    const question = getCurrentQuestion()
+    if (!question || quizState.completed || quizState.showResumePrompt) return
+
+    quizState.answers[question.id] = selectedOptionId
+    saveQuizState()
     renderQuizQuestion()
-    if (question && answerIndex === question.answerIndex) celebrateCorrectAnswer()
+
+    if (question.correctOptionId === selectedOptionId) {
+      triggerCorrectAnswerCelebration()
+    }
   }
 }
 
