@@ -53,6 +53,9 @@ const subjects = [
         state: 'taken',
         art: 8,
         note: 'Tuesday report: cirrhosis, portal hypertension, esophageal varices, liver transplantation, Budd-Chiari syndrome, portal vein thrombosis, and splenic vein thrombosis.',
+        lectureUrls: [
+          { label: 'Lecture', url: 'https://docs.google.com/presentation/d/1Y8AQJlpl-XINpxVDyeexUBjpxfAsDJrV/edit?usp=drivesdk&ouid=109054155258701630059&rtpof=true&sd=true' }
+        ],
         audioUrl: 'https://drive.google.com/file/d/1t1i2zjXOYw9jaSdIRYn1GvBOrsToq30u/view?usp=drivesdk'
       },
       { label: 'Tongue', state: 'remaining', art: 2 },
@@ -249,6 +252,7 @@ const subjects = [
         art: 13,
         note: 'Wednesday report: viral foodborne infections including polio virus and hepatitis A/E viruses.',
         lectureUrls: [
+          { label: 'Lecture', url: 'https://drive.google.com/file/d/15d6Q4cfi8jJ9XW2NpuLBk76ctKe8mKSZ/view?usp=drivesdk' },
           { label: 'Foodborne map', url: '/assets/foodborne-viral-part2-map-v1.png' }
         ],
         pdfUrls: [
@@ -274,6 +278,7 @@ const subjects = [
         state: 'taken',
         art: 5,
         lectureUrls: [
+          { label: 'Lecture', url: 'https://drive.google.com/file/d/154Sxxn2R_Y-6l2i3pvhFtWP_Roi_GR0Q/view?usp=drivesdk' },
           { label: 'Lecture map', url: '/assets/lft-full-lecture-map-v2.png' }
         ],
         pdfUrls: [
@@ -301,6 +306,8 @@ const subjects = [
         art: 14,
         note: 'Wednesday report: combined LAB topic. The lecture map currently covers the diabetes/glucose-testing lecture only.',
         lectureUrls: [
+          { label: 'DM lecture', url: 'https://drive.google.com/file/d/1wu3gyA28ynSIPuHvqMAvqCmCPIp5zIzp/view?usp=drivesdk' },
+          { label: 'Lipid lecture', url: 'https://drive.google.com/file/d/15At9wbM85dRi_4Cbx9AZ76vRuHTiAL_L/view?usp=drivesdk' },
           { label: 'Diabetes map', url: '/assets/diabetes-glucose-testing-map-v1.png' }
         ],
         pdfUrls: [
@@ -351,6 +358,12 @@ const subjects = [
 
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 const mobileQuery = window.matchMedia('(max-width: 860px)')
+const mcqQuizzes = window.mcqQuizzes || {}
+const quizState = {
+  topicLabel: null,
+  index: 0,
+  answers: {}
+}
 
 const coveredStates = new Set(['taken', 'partial'])
 const stateLabels = {
@@ -421,6 +434,15 @@ function getSubjectSummary(subject) {
   return parts.join(' · ')
 }
 
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;')
+}
+
 function getResourceItems(topic) {
   const lectureItems = (topic.lectureUrls || []).map((item) => ({ ...item, type: 'lecture' }))
   const pdfItems = (topic.pdfUrls || []).map((item) => ({ ...item, type: 'pdf' }))
@@ -432,11 +454,17 @@ function renderResourceLinks(topic) {
   if (!coveredStates.has(topic.state)) return ''
 
   const resources = getResourceItems(topic)
+  const quiz = mcqQuizzes[topic.label]
   const links = resources.map((item) => `
     <a class="topic-resource topic-resource--${item.type}" href="${item.url}" target="_blank" rel="noopener noreferrer"${item.download ? ' download' : ''}>
       ${item.label}
     </a>
   `).join('')
+  const quizButton = quiz?.length ? `
+    <button class="topic-resource topic-resource--quiz" type="button" data-quiz-topic="${escapeHtml(topic.label)}">
+      MCQs (${quiz.length})
+    </button>
+  ` : ''
 
   const pendingLecture = topic.lectureUrls?.length ? '' : '<span class="topic-resource topic-resource--pending">Lecture pending</span>'
   const pendingAudio = topic.audioUrl ? '' : '<span class="topic-resource topic-resource--pending">Audio pending</span>'
@@ -444,6 +472,7 @@ function renderResourceLinks(topic) {
   return `
     <span class="topic-resources" aria-label="Topic resources">
       ${links}
+      ${quizButton}
       ${pendingLecture}
       ${pendingAudio}
     </span>
@@ -505,6 +534,176 @@ function renderTopicCards(subject) {
       ${topicMarkup}
     `
   }).join('')
+}
+
+function ensureQuizModal() {
+  let modal = document.getElementById('quiz-modal')
+  if (modal) return modal
+
+  modal = document.createElement('div')
+  modal.id = 'quiz-modal'
+  modal.className = 'quiz-modal'
+  modal.setAttribute('aria-hidden', 'true')
+  modal.innerHTML = `
+    <div class="quiz-modal__backdrop" data-quiz-close></div>
+    <section class="quiz-modal__panel" role="dialog" aria-modal="true" aria-labelledby="quiz-title">
+      <div class="quiz-modal__top">
+        <div>
+          <p class="card__kicker">Interactive MCQs</p>
+          <h2 id="quiz-title">Quiz</h2>
+          <p class="quiz-modal__meta" id="quiz-meta"></p>
+        </div>
+        <button class="icon-button" type="button" data-quiz-close aria-label="Close quiz">X</button>
+      </div>
+      <div class="quiz-progress" aria-label="Quiz progress">
+        <span id="quiz-progress-fill"></span>
+      </div>
+      <div class="quiz-modal__body" id="quiz-body"></div>
+      <div class="quiz-modal__actions">
+        <button class="quiz-action" type="button" data-quiz-prev>Previous</button>
+        <button class="quiz-action" type="button" data-quiz-reset>Reset</button>
+        <button class="quiz-action quiz-action--primary" type="button" data-quiz-next>Next</button>
+      </div>
+      <div class="quiz-confetti" aria-hidden="true" id="quiz-confetti"></div>
+    </section>
+  `
+  document.body.appendChild(modal)
+  return modal
+}
+
+function getCurrentQuiz() {
+  return mcqQuizzes[quizState.topicLabel] || []
+}
+
+function getQuizScore() {
+  return Object.entries(quizState.answers).reduce((score, [questionIndex, answerIndex]) => {
+    const question = getCurrentQuiz()[Number(questionIndex)]
+    return question && question.answerIndex === answerIndex ? score + 1 : score
+  }, 0)
+}
+
+function renderQuizQuestion() {
+  const modal = ensureQuizModal()
+  const quiz = getCurrentQuiz()
+  const question = quiz[quizState.index]
+  const body = modal.querySelector('#quiz-body')
+  const title = modal.querySelector('#quiz-title')
+  const meta = modal.querySelector('#quiz-meta')
+  const fill = modal.querySelector('#quiz-progress-fill')
+  const prev = modal.querySelector('[data-quiz-prev]')
+  const next = modal.querySelector('[data-quiz-next]')
+
+  if (!question) return
+
+  const selected = quizState.answers[quizState.index]
+  const answered = Number.isInteger(selected)
+  const score = getQuizScore()
+
+  title.textContent = quizState.topicLabel
+  meta.textContent = `Question ${quizState.index + 1} of ${quiz.length} - Score ${score}/${Object.keys(quizState.answers).length || 0}`
+  fill.style.width = `${((quizState.index + 1) / quiz.length) * 100}%`
+  prev.disabled = quizState.index === 0
+  next.textContent = quizState.index === quiz.length - 1 ? 'Finish' : 'Next'
+
+  const choices = question.choices.map((choice, index) => {
+    let stateClass = ''
+    if (answered && index === question.answerIndex) stateClass = ' quiz-choice--correct'
+    if (answered && index === selected && index !== question.answerIndex) stateClass = ' quiz-choice--wrong'
+
+    return `
+      <button class="quiz-choice${stateClass}" type="button" data-quiz-answer="${index}" ${answered ? 'disabled' : ''}>
+        <span>${String.fromCharCode(65 + index)}</span>
+        ${escapeHtml(choice)}
+      </button>
+    `
+  }).join('')
+
+  body.innerHTML = `
+    <article class="quiz-card">
+      <p class="quiz-question">${escapeHtml(question.question)}</p>
+      <div class="quiz-choices">${choices}</div>
+      ${answered ? `
+        <div class="quiz-explanation">
+          <strong>${selected === question.answerIndex ? 'Correct.' : 'Correct answer: ' + escapeHtml(question.choices[question.answerIndex])}</strong>
+          <p>${escapeHtml(question.explanation)}</p>
+        </div>
+      ` : ''}
+    </article>
+  `
+}
+
+function celebrateCorrectAnswer() {
+  if (prefersReducedMotion) return
+  const confetti = ensureQuizModal().querySelector('#quiz-confetti')
+  confetti.innerHTML = Array.from({ length: 18 }, (_, index) => `<span style="--x:${index};"></span>`).join('')
+  confetti.classList.remove('quiz-confetti--active')
+  requestAnimationFrame(() => confetti.classList.add('quiz-confetti--active'))
+}
+
+function openQuiz(topicLabel) {
+  const quiz = mcqQuizzes[topicLabel]
+  if (!quiz?.length) return
+
+  quizState.topicLabel = topicLabel
+  quizState.index = 0
+  quizState.answers = {}
+
+  const modal = ensureQuizModal()
+  modal.setAttribute('aria-hidden', 'false')
+  document.body.classList.add('panel-open')
+  renderQuizQuestion()
+}
+
+function closeQuiz() {
+  const modal = ensureQuizModal()
+  modal.setAttribute('aria-hidden', 'true')
+  document.body.classList.remove('panel-open')
+}
+
+function handleQuizClick(event) {
+  const openButton = event.target.closest('[data-quiz-topic]')
+  if (openButton) {
+    openQuiz(openButton.dataset.quizTopic)
+    return
+  }
+
+  if (event.target.closest('[data-quiz-close]')) {
+    closeQuiz()
+    return
+  }
+
+  if (event.target.closest('[data-quiz-prev]')) {
+    quizState.index = Math.max(0, quizState.index - 1)
+    renderQuizQuestion()
+    return
+  }
+
+  if (event.target.closest('[data-quiz-next]')) {
+    const quiz = getCurrentQuiz()
+    if (quizState.index === quiz.length - 1) {
+      closeQuiz()
+      return
+    }
+    quizState.index = Math.min(quiz.length - 1, quizState.index + 1)
+    renderQuizQuestion()
+    return
+  }
+
+  if (event.target.closest('[data-quiz-reset]')) {
+    quizState.answers = {}
+    quizState.index = 0
+    renderQuizQuestion()
+    return
+  }
+
+  const answerButton = event.target.closest('[data-quiz-answer]')
+  if (answerButton) {
+    const answerIndex = Number(answerButton.dataset.quizAnswer)
+    const question = getCurrentQuiz()[quizState.index]
+    quizState.answers[quizState.index] = answerIndex
+    renderQuizQuestion()
+    if (question && answerIndex === question.answerIndex) celebrateCorrectAnswer()
+  }
 }
 
 function renderSubjects() {
@@ -916,6 +1115,8 @@ if (subjectList) {
   setActiveSubject(activeSubjectCode, initialParams.get('tracker') === '1' ? 'open' : 'closed')
   renderSemesterTimeline()
 }
+
+document.addEventListener('click', handleQuizClick)
 
 requestAnimationFrame(() => {
   const params = new URLSearchParams(window.location.search)
