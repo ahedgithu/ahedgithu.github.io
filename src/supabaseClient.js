@@ -54,7 +54,34 @@ function getHeaders({ auth = false, prefer } = {}) {
   return headers
 }
 
-async function request(path, options = {}) {
+let refreshPromise = null
+
+async function refreshSession() {
+  const refreshToken = getSession()?.refresh_token
+  if (!refreshToken) return false
+
+  if (!refreshPromise) {
+    refreshPromise = fetch(getProjectUrl('/auth/v1/token?grant_type=refresh_token'), {
+      method: 'POST',
+      headers: getHeaders(),
+      body: JSON.stringify({ refresh_token: refreshToken })
+    }).then(async (response) => {
+      if (!response.ok) {
+        clearSession()
+        return false
+      }
+
+      saveSession(await response.json())
+      return true
+    }).finally(() => {
+      refreshPromise = null
+    })
+  }
+
+  return refreshPromise
+}
+
+async function request(path, options = {}, canRefresh = true) {
   if (!isSupabaseConfigured()) {
     throw new Error('Supabase is not configured.')
   }
@@ -66,6 +93,10 @@ async function request(path, options = {}) {
       ...(options.headers || {})
     }
   })
+
+  if (response.status === 401 && options.auth && canRefresh && await refreshSession()) {
+    return request(path, options, false)
+  }
 
   if (!response.ok) {
     const errorText = await response.text()

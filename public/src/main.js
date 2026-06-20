@@ -1,4 +1,7 @@
-const subjects = [
+﻿import confetti from 'canvas-confetti'
+import { fetchTrackerData, isSupabaseConfigured } from './supabaseClient.js'
+
+let subjects = [
   {
     code: 'SUR-1',
     name: 'Surgery 1',
@@ -12,7 +15,7 @@ const subjects = [
         lectureUrls: [
           { label: 'Lecture', url: 'https://docs.google.com/presentation/d/12BIYR9r2h_fwkUQpXQI0xOyPy-lSI9D_/edit?usp=drivesdk&ouid=109054155258701630059&rtpof=true&sd=true' }
         ],
-        audioUrl: 'https://drive.google.com/file/d/1ukIDlUnzzpsyCOola5-TiyWJy7e2QELO/view?usp=drivesdk'
+        audioUrl: 'https://pub-b1a0ad9fb8794da99eb2214f709871b4.r2.dev/sur401-1/liver-introduction.m4a'
       },
       {
         label: 'Oesophagus: surgical anatomy and physiology',
@@ -21,7 +24,7 @@ const subjects = [
         lectureUrls: [
           { label: 'Lecture', url: 'https://drive.google.com/file/d/1-iY3KOVw6vUWm_7k--A9lWFJnuGxYqoo/view?usp=drivesdk' }
         ],
-        audioUrl: 'https://drive.google.com/file/d/1l4H_hY6RO36c-iYZFLyJu8h9rv-jfYi5/view?usp=drivesdk'
+        audioUrl: 'https://pub-b1a0ad9fb8794da99eb2214f709871b4.r2.dev/sur401-1/oesophagus-anatomy-physiology.m4a'
       },
       {
         label: 'Esophagus: achalasia, hiatus hernia, GERD',
@@ -30,13 +33,13 @@ const subjects = [
         lectureUrls: [
           { label: 'Lecture', url: 'https://drive.google.com/file/d/1-uzZPnXaDetSZxCujFNDLudZ_TOJaQEh/view?usp=drivesdk' }
         ],
-        audioUrl: 'https://drive.google.com/file/d/1vt23RUJTWuT_1ZRUHGm4gvWJKW1sxUyI/view?usp=drivesdk'
+        audioUrl: 'https://pub-b1a0ad9fb8794da99eb2214f709871b4.r2.dev/sur401-1/achalasia-hiatus-hernia-gerd.m4a'
       },
       {
         label: 'Clinical round overview',
         state: 'taken',
         art: 2,
-        audioUrl: 'https://drive.google.com/file/d/1mpckOjHYl__72iCCGy4jXU7EJfzgzKlX/view?usp=drivesdk'
+        audioUrl: 'https://pub-b1a0ad9fb8794da99eb2214f709871b4.r2.dev/sur401-1/clinical-round-overview.m4a'
       },
       {
         label: 'Liver Trauma and Infections',
@@ -46,7 +49,7 @@ const subjects = [
         lectureUrls: [
           { label: 'Lecture', url: 'https://docs.google.com/presentation/d/1yjIUZolwSkC9DLnvTGCWBsxtPMuqalgY/edit?usp=drivesdk&ouid=109054155258701630059&rtpof=true&sd=true' }
         ],
-        audioUrl: 'https://drive.google.com/file/d/1mhHDVMOU6lPAar5xesF0eLKtNUJDwVR9/view?usp=drivesdk'
+        audioUrl: 'https://pub-b1a0ad9fb8794da99eb2214f709871b4.r2.dev/sur401-1/liver-trauma-infections.m4a'
       },
       {
         label: 'Cirrhosis, portal hypertension and hepatic vascular disease',
@@ -56,7 +59,7 @@ const subjects = [
         lectureUrls: [
           { label: 'Lecture', url: 'https://docs.google.com/presentation/d/1Y8AQJlpl-XINpxVDyeexUBjpxfAsDJrV/edit?usp=drivesdk&ouid=109054155258701630059&rtpof=true&sd=true' }
         ],
-        audioUrl: 'https://drive.google.com/file/d/1t1i2zjXOYw9jaSdIRYn1GvBOrsToq30u/view?usp=drivesdk'
+        audioUrl: 'https://pub-b1a0ad9fb8794da99eb2214f709871b4.r2.dev/sur401-1/cirrhosis-portal-hypertension.m4a'
       },
       { label: 'Tongue', state: 'remaining', art: 2 },
       { label: 'Salivary glands', state: 'remaining', art: 13 },
@@ -77,7 +80,7 @@ const subjects = [
         label: 'Overview of the Subject',
         state: 'taken',
         art: 2,
-        audioUrl: 'https://drive.google.com/file/d/1JCS1ZR8BiLL2sGVi-0B6UBExsstVOZEP/view?usp=drivesdk'
+        audioUrl: 'https://pub-b1a0ad9fb8794da99eb2214f709871b4.r2.dev/sur401-2/subject-overview.m4a'
       },
       { label: 'Chest trauma / trauma up to sternal fractures', state: 'announced', art: 10, note: 'Announced in university, not explained yet.' },
       { label: 'Rib fracture', state: 'remaining', art: 10 },
@@ -99,7 +102,7 @@ const subjects = [
         lectureUrls: [
           { label: 'Lecture', url: 'https://drive.google.com/file/d/14TjxXXk2ITCHuao-ayMIwT4z1yjbNFuh/view?usp=drivesdk' }
         ],
-        audioUrl: 'https://drive.google.com/file/d/1Jw6R2QaYMQ9PerWxCAU_0vMfReSneE1o/view?usp=drivesdk'
+        audioUrl: 'https://pub-b1a0ad9fb8794da99eb2214f709871b4.r2.dev/med401-1/diseases-of-the-pancreas.m4a'
       },
       {
         label: 'Investigation of Acute Hepatitis',
@@ -112,7 +115,7 @@ const subjects = [
         pdfUrls: [
           { label: 'Download PDF', url: '/assets/acute-viral-hepatitis-map-v3.pdf', download: true }
         ],
-        audioUrl: 'https://drive.google.com/file/d/1pCiruJJQ6rB84pyxeGy_NUY5QMUzDJVi/view?usp=drivesdk'
+        audioUrl: 'https://pub-b1a0ad9fb8794da99eb2214f709871b4.r2.dev/med401-1/investigation-acute-hepatitis.m4a'
       },
       { label: 'Chronic viral and non-viral hepatitis', state: 'remaining', art: 5 },
       { label: 'Diseases of Stomach: PUD, H. pylori, non-ulcer dyspepsia', state: 'remaining', art: 6 },
@@ -135,7 +138,7 @@ const subjects = [
         lectureUrls: [
           { label: 'Lecture', url: 'https://drive.google.com/file/d/1lCYbFrQVM23IHF-qxs0DItq6wHIjwxxP/view?usp=drivesdk' }
         ],
-        audioUrl: 'https://drive.google.com/file/d/1ryTmHHfCBcIzK0AXKgYYxqSKvvbMHAZk/view?usp=drivesdk'
+        audioUrl: 'https://pub-b1a0ad9fb8794da99eb2214f709871b4.r2.dev/med401-2/systemic-hypertension.m4a'
       },
       {
         label: 'Rheumatic fever and infective endocarditis',
@@ -145,7 +148,7 @@ const subjects = [
         lectureUrls: [
           { label: 'Lecture', url: 'https://docs.google.com/presentation/d/1yZxhWUh5KDgQp_Z_Le10RL_JmdooXpwb/edit?usp=drivesdk&ouid=109054155258701630059&rtpof=true&sd=true' }
         ],
-        audioUrl: 'https://drive.google.com/file/d/1G7x3QDKNsrxEZXdm-iQBAEeQzijaul2K/view?usp=drivesdk'
+        audioUrl: 'https://pub-b1a0ad9fb8794da99eb2214f709871b4.r2.dev/med401-2/rheumatic-fever-infective-endocarditis.m4a'
       },
       { label: 'Ischemic heart disease and stable angina', state: 'remaining', art: 9, section: 'Cardio' },
       { label: 'Acute coronary syndrome', state: 'remaining', art: 9, section: 'Cardio' },
@@ -160,7 +163,7 @@ const subjects = [
         lectureUrls: [
           { label: 'Lecture', url: 'https://drive.google.com/file/d/1SX1PStcEfLVwTwYt_WfjesGwkieI2Pfd/view?usp=drivesdk' }
         ],
-        audioUrl: 'https://drive.google.com/file/d/14YTH3onMolGkFXHzRSyG_ejnZv9ryGG5/view?usp=drivesdk'
+        audioUrl: 'https://pub-b1a0ad9fb8794da99eb2214f709871b4.r2.dev/med401-2/chest-symptomatology.m4a'
       },
       {
         label: 'Pulmonary Function Test',
@@ -171,7 +174,7 @@ const subjects = [
           { label: 'Lecture', url: 'https://drive.google.com/file/d/1k5IlWjpjnwEeKt4UmcD-zdBNtqiyr0S2/view?usp=drivesdk' },
           { label: 'Slides', url: 'https://docs.google.com/presentation/d/1I3A5NgJf0YtX932PbftokMNZeKfjGEln/edit?usp=drivesdk&ouid=109054155258701630059&rtpof=true&sd=true' }
         ],
-        audioUrl: 'https://drive.google.com/file/d/1O83lsWK2zc1e7u6Yljwtd5ZFM2llnrFA/view?usp=drivesdk'
+        audioUrl: 'https://pub-b1a0ad9fb8794da99eb2214f709871b4.r2.dev/med401-2/pulmonary-function-test.m4a'
       },
       {
         label: 'Diseases of the airways and bronchial asthma Part 1',
@@ -204,7 +207,7 @@ const subjects = [
         lectureUrls: [
           { label: 'Lecture', url: 'https://drive.google.com/file/d/1D3qbb6zibbkzstmNeipmEoNPlnF7BN2q/view?usp=drivesdk' }
         ],
-        audioUrl: 'https://drive.google.com/file/d/1qH7bGw0mqGQzaf8lzszR72PRFUAnNCG6/view?usp=drivesdk'
+        audioUrl: 'https://pub-b1a0ad9fb8794da99eb2214f709871b4.r2.dev/onc401/anemia-part-1.m4a'
       },
       {
         label: 'Anemia file completion and sideroblastic anemia',
@@ -214,7 +217,7 @@ const subjects = [
           { label: 'Anemia file', url: 'https://drive.google.com/file/d/1zcQyZdfM-y6qqo5AhaeZtORqEkUFIQJJ/view?usp=drivesdk' },
           { label: 'Sideroblastic', url: 'https://docs.google.com/presentation/d/10qAAzE1DcZj3QAjyhf_4kkA8mzf0QH6-/edit?usp=drivesdk&ouid=109054155258701630059&rtpof=true&sd=true' }
         ],
-        audioUrl: 'https://drive.google.com/file/d/1UuxB_UA6w7NKqgPerO6yadsKbpdNcNle/view?usp=drivesdk'
+        audioUrl: 'https://pub-b1a0ad9fb8794da99eb2214f709871b4.r2.dev/onc401/anemia-part-2-sideroblastic.m4a'
       },
       { label: 'Anemia approach and iron deficiency anemia', state: 'remaining', art: 12 },
       { label: 'Hemolytic anemia', state: 'remaining', art: 12 },
@@ -235,7 +238,7 @@ const subjects = [
         lectureUrls: [
           { label: 'Lecture', url: 'https://drive.google.com/file/d/1rCjJqBqu8wOWIW0SMHoGjvyXSCIniwsR/view?usp=drivesdk' }
         ],
-        audioUrl: 'https://drive.google.com/file/d/1twQvgbaRxLMP2vBRu4dVV7nU6zmMHUFV/view?usp=drivesdk'
+        audioUrl: 'https://pub-b1a0ad9fb8794da99eb2214f709871b4.r2.dev/nut401/vitamins.m4a'
       },
       {
         label: 'Food-borne Diseases',
@@ -244,7 +247,7 @@ const subjects = [
         lectureUrls: [
           { label: 'Lecture', url: 'https://drive.google.com/file/d/1q5b51GzxLYXT-iOOLfA1M1KnigeJTE1b/view?usp=drivesdk' }
         ],
-        audioUrl: 'https://drive.google.com/file/d/1Lr0LftsOc_-uhH2X82uqzJ0eSkUWgSDz/view?usp=drivesdk'
+        audioUrl: 'https://pub-b1a0ad9fb8794da99eb2214f709871b4.r2.dev/nut401/food-borne-diseases-part-1.m4a'
       },
       {
         label: 'Food Borne Diseases Part 2',
@@ -284,7 +287,7 @@ const subjects = [
         pdfUrls: [
           { label: 'Download PDF', url: '/assets/lft-full-lecture-map-v2.pdf', download: true }
         ],
-        audioUrl: 'https://drive.google.com/file/d/122BV8-mfoCWNXt979EaO2ZkMGbGuHpm5/view?usp=drivesdk'
+        audioUrl: 'https://pub-b1a0ad9fb8794da99eb2214f709871b4.r2.dev/lab401/liver-function-test.m4a'
       },
       {
         label: 'Cardiac Biomarkers',
@@ -297,7 +300,7 @@ const subjects = [
         pdfUrls: [
           { label: 'Download PDF', url: '/assets/cardiac-biomarkers-map-v1.pdf', download: true }
         ],
-        audioUrl: 'https://drive.google.com/file/d/168l5PhCSMGsl3GWyVeFpDiw8WEWaJlmC/view?usp=drivesdk'
+        audioUrl: 'https://pub-b1a0ad9fb8794da99eb2214f709871b4.r2.dev/lab401/cardiac-biomarkers.m4a'
       },
       { label: 'Clinical Pathology Research Assignment', state: 'remaining', art: 14 },
       {
@@ -331,7 +334,7 @@ const subjects = [
         lectureUrls: [
           { label: 'Lecture', url: 'https://drive.google.com/file/d/1V5Shpas5pvITeqRW3U6hQs1iN6qZGJcv/view?usp=drivesdk' }
         ],
-        audioUrl: 'https://drive.google.com/file/d/1sFabKs8xoweV_eSqkB_D7YVXufv28rLt/view?usp=drivesdk'
+        audioUrl: 'https://pub-b1a0ad9fb8794da99eb2214f709871b4.r2.dev/anae401/preoperative-patient-management.m4a'
       },
       {
         label: 'Monitoring and Fluid Therapy',
@@ -345,7 +348,7 @@ const subjects = [
         pdfUrls: [
           { label: 'Download PDF', url: '/assets/monitoring-fluid-therapy-map-v1.pdf', download: true }
         ],
-        audioUrl: 'https://drive.google.com/file/d/1o1biv_U_2DBaIVnJPvbN5UXlmPfSkGlq/view?usp=drivesdk'
+        audioUrl: 'https://pub-b1a0ad9fb8794da99eb2214f709871b4.r2.dev/anae401/monitoring-fluid-therapy.m4a'
       },
       { label: 'General anaesthesia', state: 'remaining', art: 15 },
       { label: 'CPR', state: 'remaining', art: 15 },
@@ -359,13 +362,16 @@ const subjects = [
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 const mobileQuery = window.matchMedia('(max-width: 860px)')
 const QUIZ_STORAGE_PREFIX = 'mcq-progress-'
+const DRIVE_ICON_URL = '/assets/icons/drive-icon.png'
+const PLAY_ICON_URL = '/assets/icons/play-button-v1.png'
 const mcqQuizzes = window.mcqQuizzes || {}
 const quizState = {
   topicLabel: null,
   sourceId: 'current',
   sourceLabel: 'Current MCQs',
   index: 0,
-  answers: {}
+  answers: {},
+  missingQuestionIds: []
 }
 
 const coveredStates = new Set(['taken', 'partial'])
@@ -374,6 +380,78 @@ const stateLabels = {
   partial: 'Partially taken',
   announced: 'Announced only',
   remaining: 'Remaining'
+}
+
+function makeResourceList(items) {
+  if (!Array.isArray(items)) return []
+  return items
+    .filter((item) => item?.label && item?.url)
+    .map((item) => ({
+      label: item.label,
+      url: item.url,
+      download: Boolean(item.download)
+    }))
+}
+
+function mapDatabaseTopic(topic, index) {
+  const lectureUrls = makeResourceList(topic.lecture_urls)
+  if (topic.lecture_url) {
+    lectureUrls.unshift({ label: 'Lecture', url: topic.lecture_url })
+  }
+
+  const pdfUrls = makeResourceList(topic.pdf_urls)
+  if (topic.pdf_url) {
+    pdfUrls.unshift({ label: topic.pdf_label || 'Download PDF', url: topic.pdf_url, download: true })
+  }
+
+  return {
+    label: topic.title,
+    state: topic.status || 'remaining',
+    art: Number.isFinite(topic.art) ? topic.art : index % 16,
+    section: topic.section || '',
+    note: topic.notes || '',
+    lectureUrls,
+    pdfUrls,
+    audioUrl: topic.audio_url || ''
+  }
+}
+
+function mapDatabaseSubjects(subjectRows, topicRows) {
+  return subjectRows.map((subject) => {
+    const topics = topicRows
+      .filter((topic) => topic.subject_id === subject.id)
+      .map((topic, index) => mapDatabaseTopic(topic, index))
+
+    return {
+      id: subject.id,
+      code: subject.code,
+      name: subject.name,
+      totalCount: subject.total_count || topics.length,
+      examNote: subject.exam_note || '',
+      topics
+    }
+  })
+}
+
+async function loadRemoteTrackerData() {
+  if (!subjectList || !isSupabaseConfigured()) return
+
+  try {
+    const data = await fetchTrackerData()
+    if (!data.topics.length) return
+    const remoteSubjects = mapDatabaseSubjects(data.subjects, data.topics)
+    if (!remoteSubjects.length) return
+
+    subjects = remoteSubjects
+    const params = new URLSearchParams(window.location.search)
+    const initialRemoteSubject = subjects.find((subject) => subject.code === params.get('subject'))
+    activeSubjectCode = initialRemoteSubject?.code || subjects[0].code
+    expandedSubjectCode = mobileQuery.matches && params.get('tracker') === '1' ? activeSubjectCode : null
+    renderSubjects()
+    setActiveSubject(activeSubjectCode, params.get('tracker') === '1' ? 'open' : 'closed')
+  } catch (error) {
+    console.warn('Supabase tracker data unavailable; using local fallback.', error)
+  }
 }
 
 const subjectList = document.getElementById('subject-list')
@@ -451,6 +529,20 @@ function escapeHtml(value) {
     .replace(/'/g, '&#039;')
 }
 
+function getDriveFileId(url = '') {
+  const match = String(url).match(/\/file\/d\/([^/]+)/) || String(url).match(/[?&]id=([^&]+)/)
+  return match ? match[1] : ''
+}
+
+function isDriveUrl(url = '') {
+  return /drive\.google\.com|docs\.google\.com/.test(String(url))
+}
+
+function getDriveDownloadUrl(url = '') {
+  const fileId = getDriveFileId(url)
+  return fileId ? `https://drive.google.com/uc?export=download&id=${fileId}` : url
+}
+
 function getTrackerFilters() {
   return {
     query: trackerSearch?.value.trim().toLowerCase() || '',
@@ -481,8 +573,31 @@ function getFilteredSubjects() {
 function getResourceItems(topic) {
   const lectureItems = (topic.lectureUrls || []).map((item) => ({ ...item, type: 'lecture' }))
   const pdfItems = (topic.pdfUrls || []).map((item) => ({ ...item, type: 'pdf' }))
-  const audioItem = topic.audioUrl ? [{ label: 'Audio', url: topic.audioUrl, type: 'audio' }] : []
+  const audioItem = topic.audioUrl ? [{ label: 'Lecture record', url: topic.audioUrl, type: 'audio' }] : []
   return [...lectureItems, ...pdfItems, ...audioItem]
+}
+
+function renderResourceItem(item) {
+  if (item.type === 'audio') {
+    const audioSrc = item.audioSrc || getDriveDownloadUrl(item.url)
+    return `
+      <button class="topic-resource topic-resource--audio" type="button" data-record-toggle data-record-src="${escapeHtml(audioSrc)}" data-record-source="${escapeHtml(item.url)}" aria-label="Play lecture record" aria-expanded="false">
+        <img class="topic-resource__play-icon" src="${PLAY_ICON_URL}" alt="" loading="lazy">
+      </button>
+    `
+  }
+
+  const isDriveLecture = item.type === 'lecture' && isDriveUrl(item.url)
+  const content = isDriveLecture
+    ? `<img class="topic-resource__drive-icon" src="${DRIVE_ICON_URL}" alt="" loading="lazy"><span class="sr-only">${escapeHtml(item.label || 'Lecture source')}</span>`
+    : escapeHtml(item.label)
+  const label = isDriveLecture ? ` aria-label="Open ${escapeHtml(item.label || 'lecture source')} in Google Drive"` : ''
+
+  return `
+    <a class="topic-resource topic-resource--${item.type}${isDriveLecture ? ' topic-resource--drive' : ''}" href="${item.url}" target="_blank" rel="noopener noreferrer"${item.download ? ' download' : ''}${label}>
+      ${content}
+    </a>
+  `
 }
 
 function renderResourceLinks(topic) {
@@ -491,11 +606,7 @@ function renderResourceLinks(topic) {
   const resources = getResourceItems(topic)
   const quizSources = getQuizSources(topic.label)
   const quizCount = quizSources.reduce((total, source) => total + source.mcqs.length, 0)
-  const links = resources.map((item) => `
-    <a class="topic-resource topic-resource--${item.type}" href="${item.url}" target="_blank" rel="noopener noreferrer"${item.download ? ' download' : ''}>
-      ${item.label}
-    </a>
-  `).join('')
+  const links = resources.map(renderResourceItem).join('')
   const quizButton = quizCount ? `
     <button class="topic-resource topic-resource--quiz" type="button" data-quiz-topic="${escapeHtml(topic.label)}">
       MCQs (${quizCount})
@@ -503,7 +614,7 @@ function renderResourceLinks(topic) {
   ` : ''
 
   const pendingLecture = topic.lectureUrls?.length ? '' : '<span class="topic-resource topic-resource--pending">Lecture pending</span>'
-  const pendingAudio = topic.audioUrl ? '' : '<span class="topic-resource topic-resource--pending">Audio pending</span>'
+  const pendingAudio = topic.audioUrl ? '' : '<span class="topic-resource topic-resource--pending">Lecture record pending</span>'
 
   return `
     <span class="topic-resources" aria-label="Topic resources">
@@ -635,7 +746,8 @@ function saveQuizState() {
     answers: quizState.answers,
     completed: quizState.completed,
     order: quizState.order,
-    questionOptionOrder: quizState.questionOptionOrder
+    questionOptionOrder: quizState.questionOptionOrder,
+    missingQuestionIds: quizState.missingQuestionIds || []
   }
 
   localStorage.setItem(getQuizStorageKey(quizState.topicLabel), JSON.stringify(payload))
@@ -772,6 +884,7 @@ function initializeQuiz(topicLabel, { sourceId = 'current', useSaved = false, fr
   quizState.questionOptionOrder = questionOptionOrder
   quizState.questions = questions
   quizState.showResumePrompt = false
+  quizState.missingQuestionIds = savedState?.missingQuestionIds || []
   quizState.lectureUrls = getTopicData(topicLabel)?.lectureUrls || []
 
   if (savedState && !fresh && !savedState.completed && useSaved) {
@@ -812,6 +925,20 @@ function getOptionById(question, optionId) {
   return question.options.find((option) => option.id === optionId)
 }
 
+function getMissedQuestions() {
+  return getCurrentQuiz().filter((question) => !quizState.answers[question.id])
+}
+
+function scrollToQuizQuestion(questionId) {
+  const modal = ensureQuizModal()
+  const questionCard = modal.querySelector(`[data-quiz-card="${CSS.escape(questionId)}"]`)
+  if (!questionCard) return
+
+  questionCard.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'center' })
+  const firstChoice = questionCard.querySelector('[data-quiz-answer]')
+  if (firstChoice) firstChoice.focus({ preventScroll: true })
+}
+
 function renderQuizActions() {
   const modal = ensureQuizModal()
   const actions = modal.querySelector('.quiz-modal__actions')
@@ -836,9 +963,8 @@ function renderQuizActions() {
   }
 
   actions.innerHTML = `
-    <button class="quiz-action" type="button" data-quiz-prev>Previous</button>
     <button class="quiz-action" type="button" data-quiz-reset>Reset</button>
-    <button class="quiz-action quiz-action--primary" type="button" data-quiz-next>Next</button>
+    <button class="quiz-action quiz-action--primary" type="button" data-quiz-submit>Submit</button>
   `
 }
 
@@ -865,8 +991,117 @@ function renderQuizMeta() {
   }
 
   const answeredCount = Object.keys(quizState.answers).length
-  meta.textContent = `${quizState.sourceLabel} - Question ${quizState.index + 1} of ${quiz.length} · Score ${score} / ${answeredCount}`
-  fill.style.width = `${((quizState.index + 1) / Math.max(quiz.length, 1)) * 100}%`
+  const missedCount = quizState.missingQuestionIds?.length || 0
+  meta.textContent = missedCount
+    ? `${quizState.sourceLabel} - ${missedCount} unanswered question${missedCount === 1 ? '' : 's'}`
+    : `${quizState.sourceLabel} - ${answeredCount} / ${quiz.length} answered`
+  fill.style.width = `${(answeredCount / Math.max(quiz.length, 1)) * 100}%`
+}
+
+function renderQuizQuestion() {
+  const modal = ensureQuizModal()
+  const body = modal.querySelector('#quiz-body')
+  const quiz = getCurrentQuiz()
+  const score = getQuizScore()
+  const missedIds = new Set(quizState.missingQuestionIds || [])
+
+  renderQuizMeta()
+  renderQuizActions()
+
+  if (!quiz.length) {
+    body.innerHTML = '<article class="quiz-card"><p class="quiz-question">No questions available.</p></article>'
+    return
+  }
+
+  const resultBanner = quizState.completed ? `
+    <article class="quiz-card quiz-result-banner">
+      <p class="quiz-summary__score">${score} / ${quiz.length}</p>
+      <p class="quiz-summary__percent">${Math.round((score / Math.max(quiz.length, 1)) * 100)}%</p>
+      <p class="quiz-summary__performance">${getPerformanceLabel(score, quiz.length)}</p>
+    </article>
+  ` : ''
+
+  const questionCards = quiz.map((question, questionIndex) => {
+    const selectedOptionId = quizState.answers[question.id]
+    const optionOrder = getOptionOrder(question)
+    const missed = missedIds.has(question.id)
+    const isAnswered = selectedOptionId !== undefined
+    const shouldReveal = quizState.completed || isAnswered
+
+    const choices = optionOrder.map((optionId, optionIndex) => {
+      const option = getOptionById(question, optionId)
+      const isCorrect = option && option.id === question.correctOptionId
+      const isSelected = option && option.id === selectedOptionId
+      let stateClass = ''
+      
+      if (shouldReveal) {
+        if (isCorrect) stateClass = ' quiz-choice--correct'
+        else if (isSelected) stateClass = ' quiz-choice--wrong'
+      } else if (isSelected) {
+        stateClass = ' quiz-choice--selected'
+      }
+
+      return `
+        <button class="quiz-choice${stateClass}" type="button" data-quiz-question="${escapeHtml(question.id)}" data-quiz-answer="${escapeHtml(option.id)}" ${shouldReveal ? 'disabled' : ''}>
+          <span>${String.fromCharCode(65 + optionIndex)}</span>
+          ${escapeHtml(option.text)}
+        </button>
+      `
+    }).join('')
+
+    const correctOption = getOptionById(question, question.correctOptionId)
+
+    return `
+      <article class="quiz-card quiz-question-card${missed ? ' quiz-question-card--missed' : ''}" data-quiz-card="${escapeHtml(question.id)}">
+        <p class="quiz-question"><strong>Q${questionIndex + 1}.</strong> ${escapeHtml(question.question)}</p>
+        ${missed ? '<p class="quiz-missed-note">Answer this question before submitting.</p>' : ''}
+        <div class="quiz-choices">${choices}</div>
+        ${shouldReveal ? `
+          <div class="quiz-explanation">
+            <strong>${selectedOptionId === question.correctOptionId ? 'Correct.' : 'Correct answer: ' + escapeHtml(correctOption?.text || '')}</strong>
+            <p>${escapeHtml(question.explanation)}</p>
+          </div>
+        ` : ''}
+      </article>
+    `
+  }).join('')
+
+  body.innerHTML = `
+    ${resultBanner}
+    <div class="quiz-question-list">${questionCards}</div>
+  `
+}
+
+function triggerCorrectAnswerCelebration() {
+  const defaults = {
+    spread: 60,
+    ticks: 80,
+    gravity: 0.9,
+    decay: 0.93,
+    startVelocity: 30,
+    colors: ['#4ade80', '#22d3ee', '#a78bfa', '#fbbf24', '#f87171', '#34d399'],
+  }
+
+  function fire(particleRatio, opts) {
+    confetti({
+      ...defaults,
+      ...opts,
+      particleCount: Math.floor(120 * particleRatio),
+    })
+  }
+
+  // Two-burst from bottom corners for a celebratory arc
+  fire(0.25, { origin: { x: 0.15, y: 1 }, angle: 60 })
+  fire(0.25, { origin: { x: 0.85, y: 1 }, angle: 120 })
+
+  setTimeout(() => {
+    fire(0.2, { origin: { x: 0.3, y: 0.95 }, angle: 75, spread: 80, startVelocity: 25 })
+    fire(0.2, { origin: { x: 0.7, y: 0.95 }, angle: 105, spread: 80, startVelocity: 25 })
+  }, 150)
+
+  setTimeout(() => {
+    fire(0.15, { origin: { x: 0.5, y: 0.98 }, angle: 90, spread: 100, startVelocity: 20 })
+  }, 300)
 }
 
 function renderResumePrompt() {
@@ -878,128 +1113,6 @@ function renderResumePrompt() {
       <p class="quiz-prompt__message">Resume your previous attempt or start over with a fresh quiz.</p>
     </article>
   `
-}
-
-function renderQuizSummary() {
-  const modal = ensureQuizModal()
-  const body = modal.querySelector('#quiz-body')
-  const quiz = getCurrentQuiz()
-  const score = getQuizScore()
-  const percent = quiz.length ? Math.round((score / quiz.length) * 100) : 0
-  const performance = getPerformanceLabel(score, quiz.length)
-  const lectureLink = quizState.lectureUrls?.[0]?.url
-
-  const reviewItems = quiz.map((question, index) => {
-    const selectedOptionId = quizState.answers[question.id]
-    const selectedOption = getOptionById(question, selectedOptionId)
-    const correctOption = getOptionById(question, question.correctOptionId)
-    const isCorrect = selectedOptionId === question.correctOptionId
-    const answerText = selectedOption ? selectedOption.text : 'No answer selected'
-    const correctText = correctOption ? correctOption.text : ''
-
-    return `
-      <li class="quiz-review-item ${isCorrect ? 'quiz-review-item--correct' : 'quiz-review-item--wrong'}">
-        <p class="quiz-review-question"><strong>Q${index + 1}.</strong> ${escapeHtml(question.question)}</p>
-        <p class="quiz-review-answer"><span>Your answer:</span> ${escapeHtml(answerText)}</p>
-        <p class="quiz-review-answer"><span>Correct answer:</span> ${escapeHtml(correctText)}</p>
-        <p class="quiz-review-explanation">${escapeHtml(question.explanation)}</p>
-      </li>
-    `
-  }).join('')
-
-  body.innerHTML = `
-    <article class="quiz-card quiz-summary">
-      <div class="quiz-summary__header">
-        <div>
-          <p class="quiz-summary__score">${score} / ${quiz.length}</p>
-          <p class="quiz-summary__percent">${percent}%</p>
-        </div>
-        <p class="quiz-summary__performance">${performance}</p>
-      </div>
-      <div class="quiz-summary__details">
-        <p>${quiz.length} questions reviewed</p>
-      </div>
-      <div class="quiz-review">
-        <ol>${reviewItems}</ol>
-      </div>
-      ${lectureLink ? `
-        <div class="quiz-summary__links">
-          <a class="quiz-action quiz-action--secondary" href="${lectureLink}" target="_blank" rel="noopener noreferrer">Review lecture</a>
-        </div>
-      ` : ''}
-    </article>
-  `
-}
-
-function renderQuizQuestion() {
-  const modal = ensureQuizModal()
-  const question = getCurrentQuestion()
-  const body = modal.querySelector('#quiz-body')
-  const prev = modal.querySelector('[data-quiz-prev]')
-  const next = modal.querySelector('[data-quiz-next]')
-  const quiz = getCurrentQuiz()
-
-  if (!question || quizState.completed) {
-    renderQuizSummary()
-    if (prev) prev.disabled = true
-    if (next) next.textContent = 'Finished'
-    return
-  }
-
-  renderQuizMeta()
-  renderQuizActions()
-
-  const selectedOptionId = quizState.answers[question.id]
-  const answered = Boolean(selectedOptionId)
-  const optionOrder = getOptionOrder(question)
-
-  const choices = optionOrder.map((optionId, optionIndex) => {
-    const option = getOptionById(question, optionId)
-    const isCorrect = option && option.id === question.correctOptionId
-    const isSelected = option && option.id === selectedOptionId
-    let stateClass = ''
-    if (answered && isCorrect) stateClass = ' quiz-choice--correct'
-    if (answered && isSelected && !isCorrect) stateClass = ' quiz-choice--wrong'
-
-    return `
-      <button class="quiz-choice${stateClass}" type="button" data-quiz-answer="${option.id}" ${answered ? 'disabled' : ''}>
-        <span>${String.fromCharCode(65 + optionIndex)}</span>
-        ${escapeHtml(option.text)}
-      </button>
-    `
-  }).join('')
-
-  body.innerHTML = `
-    <article class="quiz-card">
-      <p class="quiz-question">${escapeHtml(question.question)}</p>
-      <div class="quiz-choices">${choices}</div>
-      ${answered ? `
-        <div class="quiz-explanation">
-          <strong>${selectedOptionId === question.correctOptionId ? 'Correct.' : 'Correct answer: ' + escapeHtml(getOptionById(question, question.correctOptionId)?.text || '')}</strong>
-          <p>${escapeHtml(question.explanation)}</p>
-        </div>
-      ` : ''}
-    </article>
-  `
-
-  if (prev) prev.disabled = quizState.index === 0
-  if (next) next.textContent = quizState.index === quiz.length - 1 ? 'Finish' : 'Next'
-}
-
-function triggerCorrectAnswerCelebration() {
-  const modal = ensureQuizModal()
-  const confetti = modal.querySelector('#quiz-confetti')
-  confetti.innerHTML = Array.from({ length: 20 }, (_, index) => `<span style="--x:${index};"></span>`).join('')
-  confetti.classList.remove('quiz-confetti--pulse', 'quiz-confetti--active')
-
-  if (prefersReducedMotion) {
-    confetti.classList.add('quiz-confetti--pulse')
-    window.setTimeout(() => confetti.classList.remove('quiz-confetti--pulse'), 900)
-    return
-  }
-
-  requestAnimationFrame(() => confetti.classList.add('quiz-confetti--active'))
-  window.setTimeout(() => confetti.classList.remove('quiz-confetti--active'), 1200)
 }
 
 function renderQuizSourcePicker(topicLabel) {
@@ -1029,6 +1142,7 @@ function renderQuizSourcePicker(topicLabel) {
   document.body.classList.add('panel-open')
 }
 
+
 function openQuiz(topicLabel, sourceId = 'current') {
   const config = getQuizConfig(topicLabel, sourceId)
   if (!config || !config.mcqs.length) return
@@ -1046,7 +1160,7 @@ function openQuiz(topicLabel, sourceId = 'current') {
   if (quizState.showResumePrompt) {
     renderResumePrompt()
   } else if (quizState.completed) {
-    renderQuizSummary()
+    renderQuizQuestion()
   } else {
     renderQuizQuestion()
   }
@@ -1102,24 +1216,19 @@ function handleQuizClick(event) {
     return
   }
 
-  if (event.target.closest('[data-quiz-prev]')) {
-    quizState.index = Math.max(0, quizState.index - 1)
-    renderQuizQuestion()
-    return
-  }
-
-  if (event.target.closest('[data-quiz-next]')) {
-    const quiz = getCurrentQuiz()
-    if (quizState.index === quiz.length - 1) {
-      quizState.completed = true
+  if (event.target.closest('[data-quiz-submit]')) {
+    const missedQuestions = getMissedQuestions()
+    if (missedQuestions.length) {
+      quizState.missingQuestionIds = missedQuestions.map((question) => question.id)
+      quizState.index = getCurrentQuiz().findIndex((question) => question.id === missedQuestions[0].id)
       saveQuizState()
-      renderQuizSummary()
-      renderQuizActions()
-      renderQuizMeta()
+      renderQuizQuestion()
+      scrollToQuizQuestion(missedQuestions[0].id)
       return
     }
 
-    quizState.index = Math.min(quiz.length - 1, quizState.index + 1)
+    quizState.completed = true
+    quizState.missingQuestionIds = []
     saveQuizState()
     renderQuizQuestion()
     return
@@ -1129,7 +1238,8 @@ function handleQuizClick(event) {
     quizState.answers = {}
     quizState.index = 0
     quizState.completed = false
-    clearSavedQuizState(quizState.topicLabel)
+    quizState.missingQuestionIds = []
+    clearSavedQuizState(quizState.topicLabel, quizState.sourceId)
     renderQuizQuestion()
     return
   }
@@ -1137,10 +1247,12 @@ function handleQuizClick(event) {
   const answerButton = event.target.closest('[data-quiz-answer]')
   if (answerButton) {
     const selectedOptionId = answerButton.dataset.quizAnswer
-    const question = getCurrentQuestion()
+    const question = getCurrentQuiz().find((item) => item.id === answerButton.dataset.quizQuestion) || getCurrentQuestion()
     if (!question || quizState.completed || quizState.showResumePrompt) return
+    if (quizState.answers[question.id] !== undefined) return
 
     quizState.answers[question.id] = selectedOptionId
+    quizState.missingQuestionIds = (quizState.missingQuestionIds || []).filter((questionId) => questionId !== question.id)
     saveQuizState()
     renderQuizQuestion()
 
@@ -1148,6 +1260,93 @@ function handleQuizClick(event) {
       triggerCorrectAnswerCelebration()
     }
   }
+}
+
+function renderLectureRecordPlayer({ audioSrc, sourceUrl }) {
+  return `
+    <div class="lecture-record-player" data-record-player>
+      <div class="lecture-record-player__top">
+        <span>Lecture record</span>
+        <span class="lecture-record-player__actions">
+          <a class="lecture-record-player__source" href="${escapeHtml(sourceUrl)}" target="_blank" rel="noopener noreferrer">Open source <span aria-hidden="true">↗</span></a>
+          <a class="lecture-record-player__download" href="${escapeHtml(audioSrc)}" download target="_blank" rel="noopener noreferrer">Download <span aria-hidden="true">↓</span></a>
+        </span>
+      </div>
+      <div class="lecture-record-player__controls">
+        <button class="record-skip" type="button" data-record-skip="-10" aria-label="Back 10 seconds">-10s</button>
+        <audio controls preload="metadata" src="${escapeHtml(audioSrc)}"></audio>
+        <button class="record-skip" type="button" data-record-skip="10" aria-label="Forward 10 seconds">+10s</button>
+      </div>
+    </div>
+  `
+}
+
+async function handleRecordClick(event) {
+  const downloadLink = event.target.closest('.lecture-record-player__download')
+  if (downloadLink && !isDriveUrl(downloadLink.href)) {
+    event.preventDefault()
+    if (downloadLink.getAttribute('aria-busy') === 'true') return
+
+    const originalContent = downloadLink.innerHTML
+    downloadLink.setAttribute('aria-busy', 'true')
+    downloadLink.textContent = 'Downloading...'
+
+    try {
+      const response = await fetch(downloadLink.href)
+      if (!response.ok) throw new Error(`Audio download failed: ${response.status}`)
+
+      const blobUrl = URL.createObjectURL(await response.blob())
+      const filename = decodeURIComponent(new URL(downloadLink.href).pathname.split('/').pop() || 'lecture-recording.m4a')
+      const temporaryLink = document.createElement('a')
+      temporaryLink.href = blobUrl
+      temporaryLink.download = filename
+      temporaryLink.click()
+      window.setTimeout(() => URL.revokeObjectURL(blobUrl), 1000)
+    } catch {
+      window.open(downloadLink.href, '_blank', 'noopener,noreferrer')
+    } finally {
+      downloadLink.removeAttribute('aria-busy')
+      downloadLink.innerHTML = originalContent
+    }
+    return
+  }
+
+  const skipButton = event.target.closest('[data-record-skip]')
+  if (skipButton) {
+    const player = skipButton.closest('[data-record-player]')
+    const audio = player?.querySelector('audio')
+    if (!audio) return
+
+    const delta = Number(skipButton.dataset.recordSkip) || 0
+    audio.currentTime = Math.max(0, Math.min(audio.duration || Number.MAX_SAFE_INTEGER, audio.currentTime + delta))
+    return
+  }
+
+  const recordButton = event.target.closest('[data-record-toggle]')
+  if (!recordButton) return
+
+  const topicItem = recordButton.closest('.topic-item')
+  const resources = recordButton.closest('.topic-resources')
+  if (!topicItem || !resources) return
+
+  const existingPlayer = topicItem.querySelector('[data-record-player]')
+  if (existingPlayer) {
+    existingPlayer.remove()
+    if (recordButton.getAttribute('aria-expanded') === 'true') {
+      recordButton.setAttribute('aria-expanded', 'false')
+      return
+    }
+  }
+
+  topicItem.querySelectorAll('[data-record-toggle][aria-expanded="true"]').forEach((button) => {
+    button.setAttribute('aria-expanded', 'false')
+  })
+
+  recordButton.setAttribute('aria-expanded', 'true')
+  resources.insertAdjacentHTML('afterend', renderLectureRecordPlayer({
+    audioSrc: recordButton.dataset.recordSrc,
+    sourceUrl: recordButton.dataset.recordSource
+  }))
 }
 
 function renderSubjects() {
@@ -1604,9 +1803,11 @@ if (subjectList) {
   renderSubjects()
   setActiveSubject(activeSubjectCode, initialParams.get('tracker') === '1' ? 'open' : 'closed')
   renderSemesterTimeline()
+  loadRemoteTrackerData()
 }
 
 document.addEventListener('click', handleQuizClick)
+document.addEventListener('click', handleRecordClick)
 
 if (trackerSearch && trackerStatusFilter) {
   ;[trackerSearch, trackerStatusFilter].forEach((control) => {
@@ -1665,3 +1866,32 @@ if (copyHistorySummary && historySummaryText) {
 
 renderWhatsappFeedback()
 renderAssignmentProgress()
+
+// ========== GLOBAL CLICK GLOW EFFECT ==========
+
+function createClickGlow(event) {
+  // Only trigger on primary pointer (left click/tap)
+  if (event.button !== 0 && event.button !== undefined) return
+  if (!event.isPrimary) return
+  
+  const glow = document.createElement('div')
+  glow.className = 'click-glow'
+  glow.setAttribute('aria-hidden', 'true')
+  glow.style.setProperty('--x', event.clientX + 'px')
+  glow.style.setProperty('--y', event.clientY + 'px')
+  
+  document.body.appendChild(glow)
+  
+  // Clean up after animation
+  glow.addEventListener('animationend', () => {
+    glow.remove()
+  }, { once: true })
+  
+  // Fallback cleanup for safety
+  setTimeout(() => {
+    if (glow.parentNode) glow.remove()
+  }, 700)
+}
+
+// Attach click glow listener
+document.addEventListener('pointerdown', createClickGlow, true)

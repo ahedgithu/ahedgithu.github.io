@@ -1,6 +1,7 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
+  <script defer src="/src/analytics.js?v=20260620-ga4"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ahmed Sayed | 401 Tracker</title>
@@ -9,7 +10,7 @@
   <meta property="og:description" content="Track MED 401 university coverage, lecture resources, and work with Ahmed on AI agents or creative medical content." />
   <meta property="og:type" content="website" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="stylesheet" href="/src/style.css?v=20260619-onco-mcq" />
+  <link rel="stylesheet" href="/src/style.css?v=20260620-login" />
 </head>
 <body>
   <header class="site-header">
@@ -27,13 +28,15 @@
       <a href="/history.html">History</a>
       <a href="/work.html">Work with me</a>
     </nav>
+
+    <a class="site-login-link" href="/admin/login/">Login</a>
   </header>
 
   <main>
     <section class="tracker-home" id="tracker" aria-labelledby="tracker-title">
       <div class="section-heading">
         <h1 id="tracker-title">401</h1>
-        <p class="tracker-updated">Last updated: Jun 18, 2026 · Sources: Study memory + latest Drive lecture folders</p>
+        <p class="tracker-updated">Last updated: Jun 18, 2026 Â· Sources: Study memory + latest Drive lecture folders</p>
       </div>
 
       <div class="semester-timeline" aria-label="Semester exam timeline">
@@ -109,7 +112,20 @@
   </main>
 
   <script defer src="/src/mcqs.js?v=20260620-chest-symptomology"></script>
-  <script type="module" src="/src/main.js?v=20260619-onco-mcq"></script>
+  <script>
+    window.SUPABASE_CONFIG = {
+      url: '%VITE_SUPABASE_URL%',
+      anonKey: '%VITE_SUPABASE_ANON_KEY%'
+    }
+  </script>
+  <script type="importmap">
+    {
+      "imports": {
+        "canvas-confetti": "https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.module.mjs"
+      }
+    }
+  </script>
+  <script type="module" src="/src/main.js?v=20260620-r2-ga4"></script>
 </body>
 </html>
 

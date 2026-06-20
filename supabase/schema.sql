@@ -116,6 +116,12 @@ alter table public.profiles enable row level security;
 alter table public.subjects enable row level security;
 alter table public.topics enable row level security;
 
+grant usage on schema public to anon, authenticated;
+grant select on public.subjects, public.topics to anon, authenticated;
+grant select on public.profiles to authenticated;
+grant insert, update, delete on public.subjects, public.topics to authenticated;
+grant update on public.profiles to authenticated;
+
 drop policy if exists "profiles read own" on public.profiles;
 create policy "profiles read own"
 on public.profiles
