@@ -15,7 +15,7 @@ let subjects = [
         lectureUrls: [
           { label: 'Lecture', url: 'https://docs.google.com/presentation/d/12BIYR9r2h_fwkUQpXQI0xOyPy-lSI9D_/edit?usp=drivesdk&ouid=109054155258701630059&rtpof=true&sd=true' }
         ],
-        audioUrl: 'https://pub-b1a0ad9fb8794da99eb2214f709871b4.r2.dev/sur401-1/liver-introduction.m4a'
+        audioUrl: 'https://drive.google.com/file/d/1ukIDlUnzzpsyCOola5-TiyWJy7e2QELO/view?usp=drivesdk'
       },
       {
         label: 'Oesophagus: surgical anatomy and physiology',
@@ -24,7 +24,7 @@ let subjects = [
         lectureUrls: [
           { label: 'Lecture', url: 'https://drive.google.com/file/d/1-iY3KOVw6vUWm_7k--A9lWFJnuGxYqoo/view?usp=drivesdk' }
         ],
-        audioUrl: 'https://pub-b1a0ad9fb8794da99eb2214f709871b4.r2.dev/sur401-1/oesophagus-anatomy-physiology.m4a'
+        audioUrl: 'https://drive.google.com/file/d/1l4H_hY6RO36c-iYZFLyJu8h9rv-jfYi5/view?usp=drivesdk'
       },
       {
         label: 'Esophagus: achalasia, hiatus hernia, GERD',
@@ -33,13 +33,13 @@ let subjects = [
         lectureUrls: [
           { label: 'Lecture', url: 'https://drive.google.com/file/d/1-uzZPnXaDetSZxCujFNDLudZ_TOJaQEh/view?usp=drivesdk' }
         ],
-        audioUrl: 'https://pub-b1a0ad9fb8794da99eb2214f709871b4.r2.dev/sur401-1/achalasia-hiatus-hernia-gerd.m4a'
+        audioUrl: 'https://drive.google.com/file/d/1vt23RUJTWuT_1ZRUHGm4gvWJKW1sxUyI/view?usp=drivesdk'
       },
       {
         label: 'Clinical round overview',
         state: 'taken',
         art: 2,
-        audioUrl: 'https://pub-b1a0ad9fb8794da99eb2214f709871b4.r2.dev/sur401-1/clinical-round-overview.m4a'
+        audioUrl: 'https://drive.google.com/file/d/1mpckOjHYl__72iCCGy4jXU7EJfzgzKlX/view?usp=drivesdk'
       },
       {
         label: 'Liver Trauma and Infections',
@@ -49,7 +49,7 @@ let subjects = [
         lectureUrls: [
           { label: 'Lecture', url: 'https://docs.google.com/presentation/d/1yjIUZolwSkC9DLnvTGCWBsxtPMuqalgY/edit?usp=drivesdk&ouid=109054155258701630059&rtpof=true&sd=true' }
         ],
-        audioUrl: 'https://pub-b1a0ad9fb8794da99eb2214f709871b4.r2.dev/sur401-1/liver-trauma-infections.m4a'
+        audioUrl: 'https://drive.google.com/file/d/1mhHDVMOU6lPAar5xesF0eLKtNUJDwVR9/view?usp=drivesdk'
       },
       {
         label: 'Cirrhosis, portal hypertension and hepatic vascular disease',
@@ -59,7 +59,7 @@ let subjects = [
         lectureUrls: [
           { label: 'Lecture', url: 'https://docs.google.com/presentation/d/1Y8AQJlpl-XINpxVDyeexUBjpxfAsDJrV/edit?usp=drivesdk&ouid=109054155258701630059&rtpof=true&sd=true' }
         ],
-        audioUrl: 'https://pub-b1a0ad9fb8794da99eb2214f709871b4.r2.dev/sur401-1/cirrhosis-portal-hypertension.m4a'
+        audioUrl: 'https://drive.google.com/file/d/1t1i2zjXOYw9jaSdIRYn1GvBOrsToq30u/view?usp=drivesdk'
       },
       { label: 'Tongue', state: 'remaining', art: 2 },
       { label: 'Salivary glands', state: 'remaining', art: 13 },
@@ -80,7 +80,7 @@ let subjects = [
         label: 'Overview of the Subject',
         state: 'taken',
         art: 2,
-        audioUrl: 'https://pub-b1a0ad9fb8794da99eb2214f709871b4.r2.dev/sur401-2/subject-overview.m4a'
+        audioUrl: 'https://drive.google.com/file/d/1JCS1ZR8BiLL2sGVi-0B6UBExsstVOZEP/view?usp=drivesdk'
       },
       { label: 'Chest trauma / trauma up to sternal fractures', state: 'announced', art: 10, note: 'Announced in university, not explained yet.' },
       { label: 'Rib fracture', state: 'remaining', art: 10 },
@@ -102,7 +102,7 @@ let subjects = [
         lectureUrls: [
           { label: 'Lecture', url: 'https://drive.google.com/file/d/14TjxXXk2ITCHuao-ayMIwT4z1yjbNFuh/view?usp=drivesdk' }
         ],
-        audioUrl: 'https://pub-b1a0ad9fb8794da99eb2214f709871b4.r2.dev/med401-1/diseases-of-the-pancreas.m4a'
+        audioUrl: 'https://drive.google.com/file/d/1Jw6R2QaYMQ9PerWxCAU_0vMfReSneE1o/view?usp=drivesdk'
       },
       {
         label: 'Investigation of Acute Hepatitis',
@@ -115,7 +115,7 @@ let subjects = [
         pdfUrls: [
           { label: 'Download PDF', url: '/assets/acute-viral-hepatitis-map-v3.pdf', download: true }
         ],
-        audioUrl: 'https://pub-b1a0ad9fb8794da99eb2214f709871b4.r2.dev/med401-1/investigation-acute-hepatitis.m4a'
+        audioUrl: 'https://drive.google.com/file/d/1pCiruJJQ6rB84pyxeGy_NUY5QMUzDJVi/view?usp=drivesdk'
       },
       { label: 'Chronic viral and non-viral hepatitis', state: 'remaining', art: 5 },
       { label: 'Diseases of Stomach: PUD, H. pylori, non-ulcer dyspepsia', state: 'remaining', art: 6 },
@@ -138,7 +138,7 @@ let subjects = [
         lectureUrls: [
           { label: 'Lecture', url: 'https://drive.google.com/file/d/1lCYbFrQVM23IHF-qxs0DItq6wHIjwxxP/view?usp=drivesdk' }
         ],
-        audioUrl: 'https://pub-b1a0ad9fb8794da99eb2214f709871b4.r2.dev/med401-2/systemic-hypertension.m4a'
+        audioUrl: 'https://drive.google.com/file/d/1ryTmHHfCBcIzK0AXKgYYxqSKvvbMHAZk/view?usp=drivesdk'
       },
       {
         label: 'Rheumatic fever and infective endocarditis',
@@ -148,7 +148,7 @@ let subjects = [
         lectureUrls: [
           { label: 'Lecture', url: 'https://docs.google.com/presentation/d/1yZxhWUh5KDgQp_Z_Le10RL_JmdooXpwb/edit?usp=drivesdk&ouid=109054155258701630059&rtpof=true&sd=true' }
         ],
-        audioUrl: 'https://pub-b1a0ad9fb8794da99eb2214f709871b4.r2.dev/med401-2/rheumatic-fever-infective-endocarditis.m4a'
+        audioUrl: 'https://drive.google.com/file/d/1G7x3QDKNsrxEZXdm-iQBAEeQzijaul2K/view?usp=drivesdk'
       },
       { label: 'Ischemic heart disease and stable angina', state: 'remaining', art: 9, section: 'Cardio' },
       { label: 'Acute coronary syndrome', state: 'remaining', art: 9, section: 'Cardio' },
@@ -163,7 +163,7 @@ let subjects = [
         lectureUrls: [
           { label: 'Lecture', url: 'https://drive.google.com/file/d/1SX1PStcEfLVwTwYt_WfjesGwkieI2Pfd/view?usp=drivesdk' }
         ],
-        audioUrl: 'https://pub-b1a0ad9fb8794da99eb2214f709871b4.r2.dev/med401-2/chest-symptomatology.m4a'
+        audioUrl: 'https://drive.google.com/file/d/14YTH3onMolGkFXHzRSyG_ejnZv9ryGG5/view?usp=drivesdk'
       },
       {
         label: 'Pulmonary Function Test',
@@ -174,7 +174,7 @@ let subjects = [
           { label: 'Lecture', url: 'https://drive.google.com/file/d/1k5IlWjpjnwEeKt4UmcD-zdBNtqiyr0S2/view?usp=drivesdk' },
           { label: 'Slides', url: 'https://docs.google.com/presentation/d/1I3A5NgJf0YtX932PbftokMNZeKfjGEln/edit?usp=drivesdk&ouid=109054155258701630059&rtpof=true&sd=true' }
         ],
-        audioUrl: 'https://pub-b1a0ad9fb8794da99eb2214f709871b4.r2.dev/med401-2/pulmonary-function-test.m4a'
+        audioUrl: 'https://drive.google.com/file/d/1O83lsWK2zc1e7u6Yljwtd5ZFM2llnrFA/view?usp=drivesdk'
       },
       {
         label: 'Diseases of the airways and bronchial asthma Part 1',
@@ -207,7 +207,7 @@ let subjects = [
         lectureUrls: [
           { label: 'Lecture', url: 'https://drive.google.com/file/d/1D3qbb6zibbkzstmNeipmEoNPlnF7BN2q/view?usp=drivesdk' }
         ],
-        audioUrl: 'https://pub-b1a0ad9fb8794da99eb2214f709871b4.r2.dev/onc401/anemia-part-1.m4a'
+        audioUrl: 'https://drive.google.com/file/d/1qH7bGw0mqGQzaf8lzszR72PRFUAnNCG6/view?usp=drivesdk'
       },
       {
         label: 'Anemia file completion and sideroblastic anemia',
@@ -217,7 +217,7 @@ let subjects = [
           { label: 'Anemia file', url: 'https://drive.google.com/file/d/1zcQyZdfM-y6qqo5AhaeZtORqEkUFIQJJ/view?usp=drivesdk' },
           { label: 'Sideroblastic', url: 'https://docs.google.com/presentation/d/10qAAzE1DcZj3QAjyhf_4kkA8mzf0QH6-/edit?usp=drivesdk&ouid=109054155258701630059&rtpof=true&sd=true' }
         ],
-        audioUrl: 'https://pub-b1a0ad9fb8794da99eb2214f709871b4.r2.dev/onc401/anemia-part-2-sideroblastic.m4a'
+        audioUrl: 'https://drive.google.com/file/d/1UuxB_UA6w7NKqgPerO6yadsKbpdNcNle/view?usp=drivesdk'
       },
       { label: 'Anemia approach and iron deficiency anemia', state: 'remaining', art: 12 },
       { label: 'Hemolytic anemia', state: 'remaining', art: 12 },
@@ -238,7 +238,7 @@ let subjects = [
         lectureUrls: [
           { label: 'Lecture', url: 'https://drive.google.com/file/d/1rCjJqBqu8wOWIW0SMHoGjvyXSCIniwsR/view?usp=drivesdk' }
         ],
-        audioUrl: 'https://pub-b1a0ad9fb8794da99eb2214f709871b4.r2.dev/nut401/vitamins.m4a'
+        audioUrl: 'https://drive.google.com/file/d/1twQvgbaRxLMP2vBRu4dVV7nU6zmMHUFV/view?usp=drivesdk'
       },
       {
         label: 'Food-borne Diseases',
@@ -247,7 +247,7 @@ let subjects = [
         lectureUrls: [
           { label: 'Lecture', url: 'https://drive.google.com/file/d/1q5b51GzxLYXT-iOOLfA1M1KnigeJTE1b/view?usp=drivesdk' }
         ],
-        audioUrl: 'https://pub-b1a0ad9fb8794da99eb2214f709871b4.r2.dev/nut401/food-borne-diseases-part-1.m4a'
+        audioUrl: 'https://drive.google.com/file/d/1Lr0LftsOc_-uhH2X82uqzJ0eSkUWgSDz/view?usp=drivesdk'
       },
       {
         label: 'Food Borne Diseases Part 2',
@@ -287,7 +287,7 @@ let subjects = [
         pdfUrls: [
           { label: 'Download PDF', url: '/assets/lft-full-lecture-map-v2.pdf', download: true }
         ],
-        audioUrl: 'https://pub-b1a0ad9fb8794da99eb2214f709871b4.r2.dev/lab401/liver-function-test.m4a'
+        audioUrl: 'https://drive.google.com/file/d/122BV8-mfoCWNXt979EaO2ZkMGbGuHpm5/view?usp=drivesdk'
       },
       {
         label: 'Cardiac Biomarkers',
@@ -300,7 +300,7 @@ let subjects = [
         pdfUrls: [
           { label: 'Download PDF', url: '/assets/cardiac-biomarkers-map-v1.pdf', download: true }
         ],
-        audioUrl: 'https://pub-b1a0ad9fb8794da99eb2214f709871b4.r2.dev/lab401/cardiac-biomarkers.m4a'
+        audioUrl: 'https://drive.google.com/file/d/168l5PhCSMGsl3GWyVeFpDiw8WEWaJlmC/view?usp=drivesdk'
       },
       { label: 'Clinical Pathology Research Assignment', state: 'remaining', art: 14 },
       {
@@ -334,7 +334,7 @@ let subjects = [
         lectureUrls: [
           { label: 'Lecture', url: 'https://drive.google.com/file/d/1V5Shpas5pvITeqRW3U6hQs1iN6qZGJcv/view?usp=drivesdk' }
         ],
-        audioUrl: 'https://pub-b1a0ad9fb8794da99eb2214f709871b4.r2.dev/anae401/preoperative-patient-management.m4a'
+        audioUrl: 'https://drive.google.com/file/d/1sFabKs8xoweV_eSqkB_D7YVXufv28rLt/view?usp=drivesdk'
       },
       {
         label: 'Monitoring and Fluid Therapy',
@@ -348,7 +348,7 @@ let subjects = [
         pdfUrls: [
           { label: 'Download PDF', url: '/assets/monitoring-fluid-therapy-map-v1.pdf', download: true }
         ],
-        audioUrl: 'https://pub-b1a0ad9fb8794da99eb2214f709871b4.r2.dev/anae401/monitoring-fluid-therapy.m4a'
+        audioUrl: 'https://drive.google.com/file/d/1o1biv_U_2DBaIVnJPvbN5UXlmPfSkGlq/view?usp=drivesdk'
       },
       { label: 'General anaesthesia', state: 'remaining', art: 15 },
       { label: 'CPR', state: 'remaining', art: 15 },
@@ -579,11 +579,10 @@ function getResourceItems(topic) {
 
 function renderResourceItem(item) {
   if (item.type === 'audio') {
-    const audioSrc = item.audioSrc || getDriveDownloadUrl(item.url)
     return `
-      <button class="topic-resource topic-resource--audio" type="button" data-record-toggle data-record-src="${escapeHtml(audioSrc)}" data-record-source="${escapeHtml(item.url)}" aria-label="Play lecture record" aria-expanded="false">
+      <a class="topic-resource topic-resource--audio" href="${item.url}" target="_blank" rel="noopener noreferrer" aria-label="Open lecture record in Google Drive">
         <img class="topic-resource__play-icon" src="${PLAY_ICON_URL}" alt="" loading="lazy">
-      </button>
+      </a>
     `
   }
 
@@ -1262,93 +1261,6 @@ function handleQuizClick(event) {
   }
 }
 
-function renderLectureRecordPlayer({ audioSrc, sourceUrl }) {
-  return `
-    <div class="lecture-record-player" data-record-player>
-      <div class="lecture-record-player__top">
-        <span>Lecture record</span>
-        <span class="lecture-record-player__actions">
-          <a class="lecture-record-player__source" href="${escapeHtml(sourceUrl)}" target="_blank" rel="noopener noreferrer">Open source <span aria-hidden="true">↗</span></a>
-          <a class="lecture-record-player__download" href="${escapeHtml(audioSrc)}" download target="_blank" rel="noopener noreferrer">Download <span aria-hidden="true">↓</span></a>
-        </span>
-      </div>
-      <div class="lecture-record-player__controls">
-        <button class="record-skip" type="button" data-record-skip="-10" aria-label="Back 10 seconds">-10s</button>
-        <audio controls preload="metadata" src="${escapeHtml(audioSrc)}"></audio>
-        <button class="record-skip" type="button" data-record-skip="10" aria-label="Forward 10 seconds">+10s</button>
-      </div>
-    </div>
-  `
-}
-
-async function handleRecordClick(event) {
-  const downloadLink = event.target.closest('.lecture-record-player__download')
-  if (downloadLink && !isDriveUrl(downloadLink.href)) {
-    event.preventDefault()
-    if (downloadLink.getAttribute('aria-busy') === 'true') return
-
-    const originalContent = downloadLink.innerHTML
-    downloadLink.setAttribute('aria-busy', 'true')
-    downloadLink.textContent = 'Downloading...'
-
-    try {
-      const response = await fetch(downloadLink.href)
-      if (!response.ok) throw new Error(`Audio download failed: ${response.status}`)
-
-      const blobUrl = URL.createObjectURL(await response.blob())
-      const filename = decodeURIComponent(new URL(downloadLink.href).pathname.split('/').pop() || 'lecture-recording.m4a')
-      const temporaryLink = document.createElement('a')
-      temporaryLink.href = blobUrl
-      temporaryLink.download = filename
-      temporaryLink.click()
-      window.setTimeout(() => URL.revokeObjectURL(blobUrl), 1000)
-    } catch {
-      window.open(downloadLink.href, '_blank', 'noopener,noreferrer')
-    } finally {
-      downloadLink.removeAttribute('aria-busy')
-      downloadLink.innerHTML = originalContent
-    }
-    return
-  }
-
-  const skipButton = event.target.closest('[data-record-skip]')
-  if (skipButton) {
-    const player = skipButton.closest('[data-record-player]')
-    const audio = player?.querySelector('audio')
-    if (!audio) return
-
-    const delta = Number(skipButton.dataset.recordSkip) || 0
-    audio.currentTime = Math.max(0, Math.min(audio.duration || Number.MAX_SAFE_INTEGER, audio.currentTime + delta))
-    return
-  }
-
-  const recordButton = event.target.closest('[data-record-toggle]')
-  if (!recordButton) return
-
-  const topicItem = recordButton.closest('.topic-item')
-  const resources = recordButton.closest('.topic-resources')
-  if (!topicItem || !resources) return
-
-  const existingPlayer = topicItem.querySelector('[data-record-player]')
-  if (existingPlayer) {
-    existingPlayer.remove()
-    if (recordButton.getAttribute('aria-expanded') === 'true') {
-      recordButton.setAttribute('aria-expanded', 'false')
-      return
-    }
-  }
-
-  topicItem.querySelectorAll('[data-record-toggle][aria-expanded="true"]').forEach((button) => {
-    button.setAttribute('aria-expanded', 'false')
-  })
-
-  recordButton.setAttribute('aria-expanded', 'true')
-  resources.insertAdjacentHTML('afterend', renderLectureRecordPlayer({
-    audioSrc: recordButton.dataset.recordSrc,
-    sourceUrl: recordButton.dataset.recordSource
-  }))
-}
-
 function renderSubjects() {
   const visibleSubjects = getFilteredSubjects()
 
@@ -1807,7 +1719,7 @@ if (subjectList) {
 }
 
 document.addEventListener('click', handleQuizClick)
-document.addEventListener('click', handleRecordClick)
+
 
 if (trackerSearch && trackerStatusFilter) {
   ;[trackerSearch, trackerStatusFilter].forEach((control) => {
