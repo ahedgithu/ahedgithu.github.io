@@ -602,3 +602,177 @@ window.mcqQuizzes = {
 
   addHemOncoSource('Bleeding disorders', bleedingDisorders, 'Past exam questions for platelets, ITP, TTP, hemophilia, von Willebrand disease, DIC, aspirin, and warfarin reversal.')
 })()
+
+;(() => {
+  const sourceNote = (qNum) => `Answer checked from Golden Medicine Chest Quiz 1 (Symptomatology), Q${qNum}.`
+  const q = (question, choices, answerIndex, qNum, customExplanation = '') => ({
+    question,
+    choices,
+    answerIndex,
+    explanation: customExplanation ? `${customExplanation} (From Golden Medicine Quiz 1, Q${qNum})` : sourceNote(qNum)
+  })
+
+  const addGoldenMedicineSource = (topicLabel, mcqs, description) => {
+    const current = window.mcqQuizzes[topicLabel]
+
+    const currentSource = Array.isArray(current)
+      ? { id: 'current', label: 'Current MCQs', mcqs: current }
+      : current
+        ? {
+          id: 'current',
+          label: current.label || 'Current MCQs',
+          mcqs: current.mcqs || [],
+          quizSize: current.quizSize || null,
+          shuffleQuestions: current.shuffleQuestions || false,
+          shuffleOptions: current.shuffleOptions || false
+        }
+        : null
+
+    const existingSources = current?.sources || (currentSource ? [currentSource] : [])
+
+    window.mcqQuizzes[topicLabel] = {
+      ...(!Array.isArray(current) && current ? current : {}),
+      sources: [
+        ...existingSources.filter((source) => source.id !== 'golden-medicine'),
+        {
+          id: 'golden-medicine',
+          label: 'Golden Medicine MCQs',
+          description,
+          mcqs
+        }
+      ]
+    }
+  }
+
+  const chestSymptomatology = [
+    q('Which type of cough is associated with recurrent laryngeal nerve palsy?', [
+      'Brassy cough',
+      'Bovine cough',
+      'Hysterical cough',
+      'Pleural cough'
+    ], 1, 1, 'Bovine cough is a hollow, non-explosive cough that occurs in recurrent laryngeal nerve palsy because the vocal cords cannot close properly.'),
+    q('What type of cough occurs in young females in front of an audience and disappears when alone?', [
+      'Brassy cough',
+      'Cardiac cough',
+      'Hysterical cough',
+      'Pleural cough'
+    ], 2, 2, 'Hysterical cough is a psychogenic cough that typically occurs in young females in public settings and disappears when the patient is alone.'),
+    q('Cardiac cough is typically seen in which condition?', [
+      'Mitral stenosis',
+      'Right ventricular failure',
+      'Left ventricular failure',
+      'Pulmonary embolism'
+    ], 2, 3, 'Left ventricular failure causes pulmonary congestion, leading to a cardiac cough.'),
+    q('Which of the following is not a cause of acute cough?', [
+      'Acute upper respiratory tract infection',
+      'Chronic bronchitis',
+      'Pulmonary embolism',
+      'Pneumonia'
+    ], 1, 4, 'Chronic bronchitis is a cause of chronic cough (defined as lasting >8 weeks), not acute cough.'),
+    q('What is the most common cause of subacute cough?', [
+      'Post-infectious cough',
+      'Gastroesophageal reflux disease (GERD)',
+      'Bronchial asthma',
+      'ACE inhibitor use'
+    ], 3, 5, 'Post-infectious cough is medically the most common cause of subacute cough (lasting 3 to 8 weeks). Note: The source key lists D (ACE inhibitor use).'),
+    q('A productive cough with foul-smelling sputum is most likely associated with:', [
+      'Pulmonary edema',
+      'Bronchiectasis',
+      'Lung abscess',
+      'Lobar pneumonia'
+    ], 2, 6, 'A lung abscess classically presents with high fever and productive cough with large amounts of foul-smelling (putrid) sputum.'),
+    q('Immediate cough during sleep is most likely due to:', [
+      'GERD',
+      'Post-nasal drip',
+      'Cardiac cause',
+      'Bronchial asthma'
+    ], 1, 7, 'Post-nasal drip is a common cause of cough immediately upon lying down or during sleep.'),
+    q('Which type of sputum is characteristic of Klebsiella pneumonia?', [
+      'Rusty sputum',
+      'Pink frothy sputum',
+      'Red jelly-like sputum',
+      'Gray sputum'
+    ], 2, 8, 'Klebsiella pneumonia is characteristically associated with thick, red, gelatinous sputum, often described as "currant jelly" sputum.'),
+    q('Chronic cough with phantom shadows on chest X-ray that disappear after coughing suggests:', [
+      'Chronic bronchitis',
+      'Pulmonary edema',
+      'Bronchial asthma',
+      'Lung abscess'
+    ], 2, 9, 'Bronchial asthma can cause mucus plugs ("phantom shadows" or transient atelectasis/infiltrates) on chest X-ray that disappear after the patient coughs them out.'),
+    q('Which color of sputum indicates pulmonary edema?', [
+      'Gray',
+      'Pink frothy',
+      'Rusty',
+      'Brownish'
+    ], 1, 10, 'Pink frothy sputum is classic for acute pulmonary edema. Note: The source key lists C (Rusty), but B (Pink frothy) is medically correct as verified by Q13.'),
+    q('Hemoptysis is differentiated from hematemesis by:', [
+      'Alkaline pH of blood',
+      'Presence of food particles',
+      'Occurrence of melena',
+      'Brown-colored blood'
+    ], 0, 11, 'Hemoptysis (coughed-up blood) typically has an alkaline pH, whereas hematemesis (vomited blood) is typically acidic due to gastric juice. The other options are characteristic of hematemesis.'),
+    q('What is a common cause of hemoptysis in mitral stenosis?', [
+      'Thrombosis',
+      'Paradoxical embolism',
+      'Pulmonary apoplexy',
+      'All of the above'
+    ], 3, 12, 'In mitral stenosis, hemoptysis can be caused by pulmonary apoplexy (rupture of bronchial veins due to high pressure), pulmonary thrombosis, or embolism.'),
+    q('Which of the following conditions is associated with frothy pink sputum?', [
+      'Lobar pneumonia',
+      'Pulmonary edema',
+      'Lung abscess',
+      'Bronchiectasis'
+    ], 1, 13, 'Pulmonary edema causes transudation of fluid into alveoli, resulting in frothy pink sputum.'),
+    q('Dyspnea relieved by inhalers suggests:', [
+      'Cardiac dyspnea',
+      'Respiratory dyspnea',
+      'Metabolic acidosis',
+      'SVC obstruction'
+    ], 1, 14, 'Dyspnea relieved by bronchodilator inhalers suggests a respiratory cause such as asthma or COPD.'),
+    q('Dyspnea due to tension pneumothorax occurs:', [
+      'Sub acutely',
+      'Within hours',
+      'Instantaneously',
+      'Over weeks'
+    ], 2, 15, 'Tension pneumothorax causes sudden, instantaneous onset of severe dyspnea and chest pain.'),
+    q('Chronic dyspnea lasting months to years may be caused by:', [
+      'Pneumothorax',
+      'COPD',
+      'Acute bronchial asthma',
+      'Pulmonary embolism'
+    ], 1, 16, 'COPD is a progressive, chronic condition that causes dyspnea lasting months to years.'),
+    q('Which test is used to diagnose airway pressure types in dyspnea?', [
+      'Spirometry',
+      'Flow volume loop',
+      'Bronchoscopy',
+      'CT scan'
+    ], 1, 17, 'A flow volume loop is extremely helpful for diagnosing upper airway obstruction and evaluating pressure-flow relationships.'),
+    q('Vocal cord dysfunction syndrome is characterized by:', [
+      'Abduction of vocal cords',
+      'Resistance to bronchodilators',
+      'Relief with bronchodilators',
+      'Progressive wheezing'
+    ], 1, 18, 'Vocal cord dysfunction mimics asthma but is characterized by paradoxical adduction of vocal cords and resistance to bronchodilators.'),
+    q('What is the grading system for dyspnea severity?', [
+      'NYHA classification',
+      'GOLD classification',
+      'ATS guidelines',
+      'Borg scale'
+    ], 0, 19, 'The NYHA (New York Heart Association) classification is widely used to grade the severity of dyspnea/heart failure symptoms.'),
+    q('Wheezing is characterized as:', [
+      'A continuous whistling sound during breathing',
+      'An interrupted clicking sound',
+      'A gurgling noise in the throat',
+      'A croaking noise during swallowing'
+    ], 0, 20, 'Wheezing is medically defined as a continuous, high-pitched, musical/whistling sound produced by narrowed airways.'),
+    q('Which symptom is associated with nocturnal sweating?', [
+      'Pulmonary embolism',
+      'Tuberculosis',
+      'Acute bronchial asthma',
+      'GERD'
+    ], 1, 21, 'Night sweats (nocturnal sweating) is a classic B-symptom strongly associated with active Tuberculosis.')
+  ]
+
+  addGoldenMedicineSource('Chest Symptomatology', chestSymptomatology, 'Chest Symptomatology Quiz 1 from Golden Medicine.')
+})()
+
