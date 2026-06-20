@@ -8,8 +8,8 @@ function cleanConfigValue(value) {
 }
 
 export const supabaseConfig = {
-  url: cleanConfigValue(globalConfig.url || viteEnv.VITE_SUPABASE_URL || ''),
-  anonKey: cleanConfigValue(globalConfig.anonKey || viteEnv.VITE_SUPABASE_ANON_KEY || '')
+  url: 'https://tjyohvifndkbzfzyysep.supabase.co',
+  anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRqeW9odmlmbmRrYnpmenl5c2VwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE4NTAwNjEsImV4cCI6MjA5NzQyNjA2MX0.KrXxuW39aJu7yfABfex8XxRhdL8mvFSr1lQf50a4Ces'
 }
 
 export const adminRoles = new Set(['owner', 'admin', 'editor'])
