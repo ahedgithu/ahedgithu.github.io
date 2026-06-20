@@ -1150,6 +1150,209 @@ window.mcqQuizzes = {
 
   window.mcqQuizzes['Rheumatic fever and infective endocarditis'] = rheumaticFever
   window.mcqQuizzes['Pulmonary Function Test'] = pulmonaryFunctionTest
+
+  const bronchialAsthma = [
+    q('Which type of immune cells suppress the Ig response in asthma?', [
+      'T1 lymphocytes',
+      'Regulatory T lymphocytes',
+      'Basophils',
+      'Mast cells'
+    ], 1, 'Regulatory T (Treg) cells play a critical role in maintaining immune tolerance and suppressing allergen-induced Th2 and IgE responses.'),
+    q('What type of asthma presents as a dry cough without wheezing?', [
+      'Allergic asthma',
+      'Cough variant asthma',
+      'Non-T2 asthma',
+      'Exercise-induced asthma'
+    ], 1, 'Cough-variant asthma is a form of asthma where the primary or only symptom is a chronic, dry, non-productive cough, without classic wheezing.'),
+    q('What do T2 lymphocytes primarily secrete?', [
+      'Gamma interferon',
+      'Interleukin 4',
+      'Tumor necrosis factor',
+      'Histamine'
+    ], 1, 'Th2 cells primarily secrete IL-4, IL-5, and IL-13, which promote IgE production, eosinophil recruitment, and mucus hypersecretion.'),
+    q('Aspirin-Exacerbated Respiratory Disease (AERD) is characterized by all of the following EXCEPT:', [
+      'Asthma',
+      'Nasal polyps',
+      'Sensitivity to NSAIDs',
+      'Eczema'
+    ], 3, 'AERD (Samter\'s Triad) classically consists of asthma, recurrent nasal polyps, and sensitivity to aspirin/other COX-1 inhibiting NSAIDs; eczema is not part of the triad.'),
+    q('Which enzyme secreted by house dust mites is also found in grass pollens?', [
+      'Matrix metalloproteinase',
+      'Interleukin 5',
+      'Histaminase',
+      'Beta-glucuronidase'
+    ], 0, 'Matrix metalloproteinases (MMPs) are enzymes secreted by house dust mites and also found in pollens, contributing to mucosal barrier breakdown.'),
+    q('Which of the following is a feature of T2-type asthma?', [
+      'Smoking-related asthma',
+      'Obesity-related asthma',
+      'Allergic asthma',
+      'Paucigranulocytic asthma'
+    ], 2, 'T2-high asthma is associated with eosinophilic inflammation and atopy, making allergic asthma a classic example.'),
+    q('Which of the following is NOT a trigger for asthma?', [
+      'Beta-blockers',
+      'ACE inhibitors',
+      'Antihistamines',
+      'Aspirin'
+    ], 2, 'Antihistamines are not asthma triggers; they block histaminic receptors and are sometimes used for allergic comorbidities.'),
+    q('Late-onset eosinophilic asthma is associated with:', [
+      'Family history of allergy',
+      'Autoimmune conditions',
+      'Increased IgE levels',
+      'Childhood onset'
+    ], 1, 'Late-onset eosinophilic asthma is often non-atopic (normal IgE, no family history) and is frequently associated with autoimmune conditions and nasal polyps.'),
+    q('What differentiates asthma from COPD?', [
+      'Irreversible airway obstruction in asthma',
+      'Progressive nature of asthma',
+      'Reversible airway obstruction in asthma',
+      'Smoking as a primary cause of asthma'
+    ], 2, 'Reversibility of airway obstruction (spontaneously or post-bronchodilator) is the key feature that distinguishes asthma from the typically progressive, poorly reversible airflow limitation of COPD.'),
+    q('Which of the following is a common allergen causing allergic asthma?', [
+      'Sunlight',
+      'Eucalyptus oil',
+      'Grass pollens',
+      'House pets'
+    ], 2, 'Grass pollen is a very common airborne allergen capable of triggering IgE-mediated allergic asthma exacerbations.'),
+    q('A 35-year-old male presents with a history of intermittent wheezing, shortness of breath, and coughing that worsens at night. Spirometry shows an FEV1/FVC ratio of 0.65, and post-bronchodilator FEV1 increases by 15% and 220 mL. What is the most likely diagnosis?', [
+      'Chronic Obstructive Pulmonary Disease (COPD)',
+      'Bronchial Asthma',
+      'Restrictive Lung Disease',
+      'Pulmonary Fibrosis'
+    ], 1, 'The clinical symptoms together with an obstructive pattern that shows significant reversibility (FEV1 increase >12% and >200 mL) confirm the diagnosis of bronchial asthma.'),
+    q('What is the diagnostic test for asthma?', [
+      'Spirometry',
+      'Peak expiratory flow (PEF) meter',
+      'Chest X-ray',
+      'CT scan'
+    ], 0, 'Spirometry is the gold standard diagnostic test to demonstrate airflow limitation and reversibility in patients suspected of having asthma.'),
+    q('Significant reversibility in asthma is defined as an increase in FEV1 or FVC by at least:', [
+      '5% and 100 mL',
+      '10% and 150 mL',
+      '12% and 200 mL',
+      '15% and 250 mL'
+    ], 2, 'According to international guidelines, a positive bronchodilator response is defined as an increase in FEV1 or FVC of at least 12% and 200 mL from baseline.'),
+    q('What does a red zone reading on a PEF meter indicate?', [
+      'Good asthma control',
+      'Moderate airflow obstruction',
+      'Severe airflow obstruction',
+      'No need for medication adjustment'
+    ], 2, 'The red zone on a peak flow meter indicates a PEF value less than 50% of the patient\'s personal best, signaling severe airflow obstruction and a medical emergency.'),
+    q('Diurnal variation in PEF is best monitored by measuring:', [
+      'Before and after meals',
+      'In the morning and afternoon',
+      'Before and after exercise',
+      'At bedtime and upon waking'
+    ], 1, 'Diurnal peak flow variability is assessed by twice-daily PEF measurements, typically done in the morning and afternoon/evening.'),
+    q('What is a side effect of inhaled corticosteroids in children?', [
+      'Growth suppression',
+      'Tachycardia',
+      'Weight gain',
+      'Eczema'
+    ], 0, 'High doses of inhaled corticosteroids in pediatric patients can be associated with a transient, minor reduction in growth velocity, though the effect on final adult height is minimal.'),
+    q('What is the mechanism of SABA in asthma treatment?', [
+      'Anti-inflammatory action',
+      'Bronchodilation',
+      'Mucus clearance',
+      'Immune suppression'
+    ], 1, 'Short-acting beta2-agonists (SABAs) stimulate beta2-adrenergic receptors on airway smooth muscle, leading to rapid relaxation and bronchodilation.'),
+    q('Which drug is added in the red zone of PEF to manage severe airflow obstruction?', [
+      'LABA',
+      'ICS',
+      'Muscarinic antagonist',
+      'Both A and C'
+    ], 3, 'In the management of severe airway obstruction (red zone), muscarinic antagonists (such as ipratropium) and long-acting bronchodilators (LABAs) are utilized to maximize airway opening.'),
+    q('A patient is using an inhaled corticosteroid and a long-acting beta-agonist (LABA) for asthma. Their PEF consistently falls in the yellow zone, with occasional symptoms at night. What is the next best step in management?', [
+      'Add a short-acting beta-agonist (SABA)',
+      'Increase the dose of the inhaled corticosteroid',
+      'Add a muscarinic antagonist',
+      'Use oral corticosteroids'
+    ], 1, 'When asthma remains poorly controlled on a low-dose ICS-LABA combination, the standard step-up therapy is to increase the dose of the inhaled corticosteroid (ICS) to medium or high dose.'),
+    q('What is the primary mechanism behind bronchial asthma?', [
+      'Immune suppression',
+      'Overactive response to allergens',
+      'Permanent airway narrowing',
+      'Lack of oxygen'
+    ], 1, 'Bronchial asthma is primarily characterized by chronic airway inflammation and airway hyperresponsiveness (an overactive response) to various environmental allergens and triggers.'),
+    q('Which class of society is more affected by asthma?', [
+      'High-class communities',
+      'Low-class communities',
+      'Both equally',
+      'Neither'
+    ], 0, 'Some epidemiological studies and the "hygiene hypothesis" associate higher socioeconomic status and more sterile environments with an increased risk of developing atopic diseases, including allergic asthma.'),
+    q('Which T-helper cell secretes interleukin 4 in asthma?', [
+      'T1',
+      'T2',
+      'T3',
+      'T4'
+    ], 1, 'Th2 (T-helper type 2) cells are the primary immune cells responsible for secreting IL-4, which directs B-cell class-switching to IgE.'),
+    q('What is the hallmark characteristic of airway obstruction in asthma?', [
+      'Irreversible',
+      'Permanent',
+      'Variable and reversible',
+      'Progressive'
+    ], 2, 'The hallmark of asthma is that airway obstruction is highly variable (worsening at night or with triggers) and reversible (either spontaneously or with bronchodilators).'),
+    q('Which drug is known to trigger asthma?', [
+      'NSAIDs',
+      'Aminophylline',
+      'Aspirin',
+      'Both A and C'
+    ], 3, 'Both aspirin and other non-steroidal anti-inflammatory drugs (NSAIDs) that inhibit COX-1 can trigger severe bronchoconstriction in susceptible patients (AERD).'),
+    q('How many attacks per week define intermittent asthma?', [
+      '1 attack per week',
+      '2 attacks per week',
+      'More than 2 attacks per week',
+      'Everyday attacks'
+    ], 1, 'According to classic severity classification guidelines, intermittent asthma is defined by daytime symptoms occurring 2 or fewer times per week.'),
+    q('Which asthma severity involves night attacks?', [
+      'Mild',
+      'Moderate',
+      'Severe',
+      'Life-threatening'
+    ], 2, 'Frequent nighttime symptoms (often occurring nightly) are a key clinical indicator of severe persistent asthma.'),
+    q('Which diagnostic test is used to confirm asthma?', [
+      'Office spirometer',
+      'Chest X-ray',
+      'Peak expiratory flow meter',
+      'Blood eosinophil count'
+    ], 0, 'An office spirometer is the primary tool used to demonstrate and confirm reversible airflow obstruction, establishing the diagnosis of asthma.'),
+    q('What FEV1/FVC ratio indicates airway obstruction?', [
+      '>0.9',
+      '<0.7',
+      '0.8-0.9',
+      '>1.0'
+    ], 1, 'An FEV1/FVC ratio of less than 0.70 (70%) is the standard spirometric criterion indicating airflow obstruction.'),
+    q('A 28-year-old female presents with asthma exacerbation shortly after taking aspirin for a headache. She has a history of nasal polyps. What is the most likely underlying condition?', [
+      'Allergic asthma',
+      'Exercise-induced asthma',
+      'Aspirin-Exacerbated Respiratory Disease (AERD)',
+      'Occupational asthma'
+    ], 2, 'The clinical combination of asthma, nasal polyps, and aspirin-induced bronchospasm is classic for Aspirin-Exacerbated Respiratory Disease (AERD), also known as Samter\'s Triad.'),
+    q('A 15-year-old with asthma has a history of frequent exacerbations and poor adherence to medication. Their PEF variability is greater than 25%, and they complain of daily symptoms. What tool would best help assess long-term control and adherence to treatment?', [
+      'Spirometry',
+      'Chest X-ray',
+      'Peak Expiratory Flow (PEF) Meter',
+      'Blood gas analysis'
+    ], 2, 'Regular home monitoring with a Peak Expiratory Flow (PEF) meter helps track peak flow variability, assess asthma control over time, and encourage treatment adherence.'),
+    q('What is an example of a short-acting beta-agonist (SABA)?', [
+      'Salmeterol',
+      'Albuterol',
+      'Prednisolone',
+      'Beclomethasone'
+    ], 1, 'Albuterol (salbutamol) is a classic short-acting beta2-agonist (SABA) used as a rescue inhaler for quick relief of symptoms.'),
+    q('What is added for asthma control in children?', [
+      'Muscarinic antagonist',
+      'Spacers',
+      'LABA',
+      'Desensitization therapy'
+    ], 1, 'Spacers are added to metered-dose inhalers (MDIs) for children to improve drug delivery to the lungs and minimize local side effects like oral thrush.'),
+    q('Which drug class includes salmeterol?', [
+      'Short-acting beta agonists',
+      'Long-acting beta agonists',
+      'Inhaled corticosteroids',
+      'Anticholinergics'
+    ], 1, 'Salmeterol is a long-acting beta2-agonist (LABA) used as a controller medication, typically in combination with an inhaled corticosteroid.')
+  ]
+
+  window.mcqQuizzes['Diseases of the airways and bronchial asthma Part 1'] = bronchialAsthma
 })()
 
 
