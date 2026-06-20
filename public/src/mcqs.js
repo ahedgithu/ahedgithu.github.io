@@ -776,3 +776,380 @@ window.mcqQuizzes = {
   addGoldenMedicineSource('Chest Symptomatology', chestSymptomatology, 'Chest Symptomatology Quiz 1 from Golden Medicine.')
 })()
 
+;(() => {
+  const q = (question, choices, answerIndex, explanation) => ({
+    question,
+    choices,
+    answerIndex,
+    explanation
+  })
+
+  const rheumaticFever = [
+    q('Rheumatic fever is most commonly preceded by:', [
+      'Influenza infection',
+      'Measles infection',
+      'Upper respiratory tract infection with Group A β-hemolytic streptococci',
+      'Bacterial pneumonia'
+    ], 2, 'Acute rheumatic fever is a nonsuppurative sequela of Group A streptococcal pharyngitis.'),
+    q('Rheumatic chorea, a manifestation of rheumatic fever, is more commonly observed in:', [
+      'Males',
+      'Females'
+    ], 1, 'Sydenham\'s chorea has a strong female predominance in prepubertal and adolescent populations.'),
+    q('Rheumatic fever is most prevalent in which age group?', [
+      'Infants (0-1) year',
+      'Toddlers (1-3) years',
+      'School-age children (5-15) years',
+      'Adolescents (15-18) years'
+    ], 2, 'Rheumatic fever is most commonly seen in children aged 5–15 years, corresponding to peak exposure to streptococcal pharyngitis.'),
+    q('Which of the following is a contributing socio-economic factor for the development of rheumatic fever?', [
+      'Overcrowding',
+      'High social class',
+      'Good hygiene practices',
+      'Developed countries'
+    ], 0, 'Overcrowding facilitates the spread of Group A streptococcus through respiratory droplets, increasing the risk of transmission.'),
+    q('In individuals with rheumatic fever, the presence of recurrent and severe recent infections is primarily associated with:', [
+      'Viral infections',
+      'Fungal infections',
+      'Bacterial infections, particularly Streptococcus pyogenes',
+      'Parasitic infections'
+    ], 2, 'Recurrent pharyngeal infections with Streptococcus pyogenes (Group A Streptococcus) are the primary driver of acute rheumatic fever pathogenesis.'),
+    q('Which of the following age groups is at higher risk for developing rheumatic fever?', [
+      '2-5 years',
+      '5-10 years',
+      '10-15 years',
+      '15-20 years'
+    ], 2, 'The age group 10-15 years represents the peak window within the overall 5-15 years risk range for rheumatic fever.'),
+    q('What are the minimum criteria required for a diagnosis of acute rheumatic fever?', [
+      'Two major criteria',
+      'One major criterion and one minor criterion',
+      'One major criterion and two minor criteria',
+      'Three minor criteria'
+    ], 0, 'Under the Jones criteria, a diagnosis is established by 2 major criteria OR 1 major and 2 minor criteria, along with evidence of preceding streptococcal infection.'),
+    q('Which of the following is a major criterion for the diagnosis of acute rheumatic fever?', [
+      'Fever',
+      'Arthralgia',
+      'Prolonged PR interval on ECG',
+      'Subcutaneous nodules'
+    ], 3, 'Subcutaneous nodules are a major Jones criterion, whereas fever, arthralgia, and prolonged PR interval are minor criteria.'),
+    q('Which of the following is a minor criterion for the diagnosis of acute rheumatic fever?', [
+      'Elevated acute phase reactants',
+      'Previous rheumatic fever',
+      'Erythema marginatum',
+      'Chorea'
+    ], 0, 'Elevated acute phase reactants (like ESR or CRP) are minor Jones criteria, whereas erythema marginatum and chorea are major criteria.'),
+    q('Which of the following manifestations of acute rheumatic fever is most commonly observed?', [
+      'Subcutaneous nodules',
+      'Erythema marginatum',
+      'Polyarthritis',
+      'Chorea'
+    ], 2, 'Migratory polyarthritis is the most common clinical manifestation of acute rheumatic fever, presenting in about 75% of first attacks.'),
+    q('Subcutaneous nodules in acute rheumatic fever typically occur:', [
+      'At the same time as the initial infection',
+      'Immediately after the infection resolves',
+      'Months after the initial infection',
+      'Years after the initial infection'
+    ], 2, 'Subcutaneous nodules are a late manifestation, typically appearing weeks to several months after the onset of rheumatic fever.'),
+    q('Which of the following best describes the characteristic appearance of erythema marginatum in acute rheumatic fever?', [
+      'A persistent rash with defined borders and a central blister',
+      'A migratory rash with irregular red edges and a clear center',
+      'A pruritic rash that spreads rapidly to cover the entire body',
+      'A maculopapular rash that is most prominent on the extremities'
+    ], 1, 'Erythema marginatum is characterized by transient, non-pruritic, erythematous rings with active margins and central clearing, typically on the trunk.'),
+    q('How long does erythema marginatum typically persist on the skin in acute rheumatic fever?', [
+      'Several days',
+      'Several weeks',
+      'Several months',
+      'It appears and disappears within hours'
+    ], 3, 'Erythema marginatum is highly transient and dynamic, often appearing and disappearing within a matter of hours.'),
+    q('Which of the following best describes the pattern of joint involvement in polyarthritis associated with acute rheumatic fever?', [
+      'Small joints of the hands and feet',
+      'Large joints that migrate from one joint to another',
+      'Symmetrical involvement of multiple joints simultaneously',
+      'Permanent dysfunction of the affected joints'
+    ], 1, 'The joint involvement is classically a migratory polyarthritis, characteristically affecting large joints sequentially.'),
+    q('What is a characteristic feature of polyarthritis in acute rheumatic fever?', [
+      'Involvement of multiple joints at the same time',
+      'Permanent joint damage and dysfunction',
+      'Limited to the small joints of the hands and feet',
+      'Migratory involvement of one joint at a time'
+    ], 3, 'Acute rheumatic fever arthritis is characteristically migratory, moving from joint to joint and leaving previous joints completely undamaged.'),
+    q('What is the reason for using penicillin as the drug of choice for treating Streptococcal pharyngitis?', [
+      'Broad spectrum of activity',
+      'Short standing efficacy',
+      'High cost',
+      'Narrow spectrum of activity',
+      'None of the above'
+    ], 3, 'Penicillin has a narrow spectrum of activity, which is ideal because it targets Streptococcus pyogenes without unnecessarily disrupting normal microflora.'),
+    q('What is the recommended dose of benzathine penicillin for treating Streptococcal pharyngitis in children?', [
+      '0.6 million units IM 1 time (< 27 Kg)',
+      '1.2 million units IM 1 time (< 27 Kg)',
+      '250 mg (2-3 times/day)x10 days',
+      '500 mg TID x10 days'
+    ], 0, 'For pediatric patients weighing less than 27 kg, a single intramuscular injection of 0.6 million units (600,000 units) of benzathine penicillin G is recommended.'),
+    q('What is the recommended alternative to penicillin in case of penicillin allergy?', [
+      'Oral erythromycin',
+      'Newer macrolides',
+      'Oral cephalosporins',
+      'All of the above'
+    ], 3, 'In patients with penicillin allergy, alternatives include macrolides (erythromycin, azithromycin, clarithromycin) and oral cephalosporins.'),
+    q('Why does Rheumatic Fever require continuous prophylactic antibiotics in secondary prevention?', [
+      'Increased susceptibility to recurrences',
+      'Increased severity of recurrences',
+      'Asymptomatic nature of Strep. Infections',
+      'Both A and B',
+      'All of the above'
+    ], 4, 'Secondary prevention is crucial because patients who have had rheumatic fever are highly susceptible to recurrences, which cause cumulative cardiac damage.'),
+    q('What is the recommended dose of aspirin for pediatrics with arthritis?', [
+      '90-130 mg/kg/day in equally divided doses every 4-6 hrs, up to 5.5 gm/day',
+      '60-70 mg/kg/day in equally divided doses every 4-6 hrs, up to 5.5 gm/day',
+      '100 mg/kg/day in equally divided doses every 4-6 hrs, up to 5.5 gm/day',
+      '90-130 mg/kg/day in equally divided doses every 8-12 hrs, up to 5.5 gm/day'
+    ], 0, 'Aspirin is given at a high anti-inflammatory dose of 90-130 mg/kg/day in 4 to 6 divided doses for pediatric rheumatic fever arthritis.'),
+    q('What is the recommended treatment for arthralgia or mild arthritis without carditis?', [
+      'Analgesics only',
+      'Aspirin 100 mg/kg/d with meals for 3 wk (or longer up to 6 wk)',
+      'Prednisone 40-60 mg/d',
+      'None of the above'
+    ], 0, 'For simple arthralgia or mild arthritis without evidence of carditis, simple analgesics are typically sufficient to manage symptoms.'),
+    q('What is the preferred treatment for severe cases of carditis?', [
+      'Aspirin 100 mg/kg/d',
+      'Prednisone 40-60 mg/d',
+      'Paracetamol',
+      'None of the above'
+    ], 1, 'Prednisone (corticosteroid therapy) is indicated for moderate-to-severe carditis (cardiomegaly, congestive heart failure, or third-degree block) to reduce inflammation.'),
+    
+    // Q23 Split
+    q('A 13-year-old male child complains of knee arthritis described as migratory. On examination, there is a truncal rash that is migratory (appears and disappears within hours), pink, with irregular red edges, serpiginous borders, and a clear center. What is this arthritis called?', [
+      'Traumatic arthritis',
+      'Rheumatoid arthritis',
+      'Rheumatic arthritis',
+      'Ankylosing spondylitis',
+      'Scleroderma'
+    ], 2, 'Migratory large-joint arthritis in a teenager, accompanied by a classic rash, points to rheumatic arthritis.'),
+    q('For the 13-year-old male child presenting with migratory knee arthritis and erythema marginatum, what is the first-choice best medication for this type of arthritis?', [
+      'Ibuprofen',
+      'Corticosteroid',
+      'Acetyl salicylic acid',
+      'Paracetamol',
+      'Surgical correction'
+    ], 2, 'Salicylates (aspirin/acetylsalicylic acid) are the drug of choice for managing the joint pain and inflammation of rheumatic arthritis.'),
+    q('In the 13-year-old male child described, the truncal rash that is migratory, appearing and disappearing within hours, pink with irregular red edges, serpiginous borders, and a clear center is named:', [
+      'Subcutaneous nodule',
+      'Erythema nodosum',
+      'Eczema',
+      'Allergic dermatitis',
+      'Erythema marginatum'
+    ], 4, 'Erythema marginatum is a major Jones criterion characterized by a transient, pink, non-pruritic, serpiginous rash with elevated margins and central clearing.'),
+
+    // Q24 Split
+    q('A 14-year-old female patient presents with a history of low-grade fever, elevated ESR and ASO titers, and joint pain (without evidence of arthritis). How can we confirm the diagnosis of rheumatic fever?', [
+      'One major and 2 minor Jones criteria',
+      '2 major Duke’s criteria',
+      '1 major and 3 minor Duke criteria',
+      '3 minor Jones criteria',
+      '5 minor Duke'
+    ], 0, 'Under the Jones criteria, a diagnosis can be established with 1 major criterion (such as arthralgia, since she doesn\'t have objective arthritis, or if she has other major criteria) and 2 minor criteria (like fever and elevated ESR/ASO titer supporting streptococcal infection).'),
+    q('As regards arthritis in rheumatic fever, all of the following are true except:', [
+      'Affect small joints',
+      'No permanent dysfunction',
+      'Migratory',
+      'Pain with other symptoms of inflammation',
+      'Polyarthritis'
+    ], 0, 'Rheumatic arthritis characteristically affects large joints (knees, ankles, wrists, elbows) rather than small joints of the hands and feet.'),
+    q('Minor Jones criteria for the diagnosis of rheumatic fever include all of the following except:', [
+      'Fever',
+      'Arthralgia (mild pain without objective findings): Can only be considered without finding of arthritis',
+      'Elevated acute-phase reactants: ESR, C-reactive protein',
+      'ECG: prolonged PR interval',
+      'Streptococcal infection'
+    ], 4, 'Evidence of a preceding group A streptococcal infection (elevated ASO titer, positive throat culture) is a mandatory requirement for diagnosis, not a minor Jones criterion.'),
+
+    q('Characteristics of rheumatic arthritis. What\'s the best treatment for this form of arthritis?', [
+      'Acetyl salicylic acid',
+      'Methotrexate',
+      'Sulphonamides'
+    ], 0, 'Salicylates (aspirin/acetylsalicylic acid) provide dramatic relief for rheumatic fever arthritis and are the first-line therapy.'),
+    q('The treatment of rheumatic fever should continue up to:', [
+      '2-4 weeks',
+      '4-6 weeks',
+      '6 months',
+      '10 months'
+    ], 1, 'Anti-inflammatory treatment with salicylates or corticosteroids for acute rheumatic fever is typically continued for 4-6 weeks and then gradually tapered.')
+  ]
+
+  const pulmonaryFunctionTest = [
+    q('Which of the following is NOT one of the three main components for assessing pulmonary function?', [
+      'Spirometry',
+      'Lung volume measurement',
+      'Arterial blood gases',
+      'Chest X-ray'
+    ], 3, 'The three primary physiological components of PFTs are spirometry, lung volume determination, and diffusing capacity (or ABG analysis); a chest X-ray is an imaging study, not a functional test.'),
+    q('What does "Spirometry" literally mean based on its Greek roots?', [
+      'Measurement of the lungs',
+      'Measurement of breathing',
+      'Measurement of capacity',
+      'Measurement of flow'
+    ], 1, '"Spirometry" comes from the Greek "spiro" (breath/breathing) and "metron" (measure), literally meaning the measurement of breathing.'),
+    q('Which lung volume represents the amount of air inspired or expired during normal, quiet breathing?', [
+      'Inspiratory Reserve Volume (IRV)',
+      'Tidal Volume (TV)',
+      'Expiratory Reserve Volume (ERV)',
+      'Residual Volume (RV)'
+    ], 1, 'Tidal volume (TV) is the volume of air moved in or out of the lungs during a single normal, quiet respiratory cycle.'),
+    q('Which of the following lung volumes cannot be measured directly by standard spirometry?', [
+      'Tidal Volume (TV)',
+      'Inspiratory Reserve Volume (IRV)',
+      'Expiratory Reserve Volume (ERV)',
+      'Residual Volume (RV)'
+    ], 3, 'Residual volume (RV) cannot be exhaled and thus cannot be measured by standard spirometry; it requires techniques like helium dilution, nitrogen washout, or plethysmography.'),
+    q('What is the primary purpose of Residual Volume (RV)?', [
+      'To allow for maximal inspiration',
+      'To increase the speed of airflow',
+      'To prevent lung collapse after maximal expiration',
+      'To be exchanged during normal breathing'
+    ], 2, 'Residual volume remains in the lungs even after a maximal forced expiration, keeping the alveoli open and preventing lung collapse (atelectasis).'),
+    q('The Vital Capacity (VC) is the sum of which three lung volumes?', [
+      'TV + IRV + RV',
+      'TV + ERV + RV',
+      'TV + IRV + ERV',
+      'IRV + ERV + RV'
+    ], 2, 'Vital capacity (VC) is the maximum volume of air that can be expired after a maximal inspiration: VC = Tidal Volume (TV) + Inspiratory Reserve Volume (IRV) + Expiratory Reserve Volume (ERV).'),
+    q('A FEV₁/FVC ratio of less than 70% is the hallmark of which type of lung disease?', [
+      'Restrictive',
+      'Obstructive',
+      'Vascular',
+      'Neuromuscular'
+    ], 1, 'An FEV₁/FVC ratio of less than 0.70 (70%) indicates airflow limitation, which is the hallmark of obstructive lung disease (e.g., asthma, COPD).'),
+    q('What is the definition of FEV₁?', [
+      'The total volume of air exhaled forcefully from a full inspiration.',
+      'The volume of air exhaled in the first second of a forced expiration.',
+      'The maximum speed of air during expiration.',
+      'The volume of air remaining in the lungs after normal expiration.'
+    ], 1, 'FEV₁ stands for Forced Expiratory Volume in 1 second, representing the volume of air exhaled during the first second of the FVC maneuver.'),
+    q('For a patient undergoing a bronchodilator reversibility test, how long should a Short-Acting Beta-Agonist (SABA) be withheld before the test?', [
+      '1 hour',
+      '4 hours',
+      '12 hours',
+      '24 hours'
+    ], 1, 'Short-acting beta-agonists (SABAs) like albuterol should be withheld for at least 4 to 6 hours before spirometry to avoid masking airway reactivity.'),
+    q('In the context of the flow-volume loop, what does a "concave shape" in the expiratory curve typically suggest?', [
+      'Normal lung function',
+      'Restrictive lung disease',
+      'Obstructive lung disease',
+      'Fixed upper airway obstruction'
+    ], 2, 'Obstructive lung diseases (like asthma and COPD) cause a characteristic scalloping or "concave shape" in the expiratory flow curve due to premature airway closure and reduced flow at low lung volumes.'),
+    q('Why are PFTs, like spirometry, generally more effective at detecting expiratory diseases (e.g., COPD) than inspiratory issues?', [
+      'Because inspiration is an active process and expiration is passive, making flow limitations more apparent during passive recoil.',
+      'Because inspiratory muscles are much stronger than expiratory muscles.',
+      'Because all lung diseases primarily affect the ability to breathe out, not in.',
+      'Because the equipment is only calibrated to measure expiratory flow accurately.'
+    ], 0, 'Expiration is passive and driven by elastic recoil, making it highly sensitive to increased airway resistance and loss of structural support (dynamic compression), which are easily detected as expiratory flow limitation.'),
+    q('In a patient with advanced COPD, what is the expected pattern of change in lung volumes due to air trapping?', [
+      'Increased RV, Increased TLC, Decreased VC',
+      'Decreased RV, Decreased TLC, Decreased VC',
+      'Increased RV, Decreased TLC, Normal VC',
+      'Normal RV, Increased TLC, Increased VC'
+    ], 0, 'Air trapping in COPD leads to an increased Residual Volume (RV) and Total Lung Capacity (TLC, hyperinflation), which crowds out and reduces the Vital Capacity (VC).'),
+    q('A patient\'s spirometry shows a reduced FEV₁ and a reduced FVC, but a normal FEV₁/FVC ratio of 85%. What do these findings strongly suggest?', [
+      'An obstructive pattern, likely asthma.',
+      'A restrictive pattern, as all volumes are proportionally reduced.',
+      'A mixed obstructive-restrictive pattern.',
+      'Poor patient effort during the test.'
+    ], 1, 'A normal or elevated FEV₁/FVC ratio (>70%) with proportionally reduced FEV₁ and FVC points to a restrictive lung pattern, which must be confirmed with total lung volume measurements.'),
+    q('A patient has a non-reversible obstructive pattern on spirometry. Which test is most useful in differentiating emphysema from chronic bronchitis, and what would be the expected finding in emphysema?', [
+      'Methacholine challenge; positive response',
+      'Nitrogen washout test; increased dead space',
+      'DLCO test; decreased value',
+      'Arterial blood gas; normal O2 saturation'
+    ], 2, 'Diffusing capacity (DLCO) is reduced in emphysema due to alveolar-capillary membrane destruction, whereas it is typically normal in chronic bronchitis.'),
+    q('How does the shape of a flow-volume loop in a fixed upper airway obstruction (e.g., tracheal stenosis) differ from that of a typical obstructive lung disease like COPD?', [
+      'It shows a concave expiratory loop, similar to COPD.',
+      'It is smaller in overall size but retains a normal shape.',
+      'It shows flattening of both the inspiratory and expiratory loops.',
+      'It shows a flattened inspiratory loop but a normal expiratory loop.'
+    ], 2, 'Fixed upper airway obstructions limit flow during both inspiration and expiration, leading to symmetric flattening of both the upper and lower curves of the flow-volume loop.'),
+    q('What is the fundamental difference between anatomical dead space and physiological dead space?', [
+      'Anatomical dead space is in the airways; physiological dead space is in the blood vessels.',
+      'They are the same, but measured with different techniques.',
+      'Physiological dead space includes anatomical dead space plus any non-functioning alveoli.',
+      'Anatomical dead space is pathological, while physiological dead space is normal.'
+    ], 2, 'Anatomical dead space is the volume of conducting airways, whereas physiological dead space also includes alveolar dead space (ventilated but unperfused alveoli).'),
+    q('Why is Carbon Monoxide (CO) used in the DLCO test instead of Oxygen (O2)?', [
+      'CO is safer for the patient to inhale in small quantities.',
+      'CO is more readily available and cheaper than pure O2.',
+      'CO diffuses across the alveolar membrane significantly faster than O2, making it a more sensitive measure of diffusion capacity.',
+      'O2 is actively transported, while CO diffuses passively, which is what the test aims to measure.'
+    ], 2, 'CO is used because it has an extremely high affinity for hemoglobin (about 200 times higher than O2), ensuring its uptake is entirely limited by diffusion across the membrane rather than blood flow.'),
+    q('According to the text, the absence of a significant response in a bronchodilator reversibility test does not entirely exclude asthma. Why?', [
+      'Because COPD can sometimes show reversibility.',
+      'Because some patients are allergic to the bronchodilator medication.',
+      'Because an asthmatic person\'s airway response can vary over time, and their airway caliber may be normal at the time of the test.',
+      'Because the test is only accurate in children under the age of 7.'
+    ], 2, 'Airway hyperresponsiveness and obstruction in asthma are highly variable. A patient may have normal lung function or be in a stable phase at the time of the test, showing no acute bronchodilator response.'),
+    q('The Nitrogen Washout Test is used to measure dead space. How does it work?', [
+      'The patient inhales pure nitrogen, and the amount exhaled is measured.',
+      'The test measures how quickly nitrogen is "washed out" of the blood.',
+      'The patient inhales pure O2, and the point at which nitrogen from the alveoli appears in exhaled air identifies the dead space volume.',
+      'The patient breathes a mix of nitrogen and oxygen to calculate V/Q mismatch'
+    ], 2, 'Fowler\'s method (single-breath nitrogen washout) uses inhalation of 100% O2; as the patient exhales, nitrogen concentration is monitored to calculate anatomical dead space.'),
+    q('If a patient with early restrictive lung disease undergoes a peak flow measurement, what might be the counter-intuitive result?', [
+      'The peak flow will be severely reduced.',
+      'The peak flow can sometimes be normal or even raised.',
+      'The peak flow will be variable and non-reproducible.',
+      'The peak flow meter cannot be used for restrictive diseases.'
+    ], 1, 'In restrictive lung diseases (like pulmonary fibrosis), increased lung elastic recoil can support high expiratory driving pressures, resulting in normal or even supernormal peak expiratory flow rates relative to lung volume.'),
+    q('A 55-year-old smoker\'s baseline spirometry shows an FEV₁ of 1.5 L and an FEV₁/FVC ratio of 60%. After administration of a short-acting bronchodilator, his FEV₁ increases to 1.6 L. What is the most likely diagnosis?', [
+      'Asthma, due to the obstructive pattern.',
+      'COPD, as the obstruction is not significantly reversible (<12% and <200 mL improvement).',
+      'Restrictive lung disease, due to the low FEV₁.',
+      'Normal lung function for a smoker.'
+    ], 1, 'The patient has an obstructive pattern (FEV₁/FVC < 70%) with minimal reversibility (FEV₁ increase of 0.1 L, which is <12% and <200 mL), which is highly characteristic of COPD in an older smoker.'),
+    q('A 9-year-old child presents with a history of intermittent wheezing and coughing, especially at night. In-office examination and spirometry are normal (FEV₁/FVC > 70%). The mother is insistent about the symptoms. What is the most appropriate next step to confirm a diagnosis of asthma?', [
+      'Administer a bronchodilator and repeat spirometry.',
+      'Perform a DLCO test.',
+      'Order an arterial blood gas analysis.',
+      'Conduct a methacholine challenge test.'
+    ], 3, 'When asthma is clinically suspected but baseline spirometry is normal, a bronchoprovocation test (like a methacholine challenge) is the gold standard to demonstrate airway hyperresponsiveness.'),
+    q('A 65-year-old patient with pulmonary fibrosis undergoes spirometry. The results show: FEV₁ is 60% of predicted, FVC is 58% of predicted, and the FEV₁/FVC ratio is 85%. How would you classify this pattern?', [
+      'Normal',
+      'Obstructive',
+      'Restrictive',
+      'Combined obstructive and restrictive'
+    ], 2, 'A normal/high FEV₁/FVC ratio (85% > 70%) with reduced FEV₁ and FVC in a patient with known pulmonary fibrosis indicates a restrictive ventilatory defect.'),
+    q('A patient performs a spirometry test, but the technician notes a significant cough during the first second of the forced expiratory maneuver. What is the correct action?', [
+      'Accept the reading as it reflects the patient\'s clinical condition.',
+      'Discard the effort as unacceptable and have the patient repeat the maneuver.',
+      'Average this reading with two other good readings to get the final result.',
+      'Note the cough but use the FVC value, as it is less affected.'
+    ], 1, 'Coughing during the first second of expiration invalidates the FEV₁ measurement; the attempt must be discarded as unacceptable and the patient must repeat the trial.'),
+    q('A patient\'s PFTs show an FEV₁/FVC ratio of 55%, an increased Total Lung Capacity (TLC), and a significantly decreased DLCO. This combination of findings is most characteristic of which condition?', [
+      'Chronic Bronchitis',
+      'Asthma',
+      'Emphysema',
+      'Pulmonary Fibrosis'
+    ], 2, 'Obstruction (FEV₁/FVC < 70%) plus hyperinflation (increased TLC) and impaired diffusion capacity (decreased DLCO) is characteristic of emphysema due to alveolar wall destruction.'),
+    q('During a flow-volume loop test, a patient produces a graph that is normal in shape but noticeably smaller in overall size compared to predicted values. This visual pattern is most indicative of:', [
+      'Obstructive lung disease',
+      'Restrictive lung disease',
+      'A fixed central airway obstruction',
+      'Poor patient cooperation'
+    ], 1, 'Restrictive lung diseases cause a symmetrical reduction in all lung volumes, resulting in a flow-volume loop that looks like a miniature version of a normal loop.'),
+    q('A patient with confirmed COPD has an RV/TLC ratio of 45%. Based on the provided text (normal is 20-35%), what does this indicate?', [
+      'The patient has an additional restrictive component to their disease.',
+      'The patient\'s condition is well-controlled with medication.',
+      'There is significant air trapping and hyperinflation.',
+      'The test was performed incorrectly'
+    ], 2, 'An elevated RV/TLC ratio (>35%) in obstructive lung disease is a hallmark of gas trapping (increased residual volume) and pulmonary hyperinflation.'),
+    q('A patient is scheduled for a spirometry test at 10 AM. They use a Long-Acting Beta-Agonist (LABA) inhaler every morning at 8 AM. What instruction should have been given to the patient?', [
+      'Take the LABA as usual to see its maximum effect.',
+      'Take the LABA 4 hours before the test.',
+      'Withhold the LABA for at least 12 hours before the test.',
+      'Switch to an oral bronchodilator on the day of the test.'
+    ], 2, 'Long-acting beta-agonists (LABAs) should be withheld for at least 12 hours prior to spirometry to prevent them from masking airway reactivity or baseline obstruction.')
+  ]
+
+  window.mcqQuizzes['Rheumatic fever and infective endocarditis'] = rheumaticFever
+  window.mcqQuizzes['Pulmonary Function Test'] = pulmonaryFunctionTest
+})()
+
+
