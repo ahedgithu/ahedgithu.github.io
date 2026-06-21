@@ -1,4 +1,4 @@
-﻿import confetti from 'canvas-confetti'
+import confetti from 'canvas-confetti'
 import { fetchTrackerData, isSupabaseConfigured } from './supabaseClient.js'
 
 let subjects = [
@@ -92,18 +92,10 @@ let subjects = [
   {
     code: 'MED-1',
     name: 'Internal Medicine 1',
-    totalCount: 6,
-    examNote: 'Midterm starts Jul 18, 2026. Exact MED-1 schedule pending.',
+    totalCount: 15,
+    examNote: 'Midterm starts Jul 18, 2026.',
     topics: [
-      {
-        label: 'Diseases of the Pancreas',
-        state: 'taken',
-        art: 4,
-        lectureUrls: [
-          { label: 'Lecture', url: 'https://drive.google.com/file/d/14TjxXXk2ITCHuao-ayMIwT4z1yjbNFuh/view?usp=drivesdk' }
-        ],
-        audioUrl: 'https://drive.google.com/file/d/1Jw6R2QaYMQ9PerWxCAU_0vMfReSneE1o/view?usp=drivesdk'
-      },
+      { label: "GERD, Barrett's Esophagus, Esophageal Motility Disorders", state: 'remaining', art: 1 },
       {
         label: 'Investigation of Acute Hepatitis',
         state: 'taken',
@@ -117,10 +109,32 @@ let subjects = [
         ],
         audioUrl: 'https://drive.google.com/file/d/1pCiruJJQ6rB84pyxeGy_NUY5QMUzDJVi/view?usp=drivesdk'
       },
-      { label: 'Chronic viral and non-viral hepatitis', state: 'remaining', art: 5 },
+      {
+        label: 'Chronic viral and non-viral hepatitis',
+        state: 'remaining',
+        art: 5,
+        note: 'Chronic Viral Hepatitis, Chronic Non-Viral Hepatitis, Autoimmune Hepatitis, PBC, PSC, MASLD'
+      },
       { label: 'Diseases of Stomach: PUD, H. pylori, non-ulcer dyspepsia', state: 'remaining', art: 6 },
       { label: 'Small intestine: diarrhea, malabsorption, celiac, Whipple', state: 'remaining', art: 7 },
-      { label: 'Cirrhosis complications: portal hypertension, ascites', state: 'remaining', art: 8 }
+      { label: 'Cirrhosis complications: portal hypertension, ascites', state: 'remaining', art: 8 },
+      { label: 'SBP, Hepatic Encephalopathy, Hepatorenal Syndrome', state: 'remaining', art: 8 },
+      {
+        label: 'Diseases of the Pancreas',
+        state: 'taken',
+        art: 4,
+        lectureUrls: [
+          { label: 'Lecture', url: 'https://drive.google.com/file/d/14TjxXXk2ITCHuao-ayMIwT4z1yjbNFuh/view?usp=drivesdk' }
+        ],
+        audioUrl: 'https://drive.google.com/file/d/1Jw6R2QaYMQ9PerWxCAU_0vMfReSneE1o/view?usp=drivesdk'
+      },
+      { label: 'Upper and Lower GI Bleeding', state: 'remaining', art: 7 },
+      { label: 'Metabolic Liver Disease', state: 'remaining', art: 5 },
+      { label: 'Liver Failure and Transplantation', state: 'remaining', art: 8 },
+      { label: 'Vascular Liver Disease and DILI', state: 'remaining', art: 5 },
+      { label: 'Constipation, Diverticular Disease, IBD, IBS', state: 'remaining', art: 7 },
+      { label: 'GI Cancers and Comprehensive GIT Revision', state: 'remaining', art: 6 },
+      { label: 'Case-Based Discussions', state: 'remaining', art: 2 }
     ]
   },
   {
