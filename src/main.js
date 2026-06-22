@@ -656,17 +656,24 @@ function renderResourceItem(item) {
 }
 
 function renderResourceLinks(topic) {
-  if (!coveredStates.has(topic.state)) return ''
-
-  const resources = getResourceItems(topic)
   const quizSources = getQuizSources(topic.label)
   const quizCount = quizSources.reduce((total, source) => total + source.mcqs.length, 0)
-  const links = resources.map(renderResourceItem).join('')
   const quizButton = quizCount ? `
     <button class="topic-resource topic-resource--quiz" type="button" data-quiz-topic="${escapeHtml(topic.label)}">
       MCQs (${quizCount})
     </button>
   ` : ''
+
+  if (!coveredStates.has(topic.state)) {
+    return quizButton ? `
+      <span class="topic-resources" aria-label="Topic resources">
+        ${quizButton}
+      </span>
+    ` : ''
+  }
+
+  const resources = getResourceItems(topic)
+  const links = resources.map(renderResourceItem).join('')
 
   const pendingLecture = topic.lectureUrls?.length ? '' : '<span class="topic-resource topic-resource--pending">Lecture pending</span>'
   const pendingAudio = topic.audioUrl ? '' : '<span class="topic-resource topic-resource--pending">Lecture record pending</span>'
