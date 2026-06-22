@@ -1355,4 +1355,89 @@ window.mcqQuizzes = {
   window.mcqQuizzes['Diseases of the airways and bronchial asthma Part 1'] = bronchialAsthma
 })()
 
+;(() => {
+  const q = (question, choices, answerIndex, explanation) => ({
+    question,
+    choices,
+    answerIndex,
+    explanation
+  })
+
+  const nashNafldAih = [
+    q("A 60-year-old with a background of non-alcoholic steatohepatitis with cirrhosis presents with fresh hematemesis, melaena and collapse. Endoscopy reveals esophageal varices as the origin of bleeding. Which of the following is an appropriate treatment?", [
+      "Band ligation",
+      "Clip placement",
+      "Heater probe coagulation",
+      "Injection of adrenaline (epinephrine)",
+      "Laparotomy"
+    ], 0, "This is variceal bleeding due to cirrhosis. Endoscopic band ligation is the appropriate treatment for bleeding esophageal varices."),
+    q("In the course of a well-woman check offered by her employer, a 50-year-old woman was found to have an antinuclear antibody with a multiple nuclear dot pattern and mildly abnormal liver function tests (LFTs). What is the most likely diagnosis?", [
+      "Autoimmune hepatitis (AIH)",
+      "Lupus",
+      "Non-alcoholic steatohepatitis (NASH)",
+      "Primary biliary cirrhosis (PBC)",
+      "Primary sclerosing cholangitis (PSC)"
+    ], 3, "NASH is a distractor here. Multiple nuclear dot ANA pattern with mildly abnormal LFTs points more toward PBC/PBC-like autoimmune cholestatic disease."),
+    q("A patient with cirrhosis from NAFLD is on 6-monthly ultrasound and AFP surveillance. AFP is normal, but ultrasound shows a 3.5 cm liver lesion. What is the next step?", [
+      "Repeat ultrasound in 6 months",
+      "Liver biopsy immediately",
+      "Stop surveillance because AFP is normal",
+      "PET scan",
+      "Triple-phase CT scan"
+    ], 4, "In cirrhosis, a suspicious liver lesion should be characterized with dynamic contrast imaging such as triple-phase CT to assess arterial enhancement and venous washout."),
+    q("A male patient with type 2 diabetes mellitus, hypertension, BMI 33, thrombocytopenia, nodular shrunken liver, high AFP, and a 5 cm liver lesion is investigated by CT. Which CT finding is most likely?", [
+      "Enhances in arterial phase with portal venous washout",
+      "No enhancement in arterial phase",
+      "Uniform delayed enhancement only",
+      "Purely cystic lesion",
+      "Calcified lesion without enhancement"
+    ], 0, "This is typical of hepatocellular carcinoma in a cirrhotic liver: arterial hyperenhancement followed by portal venous washout."),
+    q("A patient with BMI 35 is teetotal and presents with jaundice, ascites, hepatosplenomegaly, very high hemoglobin, and abnormal LFTs. What is the most likely cause?", [
+      "NAFLD",
+      "Alcoholic liver disease",
+      "Autoimmune hepatitis",
+      "Hepatic vein thrombosis",
+      "Viral hepatitis"
+    ], 3, "NAFLD is a distractor. Very high hemoglobin suggests a hypercoagulable/myeloproliferative state, which can cause Budd-Chiari syndrome due to hepatic vein thrombosis."),
+    q("When assessing the severity of NAFLD in an overweight 65-year-old patient with type 2 diabetes mellitus and hypertension, which statement is correct?", [
+      "Normal ALT excludes significant fibrosis",
+      "Ultrasound reliably stages fibrosis",
+      "AST:ALT ratio is a useful indicator of progressive liver fibrosis towards cirrhosis",
+      "Liver biopsy is never needed",
+      "AFP is the best marker for fibrosis"
+    ], 2, "As fibrosis progresses toward cirrhosis, AST may become higher relative to ALT. Normal enzymes do not safely exclude advanced fibrosis."),
+    q("In suspected NAFLD, which diagnosis or treatment statement is correct?", [
+      "NAFLD is diagnosed only by AFP",
+      "Normal liver enzymes exclude NAFLD",
+      "Steroids are first-line treatment",
+      "Features of metabolic syndrome should be sought and treated to reduce cardiovascular risk",
+      "Alcohol intake does not need assessment"
+    ], 3, "NAFLD is strongly associated with metabolic syndrome and cardiovascular risk. Management must include assessment and treatment of obesity, diabetes, dyslipidemia, and hypertension."),
+    q("A patient with NAFLD cirrhosis has screening endoscopy showing grade 2 esophageal varices with no signs of recent bleeding. What is the best next step?", [
+      "No treatment and repeat endoscopy only",
+      "Immediate laparotomy",
+      "Adrenaline injection",
+      "Start non-selective beta-blocker such as propranolol 20 mg TDS",
+      "Clip placement"
+    ], 3, "Non-selective beta-blockers are used for primary prophylaxis of variceal bleeding in patients with significant esophageal varices."),
+    q("What is the most common etiology for abnormal liver biochemistry in developed countries?", [
+      "Autoimmune hepatitis",
+      "Wilson disease",
+      "Primary sclerosing cholangitis",
+      "NAFLD",
+      "Hemochromatosis"
+    ], 3, "NAFLD is the commonest cause of abnormal liver biochemistry in developed countries, largely due to obesity and metabolic syndrome."),
+    q("Regarding non-alcoholic steatohepatitis (NASH), all are true EXCEPT:", [
+      "It may progress to cirrhosis and liver failure",
+      "It occurs in overweight diabetic hyperlipidemic subjects",
+      "Jejunoileal bypass may be an etiology",
+      "Glucocorticoid helps cure",
+      "It may be caused by drugs"
+    ], 3, "Glucocorticoids are not a cure for NASH and can worsen metabolic risk factors. NASH may progress to fibrosis, cirrhosis, and liver failure.")
+  ]
+
+  window.mcqQuizzes['NASH & NAFLD, AIH'] = nashNafldAih
+})()
+
+
 
