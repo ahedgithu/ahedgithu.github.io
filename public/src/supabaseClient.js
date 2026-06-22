@@ -15,7 +15,9 @@ export const supabaseConfig = {
 export const adminRoles = new Set(['owner', 'admin', 'editor'])
 
 export function isSupabaseConfigured() {
-  return Boolean(supabaseConfig.url && supabaseConfig.anonKey)
+  // Set to false to disable Supabase and use local static fallback data
+  const isEnabled = false;
+  return isEnabled && Boolean(supabaseConfig.url && supabaseConfig.anonKey)
 }
 
 function getProjectUrl(path) {
