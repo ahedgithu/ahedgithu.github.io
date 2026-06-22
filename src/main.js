@@ -111,7 +111,7 @@ let subjects = [
       },
       {
         label: 'Chronic viral and non-viral hepatitis',
-        state: 'remaining',
+        state: 'taken',
         art: 5,
         note: 'Chronic Viral Hepatitis, Chronic Non-Viral Hepatitis, Autoimmune Hepatitis, PBC, PSC, MASLD'
       },
@@ -140,20 +140,13 @@ let subjects = [
   {
     code: 'MED-2',
     name: 'Internal Medicine 2',
-    totalCount: 13,
-    examNote: 'Midterm starts Jul 18, 2026. Exact MED-2 schedule pending.',
+    totalCount: 28,
+    examNote: 'Midterm starts Jul 18, 2026.',
     topics: [
+      // Cardiology (14 topics)
       { label: 'Cardiology Symptomatology', state: 'remaining', art: 9, section: 'Cardio' },
-      {
-        label: 'Systemic Hypertension',
-        state: 'taken',
-        art: 9,
-        section: 'Cardio',
-        lectureUrls: [
-          { label: 'Lecture', url: 'https://drive.google.com/file/d/1lCYbFrQVM23IHF-qxs0DItq6wHIjwxxP/view?usp=drivesdk' }
-        ],
-        audioUrl: 'https://drive.google.com/file/d/1ryTmHHfCBcIzK0AXKgYYxqSKvvbMHAZk/view?usp=drivesdk'
-      },
+      { label: 'Acute Coronary Artery Disease', state: 'remaining', art: 9, section: 'Cardio' },
+      { label: 'Chronic Coronary Artery Disease', state: 'remaining', art: 9, section: 'Cardio' },
       {
         label: 'Rheumatic fever and infective endocarditis',
         state: 'taken',
@@ -164,11 +157,26 @@ let subjects = [
         ],
         audioUrl: 'https://drive.google.com/file/d/1G7x3QDKNsrxEZXdm-iQBAEeQzijaul2K/view?usp=drivesdk'
       },
-      { label: 'Ischemic heart disease and stable angina', state: 'remaining', art: 9, section: 'Cardio' },
       { label: 'Acute coronary syndrome', state: 'remaining', art: 9, section: 'Cardio' },
-      { label: 'Pulmonary embolism', state: 'remaining', art: 10, section: 'Cardio' },
       { label: 'Aortic and mitral valve diseases', state: 'remaining', art: 9, section: 'Cardio' },
       { label: 'Pericardial diseases', state: 'remaining', art: 9, section: 'Cardio' },
+      { label: 'ECG', state: 'remaining', art: 9, section: 'Cardio' },
+      { label: 'Arrhythmia I', state: 'remaining', art: 9, section: 'Cardio' },
+      { label: 'Arrhythmia II', state: 'remaining', art: 9, section: 'Cardio' },
+      { label: 'Respiratory Failure', state: 'remaining', art: 9, section: 'Cardio' },
+      { label: 'Heart Failure I', state: 'remaining', art: 9, section: 'Cardio' },
+      { label: 'Heart Failure II', state: 'remaining', art: 9, section: 'Cardio' },
+      {
+        label: 'Systemic Hypertension',
+        state: 'taken',
+        art: 9,
+        section: 'Cardio',
+        lectureUrls: [
+          { label: 'Lecture', url: 'https://drive.google.com/file/d/1lCYbFrQVM23IHF-qxs0DItq6wHIjwxxP/view?usp=drivesdk' }
+        ],
+        audioUrl: 'https://drive.google.com/file/d/1ryTmHHfCBcIzK0AXKgYYxqSKvvbMHAZk/view?usp=drivesdk'
+      },
+      // Chest (14 topics)
       {
         label: 'Chest Symptomatology',
         state: 'taken',
@@ -204,16 +212,35 @@ let subjects = [
           { label: 'Download PDF', url: '/assets/asthma-guidelines-map-v1.pdf', download: true }
         ]
       },
-      { label: 'COPD', state: 'remaining', art: 10, section: 'Chest' },
-      { label: 'Upper and lower respiratory tract infections', state: 'remaining', art: 10, section: 'Chest' }
+      { label: 'Chronic Bronchitis and COPD', state: 'remaining', art: 10, section: 'Chest' },
+      { label: 'Suppurative Lung Diseases', state: 'remaining', art: 10, section: 'Chest' },
+      {
+        label: 'Pulmonary Embolism',
+        state: 'taken',
+        art: 10,
+        section: 'Chest',
+        lectureUrls: [
+          { label: 'Lecture', url: 'https://docs.google.com/presentation/d/1TicuEg59UwuZYaZ4OPBiD6vOfDupF8za/edit?usp=drivesdk&ouid=109788860164887061740&rtpof=true&sd=true' }
+        ],
+        audioUrl: 'https://drive.google.com/file/d/15PxmYb9SjFLIoabrFFI0XfBqFVaRhjUO/view?usp=drivesdk'
+      },
+      { label: 'CAP and HAP', state: 'remaining', art: 10, section: 'Chest' },
+      { label: 'Interstitial Lung Diseases and Sarcoidosis', state: 'remaining', art: 10, section: 'Chest' },
+      { label: 'Pulmonary Tuberculosis', state: 'remaining', art: 10, section: 'Chest' },
+      { label: 'Atypical Mycoplasma Infections', state: 'remaining', art: 10, section: 'Chest' },
+      { label: 'Diseases of the Pleura I', state: 'remaining', art: 10, section: 'Chest' },
+      { label: 'Diseases of the Pleura II', state: 'remaining', art: 10, section: 'Chest' },
+      { label: 'EVALI and Smoking', state: 'remaining', art: 10, section: 'Chest' },
+      { label: 'Bronchogenic Carcinoma', state: 'remaining', art: 10, section: 'Chest' }
     ]
   },
   {
     code: 'ONC',
     name: 'Oncology',
-    totalCount: 6,
-    examNote: 'Midterm starts Jul 18, 2026. Exact ONC schedule pending.',
+    totalCount: 14,
+    examNote: 'Midterm starts Jul 18, 2026.',
     topics: [
+      { label: 'Anemia approach and iron deficiency anemia', state: 'remaining', art: 12 },
       {
         label: 'Anemia of chronic disease and hemoglobinopathies',
         state: 'taken',
@@ -222,6 +249,15 @@ let subjects = [
           { label: 'Lecture', url: 'https://drive.google.com/file/d/1D3qbb6zibbkzstmNeipmEoNPlnF7BN2q/view?usp=drivesdk' }
         ],
         audioUrl: 'https://drive.google.com/file/d/1qH7bGw0mqGQzaf8lzszR72PRFUAnNCG6/view?usp=drivesdk'
+      },
+      {
+        label: 'Hemolytic anemia',
+        state: 'taken',
+        art: 12,
+        lectureUrls: [
+          { label: 'Lecture', url: 'https://drive.google.com/file/d/1gVZZDhS-d6oiNbk7WDhgG_v1kX_5_2Nm/view?usp=drivesdk' }
+        ],
+        audioUrl: 'https://drive.google.com/file/d/1RkBUYZutIOLulGwOrUAny3tAupTZe7Ki/view?usp=drivesdk'
       },
       {
         label: 'Anemia file completion and sideroblastic anemia',
@@ -233,10 +269,16 @@ let subjects = [
         ],
         audioUrl: 'https://drive.google.com/file/d/1UuxB_UA6w7NKqgPerO6yadsKbpdNcNle/view?usp=drivesdk'
       },
-      { label: 'Anemia approach and iron deficiency anemia', state: 'remaining', art: 12 },
-      { label: 'Hemolytic anemia', state: 'remaining', art: 12 },
+      { label: 'Bleeding disorders', state: 'remaining', art: 14 },
       { label: 'Polycythemia vera and essential thrombocytosis', state: 'remaining', art: 12 },
-      { label: 'Bleeding disorders', state: 'remaining', art: 14 }
+      { label: 'WBC Diseases: Neutropenia and Leukocytosis', state: 'remaining', art: 12 },
+      { label: 'Malignancy Pathophysiology and Lymphoma', state: 'remaining', art: 12 },
+      { label: 'Acute Leukemias: AML and ALL', state: 'remaining', art: 12 },
+      { label: 'Chronic Leukemias: CML and CLL', state: 'remaining', art: 12 },
+      { label: 'Blood Transfusion', state: 'remaining', art: 12 },
+      { label: 'Myeloproliferative Neoplasm', state: 'remaining', art: 12 },
+      { label: 'Multiple Myeloma and amyloidosis', state: 'remaining', art: 12 },
+      { label: 'Case Scenarios and Problem Solving Revision', state: 'remaining', art: 14 }
     ]
   },
   {
@@ -614,17 +656,24 @@ function renderResourceItem(item) {
 }
 
 function renderResourceLinks(topic) {
-  if (!coveredStates.has(topic.state)) return ''
-
-  const resources = getResourceItems(topic)
   const quizSources = getQuizSources(topic.label)
   const quizCount = quizSources.reduce((total, source) => total + source.mcqs.length, 0)
-  const links = resources.map(renderResourceItem).join('')
   const quizButton = quizCount ? `
     <button class="topic-resource topic-resource--quiz" type="button" data-quiz-topic="${escapeHtml(topic.label)}">
       MCQs (${quizCount})
     </button>
   ` : ''
+
+  if (!coveredStates.has(topic.state)) {
+    return quizButton ? `
+      <span class="topic-resources" aria-label="Topic resources">
+        ${quizButton}
+      </span>
+    ` : ''
+  }
+
+  const resources = getResourceItems(topic)
+  const links = resources.map(renderResourceItem).join('')
 
   const pendingLecture = topic.lectureUrls?.length ? '' : '<span class="topic-resource topic-resource--pending">Lecture pending</span>'
   const pendingAudio = topic.audioUrl ? '' : '<span class="topic-resource topic-resource--pending">Lecture record pending</span>'
