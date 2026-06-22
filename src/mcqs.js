@@ -357,7 +357,7 @@ window.mcqQuizzes = {
       explanation: 'Endoscopic therapy is first-line for bleeding varices; balloon tamponade is temporary rescue treatment.'
     }
   ],
-  'Chronic viral and non-viral hepatitis': [
+  'NASH & NAFLD, AIH': [
     {
       question: 'A 60-year-old with a background of non-alcoholic steatohepatitis with cirrhosis presents with fresh hematemesis, melaena and collapse. Endoscopy reveals esophageal varices as the origin of bleeding. Which of the following is an appropriate treatment?',
       choices: [

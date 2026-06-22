@@ -110,7 +110,7 @@ let subjects = [
         audioUrl: 'https://drive.google.com/file/d/1pCiruJJQ6rB84pyxeGy_NUY5QMUzDJVi/view?usp=drivesdk'
       },
       {
-        label: 'Chronic viral and non-viral hepatitis',
+        label: 'NASH & NAFLD, AIH',
         state: 'taken',
         art: 5,
         note: 'Chronic Viral Hepatitis, Chronic Non-Viral Hepatitis, Autoimmune Hepatitis, PBC, PSC, MASLD'
