@@ -111,7 +111,7 @@ let subjects = [
       },
       {
         label: 'Chronic viral and non-viral hepatitis',
-        state: 'remaining',
+        state: 'taken',
         art: 5,
         note: 'Chronic Viral Hepatitis, Chronic Non-Viral Hepatitis, Autoimmune Hepatitis, PBC, PSC, MASLD'
       },
