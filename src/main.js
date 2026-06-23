@@ -5,7 +5,7 @@ let subjects = [
   {
     code: 'SUR-1',
     name: 'Surgery 1',
-    totalCount: 13,
+    totalCount: 16,
     examNote: 'Midterm starts Jul 18, 2026. Exact SUR-1 schedule pending.',
     topics: [
       {
@@ -36,6 +36,36 @@ let subjects = [
         audioUrl: 'https://drive.google.com/file/d/1vt23RUJTWuT_1ZRUHGm4gvWJKW1sxUyI/view?usp=drivesdk'
       },
       {
+        label: 'Esophageal Perforation',
+        state: 'taken',
+        art: 1,
+        note: 'Sunday report 21 Jun: taught by Dr. Hisham Ahmed.',
+        lectureUrls: [
+          { label: 'Esophagus lecture', url: 'https://drive.google.com/file/d/1-uzZPnXaDetSZxCujFNDLudZ_TOJaQEh' }
+        ],
+        audioUrl: 'https://drive.google.com/file/d/1Xy8aJmb30RgLP7C0-0uRa5Q8fLaJChIr/view?usp=drivesdk'
+      },
+      {
+        label: 'Corrosive Injury',
+        state: 'taken',
+        art: 1,
+        note: 'Sunday report 21 Jun: taught by Dr. Hisham Ahmed.',
+        lectureUrls: [
+          { label: 'Esophagus lecture', url: 'https://drive.google.com/file/d/1-uzZPnXaDetSZxCujFNDLudZ_TOJaQEh' }
+        ],
+        audioUrl: 'https://drive.google.com/file/d/1Xy8aJmb30RgLP7C0-0uRa5Q8fLaJChIr/view?usp=drivesdk'
+      },
+      {
+        label: 'Carcinoma of the Esophagus',
+        state: 'taken',
+        art: 1,
+        note: 'Sunday report 21 Jun: taught by Dr. Hisham Ahmed.',
+        lectureUrls: [
+          { label: 'Esophagus lecture', url: 'https://drive.google.com/file/d/1-uzZPnXaDetSZxCujFNDLudZ_TOJaQEh' }
+        ],
+        audioUrl: 'https://drive.google.com/file/d/1Xy8aJmb30RgLP7C0-0uRa5Q8fLaJChIr/view?usp=drivesdk'
+      },
+      {
         label: 'Clinical round overview',
         state: 'taken',
         art: 2,
@@ -63,7 +93,16 @@ let subjects = [
       },
       { label: 'Tongue', state: 'remaining', art: 2 },
       { label: 'Salivary glands', state: 'remaining', art: 13 },
-      { label: 'Stomach', state: 'remaining', art: 6 },
+      {
+        label: 'Overview of the Stomach',
+        state: 'taken',
+        art: 6,
+        note: 'Sunday report 21 Jun: taught by Dr. Hisham Ahmed.',
+        lectureUrls: [
+          { label: 'Summary / Stomach file', url: 'https://drive.google.com/file/d/1XX_NpXX5jb0VGaL_-LW-O_6SAwFv0c1-' }
+        ],
+        audioUrl: 'https://drive.google.com/file/d/1Xy8aJmb30RgLP7C0-0uRa5Q8fLaJChIr/view?usp=drivesdk'
+      },
       { label: 'Pancreas', state: 'remaining', art: 4 },
       { label: 'Intestines', state: 'remaining', art: 7 },
       { label: 'Biliary tract', state: 'remaining', art: 0 },
@@ -82,7 +121,15 @@ let subjects = [
         art: 2,
         audioUrl: 'https://drive.google.com/file/d/1JCS1ZR8BiLL2sGVi-0B6UBExsstVOZEP/view?usp=drivesdk'
       },
-      { label: 'Chest trauma / trauma up to sternal fractures', state: 'announced', art: 10, note: 'Announced in university, not explained yet.' },
+      {
+        label: 'Chest trauma / trauma up to sternal fractures',
+        state: 'taken',
+        art: 10,
+        note: 'Sunday report 21 Jun: taught by Dr. Mohand Mostafa.',
+        lectureUrls: [
+          { label: 'Lecture', url: 'https://drive.google.com/file/d/18BP11uNEJk5eq6GKSAtj_mBEMN59l8U' }
+        ]
+      },
       { label: 'Rib fracture', state: 'remaining', art: 10 },
       { label: 'Pneumothorax, tension pneumothorax, hemothorax', state: 'remaining', art: 10 },
       { label: 'Pulmonary contusion and flail chest', state: 'remaining', art: 10 },
@@ -113,7 +160,12 @@ let subjects = [
         label: 'Chronic viral and non-viral hepatitis',
         state: 'taken',
         art: 5,
-        note: 'Chronic Viral Hepatitis, Chronic Non-Viral Hepatitis, Autoimmune Hepatitis, PBC, PSC, MASLD'
+        note: 'Sunday report 21 Jun: Autoimmune Hepatitis (AIH) taught by Dr. Omar Heikal. Also covers PBC, PSC, MASLD.',
+        lectureUrls: [
+          { label: 'Lecture folder', url: 'https://drive.google.com/drive/folders/1545uWPrXXOM9JjruxJVRzh2joO5IFDlt' },
+          { label: 'Lecture', url: 'https://drive.google.com/file/d/1YFpgL3FEVYMOj3aHLH7zjdYHn7A4G2FF' }
+        ],
+        audioUrl: 'https://drive.google.com/file/d/10wtq_v-0BOgOysXSgb1qxAFoOkbW8ix0/view?usp=drivesdk'
       },
       { label: 'Diseases of Stomach: PUD, H. pylori, non-ulcer dyspepsia', state: 'remaining', art: 6 },
       { label: 'Small intestine: diarrhea, malabsorption, celiac, Whipple', state: 'remaining', art: 7 },
@@ -129,7 +181,17 @@ let subjects = [
         audioUrl: 'https://drive.google.com/file/d/1Jw6R2QaYMQ9PerWxCAU_0vMfReSneE1o/view?usp=drivesdk'
       },
       { label: 'Upper and Lower GI Bleeding', state: 'remaining', art: 7 },
-      { label: 'Metabolic Liver Disease', state: 'remaining', art: 5 },
+      {
+        label: 'Metabolic Liver Disease',
+        state: 'taken',
+        art: 5,
+        note: 'Sunday report 21 Jun: NASH & NAFLD taught by Dr. Omar Heikal.',
+        lectureUrls: [
+          { label: 'Lecture folder', url: 'https://drive.google.com/drive/folders/1545uWPrXXOM9JjruxJVRzh2joO5IFDlt' },
+          { label: 'Lecture', url: 'https://drive.google.com/file/d/1YFpgL3FEVYMOj3aHLH7zjdYHn7A4G2FF' }
+        ],
+        audioUrl: 'https://drive.google.com/file/d/10wtq_v-0BOgOysXSgb1qxAFoOkbW8ix0/view?usp=drivesdk'
+      },
       { label: 'Liver Failure and Transplantation', state: 'remaining', art: 8 },
       { label: 'Vascular Liver Disease and DILI', state: 'remaining', art: 5 },
       { label: 'Constipation, Diverticular Disease, IBD, IBS', state: 'remaining', art: 7 },
@@ -219,8 +281,9 @@ let subjects = [
         state: 'taken',
         art: 10,
         section: 'Chest',
+        note: 'Sunday report 21 Jun: taught by Dr. Ibrahim Abdelhamid.',
         lectureUrls: [
-          { label: 'Lecture', url: 'https://docs.google.com/presentation/d/1TicuEg59UwuZYaZ4OPBiD6vOfDupF8za/edit?usp=drivesdk&ouid=109788860164887061740&rtpof=true&sd=true' }
+          { label: 'Lecture', url: 'https://drive.google.com/file/d/1N4XIY296nvaftsjrXUEbYUaGH2-UJBT0' }
         ],
         audioUrl: 'https://drive.google.com/file/d/15PxmYb9SjFLIoabrFFI0XfBqFVaRhjUO/view?usp=drivesdk'
       },
@@ -254,8 +317,9 @@ let subjects = [
         label: 'Hemolytic anemia',
         state: 'taken',
         art: 12,
+        note: 'Sunday report 21 Jun: taught by Dr. Manal Mahmoud.',
         lectureUrls: [
-          { label: 'Lecture', url: 'https://drive.google.com/file/d/1gVZZDhS-d6oiNbk7WDhgG_v1kX_5_2Nm/view?usp=drivesdk' }
+          { label: 'Lecture', url: 'https://drive.google.com/file/d/1j1_ViyVc0eF2J-0qkTmg6vbO9V5EvIzp' }
         ],
         audioUrl: 'https://drive.google.com/file/d/1RkBUYZutIOLulGwOrUAny3tAupTZe7Ki/view?usp=drivesdk'
       },
