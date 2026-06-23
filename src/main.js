@@ -753,16 +753,46 @@ function updateTrackerUrl(subjectCode) {
   window.history.replaceState({}, '', url)
 }
 
-function renderTopicCard(topic, index) {
+function sortTopicsForDisplay(subject, topics) {
+  const { status } = getTrackerFilters()
+
+  if (status !== 'all') {
+    return [...topics].sort((a, b) => {
+      return subject.topics.indexOf(a) - subject.topics.indexOf(b)
+    })
+  }
+
+  const priority = {
+    'taken': 0,
+    'partial': 0,
+    'taken-in-university': 0,
+    'announced': 1,
+    'lecture-pending': 2,
+    'remaining': 3
+  }
+
+  return [...topics].sort((a, b) => {
+    const pA = priority[a.state] ?? 3
+    const pB = priority[b.state] ?? 3
+
+    if (pA !== pB) {
+      return pA - pB
+    }
+    return subject.topics.indexOf(a) - subject.topics.indexOf(b)
+  })
+}
+
+function renderTopicCard(subject, topic, index) {
   const tileX = topic.art % 4
   const tileY = Math.floor(topic.art / 4)
+  const displayNum = String(subject.topics.indexOf(topic) + 1).padStart(2, '0')
 
   return `
     <li class="topic-item topic-item--${topic.state}" style="--delay: ${index * 45}ms; --tile-x: ${tileX}; --tile-y: ${tileY};">
       <span class="topic-item__image" aria-hidden="true"></span>
-      <span class="topic-item__index">${String(index + 1).padStart(2, '0')}</span>
-        <span class="topic-item__body">
-          <span class="topic-item__label">${topic.label}</span>
+      <span class="topic-item__index">${displayNum}</span>
+      <span class="topic-item__body">
+        <span class="topic-item__label">${topic.label}</span>
         <span class="topic-item__state topic-item__state--${topic.state}">${stateLabels[topic.state] || topic.state}</span>
         ${topic.note ? `<span class="topic-item__note">${topic.note}</span>` : ''}
         ${renderResourceLinks(topic)}
@@ -776,34 +806,46 @@ function renderTopicCards(subject, topics = getFilteredTopics(subject)) {
     return '<li class="topic-empty">No topics match the current filters.</li>'
   }
 
-  if (!topics.some((topic) => topic.section)) {
-    return topics.map((topic, index) => renderTopicCard(topic, index)).join('')
-  }
+  const sortedTopics = sortTopicsForDisplay(subject, topics)
+  const takenStates = new Set(['taken', 'partial', 'taken-in-university'])
+  const takenGroup = sortedTopics.filter(t => takenStates.has(t.state))
+  const upcomingGroup = sortedTopics.filter(t => !takenStates.has(t.state))
 
-  const sections = topics.reduce((collection, topic) => {
-    const title = topic.section || 'Topics'
-    const section = collection.find((item) => item.title === title)
+  let globalIndex = 0
 
-    if (section) {
-      section.topics.push(topic)
+  function renderGroup(groupTopics, groupTitle) {
+    if (!groupTopics.length) return ''
+
+    let groupHtml = `<li class="topic-section-heading" style="--delay: ${globalIndex * 45}ms">${groupTitle}</li>`
+    const hasSections = groupTopics.some((t) => t.section)
+
+    if (!hasSections) {
+      groupHtml += groupTopics.map((topic) => renderTopicCard(subject, topic, globalIndex++)).join('')
     } else {
-      collection.push({ title, topics: [topic] })
+      const sections = groupTopics.reduce((collection, topic) => {
+        const title = topic.section || 'Topics'
+        const section = collection.find((item) => item.title === title)
+
+        if (section) {
+          section.topics.push(topic)
+        } else {
+          collection.push({ title, topics: [topic] })
+        }
+        return collection
+      }, [])
+
+      groupHtml += sections.map((section) => {
+        const headingDelay = globalIndex * 45
+        const sectionTitleMarkup = `<li class="topic-section-subheading" style="--delay: ${headingDelay}ms">${section.title}</li>`
+        const topicMarkup = section.topics.map((topic) => renderTopicCard(subject, topic, globalIndex++)).join('')
+        return sectionTitleMarkup + topicMarkup
+      }).join('')
     }
 
-    return collection
-  }, [])
+    return groupHtml
+  }
 
-  let topicIndex = 0
-
-  return sections.map((section) => {
-    const headingDelay = topicIndex * 45
-    const topicMarkup = section.topics.map((topic) => renderTopicCard(topic, topicIndex++)).join('')
-
-    return `
-      <li class="topic-section-heading" style="--delay: ${headingDelay}ms">${section.title}</li>
-      ${topicMarkup}
-    `
-  }).join('')
+  return renderGroup(takenGroup, 'Taken in University') + renderGroup(upcomingGroup, 'Upcoming / Remaining')
 }
 
 function ensureQuizModal() {

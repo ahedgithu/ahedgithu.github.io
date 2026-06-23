@@ -5,7 +5,7 @@ let subjects = [
   {
     code: 'SUR-1',
     name: 'Surgery 1',
-    totalCount: 13,
+    totalCount: 16,
     examNote: 'Midterm starts Jul 18, 2026. Exact SUR-1 schedule pending.',
     topics: [
       {
@@ -36,6 +36,36 @@ let subjects = [
         audioUrl: 'https://drive.google.com/file/d/1vt23RUJTWuT_1ZRUHGm4gvWJKW1sxUyI/view?usp=drivesdk'
       },
       {
+        label: 'Esophageal Perforation',
+        state: 'taken',
+        art: 1,
+        note: 'Sunday report 21 Jun: taught by Dr. Hisham Ahmed.',
+        lectureUrls: [
+          { label: 'Esophagus lecture', url: 'https://drive.google.com/file/d/1-uzZPnXaDetSZxCujFNDLudZ_TOJaQEh' }
+        ],
+        audioUrl: 'https://drive.google.com/file/d/1Xy8aJmb30RgLP7C0-0uRa5Q8fLaJChIr/view?usp=drivesdk'
+      },
+      {
+        label: 'Corrosive Injury',
+        state: 'taken',
+        art: 1,
+        note: 'Sunday report 21 Jun: taught by Dr. Hisham Ahmed.',
+        lectureUrls: [
+          { label: 'Esophagus lecture', url: 'https://drive.google.com/file/d/1-uzZPnXaDetSZxCujFNDLudZ_TOJaQEh' }
+        ],
+        audioUrl: 'https://drive.google.com/file/d/1Xy8aJmb30RgLP7C0-0uRa5Q8fLaJChIr/view?usp=drivesdk'
+      },
+      {
+        label: 'Carcinoma of the Esophagus',
+        state: 'taken',
+        art: 1,
+        note: 'Sunday report 21 Jun: taught by Dr. Hisham Ahmed.',
+        lectureUrls: [
+          { label: 'Esophagus lecture', url: 'https://drive.google.com/file/d/1-uzZPnXaDetSZxCujFNDLudZ_TOJaQEh' }
+        ],
+        audioUrl: 'https://drive.google.com/file/d/1Xy8aJmb30RgLP7C0-0uRa5Q8fLaJChIr/view?usp=drivesdk'
+      },
+      {
         label: 'Clinical round overview',
         state: 'taken',
         art: 2,
@@ -63,7 +93,16 @@ let subjects = [
       },
       { label: 'Tongue', state: 'remaining', art: 2 },
       { label: 'Salivary glands', state: 'remaining', art: 13 },
-      { label: 'Stomach', state: 'remaining', art: 6 },
+      {
+        label: 'Overview of the Stomach',
+        state: 'taken',
+        art: 6,
+        note: 'Sunday report 21 Jun: taught by Dr. Hisham Ahmed.',
+        lectureUrls: [
+          { label: 'Summary / Stomach file', url: 'https://drive.google.com/file/d/1XX_NpXX5jb0VGaL_-LW-O_6SAwFv0c1-' }
+        ],
+        audioUrl: 'https://drive.google.com/file/d/1Xy8aJmb30RgLP7C0-0uRa5Q8fLaJChIr/view?usp=drivesdk'
+      },
       { label: 'Pancreas', state: 'remaining', art: 4 },
       { label: 'Intestines', state: 'remaining', art: 7 },
       { label: 'Biliary tract', state: 'remaining', art: 0 },
@@ -82,7 +121,15 @@ let subjects = [
         art: 2,
         audioUrl: 'https://drive.google.com/file/d/1JCS1ZR8BiLL2sGVi-0B6UBExsstVOZEP/view?usp=drivesdk'
       },
-      { label: 'Chest trauma / trauma up to sternal fractures', state: 'announced', art: 10, note: 'Announced in university, not explained yet.' },
+      {
+        label: 'Chest trauma / trauma up to sternal fractures',
+        state: 'taken',
+        art: 10,
+        note: 'Sunday report 21 Jun: taught by Dr. Mohand Mostafa.',
+        lectureUrls: [
+          { label: 'Lecture', url: 'https://drive.google.com/file/d/18BP11uNEJk5eq6GKSAtj_mBEMN59l8U' }
+        ]
+      },
       { label: 'Rib fracture', state: 'remaining', art: 10 },
       { label: 'Pneumothorax, tension pneumothorax, hemothorax', state: 'remaining', art: 10 },
       { label: 'Pulmonary contusion and flail chest', state: 'remaining', art: 10 },
@@ -111,9 +158,14 @@ let subjects = [
       },
       {
         label: 'Chronic viral and non-viral hepatitis',
-        state: 'remaining',
+        state: 'taken',
         art: 5,
-        note: 'Chronic Viral Hepatitis, Chronic Non-Viral Hepatitis, Autoimmune Hepatitis, PBC, PSC, MASLD'
+        note: 'Sunday report 21 Jun: Autoimmune Hepatitis (AIH) taught by Dr. Omar Heikal. Also covers PBC, PSC, MASLD.',
+        lectureUrls: [
+          { label: 'Lecture folder', url: 'https://drive.google.com/drive/folders/1545uWPrXXOM9JjruxJVRzh2joO5IFDlt' },
+          { label: 'Lecture', url: 'https://drive.google.com/file/d/1YFpgL3FEVYMOj3aHLH7zjdYHn7A4G2FF' }
+        ],
+        audioUrl: 'https://drive.google.com/file/d/10wtq_v-0BOgOysXSgb1qxAFoOkbW8ix0/view?usp=drivesdk'
       },
       { label: 'Diseases of Stomach: PUD, H. pylori, non-ulcer dyspepsia', state: 'remaining', art: 6 },
       { label: 'Small intestine: diarrhea, malabsorption, celiac, Whipple', state: 'remaining', art: 7 },
@@ -129,7 +181,17 @@ let subjects = [
         audioUrl: 'https://drive.google.com/file/d/1Jw6R2QaYMQ9PerWxCAU_0vMfReSneE1o/view?usp=drivesdk'
       },
       { label: 'Upper and Lower GI Bleeding', state: 'remaining', art: 7 },
-      { label: 'Metabolic Liver Disease', state: 'remaining', art: 5 },
+      {
+        label: 'Metabolic Liver Disease',
+        state: 'taken',
+        art: 5,
+        note: 'Sunday report 21 Jun: NASH & NAFLD taught by Dr. Omar Heikal.',
+        lectureUrls: [
+          { label: 'Lecture folder', url: 'https://drive.google.com/drive/folders/1545uWPrXXOM9JjruxJVRzh2joO5IFDlt' },
+          { label: 'Lecture', url: 'https://drive.google.com/file/d/1YFpgL3FEVYMOj3aHLH7zjdYHn7A4G2FF' }
+        ],
+        audioUrl: 'https://drive.google.com/file/d/10wtq_v-0BOgOysXSgb1qxAFoOkbW8ix0/view?usp=drivesdk'
+      },
       { label: 'Liver Failure and Transplantation', state: 'remaining', art: 8 },
       { label: 'Vascular Liver Disease and DILI', state: 'remaining', art: 5 },
       { label: 'Constipation, Diverticular Disease, IBD, IBS', state: 'remaining', art: 7 },
@@ -219,8 +281,9 @@ let subjects = [
         state: 'taken',
         art: 10,
         section: 'Chest',
+        note: 'Sunday report 21 Jun: taught by Dr. Ibrahim Abdelhamid.',
         lectureUrls: [
-          { label: 'Lecture', url: 'https://docs.google.com/presentation/d/1TicuEg59UwuZYaZ4OPBiD6vOfDupF8za/edit?usp=drivesdk&ouid=109788860164887061740&rtpof=true&sd=true' }
+          { label: 'Lecture', url: 'https://drive.google.com/file/d/1N4XIY296nvaftsjrXUEbYUaGH2-UJBT0' }
         ],
         audioUrl: 'https://drive.google.com/file/d/15PxmYb9SjFLIoabrFFI0XfBqFVaRhjUO/view?usp=drivesdk'
       },
@@ -254,8 +317,9 @@ let subjects = [
         label: 'Hemolytic anemia',
         state: 'taken',
         art: 12,
+        note: 'Sunday report 21 Jun: taught by Dr. Manal Mahmoud.',
         lectureUrls: [
-          { label: 'Lecture', url: 'https://drive.google.com/file/d/1gVZZDhS-d6oiNbk7WDhgG_v1kX_5_2Nm/view?usp=drivesdk' }
+          { label: 'Lecture', url: 'https://drive.google.com/file/d/1j1_ViyVc0eF2J-0qkTmg6vbO9V5EvIzp' }
         ],
         audioUrl: 'https://drive.google.com/file/d/1RkBUYZutIOLulGwOrUAny3tAupTZe7Ki/view?usp=drivesdk'
       },
@@ -284,7 +348,7 @@ let subjects = [
   {
     code: 'NUT',
     name: 'Nutrition',
-    totalCount: 9,
+    totalCount: 8,
     examNote: 'Midterm starts Jul 18, 2026. Exact NUT schedule pending.',
     topics: [
       {
@@ -300,23 +364,16 @@ let subjects = [
         label: 'Food-borne Diseases',
         state: 'taken',
         art: 13,
+        note: 'Covers bacterial, viral foodborne infections, polio virus, and hepatitis A/E viruses.',
         lectureUrls: [
-          { label: 'Lecture', url: 'https://drive.google.com/file/d/1q5b51GzxLYXT-iOOLfA1M1KnigeJTE1b/view?usp=drivesdk' }
-        ],
-        audioUrl: 'https://drive.google.com/file/d/1Lr0LftsOc_-uhH2X82uqzJ0eSkUWgSDz/view?usp=drivesdk'
-      },
-      {
-        label: 'Food Borne Diseases Part 2',
-        state: 'taken',
-        art: 13,
-        note: 'Wednesday report: viral foodborne infections including polio virus and hepatitis A/E viruses.',
-        lectureUrls: [
-          { label: 'Lecture', url: 'https://drive.google.com/file/d/15d6Q4cfi8jJ9XW2NpuLBk76ctKe8mKSZ/view?usp=drivesdk' },
+          { label: 'Lecture Part 1', url: 'https://drive.google.com/file/d/1q5b51GzxLYXT-iOOLfA1M1KnigeJTE1b/view?usp=drivesdk' },
+          { label: 'Lecture Part 2', url: 'https://drive.google.com/file/d/15d6Q4cfi8jJ9XW2NpuLBk76ctKe8mKSZ/view?usp=drivesdk' },
           { label: 'Foodborne map', url: '/assets/foodborne-viral-part2-map-v1.png' }
         ],
         pdfUrls: [
           { label: 'Download PDF', url: '/assets/foodborne-viral-part2-map-v1.pdf', download: true }
-        ]
+        ],
+        audioUrl: 'https://drive.google.com/file/d/1Lr0LftsOc_-uhH2X82uqzJ0eSkUWgSDz/view?usp=drivesdk'
       },
       { label: 'Iodine', state: 'remaining', art: 13 },
       { label: 'Nutrition in elderly', state: 'remaining', art: 13 },
@@ -656,17 +713,24 @@ function renderResourceItem(item) {
 }
 
 function renderResourceLinks(topic) {
-  if (!coveredStates.has(topic.state)) return ''
-
-  const resources = getResourceItems(topic)
   const quizSources = getQuizSources(topic.label)
   const quizCount = quizSources.reduce((total, source) => total + source.mcqs.length, 0)
-  const links = resources.map(renderResourceItem).join('')
   const quizButton = quizCount ? `
     <button class="topic-resource topic-resource--quiz" type="button" data-quiz-topic="${escapeHtml(topic.label)}">
       MCQs (${quizCount})
     </button>
   ` : ''
+
+  if (!coveredStates.has(topic.state)) {
+    return quizButton ? `
+      <span class="topic-resources" aria-label="Topic resources">
+        ${quizButton}
+      </span>
+    ` : ''
+  }
+
+  const resources = getResourceItems(topic)
+  const links = resources.map(renderResourceItem).join('')
 
   const pendingLecture = topic.lectureUrls?.length ? '' : '<span class="topic-resource topic-resource--pending">Lecture pending</span>'
   const pendingAudio = topic.audioUrl ? '' : '<span class="topic-resource topic-resource--pending">Lecture record pending</span>'
@@ -689,16 +753,46 @@ function updateTrackerUrl(subjectCode) {
   window.history.replaceState({}, '', url)
 }
 
-function renderTopicCard(topic, index) {
+function sortTopicsForDisplay(subject, topics) {
+  const { status } = getTrackerFilters()
+
+  if (status !== 'all') {
+    return [...topics].sort((a, b) => {
+      return subject.topics.indexOf(a) - subject.topics.indexOf(b)
+    })
+  }
+
+  const priority = {
+    'taken': 0,
+    'partial': 0,
+    'taken-in-university': 0,
+    'announced': 1,
+    'lecture-pending': 2,
+    'remaining': 3
+  }
+
+  return [...topics].sort((a, b) => {
+    const pA = priority[a.state] ?? 3
+    const pB = priority[b.state] ?? 3
+
+    if (pA !== pB) {
+      return pA - pB
+    }
+    return subject.topics.indexOf(a) - subject.topics.indexOf(b)
+  })
+}
+
+function renderTopicCard(subject, topic, index) {
   const tileX = topic.art % 4
   const tileY = Math.floor(topic.art / 4)
+  const displayNum = String(subject.topics.indexOf(topic) + 1).padStart(2, '0')
 
   return `
     <li class="topic-item topic-item--${topic.state}" style="--delay: ${index * 45}ms; --tile-x: ${tileX}; --tile-y: ${tileY};">
       <span class="topic-item__image" aria-hidden="true"></span>
-      <span class="topic-item__index">${String(index + 1).padStart(2, '0')}</span>
-        <span class="topic-item__body">
-          <span class="topic-item__label">${topic.label}</span>
+      <span class="topic-item__index">${displayNum}</span>
+      <span class="topic-item__body">
+        <span class="topic-item__label">${topic.label}</span>
         <span class="topic-item__state topic-item__state--${topic.state}">${stateLabels[topic.state] || topic.state}</span>
         ${topic.note ? `<span class="topic-item__note">${topic.note}</span>` : ''}
         ${renderResourceLinks(topic)}
@@ -712,34 +806,46 @@ function renderTopicCards(subject, topics = getFilteredTopics(subject)) {
     return '<li class="topic-empty">No topics match the current filters.</li>'
   }
 
-  if (!topics.some((topic) => topic.section)) {
-    return topics.map((topic, index) => renderTopicCard(topic, index)).join('')
-  }
+  const sortedTopics = sortTopicsForDisplay(subject, topics)
+  const takenStates = new Set(['taken', 'partial', 'taken-in-university'])
+  const takenGroup = sortedTopics.filter(t => takenStates.has(t.state))
+  const upcomingGroup = sortedTopics.filter(t => !takenStates.has(t.state))
 
-  const sections = topics.reduce((collection, topic) => {
-    const title = topic.section || 'Topics'
-    const section = collection.find((item) => item.title === title)
+  let globalIndex = 0
 
-    if (section) {
-      section.topics.push(topic)
+  function renderGroup(groupTopics, groupTitle) {
+    if (!groupTopics.length) return ''
+
+    let groupHtml = `<li class="topic-section-heading" style="--delay: ${globalIndex * 45}ms">${groupTitle}</li>`
+    const hasSections = groupTopics.some((t) => t.section)
+
+    if (!hasSections) {
+      groupHtml += groupTopics.map((topic) => renderTopicCard(subject, topic, globalIndex++)).join('')
     } else {
-      collection.push({ title, topics: [topic] })
+      const sections = groupTopics.reduce((collection, topic) => {
+        const title = topic.section || 'Topics'
+        const section = collection.find((item) => item.title === title)
+
+        if (section) {
+          section.topics.push(topic)
+        } else {
+          collection.push({ title, topics: [topic] })
+        }
+        return collection
+      }, [])
+
+      groupHtml += sections.map((section) => {
+        const headingDelay = globalIndex * 45
+        const sectionTitleMarkup = `<li class="topic-section-subheading" style="--delay: ${headingDelay}ms">${section.title}</li>`
+        const topicMarkup = section.topics.map((topic) => renderTopicCard(subject, topic, globalIndex++)).join('')
+        return sectionTitleMarkup + topicMarkup
+      }).join('')
     }
 
-    return collection
-  }, [])
+    return groupHtml
+  }
 
-  let topicIndex = 0
-
-  return sections.map((section) => {
-    const headingDelay = topicIndex * 45
-    const topicMarkup = section.topics.map((topic) => renderTopicCard(topic, topicIndex++)).join('')
-
-    return `
-      <li class="topic-section-heading" style="--delay: ${headingDelay}ms">${section.title}</li>
-      ${topicMarkup}
-    `
-  }).join('')
+  return renderGroup(takenGroup, 'Taken in University') + renderGroup(upcomingGroup, 'Upcoming / Remaining')
 }
 
 function ensureQuizModal() {

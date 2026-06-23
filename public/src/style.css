@@ -1130,6 +1130,23 @@ main {
   margin-top: 0;
 }
 
+.topic-section-subheading {
+  grid-column: 1 / -1;
+  margin-top: 12px;
+  margin-bottom: 4px;
+  padding: 6px 11px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-left: 3px solid var(--blue);
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  animation: topic-pop 320ms var(--ease) both;
+  animation-delay: var(--delay);
+}
+
 .topic-item::before {
   content: "";
   position: absolute;
