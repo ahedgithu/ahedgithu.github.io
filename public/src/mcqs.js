@@ -2732,6 +2732,98 @@ window.mcqQuizzes['Liver Function Test'] = [
   }
 ]
 
+window.mcqQuizzes['Cardiac Biomarkers'] = [
+  {
+    question: "For the diagnosis of acute myocardial infarction, there should be clinical evidence of myocardial ischemia together with:",
+    choices: [
+      "Rise and/or fall of cardiac biomarkers",
+      "Normal troponin only",
+      "Normal ECG only",
+      "Normal CK-MB only"
+    ],
+    answerIndex: 0,
+    explanation: "Myocardial infarction diagnosis requires evidence of myocardial ischemia plus a rise and/or fall of cardiac biomarkers, especially cardiac troponin."
+  },
+  {
+    question: "CK-MB is predominantly found in:",
+    choices: [
+      "Brain",
+      "Skeletal muscle only",
+      "Cardiac muscle",
+      "Liver"
+    ],
+    answerIndex: 2,
+    explanation: "CK-MB is the creatine kinase isoenzyme relatively enriched in cardiac muscle and was classically used as a biomarker for acute myocardial infarction."
+  },
+  {
+    question: "CK-MM is predominantly found in:",
+    choices: [
+      "Skeletal muscle",
+      "Brain",
+      "Pancreas",
+      "Kidney only"
+    ],
+    answerIndex: 0,
+    explanation: "CK-MM is the predominant creatine kinase isoenzyme in skeletal muscle."
+  },
+  {
+    question: "CK-BB is predominantly found in:",
+    choices: [
+      "Brain",
+      "Cardiac muscle",
+      "Skeletal muscle",
+      "Biliary tract"
+    ],
+    answerIndex: 0,
+    explanation: "CK-BB is predominantly found in brain tissue and is not routinely measured for acute myocardial infarction."
+  },
+  {
+    question: "CK-MB activity elevation greater than 6% of total CK activity together with total CK activity more than 2 times normal suggests:",
+    choices: [
+      "Acute myocardial infarction",
+      "Viral hepatitis",
+      "Obstructive jaundice",
+      "Chronic kidney disease only"
+    ],
+    answerIndex: 0,
+    explanation: "The lecture states that CK-MB activity elevation >6% of total CK plus total CK >2 times normal indicates myocardial infarction."
+  },
+  {
+    question: "CK-MB starts to rise after chest pain onset at approximately:",
+    choices: [
+      "Immediately within seconds",
+      "3 - 8 hours",
+      "7 - 10 days",
+      "After one month"
+    ],
+    answerIndex: 1,
+    explanation: "CK-MB begins to rise about 3 - 8 hours after the onset of chest pain."
+  },
+  {
+    question: "Why is CK-MB still useful in some cases despite the availability of troponin?",
+    choices: [
+      "It can help detect reinfarction",
+      "It can estimate infarct size",
+      "It may be used where troponin assay is unavailable",
+      "All of the above"
+    ],
+    answerIndex: 3,
+    explanation: "CK-MB can be useful for detecting reinfarction because troponin may remain elevated from the first infarct. CK-MB also correlates with infarct size and may be used when troponin assays are unavailable."
+  },
+  {
+    question: "LDH is considered non-specific as a cardiac biomarker because it is found in:",
+    choices: [
+      "Heart only",
+      "RBCs and liver only",
+      "Almost all body tissues",
+      "Brain only"
+    ],
+    answerIndex: 2,
+    explanation: "LDH is found in many tissues including heart, RBCs, liver, skeletal muscle, kidneys, lungs, and brain, so it is not specific for myocardial injury."
+  }
+]
+
+
 
 
 
