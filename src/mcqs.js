@@ -1880,6 +1880,16 @@ window.mcqQuizzes['Investigation of Acute Hepatitis'] = [
       "Hemolytic anemia",
       "Hepatitis A",
       "Hepatitis C",
+  {
+    question: "A 24-year-old presents with nausea, malaise and jaundice. On examination he has moderate hepatosplenomegaly and tender cervical lymphadenopathy. He has dark urine and pale stools. What is the most likely diagnosis?",
+    choices: [
+      "Autoimmune hepatitis",
+      "Dubin-Johnson syndrome",
+      "Gilbert's syndrome",
+      "Hemochromatosis",
+      "Hemolytic anemia",
+      "Hepatitis A",
+      "Hepatitis C",
       "Hepatocellular carcinoma",
       "Iatrogenic hepatitis",
       "Primary biliary cirrhosis",
@@ -1889,5 +1899,306 @@ window.mcqQuizzes['Investigation of Acute Hepatitis'] = [
     ],
     answerIndex: 5,
     explanation: "Acute onset nausea, malaise, jaundice, dark urine and pale stools suggests acute hepatitis with conjugated hyperbilirubinemia. In this matching question, the best answer is Hepatitis A."
+  }
+]
+
+window.mcqQuizzes['Diseases of the Pancreas'] = [
+  {
+    question: "Regarding: \"The following statements about pancreatic function are true:\", is this statement True or False?\n\n\"The islets of Langerhans comprise 10% of pancreatic cell mass\"",
+    choices: ["True", "False"],
+    answerIndex: 1,
+    explanation: "False. The islets of Langerhans form about 1% of pancreatic mass, not 10%."
+  },
+  {
+    question: "Regarding: \"The following statements about pancreatic function are true:\", is this statement True or False?\n\n\"4-5 L of pancreatic exocrine fluid enters the duodenum daily\"",
+    choices: ["True", "False"],
+    answerIndex: 1,
+    explanation: "False. Pancreatic exocrine secretion is about 2 L/day, not 4-5 L."
+  },
+  {
+    question: "Regarding: \"The following statements about pancreatic function are true:\", is this statement True or False?\n\n\"Secretin stimulates pancreatic trypsin secretion\"",
+    choices: ["True", "False"],
+    answerIndex: 1,
+    explanation: "False. Secretin mainly stimulates bicarbonate-rich pancreatic secretion; cholecystokinin stimulates enzyme secretion such as trypsinogen."
+  },
+  {
+    question: "Regarding: \"The following statements about pancreatic function are true:\", is this statement True or False?\n\n\"Pancreatic polypeptide decreases pancreatic and biliary secretion\"",
+    choices: ["True", "False"],
+    answerIndex: 0,
+    explanation: "True. Pancreatic polypeptide decreases pancreatic and biliary secretion."
+  },
+  {
+    question: "Regarding: \"The following statements about pancreatic function are true:\", is this statement True or False?\n\n\"Pancreatic enzyme activity depends on an alkaline medium\"",
+    choices: ["True", "False"],
+    answerIndex: 0,
+    explanation: "True. Pancreatic enzymes work best in an alkaline medium because bicarbonate neutralizes gastric acid in the duodenum."
+  },
+  {
+    question: "Regarding: \"In the investigation of chronic pancreatic disease:\", is this statement True or False?\n\n\"Glucose tolerance is typically normal in pancreatic carcinoma\"",
+    choices: ["True", "False"],
+    answerIndex: 1,
+    explanation: "False. Glucose tolerance can be impaired in pancreatic disease due to endocrine pancreatic involvement."
+  },
+  {
+    question: "Regarding: \"In the investigation of chronic pancreatic disease:\", is this statement True or False?\n\n\"Duodenal ileus is a characteristic feature of chronic pancreatitis\"",
+    choices: ["True", "False"],
+    answerIndex: 1,
+    explanation: "False. Duodenal ileus may be seen in acute pancreatitis, not a characteristic feature of chronic pancreatitis."
+  },
+  {
+    question: "Regarding: \"In the investigation of chronic pancreatic disease:\", is this statement True or False?\n\n\"Ultrasound scanning is more sensitive than CT scanning\"",
+    choices: ["True", "False"],
+    answerIndex: 1,
+    explanation: "False. CT is generally better than ultrasound for pancreatic visualization."
+  },
+  {
+    question: "Regarding: \"In the investigation of chronic pancreatic disease:\", is this statement True or False?\n\n\"ERCP can reliably distinguish carcinoma from chronic pancreatitis\"",
+    choices: ["True", "False"],
+    answerIndex: 1,
+    explanation: "False. ERCP may show duct abnormalities, but it cannot always reliably distinguish carcinoma from chronic pancreatitis."
+  },
+  {
+    question: "Regarding: \"In the investigation of chronic pancreatic disease:\", is this statement True or False?\n\n\"Pancreatic calcification suggests that chronic pancreatitis is the result of alcohol abuse\"",
+    choices: ["True", "False"],
+    answerIndex: 0,
+    explanation: "True. Pancreatic calcification is classically associated with chronic alcoholic pancreatitis."
+  },
+  {
+    question: "Regarding: \"Recognised causes of acute pancreatitis include:\", is this statement True or False?\n\n\"Mumps and Coxsackie B viral infections\"",
+    choices: ["True", "False"],
+    answerIndex: 0,
+    explanation: "True. Viral infections such as mumps and Coxsackie B can rarely cause acute pancreatitis."
+  },
+  {
+    question: "Regarding: \"Recognised causes of acute pancreatitis include:\", is this statement True or False?\n\n\"Hypothermia and hyperlipidaemia\"",
+    choices: ["True", "False"],
+    answerIndex: 0,
+    explanation: "True. Hyperlipidaemia is a recognized cause; hypothermia is rare but recognized."
+  },
+  {
+    question: "Regarding: \"Recognised causes of acute pancreatitis include:\", is this statement True or False?\n\n\"Gallstones in the common bile duct\"",
+    choices: ["True", "False"],
+    answerIndex: 0,
+    explanation: "True. Gallstones are one of the commonest causes of acute pancreatitis."
+  },
+  {
+    question: "Regarding: \"Recognised causes of acute pancreatitis include:\", is this statement True or False?\n\n\"Azathioprine therapy\"",
+    choices: ["True", "False"],
+    answerIndex: 0,
+    explanation: "True. Azathioprine can cause drug-induced pancreatitis."
+  },
+  {
+    question: "Regarding: \"Recognised causes of acute pancreatitis include:\", is this statement True or False?\n\n\"Alcohol abuse\"",
+    choices: ["True", "False"],
+    answerIndex: 0,
+    explanation: "True. Alcohol abuse is a common cause of acute pancreatitis."
+  },
+  {
+    question: "Regarding: \"The following are characteristic of acute pancreatitis:\", is this statement True or False?\n\n\"Abdominal guarding develops soon after the onset of pain\"",
+    choices: ["True", "False"],
+    answerIndex: 1,
+    explanation: "False. Guarding usually occurs relatively late."
+  },
+  {
+    question: "Regarding: \"The following are characteristic of acute pancreatitis:\", is this statement True or False?\n\n\"Normal serum amylase concentration in the first 4 hours after onset\"",
+    choices: ["True", "False"],
+    answerIndex: 1,
+    explanation: "False. Serum amylase usually rises rapidly after onset."
+  },
+  {
+    question: "Regarding: \"The following are characteristic of acute pancreatitis:\", is this statement True or False?\n\n\"Persistent serum hyperamylasaemia suggests a developing pseudocyst\"",
+    choices: ["True", "False"],
+    answerIndex: 0,
+    explanation: "True. Persistent hyperamylasaemia may suggest pseudocyst, pancreatic abscess, or another pancreatic/non-pancreatic cause."
+  },
+  {
+    question: "Regarding: \"The following are characteristic of acute pancreatitis:\", is this statement True or False?\n\n\"Hypercalcaemia develops 5-7 days after onset\"",
+    choices: ["True", "False"],
+    answerIndex: 1,
+    explanation: "False. Hypocalcaemia, not hypercalcaemia, may occur due to fat necrosis and calcium binding."
+  },
+  {
+    question: "Regarding: \"The following are characteristic of acute pancreatitis:\", is this statement True or False?\n\n\"Hyperactive loud bowel sounds\"",
+    choices: ["True", "False"],
+    answerIndex: 1,
+    explanation: "False. Bowel sounds may be absent or diminished due to paralytic ileus."
+  },
+  {
+    question: "Regarding: \"In the management of acute pancreatitis:\", is this statement True or False?\n\n\"Early laparotomy is advisable to exclude alternative diagnoses\"",
+    choices: ["True", "False"],
+    answerIndex: 1,
+    explanation: "False. Diagnostic laparotomy is rarely required."
+  },
+  {
+    question: "Regarding: \"In the management of acute pancreatitis:\", is this statement True or False?\n\n\"Opiates should be avoided because of spasm of the sphincter of Oddi\"",
+    choices: ["True", "False"],
+    answerIndex: 1,
+    explanation: "False. Effective pain relief is important; opiates may be used when needed."
+  },
+  {
+    question: "Regarding: \"In the management of acute pancreatitis:\", is this statement True or False?\n\n\"Intravenous fluids are unnecessary in the absence of a tachycardia\"",
+    choices: ["True", "False"],
+    answerIndex: 1,
+    explanation: "False. Heart rate alone is a poor guide to fluid loss; aggressive IV fluids may be needed."
+  },
+  {
+    question: "Regarding: \"In the management of acute pancreatitis:\", is this statement True or False?\n\n\"The PaO2 and the central venous pressure should be monitored\"",
+    choices: ["True", "False"],
+    answerIndex: 0,
+    explanation: "True. Respiratory failure and shock are serious complications, so oxygenation and volume status should be monitored."
+  },
+  {
+    question: "Regarding: \"In the management of acute pancreatitis:\", is this statement True or False?\n\n\"Nasogastric aspiration is required since an ileus is inevitable\"",
+    choices: ["True", "False"],
+    answerIndex: 0,
+    explanation: "True in this source. Nasogastric aspiration may be continued until peristalsis returns, especially if ileus/vomiting is present."
+  },
+  {
+    question: "Regarding: \"Typical features of chronic pancreatitis include:\", is this statement True or False?\n\n\"Back pain persisting for days or weeks\"",
+    choices: ["True", "False"],
+    answerIndex: 0,
+    explanation: "True. Chronic pancreatitis pain may radiate to the back and persist for days or weeks."
+  },
+  {
+    question: "Regarding: \"Typical features of chronic pancreatitis include:\", is this statement True or False?\n\n\"Decreased vitamin B12 absorption\"",
+    choices: ["True", "False"],
+    answerIndex: 0,
+    explanation: "True. Pancreatic proteases help vitamin B12 absorption, so pancreatic insufficiency can reduce B12 absorption."
+  },
+  {
+    question: "Regarding: \"Typical features of chronic pancreatitis include:\", is this statement True or False?\n\n\"Increased sodium concentration in the sweat\"",
+    choices: ["True", "False"],
+    answerIndex: 1,
+    explanation: "False. Increased sweat sodium is a feature of cystic fibrosis, not typical chronic pancreatitis."
+  },
+  {
+    question: "Regarding: \"Typical features of chronic pancreatitis include:\", is this statement True or False?\n\n\"Abdominal pain occurring 12-24 hours after alcohol intake\"",
+    choices: ["True", "False"],
+    answerIndex: 0,
+    explanation: "True. Pain may occur after alcohol intake and may persist."
+  },
+  {
+    question: "Regarding: \"Typical features of chronic pancreatitis include:\", is this statement True or False?\n\n\"Pancreatic calcification on plain X-ray or ultrasound scan\"",
+    choices: ["True", "False"],
+    answerIndex: 0,
+    explanation: "True. Pancreatic calcification is a classic feature, especially in chronic calcific pancreatitis."
+  },
+  {
+    question: "Regarding: \"Pancreatic carcinoma in the UK is associated with:\", is this statement True or False?\n\n\"An incidence which has decreased in the last 20 years\"",
+    choices: ["True", "False"],
+    answerIndex: 1,
+    explanation: "False. Incidence has been increasing in many Western countries."
+  },
+  {
+    question: "Regarding: \"Pancreatic carcinoma in the UK is associated with:\", is this statement True or False?\n\n\"Occurrence in males rather than females\"",
+    choices: ["True", "False"],
+    answerIndex: 0,
+    explanation: "True. It occurs more commonly in males and usually in older age groups."
+  },
+  {
+    question: "Regarding: \"Pancreatic carcinoma in the UK is associated with:\", is this statement True or False?\n\n\"Tobacco consumption\"",
+    choices: ["True", "False"],
+    answerIndex: 0,
+    explanation: "True. Smoking is a recognized risk factor."
+  },
+  {
+    question: "Regarding: \"Pancreatic carcinoma in the UK is associated with:\", is this statement True or False?\n\n\"An overall 5-year survival rate of 20%\"",
+    choices: ["True", "False"],
+    answerIndex: 1,
+    explanation: "False. Five-year survival is poor and 20% is too high for the classic exam answer."
+  },
+  {
+    question: "Regarding: \"Pancreatic carcinoma in the UK is associated with:\", is this statement True or False?\n\n\"Metastatic spread in 33% at presentation\"",
+    choices: ["True", "False"],
+    answerIndex: 1,
+    explanation: "False. The majority, not only one-third, have metastatic spread at presentation."
+  },
+  {
+    question: "Regarding: \"The typical features of pancreatic carcinoma include:\", is this statement True or False?\n\n\"Adenocarcinomatous histology\"",
+    choices: ["True", "False"],
+    answerIndex: 0,
+    explanation: "True. Most pancreatic cancers are adenocarcinomas."
+  },
+  {
+    question: "Regarding: \"The typical features of pancreatic carcinoma include:\", is this statement True or False?\n\n\"Origin in the body of the pancreas in 60% of cases\"",
+    choices: ["True", "False"],
+    answerIndex: 1,
+    explanation: "False. The head of the pancreas is the commonest site, around 60%."
+  },
+  {
+    question: "Regarding: \"The typical features of pancreatic carcinoma include:\", is this statement True or False?\n\n\"Abdominal pain when arising in the ampulla of Vater\"",
+    choices: ["True", "False"],
+    answerIndex: 1,
+    explanation: "False. Ampullary tumors commonly present with obstructive jaundice."
+  },
+  {
+    question: "Regarding: \"The typical features of pancreatic carcinoma include:\", is this statement True or False?\n\n\"Back pain and weight loss indicate a poor prognosis\"",
+    choices: ["True", "False"],
+    answerIndex: 0,
+    explanation: "True. Back pain and weight loss suggest advanced disease and poor prognosis."
+  },
+  {
+    question: "Regarding: \"The typical features of pancreatic carcinoma include:\", is this statement True or False?\n\n\"Presentation with painless jaundice\"",
+    choices: ["True", "False"],
+    answerIndex: 0,
+    explanation: "True. Painless obstructive jaundice is classic for carcinoma of the head of the pancreas."
+  },
+  {
+    question: "Malabsorption syndrome with normal D-xylose test:",
+    choices: [
+      "Celiac disease",
+      "Chronic pancreatitis",
+      "Blind loop syndrome",
+      "Chronic renal failure"
+    ],
+    answerIndex: 1,
+    explanation: "D-xylose tests intestinal mucosal absorption. In chronic pancreatitis, the intestinal mucosa is normal, but digestion is impaired due to pancreatic enzyme deficiency, so D-xylose can remain normal."
+  },
+  {
+    question: "All of the following are causes of upper gastrointestinal hemorrhage EXCEPT:",
+    choices: [
+      "Bleeding chronic duodenal ulcer",
+      "Bleeding oesophageal varices",
+      "Acute hemorrhagic pancreatitis",
+      "Gastric erosions",
+      "Mallory-Weiss syndrome"
+    ],
+    answerIndex: 2,
+    explanation: "The common causes of upper GI bleeding include peptic ulcer disease, varices, gastric erosions, and Mallory-Weiss tear. Acute hemorrhagic pancreatitis is not a classic direct cause of upper GI hemorrhage in this MCQ."
+  },
+  {
+    question: "Acute pancreatitis may be caused by:",
+    choices: [
+      "Rheumatoid arthritis",
+      "IBD",
+      "Hyperlipidemia",
+      "Hypoparathyroidism",
+      "Diabetes mellitus"
+    ],
+    answerIndex: 2,
+    explanation: "Hyperlipidemia, especially severe hypertriglyceridemia, is a recognized cause of acute pancreatitis."
+  },
+  {
+    question: "The most useful test in a patient with recurrent duodenal ulcer with diarrhea:",
+    choices: [
+      "Colonoscopy",
+      "Gastroscopy",
+      "ERCP",
+      "Serum gastrin and CT of the abdomen"
+    ],
+    answerIndex: 3,
+    explanation: "Recurrent duodenal ulcer with diarrhea suggests Zollinger-Ellison syndrome due to gastrinoma, which may occur in the pancreas or duodenum. Serum gastrin helps diagnose it and CT helps localize the tumor."
+  },
+  {
+    question: "The most useful test in a patient with recurrent duodenal ulcer with diarrhea:",
+    choices: [
+      "Colonoscopy",
+      "Gastroscopy",
+      "ERCP",
+      "Serum gastrin level",
+      "Serum gastrin and CT of abdomen"
+    ],
+    answerIndex: 4,
+    explanation: "Recurrent duodenal ulcers plus diarrhea is a classic clue for gastrinoma/Zollinger-Ellison syndrome. Serum gastrin confirms hypergastrinemia and CT abdomen helps locate the tumor."
   }
 ]
