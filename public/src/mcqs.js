@@ -478,6 +478,278 @@ window.mcqQuizzes = {
       answerIndex: 3,
       explanation: 'Glucocorticoids are not a cure for NASH and can worsen metabolic risk factors. NASH may progress to fibrosis, cirrhosis, and liver failure.'
     }
+  ],
+  'Systemic Hypertension': [
+    {
+      question: "Regarding: \"The following statements about systemic hypertension are true:\", is this statement True or False?\n\n\"Casual blood pressure recordings correlate poorly with life expectancy\"",
+      choices: ["True","False"],
+      answerIndex: 1,
+      explanation: "False. Even a single BP reading can correlate with future cardiovascular risk."
+    },
+    {
+      question: "Regarding: \"The following statements about systemic hypertension are true:\", is this statement True or False?\n\n\"Systolic hypertension alone is of little prognostic value\"",
+      choices: ["True","False"],
+      answerIndex: 1,
+      explanation: "False. Isolated systolic hypertension is prognostically important, especially in older patients."
+    },
+    {
+      question: "Regarding: \"The following statements about systemic hypertension are true:\", is this statement True or False?\n\n\"Most patients have a normal plasma renin concentration\"",
+      choices: ["True","False"],
+      answerIndex: 0,
+      explanation: "True. Most patients with essential hypertension have normal plasma renin."
+    },
+    {
+      question: "Regarding: \"The following statements about systemic hypertension are true:\", is this statement True or False?\n\n\"15% of the adult UK population have essential hypertension\"",
+      choices: ["True","False"],
+      answerIndex: 0,
+      explanation: "True. Essential hypertension is common in the adult population."
+    },
+    {
+      question: "Regarding: \"The following statements about systemic hypertension are true:\", is this statement True or False?\n\n\"15% of hypertensives have hypertension secondary to other disorders\"",
+      choices: ["True","False"],
+      answerIndex: 1,
+      explanation: "False. Secondary hypertension is less common, around 5% in this source."
+    },
+    {
+      question: "Regarding: \"Recognised causes of secondary hypertension include:\", is this statement True or False?\n\n\"Persistent ductus arteriosus\"",
+      choices: ["True","False"],
+      answerIndex: 1,
+      explanation: "False. Coarctation of the aorta, not persistent ductus arteriosus, is a classic secondary cause."
+    },
+    {
+      question: "Regarding: \"Recognised causes of secondary hypertension include:\", is this statement True or False?\n\n\"Primary hyperaldosteronism\"",
+      choices: ["True","False"],
+      answerIndex: 0,
+      explanation: "True. Primary hyperaldosteronism, also called Conn syndrome, causes sodium retention and hypertension."
+    },
+    {
+      question: "Regarding: \"Recognised causes of secondary hypertension include:\", is this statement True or False?\n\n\"Acromegaly\"",
+      choices: ["True","False"],
+      answerIndex: 0,
+      explanation: "True. Acromegaly can cause hypertension."
+    },
+    {
+      question: "Regarding: \"Recognised causes of secondary hypertension include:\", is this statement True or False?\n\n\"Oestrogen-containing oral contraceptives\"",
+      choices: ["True","False"],
+      answerIndex: 0,
+      explanation: "True. Oestrogen-containing oral contraceptives can raise blood pressure."
+    },
+    {
+      question: "Regarding: \"Recognised causes of secondary hypertension include:\", is this statement True or False?\n\n\"Thyrotoxicosis\"",
+      choices: ["True","False"],
+      answerIndex: 1,
+      explanation: "False in this source. Hypothyroidism is more classically linked with diastolic hypertension, while thyrotoxicosis usually causes systolic hypertension with widened pulse pressure."
+    },
+    {
+      question: "Regarding: \"In a patient with systemic hypertension, the following findings suggest the diagnoses shown:\", is this statement True or False?\n\n\"Symmetrical small joint polyarthritis: hyperparathyroidism\"",
+      choices: ["True","False"],
+      answerIndex: 1,
+      explanation: "False. Symmetrical small joint polyarthritis suggests connective tissue disease, not hyperparathyroidism."
+    },
+    {
+      question: "Regarding: \"In a patient with systemic hypertension, the following findings suggest the diagnoses shown:\", is this statement True or False?\n\n\"Radio-femoral delay in the pulses: renovascular disease\"",
+      choices: ["True","False"],
+      answerIndex: 1,
+      explanation: "False. Radio-femoral delay suggests coarctation of the aorta, not renovascular disease."
+    },
+    {
+      question: "Regarding: \"In a patient with systemic hypertension, the following findings suggest the diagnoses shown:\", is this statement True or False?\n\n\"Left ventricular failure: phaeochromocytoma\"",
+      choices: ["True","False"],
+      answerIndex: 1,
+      explanation: "False. Left ventricular failure is a non-specific complication of hypertension."
+    },
+    {
+      question: "Regarding: \"In a patient with systemic hypertension, the following findings suggest the diagnoses shown:\", is this statement True or False?\n\n\"Epigastric bruit: coarctation of the aorta\"",
+      choices: ["True","False"],
+      answerIndex: 1,
+      explanation: "False. Epigastric or abdominal bruit suggests renal artery stenosis."
+    },
+    {
+      question: "Regarding: \"In a patient with systemic hypertension, the following findings suggest the diagnoses shown:\", is this statement True or False?\n\n\"Palpably enlarged kidneys: renovascular disease\"",
+      choices: ["True","False"],
+      answerIndex: 1,
+      explanation: "False. Palpably enlarged kidneys suggest polycystic kidney disease, not renal artery stenosis."
+    },
+    {
+      question: "Regarding: \"Complications of systemic hypertension include:\", is this statement True or False?\n\n\"Retinal microaneurysms\"",
+      choices: ["True","False"],
+      answerIndex: 1,
+      explanation: "False. Hypertensive retinopathy classically causes arteriolar narrowing, AV nipping, haemorrhages, exudates, and papilloedema in malignant hypertension."
+    },
+    {
+      question: "Regarding: \"Complications of systemic hypertension include:\", is this statement True or False?\n\n\"Dissecting aneurysm of the ascending aorta\"",
+      choices: ["True","False"],
+      answerIndex: 0,
+      explanation: "True. Hypertension predisposes to aortic dissection."
+    },
+    {
+      question: "Regarding: \"Complications of systemic hypertension include:\", is this statement True or False?\n\n\"Renal artery stenosis\"",
+      choices: ["True","False"],
+      answerIndex: 0,
+      explanation: "True. Hypertension predisposes to atheroma formation, including renal artery disease."
+    },
+    {
+      question: "Regarding: \"Complications of systemic hypertension include:\", is this statement True or False?\n\n\"Lacunar strokes of the internal capsule\"",
+      choices: ["True","False"],
+      answerIndex: 0,
+      explanation: "True. Hypertension is a major cause of lacunar infarcts due to small vessel disease."
+    },
+    {
+      question: "Regarding: \"Complications of systemic hypertension include:\", is this statement True or False?\n\n\"Subdural haemorrhage\"",
+      choices: ["True","False"],
+      answerIndex: 1,
+      explanation: "False. Hypertension is more associated with intracerebral and subarachnoid haemorrhage, not subdural haemorrhage."
+    },
+    {
+      question: "Regarding: \"In the investigation of systemic hypertension:\", is this statement True or False?\n\n\"Hyperkalaemic metabolic acidosis indicates hyperaldosteronism\"",
+      choices: ["True","False"],
+      answerIndex: 1,
+      explanation: "False. Primary hyperaldosteronism causes hypokalaemic metabolic alkalosis, not hyperkalaemic metabolic acidosis."
+    },
+    {
+      question: "Regarding: \"In the investigation of systemic hypertension:\", is this statement True or False?\n\n\"Excretion urography is useful in the diagnosis of renal artery stenosis\"",
+      choices: ["True","False"],
+      answerIndex: 1,
+      explanation: "False. Renal artery stenosis needs renal artery imaging or functional renal studies, not simple excretion urography as the key test."
+    },
+    {
+      question: "Regarding: \"In the investigation of systemic hypertension:\", is this statement True or False?\n\n\"Normal urinary VMA excretion excludes phaeochromocytoma\"",
+      choices: ["True","False"],
+      answerIndex: 1,
+      explanation: "False. VMA can be measured in suspected phaeochromocytoma, but a normal result does not reliably exclude it."
+    },
+    {
+      question: "Regarding: \"In the investigation of systemic hypertension:\", is this statement True or False?\n\n\"Urine analysis for blood, protein and glucose is essential\"",
+      choices: ["True","False"],
+      answerIndex: 0,
+      explanation: "True. Urinalysis helps detect renal disease and diabetes."
+    },
+    {
+      question: "Regarding: \"In the investigation of systemic hypertension:\", is this statement True or False?\n\n\"The commonest cause of electrolyte abnormalities is diuretic treatment\"",
+      choices: ["True","False"],
+      answerIndex: 0,
+      explanation: "True. Diuretics are a common cause of electrolyte abnormalities in hypertensive patients."
+    },
+    {
+      question: "Regarding: \"Accelerated phase or malignant hypertension is suggested by hypertension and:\", is this statement True or False?\n\n\"A loud second heart sound\"",
+      choices: ["True","False"],
+      answerIndex: 1,
+      explanation: "False. A loud A2 can occur in many hypertensive patients and does not by itself suggest malignant hypertension."
+    },
+    {
+      question: "Regarding: \"Accelerated phase or malignant hypertension is suggested by hypertension and:\", is this statement True or False?\n\n\"A heaving apex beat\"",
+      choices: ["True","False"],
+      answerIndex: 1,
+      explanation: "False. A heaving apex suggests left ventricular hypertrophy, not specifically malignant hypertension."
+    },
+    {
+      question: "Regarding: \"Accelerated phase or malignant hypertension is suggested by hypertension and:\", is this statement True or False?\n\n\"Headache\"",
+      choices: ["True","False"],
+      answerIndex: 0,
+      explanation: "True. Headache can occur in severe or malignant hypertension."
+    },
+    {
+      question: "Regarding: \"Accelerated phase or malignant hypertension is suggested by hypertension and:\", is this statement True or False?\n\n\"Retinal soft exudates or haemorrhages\"",
+      choices: ["True","False"],
+      answerIndex: 0,
+      explanation: "True. Retinal haemorrhages, soft exudates, and papilloedema suggest malignant hypertension."
+    },
+    {
+      question: "Regarding: \"Accelerated phase or malignant hypertension is suggested by hypertension and:\", is this statement True or False?\n\n\"Renal or cardiac failure\"",
+      choices: ["True","False"],
+      answerIndex: 0,
+      explanation: "True. Renal or cardiac failure indicates severe end-organ damage."
+    },
+    {
+      question: "Regarding: \"In the emergency treatment of accelerated hypertension:\", is this statement True or False?\n\n\"The aim is to lower the systolic blood pressure to normal within 60 minutes\"",
+      choices: ["True","False"],
+      answerIndex: 1,
+      explanation: "False. Rapid normalization of BP can cause organ hypoperfusion; BP should be reduced carefully."
+    },
+    {
+      question: "Regarding: \"In the emergency treatment of accelerated hypertension:\", is this statement True or False?\n\n\"Intravenous sodium nitroprusside is usually necessary to control the severe hypertension\"",
+      choices: ["True","False"],
+      answerIndex: 1,
+      explanation: "False. Sodium nitroprusside may be used in selected cases but is not usually necessary for all patients."
+    },
+    {
+      question: "Regarding: \"In the emergency treatment of accelerated hypertension:\", is this statement True or False?\n\n\"Parenteral therapy is preferable to oral therapy\"",
+      choices: ["True","False"],
+      answerIndex: 1,
+      explanation: "False. Some oral or sublingual options may be effective depending on the scenario."
+    },
+    {
+      question: "Regarding: \"In the emergency treatment of accelerated hypertension:\", is this statement True or False?\n\n\"Vasodilator therapy to reduce the afterload should be used\"",
+      choices: ["True","False"],
+      answerIndex: 0,
+      explanation: "True. Vasodilator therapy reduces afterload and helps control severe hypertension."
+    },
+    {
+      question: "Regarding: \"In the emergency treatment of accelerated hypertension:\", is this statement True or False?\n\n\"ACE inhibitors are indicated if renal artery stenosis is suspected\"",
+      choices: ["True","False"],
+      answerIndex: 1,
+      explanation: "False. ACE inhibitors can worsen renal function in bilateral renal artery stenosis."
+    },
+    {
+      question: "Regarding: \"In the treatment of mild to moderate systemic hypertension:\", is this statement True or False?\n\n\"Treatment has more effect on the risk of stroke than the risk of coronary heart disease\"",
+      choices: ["True","False"],
+      answerIndex: 0,
+      explanation: "True. Antihypertensive treatment has a strong protective effect against stroke."
+    },
+    {
+      question: "Regarding: \"In the treatment of mild to moderate systemic hypertension:\", is this statement True or False?\n\n\"Weight reduction is more important to prognosis than stopping smoking\"",
+      choices: ["True","False"],
+      answerIndex: 1,
+      explanation: "False. Smoking is the most important remediable cardiovascular risk factor."
+    },
+    {
+      question: "Regarding: \"In the treatment of mild to moderate systemic hypertension:\", is this statement True or False?\n\n\"Treatment is less likely to be of benefit if cardiac or renal disease are present\"",
+      choices: ["True","False"],
+      answerIndex: 1,
+      explanation: "False. Patients with cardiac or renal disease often benefit significantly from BP control."
+    },
+    {
+      question: "Regarding: \"In the treatment of mild to moderate systemic hypertension:\", is this statement True or False?\n\n\"There are no proven benefits of therapy in patients aged over 70 years\"",
+      choices: ["True","False"],
+      answerIndex: 1,
+      explanation: "False. There is evidence of benefit in elderly patients."
+    },
+    {
+      question: "Regarding: \"In the treatment of mild to moderate systemic hypertension:\", is this statement True or False?\n\n\"Moderation of alcohol consumption is likely to improve blood pressure control\"",
+      choices: ["True","False"],
+      answerIndex: 0,
+      explanation: "True. Excess alcohol contributes to hypertension, so moderation can improve control."
+    },
+    {
+      question: "Regarding: \"Important explanations for hypertension refractory to medical therapy include:\", is this statement True or False?\n\n\"Poor compliance with drug therapy\"",
+      choices: ["True","False"],
+      answerIndex: 0,
+      explanation: "True. Poor compliance is a common cause of apparent resistant hypertension."
+    },
+    {
+      question: "Regarding: \"Important explanations for hypertension refractory to medical therapy include:\", is this statement True or False?\n\n\"Inadequate drug therapy\"",
+      choices: ["True","False"],
+      answerIndex: 0,
+      explanation: "True. Inadequate dosing or wrong drug combinations can cause poor control."
+    },
+    {
+      question: "Regarding: \"Important explanations for hypertension refractory to medical therapy include:\", is this statement True or False?\n\n\"Phaeochromocytoma\"",
+      choices: ["True","False"],
+      answerIndex: 0,
+      explanation: "True. Phaeochromocytoma is rare but important."
+    },
+    {
+      question: "Regarding: \"Important explanations for hypertension refractory to medical therapy include:\", is this statement True or False?\n\n\"Primary hyperaldosteronism\"",
+      choices: ["True","False"],
+      answerIndex: 0,
+      explanation: "True. Primary hyperaldosteronism can cause resistant hypertension."
+    },
+    {
+      question: "Regarding: \"Important explanations for hypertension refractory to medical therapy include:\", is this statement True or False?\n\n\"Renal artery stenosis\"",
+      choices: ["True","False"],
+      answerIndex: 0,
+      explanation: "True. Renal artery stenosis can cause resistant or worsening hypertension."
+    }
   ]
 }
 
