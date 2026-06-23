@@ -2614,4 +2614,30 @@ window.mcqQuizzes['Food-borne Diseases'] = [
   }
 ]
 
+window.mcqQuizzes['Vitamins'] = [
+  {
+    question: "Strict vegan diet for a long period may lead mainly to deficiency of which vitamin?",
+    choices: [
+      "Vitamin C",
+      "Vitamin B12",
+      "Vitamin K",
+      "Vitamin E"
+    ],
+    answerIndex: 1,
+    explanation: "Vitamin B12 sources are mainly animal foods such as meat, fish, eggs, milk, and cheese. Strict vegans who avoid fortified foods are at risk of vitamin B12 deficiency."
+  },
+  {
+    question: "Which of the following diets commonly needs vitamin B12 supplementation if followed strictly for a long time?",
+    choices: [
+      "Mediterranean diet",
+      "Paleo diet",
+      "Vegan diet",
+      "Low glycemic index diet"
+    ],
+    answerIndex: 2,
+    explanation: "Vegan diet excludes animal-source foods. Since vitamin B12 is mainly found in animal products, long-term strict vegan diet may require B12 supplementation."
+  }
+]
+
+
 
