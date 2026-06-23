@@ -2191,3 +2191,247 @@ window.mcqQuizzes['Diseases of the Pancreas'] = [
     explanation: "Recurrent duodenal ulcers plus diarrhea is a classic clue for gastrinoma/Zollinger-Ellison syndrome. Serum gastrin confirms hypergastrinemia and CT abdomen helps locate the tumor."
   }
 ]
+
+window.mcqQuizzes['Pulmonary Embolism'] = [
+  {
+    question: "Regarding: \"Syncope:\", is this statement True or False?\n\n\"Followed by facial flushing suggests a tachyarrhythmia\"",
+    choices: ["True", "False"],
+    answerIndex: 1,
+    explanation: "False. Facial flushing after syncope suggests episodic bradycardia or Adams-Stokes attacks, not tachyarrhythmia."
+  },
+  {
+    question: "Regarding: \"Syncope:\", is this statement True or False?\n\n\"Without warning suggests a vaso-vagal episode\"",
+    choices: ["True", "False"],
+    answerIndex: 1,
+    explanation: "False. Vasovagal syncope usually has warning symptoms such as nausea, sweating, and lightheadedness."
+  },
+  {
+    question: "Regarding: \"Syncope:\", is this statement True or False?\n\n\"On exercise is a typical feature of mitral regurgitation\"",
+    choices: ["True", "False"],
+    answerIndex: 1,
+    explanation: "False. Exertional syncope suggests severe aortic stenosis or pulmonary hypertension, not mitral regurgitation."
+  },
+  {
+    question: "Regarding: \"Syncope:\", is this statement True or False?\n\n\"Is the commonest cause of falls among elderly patients\"",
+    choices: ["True", "False"],
+    answerIndex: 1,
+    explanation: "False. Elderly patients often fall without true loss of consciousness."
+  },
+  {
+    question: "Regarding: \"Syncope:\", is this statement True or False?\n\n\"Is a recognised presenting feature of pulmonary embolism\"",
+    choices: ["True", "False"],
+    answerIndex: 0,
+    explanation: "True. Massive pulmonary embolism can cause syncope due to sudden obstruction of pulmonary blood flow, reduced left ventricular filling, low cardiac output, and cerebral hypoperfusion."
+  },
+  {
+    question: "Regarding: \"Acute circulatory failure with an elevated central venous pressure are typical findings in:\", is this statement True or False?\n\n\"Acute pancreatitis\"",
+    choices: ["True", "False"],
+    answerIndex: 1,
+    explanation: "False. Acute pancreatitis usually causes hypovolaemic shock with low central venous pressure."
+  },
+  {
+    question: "Regarding: \"Acute circulatory failure with an elevated central venous pressure are typical findings in:\", is this statement True or False?\n\n\"Massive pulmonary embolism\"",
+    choices: ["True", "False"],
+    answerIndex: 0,
+    explanation: "True. Massive pulmonary embolism causes acute right ventricular failure, so central venous pressure rises."
+  },
+  {
+    question: "Regarding: \"Acute circulatory failure with an elevated central venous pressure are typical findings in:\", is this statement True or False?\n\n\"Ruptured ectopic pregnancy\"",
+    choices: ["True", "False"],
+    answerIndex: 1,
+    explanation: "False. Ruptured ectopic pregnancy causes hypovolaemic shock, usually with low central venous pressure."
+  },
+  {
+    question: "Regarding: \"Acute circulatory failure with an elevated central venous pressure are typical findings in:\", is this statement True or False?\n\n\"Acute right ventricular infarction\"",
+    choices: ["True", "False"],
+    answerIndex: 0,
+    explanation: "True. Acute right ventricular infarction can cause shock with raised central venous pressure."
+  },
+  {
+    question: "Regarding: \"Acute circulatory failure with an elevated central venous pressure are typical findings in:\", is this statement True or False?\n\n\"Pericardial tamponade\"",
+    choices: ["True", "False"],
+    answerIndex: 0,
+    explanation: "True. Pericardial tamponade prevents cardiac filling, causing shock with raised central venous pressure."
+  },
+  {
+    question: "Regarding: \"Recognised causes of pulmonary arterial hypertension include:\", is this statement True or False?\n\n\"Mitral stenosis\"",
+    choices: ["True", "False"],
+    answerIndex: 0,
+    explanation: "True. Mitral stenosis raises left atrial pressure, which can lead to pulmonary hypertension."
+  },
+  {
+    question: "Regarding: \"Recognised causes of pulmonary arterial hypertension include:\", is this statement True or False?\n\n\"Atrial septal defect\"",
+    choices: ["True", "False"],
+    answerIndex: 0,
+    explanation: "True. Atrial septal defect increases pulmonary blood flow, which can cause pulmonary hypertension."
+  },
+  {
+    question: "Regarding: \"Recognised causes of pulmonary arterial hypertension include:\", is this statement True or False?\n\n\"Chronic obstructive pulmonary disease\"",
+    choices: ["True", "False"],
+    answerIndex: 0,
+    explanation: "True. Chronic obstructive pulmonary disease can cause hypoxic pulmonary vasoconstriction and pulmonary hypertension."
+  },
+  {
+    question: "Regarding: \"Recognised causes of pulmonary arterial hypertension include:\", is this statement True or False?\n\n\"Pulmonary thromboembolism\"",
+    choices: ["True", "False"],
+    answerIndex: 0,
+    explanation: "True. Recurrent or unresolved pulmonary thromboembolism can cause chronic thromboembolic pulmonary hypertension."
+  },
+  {
+    question: "Regarding: \"Recognised causes of pulmonary arterial hypertension include:\", is this statement True or False?\n\n\"Persistent ductus arteriosus\"",
+    choices: ["True", "False"],
+    answerIndex: 0,
+    explanation: "True. Persistent ductus arteriosus increases pulmonary blood flow and can cause pulmonary hypertension."
+  },
+  {
+    question: "Regarding: \"Clinical features characteristic of massive pulmonary embolism include:\", is this statement True or False?\n\n\"Central and peripheral cyanosis\"",
+    choices: ["True", "False"],
+    answerIndex: 0,
+    explanation: "True. Massive PE can cause profound hypoxaemia, leading to central and peripheral cyanosis."
+  },
+  {
+    question: "Regarding: \"Clinical features characteristic of massive pulmonary embolism include:\", is this statement True or False?\n\n\"Pleuritic chest pain and haemoptysis\"",
+    choices: ["True", "False"],
+    answerIndex: 1,
+    explanation: "False. Pleuritic chest pain and haemoptysis suggest pulmonary infarction rather than massive PE itself."
+  },
+  {
+    question: "Regarding: \"Clinical features characteristic of massive pulmonary embolism include:\", is this statement True or False?\n\n\"Breathlessness and syncope\"",
+    choices: ["True", "False"],
+    answerIndex: 0,
+    explanation: "True. Sudden breathlessness and syncope are typical because PE acutely reduces pulmonary blood flow and cardiac output."
+  },
+  {
+    question: "Regarding: \"Clinical features characteristic of massive pulmonary embolism include:\", is this statement True or False?\n\n\"Tachycardia and elevated JVP\"",
+    choices: ["True", "False"],
+    answerIndex: 0,
+    explanation: "True. Tachycardia occurs due to sympathetic compensation, and elevated JVP occurs due to acute right ventricular strain/failure."
+  },
+  {
+    question: "Regarding: \"Clinical features characteristic of massive pulmonary embolism include:\", is this statement True or False?\n\n\"Q waves in leads I, II and aVL on ECG\"",
+    choices: ["True", "False"],
+    answerIndex: 1,
+    explanation: "False. The classic ECG pattern is S1Q3T3, not Q waves in leads I, II and aVL."
+  },
+  {
+    question: "Regarding: \"Recognised features of pulmonary infarction include:\", is this statement True or False?\n\n\"Peripheral blood leucocytosis and fever\"",
+    choices: ["True", "False"],
+    answerIndex: 0,
+    explanation: "True. Pulmonary infarction can mimic pneumonia with fever and leucocytosis."
+  },
+  {
+    question: "Regarding: \"Recognised features of pulmonary infarction include:\", is this statement True or False?\n\n\"Pleuro-pericardial friction rub\"",
+    choices: ["True", "False"],
+    answerIndex: 0,
+    explanation: "True. Pleural irritation may produce a friction rub."
+  },
+  {
+    question: "Regarding: \"Recognised features of pulmonary infarction include:\", is this statement True or False?\n\n\"Blood-stained pleural effusion\"",
+    choices: ["True", "False"],
+    answerIndex: 0,
+    explanation: "True. Infarction can cause haemorrhagic inflammation and blood-stained pleural effusion."
+  },
+  {
+    question: "Regarding: \"Recognised features of pulmonary infarction include:\", is this statement True or False?\n\n\"Development of a lung abscess\"",
+    choices: ["True", "False"],
+    answerIndex: 0,
+    explanation: "True. Necrotic lung tissue may cavitate and rarely develop abscess."
+  },
+  {
+    question: "Regarding: \"Recognised features of pulmonary infarction include:\", is this statement True or False?\n\n\"Ipsilateral elevation of the hemidiaphragm\"",
+    choices: ["True", "False"],
+    answerIndex: 0,
+    explanation: "True. Ipsilateral diaphragmatic elevation may be seen clinically or on chest X-ray."
+  },
+  {
+    question: "Regarding: \"In the treatment of acute pulmonary thromboembolism:\", is this statement True or False?\n\n\"Streptokinase therapy should be given immediately\"",
+    choices: ["True", "False"],
+    answerIndex: 1,
+    explanation: "False. Thrombolysis such as streptokinase is reserved mainly for selected cases such as massive PE with shock, not all acute PE immediately."
+  },
+  {
+    question: "Regarding: \"In the treatment of acute pulmonary thromboembolism:\", is this statement True or False?\n\n\"24% oxygen therapy should correct hypoxaemia\"",
+    choices: ["True", "False"],
+    answerIndex: 1,
+    explanation: "False. High-flow, high-concentration oxygen is indicated; 24% oxygen may be insufficient."
+  },
+  {
+    question: "Regarding: \"In the treatment of acute pulmonary thromboembolism:\", is this statement True or False?\n\n\"Diamorphine therapy should be avoided if the patient is severely hypoxic\"",
+    choices: ["True", "False"],
+    answerIndex: 1,
+    explanation: "False. Diamorphine may worsen hypotension, but the source marks this statement false as a general rule."
+  },
+  {
+    question: "Regarding: \"In the treatment of acute pulmonary thromboembolism:\", is this statement True or False?\n\n\"Heparin infusion should be given until warfarin therapy has become effective\"",
+    choices: ["True", "False"],
+    answerIndex: 0,
+    explanation: "True. Heparin is continued until warfarin becomes effective and INR is stable."
+  },
+  {
+    question: "Regarding: \"In the treatment of acute pulmonary thromboembolism:\", is this statement True or False?\n\n\"Warfarin therapy should be continued for 4 weeks\"",
+    choices: ["True", "False"],
+    answerIndex: 1,
+    explanation: "False. Anticoagulation is usually continued for about 3 months, not only 4 weeks."
+  },
+  {
+    question: "Regarding: \"Recognised causes of deep vein thrombosis include:\", is this statement True or False?\n\n\"Pregnancy\"",
+    choices: ["True", "False"],
+    answerIndex: 0,
+    explanation: "True. Pregnancy increases coagulability and venous stasis."
+  },
+  {
+    question: "Regarding: \"Recognised causes of deep vein thrombosis include:\", is this statement True or False?\n\n\"Polycythaemia\"",
+    choices: ["True", "False"],
+    answerIndex: 0,
+    explanation: "True. Polycythaemia increases blood viscosity and thrombotic risk."
+  },
+  {
+    question: "Regarding: \"Recognised causes of deep vein thrombosis include:\", is this statement True or False?\n\n\"Prolonged travelling\"",
+    choices: ["True", "False"],
+    answerIndex: 0,
+    explanation: "True. Prolonged travelling causes venous stasis."
+  },
+  {
+    question: "Regarding: \"Recognised causes of deep vein thrombosis include:\", is this statement True or False?\n\n\"Cardiac failure\"",
+    choices: ["True", "False"],
+    answerIndex: 0,
+    explanation: "True. Cardiac failure causes low flow and immobility, increasing DVT risk."
+  },
+  {
+    question: "Regarding: \"Recognised causes of deep vein thrombosis include:\", is this statement True or False?\n\n\"Carcinomatosis\"",
+    choices: ["True", "False"],
+    answerIndex: 0,
+    explanation: "True. Malignancy causes a hypercoagulable state."
+  },
+  {
+    question: "Regarding: \"Clinical features of deep venous thrombosis include:\", is this statement True or False?\n\n\"Cold, painful, blue limb with altered sensation\"",
+    choices: ["True", "False"],
+    answerIndex: 1,
+    explanation: "False. A cold painful limb with altered sensation suggests acute arterial insufficiency, not DVT."
+  },
+  {
+    question: "Regarding: \"Clinical features of deep venous thrombosis include:\", is this statement True or False?\n\n\"The absence of any abnormal physical sign\"",
+    choices: ["True", "False"],
+    answerIndex: 0,
+    explanation: "True. DVT can be clinically silent with no abnormal signs."
+  },
+  {
+    question: "Regarding: \"Clinical features of deep venous thrombosis include:\", is this statement True or False?\n\n\"Warm, painless, oedematous, white limb\"",
+    choices: ["True", "False"],
+    answerIndex: 0,
+    explanation: "True. A swollen oedematous limb can occur in DVT; marked erythema may mimic cellulitis."
+  },
+  {
+    question: "Regarding: \"Clinical features of deep venous thrombosis include:\", is this statement True or False?\n\n\"Calf tenderness and fever\"",
+    choices: ["True", "False"],
+    answerIndex: 0,
+    explanation: "True. Calf tenderness and fever can occur."
+  },
+  {
+    question: "Regarding: \"Clinical features of deep venous thrombosis include:\", is this statement True or False?\n\n\"Syncopal episode during defecation\"",
+    choices: ["True", "False"],
+    answerIndex: 0,
+    explanation: "True. Syncope may suggest pulmonary embolism as a complication of DVT."
+  }
+]
+
