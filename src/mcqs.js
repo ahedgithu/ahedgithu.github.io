@@ -2435,3 +2435,183 @@ window.mcqQuizzes['Pulmonary Embolism'] = [
   }
 ]
 
+window.mcqQuizzes['Food-borne Diseases'] = [
+  {
+    question: "Food-borne infections are caused by consuming food contaminated with:",
+    choices: [
+      "Preformed toxins only",
+      "Bacteria, viruses, or parasites",
+      "Heavy metals only",
+      "Natural toxins only"
+    ],
+    answerIndex: 1,
+    explanation: "Food-borne infections occur when contaminated food contains living organisms such as bacteria, viruses, or parasites that invade and/or multiply in the intestine."
+  },
+  {
+    question: "Food-borne intoxication is caused by consuming food contaminated mainly with:",
+    choices: [
+      "A toxin already present in food",
+      "Living bacteria only",
+      "Parasites only",
+      "Viruses only"
+    ],
+    answerIndex: 0,
+    explanation: "Food-borne intoxication happens when the toxin is already present in the food before ingestion. There is no need for invasion or multiplication inside the intestine."
+  },
+  {
+    question: "Which of the following best describes the incubation period of food-borne intoxication compared with food-borne infection?",
+    choices: [
+      "Food-borne intoxication usually takes weeks",
+      "Food-borne intoxication usually occurs within minutes to hours",
+      "Food-borne infection always occurs within minutes",
+      "Both always have the same incubation period"
+    ],
+    answerIndex: 1,
+    explanation: "Because the toxin is already formed in food, symptoms of food-borne intoxication appear quickly, usually within minutes to hours. Food-borne infections usually take hours to days."
+  },
+  {
+    question: "Which of the following is an example of food-borne infection?",
+    choices: [
+      "Typhoid fever",
+      "Botulism due to preformed toxin",
+      "Ciguatera fish poisoning",
+      "Poisonous mushroom poisoning"
+    ],
+    answerIndex: 0,
+    explanation: "Typhoid fever is a bacterial food-borne infection caused by Salmonella Typhi. Botulism, ciguatera, and poisonous mushrooms are examples of intoxication/toxin-related illness."
+  },
+  {
+    question: "Which of the following is an example of food-borne intoxication?",
+    choices: [
+      "Viral hepatitis A",
+      "Giardiasis",
+      "Botulism",
+      "Typhoid fever"
+    ],
+    answerIndex: 2,
+    explanation: "Botulism is caused by a preformed toxin produced by Clostridium botulinum. This makes it a food-borne intoxication rather than an infection."
+  },
+  {
+    question: "Which factor is related to contamination in food-borne infections?",
+    choices: [
+      "Inadequate cooking",
+      "Cross contamination",
+      "Poor personal hygiene",
+      "All of the above"
+    ],
+    answerIndex: 3,
+    explanation: "Food contamination can occur due to inadequate cooking, cross contamination, poor personal hygiene, and bare hand contact."
+  },
+  {
+    question: "Food-borne infections can spread from person to person mainly through which route?",
+    choices: [
+      "Feco-oral route",
+      "Blood transfusion",
+      "Airborne route only",
+      "Vector-borne route only"
+    ],
+    answerIndex: 0,
+    explanation: "Food-borne infections can spread person to person via the feco-oral route because living organisms may be shedded in stool."
+  },
+  {
+    question: "Food-borne intoxications are generally:",
+    choices: [
+      "Highly communicable from person to person",
+      "Non-communicable",
+      "Always viral",
+      "Always parasitic"
+    ],
+    answerIndex: 1,
+    explanation: "Food-borne intoxication is due to ingestion of toxin already present in food, so it is generally non-communicable."
+  },
+  {
+    question: "The reservoir of infection in enteric fever is:",
+    choices: [
+      "Only human",
+      "Only cattle",
+      "Only rodents",
+      "Soil"
+    ],
+    answerIndex: 0,
+    explanation: "Enteric fever has a human reservoir. Infection may come from cases or carriers."
+  },
+  {
+    question: "The usual mode of infection of enteric fever is:",
+    choices: [
+      "Feco-oral route through contaminated food and water",
+      "Sexual transmission",
+      "Blood transfusion",
+      "Mosquito bite"
+    ],
+    answerIndex: 0,
+    explanation: "Enteric fever spreads by the feco-oral route, especially through contaminated food, water, hands, fomites, and mechanical transmission by flies."
+  },
+  {
+    question: "The incubation period of enteric fever is usually:",
+    choices: [
+      "Minutes to hours",
+      "1 to 3 days",
+      "1 to 3 weeks",
+      "More than 6 months"
+    ],
+    answerIndex: 2,
+    explanation: "Enteric fever has an incubation period of about 1 to 3 weeks."
+  },
+  {
+    question: "A confirmed case of typhoid fever is diagnosed by identification of Salmonella Typhi from:",
+    choices: [
+      "Blood, bone marrow, stool, or urine",
+      "Sputum only",
+      "Skin scraping only",
+      "CSF only"
+    ],
+    answerIndex: 0,
+    explanation: "A confirmed case is made when Salmonella Typhi is isolated from blood, bone marrow, stool, or urine. Culture is considered the gold standard."
+  },
+  {
+    question: "Brucellosis is mainly transmitted to humans through:",
+    choices: [
+      "Infected milk or dairy products",
+      "Mosquito bite",
+      "Direct man-to-man transmission",
+      "Sexual contact"
+    ],
+    answerIndex: 0,
+    explanation: "Brucellosis is a zoonotic infection transmitted from animals to humans. Food-borne transmission occurs through infected milk or dairy products."
+  },
+  {
+    question: "Which of the following is true about brucellosis?",
+    choices: [
+      "It has only human reservoir",
+      "There is no man-to-man transmission",
+      "It is caused by Vibrio cholerae",
+      "It is prevented by a routinely used human vaccine"
+    ],
+    answerIndex: 1,
+    explanation: "Brucellosis has animal reservoirs and is transmitted from infected animals or animal products to humans. Man-to-man transmission is not typical."
+  },
+  {
+    question: "The causative agent of cholera is:",
+    choices: [
+      "Salmonella Typhi",
+      "Brucella melitensis",
+      "Vibrio cholerae",
+      "Clostridium botulinum"
+    ],
+    answerIndex: 2,
+    explanation: "Cholera is caused by Vibrio cholerae, especially serogroups O1 and O139."
+  },
+  {
+    question: "The characteristic stool in cholera is:",
+    choices: [
+      "Bloody stool",
+      "Rice-water stool",
+      "Black tarry stool",
+      "Fatty bulky stool"
+    ],
+    answerIndex: 1,
+    explanation: "Cholera classically causes severe watery diarrhea known as rice-water stool, which can rapidly lead to dehydration and shock."
+  }
+]
+
+
