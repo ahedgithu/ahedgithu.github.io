@@ -1833,5 +1833,61 @@ window.mcqQuizzes = {
   window.mcqQuizzes['NASH & NAFLD, AIH'] = nashNafldAih
 })()
 
-
-
+window.mcqQuizzes['Investigation of Acute Hepatitis'] = [
+  {
+    question: "An 18-year-old woman presents to the emergency department having taken an overdose of an unknown quantity of paracetamol. Which of the following statements regarding the clinical presentation and progress of paracetamol overdose is true?",
+    choices: [
+      "Deterioration from grade 1 to grade 4 encephalopathy typically takes place over several days",
+      "It has a worse outcome than acute liver failure of other etiologies",
+      "If the patient recovers from acute liver failure, cirrhosis development is almost inevitable",
+      "Jaundice typically occurs before prothrombin time (PT) prolongation",
+      "Pancreatitis can be an accompanying complication"
+    ],
+    answerIndex: 4,
+    explanation: "Paracetamol overdose can cause acute liver injury or acute liver failure. PT/INR prolongation is an important early marker of severity and may appear before obvious jaundice. Pancreatitis can occur as an associated complication."
+  },
+  {
+    question: "Enlarged tender liver is found in all except:",
+    choices: [
+      "Congestive cardiac failure",
+      "Amoebic liver abscess",
+      "Large hepatoma",
+      "Wilson's disease",
+      "Acute hepatitis"
+    ],
+    answerIndex: 3,
+    explanation: "Acute hepatitis can cause a tender enlarged liver due to acute hepatocellular inflammation and swelling. Wilson's disease may cause liver disease, but tender hepatomegaly is not the typical answer here."
+  },
+  {
+    question: "Rapid diminution in the size of liver is seen in:",
+    choices: [
+      "Cholangio-hepatitis",
+      "Fulminant hepatic failure",
+      "Carcinoma of liver",
+      "Acute alcoholic hepatitis",
+      "Steatosis"
+    ],
+    answerIndex: 1,
+    explanation: "Fulminant hepatic failure means rapid severe hepatocyte necrosis. Because liver cells die massively, the liver can rapidly shrink in size. This is a dangerous sign in acute severe hepatitis or acute liver failure."
+  },
+  {
+    question: "A 24-year-old presents with nausea, malaise and jaundice. On examination he has moderate hepatosplenomegaly and tender cervical lymphadenopathy. He has dark urine and pale stools. What is the most likely diagnosis?",
+    choices: [
+      "Autoimmune hepatitis",
+      "Dubin-Johnson syndrome",
+      "Gilbert's syndrome",
+      "Hemochromatosis",
+      "Hemolytic anemia",
+      "Hepatitis A",
+      "Hepatitis C",
+      "Hepatocellular carcinoma",
+      "Iatrogenic hepatitis",
+      "Primary biliary cirrhosis",
+      "Primary sclerosing cholangitis",
+      "Rotor syndrome",
+      "Wilson's disease"
+    ],
+    answerIndex: 5,
+    explanation: "Acute onset nausea, malaise, jaundice, dark urine and pale stools suggests acute hepatitis with conjugated hyperbilirubinemia. In this matching question, the best answer is Hepatitis A."
+  }
+]
