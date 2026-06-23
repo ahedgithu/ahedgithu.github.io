@@ -3134,6 +3134,277 @@ window.mcqQuizzes['Diabetes mellitus & disorders of plasma lipids and lipoprotei
   }
 ]
 
+window.mcqQuizzes['Preoperative Patient Management'] = [
+  {
+    question: "Which of the following is an aim of preoperative patient assessment?",
+    choices: [
+      "Avoid obtaining consent",
+      "Risk assessment of anesthesia and surgery to plan safe anesthesia care",
+      "Delay all elective surgeries regardless of patient status",
+      "Start antibiotics after wound closure only"
+    ],
+    answerIndex: 1,
+    explanation: "Preoperative assessment aims to identify medical problems, assess anesthesia/surgical risk, and plan safe anesthesia care."
+  },
+  {
+    question: "Previous adverse anesthesia history should specifically include asking about:",
+    choices: [
+      "Difficult airway and malignant hyperthermia",
+      "Previous eye color change",
+      "Daily water intake only",
+      "Only childhood vaccinations"
+    ],
+    answerIndex: 0,
+    explanation: "History should include previous adverse anesthesia events such as difficult airway and malignant hyperthermia."
+  },
+  {
+    question: "Why should last menstrual period be asked about in a female patient before anesthesia?",
+    choices: [
+      "Because anesthetic agents may be teratogenic or induce abortion",
+      "Because it determines the dose of all opioids",
+      "Because it replaces pregnancy testing completely",
+      "Because it predicts postoperative fever"
+    ],
+    answerIndex: 0,
+    explanation: "The lecture states that LMP is important because anesthetic agents may be teratogenic or could induce abortion; late pregnancy also increases aspiration risk."
+  },
+  {
+    question: "Preoperative drug history should include all of the following EXCEPT:",
+    choices: [
+      "Current medications",
+      "Herbal products",
+      "Allergy and drug interactions",
+      "Patient’s favorite food"
+    ],
+    answerIndex: 3,
+    explanation: "Drug history includes current medications, herbal products, allergies, and possible drug interactions."
+  },
+  {
+    question: "Airway assessment for difficult intubation includes:",
+    choices: [
+      "Neck mobility, Mallampati classification, mouth opening, and thyromental distance",
+      "Only pulse rate",
+      "Only body temperature",
+      "Only abdominal palpation"
+    ],
+    answerIndex: 0,
+    explanation: "Preoperative airway assessment includes neck mobility, Mallampati class, age, body weight, mouth opening, and thyromental distance."
+  },
+  {
+    question: "Before regional anesthesia, the assessment should include:",
+    choices: [
+      "History of anticoagulant drugs and evidence of infection at injection site",
+      "Only chest X-ray",
+      "Only fasting blood sugar",
+      "Only family history of diabetes"
+    ],
+    answerIndex: 0,
+    explanation: "For regional anesthesia, check anticoagulant drug history, anatomical landmarks, and infection at the injection site."
+  },
+  {
+    question: "Common preoperative investigations include:",
+    choices: [
+      "CBC, coagulation profile, fasting blood sugar, renal and liver functions",
+      "Only urine pregnancy test for all patients",
+      "Only CT brain",
+      "Only serum amylase"
+    ],
+    answerIndex: 0,
+    explanation: "Common investigations include CBC, PT/PTT/INR, fasting blood sugar, renal function, and liver function."
+  },
+  {
+    question: "ASA Class I refers to:",
+    choices: [
+      "Fit normal patient",
+      "Moribund patient not expected to survive 24 hours without operation",
+      "Brain stem dead patient candidate for organ donation",
+      "Patient with severe systemic disease that is a constant threat to life"
+    ],
+    answerIndex: 0,
+    explanation: "ASA Class I is a fit, normal patient."
+  },
+  {
+    question: "ASA Class III describes a patient with:",
+    choices: [
+      "Mild systemic disease not limiting activity",
+      "Severe systemic disease limiting normal activity",
+      "No systemic disease",
+      "Brain stem death"
+    ],
+    answerIndex: 1,
+    explanation: "ASA Class III is severe systemic disease that limits normal activity, such as renal failure."
+  },
+  {
+    question: "A healthy elective surgical patient should fast for at least how long after clear liquids?",
+    choices: [
+      "2 hours",
+      "4 hours",
+      "6 hours",
+      "8 hours"
+    ],
+    answerIndex: 0,
+    explanation: "The lecture states fasting should be at least 2 hours after clear liquids."
+  },
+  {
+    question: "A healthy elective surgical patient should fast for at least how long after fatty or meat foods?",
+    choices: [
+      "2 hours",
+      "4 hours",
+      "6 hours",
+      "8 hours"
+    ],
+    answerIndex: 3,
+    explanation: "The lecture states fasting should be at least 8 hours after fatty and meat foods."
+  },
+  {
+    question: "Which of the following is an indication to postpone an elective operation?",
+    choices: [
+      "Acute upper respiratory tract infection",
+      "Signed informed consent",
+      "Optimized comorbid condition",
+      "Adequate fasting"
+    ],
+    answerIndex: 0,
+    explanation: "Elective surgery should be postponed in acute URTI, uncontrolled comorbidities, recent food intake, refusal of consent, pregnancy, or emergency without adequate resuscitation."
+  },
+  {
+    question: "Midazolam is used preoperatively mainly for:",
+    choices: [
+      "Relief of anxiety and amnesia",
+      "Increasing airway secretions",
+      "Increasing gastric acidity",
+      "Treatment of surgical site infection after incision"
+    ],
+    answerIndex: 0,
+    explanation: "Benzodiazepines such as midazolam are used for anxiety relief and amnesia."
+  },
+  {
+    question: "Antibiotic prophylaxis should generally be given:",
+    choices: [
+      "Within one hour before skin incision and before tourniquet inflation",
+      "Only 24 hours after skin incision",
+      "Only after postoperative fever develops",
+      "Only after wound infection is confirmed"
+    ],
+    answerIndex: 0,
+    explanation: "Antibiotic prophylaxis is given within one hour before skin incision and before tourniquet inflation to reduce surgical site infection."
+  }
+]
+
+window.mcqQuizzes['Monitoring and Fluid Therapy'] = [
+  {
+    question: "Lack of basic monitoring equipment and drugs is associated with:",
+    choices: [
+      "Increased anesthesia complications",
+      "Reduced need for patient assessment",
+      "Elimination of aspiration risk",
+      "No clinical significance"
+    ],
+    answerIndex: 0,
+    explanation: "The lecture lists lack of basic monitoring equipment and drugs among factors related to anesthesia complications."
+  },
+  {
+    question: "Which of the following should be recorded intraoperatively?",
+    choices: [
+      "Fluid balance, input and output",
+      "Only the patient’s address",
+      "Only the surgeon’s name",
+      "Only the hospital floor number"
+    ],
+    answerIndex: 0,
+    explanation: "The anesthesia record should include fluid balance with input and output."
+  },
+  {
+    question: "Intraoperative records should include:",
+    choices: [
+      "Hemodynamic and ventilatory parameters",
+      "Only preoperative fasting time",
+      "Only family history",
+      "Only previous surgeries"
+    ],
+    answerIndex: 0,
+    explanation: "Intraoperative monitoring records include hemodynamic and ventilatory parameters."
+  },
+  {
+    question: "Recovery room documentation should include:",
+    choices: [
+      "Records of vital signs",
+      "Only surgical instrument count",
+      "Only preoperative ECG",
+      "Only consent form"
+    ],
+    answerIndex: 0,
+    explanation: "Recovery room records should include vital signs."
+  },
+  {
+    question: "A key precaution during local or regional anesthesia is:",
+    choices: [
+      "Proper monitoring and availability of emergency drugs and equipment",
+      "Avoiding all monitoring",
+      "Using maximum dose regardless of liver function",
+      "Injecting rapidly without aspiration"
+    ],
+    answerIndex: 0,
+    explanation: "The lecture emphasizes proper monitoring and availability of emergency drugs and equipment."
+  },
+  {
+    question: "At the first sign of local anesthetic toxicity, the first step is to:",
+    choices: [
+      "Stop injection of local anesthetic",
+      "Increase injection speed",
+      "Give another full dose",
+      "Ignore symptoms until convulsions occur"
+    ],
+    answerIndex: 0,
+    explanation: "Management starts by stopping the injection of local anesthetic immediately."
+  },
+  {
+    question: "Treatment of local anesthetic toxicity includes:",
+    choices: [
+      "Oxygen, airway maintenance, assisted respiration, and IV fluids",
+      "Stopping oxygen therapy",
+      "Avoiding airway support",
+      "Giving oral fluids only"
+    ],
+    answerIndex: 0,
+    explanation: "The lecture states to give O2, maintain airway, assist respiration, and give IV fluids."
+  },
+  {
+    question: "Hypotension during local anesthetic toxicity can be treated with:",
+    choices: [
+      "Ephedrine",
+      "Atropine",
+      "Metoclopramide",
+      "Sodium citrate"
+    ],
+    answerIndex: 0,
+    explanation: "Ephedrine is mentioned for hypotension; atropine is for bradycardia."
+  },
+  {
+    question: "Bradycardia can be treated with:",
+    choices: [
+      "Atropine",
+      "Ephedrine",
+      "Ranitidine",
+      "Sodium citrate"
+    ],
+    answerIndex: 0,
+    explanation: "Atropine is mentioned for bradycardia."
+  },
+  {
+    question: "When morphine or fentanyl is used with spinal or epidural anesthesia, what should be monitored?",
+    choices: [
+      "Respiration",
+      "Hair growth",
+      "Visual acuity only",
+      "Serum bilirubin only"
+    ],
+    answerIndex: 0,
+    explanation: "The lecture states that morphine and fentanyl provide analgesia with spinal/epidural anesthesia, and respiration should be monitored."
+  }
+]
+
+
 
 
 
