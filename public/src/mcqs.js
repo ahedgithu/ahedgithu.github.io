@@ -1880,16 +1880,6 @@ window.mcqQuizzes['Investigation of Acute Hepatitis'] = [
       "Hemolytic anemia",
       "Hepatitis A",
       "Hepatitis C",
-  {
-    question: "A 24-year-old presents with nausea, malaise and jaundice. On examination he has moderate hepatosplenomegaly and tender cervical lymphadenopathy. He has dark urine and pale stools. What is the most likely diagnosis?",
-    choices: [
-      "Autoimmune hepatitis",
-      "Dubin-Johnson syndrome",
-      "Gilbert's syndrome",
-      "Hemochromatosis",
-      "Hemolytic anemia",
-      "Hepatitis A",
-      "Hepatitis C",
       "Hepatocellular carcinoma",
       "Iatrogenic hepatitis",
       "Primary biliary cirrhosis",
@@ -1897,7 +1887,6 @@ window.mcqQuizzes['Investigation of Acute Hepatitis'] = [
       "Rotor syndrome",
       "Wilson's disease"
     ],
-    answerIndex: 5,
     explanation: "Acute onset nausea, malaise, jaundice, dark urine and pale stools suggests acute hepatitis with conjugated hyperbilirubinemia. In this matching question, the best answer is Hepatitis A."
   }
 ]
