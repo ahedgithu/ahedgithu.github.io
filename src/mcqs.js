@@ -2639,5 +2639,99 @@ window.mcqQuizzes['Vitamins'] = [
   }
 ]
 
+window.mcqQuizzes['Liver Function Test'] = [
+  {
+    question: "Which of the following is included in liver function tests?",
+    choices: [
+      "Serum bilirubin",
+      "ALT and AST",
+      "ALP and Gamma GT",
+      "Albumin and prothrombin time",
+      "All of the above"
+    ],
+    answerIndex: 4,
+    explanation: "Liver function tests include serum bilirubin, liver enzymes such as ALT, AST, ALP and GGT, serum proteins such as albumin, and prothrombin time."
+  },
+  {
+    question: "The normal reference range of total serum bilirubin is approximately:",
+    choices: [
+      "0.2 - 1.2 mg/dL",
+      "2 - 5 mg/dL",
+      "5 - 10 mg/dL",
+      "10 - 20 mg/dL"
+    ],
+    answerIndex: 0,
+    explanation: "The lecture states that the reference range of total bilirubin is 0.2 - 1.2 mg/dL."
+  },
+  {
+    question: "Unconjugated hyperbilirubinemia may occur due to:",
+    choices: [
+      "Hemolysis",
+      "Gilbert syndrome",
+      "Neonatal jaundice",
+      "Crigler-Najjar syndrome",
+      "All of the above"
+    ],
+    answerIndex: 4,
+    explanation: "Unconjugated hyperbilirubinemia may result from overproduction, decreased uptake, or decreased conjugation of bilirubin."
+  },
+  {
+    question: "Mixed conjugated and unconjugated hyperbilirubinemia is typically seen in:",
+    choices: [
+      "Hemolysis only",
+      "Hepatocellular disease such as acute hepatitis or cirrhosis",
+      "Gilbert syndrome only",
+      "Complete extrahepatic obstruction only"
+    ],
+    answerIndex: 1,
+    explanation: "In hepatocellular disease, the liver cannot properly uptake, conjugate, or excrete bilirubin, so both conjugated and unconjugated bilirubin may increase."
+  },
+  {
+    question: "ALT is mainly located in:",
+    choices: [
+      "Cytosol of hepatocytes",
+      "Biliary tract membrane only",
+      "Bone",
+      "Placenta"
+    ],
+    answerIndex: 0,
+    explanation: "ALT is mainly present in the cytosol of hepatocytes, making it relatively liver-specific."
+  },
+  {
+    question: "The highest elevation of aminotransferases, about 10-100 fold, is classically seen in:",
+    choices: [
+      "Hepatitis",
+      "Cirrhosis only",
+      "Bone disease",
+      "Pregnancy"
+    ],
+    answerIndex: 0,
+    explanation: "Aminotransferases such as ALT and AST show very high elevation in hepatitis due to hepatocellular injury."
+  },
+  {
+    question: "Marked elevation of ALP and Gamma GT is most suggestive of:",
+    choices: [
+      "Extrahepatic cholestasis",
+      "Pure hemolysis",
+      "Gilbert syndrome",
+      "Muscle disease"
+    ],
+    answerIndex: 0,
+    explanation: "ALP and GGT are membrane-bound enzymes of the biliary tract and rise markedly in cholestasis, especially extrahepatic obstruction."
+  },
+  {
+    question: "Prolonged prothrombin time in liver disease may occur due to:",
+    choices: [
+      "Impaired synthesis of coagulation factors",
+      "Vitamin K deficiency in cholestasis",
+      "Severe acute or chronic liver damage",
+      "All of the above"
+    ],
+    answerIndex: 3,
+    explanation: "The liver synthesizes coagulation factors, so severe liver damage prolongs PT. Cholestasis may also cause vitamin K deficiency, further prolonging PT."
+  }
+]
+
+
 
 
