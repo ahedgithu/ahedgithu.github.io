@@ -284,7 +284,7 @@ let subjects = [
   {
     code: 'NUT',
     name: 'Nutrition',
-    totalCount: 9,
+    totalCount: 8,
     examNote: 'Midterm starts Jul 18, 2026. Exact NUT schedule pending.',
     topics: [
       {
@@ -300,23 +300,16 @@ let subjects = [
         label: 'Food-borne Diseases',
         state: 'taken',
         art: 13,
+        note: 'Covers bacterial, viral foodborne infections, polio virus, and hepatitis A/E viruses.',
         lectureUrls: [
-          { label: 'Lecture', url: 'https://drive.google.com/file/d/1q5b51GzxLYXT-iOOLfA1M1KnigeJTE1b/view?usp=drivesdk' }
-        ],
-        audioUrl: 'https://drive.google.com/file/d/1Lr0LftsOc_-uhH2X82uqzJ0eSkUWgSDz/view?usp=drivesdk'
-      },
-      {
-        label: 'Food Borne Diseases Part 2',
-        state: 'taken',
-        art: 13,
-        note: 'Wednesday report: viral foodborne infections including polio virus and hepatitis A/E viruses.',
-        lectureUrls: [
-          { label: 'Lecture', url: 'https://drive.google.com/file/d/15d6Q4cfi8jJ9XW2NpuLBk76ctKe8mKSZ/view?usp=drivesdk' },
+          { label: 'Lecture Part 1', url: 'https://drive.google.com/file/d/1q5b51GzxLYXT-iOOLfA1M1KnigeJTE1b/view?usp=drivesdk' },
+          { label: 'Lecture Part 2', url: 'https://drive.google.com/file/d/15d6Q4cfi8jJ9XW2NpuLBk76ctKe8mKSZ/view?usp=drivesdk' },
           { label: 'Foodborne map', url: '/assets/foodborne-viral-part2-map-v1.png' }
         ],
         pdfUrls: [
           { label: 'Download PDF', url: '/assets/foodborne-viral-part2-map-v1.pdf', download: true }
-        ]
+        ],
+        audioUrl: 'https://drive.google.com/file/d/1Lr0LftsOc_-uhH2X82uqzJ0eSkUWgSDz/view?usp=drivesdk'
       },
       { label: 'Iodine', state: 'remaining', art: 13 },
       { label: 'Nutrition in elderly', state: 'remaining', art: 13 },

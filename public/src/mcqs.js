@@ -2823,6 +2823,318 @@ window.mcqQuizzes['Cardiac Biomarkers'] = [
   }
 ]
 
+window.mcqQuizzes['Diabetes mellitus & disorders of plasma lipids and lipoproteins'] = [
+  {
+    question: "Diabetes mellitus is best defined as a state of:",
+    choices: [
+      "Increased insulin action",
+      "Diminished insulin action due to decreased availability or effectiveness of insulin",
+      "Increased glucagon only",
+      "Primary renal glucose wasting"
+    ],
+    answerIndex: 1,
+    explanation: "DM is caused by reduced insulin availability or reduced effectiveness of the produced insulin."
+  },
+  {
+    question: "Normal fasting plasma glucose is:",
+    choices: [
+      "<100 mg/dL",
+      "<126 mg/dL",
+      "<140 mg/dL",
+      "<200 mg/dL"
+    ],
+    answerIndex: 0,
+    explanation: "Fasting plasma glucose in healthy subjects is less than 100 mg/dL after at least 8 hours without caloric intake."
+  },
+  {
+    question: "Normal 2-hour postprandial or postload plasma glucose is:",
+    choices: [
+      "<100 mg/dL",
+      "<126 mg/dL",
+      "<140 mg/dL",
+      "≥200 mg/dL"
+    ],
+    answerIndex: 2,
+    explanation: "The normal 2-hour postload/postprandial plasma glucose is less than 140 mg/dL."
+  },
+  {
+    question: "Why should serum or plasma be promptly separated from RBCs during glucose testing?",
+    choices: [
+      "To prevent hemolysis from increasing glucose falsely",
+      "To prevent glycolysis from decreasing glucose",
+      "To activate insulin in the sample",
+      "To remove ketone bodies"
+    ],
+    answerIndex: 1,
+    explanation: "Glycolysis by blood cells decreases glucose by about 5-10 mg/dL per hour in unseparated blood."
+  },
+  {
+    question: "Which of the following is diagnostic of diabetes mellitus?",
+    choices: [
+      "Fasting plasma glucose 100-125 mg/dL",
+      "2-hour OGTT plasma glucose 140-199 mg/dL",
+      "Random plasma glucose ≥200 mg/dL with classic symptoms",
+      "Random plasma glucose <140 mg/dL"
+    ],
+    answerIndex: 2,
+    explanation: "A random plasma glucose ≥200 mg/dL plus classic symptoms is diagnostic of DM."
+  },
+  {
+    question: "According to the lecture, HbA1c diagnostic of diabetes mellitus is:",
+    choices: [
+      "≥5.5%",
+      "≥6.0%",
+      "≥6.5%",
+      "≥7.5%"
+    ],
+    answerIndex: 2,
+    explanation: "The lecture states that ADA added HbA1c ≥6.5% as diagnostic of DM in 2010."
+  },
+  {
+    question: "Urine glucose testing alone is not reliable for diagnosis of DM because:",
+    choices: [
+      "It is always positive in mild DM",
+      "It may be falsely negative when blood glucose is below the renal threshold",
+      "It directly measures insulin level",
+      "It is unaffected by renal threshold"
+    ],
+    answerIndex: 1,
+    explanation: "Mild DM may have elevated blood glucose below the renal threshold, so glucose may not appear in urine."
+  },
+  {
+    question: "HbA1c is mainly used to assess glycemic control over the previous:",
+    choices: [
+      "24 hours",
+      "2-3 weeks",
+      "6-8 weeks",
+      "1 year"
+    ],
+    answerIndex: 2,
+    explanation: "HbA1c reflects long-term glycemic control over the previous 6-8 weeks."
+  },
+  {
+    question: "Fructosamine reflects glycemic control over approximately:",
+    choices: [
+      "1-2 days",
+      "2-3 weeks",
+      "6-8 weeks",
+      "3-4 months"
+    ],
+    answerIndex: 1,
+    explanation: "Fructosamine represents glycated plasma proteins, mainly albumin, and reflects short-term glycemic control over 2-3 weeks."
+  },
+  {
+    question: "The standard oral glucose load for a non-pregnant adult in OGTT is:",
+    choices: [
+      "50 g",
+      "75 g",
+      "100 g",
+      "150 g"
+    ],
+    answerIndex: 1,
+    explanation: "For a non-pregnant adult, OGTT uses 75 g anhydrous glucose."
+  },
+  {
+    question: "Which OGTT result is consistent with impaired fasting glucose?",
+    choices: [
+      "Fasting glucose 100-125 mg/dL and 2-hour glucose <140 mg/dL",
+      "Fasting glucose <126 mg/dL and 2-hour glucose 140-199 mg/dL",
+      "Fasting glucose ≥126 mg/dL and 2-hour glucose ≥200 mg/dL",
+      "Fasting glucose <100 mg/dL and all urine samples positive for glucose"
+    ],
+    answerIndex: 0,
+    explanation: "Impaired fasting glucose means fasting plasma glucose 100-125 mg/dL with normal 2-hour postload glucose."
+  },
+  {
+    question: "Which OGTT result is consistent with impaired glucose tolerance?",
+    choices: [
+      "Fasting glucose 100-125 mg/dL and 2-hour glucose <140 mg/dL",
+      "Fasting glucose <126 mg/dL and 2-hour glucose 140-199 mg/dL",
+      "Fasting glucose ≥126 mg/dL and 2-hour glucose ≥200 mg/dL",
+      "Peak glucose ≤170 mg/dL and urine negative"
+    ],
+    answerIndex: 1,
+    explanation: "Impaired glucose tolerance means fasting glucose below the diabetic range with 2-hour postload glucose between 140 and 199 mg/dL."
+  },
+  {
+    question: "Glucose appears in urine during OGTT despite plasma glucose being below renal threshold. This suggests:",
+    choices: [
+      "Renal glycosuria",
+      "Flat tolerance curve",
+      "Diabetes mellitus",
+      "Alimentary glycosuria"
+    ],
+    answerIndex: 0,
+    explanation: "Renal glycosuria occurs when glucose appears in urine despite plasma glucose remaining below the renal threshold."
+  },
+  {
+    question: "In the 3-hour OGTT for gestational diabetes, at least two plasma glucose values must equal or exceed:",
+    choices: [
+      "Fasting 100, 1h 170, 2h 140, 3h 120 mg/dL",
+      "Fasting 95, 1h 180, 2h 155, 3h 140 mg/dL",
+      "Fasting 126, 1h 200, 2h 200, 3h 180 mg/dL",
+      "Fasting 80, 1h 140, 2h 120, 3h 100 mg/dL"
+    ],
+    answerIndex: 1,
+    explanation: "For confirmatory 3-hour OGTT in GDM, at least two values must meet or exceed fasting 95, 1h 180, 2h 155, or 3h 140 mg/dL."
+  },
+  {
+    question: "The main lipid classes in plasma are:",
+    choices: [
+      "Cholesterol, triglycerides, and phospholipids",
+      "Glucose, albumin, and bilirubin",
+      "Urea, creatinine, and uric acid",
+      "Hemoglobin, myoglobin, and ferritin"
+    ],
+    answerIndex: 0,
+    explanation: "The main plasma lipid classes are cholesterol, triglycerides, and phospholipids."
+  },
+  {
+    question: "Lipids are transported in plasma mainly as:",
+    choices: [
+      "Free insoluble droplets",
+      "Complexes with apolipoproteins called lipoproteins",
+      "Complexes with hemoglobin",
+      "Free cholesterol only"
+    ],
+    answerIndex: 1,
+    explanation: "Because lipids are water-insoluble, they are carried with apolipoproteins as lipoprotein particles."
+  },
+  {
+    question: "Chylomicrons mainly transport:",
+    choices: [
+      "Endogenous triglycerides from liver",
+      "Dietary exogenous triglycerides to tissues",
+      "Cholesterol from IDL to tissues",
+      "Excess cholesterol from tissues to liver"
+    ],
+    answerIndex: 1,
+    explanation: "Chylomicrons are the principal form in which dietary triglycerides are transported to tissues."
+  },
+  {
+    question: "VLDL mainly transports:",
+    choices: [
+      "Endogenous triglycerides from the liver to tissues",
+      "Dietary triglycerides from intestine to tissues",
+      "Reverse cholesterol from tissues to liver",
+      "Bile acids from liver to intestine"
+    ],
+    answerIndex: 0,
+    explanation: "VLDL is produced by the liver and carries endogenous triglycerides to tissues."
+  },
+  {
+    question: "IDL is formed mainly from:",
+    choices: [
+      "HDL after uptake of cholesterol",
+      "VLDL after removal of triglycerides",
+      "LDL after oxidation",
+      "Albumin-bound free fatty acids"
+    ],
+    answerIndex: 1,
+    explanation: "IDL is a remnant produced when triglycerides are removed from VLDL."
+  },
+  {
+    question: "LDL is considered a major atherogenic lipoprotein mainly because it:",
+    choices: [
+      "Removes cholesterol from arteries",
+      "Delivers cholesterol to peripheral tissues and can form foam cells when oxidized",
+      "Carries only dietary triglycerides",
+      "Has the highest protein content"
+    ],
+    answerIndex: 1,
+    explanation: "Oxidized LDL is taken up by macrophages in arterial walls, forming foam cells and contributing to atherosclerotic plaque."
+  },
+  {
+    question: "The main protective function of HDL is:",
+    choices: [
+      "Transport dietary triglycerides",
+      "Reverse cholesterol transport from peripheral tissues to liver",
+      "Increase LDL uptake by vessel wall",
+      "Transport endogenous triglycerides from liver"
+    ],
+    answerIndex: 1,
+    explanation: "HDL removes excess cholesterol from peripheral tissues and artery walls and returns it to the liver."
+  },
+  {
+    question: "Which of the following is a secondary cause of hyperlipidemia?",
+    choices: [
+      "Diabetes mellitus",
+      "Familial chylomicronemia only",
+      "Apo E receptor mutation only",
+      "LCAT stimulation by Apo A"
+    ],
+    answerIndex: 0,
+    explanation: "Secondary hyperlipidemia may be caused by endocrine/metabolic disorders such as diabetes mellitus, hypothyroidism, and pregnancy."
+  },
+  {
+    question: "Before lipid profile measurement, the patient should usually fast for:",
+    choices: [
+      "2-4 hours",
+      "6-8 hours",
+      "12-14 hours",
+      "24-48 hours"
+    ],
+    answerIndex: 2,
+    explanation: "Patient preparation for lipid measurement includes fasting for 12-14 hours."
+  },
+  {
+    question: "The standard lipid profile includes all of the following EXCEPT:",
+    choices: [
+      "Total cholesterol",
+      "Triglycerides",
+      "HDL-C",
+      "Serum bilirubin"
+    ],
+    answerIndex: 3,
+    explanation: "Routine lipid profile includes total cholesterol, triglycerides, HDL-C, and LDL-C; bilirubin is not part of the lipid profile."
+  },
+  {
+    question: "Desirable serum total cholesterol is:",
+    choices: [
+      "<150 mg/dL",
+      "<200 mg/dL",
+      "200-239 mg/dL",
+      ">240 mg/dL"
+    ],
+    answerIndex: 1,
+    explanation: "Desirable serum total cholesterol is less than 200 mg/dL."
+  },
+  {
+    question: "Desirable serum triglycerides are:",
+    choices: [
+      "<150 mg/dL",
+      "150-199 mg/dL",
+      "200-239 mg/dL",
+      ">240 mg/dL"
+    ],
+    answerIndex: 0,
+    explanation: "The desirable serum triglyceride level is less than 150 mg/dL."
+  },
+  {
+    question: "Normal HDL-C is generally considered:",
+    choices: [
+      ">40 mg/dL in males and >50 mg/dL in females",
+      "<40 mg/dL in males and <50 mg/dL in females",
+      ">100 mg/dL in both males and females",
+      "200-239 mg/dL"
+    ],
+    answerIndex: 0,
+    explanation: "The lecture lists normal HDL-C as more than 40 mg/dL in males and more than 50 mg/dL in females."
+  },
+  {
+    question: "A poorly controlled type 2 diabetic patient with HbA1c 9.5%, high triglycerides, and low HDL most likely has:",
+    choices: [
+      "Diabetic dyslipidemia due to insulin resistance",
+      "Ideal lipid profile",
+      "Isolated HDL elevation",
+      "Renal glycosuria"
+    ],
+    answerIndex: 0,
+    explanation: "Poorly controlled diabetes can cause high VLDL production, high triglycerides, and low HDL, increasing ASCVD risk."
+  }
+]
+
+
 
 
 
