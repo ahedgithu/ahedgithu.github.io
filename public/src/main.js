@@ -274,7 +274,17 @@ let subjects = [
           { label: 'Download PDF', url: '/assets/asthma-guidelines-map-v1.pdf', download: true }
         ]
       },
-      { label: 'Chronic Bronchitis and COPD', state: 'remaining', art: 10, section: 'Chest' },
+      {
+        label: 'Chronic Bronchitis and COPD',
+        state: 'taken',
+        art: 10,
+        section: 'Chest',
+        note: 'Tuesday report: Asthma Part 2 & COPD & ACOS taught by Dr. Serageldin Ali Sadek.',
+        lectureUrls: [
+          { label: 'Lecture folder', url: 'https://drive.google.com/drive/folders/1KYLyxp67TVvPqmcnl33siqUB5SSbbwYF' }
+        ],
+        audioUrl: 'https://drive.google.com/file/d/1QpUB6w-BoBRmhutzUwzUUi9kbf_L_Q0p/view?usp=drivesdk'
+      },
       { label: 'Suppurative Lung Diseases', state: 'remaining', art: 10, section: 'Chest' },
       {
         label: 'Pulmonary Embolism',
@@ -463,7 +473,12 @@ let subjects = [
         ],
         audioUrl: 'https://drive.google.com/file/d/1o1biv_U_2DBaIVnJPvbN5UXlmPfSkGlq/view?usp=drivesdk'
       },
-      { label: 'General anaesthesia', state: 'remaining', art: 15 },
+      {
+        label: 'General anaesthesia',
+        state: 'taken',
+        art: 15,
+        note: 'Tuesday report: taught by Dr. Alaa Neyazy.'
+      },
       { label: 'CPR', state: 'remaining', art: 15 },
       { label: 'Oxygen therapy', state: 'remaining', art: 15 },
       { label: 'Nutrition in ICU', state: 'remaining', art: 13 },
