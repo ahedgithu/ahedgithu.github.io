@@ -219,11 +219,12 @@ main {
 }
 
 .tracker-updated {
-  max-width: 640px;
+  max-width: min(640px, calc(100vw - 32px));
   margin: 10px auto 0;
   color: rgba(244, 245, 247, 0.64);
   font-size: 0.88rem;
   font-weight: 800;
+  overflow-wrap: break-word;
 }
 
 .whatsapp-feedback {
@@ -560,6 +561,154 @@ main {
 .semester-date-scale__tick time {
   color: var(--muted);
   font-weight: 900;
+}
+
+.exam-schedule {
+  display: grid;
+  gap: 14px;
+  margin: 20px 0 0;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.exam-schedule__summary {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 14px;
+  align-items: center;
+}
+
+.exam-calendar-tile {
+  display: grid;
+  justify-items: center;
+  min-width: 74px;
+  padding: 9px 10px 11px;
+  border: 1px solid rgba(50, 211, 154, 0.3);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(180deg, rgba(50, 211, 154, 0.15), rgba(255, 255, 255, 0.035)),
+    rgba(7, 9, 12, 0.72);
+  box-shadow: 0 18px 34px rgba(0, 0, 0, 0.22);
+}
+
+.exam-calendar-tile span,
+.exam-card span,
+.exam-card small {
+  color: var(--muted);
+  font-size: 0.66rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.exam-calendar-tile strong {
+  color: var(--text);
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.exam-calendar-tile em {
+  color: var(--green);
+  font-style: normal;
+  font-weight: 900;
+}
+
+.exam-schedule__summary > div:last-child {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.exam-schedule__summary > div:last-child > strong {
+  color: var(--text);
+  font-size: 1rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.exam-schedule__summary p,
+.exam-schedule__summary small {
+  margin: 0;
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.exam-schedule__summary p {
+  color: rgba(244, 245, 247, 0.9);
+}
+
+.exam-schedule__cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.exam-card {
+  display: grid;
+  gap: 6px;
+  width: 100%;
+  min-height: 132px;
+  padding: 13px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  color: var(--text);
+  text-align: left;
+  background: rgba(255, 255, 255, 0.04);
+  cursor: pointer;
+  transition:
+    border-color 180ms var(--ease),
+    transform 180ms var(--ease),
+    background 180ms var(--ease);
+}
+
+.exam-card:hover,
+.exam-card:focus-visible {
+  border-color: rgba(105, 167, 255, 0.45);
+  background: rgba(105, 167, 255, 0.08);
+  transform: translateY(-1px);
+  outline: none;
+}
+
+.exam-card strong {
+  color: var(--text);
+  font-size: 1rem;
+}
+
+.exam-card time,
+.exam-card em {
+  color: var(--muted);
+  font-style: normal;
+  font-weight: 850;
+}
+
+.exam-card small {
+  align-self: end;
+  width: fit-content;
+  margin-top: 5px;
+  padding: 4px 7px;
+  border-radius: 999px;
+  color: rgba(244, 245, 247, 0.8);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.exam-card--next {
+  border-color: rgba(50, 211, 154, 0.5);
+  background:
+    linear-gradient(180deg, rgba(50, 211, 154, 0.12), rgba(255, 255, 255, 0.035)),
+    rgba(16, 18, 25, 0.86);
+}
+
+.exam-card--next small {
+  color: #06110d;
+  background: var(--green);
+}
+
+.exam-card--done {
+  opacity: 0.68;
+}
+
+.exam-card--done small {
+  color: rgba(244, 245, 247, 0.72);
 }
 
 .shell {
@@ -3657,6 +3806,10 @@ main {
     flex-direction: column;
   }
 
+  .tracker-updated {
+    max-width: 340px;
+  }
+
   .race-track {
     height: 112px;
     margin: 0 8px;
@@ -3675,6 +3828,31 @@ main {
   .race-marker {
     min-width: 72px;
     font-size: 0.66rem;
+  }
+
+  .exam-schedule {
+    margin-top: 16px;
+  }
+
+  .exam-schedule__summary,
+  .exam-schedule__cards {
+    grid-template-columns: 1fr;
+  }
+
+  .exam-calendar-tile {
+    justify-self: start;
+    grid-template-columns: auto auto auto;
+    gap: 8px;
+    align-items: end;
+    min-width: 0;
+  }
+
+  .exam-calendar-tile strong {
+    font-size: 1.55rem;
+  }
+
+  .exam-card {
+    min-height: 0;
   }
 
   .whatsapp-feedback {

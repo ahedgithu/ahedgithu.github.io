@@ -6,7 +6,7 @@ let subjects = [
     code: 'SUR-1',
     name: 'Surgery 1',
     totalCount: 16,
-    examNote: 'Midterm starts Jul 18, 2026. Exact SUR-1 schedule pending.',
+    examNote: 'Midterm: Sat Jul 25, 2026, 2:30-3:30.',
     topics: [
       {
         label: 'Liver Introduction',
@@ -140,7 +140,7 @@ let subjects = [
     code: 'MED-1',
     name: 'Internal Medicine 1',
     totalCount: 15,
-    examNote: 'Midterm starts Jul 18, 2026.',
+    examNote: 'Midterm: Sat Jul 18, 2026, 2:30-3:30.',
     topics: [
       { label: "GERD, Barrett's Esophagus, Esophageal Motility Disorders", state: 'remaining', art: 1 },
       {
@@ -203,7 +203,7 @@ let subjects = [
     code: 'MED-2',
     name: 'Internal Medicine 2',
     totalCount: 28,
-    examNote: 'Midterm starts Jul 18, 2026.',
+    examNote: 'Midterm: Wed Jul 22, 2026, 2:30-3:30.',
     topics: [
       // Cardiology (14 topics)
       { label: 'Cardiology Symptomatology', state: 'remaining', art: 9, section: 'Cardio' },
@@ -510,6 +510,39 @@ const stateLabels = {
   remaining: 'Remaining'
 }
 
+const subjectExamNotes = {
+  'SUR-1': 'Midterm: Sat Jul 25, 2026, 2:30-3:30.',
+  'MED-1': 'Midterm: Sat Jul 18, 2026, 2:30-3:30.',
+  'MED-2': 'Midterm: Wed Jul 22, 2026, 2:30-3:30.'
+}
+
+const midtermExamSchedule = [
+  {
+    code: 'MED 401-1',
+    subjectCode: 'MED-1',
+    subjectName: 'Internal Medicine 1',
+    date: '2026-07-18',
+    dayLabel: 'Sat',
+    time: '2:30-3:30'
+  },
+  {
+    code: 'MED 401-2',
+    subjectCode: 'MED-2',
+    subjectName: 'Internal Medicine 2',
+    date: '2026-07-22',
+    dayLabel: 'Wed',
+    time: '2:30-3:30'
+  },
+  {
+    code: 'SUR 401-1',
+    subjectCode: 'SUR-1',
+    subjectName: 'Surgery 1',
+    date: '2026-07-25',
+    dayLabel: 'Sat',
+    time: '2:30-3:30'
+  }
+]
+
 function makeResourceList(items) {
   if (!Array.isArray(items)) return []
   return items
@@ -555,7 +588,7 @@ function mapDatabaseSubjects(subjectRows, topicRows) {
       code: subject.code,
       name: subject.name,
       totalCount: subject.total_count || topics.length,
-      examNote: subject.exam_note || '',
+      examNote: subjectExamNotes[subject.code] || subject.exam_note || '',
       topics
     }
   })
@@ -597,6 +630,11 @@ const midtermMarker = document.getElementById('midterm-marker')
 const finalsMarker = document.getElementById('finals-marker')
 const semesterDateScale = document.getElementById('semester-date-scale')
 const nextCheckpoint = document.getElementById('next-checkpoint')
+const examTodayDay = document.getElementById('exam-today-day')
+const examTodayMonth = document.getElementById('exam-today-month')
+const next401Exam = document.getElementById('next-401-exam')
+const next401Countdown = document.getElementById('next-401-countdown')
+const examScheduleCards = document.getElementById('exam-schedule-cards')
 const bookingForm = document.getElementById('booking-form')
 const bookingName = document.getElementById('booking-name')
 const bookingService = document.getElementById('booking-service')
@@ -1548,6 +1586,88 @@ function getTodayLabel() {
   }).format(new Date())
 }
 
+function getLocalDate(dateString) {
+  return new Date(`${dateString}T00:00:00`)
+}
+
+function startOfDay(date) {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate())
+}
+
+function formatExamDate(dateString) {
+  return new Intl.DateTimeFormat('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric'
+  }).format(getLocalDate(dateString))
+}
+
+function getExamCountdownText(daysUntil) {
+  if (daysUntil > 1) return `${daysUntil} days left`
+  if (daysUntil === 1) return '1 day left'
+  if (daysUntil === 0) return 'Today'
+  return 'Completed'
+}
+
+function render401ExamSchedule() {
+  if (!examScheduleCards) return
+
+  const today = new Date()
+  const todayStart = startOfDay(today)
+  const todayParts = new Intl.DateTimeFormat('en-US', {
+    day: '2-digit',
+    month: 'short'
+  }).formatToParts(today)
+  const dayPart = todayParts.find((part) => part.type === 'day')?.value || ''
+  const monthPart = todayParts.find((part) => part.type === 'month')?.value || ''
+
+  if (examTodayDay) examTodayDay.textContent = dayPart
+  if (examTodayMonth) examTodayMonth.textContent = monthPart
+
+  const scheduleWithState = midtermExamSchedule.map((exam) => {
+    const examDate = getLocalDate(exam.date)
+    const daysUntil = Math.ceil((examDate - todayStart) / 86400000)
+    return { ...exam, examDate, daysUntil }
+  })
+
+  const nextExam = scheduleWithState.find((exam) => exam.daysUntil >= 0)
+
+  if (nextExam) {
+    if (next401Exam) {
+      next401Exam.textContent = `Next 401 exam: ${nextExam.code} on ${formatExamDate(nextExam.date)}`
+    }
+    if (next401Countdown) {
+      next401Countdown.textContent = `${getExamCountdownText(nextExam.daysUntil)} - ${nextExam.subjectName} at ${nextExam.time}.`
+    }
+  } else {
+    if (next401Exam) next401Exam.textContent = '401 midterm schedule complete'
+    if (next401Countdown) next401Countdown.textContent = 'All listed 401 midterm exams have passed.'
+  }
+
+  examScheduleCards.innerHTML = scheduleWithState.map((exam) => {
+    const isNext = nextExam?.code === exam.code
+    const isDone = exam.daysUntil < 0
+    const statusLabel = isNext ? getExamCountdownText(exam.daysUntil) : isDone ? 'Completed' : 'Upcoming'
+    const stateClass = isNext ? ' exam-card--next' : isDone ? ' exam-card--done' : ''
+
+    return `
+      <button class="exam-card${stateClass}" type="button" data-code="${exam.subjectCode}" aria-label="Open ${escapeHtml(exam.subjectName)} tracker">
+        <span>${escapeHtml(exam.code)}</span>
+        <strong>${escapeHtml(exam.subjectName)}</strong>
+        <time datetime="${exam.date}T14:30">${exam.dayLabel} ${formatExamDate(exam.date)}</time>
+        <em>${escapeHtml(exam.time)}</em>
+        <small>${escapeHtml(statusLabel)}</small>
+      </button>
+    `
+  }).join('')
+
+  examScheduleCards.querySelectorAll('.exam-card').forEach((card) => {
+    card.addEventListener('click', () => {
+      setActiveSubject(card.dataset.code, 'open')
+    })
+  })
+}
+
 function clamp(value, min, max) {
   return Math.min(Math.max(value, min), max)
 }
@@ -1892,6 +2012,8 @@ if (subjectList) {
   renderSubjects()
   setActiveSubject(activeSubjectCode, initialParams.get('tracker') === '1' ? 'open' : 'closed')
   renderSemesterTimeline()
+  render401ExamSchedule()
+  window.setInterval(render401ExamSchedule, 3600000)
   loadRemoteTrackerData()
 }
 
