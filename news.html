@@ -10,7 +10,7 @@
   <meta property="og:description" content="Public class board for MED 401 assignments, quiz reminders, and student-submitted corrections." />
   <meta property="og:type" content="website" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="stylesheet" href="/src/style.css?v=20260620-login" />
+  <link rel="stylesheet" href="/src/style.css?v=20260625-midterm-news" />
   <script type="importmap">
     {
       "imports": {
@@ -87,11 +87,9 @@
           <select id="news-course-filter">
             <option value="all">All courses</option>
             <option value="Anaesthesia">Anaesthesia</option>
-            <option value="MED401-1">MED401-1</option>
-            <option value="MED401-2">MED401-2</option>
+            <option value="Nutrition">Nutrition</option>
             <option value="SUR401-1">SUR401-1</option>
             <option value="SUR401-2">SUR401-2</option>
-            <option value="ONC401">ONC401</option>
             <option value="LAB401">LAB401</option>
           </select>
         </label>
@@ -105,81 +103,71 @@
       </div>
 
       <div class="updates-board" id="news-feed" aria-live="polite">
-      <article class="update-panel update-panel--compact" data-course="MED401-2" data-date="2026-06-23">
+      <article class="update-panel update-panel--primary update-panel--wide" data-course="Nutrition" data-date="2026-07-08" data-priority="1">
         <div class="update-panel__top">
-          <p class="card__kicker">MED401-2</p>
-          <span class="status-pill status-pill--open">Jun 23</span>
+          <p class="card__kicker">Nutrition</p>
+          <span class="status-pill status-pill--exam">Jul 8</span>
         </div>
-        <h2>Bronchial Asthma Part 2 & COPD & ACOS</h2>
-        <p>
-          Dr. Serageldin Ali Sadek covered Bronchial Asthma Part 2, COPD, and ACOS. Lecture folder and audio record are uploaded.
-        </p>
+        <h2>Nutrition quiz confirmed</h2>
+        <div class="arabic-news" dir="rtl">
+          <p>
+            السلام عليكم يا دكاترة، ميعاد <span dir="ltr">Nutrition quiz</span> اتحدد بعد تصويت الطلبة:
+            <strong>يوم 8 July 2026</strong>.
+          </p>
+          <p>
+            بعد الاستقرار على الميعاد، مش هيكون فيه تأجيل فردي لأي سبب، سواء سفر أو إقامة أو ظروف شخصية.
+            أي حد هيتخلف ويمتحن لوحده في ميعاد خاص، الدرجة هتتقسم على 2.
+          </p>
+        </div>
+        <dl class="update-facts update-facts--three">
+          <div>
+            <dt>Date</dt>
+            <dd>8 July 2026</dd>
+          </div>
+          <div>
+            <dt>Course</dt>
+            <dd>Nutrition</dd>
+          </div>
+          <div>
+            <dt>Rule</dt>
+            <dd>No individual postponement</dd>
+          </div>
+        </dl>
       </article>
 
-      <article class="update-panel update-panel--compact" data-course="Anaesthesia" data-date="2026-06-23">
-        <div class="update-panel__top">
-          <p class="card__kicker">Anaesthesia</p>
-          <span class="status-pill status-pill--open">Jun 23</span>
-        </div>
-        <h2>General Anesthesia</h2>
-        <p>
-          Dr. Alaa Neyazy covered General Anesthesia.
-        </p>
-      </article>
-
-      <article class="update-panel update-panel--compact" data-course="MED401-1" data-date="2026-06-21">
-        <div class="update-panel__top">
-          <p class="card__kicker">MED401-1</p>
-          <span class="status-pill status-pill--open">Jun 21</span>
-        </div>
-        <h2>NASH, NAFLD & Autoimmune Hepatitis</h2>
-        <p>
-          Dr. Omar Heikal covered NASH & NAFLD (MASLD) and AIH. Lecture resources and audio records are uploaded.
-        </p>
-      </article>
-
-      <article class="update-panel update-panel--compact" data-course="ONC401" data-date="2026-06-21">
-        <div class="update-panel__top">
-          <p class="card__kicker">ONC401</p>
-          <span class="status-pill status-pill--open">Jun 21</span>
-        </div>
-        <h2>Hemolytic Anemia</h2>
-        <p>
-          Dr. Manal Mahmoud covered Hemolytic anemia. Lecture slides and audio records are uploaded.
-        </p>
-      </article>
-
-      <article class="update-panel update-panel--compact" data-course="SUR401-2" data-date="2026-06-21">
-        <div class="update-panel__top">
-          <p class="card__kicker">SUR401-2</p>
-          <span class="status-pill status-pill--open">Jun 21</span>
-        </div>
-        <h2>Chest Trauma</h2>
-        <p>
-          Dr. Mohand Mostafa covered Chest Trauma. Lecture slides are uploaded. No audio recording is available.
-        </p>
-      </article>
-
-      <article class="update-panel update-panel--compact" data-course="MED401-2" data-date="2026-06-21">
-        <div class="update-panel__top">
-          <p class="card__kicker">MED401-2</p>
-          <span class="status-pill status-pill--open">Jun 21</span>
-        </div>
-        <h2>Pulmonary Embolism</h2>
-        <p>
-          Dr. Ibrahim Abdelhamid covered Pulmonary Embolism. Lecture slides and audio records are uploaded.
-        </p>
-      </article>
-
-      <article class="update-panel update-panel--compact" data-course="SUR401-1" data-date="2026-06-21">
+      <article class="update-panel update-panel--primary update-panel--wide" data-course="SUR401-1" data-date="2026-06-25" data-priority="1">
         <div class="update-panel__top">
           <p class="card__kicker">SUR401-1</p>
-          <span class="status-pill status-pill--open">Jun 21</span>
+          <span class="status-pill status-pill--due">4 marks</span>
         </div>
-        <h2>Esophagus & Stomach Overview</h2>
-        <p>
-          Dr. Hisham Ahmed covered Esophageal Perforation, Corrosive Injury, Carcinoma of the Esophagus, and Stomach Overview.
-        </p>
+        <h2>Incision Academy reminder</h2>
+        <div class="arabic-news" dir="rtl">
+          <p>
+            تذكير بموضوع <span dir="ltr">Incision Academy</span> الخاص بمادة <span dir="ltr">Surgery 401-1</span>.
+            عليه <strong>4 درجات</strong>، ولازم تجيبوا <span dir="ltr">70%+</span> عشان الدرجات تتحسب.
+          </p>
+          <p>
+            فعلوا الكود على الموقع، حلوا المطلوب في <span dir="ltr">Surgery</span>، واتأكدوا إن الاسم الرباعي
+            والـ <span dir="ltr">ID</span> مكتوبين صح على الحساب.
+          </p>
+        </div>
+        <dl class="update-facts update-facts--three">
+          <div>
+            <dt>Code</dt>
+            <dd>4241F9</dd>
+          </div>
+          <div>
+            <dt>Pass</dt>
+            <dd>70%+</dd>
+          </div>
+          <div>
+            <dt>Marks</dt>
+            <dd>4 marks</dd>
+          </div>
+        </dl>
+        <a class="news-action" href="https://academy.incision.care/" target="_blank" rel="noopener noreferrer">
+          Open Incision Academy
+        </a>
       </article>
 
       <article class="update-panel update-panel--compact" data-course="Anaesthesia" data-date="2026-06-16">
@@ -187,10 +175,12 @@
           <p class="card__kicker">Anaesthesia</p>
           <span class="status-pill status-pill--open">Jun 16</span>
         </div>
-        <h2>Final-only assessment</h2>
-        <p>
-          No separate Anaesthesia quiz. Quiz marks are included with the final exam.
-        </p>
+        <h2>Anaesthesia assessment</h2>
+        <div class="arabic-news" dir="rtl">
+          <p>
+            مفيش <span dir="ltr">Anaesthesia quiz</span> منفصل. درجات الكويز داخلة مع امتحان الـ <span dir="ltr">final</span>.
+          </p>
+        </div>
         <dl class="update-facts">
           <div>
             <dt>Total</dt>
@@ -203,40 +193,18 @@
         </dl>
       </article>
 
-      <article class="update-panel update-panel--compact" data-course="SUR401-2" data-date="2026-06-16">
-        <div class="update-panel__top">
-          <p class="card__kicker">SUR401-2</p>
-          <span class="status-pill status-pill--open">Jun 16</span>
-        </div>
-        <h2>Final, attendance, and lecture quizzes</h2>
-        <p>
-          SUR401-2 total mark is 25: final exam plus attendance marks.
-        </p>
-        <dl class="update-facts">
-          <div>
-            <dt>Final</dt>
-            <dd>20 marks</dd>
-          </div>
-          <div>
-            <dt>Attendance</dt>
-            <dd>5 marks</dd>
-          </div>
-        </dl>
-        <ul class="clean-list clean-list--compact">
-          <li>Complete the quiz after each lecture.</li>
-          <li>The announcement mentioned 5 or 8 lectures for attendance; confirm the exact number with the department or class representative.</li>
-        </ul>
-      </article>
-
       <article class="update-panel update-panel--primary" data-course="LAB401" data-date="2026-09-05">
         <div class="update-panel__top">
           <p class="card__kicker">Required assignment</p>
           <span class="status-pill status-pill--due">Due Sep 5</span>
         </div>
         <h2>LAB401 Clinical Pathology Research</h2>
-        <p>
-          Printed hard-copy research for Clinical Pathology / Laboratory Medicine. Submit through the class collector.
-        </p>
+        <div class="arabic-news" dir="rtl">
+          <p>
+            مطلوب بحث مطبوع <span dir="ltr">hard copy</span> في <span dir="ltr">Clinical Pathology / Laboratory Medicine</span>.
+            التسليم من خلال مسؤول التجميع.
+          </p>
+        </div>
         <div class="assignment-progress" data-assignment-progress data-start-date="2026-06-06" data-due-date="2026-09-05">
           <div class="assignment-progress__top">
             <span>Time until deadline</span>
@@ -278,6 +246,30 @@
           <span>Lipoprotein disorders</span>
         </div>
       </article>
+
+      <article class="update-panel update-panel--compact" data-course="SUR401-2" data-date="2026-06-16">
+        <div class="update-panel__top">
+          <p class="card__kicker">SUR401-2</p>
+          <span class="status-pill status-pill--open">Jun 16</span>
+        </div>
+        <h2>SUR401-2 assessment</h2>
+        <div class="arabic-news" dir="rtl">
+          <p>
+            مجموع <span dir="ltr">SUR401-2</span> هو 25 درجة: امتحان <span dir="ltr">final</span> مع درجات حضور.
+            كملوا الكويز بعد كل محاضرة.
+          </p>
+        </div>
+        <dl class="update-facts">
+          <div>
+            <dt>Final</dt>
+            <dd>20 marks</dd>
+          </div>
+          <div>
+            <dt>Attendance</dt>
+            <dd>5 marks</dd>
+          </div>
+        </dl>
+      </article>
       </div>
     </section>
   </main>
@@ -288,7 +280,7 @@
       anonKey: '%VITE_SUPABASE_ANON_KEY%'
     }
   </script>
-  <script type="module" src="/src/main.js?v=20260625-week4-report"></script>
+  <script type="module" src="/src/main.js?v=20260625-midterm-news"></script>
 </body>
 </html>
 

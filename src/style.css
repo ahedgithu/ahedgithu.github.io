@@ -431,6 +431,23 @@ main {
   gap: 5px;
 }
 
+.checkpoint-code,
+.checkpoint-meta {
+  display: block;
+}
+
+.checkpoint-code {
+  color: var(--text);
+  font-size: 1.18rem;
+  line-height: 1.1;
+}
+
+.checkpoint-meta {
+  color: var(--green);
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+
 .semester-timeline strong {
   color: var(--muted);
   font-size: 0.76rem;
@@ -510,14 +527,11 @@ main {
 
 .race-marker--midterm b,
 .race-marker--finals b {
-  position: relative;
-  width: 58px;
-  height: 54px;
-  color: transparent;
-  border-color: transparent;
-  background: url("/assets/race-flag.png") center / contain no-repeat;
-  text-indent: -999px;
-  overflow: hidden;
+  min-width: 74px;
+  color: var(--text);
+  background:
+    linear-gradient(180deg, rgba(216, 178, 77, 0.16), rgba(255, 255, 255, 0.025)),
+    #121722;
 }
 
 .semester-date-scale {
@@ -566,9 +580,11 @@ main {
 .exam-schedule {
   display: grid;
   gap: 14px;
-  margin: 20px 0 0;
-  padding-top: 18px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin: -8px 18px 26px;
+  padding: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius);
+  background: rgba(7, 9, 12, 0.42);
 }
 
 .exam-schedule__summary {
@@ -2335,6 +2351,30 @@ main {
   line-height: 1.55;
 }
 
+.arabic-news {
+  display: grid;
+  gap: 10px;
+  margin-top: 12px;
+  color: var(--muted);
+  text-align: right;
+}
+
+.arabic-news p {
+  margin: 0;
+  line-height: 1.85;
+}
+
+.arabic-news strong {
+  color: var(--text);
+  font-weight: 900;
+}
+
+.arabic-news [dir="ltr"] {
+  display: inline-block;
+  color: rgba(244, 245, 247, 0.9);
+  font-weight: 800;
+}
+
 .status-pill {
   display: inline-flex;
   align-items: center;
@@ -2373,6 +2413,32 @@ main {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px;
   margin: 18px 0 0;
+}
+
+.update-facts--three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.news-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  margin-top: 18px;
+  padding: 10px 13px;
+  border: 1px solid rgba(54, 211, 153, 0.34);
+  border-radius: var(--radius);
+  color: #07100d;
+  background: var(--green);
+  font-size: 0.84rem;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.news-action:hover,
+.news-action:focus-visible {
+  filter: brightness(1.06);
+  outline: none;
 }
 
 .assignment-progress {
@@ -3798,7 +3864,8 @@ main {
 
   .benefit-grid,
   .app-grid,
-  .app-grid--large {
+  .app-grid--large,
+  .update-facts--three {
     grid-template-columns: 1fr;
   }
 
@@ -3831,7 +3898,8 @@ main {
   }
 
   .exam-schedule {
-    margin-top: 16px;
+    margin: -8px 8px 22px;
+    padding: 12px;
   }
 
   .exam-schedule__summary,

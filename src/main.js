@@ -1645,6 +1645,9 @@ function render401ExamSchedule() {
   const nextExam = scheduleWithState.find((exam) => exam.daysUntil >= 0)
 
   if (nextExam) {
+    if (nextCheckpoint) {
+      nextCheckpoint.innerHTML = `<span class="checkpoint-code">${escapeHtml(nextExam.code)}</span><span class="checkpoint-meta">${escapeHtml(getExamCountdownText(nextExam.daysUntil))} - ${escapeHtml(formatExamDate(nextExam.date))}, ${escapeHtml(nextExam.time)}</span>`
+    }
     if (next401Exam) {
       next401Exam.textContent = `Next 401 exam: ${nextExam.code} on ${formatExamDate(nextExam.date)}`
     }
@@ -1652,6 +1655,9 @@ function render401ExamSchedule() {
       next401Countdown.textContent = `${getExamCountdownText(nextExam.daysUntil)} - ${nextExam.subjectName} at ${nextExam.time}.`
     }
   } else {
+    if (nextCheckpoint) {
+      nextCheckpoint.innerHTML = '<span class="checkpoint-code">Finals</span><span class="checkpoint-meta">Sep 19, 2026</span>'
+    }
     if (next401Exam) next401Exam.textContent = '401 midterm schedule complete'
     if (next401Countdown) next401Countdown.textContent = 'All listed 401 midterm exams have passed.'
   }
@@ -1734,7 +1740,19 @@ function renderSemesterTimeline() {
   }
 
   if (nextCheckpoint) {
-    nextCheckpoint.textContent = today < midterm ? 'Midterm - Jul 18, 2026' : 'Finals - Sep 19, 2026'
+    const nextExam = midtermExamSchedule
+      .map((exam) => {
+        const examDate = getLocalDate(exam.date)
+        return {
+          ...exam,
+          daysUntil: Math.ceil((examDate - startOfDay(today)) / 86400000)
+        }
+      })
+      .find((exam) => exam.daysUntil >= 0)
+
+    nextCheckpoint.innerHTML = nextExam
+      ? `<span class="checkpoint-code">${escapeHtml(nextExam.code)}</span><span class="checkpoint-meta">${escapeHtml(getExamCountdownText(nextExam.daysUntil))} - ${escapeHtml(formatExamDate(nextExam.date))}, ${escapeHtml(nextExam.time)}</span>`
+      : '<span class="checkpoint-code">Finals</span><span class="checkpoint-meta">Sep 19, 2026</span>'
   }
 }
 
@@ -1996,6 +2014,8 @@ function renderNewsFilters() {
 
   cards
     .sort((a, b) => {
+      const priorityDifference = Number(b.dataset.priority || 0) - Number(a.dataset.priority || 0)
+      if (priorityDifference) return priorityDifference
       const difference = new Date(a.dataset.date || 0) - new Date(b.dataset.date || 0)
       return order === 'oldest' ? difference : -difference
     })
