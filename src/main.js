@@ -358,7 +358,7 @@ let subjects = [
   {
     code: 'NUT',
     name: 'Nutrition',
-    totalCount: 8,
+    totalCount: 9,
     examNote: 'Midterm starts Jul 18, 2026. Exact NUT schedule pending.',
     topics: [
       {
@@ -385,6 +385,12 @@ let subjects = [
         ],
         audioUrl: 'https://drive.google.com/file/d/1Lr0LftsOc_-uhH2X82uqzJ0eSkUWgSDz/view?usp=drivesdk'
       },
+      {
+        label: 'Rabies and Tetanus',
+        state: 'taken',
+        art: 13,
+        note: 'Wednesday report 24 Jun: taught by Dr. Enas Abd El-Rahim.'
+      },
       { label: 'Iodine', state: 'remaining', art: 13 },
       { label: 'Nutrition in elderly', state: 'remaining', art: 13 },
       { label: 'AIDS nutrition', state: 'remaining', art: 13 },
@@ -396,7 +402,7 @@ let subjects = [
   {
     code: 'LAB',
     name: 'Lab Medicine',
-    totalCount: 6,
+    totalCount: 7,
     examNote: 'Midterm starts Jul 18, 2026. Exact LAB schedule pending.',
     topics: [
       {
@@ -424,6 +430,12 @@ let subjects = [
           { label: 'Download PDF', url: '/assets/cardiac-biomarkers-map-v1.pdf', download: true }
         ],
         audioUrl: 'https://drive.google.com/file/d/168l5PhCSMGsl3GWyVeFpDiw8WEWaJlmC/view?usp=drivesdk'
+      },
+      {
+        label: 'Clinical Immunology Part 1',
+        state: 'taken',
+        art: 14,
+        note: 'Wednesday report 24 Jun: taught by Dr. Mohamed Mostafa.'
       },
       { label: 'Clinical Pathology Research Assignment', state: 'remaining', art: 14 },
       {
@@ -477,7 +489,7 @@ let subjects = [
         label: 'General anaesthesia',
         state: 'taken',
         art: 15,
-        note: 'Tuesday report: taught by Dr. Alaa Neyazy.'
+        note: 'Tuesday report: taught by Dr. Alaa Neyazy; stopped at muscle relaxant.'
       },
       { label: 'CPR', state: 'remaining', art: 15 },
       { label: 'Oxygen therapy', state: 'remaining', art: 15 },
