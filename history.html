@@ -11,14 +11,550 @@
   <meta property="og:type" content="website" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="stylesheet" href="/src/style.css?v=20260620-login" />
-  <script type="importmap">
-    {
-      "imports": {
-        "canvas-confetti": "https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.module.mjs"
-      }
+  <style>
+    :root {
+      --bg: #060914;
+      --panel: rgba(15, 23, 42, 0.86);
+      --panel-2: rgba(17, 27, 50, 0.92);
+      --card: rgba(30, 41, 59, 0.78);
+      --stroke: rgba(148, 163, 184, 0.22);
+      --stroke-strong: rgba(125, 211, 252, 0.34);
+      --text: #e5f2ff;
+      --muted: #92a6bd;
+      --soft: #c6d7e7;
+      --cyan: #22d3ee;
+      --blue: #60a5fa;
+      --amber: #fbbf24;
+      --green: #34d399;
+      --red: #fb7185;
+      --purple: #a78bfa;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+      --radius: 22px;
+      --radius-sm: 14px;
+      --focus: 0 0 0 3px rgba(34, 211, 238, 0.25), 0 0 0 1px rgba(34, 211, 238, 0.65) inset;
+      color-scheme: dark;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
-  </script>
-</head>
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(34, 211, 238, 0.18), transparent 30%),
+        radial-gradient(circle at 90% 0%, rgba(167, 139, 250, 0.18), transparent 24%),
+        radial-gradient(circle at 50% 100%, rgba(52, 211, 153, 0.10), transparent 35%),
+        var(--bg);
+      color: var(--text);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: linear-gradient(to bottom, black, transparent 82%);
+    }
+
+    .app {
+      width: min(1680px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 24px 0 36px;
+    }
+
+    .hero {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 22px;
+      margin-bottom: 18px;
+      padding: 22px 24px;
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.84), rgba(8, 13, 28, 0.62));
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 10px;
+      z-index: 10;
+      backdrop-filter: blur(18px);
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(1.35rem, 2.2vw, 2.3rem);
+      letter-spacing: -0.045em;
+      line-height: 1.04;
+    }
+
+    .hero p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      max-width: 780px;
+      line-height: 1.5;
+      font-size: 0.98rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      min-width: 330px;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 290px minmax(0, 1fr) 430px;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .sidebar, .main-panel, .preview {
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+
+    .sidebar, .preview {
+      position: sticky;
+      top: 118px;
+      max-height: calc(100vh - 136px);
+      overflow: auto;
+    }
+
+    .sidebar { padding: 18px; }
+    .main-panel { padding: 22px; min-height: 760px; }
+    .preview { padding: 18px; }
+
+    .small-title {
+      margin: 0 0 12px;
+      color: var(--soft);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 800;
+    }
+
+    .system-grid {
+      display: grid;
+      gap: 9px;
+      margin-bottom: 18px;
+    }
+
+    .system-btn, .step-btn, .chip, button, select, input, textarea {
+      font: inherit;
+    }
+
+    button, .system-btn, .step-btn, .chip, select, input, textarea {
+      transition: 160ms ease;
+    }
+
+    .system-btn, .step-btn {
+      width: 100%;
+      text-align: left;
+      border: 1px solid var(--stroke);
+      color: var(--text);
+      background: rgba(15, 23, 42, 0.65);
+      border-radius: 14px;
+      padding: 12px 12px;
+      cursor: pointer;
+    }
+
+    .system-btn:hover, .step-btn:hover, .chip:hover, button:hover {
+      transform: translateY(-1px);
+      border-color: rgba(34, 211, 238, 0.45);
+    }
+
+    .system-btn.active, .step-btn.active {
+      background: linear-gradient(135deg, rgba(34, 211, 238, 0.16), rgba(96, 165, 250, 0.12));
+      border-color: var(--stroke-strong);
+      box-shadow: inset 0 0 0 1px rgba(34, 211, 238, 0.12);
+    }
+
+    .system-btn b { display: block; font-size: 0.97rem; }
+    .system-btn span { display: block; color: var(--muted); font-size: 0.78rem; margin-top: 2px; }
+
+    .progress-wrap { margin: 12px 0 18px; }
+    .progress-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; font-size: 0.82rem; color: var(--muted); }
+    .progress-bar { height: 9px; border-radius: 999px; background: rgba(148, 163, 184, 0.16); overflow: hidden; border: 1px solid rgba(255,255,255,0.06); }
+    .progress-fill { height: 100%; width: 0%; border-radius: inherit; background: linear-gradient(90deg, var(--cyan), var(--green)); }
+
+    .step-list { display: grid; gap: 8px; }
+    .step-btn { display: flex; align-items: center; gap: 10px; padding: 10px; }
+    .step-dot { width: 27px; height: 27px; display: grid; place-items: center; border-radius: 50%; background: rgba(148, 163, 184, 0.12); color: var(--muted); font-weight: 900; font-size: 0.8rem; }
+    .step-btn.active .step-dot { background: rgba(34, 211, 238, 0.18); color: var(--cyan); }
+    .step-btn.done .step-dot { background: rgba(52, 211, 153, 0.18); color: var(--green); }
+    .step-label b { display: block; font-size: 0.9rem; }
+    .step-label span { display: block; color: var(--muted); font-size: 0.75rem; }
+
+    .mode-toggle {
+      display: flex;
+      gap: 7px;
+      padding: 6px;
+      background: rgba(2, 6, 23, 0.5);
+      border: 1px solid var(--stroke);
+      border-radius: 16px;
+      flex-wrap: wrap;
+    }
+
+    .mode-toggle button {
+      border: 0;
+      border-radius: 12px;
+      padding: 9px 12px;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font-weight: 800;
+      font-size: 0.84rem;
+    }
+
+    .mode-toggle button.active {
+      background: rgba(34, 211, 238, 0.16);
+      color: var(--cyan);
+    }
+
+    .step-section { display: none; animation: fadeIn 180ms ease; }
+    .step-section.active { display: block; }
+
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: flex-start;
+      border-bottom: 1px solid var(--stroke);
+      padding-bottom: 16px;
+      margin-bottom: 18px;
+    }
+
+    .section-head h2 { margin: 0; font-size: clamp(1.25rem, 2vw, 2rem); letter-spacing: -0.03em; }
+    .section-head p { margin: 8px 0 0; color: var(--muted); line-height: 1.55; max-width: 760px; }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      white-space: nowrap;
+      color: #a7f3d0;
+      background: rgba(52, 211, 153, 0.11);
+      border: 1px solid rgba(52, 211, 153, 0.18);
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-size: 0.78rem;
+      font-weight: 850;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+    }
+
+    .field { grid-column: span 6; }
+    .field.third { grid-column: span 4; }
+    .field.quarter { grid-column: span 3; }
+    .field.full { grid-column: 1 / -1; }
+    .field.two-thirds { grid-column: span 8; }
+
+    label {
+      display: block;
+      margin: 0 0 7px;
+      font-size: 0.84rem;
+      color: var(--soft);
+      font-weight: 780;
+    }
+
+    .helper {
+      color: var(--muted);
+      font-size: 0.77rem;
+      margin-top: 7px;
+      line-height: 1.45;
+    }
+
+    .hint {
+      border: 1px dashed rgba(34, 211, 238, 0.28);
+      background: rgba(34, 211, 238, 0.08);
+      color: #c9fbff;
+      padding: 12px 13px;
+      border-radius: 15px;
+      margin: 12px 0 18px;
+      font-size: 0.88rem;
+      line-height: 1.55;
+    }
+
+    .osce .hint { display: none; }
+
+    input, select, textarea {
+      width: 100%;
+      color: var(--text);
+      background: rgba(2, 6, 23, 0.48);
+      border: 1px solid rgba(148, 163, 184, 0.26);
+      border-radius: 14px;
+      padding: 12px 13px;
+      outline: none;
+    }
+
+    textarea { min-height: 100px; resize: vertical; line-height: 1.5; }
+    input:focus, select:focus, textarea:focus, button:focus-visible, .chip:focus-visible { box-shadow: var(--focus); border-color: rgba(34, 211, 238, 0.65); outline: none; }
+
+    .sub-card {
+      grid-column: 1 / -1;
+      border: 1px solid var(--stroke);
+      background: rgba(15, 23, 42, 0.55);
+      border-radius: 18px;
+      padding: 16px;
+      margin-top: 2px;
+    }
+
+    .sub-card h3 { margin: 0 0 10px; font-size: 1rem; }
+    .sub-card .form-grid { margin-top: 12px; }
+
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 42px;
+      color: var(--soft);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .checkbox-row input {
+      width: 18px;
+      height: 18px;
+      accent-color: #22d3ee;
+      flex: 0 0 auto;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 8px;
+    }
+
+    .chip {
+      border: 1px solid var(--stroke);
+      background: rgba(30, 41, 59, 0.75);
+      color: var(--soft);
+      border-radius: 999px;
+      padding: 8px 11px;
+      cursor: pointer;
+      font-size: 0.84rem;
+    }
+
+    .chip.active, .chip[aria-pressed="true"] {
+      color: var(--cyan);
+      border-color: rgba(34, 211, 238, 0.44);
+      background: rgba(34, 211, 238, 0.13);
+    }
+
+    .mini-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .stat {
+      border: 1px solid var(--stroke);
+      background: rgba(2, 6, 23, 0.36);
+      border-radius: 15px;
+      padding: 12px;
+    }
+
+    .stat b { display: block; font-size: 1.25rem; color: var(--cyan); }
+    .stat span { color: var(--muted); font-size: 0.78rem; }
+
+    .conditional { display: none; }
+    .conditional.show { display: block; }
+
+    .nav-actions {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 22px;
+      padding-top: 16px;
+      border-top: 1px solid var(--stroke);
+    }
+
+    .btn {
+      border: 1px solid var(--stroke);
+      border-radius: 14px;
+      padding: 11px 14px;
+      color: var(--text);
+      background: rgba(30, 41, 59, 0.74);
+      cursor: pointer;
+      font-weight: 850;
+    }
+
+    .btn.primary { background: linear-gradient(135deg, rgba(34, 211, 238, 0.22), rgba(96, 165, 250, 0.18)); border-color: rgba(34, 211, 238, 0.42); }
+    .btn.green { background: rgba(52, 211, 153, 0.16); border-color: rgba(52, 211, 153, 0.32); color: #c3ffe7; }
+    .btn.danger { background: rgba(251, 113, 133, 0.12); border-color: rgba(251, 113, 133, 0.28); color: #fecdd3; }
+    .btn.ghost { background: transparent; }
+
+    .preview-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .preview-head h2 { margin: 0; font-size: 1rem; }
+
+    .tabs {
+      display: flex;
+      gap: 6px;
+      padding: 5px;
+      border: 1px solid var(--stroke);
+      border-radius: 14px;
+      background: rgba(2, 6, 23, 0.35);
+      margin-bottom: 12px;
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      backdrop-filter: blur(10px);
+    }
+
+    .tabs button {
+      flex: 1;
+      border: 0;
+      border-radius: 10px;
+      padding: 8px 7px;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font-weight: 850;
+      font-size: 0.78rem;
+    }
+
+    .tabs button.active { color: var(--cyan); background: rgba(34, 211, 238, 0.12); }
+
+    .output-box {
+      min-height: 260px;
+      max-height: 44vh;
+      overflow: auto;
+      padding: 15px;
+      border-radius: 17px;
+      border: 1px solid var(--stroke);
+      background: rgba(2, 6, 23, 0.42);
+      white-space: pre-wrap;
+      line-height: 1.6;
+      color: #dbeafe;
+      font-size: 0.92rem;
+    }
+
+    .missing-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .missing-item, .good-item {
+      border: 1px solid rgba(251, 191, 36, 0.22);
+      background: rgba(251, 191, 36, 0.08);
+      color: #fde68a;
+      border-radius: 13px;
+      padding: 9px 10px;
+      font-size: 0.84rem;
+      line-height: 1.4;
+    }
+
+    .good-item { border-color: rgba(52, 211, 153, 0.22); background: rgba(52, 211, 153, 0.08); color: #bbf7d0; }
+
+    .system-symptoms {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .symptom-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 12px;
+      min-height: 54px;
+      border-radius: 14px;
+      border: 1px solid var(--stroke);
+      background: rgba(2, 6, 23, 0.35);
+    }
+
+    .symptom-card input { width: 18px; height: 18px; margin-top: 2px; accent-color: #22d3ee; }
+    .symptom-card b { display: block; font-size: 0.9rem; }
+    .symptom-card span { display: block; color: var(--muted); font-size: 0.74rem; margin-top: 2px; }
+
+    .notice {
+      border: 1px solid rgba(167, 139, 250, 0.24);
+      background: rgba(167, 139, 250, 0.09);
+      border-radius: 16px;
+      color: #ddd6fe;
+      padding: 13px;
+      font-size: 0.88rem;
+      line-height: 1.55;
+      margin: 12px 0;
+    }
+
+    .toast {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 99;
+      background: rgba(15, 23, 42, 0.92);
+      border: 1px solid rgba(52, 211, 153, 0.35);
+      color: #bbf7d0;
+      border-radius: 14px;
+      padding: 12px 14px;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
+    }
+
+    .toast.show { opacity: 1; transform: translateY(0); }
+
+    .footer-note { margin: 16px 0 0; color: var(--muted); font-size: 0.76rem; line-height: 1.45; }
+
+    @media (max-width: 1250px) {
+      .layout { grid-template-columns: 260px 1fr; }
+      .preview { grid-column: 1 / -1; position: static; max-height: none; }
+      .output-box { max-height: none; }
+    }
+
+    @media (max-width: 860px) {
+      .app { width: min(100% - 20px, 760px); padding-top: 10px; }
+      .hero { position: static; flex-direction: column; padding: 18px; }
+      .hero-actions { min-width: 0; width: 100%; justify-content: flex-start; }
+      .layout { grid-template-columns: 1fr; }
+      .sidebar { position: static; max-height: none; }
+      .main-panel { padding: 16px; }
+      .field, .field.third, .field.quarter, .field.two-thirds { grid-column: 1 / -1; }
+      .system-symptoms { grid-template-columns: 1fr; }
+      .section-head { flex-direction: column; }
+      .nav-actions { flex-direction: column; }
+      .btn { width: 100%; }
+    }
+
+    @media print {
+      body { background: white; color: black; }
+      .hero, .sidebar, .main-panel, .tabs, .preview-head .btn, .footer-note { display: none !important; }
+      .app { width: 100%; padding: 0; }
+      .layout { display: block; }
+      .preview { box-shadow: none; border: none; background: white; color: black; max-height: none; }
+      .output-box { border: none; background: white; color: black; max-height: none; }
+    }
+  </style>
 <body>
   <header class="site-header">
     <a class="brand" href="/" aria-label="Ahmed Sayed tracker home">
@@ -39,247 +575,936 @@
     <a class="site-login-link" href="/admin/login/">Login</a>
   </header>
 
-  <main>
-    <section class="history-hero" aria-labelledby="history-title">
-      <div class="section-heading">
-        <p class="eyebrow">Clinical round tool</p>
-        <h1 id="history-title">History taking</h1>
-        <p>
-          A practical general-history checklist for students: collect the patient story, avoid missing core criteria, then copy a clean presentation summary.
-        </p>
-      </div>
-    </section>
-
-    <div class="history-progress" aria-label="History completion">
+  <div class="app" id="app">
+    <header class="hero">
       <div>
-        <strong id="history-progress-count">0 / 0</strong>
-        <span>criteria checked</span>
+        <h1>History Taking Tool</h1>
+        <p>Allam-style clinical history prototype: choose a system, take the history step-by-step, and get a live case presentation with missing-question feedback.</p>
       </div>
-      <div class="history-progress__bar" aria-hidden="true">
-        <span id="history-progress-fill"></span>
-      </div>
-    </div>
-
-    <section class="history-tool" aria-label="Interactive history-taking form">
-      <form class="history-form" id="history-form">
-        <article class="history-panel history-panel--wide">
-          <div class="history-panel__top">
-            <p class="card__kicker">Opening</p>
-            <span class="status-pill status-pill--open">Start here</span>
-          </div>
-          <div class="history-check-grid">
-            <label><input type="checkbox" data-history-check /> Introduce yourself and confirm patient identity.</label>
-            <label><input type="checkbox" data-history-check /> Ask permission to take the history and to write notes.</label>
-            <label><input type="checkbox" data-history-check /> Confirm the source of history and reliability when relevant.</label>
-            <label><input type="checkbox" data-history-check /> Use open questions first, then focused questions.</label>
-          </div>
-        </article>
-
-        <article class="history-panel">
-          <p class="card__kicker">Biodata</p>
-          <h2>Patient identity</h2>
-          <div class="history-fields">
-            <label><span>Name or initials</span><input name="patientName" type="text" placeholder="e.g. Mr A.S." /></label>
-            <label><span>Sex</span><select name="sex"><option value="">Choose</option><option>Male</option><option>Female</option></select></label>
-            <label><span>Occupation</span><input name="occupation" type="text" placeholder="Current or previous job" /></label>
-            <label><span>Residence</span><input name="residence" type="text" placeholder="City / rural area / address note" /></label>
-            <label><span>Marital status</span><select name="maritalStatus"><option value="">Choose</option><option>Single</option><option>Married</option><option>Divorced</option><option>Widowed</option></select></label>
-            <label><span>History source</span><select name="source"><option value="">Choose</option><option>Patient</option><option>Relative</option><option>Caregiver</option><option>Medical record</option></select></label>
-          </div>
-
-          <details class="history-age">
-            <summary>Age: choose date of birth or type age manually</summary>
-            <div class="history-fields history-fields--two">
-              <label><span>Date of birth</span><input name="dob" type="date" /></label>
-              <label><span>Manual age</span><input name="ageManual" type="text" placeholder="e.g. 54 years" /></label>
-            </div>
-          </details>
-
-          <div class="history-check-list">
-            <label><input type="checkbox" data-history-check /> Name</label>
-            <label><input type="checkbox" data-history-check /> Age</label>
-            <label><input type="checkbox" data-history-check /> Sex</label>
-            <label><input type="checkbox" data-history-check /> Occupation</label>
-            <label><input type="checkbox" data-history-check /> Residence</label>
-          </div>
-        </article>
-
-        <article class="history-panel">
-          <p class="card__kicker">Complaint</p>
-          <h2>Main problem</h2>
-          <div class="history-fields">
-            <label><span>Chief complaint</span><input name="complaint" type="text" placeholder="Patient's own words if possible" /></label>
-            <label><span>Duration</span><input name="duration" type="text" placeholder="e.g. 3 days, 2 months" /></label>
-            <label><span>Mode of onset</span><select name="onset"><option value="">Choose</option><option>Sudden</option><option>Gradual</option><option>Progressive</option><option>Intermittent</option></select></label>
-          </div>
-          <textarea name="hpi" rows="7" placeholder="History of present illness: chronology, progression, associated symptoms, negatives, prior attacks, and what the patient did before coming."></textarea>
-          <div class="history-check-list">
-            <label><input type="checkbox" data-history-check /> Chief complaint in patient's words</label>
-            <label><input type="checkbox" data-history-check /> Duration</label>
-            <label><input type="checkbox" data-history-check /> Chronology and progression</label>
-            <label><input type="checkbox" data-history-check /> Associated symptoms</label>
-            <label><input type="checkbox" data-history-check /> Important negatives</label>
-          </div>
-        </article>
-
-        <article class="history-panel history-panel--wide">
-          <p class="card__kicker">Symptom analysis</p>
-          <h2>Use when the complaint is pain or a focused symptom</h2>
-          <div class="history-fields history-fields--four">
-            <label><span>Site</span><input name="site" type="text" /></label>
-            <label><span>Onset</span><input name="painOnset" type="text" /></label>
-            <label><span>Character</span><input name="character" type="text" placeholder="Burning, colicky, stabbing..." /></label>
-            <label><span>Radiation</span><input name="radiation" type="text" /></label>
-            <label><span>Associated symptoms</span><input name="associations" type="text" /></label>
-            <label><span>Timing / course</span><input name="timing" type="text" /></label>
-            <label><span>Exacerbating factors</span><input name="exacerbating" type="text" /></label>
-            <label><span>Relieving factors</span><input name="relieving" type="text" /></label>
-            <label><span>Severity</span><select name="severity"><option value="">Choose</option><option>Mild</option><option>Moderate</option><option>Severe</option><option>10/10</option></select></label>
-          </div>
-        </article>
-
-        <article class="history-panel">
-          <p class="card__kicker">Past history</p>
-          <h2>Medical, surgical, and admission history</h2>
-          <div class="history-toggle-grid">
-            <label><input type="checkbox" name="hypertension" /> Hypertension</label>
-            <label><input type="checkbox" name="diabetes" /> Diabetes mellitus</label>
-            <label><input type="checkbox" name="cardiac" /> Cardiac disease</label>
-            <label><input type="checkbox" name="renal" /> Renal disease</label>
-            <label><input type="checkbox" name="hepatic" /> Hepatic disease</label>
-            <label><input type="checkbox" name="asthma" /> Asthma / COPD</label>
-          </div>
-          <textarea name="pastHistory" rows="5" placeholder="Other chronic illnesses, previous admissions, blood transfusion, accidents, similar attacks."></textarea>
-          <textarea name="surgicalHistory" rows="4" placeholder="Previous operations: type, date, indication, complications."></textarea>
-          <div class="history-check-list">
-            <label><input type="checkbox" data-history-check /> Chronic diseases</label>
-            <label><input type="checkbox" data-history-check /> Previous admissions</label>
-            <label><input type="checkbox" data-history-check /> Surgical history</label>
-            <label><input type="checkbox" data-history-check /> Blood transfusion / accidents when relevant</label>
-          </div>
-        </article>
-
-        <article class="history-panel">
-          <p class="card__kicker">Drug and allergy history</p>
-          <h2>Current and previous treatment</h2>
-          <textarea name="drugHistory" rows="5" placeholder="Medication name, dose, frequency, duration, compliance, OTC/herbal drugs."></textarea>
-          <textarea name="allergies" rows="4" placeholder="Drug, food, or latex allergy and reaction type."></textarea>
-          <div class="history-check-list">
-            <label><input type="checkbox" data-history-check /> Current medications</label>
-            <label><input type="checkbox" data-history-check /> Dose and compliance</label>
-            <label><input type="checkbox" data-history-check /> Allergies and reaction</label>
-          </div>
-        </article>
-
-        <article class="history-panel">
-          <p class="card__kicker">Vaccination and family</p>
-          <h2>Prevention and relatives</h2>
-          <textarea name="vaccination" rows="4" placeholder="Childhood vaccines, COVID, hepatitis, tetanus, influenza, special vaccines when relevant."></textarea>
-          <textarea name="familyHistory" rows="5" placeholder="Similar condition, hypertension, diabetes, cardiac disease, malignancy, inherited disease, consanguinity."></textarea>
-          <div class="history-check-list">
-            <label><input type="checkbox" data-history-check /> Vaccination history</label>
-            <label><input type="checkbox" data-history-check /> Similar condition in family</label>
-            <label><input type="checkbox" data-history-check /> Hereditary or common family diseases</label>
-          </div>
-        </article>
-
-        <article class="history-panel">
-          <p class="card__kicker">Social and habits</p>
-          <h2>Daily life and exposures</h2>
-          <div class="history-toggle-grid">
-            <label><input type="checkbox" name="smoking" /> Smoking</label>
-            <label><input type="checkbox" name="alcohol" /> Alcohol</label>
-            <label><input type="checkbox" name="substance" /> Substance use</label>
-            <label><input type="checkbox" name="occupationalExposure" /> Occupational exposure</label>
-          </div>
-          <div class="history-conditional" id="smoking-details" hidden>
-            <h3>Smoking details</h3>
-            <div class="history-fields history-fields--three">
-              <label>
-                <span>Type</span>
-                <select name="smokingType">
-                  <option value="">Choose</option>
-                  <option>Cigarettes</option>
-                  <option>Vape</option>
-                  <option>Shisha</option>
-                  <option>Cigar</option>
-                  <option>Other</option>
-                </select>
-              </label>
-              <label><span>Cigarettes per day</span><input name="cigarettesPerDay" type="number" min="0" inputmode="numeric" placeholder="e.g. 20" /></label>
-              <label><span>Duration</span><input name="smokingDuration" type="text" placeholder="e.g. 10 years" /></label>
-            </div>
-          </div>
-          <div class="history-conditional" id="substance-details" hidden>
-            <h3>Substance use details</h3>
-            <div class="history-fields history-fields--two">
-              <label>
-                <span>Type</span>
-                <select name="substanceType">
-                  <option value="">Choose</option>
-                  <option>Cannabis / hashish</option>
-                  <option>Tramadol / opioids</option>
-                  <option>Benzodiazepines / sedatives</option>
-                  <option>Stimulants</option>
-                  <option>Cocaine</option>
-                  <option>Inhalants</option>
-                  <option>Other</option>
-                </select>
-              </label>
-              <label class="history-other-field" id="substance-other-field" hidden>
-                <span>Other substance</span>
-                <input name="substanceOther" type="text" placeholder="Type substance" />
-              </label>
-            </div>
-          </div>
-          <textarea name="socialHistory" rows="5" placeholder="Smoking index, alcohol/substance details, diet, exercise, living conditions, travel, animal contact, occupational exposure."></textarea>
-          <div class="history-check-list">
-            <label><input type="checkbox" data-history-check /> Smoking</label>
-            <label><input type="checkbox" data-history-check /> Alcohol</label>
-            <label><input type="checkbox" data-history-check /> Substance use</label>
-            <label><input type="checkbox" data-history-check /> Occupation and environmental exposure</label>
-          </div>
-        </article>
-
-        <article class="history-panel history-panel--wide">
-          <p class="card__kicker">Review of systems</p>
-          <h2>Screen related systems without turning it into a full lecture</h2>
-          <div class="history-system-grid">
-            <label><input type="checkbox" data-history-check /> General: fever, weight loss, appetite, fatigue</label>
-            <label><input type="checkbox" data-history-check /> Cardiovascular: chest pain, dyspnea, palpitations, edema</label>
-            <label><input type="checkbox" data-history-check /> Respiratory: cough, sputum, wheeze, hemoptysis</label>
-            <label><input type="checkbox" data-history-check /> Gastrointestinal: vomiting, dysphagia, bowel habit, bleeding</label>
-            <label><input type="checkbox" data-history-check /> Urinary: dysuria, frequency, hematuria, urine output</label>
-            <label><input type="checkbox" data-history-check /> Neurologic: headache, weakness, fits, sensory symptoms</label>
-          </div>
-          <textarea name="ros" rows="5" placeholder="Focused review of systems and important negatives."></textarea>
-        </article>
-      </form>
-
-      <aside class="history-summary" aria-labelledby="summary-title">
-        <div class="history-summary__top">
-          <div>
-            <p class="card__kicker">Presentation draft</p>
-            <h2 id="summary-title">Case summary</h2>
-          </div>
-          <button class="primary-action" id="copy-history-summary" type="button">Copy</button>
+      <div class="hero-actions">
+        <div class="mode-toggle" role="group" aria-label="Mode selector">
+          <button class="mode-btn active" data-mode="study">Study</button>
+          <button class="mode-btn" data-mode="osce">OSCE</button>
+          <button class="mode-btn" data-mode="presentation">Presentation</button>
         </div>
-        <pre id="history-summary-text">Fill the form to generate a presentation summary.</pre>
-        <p class="history-note">
-          For learning support only. Students should follow local department instructions and patient privacy rules.
-        </p>
+        <button class="btn danger" id="resetBtn" type="button">Reset</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <aside class="sidebar" aria-label="History navigation">
+        <p class="small-title">Clinical system</p>
+        <div class="system-grid" id="systemGrid"></div>
+
+        <div class="progress-wrap">
+          <div class="progress-row"><span>Completion</span><strong id="completionLabel">0%</strong></div>
+          <div class="progress-bar"><div class="progress-fill" id="completionFill"></div></div>
+        </div>
+
+        <p class="small-title">Steps</p>
+        <div class="step-list" id="stepList"></div>
+
+        <p class="footer-note">Prototype v1. Data is saved locally in this browser only. No backend, no patient privacy risk.</p>
       </aside>
-    </section>
-  </main>
+
+      <section class="main-panel" aria-live="polite">
+        <section class="step-section active" data-step="personal">
+          <div class="section-head">
+            <div>
+              <h2>Personal History</h2>
+              <p>Build the opening paragraph: identity, demographics, occupation, residence, marital data, special habits, and conditional female/neuro items.</p>
+            </div>
+            <span class="tag">NASOMRH engine</span>
+          </div>
+
+          <div class="hint">Ask like a clinician, not a robot: “What is your name? How old are you? What do you do? Where do you live?” Then convert it into a clean paragraph.</div>
+
+          <div class="form-grid">
+            <div class="field third"><label for="name">Name / initials</label><input id="name" data-key="name" placeholder="e.g., A.M." /></div>
+            <div class="field third"><label for="age">Age</label><input id="age" data-key="age" type="number" min="0" placeholder="45" /></div>
+            <div class="field third"><label for="sex">Sex</label><select id="sex" data-key="sex"><option value="">Select</option><option>Male</option><option>Female</option></select></div>
+
+            <div class="field"><label for="occupation">Occupation</label><input id="occupation" data-key="occupation" placeholder="driver / farmer / medical staff" /></div>
+            <div class="field"><label for="residence">Residence</label><input id="residence" data-key="residence" placeholder="born in..., living in..." /></div>
+
+            <div class="field third"><label for="marital">Marital state</label><select id="marital" data-key="marital"><option value="">Select</option><option>Single</option><option>Married</option><option>Divorced</option><option>Widowed</option></select></div>
+            <div class="field third"><label for="marriageDuration">Duration of marriage</label><input id="marriageDuration" data-key="marriageDuration" placeholder="20 years" /></div>
+            <div class="field third"><label for="children">Number of children</label><input id="children" data-key="children" type="number" min="0" placeholder="3" /></div>
+            <div class="field third"><label for="youngestChild">Age of youngest child</label><input id="youngestChild" data-key="youngestChild" placeholder="3 years" /></div>
+            <div class="field third"><label for="socialClass">Socioeconomic note</label><select id="socialClass" data-key="socialClass"><option value="">Optional</option><option>High social class</option><option>Middle social class</option><option>Low social class</option></select></div>
+            <div class="field third conditional" id="handednessWrap"><label for="handedness">Handedness</label><select id="handedness" data-key="handedness"><option value="">Select</option><option>Right-handed</option><option>Left-handed</option><option>Ambidextrous</option></select><div class="helper">Shown in Neurology mode.</div></div>
+
+            <div class="sub-card">
+              <label class="checkbox-row"><input type="checkbox" id="isSmoker" data-key="isSmoker" /> Smoking / special habits present</label>
+              <div class="conditional" id="smokingWrap">
+                <div class="form-grid">
+                  <div class="field third"><label for="smokingStatus">Smoking status</label><select id="smokingStatus" data-key="smokingStatus"><option value="Current smoker">Current smoker</option><option value="Ex-smoker">Ex-smoker</option><option value="Occasional smoker">Occasional smoker</option></select></div>
+                  <div class="field third"><label for="cigsDay">Cigarettes / day</label><input id="cigsDay" data-key="cigsDay" type="number" min="0" placeholder="20" /></div>
+                  <div class="field third"><label for="smokingYears">Duration in years</label><input id="smokingYears" data-key="smokingYears" type="number" min="0" placeholder="15" /></div>
+                  <div class="field"><label for="smokingType">Type</label><input id="smokingType" data-key="smokingType" placeholder="cigarettes / pipe / shisha" /></div>
+                  <div class="field"><label for="otherHabits">Other habits</label><input id="otherHabits" data-key="otherHabits" placeholder="shisha, cannabis, heroin, alcohol, drugs..." /></div>
+                </div>
+                <div class="mini-stats">
+                  <div class="stat"><b id="smokingIndex">0</b><span>Smoking index</span></div>
+                  <div class="stat"><b id="packYears">0</b><span>Pack-years</span></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="sub-card conditional" id="femaleWrap">
+              <h3>Female / menstrual history</h3>
+              <div class="form-grid">
+                <div class="field third"><label for="menarche">Menarche</label><input id="menarche" data-key="menarche" placeholder="13 years" /></div>
+                <div class="field third"><label for="menopause">Menopause</label><input id="menopause" data-key="menopause" placeholder="if applicable" /></div>
+                <div class="field third"><label for="cycleRhythm">Cycle rhythm</label><input id="cycleRhythm" data-key="cycleRhythm" placeholder="regular every 28 days" /></div>
+                <div class="field third"><label for="flowDuration">Flow duration</label><input id="flowDuration" data-key="flowDuration" placeholder="4 days" /></div>
+                <div class="field third"><label for="flowAmount">Amount / color</label><input id="flowAmount" data-key="flowAmount" placeholder="moderate, normal color" /></div>
+                <div class="field third"><label for="dysmenorrhea">Dysmenorrhea</label><select id="dysmenorrhea" data-key="dysmenorrhea"><option value="">Select</option><option>No dysmenorrhea</option><option>Has dysmenorrhea</option></select></div>
+                <div class="field"><label for="contraception">Current contraception</label><input id="contraception" data-key="contraception" placeholder="none / OCP / IUD" /></div>
+                <div class="field"><label for="obstetric">Obstetric note</label><input id="obstetric" data-key="obstetric" placeholder="pregnancies, deliveries, abortions if relevant" /></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="step-section" data-step="complaint">
+          <div class="section-head">
+            <div>
+              <h2>Complaint</h2>
+              <p>Keep it short: patient’s own words, main complaint, and duration. This becomes your C/O line.</p>
+            </div>
+            <span class="tag">C/O + duration</span>
+          </div>
+
+          <div class="hint">Complaint should not be over-medicalized. Write what brought the patient, then summarize it clinically in one line.</div>
+
+          <div class="form-grid">
+            <div class="field full"><label for="patientWords">Patient’s own words</label><textarea id="patientWords" data-key="patientWords" placeholder="e.g., I can’t breathe well since last week / مش قادر أتنفس من أسبوع"></textarea></div>
+            <div class="field two-thirds"><label for="mainComplaint">Main complaint</label><input id="mainComplaint" data-key="mainComplaint" placeholder="shortness of breath" /></div>
+            <div class="field third"><label for="complaintDuration">Duration</label><input id="complaintDuration" data-key="complaintDuration" placeholder="1 week" /></div>
+            <div class="field"><label for="complaintType">Complaint type</label><select id="complaintType" data-key="complaintType">
+              <option value="">Select</option>
+              <option value="pain">Pain</option>
+              <option value="dyspnea">Dyspnea</option>
+              <option value="cough-sputum">Cough / sputum</option>
+              <option value="bleeding">Bleeding</option>
+              <option value="swelling">Swelling</option>
+              <option value="weakness">Weakness</option>
+              <option value="fever">Fever</option>
+              <option value="abdominal">Abdominal complaint</option>
+              <option value="neuro">Neurological complaint</option>
+              <option value="excreta">Excreta: sputum / stool / urine / vomit</option>
+              <option value="other">Other</option>
+            </select></div>
+            <div class="field"><label for="complaintPriority">Most agonizing / recent?</label><input id="complaintPriority" data-key="complaintPriority" placeholder="main recent agonizing complaint" /></div>
+            <div class="field full">
+              <label>Quick complaint chips</label>
+              <div class="chips" id="complaintChips"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="step-section" data-step="hpi">
+          <div class="section-head">
+            <div>
+              <h2>History of Present Illness</h2>
+              <p>Analyze the complaint, then build a chronological story with related symptoms and prior management.</p>
+            </div>
+            <span class="tag">Story builder</span>
+          </div>
+
+          <div class="hint">Core analysis: onset, course, duration, associations, aggravating/relieving factors, effect of treatment, and last attack. Pain/excreta get extra fields.</div>
+
+          <div class="form-grid">
+            <div class="field third"><label for="onset">Onset</label><input id="onset" data-key="onset" placeholder="sudden / gradual / since..." /></div>
+            <div class="field third"><label for="course">Course</label><input id="course" data-key="course" placeholder="progressive / regressive / intermittent" /></div>
+            <div class="field third"><label for="hpiDuration">Duration details</label><input id="hpiDuration" data-key="hpiDuration" placeholder="same as complaint or details" /></div>
+            <div class="field full"><label for="associated">Associated symptoms</label><textarea id="associated" data-key="associated" placeholder="fever, cough, palpitations, vomiting..."></textarea></div>
+            <div class="field"><label for="aggravating">What increases it?</label><input id="aggravating" data-key="aggravating" placeholder="exertion, meals, posture..." /></div>
+            <div class="field"><label for="relieving">What decreases it?</label><input id="relieving" data-key="relieving" placeholder="rest, medications, position..." /></div>
+            <div class="field"><label for="treatmentEffect">Effect of treatment</label><input id="treatmentEffect" data-key="treatmentEffect" placeholder="improved / no response / not tried" /></div>
+            <div class="field"><label for="lastAttack">Date of last attack</label><input id="lastAttack" data-key="lastAttack" placeholder="yesterday / 2 months ago / first attack" /></div>
+
+            <div class="sub-card conditional" id="painWrap">
+              <h3>Pain analysis</h3>
+              <div class="form-grid">
+                <div class="field third"><label for="painSite">Site</label><input id="painSite" data-key="painSite" placeholder="retrosternal / epigastric / RUQ" /></div>
+                <div class="field third"><label for="painCharacter">Character</label><input id="painCharacter" data-key="painCharacter" placeholder="burning / colicky / crushing" /></div>
+                <div class="field third"><label for="painRadiation">Radiation</label><input id="painRadiation" data-key="painRadiation" placeholder="left arm / back / shoulder" /></div>
+              </div>
+            </div>
+
+            <div class="sub-card conditional" id="excretaWrap">
+              <h3>Excreta analysis</h3>
+              <div class="form-grid">
+                <div class="field third"><label for="amount">Amount</label><input id="amount" data-key="amount" placeholder="small / large / cups/day" /></div>
+                <div class="field third"><label for="content">Content</label><input id="content" data-key="content" placeholder="blood / mucus / food particles" /></div>
+                <div class="field third"><label for="color">Color</label><input id="color" data-key="color" placeholder="yellow / green / black / red" /></div>
+                <div class="field"><label for="consistency">Consistency</label><input id="consistency" data-key="consistency" placeholder="watery / mucoid / hard" /></div>
+                <div class="field"><label for="odour">Odour</label><input id="odour" data-key="odour" placeholder="offensive / normal / no odour" /></div>
+              </div>
+            </div>
+
+            <div class="sub-card">
+              <h3>Variants</h3>
+              <div class="form-grid">
+                <div class="field third"><label for="postural">Postural variation</label><input id="postural" data-key="postural" placeholder="worse lying / better sitting" /></div>
+                <div class="field third"><label for="diurnal">Diurnal variation</label><input id="diurnal" data-key="diurnal" placeholder="morning / night / no variation" /></div>
+                <div class="field third"><label for="seasonal">Seasonal variation</label><input id="seasonal" data-key="seasonal" placeholder="winter / spring / no variation" /></div>
+              </div>
+            </div>
+
+            <div class="field full"><label for="investigationTreatment">Investigations / treatment already done for this complaint</label><textarea id="investigationTreatment" data-key="investigationTreatment" placeholder="X-ray, ECG, labs, medications, hospital visits..."></textarea></div>
+          </div>
+        </section>
+
+        <section class="step-section" data-step="related">
+          <div class="section-head">
+            <div>
+              <h2>Related System Symptoms</h2>
+              <p>Checklist changes according to the selected system. Use notes to add positives and important negatives.</p>
+            </div>
+            <span class="tag" id="systemTag">General</span>
+          </div>
+
+          <div class="hint">In OSCE, related symptoms are where you prove you understand the system, not just the chief complaint.</div>
+
+          <div class="system-symptoms" id="relatedSymptoms"></div>
+          <div class="form-grid" style="margin-top:14px;">
+            <div class="field full"><label for="relatedNotes">Related symptoms notes</label><textarea id="relatedNotes" data-key="relatedNotes" placeholder="Write important positives and negatives here..."></textarea></div>
+            <div class="field full"><label for="systemicReview">Systemic review / other systems</label><textarea id="systemicReview" data-key="systemicReview" placeholder="fever, weight loss, appetite, urinary symptoms, other systems..."></textarea></div>
+          </div>
+        </section>
+
+        <section class="step-section" data-step="past">
+          <div class="section-head">
+            <div>
+              <h2>Past History</h2>
+              <p>Diseases, operations, transfusion, drug history, allergies, and chronic risk factors like DM/HTN/TB/IHD.</p>
+            </div>
+            <span class="tag">Disease · Operative · Drugs</span>
+          </div>
+
+          <div class="hint">For any past disease: ask duration, manifestations, investigations, treatment, and complications.</div>
+
+          <div class="form-grid">
+            <div class="field third"><label for="dm">Diabetes mellitus</label><select id="dm" data-key="dm"><option value="">Not asked</option><option>No DM</option><option>Known DM</option><option>Newly discovered DM</option></select></div>
+            <div class="field third"><label for="htn">Hypertension</label><select id="htn" data-key="htn"><option value="">Not asked</option><option>No HTN</option><option>Known HTN</option><option>Newly discovered HTN</option></select></div>
+            <div class="field third"><label for="tb">Tuberculosis</label><select id="tb" data-key="tb"><option value="">Not asked</option><option>No TB history</option><option>Past TB</option><option>Contact with TB</option></select></div>
+            <div class="field third"><label for="ihd">IHD</label><select id="ihd" data-key="ihd"><option value="">Not asked</option><option>No IHD</option><option>Known IHD</option></select></div>
+            <div class="field third"><label for="similarAttacks">Similar attacks</label><input id="similarAttacks" data-key="similarAttacks" placeholder="none / previous attacks" /></div>
+            <div class="field third"><label for="allergies">Allergies</label><input id="allergies" data-key="allergies" placeholder="none / penicillin / food..." /></div>
+            <div class="field"><label for="operations">Operations</label><textarea id="operations" data-key="operations" placeholder="date, site, outcome"></textarea></div>
+            <div class="field"><label for="transfusion">Blood transfusion</label><textarea id="transfusion" data-key="transfusion" placeholder="history, date, reactions"></textarea></div>
+            <div class="field full"><label for="drugs">Drug history / chronic medications</label><textarea id="drugs" data-key="drugs" placeholder="steroids, OCP, antihypertensives, anti-TB, anticoagulants..."></textarea></div>
+            <div class="field full"><label for="pastDetails">Past history details</label><textarea id="pastDetails" data-key="pastDetails" placeholder="duration, manifestations, investigations, treatment, complications..."></textarea></div>
+          </div>
+        </section>
+
+        <section class="step-section" data-step="family">
+          <div class="section-head">
+            <div>
+              <h2>Family + Social History</h2>
+              <p>Consanguinity, similar conditions, chronic diseases, living conditions, and occupational clues.</p>
+            </div>
+            <span class="tag">Risk context</span>
+          </div>
+
+          <div class="form-grid">
+            <div class="field third"><label for="consanguinity">Consanguinity</label><select id="consanguinity" data-key="consanguinity"><option value="">Not asked</option><option>No consanguinity</option><option>Positive consanguinity</option></select></div>
+            <div class="field third"><label for="familyDM">Family DM</label><select id="familyDM" data-key="familyDM"><option value="">Not asked</option><option>No family history of DM</option><option>Positive family history of DM</option></select></div>
+            <div class="field third"><label for="familyHTN">Family HTN</label><select id="familyHTN" data-key="familyHTN"><option value="">Not asked</option><option>No family history of HTN</option><option>Positive family history of HTN</option></select></div>
+            <div class="field third"><label for="familyTB">Family TB</label><select id="familyTB" data-key="familyTB"><option value="">Not asked</option><option>No family history of TB</option><option>Positive family history of TB</option></select></div>
+            <div class="field third"><label for="familyIHD">Family IHD</label><select id="familyIHD" data-key="familyIHD"><option value="">Not asked</option><option>No family history of IHD</option><option>Positive family history of IHD</option></select></div>
+            <div class="field third"><label for="similarFamily">Similar condition</label><select id="similarFamily" data-key="similarFamily"><option value="">Not asked</option><option>No similar condition</option><option>Similar condition present</option></select></div>
+            <div class="field full"><label for="familyDetails">Family details</label><textarea id="familyDetails" data-key="familyDetails" placeholder="who has the disease, age, relation, details..."></textarea></div>
+            <div class="field full"><label for="livingConditions">Living conditions / exposure</label><textarea id="livingConditions" data-key="livingConditions" placeholder="animals, insects, poor sanitation, crowding, occupational exposure..."></textarea></div>
+          </div>
+        </section>
+
+        <section class="step-section" data-step="final">
+          <div class="section-head">
+            <div>
+              <h2>Final Review</h2>
+              <p>Review the generated history, missing questions, and OSCE summary. Then copy or print.</p>
+            </div>
+            <span class="tag">Ready to present</span>
+          </div>
+
+          <div class="notice">Use this page as a checkpoint: complete the amber missing items, then copy the polished history from the right panel.</div>
+          <div id="finalMissing" class="missing-list"></div>
+          <div class="nav-actions">
+            <button class="btn ghost" type="button" id="printBtn">Print / Save as PDF</button>
+            <button class="btn green" type="button" id="copyFinalBtn">Copy final history</button>
+          </div>
+        </section>
+
+        <div class="nav-actions">
+          <button class="btn ghost" type="button" id="prevStep">← Previous</button>
+          <button class="btn primary" type="button" id="nextStep">Next →</button>
+        </div>
+      </section>
+
+      <aside class="preview" aria-label="Generated output">
+        <div class="preview-head">
+          <h2>Live Output</h2>
+          <button class="btn green" id="copyBtn" type="button">Copy</button>
+        </div>
+        <div class="tabs">
+          <button class="tab-btn active" data-tab="full" type="button">Full</button>
+          <button class="tab-btn" data-tab="osce" type="button">OSCE</button>
+          <button class="tab-btn" data-tab="missing" type="button">Missing</button>
+        </div>
+        <div class="output-box" id="outputBox"></div>
+        <div class="missing-list" id="missingBox"></div>
+        <p class="footer-note">Tip: in Presentation Mode, the right panel focuses on the clean case presentation.</p>
+      </aside>
+    </main>
+  </div>
+
+  <div class="toast" id="toast">Copied.</div>
 
   <script>
-    window.SUPABASE_CONFIG = {
-      url: '%VITE_SUPABASE_URL%',
-      anonKey: '%VITE_SUPABASE_ANON_KEY%'
+    const systems = {
+      general: {
+        label: "General",
+        desc: "Basic history sheet",
+        complaints: ["Fever", "Weight loss", "Fatigue", "Swelling", "Pallor", "Jaundice"],
+        symptoms: [
+          ["Fever", "pattern, grade, chills"], ["Weight loss", "amount, duration, appetite"], ["Night sweats", "TB/lymphoma clue"], ["Pallor", "anemia clue"],
+          ["Jaundice", "urine/stool/pruritus"], ["Cyanosis", "central/peripheral"], ["Edema", "site, pitting, timing"], ["Rash", "type, distribution"]
+        ]
+      },
+      cardiology: {
+        label: "Cardiology",
+        desc: "Cardiac symptoms",
+        complaints: ["Dyspnea", "Chest pain", "Palpitations", "Syncope", "LL edema", "Orthopnea"],
+        symptoms: [
+          ["Dyspnea", "exertional grade"], ["Orthopnea", "number of pillows"], ["PND", "wakes from sleep"], ["Chest pain", "site/character/radiation"],
+          ["Palpitations", "onset/rhythm/duration"], ["Syncope", "pre/post-event"], ["LL edema", "dependent/pitting"], ["Cyanosis", "central/peripheral"],
+          ["Cough/hemoptysis", "pulmonary congestion"], ["Fatigue", "low COP clue"]
+        ]
+      },
+      chest: {
+        label: "Chest",
+        desc: "Respiratory symptoms",
+        complaints: ["Cough", "Sputum", "Dyspnea", "Wheeze", "Hemoptysis", "Chest pain"],
+        symptoms: [
+          ["Cough", "dry/productive, timing"], ["Sputum", "amount/color/odour"], ["Hemoptysis", "streaks vs massive"], ["Dyspnea", "acute/subacute/chronic"],
+          ["Wheeze", "episodic/triggered"], ["Chest pain", "pleuritic/localized"], ["Fever", "infection clue"], ["Weight loss", "TB/malignancy"],
+          ["Occupational exposure", "dust/asbestos/farm"], ["Allergy/asthma", "personal/family"]
+        ]
+      },
+      abdomen: {
+        label: "Abdomen / GIT",
+        desc: "GIT + hepatology",
+        complaints: ["Abdominal pain", "Vomiting", "Diarrhea", "Constipation", "Jaundice", "Abdominal swelling"],
+        symptoms: [
+          ["Dysphagia", "solids/liquids"], ["Vomiting", "content/amount/relation"], ["Hematemesis", "fresh/coffee ground"], ["Abdominal pain", "site/character/radiation"],
+          ["Diarrhea", "frequency/consistency/blood"], ["Constipation", "duration/obstruction"], ["Melena", "black tarry stool"], ["Jaundice", "urine/stool/pruritus"],
+          ["Abdominal swelling", "ascites/mass"], ["LL swelling", "hepatic/cardiac clue"], ["Urinary symptoms", "renal overlap"], ["Gynecological symptoms", "female patients"]
+        ]
+      },
+      neurology: {
+        label: "Neurology",
+        desc: "CNS history",
+        complaints: ["Weakness", "Headache", "Convulsions", "Sensory loss", "Speech trouble", "Sphincter trouble"],
+        symptoms: [
+          ["Headache", "ICT/red flags"], ["Projectile vomiting", "ICT clue"], ["Blurring of vision", "optic/ICT"], ["Convulsions", "type/post-ictal"],
+          ["Motor weakness", "side/distribution"], ["Sensory symptoms", "level/modality"], ["Speech symptoms", "aphasia/dysarthria"], ["Sphincter troubles", "retention/incontinence"],
+          ["Cranial nerves", "vision/diplopia/facial"], ["Trauma", "exclude in history"], ["Fever/malaise", "inflammation clue"], ["Hypothalamic symptoms", "sleep/appetite/temp"]
+        ]
+      },
+      rheumatology: {
+        label: "Rheumatology",
+        desc: "Articular + extra-articular",
+        complaints: ["Joint pain", "Joint swelling", "Morning stiffness", "Back pain", "Rash", "Oral ulcers"],
+        symptoms: [
+          ["Joint pain", "site, number, symmetry"], ["Swelling", "inflammatory/mechanical"], ["Morning stiffness", "duration"], ["Deformity", "type/progression"],
+          ["Limitation", "function/disability"], ["Skin rash", "malar/psoriasis/nodules"], ["Eye symptoms", "redness/uveitis"], ["Oral ulcers", "SLE/Behçet clue"],
+          ["Raynaud’s", "color change/cold"], ["Back pain", "inflammatory features"], ["Fever/weight loss", "systemic"], ["Drug history", "steroids/NSAIDs"]
+        ]
+      }
+    };
+
+    const steps = [
+      { id: "personal", label: "Personal", desc: "NASOMRH" },
+      { id: "complaint", label: "Complaint", desc: "C/O + duration" },
+      { id: "hpi", label: "HPI", desc: "analysis story" },
+      { id: "related", label: "Related", desc: "system symptoms" },
+      { id: "past", label: "Past", desc: "disease/drugs" },
+      { id: "family", label: "Family", desc: "risk context" },
+      { id: "final", label: "Final", desc: "review/copy" }
+    ];
+
+    const requiredKeys = [
+      "age", "sex", "occupation", "residence", "mainComplaint", "complaintDuration",
+      "complaintType", "onset", "course", "associated", "aggravating", "relieving",
+      "treatmentEffect", "dm", "htn", "tb", "familyDM", "familyHTN", "consanguinity"
+    ];
+
+    const defaultState = {
+      system: "general",
+      step: "personal",
+      mode: "study",
+      tab: "full",
+      relatedSymptoms: []
+    };
+
+    let state = loadState();
+
+    function loadState() {
+      try {
+        const saved = localStorage.getItem("historyToolState.v1");
+        return saved ? { ...defaultState, ...JSON.parse(saved) } : { ...defaultState };
+      } catch {
+        return { ...defaultState };
+      }
     }
+
+    function saveState() {
+      localStorage.setItem("historyToolState.v1", JSON.stringify(state));
+    }
+
+    const $ = (sel) => document.querySelector(sel);
+    const $$ = (sel) => Array.from(document.querySelectorAll(sel));
+
+    function value(key) {
+      const v = state[key];
+      if (v === undefined || v === null || v === false) return "";
+      return String(v).trim();
+    }
+
+    function sentence(text) {
+      const t = String(text || "").trim();
+      if (!t) return "";
+      return /[.!?]$/.test(t) ? t : t + ".";
+    }
+
+    function joinParts(parts, sep = ", ") {
+      return parts.filter(Boolean).map(x => String(x).trim()).filter(Boolean).join(sep);
+    }
+
+    function smokingStats() {
+      const cigs = Number(value("cigsDay")) || 0;
+      const years = Number(value("smokingYears")) || 0;
+      const index = cigs * years;
+      const pack = cigs * years / 20;
+      let grade = "";
+      if (index > 0) grade = index < 100 ? "mild" : index <= 400 ? "moderate" : "heavy";
+      return { index, pack: Number.isInteger(pack) ? pack : pack.toFixed(1), grade };
+    }
+
+    function renderSystems() {
+      const grid = $("#systemGrid");
+      grid.innerHTML = "";
+      Object.entries(systems).forEach(([id, sys]) => {
+        const btn = document.createElement("button");
+        btn.className = "system-btn" + (state.system === id ? " active" : "");
+        btn.type = "button";
+        btn.innerHTML = `<b>${sys.label}</b><span>${sys.desc}</span>`;
+        btn.addEventListener("click", () => {
+          state.system = id;
+          state.relatedSymptoms = [];
+          state.step = "personal";
+          saveState();
+          renderAll();
+        });
+        grid.appendChild(btn);
+      });
+    }
+
+    function renderSteps() {
+      const list = $("#stepList");
+      list.innerHTML = "";
+      const currentIndex = steps.findIndex(s => s.id === state.step);
+      steps.forEach((s, i) => {
+        const btn = document.createElement("button");
+        btn.className = "step-btn" + (state.step === s.id ? " active" : "") + (i < currentIndex ? " done" : "");
+        btn.type = "button";
+        btn.innerHTML = `<span class="step-dot">${i < currentIndex ? "✓" : i + 1}</span><span class="step-label"><b>${s.label}</b><span>${s.desc}</span></span>`;
+        btn.addEventListener("click", () => {
+          state.step = s.id;
+          saveState();
+          renderAll();
+        });
+        list.appendChild(btn);
+      });
+    }
+
+    function renderMode() {
+      $$(".mode-btn").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.mode === state.mode);
+      });
+      document.body.classList.toggle("osce", state.mode === "osce");
+      if (state.mode === "presentation") state.tab = "osce";
+    }
+
+    function renderStepSections() {
+      $$(".step-section").forEach(sec => sec.classList.toggle("active", sec.dataset.step === state.step));
+      const index = steps.findIndex(s => s.id === state.step);
+      $("#prevStep").disabled = index === 0;
+      $("#nextStep").textContent = index === steps.length - 1 ? "Back to start →" : "Next →";
+      $("#systemTag").textContent = systems[state.system].label;
+    }
+
+    function renderInputs() {
+      $$('[data-key]').forEach(el => {
+        const key = el.dataset.key;
+        if (el.type === "checkbox") {
+          el.checked = Boolean(state[key]);
+        } else if (el.tagName === "SELECT" || el.tagName === "INPUT" || el.tagName === "TEXTAREA") {
+          el.value = state[key] ?? "";
+        }
+      });
+      updateConditionals();
+    }
+
+    function renderComplaintChips() {
+      const wrap = $("#complaintChips");
+      wrap.innerHTML = "";
+      systems[state.system].complaints.forEach(label => {
+        const chip = document.createElement("button");
+        chip.type = "button";
+        chip.className = "chip" + (value("mainComplaint").toLowerCase() === label.toLowerCase() ? " active" : "");
+        chip.textContent = label;
+        chip.addEventListener("click", () => {
+          state.mainComplaint = label.toLowerCase();
+          const lower = label.toLowerCase();
+          if (lower.includes("pain")) state.complaintType = "pain";
+          else if (lower.includes("cough") || lower.includes("sputum")) state.complaintType = "cough-sputum";
+          else if (lower.includes("dyspnea") || lower.includes("breath")) state.complaintType = "dyspnea";
+          else if (lower.includes("swelling") || lower.includes("edema")) state.complaintType = "swelling";
+          else if (lower.includes("fever")) state.complaintType = "fever";
+          else if (lower.includes("weakness")) state.complaintType = "weakness";
+          saveState();
+          renderAll();
+        });
+        wrap.appendChild(chip);
+      });
+    }
+
+    function renderRelatedSymptoms() {
+      const wrap = $("#relatedSymptoms");
+      wrap.innerHTML = "";
+      const selected = new Set(state.relatedSymptoms || []);
+      systems[state.system].symptoms.forEach(([name, detail]) => {
+        const label = document.createElement("label");
+        label.className = "symptom-card";
+        label.innerHTML = `<input type="checkbox" ${selected.has(name) ? "checked" : ""} /><span><b>${name}</b><span>${detail}</span></span>`;
+        label.querySelector("input").addEventListener("change", (e) => {
+          if (e.target.checked) selected.add(name); else selected.delete(name);
+          state.relatedSymptoms = Array.from(selected);
+          saveState();
+          renderOutput();
+          renderProgress();
+        });
+        wrap.appendChild(label);
+      });
+    }
+
+    function updateConditionals() {
+      $("#femaleWrap").classList.toggle("show", value("sex") === "Female");
+      $("#handednessWrap").classList.toggle("show", state.system === "neurology");
+      $("#smokingWrap").classList.toggle("show", Boolean(state.isSmoker));
+      const type = value("complaintType");
+      const needsPain = type === "pain" || value("mainComplaint").toLowerCase().includes("pain");
+      const needsExcreta = ["excreta", "cough-sputum", "bleeding"].includes(type) || ["sputum", "diarrhea", "vomit", "urine", "stool", "hemoptysis", "hematemesis", "melena"].some(w => value("mainComplaint").toLowerCase().includes(w));
+      $("#painWrap").classList.toggle("show", needsPain);
+      $("#excretaWrap").classList.toggle("show", needsExcreta);
+
+      const stats = smokingStats();
+      $("#smokingIndex").textContent = stats.index ? `${stats.index} ${stats.grade ? `(${stats.grade})` : ""}` : "0";
+      $("#packYears").textContent = stats.pack || "0";
+    }
+
+    function missingQuestions() {
+      const missing = [];
+      const add = (key, text) => { if (!value(key)) missing.push(text); };
+
+      add("age", "Ask the patient’s age.");
+      add("sex", "Record sex.");
+      add("occupation", "Ask occupation and occupational exposure.");
+      add("residence", "Ask residence / place of living.");
+      add("mainComplaint", "Write the main complaint.");
+      add("complaintDuration", "Add duration to the complaint.");
+      add("complaintType", "Choose complaint type so the tool can guide analysis.");
+      add("onset", "Analyze onset.");
+      add("course", "Analyze course.");
+      add("associated", "Ask associated symptoms.");
+      add("aggravating", "Ask what increases the complaint.");
+      add("relieving", "Ask what decreases the complaint.");
+      add("treatmentEffect", "Ask about effect of treatment.");
+      add("dm", "Ask past history of DM.");
+      add("htn", "Ask past history of hypertension.");
+      add("tb", "Ask past/contact history of TB.");
+      add("familyDM", "Ask family history of DM.");
+      add("familyHTN", "Ask family history of HTN.");
+      add("consanguinity", "Ask consanguinity.");
+
+      const type = value("complaintType");
+      const lowerComplaint = value("mainComplaint").toLowerCase();
+      const needsPain = type === "pain" || lowerComplaint.includes("pain");
+      const needsExcreta = ["excreta", "cough-sputum", "bleeding"].includes(type) || ["sputum", "diarrhea", "vomit", "urine", "stool", "hemoptysis", "hematemesis", "melena"].some(w => lowerComplaint.includes(w));
+
+      if (needsPain) {
+        add("painSite", "Pain complaint: ask site.");
+        add("painCharacter", "Pain complaint: ask character.");
+        add("painRadiation", "Pain complaint: ask radiation.");
+      }
+      if (needsExcreta) {
+        add("amount", "Excreta complaint: ask amount.");
+        add("color", "Excreta complaint: ask color.");
+        add("consistency", "Excreta complaint: ask consistency.");
+        add("odour", "Excreta complaint: ask odour.");
+      }
+      if (state.system === "neurology") add("handedness", "Neurology mode: add handedness.");
+      if (value("sex") === "Female") {
+        add("menarche", "Female patient: ask menarche.");
+        add("cycleRhythm", "Female patient: ask menstrual cycle rhythm.");
+        add("flowDuration", "Female patient: ask duration of flow.");
+        add("dysmenorrhea", "Female patient: ask dysmenorrhea.");
+        add("contraception", "Female patient: ask current contraception.");
+      }
+      if (!state.relatedSymptoms || state.relatedSymptoms.length === 0) missing.push("Ask/check related system symptoms.");
+
+      return missing;
+    }
+
+    function completion() {
+      const keys = [...requiredKeys];
+      const type = value("complaintType");
+      const lowerComplaint = value("mainComplaint").toLowerCase();
+      if (type === "pain" || lowerComplaint.includes("pain")) keys.push("painSite", "painCharacter", "painRadiation");
+      if (["excreta", "cough-sputum", "bleeding"].includes(type) || ["sputum", "diarrhea", "vomit", "urine", "stool", "hemoptysis", "hematemesis", "melena"].some(w => lowerComplaint.includes(w))) keys.push("amount", "color", "consistency", "odour");
+      if (state.system === "neurology") keys.push("handedness");
+      if (value("sex") === "Female") keys.push("menarche", "cycleRhythm", "flowDuration", "dysmenorrhea", "contraception");
+      const done = keys.filter(k => value(k)).length + ((state.relatedSymptoms || []).length ? 1 : 0);
+      const total = keys.length + 1;
+      return Math.round((done / total) * 100);
+    }
+
+    function renderProgress() {
+      const pct = completion();
+      $("#completionLabel").textContent = pct + "%";
+      $("#completionFill").style.width = pct + "%";
+    }
+
+    function personalParagraph() {
+      const parts = [];
+      const gender = value("sex") ? value("sex").toLowerCase() : "Patient";
+      const name = value("name") ? ` ${value("name")}` : "";
+      let opener = `${value("sex") || "Patient"}${name}`;
+      if (value("age")) opener += `, ${value("age")}-year-old`;
+      if (value("occupation")) opener += `, ${value("occupation")}`;
+      parts.push(opener);
+
+      const residence = value("residence") ? `living in ${value("residence")}` : "";
+      const marital = value("marital") ? value("marital").toLowerCase() : "";
+      const marriage = value("marriageDuration") ? `for ${value("marriageDuration")}` : "";
+      const children = value("children") ? `with ${value("children")} living offspring` : "";
+      const youngest = value("youngestChild") ? `the youngest is ${value("youngestChild")}` : "";
+      parts.push(joinParts([residence, marital, marriage, children, youngest]));
+
+      if (state.system === "neurology" && value("handedness")) parts.push(value("handedness"));
+
+      if (state.isSmoker) {
+        const stats = smokingStats();
+        const smoke = joinParts([
+          value("smokingStatus") || "smoker",
+          value("cigsDay") ? `${value("cigsDay")} cigarettes/day` : "",
+          value("smokingYears") ? `for ${value("smokingYears")} years` : "",
+          stats.index ? `smoking index ${stats.index}${stats.grade ? ` (${stats.grade})` : ""}` : "",
+          stats.pack ? `${stats.pack} pack-years` : "",
+          value("smokingType") ? `type: ${value("smokingType")}` : ""
+        ]);
+        parts.push(smoke);
+      } else {
+        parts.push("no special habits documented");
+      }
+      if (value("otherHabits")) parts.push(`Other habits: ${value("otherHabits")}`);
+
+      if (value("sex") === "Female") {
+        const menstrual = joinParts([
+          value("menarche") ? `menarche at ${value("menarche")}` : "",
+          value("menopause") ? `menopause: ${value("menopause")}` : "",
+          value("cycleRhythm") ? `cycle ${value("cycleRhythm")}` : "",
+          value("flowDuration") ? `flow duration ${value("flowDuration")}` : "",
+          value("flowAmount") ? `flow ${value("flowAmount")}` : "",
+          value("dysmenorrhea"),
+          value("contraception") ? `contraception: ${value("contraception")}` : "",
+          value("obstetric") ? `obstetric note: ${value("obstetric")}` : ""
+        ]);
+        if (menstrual) parts.push(`Menstrual history: ${menstrual}`);
+      }
+
+      if (value("socialClass")) parts.push(value("socialClass"));
+      return sentence(joinParts(parts));
+    }
+
+    function complaintLine() {
+      const complaint = value("mainComplaint") || "[main complaint]";
+      const duration = value("complaintDuration") ? ` of ${value("complaintDuration")} duration` : "";
+      return `C/O: ${complaint}${duration}.`;
+    }
+
+    function hpiParagraph() {
+      const chunks = [];
+      const complaint = value("mainComplaint") || "the complaint";
+      chunks.push(`The patient presented with ${complaint}${value("complaintDuration") ? ` for ${value("complaintDuration")}` : ""}`);
+      if (value("onset")) chunks.push(`onset was ${value("onset")}`);
+      if (value("course")) chunks.push(`course was ${value("course")}`);
+      if (value("hpiDuration")) chunks.push(`duration details: ${value("hpiDuration")}`);
+      if (value("associated")) chunks.push(`associated with ${value("associated")}`);
+      if (value("aggravating")) chunks.push(`increased by ${value("aggravating")}`);
+      if (value("relieving")) chunks.push(`relieved by ${value("relieving")}`);
+      if (value("treatmentEffect")) chunks.push(`effect of treatment: ${value("treatmentEffect")}`);
+      if (value("lastAttack")) chunks.push(`last attack: ${value("lastAttack")}`);
+
+      const pain = joinParts([
+        value("painSite") ? `site: ${value("painSite")}` : "",
+        value("painCharacter") ? `character: ${value("painCharacter")}` : "",
+        value("painRadiation") ? `radiation: ${value("painRadiation")}` : ""
+      ]);
+      if (pain) chunks.push(`Pain analysis: ${pain}`);
+
+      const excreta = joinParts([
+        value("amount") ? `amount: ${value("amount")}` : "",
+        value("content") ? `content: ${value("content")}` : "",
+        value("color") ? `color: ${value("color")}` : "",
+        value("consistency") ? `consistency: ${value("consistency")}` : "",
+        value("odour") ? `odour: ${value("odour")}` : ""
+      ]);
+      if (excreta) chunks.push(`Excreta analysis: ${excreta}`);
+
+      const variants = joinParts([
+        value("postural") ? `postural variation: ${value("postural")}` : "",
+        value("diurnal") ? `diurnal variation: ${value("diurnal")}` : "",
+        value("seasonal") ? `seasonal variation: ${value("seasonal")}` : ""
+      ]);
+      if (variants) chunks.push(`Variants: ${variants}`);
+      if (value("investigationTreatment")) chunks.push(`Investigations/treatment for current illness: ${value("investigationTreatment")}`);
+
+      return sentence(chunks.join("; "));
+    }
+
+    function relatedParagraph() {
+      const symptoms = (state.relatedSymptoms || []).join(", ");
+      const parts = [];
+      if (symptoms) parts.push(`Related ${systems[state.system].label} symptoms checked: ${symptoms}`);
+      if (value("relatedNotes")) parts.push(value("relatedNotes"));
+      if (value("systemicReview")) parts.push(`Systemic review: ${value("systemicReview")}`);
+      return sentence(parts.join(". "));
+    }
+
+    function pastParagraph() {
+      const parts = [];
+      ["dm", "htn", "tb", "ihd"].forEach(k => { if (value(k)) parts.push(value(k)); });
+      if (value("similarAttacks")) parts.push(`similar attacks: ${value("similarAttacks")}`);
+      if (value("operations")) parts.push(`operations: ${value("operations")}`);
+      if (value("transfusion")) parts.push(`blood transfusion: ${value("transfusion")}`);
+      if (value("drugs")) parts.push(`drug history: ${value("drugs")}`);
+      if (value("allergies")) parts.push(`allergies: ${value("allergies")}`);
+      if (value("pastDetails")) parts.push(value("pastDetails"));
+      return sentence(parts.length ? `Past history: ${parts.join("; ")}` : "Past history not completed");
+    }
+
+    function familyParagraph() {
+      const parts = [];
+      ["consanguinity", "similarFamily", "familyDM", "familyHTN", "familyTB", "familyIHD"].forEach(k => { if (value(k)) parts.push(value(k)); });
+      if (value("familyDetails")) parts.push(`family details: ${value("familyDetails")}`);
+      if (value("livingConditions")) parts.push(`living/exposure: ${value("livingConditions")}`);
+      return sentence(parts.length ? `Family and social history: ${parts.join("; ")}` : "Family and social history not completed");
+    }
+
+    function fullHistory() {
+      const lines = [
+        `SYSTEM: ${systems[state.system].label}`,
+        "",
+        "PERSONAL HISTORY",
+        personalParagraph(),
+        "",
+        "COMPLAINT",
+        complaintLine(),
+        value("patientWords") ? `Patient’s own words: “${value("patientWords")}”` : "",
+        "",
+        "HISTORY OF PRESENT ILLNESS",
+        hpiParagraph(),
+        "",
+        "RELATED SYSTEM + SYSTEMIC REVIEW",
+        relatedParagraph(),
+        "",
+        "PAST HISTORY",
+        pastParagraph(),
+        "",
+        "FAMILY + SOCIAL HISTORY",
+        familyParagraph()
+      ];
+      return lines.filter(line => line !== "").join("\n");
+    }
+
+    function osceSummary() {
+      const demo = joinParts([
+        value("age") ? `${value("age")}-year-old` : "",
+        value("sex") ? value("sex").toLowerCase() : "patient",
+        value("occupation") || ""
+      ], " ");
+      const smoker = state.isSmoker ? `, ${value("smokingStatus") || "smoker"}${value("cigsDay") ? ` ${value("cigsDay")} cigarettes/day` : ""}${value("smokingYears") ? ` for ${value("smokingYears")} years` : ""}` : "";
+      const complaint = value("mainComplaint") || "[main complaint]";
+      const duration = value("complaintDuration") ? `for ${value("complaintDuration")}` : "with unspecified duration";
+      const assoc = value("associated") ? ` It was associated with ${value("associated")}.` : "";
+      const systemPos = (state.relatedSymptoms || []).length ? ` Related positive/checklisted symptoms include ${(state.relatedSymptoms || []).join(", ")}.` : "";
+      const risks = joinParts([value("dm"), value("htn"), value("tb"), value("ihd")], "; ");
+      return `This is a ${demo || "patient"}${smoker}, presenting with ${complaint} ${duration}. The illness had ${value("onset") || "[onset not specified]"} onset and ${value("course") || "[course not specified]"} course.${assoc}${systemPos}${risks ? ` Past history: ${risks}.` : ""}`;
+    }
+
+    function renderOutput() {
+      const missing = missingQuestions();
+      const missingBox = $("#missingBox");
+      const output = $("#outputBox");
+      const finalMissing = $("#finalMissing");
+
+      $$(".tab-btn").forEach(btn => btn.classList.toggle("active", btn.dataset.tab === state.tab));
+      if (state.tab === "full") output.textContent = fullHistory();
+      if (state.tab === "osce") output.textContent = osceSummary();
+      if (state.tab === "missing") output.textContent = missing.length ? "Complete the items below." : "Looks clean. No major missing items detected.";
+
+      missingBox.innerHTML = "";
+      if (state.tab === "missing") {
+        if (!missing.length) {
+          missingBox.innerHTML = `<div class="good-item">No major missing questions detected. Nice.</div>`;
+        } else {
+          missing.forEach(m => {
+            const div = document.createElement("div");
+            div.className = "missing-item";
+            div.textContent = m;
+            missingBox.appendChild(div);
+          });
+        }
+      }
+
+      if (finalMissing) {
+        finalMissing.innerHTML = "";
+        if (!missing.length) {
+          finalMissing.innerHTML = `<div class="good-item">No major missing questions detected. You can present this case.</div>`;
+        } else {
+          missing.slice(0, 12).forEach(m => {
+            const div = document.createElement("div");
+            div.className = "missing-item";
+            div.textContent = m;
+            finalMissing.appendChild(div);
+          });
+          if (missing.length > 12) {
+            const div = document.createElement("div");
+            div.className = "missing-item";
+            div.textContent = `+ ${missing.length - 12} more items in the Missing tab.`;
+            finalMissing.appendChild(div);
+          }
+        }
+      }
+    }
+
+    function renderAll() {
+      renderMode();
+      renderSystems();
+      renderSteps();
+      renderStepSections();
+      renderInputs();
+      renderComplaintChips();
+      renderRelatedSymptoms();
+      renderProgress();
+      renderOutput();
+    }
+
+    function bindEvents() {
+      document.addEventListener("input", (e) => {
+        const el = e.target.closest("[data-key]");
+        if (!el) return;
+        const key = el.dataset.key;
+        if (el.type === "checkbox") state[key] = el.checked;
+        else state[key] = el.value;
+        saveState();
+        updateConditionals();
+        renderComplaintChips();
+        renderProgress();
+        renderOutput();
+      });
+
+      document.addEventListener("change", (e) => {
+        const el = e.target.closest("[data-key]");
+        if (!el) return;
+        const key = el.dataset.key;
+        if (el.type === "checkbox") state[key] = el.checked;
+        else state[key] = el.value;
+        saveState();
+        updateConditionals();
+        renderProgress();
+        renderOutput();
+      });
+
+      $$(".mode-btn").forEach(btn => btn.addEventListener("click", () => {
+        state.mode = btn.dataset.mode;
+        if (state.mode === "presentation") state.tab = "osce";
+        saveState();
+        renderAll();
+      }));
+
+      $$(".tab-btn").forEach(btn => btn.addEventListener("click", () => {
+        state.tab = btn.dataset.tab;
+        saveState();
+        renderOutput();
+      }));
+
+      $("#prevStep").addEventListener("click", () => {
+        const idx = steps.findIndex(s => s.id === state.step);
+        state.step = steps[Math.max(0, idx - 1)].id;
+        saveState();
+        renderAll();
+      });
+
+      $("#nextStep").addEventListener("click", () => {
+        const idx = steps.findIndex(s => s.id === state.step);
+        state.step = steps[(idx + 1) % steps.length].id;
+        saveState();
+        renderAll();
+      });
+
+      $("#copyBtn").addEventListener("click", () => copyText($("#outputBox").textContent));
+      $("#copyFinalBtn").addEventListener("click", () => copyText(fullHistory()));
+      $("#printBtn").addEventListener("click", () => window.print());
+
+      $("#resetBtn").addEventListener("click", () => {
+        if (!confirm("Reset the whole prototype form?")) return;
+        localStorage.removeItem("historyToolState.v1");
+        state = { ...defaultState };
+        renderAll();
+      });
+    }
+
+    async function copyText(text) {
+      try {
+        await navigator.clipboard.writeText(text);
+        showToast("Copied.");
+      } catch {
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        ta.remove();
+        showToast("Copied.");
+      }
+    }
+
+    function showToast(text) {
+      const toast = $("#toast");
+      toast.textContent = text;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 1600);
+    }
+
+    bindEvents();
+    renderAll();
   </script>
-  <script type="module" src="/src/main.js?v=20260622-med2-onc"></script>
 </body>
 </html>
-
-
