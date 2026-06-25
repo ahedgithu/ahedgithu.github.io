@@ -3767,7 +3767,7 @@ main {
 
   .tracker-home,
   .work-section {
-    padding: 34px 0;
+    padding: 22px 0;
     scroll-margin-top: 130px;
   }
 
@@ -3918,56 +3918,139 @@ main {
 
   .semester-timeline__top {
     flex-direction: column;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .checkpoint-code {
+    font-size: 1rem;
+  }
+
+  .checkpoint-meta {
+    font-size: 0.72rem;
   }
 
   .tracker-updated {
     max-width: 340px;
+    font-size: 0.78rem;
   }
 
   .race-track {
-    height: 112px;
+    height: 58px;
     margin: 0 8px;
   }
 
   .semester-date-scale {
-    height: 58px;
-    margin: -20px 8px 0;
+    height: 34px;
+    margin: -12px 8px 0;
   }
 
   .semester-date-scale__tick {
     min-width: 58px;
-    font-size: 0.6rem;
+    font-size: 0.55rem;
+  }
+
+  .semester-date-scale__tick i {
+    height: 8px;
+  }
+
+  .semester-date-scale__tick time {
+    display: none;
   }
 
   .race-marker {
     min-width: 72px;
-    font-size: 0.66rem;
+    font-size: 0.56rem;
+  }
+
+  .race-marker b {
+    min-width: 34px;
+    height: 34px;
+    padding: 0 6px;
+  }
+
+  .race-marker time {
+    display: none;
   }
 
   .exam-schedule {
-    margin: -8px 8px 22px;
-    padding: 12px;
+    gap: 8px;
+    margin: -4px 8px 12px;
+    padding: 8px;
   }
 
-  .exam-schedule__summary,
+  .exam-schedule__summary {
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 8px;
+  }
+
+  .exam-schedule__summary > div:last-child > strong {
+    font-size: 0.82rem;
+  }
+
+  .exam-schedule__summary p,
+  .exam-schedule__summary small {
+    font-size: 0.68rem;
+    line-height: 1.25;
+  }
+
+  .exam-schedule__summary small {
+    display: none;
+  }
+
   .exam-schedule__cards {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
   }
 
   .exam-calendar-tile {
     justify-self: start;
     grid-template-columns: auto auto auto;
-    gap: 8px;
+    gap: 5px;
     align-items: end;
     min-width: 0;
+    padding: 6px 7px;
+  }
+
+  .exam-calendar-tile span,
+  .exam-card span,
+  .exam-card small {
+    font-size: 0.52rem;
+    letter-spacing: 0.04em;
   }
 
   .exam-calendar-tile strong {
-    font-size: 1.55rem;
+    font-size: 1.2rem;
   }
 
   .exam-card {
-    min-height: 0;
+    gap: 3px;
+    min-height: 78px;
+    padding: 7px 6px;
+  }
+
+  .exam-card strong {
+    max-width: 100%;
+    overflow: hidden;
+    font-size: 0.66rem;
+    line-height: 1.12;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .exam-card time,
+  .exam-card em {
+    font-size: 0.58rem;
+    line-height: 1.15;
+  }
+
+  .exam-card time {
+    white-space: nowrap;
+  }
+
+  .exam-card small {
+    margin-top: 2px;
+    padding: 3px 5px;
   }
 
   .whatsapp-feedback {
