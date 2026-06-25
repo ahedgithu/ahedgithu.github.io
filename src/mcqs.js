@@ -3404,6 +3404,159 @@ window.mcqQuizzes['Monitoring and Fluid Therapy'] = [
   }
 ]
 
+;(() => {
+  const toSource = (topicLabel, source) => {
+    const current = window.mcqQuizzes[topicLabel]
+    const currentSource = Array.isArray(current)
+      ? { id: 'current', label: 'Current MCQs', mcqs: current }
+      : current
+        ? {
+          id: 'current',
+          label: current.label || 'Current MCQs',
+          description: current.description || '',
+          mcqs: current.mcqs || [],
+          quizSize: current.quizSize || null,
+          shuffleQuestions: current.shuffleQuestions || false,
+          shuffleOptions: current.shuffleOptions || false
+        }
+        : null
+
+    const existingSources = current?.sources || (currentSource ? [currentSource] : [])
+    window.mcqQuizzes[topicLabel] = {
+      ...(!Array.isArray(current) && current ? current : {}),
+      sources: [
+        ...existingSources.filter((item) => item.id !== source.id),
+        source
+      ]
+    }
+  }
+
+  const q = (question, choices, answerIndex, explanation) => ({
+    question,
+    choices,
+    answerIndex,
+    explanation
+  })
+
+  const oldOesophagus = window.mcqQuizzes['Oesophagus: surgical anatomy and physiology']
+  const oldAchalasia = window.mcqQuizzes['Esophagus: achalasia, hiatus hernia, GERD']
+  const mergedSources = []
+
+  const normalizeExistingSources = (raw, fallbackLabel, prefix) => {
+    if (!raw) return []
+    const fallbackId = fallbackLabel.toLowerCase().replace(/[^a-z0-9]+/g, '-')
+    const withPrefix = (source) => ({
+      ...source,
+      id: `${prefix}-${source.id || fallbackId}`,
+      label: `${fallbackLabel} - ${source.label || 'MCQs'}`
+    })
+    if (Array.isArray(raw)) return [{ id: `${prefix}-${fallbackId}`, label: fallbackLabel, mcqs: raw }]
+    if (raw.sources?.length) return raw.sources.map(withPrefix)
+    return [withPrefix({ id: raw.id || fallbackId, label: raw.label || 'Current MCQs', description: raw.description || '', mcqs: raw.mcqs || [] })]
+  }
+
+  mergedSources.push(...normalizeExistingSources(oldOesophagus, 'Oesophagus anatomy', 'oesophagus-anatomy'))
+  mergedSources.push(...normalizeExistingSources(oldAchalasia, 'Achalasia / GERD', 'achalasia-gerd'))
+  mergedSources.push({
+    id: 'git-seyahk-esophagus',
+    label: 'Past Exam MCQs',
+    description: 'Extra esophagus questions from GIT-SEYA7K TARAB.pdf.',
+    mcqs: [
+      q('The following is TRUE about the anatomy of the oesophagus.', ['Narrowed by right main bronchus', 'Lies in anterior mediastinum', 'Passes diaphragm about 25 cm from incisors', 'Begins at C6', 'Lies anterior to aortic arch'], 3, 'The keyed answer is that the oesophagus begins at C6.'),
+      q('Cardiac achalasia is associated with all EXCEPT:', ['Chagas disease', 'Regurgitation of food', 'Absent esophageal body motility', 'No increased risk of esophageal carcinoma', 'Aspiration pneumonia'], 3, 'Achalasia increases esophageal carcinoma risk, so "no increased risk" is the false statement.'),
+      q('About paraesophageal hiatus hernia, one statement is true.', ['GE junction lies above diaphragm', 'Main symptom is heartburn', 'Main treatment is conservative PPI', 'Represents 85% of hiatus hernias', 'Strangulation of stomach fundus might occur'], 4, 'Paraesophageal hernia can strangulate and is usually repaired.'),
+      q('Spontaneous oesophageal perforation: all symptoms occur EXCEPT:', ['Subcutaneous air', 'Dysphagia', 'Cervical pain', 'Dyspnea', 'Fever'], 2, 'Cervical pain is not typical for distal spontaneous rupture.'),
+      q("Boerhaave's syndrome matches which radiologic sign?", ["Parrot's beak sign", 'Pneumoperitoneum', 'Ulcer crater niche', 'Hourglass stomach', 'Corkscrew appearance', 'Pneumothorax'], 5, "The source key matches Boerhaave's syndrome with pneumothorax.")
+    ]
+  })
+
+  window.mcqQuizzes['Esophagus topics'] = { sources: mergedSources.filter((source) => source.mcqs?.length) }
+  delete window.mcqQuizzes['Oesophagus: surgical anatomy and physiology']
+  delete window.mcqQuizzes['Esophagus: achalasia, hiatus hernia, GERD']
+
+  window.mcqQuizzes['Corrosive Injury'] = {
+    label: 'Past Exam MCQs',
+    description: 'Focused corrosive esophageal injury questions from surgery/GIT banks.',
+    mcqs: [
+      q('A 4-year-old boy is seen 1 hour after lye drain-cleaner ingestion. No oropharyngeal burns, normal CXR, but significant chest pain. Best next step?', ['Parenteral steroids and antibiotics', 'Esophagram with water-soluble contrast', 'Oral neutralizing agent', 'Induction of vomiting', 'Ingestion of a quart of water'], 1, 'Water-soluble contrast esophagram is used when perforation or deep injury is suspected; vomiting, dilution, and neutralization are avoided.'),
+      q('A 19-year-old female has dysphagia 6 months after potash ingestion; barium swallow shows a 2 cm middle-third esophageal stenosis. Best treatment?', ['Total radical esophagectomy', 'Botulinum toxin injection', 'Repeated esophageal dilatation', 'Trans-hiatal esophagectomy and colon transposition', 'Laparoscopic fundoplication', 'Esophageal stenting', 'PPI and antacids'], 2, 'A short post-corrosive stricture is treated first with repeated dilatation.'),
+      q('A 20-year-old male has severe dysphagia after concentrated sulphuric acid ingestion; barium shows multiple long esophageal strictures. Best treatment?', ['Total radical esophagectomy', 'Botulinum toxin injection', 'Repeated esophageal dilatation', 'Trans-hiatal esophagectomy and colon transposition', 'Laparoscopic fundoplication', 'Esophageal stenting', 'PPI and antacids'], 3, 'Multiple long strictures are poor candidates for dilatation; esophageal replacement or bypass with colon transposition is used.')
+    ]
+  }
+
+  window.mcqQuizzes['Carcinoma of the Esophagus'] = {
+    label: 'Past Exam MCQs',
+    description: 'Focused carcinoma of the esophagus questions from GIT-SEYA7K TARAB.pdf.',
+    mcqs: [
+      q('A 65-year-old man has progressive dysphagia from solids to liquids, 12 kg weight loss, heavy smoking, and alcohol history. What is the provisional diagnosis?', ['Reflux oesophagitis', 'Lung cancer', 'Cardiac achalasia', 'Biliary duodenogastric reflux', 'Oesophageal cancer'], 4, 'Progressive dysphagia with marked weight loss in an older smoker/drinker is classic for esophageal carcinoma.'),
+      q('How would you confirm suspected oesophageal cancer?', ['CT scan', 'Ultrasound', 'Upper gastroduodenal endoscopy', 'Tumour markers', 'Barium enema'], 2, 'Endoscopy confirms the diagnosis and allows biopsy.'),
+      q('Carcinoma of the esophagus might occur in patients with corrosive esophagitis.', ['False', 'True'], 1, 'Chronic corrosive stricture is a recognized premalignant risk.'),
+      q('A 64-year-old man has rapidly progressive dysphagia, marked weight loss, and chest X-ray multiple focal lesions. Best treatment?', ['Total radical esophagectomy', 'Botulinum toxin injection', 'Repeated esophageal dilatation', 'Trans-hiatal esophagectomy and colon transposition', 'Laparoscopic fundoplication', 'Esophageal stenting', 'PPI and antacids'], 5, 'Metastatic disease is palliated; stenting relieves dysphagia.'),
+      q('Oesophageal cancer is most appropriately matched with which finding?', ['Gastric outlet obstruction', 'Odynophagia', 'Multiple recurrent duodenal ulcers', 'Cachexia', 'Intermittent dysphagia'], 3, 'The source key matches oesophageal cancer with cachexia.')
+    ]
+  }
+
+  window.mcqQuizzes['Chest trauma / trauma up to sternal fractures'] = {
+    label: 'Past Exam MCQs',
+    description: 'SUR401-2 cardiothoracic trauma repeated past-exam questions.',
+    mcqs: [
+      q('What is the most common intervention required for patients with thoracic trauma?', ['Chest tube insertion', 'Thoracotomy', 'VATS', 'Pericardiocentesis'], 0, 'Most thoracic trauma requiring intervention is managed initially with intercostal chest tube drainage.'),
+      q('Which injuries are considered life-threatening and require immediate intervention?', ['Tension pneumothorax and pericardial tamponade', 'Cardiac contusion and rib fractures', 'Clavicle fracture and pulmonary contusion', 'Pneumomediastinum and subcutaneous emphysema'], 0, 'Both tension pneumothorax and tamponade can rapidly obstruct circulation or ventilation and are treated during the primary survey.'),
+      q('Flail chest is defined as:', ['Floating ribs at the bottom of the rib cage', 'Broken ribs on both sides of the chest', 'Three or more ribs broken on the same side', 'Three or more ribs broken in two or more points'], 3, 'A flail segment needs multiple adjacent ribs fractured in at least two places, creating paradoxical movement.'),
+      q('What is TRUE regarding chest trauma?', ['It is commonly blunt', 'It is commonly penetrating', 'It is commonly rapidly fatal', 'It commonly involves airway injuries'], 0, 'The keyed source marks blunt trauma as the common pattern.'),
+      q('The most important step in the INITIAL management of traumatic hemorrhagic shock is:', ['Insert a CVP line early', 'Type and crossmatch blood', 'Secure the airway and ventilate adequately', 'Rapidly infuse colloids'], 2, 'ATLS starts with airway and adequate ventilation before circulation details.'),
+      q('The radiographic findings indicating a torn thoracic aorta include:', ['Widened mediastinum', 'Pleural cap / apical opacity', 'First-rib fracture', 'All of the above'], 3, 'The topic bank keys all listed CXR clues as suggestive of traumatic thoracic aortic injury.'),
+      q('What is the commonest site of traumatic aortic injury?', ['Ascending aorta', 'Just distal to the left subclavian artery', 'Distal descending aorta', 'Abdominal aorta'], 1, 'Classic deceleration injury occurs at the aortic isthmus, just distal to the left subclavian artery.'),
+      q('After a motor vehicle accident, a patient has proximal descending aortic injury. The most suitable surgical technique is:', ['Urgent anterior thoracotomy then clamp-and-sew', 'Urgent sternotomy with femoro-femoral bypass', 'Posterolateral thoracotomy with partial left-heart bypass', 'None of the above'], 2, 'The keyed answer is posterolateral thoracotomy with partial left-heart bypass for proximal descending aortic injury.'),
+      q('When the sternum is fractured in an accident:', ['A lateral-view chest X-ray is very important for diagnosis', 'A simple chest bandage is enough for treatment', 'Cardiac injury is only a remote possibility', 'None of the above'], 0, 'The repeated keyed answer is lateral chest X-ray view for sternal fracture diagnosis.'),
+      q('In fracture of the sternum, the following investigations should be done:', ['ECG only', 'Echocardiography only', 'Cardiac enzymes only', 'All of the above'], 3, 'Sternal fracture can be associated with myocardial injury, so ECG, echo, and cardiac enzymes are checked.')
+    ]
+  }
+
+  toSource('Metabolic Liver Disease', {
+    id: 'golden-metabolic-liver',
+    label: 'Golden Medicine MCQs',
+    description: 'Focused metabolic liver disease questions from Golden Medicine.',
+    mcqs: [
+      q('Minimum intrahepatic fat percentage required to diagnose hepatic steatosis?', ['3%', '5%', '10%', '15%'], 1, 'Hepatic steatosis is usually defined at 5% or more fat.'),
+      q('Which is a severe form of NAFLD?', ['NAFL', 'NASH', 'Alcoholic fatty liver', 'Hepatitis C'], 1, 'NASH is inflammatory steatohepatitis and can progress to fibrosis.'),
+      q('What does F4 fibrosis indicate in NAFLD/NASH staging?', ['Mild fibrosis', 'Advanced fibrosis', 'Liver cirrhosis', 'No fibrosis'], 2, 'F4 corresponds to cirrhosis.'),
+      q('NASH is most commonly associated with which condition?', ['Peptic ulcer', 'Diabetes', 'Coronary artery disease', 'Renal failure'], 1, 'NASH is strongly associated with type 2 diabetes and metabolic syndrome.'),
+      q('Gold standard diagnostic tool for NASH?', ['FibroScan', 'Ultrasound', 'Liver biopsy', 'MRI'], 2, 'Biopsy confirms steatohepatitis and stages fibrosis.'),
+      q('NOT a risk factor for NAFLD?', ['Obesity', 'Hypertension', 'Type 2 diabetes', 'Alcohol consumption'], 3, 'Significant alcohol use points away from NAFLD by definition.'),
+      q('Hemochromatosis is also known as:', ['Wilson disease', 'Alpha-1 antitrypsin deficiency', 'Bronze diabetes', 'Gilbert syndrome'], 2, 'Iron overload can cause skin pigmentation and diabetes.'),
+      q('Gene mutation primarily responsible for hereditary hemochromatosis?', ['ATP7B', 'HFE', 'HAMP', 'TF'], 1, 'Most classic hereditary hemochromatosis is HFE-related.'),
+      q('Wilson disease is caused by excessive accumulation of:', ['Iron', 'Copper', 'Lead', 'Zinc'], 1, 'Wilson disease is copper overload.'),
+      q('Hallmark of Wilson disease on slit lamp examination?', ['Sunflower cataracts', 'Kayser-Fleischer rings', 'Cherry-red spots', 'Cotton wool spots'], 1, 'Kayser-Fleischer rings reflect corneal copper deposition.'),
+      q('Alpha-1 antitrypsin deficiency primarily affects:', ['Liver and lungs', 'Brain and kidneys', 'Heart and pancreas', 'Spleen and bones'], 0, 'AAT deficiency causes liver disease and emphysema.'),
+      q('Alpha-1 antitrypsin inhibits which enzyme?', ['Lactase', 'Amylase', 'Lipase', 'Elastase'], 3, 'AAT inhibits neutrophil elastase.')
+    ]
+  })
+
+  window.mcqQuizzes['Chronic Bronchitis and COPD'] = {
+    label: 'MUST 401 COPD MCQ',
+    description: 'Focused COPD and chronic bronchitis questions from MUST 401 COPD mcq.pdf.',
+    mcqs: [
+      q('Which is true about COPD?', ['All COPD patients have barrel-shaped chest', 'All COPD patients have crepitations', 'Alpha-1 antitrypsin deficiency is a cause of early COPD', 'COPD is only one type'], 2, 'AAT deficiency can cause early-onset COPD/emphysema.'),
+      q('All are true about COPD EXCEPT:', ['Pink puffers mainly complain of dyspnea', 'Blue bloaters mainly complain of chronic productive cough', 'Bronchitis is mainly associated with high CO2', 'Emphysema CXR shows hyperinflation', 'COPD is rarely mixed type'], 4, 'Mixed emphysema/chronic bronchitis COPD is common, not rare.'),
+      q('About emphysema-predominant COPD, all are true EXCEPT:', ['Normal PaCO2', 'Narrow intercostal spaces on CXR', 'TVF diminished bilaterally', 'Hyper-resonance on examination', 'Increased retrosternal airspace on CXR'], 1, 'Emphysema causes hyperinflation with widened, not narrowed, spaces.'),
+      q('Facts about bronchitic COPD are true EXCEPT:', ['Coarse crepitations', 'Pulmonary hypertension more prominent than emphysema', 'Cyanosis', 'Low V/Q ratio', 'High V/Q ratio'], 4, 'Chronic bronchitis is associated with low V/Q and hypoxemia.'),
+      q('All are true EXCEPT:', ['>2 COPD exacerbations/year is high risk', '>=1 hospitalization/year due to exacerbation is high risk', 'Prevention mainly smoking cessation', 'Emphysema associated with type I respiratory failure', 'Type II respiratory failure should take high-flow oxygen'], 4, 'CO2 retainers need controlled oxygen, not uncontrolled high flow.'),
+      q('Which is true?', ['COPD onset before 40 is atypical', 'Antibiotics are essential in COPD exacerbation treatment', 'FEV1 <50% indicates high-risk patient', 'Ipratropium may induce urinary retention', 'Steroids reduce airway inflammation/swelling', 'All of the above'], 5, 'The listed statements are accepted in the source answer key.'),
+      q('Known COPD with pyrexia, confusion, RR 26, no CXR changes, PaO2 7.8, PaCO2 8.5, pH 7.3. Immediate management?', ['High-flow oxygen', 'IV aminophylline', 'IV hydrocortisone', 'Intubation/mechanical ventilation', 'Nebulized salbutamol and ipratropium'], 4, 'Initial exacerbation treatment includes nebulized short-acting bronchodilators.'),
+      q('All are true regarding COPD EXCEPT:', ['Airflow limitation generally progressive', 'Associated with abnormal inflammatory response to noxious particles/gases', 'Spirometry shows obstructive pattern', 'Loss of elastic recoil due to alveolar destruction contributes to irreversible airflow limitation', 'Airflow limitation is fully reversible'], 4, 'COPD airflow limitation is not fully reversible.'),
+      q('Causes of reversible airflow limitation in COPD EXCEPT:', ['Accumulation of inflammatory cells', 'Mucus plugging', 'Loss of elastic recoil due to alveolar destruction', 'Plasma exudate in bronchi', 'Smooth muscle contraction'], 2, 'Alveolar destruction and loss of recoil are irreversible.'),
+      q('After nebulized albuterol/Atrovent for COPD wheeze, which indicates response?', ['Increased wheezing', 'Pink frothy sputum', 'Decreased shortness of breath', 'Decreased heart rate'], 2, 'Symptomatic relief of dyspnea indicates bronchodilator response.'),
+      q('55-year-old heavy smoker with progressive SOB and wheezy chest. Initial treatment to relieve symptoms?', ['Bronchodilators', 'Steroids', 'Antileukotrienes', 'Oxygen'], 0, 'Bronchodilators are first-line symptomatic therapy.'),
+      q('Smoker with progressive dyspnea, wheeze, hyperinflated CXR. To confirm COPD diagnosis, do:', ['CT chest', 'Exercise test', 'Spirometry', 'Sputum analysis'], 2, 'Spirometry confirms airflow obstruction.'),
+      q('Smoker referred for PFT due to progressive dyspnea. Expected spirometry result confirming COPD?', ['Obstructive pattern with reversibility', 'Restrictive pattern', 'Mixed obstructive and restrictive pattern', 'Obstructive pattern with no reversibility'], 3, 'COPD shows persistent obstruction with limited reversibility.'),
+      q('Most common risk factor for COPD?', ['Air pollution', 'Coal mining', 'Infection', 'Low socioeconomic status', 'Tobacco smoke'], 4, 'Cigarette smoking is the leading COPD risk factor.'),
+      q('Which distinguishes asthma from COPD?', ['Asthma is reversible, COPD is not', 'COPD patients should not take bronchodilators/steroids', 'Asthma is restrictive and COPD obstructive', 'Main asthma treatment is surgical'], 0, 'Reversibility is a key asthma feature compared with COPD.'),
+      q('Diagnosis and staging of COPD is done by:', ['Spirometry values', 'Echo', 'CT chest', 'Blood gases'], 0, 'Spirometry confirms and grades airflow obstruction.')
+    ]
+  }
+})()
+
 
 
 

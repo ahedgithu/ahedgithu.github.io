@@ -18,32 +18,16 @@ let subjects = [
         audioUrl: 'https://drive.google.com/file/d/1ukIDlUnzzpsyCOola5-TiyWJy7e2QELO/view?usp=drivesdk'
       },
       {
-        label: 'Oesophagus: surgical anatomy and physiology',
+        label: 'Esophagus topics',
         state: 'taken',
         art: 1,
+        coverageUnits: 3,
+        note: 'Contains 3 topics: surgical anatomy and physiology; achalasia, hiatus hernia and GERD; esophageal perforation.',
         lectureUrls: [
-          { label: 'Lecture', url: 'https://drive.google.com/file/d/1-iY3KOVw6vUWm_7k--A9lWFJnuGxYqoo/view?usp=drivesdk' }
-        ],
-        audioUrl: 'https://drive.google.com/file/d/1l4H_hY6RO36c-iYZFLyJu8h9rv-jfYi5/view?usp=drivesdk'
-      },
-      {
-        label: 'Esophagus: achalasia, hiatus hernia, GERD',
-        state: 'taken',
-        art: 1,
-        lectureUrls: [
-          { label: 'Lecture', url: 'https://drive.google.com/file/d/1-uzZPnXaDetSZxCujFNDLudZ_TOJaQEh/view?usp=drivesdk' }
+          { label: 'Anatomy lecture', url: 'https://drive.google.com/file/d/1-iY3KOVw6vUWm_7k--A9lWFJnuGxYqoo/view?usp=drivesdk' },
+          { label: 'Achalasia / GERD lecture', url: 'https://drive.google.com/file/d/1-uzZPnXaDetSZxCujFNDLudZ_TOJaQEh/view?usp=drivesdk' }
         ],
         audioUrl: 'https://drive.google.com/file/d/1vt23RUJTWuT_1ZRUHGm4gvWJKW1sxUyI/view?usp=drivesdk'
-      },
-      {
-        label: 'Esophageal Perforation',
-        state: 'taken',
-        art: 1,
-        note: 'Sunday report 21 Jun: taught by Dr. Hisham Ahmed.',
-        lectureUrls: [
-          { label: 'Esophagus lecture', url: 'https://drive.google.com/file/d/1-uzZPnXaDetSZxCujFNDLudZ_TOJaQEh' }
-        ],
-        audioUrl: 'https://drive.google.com/file/d/1Xy8aJmb30RgLP7C0-0uRa5Q8fLaJChIr/view?usp=drivesdk'
       },
       {
         label: 'Corrosive Injury',
@@ -675,13 +659,19 @@ function getPercent(subject) {
   return Math.round((getCoveredCount(subject) / subject.totalCount) * 100)
 }
 
+function getTopicUnits(topic) {
+  return topic.coverageUnits || 1
+}
+
 function getCoveredCount(subject) {
-  return subject.topics.filter((topic) => coveredStates.has(topic.state)).length
+  return subject.topics.reduce((count, topic) => {
+    return coveredStates.has(topic.state) ? count + getTopicUnits(topic) : count
+  }, 0)
 }
 
 function getStateCounts(subject) {
   return subject.topics.reduce((counts, topic) => {
-    counts[topic.state] = (counts[topic.state] || 0) + 1
+    counts[topic.state] = (counts[topic.state] || 0) + getTopicUnits(topic)
     return counts
   }, {})
 }
