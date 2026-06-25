@@ -602,10 +602,11 @@ async function loadRemoteTrackerData() {
     subjects = remoteSubjects
     const params = new URLSearchParams(window.location.search)
     const initialRemoteSubject = subjects.find((subject) => subject.code === params.get('subject'))
-    activeSubjectCode = initialRemoteSubject?.code || subjects[0].code
-    expandedSubjectCode = mobileQuery.matches && params.get('tracker') === '1' ? activeSubjectCode : null
+    activeSubjectCode = params.get('tracker') === '1' && initialRemoteSubject ? initialRemoteSubject.code : null
+    expandedSubjectCode = mobileQuery.matches && activeSubjectCode ? activeSubjectCode : null
     renderSubjects()
-    setActiveSubject(activeSubjectCode, params.get('tracker') === '1' ? 'open' : 'closed')
+    if (activeSubjectCode) setActiveSubject(activeSubjectCode, 'open')
+    else clearSubjectDetail()
   } catch (error) {
     console.warn('Supabase tracker data unavailable; using local fallback.', error)
   }
@@ -651,8 +652,8 @@ const whatsappFeedbackUrl = 'https://wa.me/201030469634?text=Hi%20Ahmed%2C%20I%2
 
 const initialParams = new URLSearchParams(window.location.search)
 const initialSubject = subjects.find((subject) => subject.code === initialParams.get('subject'))
-let activeSubjectCode = initialSubject?.code || subjects[0].code
-let expandedSubjectCode = mobileQuery.matches && initialParams.get('tracker') === '1' ? activeSubjectCode : null
+let activeSubjectCode = initialParams.get('tracker') === '1' && initialSubject ? initialSubject.code : null
+let expandedSubjectCode = mobileQuery.matches && activeSubjectCode ? activeSubjectCode : null
 
 function getPercent(subject) {
   if (!subject.totalCount) return 0
@@ -1509,11 +1510,14 @@ function renderSubjects() {
 
   if (!visibleSubjects.length) {
     subjectList.innerHTML = '<div class="topic-empty topic-empty--panel">No subjects match the current filters.</div>'
+    clearSubjectDetail()
     return
   }
 
-  if (!visibleSubjects.some((subject) => subject.code === activeSubjectCode)) {
-    activeSubjectCode = visibleSubjects[0].code
+  if (activeSubjectCode && !visibleSubjects.some((subject) => subject.code === activeSubjectCode)) {
+    activeSubjectCode = null
+    expandedSubjectCode = null
+    clearSubjectDetail()
   }
 
   subjectList.innerHTML = visibleSubjects.map((subject, index) => {
@@ -1558,6 +1562,16 @@ function renderSubjects() {
       setActiveSubject(button.dataset.code)
     })
   })
+}
+
+function clearSubjectDetail() {
+  if (!selectedCode || !selectedName || !selectedCount || !selectedPercent || !progressFill || !topicList) return
+  selectedCode.textContent = 'Tracker'
+  selectedName.textContent = 'Choose a subject'
+  selectedCount.textContent = 'Closed'
+  selectedPercent.textContent = '0%'
+  progressFill.style.width = '0%'
+  topicList.innerHTML = '<li class="topic-empty">Click a subject card to view its topics.</li>'
 }
 
 function setActiveSubject(code, mobileMode = 'toggle') {
@@ -2058,7 +2072,8 @@ function renderNewsFilters() {
 
 if (subjectList) {
   renderSubjects()
-  setActiveSubject(activeSubjectCode, initialParams.get('tracker') === '1' ? 'open' : 'closed')
+  if (activeSubjectCode) setActiveSubject(activeSubjectCode, 'open')
+  else clearSubjectDetail()
   renderSemesterTimeline()
   render401ExamSchedule()
   window.setInterval(render401ExamSchedule, 3600000)
@@ -2072,7 +2087,8 @@ if (trackerSearch && trackerStatusFilter) {
   ;[trackerSearch, trackerStatusFilter].forEach((control) => {
     control.addEventListener('input', () => {
       renderSubjects()
-      setActiveSubject(activeSubjectCode, 'open')
+      if (activeSubjectCode) setActiveSubject(activeSubjectCode, 'open')
+      else clearSubjectDetail()
     })
   })
 }
@@ -2096,7 +2112,7 @@ if (newsFeed) {
 
 requestAnimationFrame(() => {
   const params = new URLSearchParams(window.location.search)
-  if (subjectList && mobileQuery.matches && params.get('tracker') === '1') {
+  if (subjectList && mobileQuery.matches && params.get('tracker') === '1' && activeSubjectCode) {
     expandedSubjectCode = activeSubjectCode
     renderSubjects()
   }
