@@ -1830,7 +1830,7 @@ window.mcqQuizzes = {
     ], 3, "Glucocorticoids are not a cure for NASH and can worsen metabolic risk factors. NASH may progress to fibrosis, cirrhosis, and liver failure.")
   ]
 
-  window.mcqQuizzes['NASH & NAFLD, AIH'] = nashNafldAih
+  window.mcqQuizzes['Metabolic Liver Disease'] = nashNafldAih
 })()
 
 window.mcqQuizzes['Investigation of Acute Hepatitis'] = [

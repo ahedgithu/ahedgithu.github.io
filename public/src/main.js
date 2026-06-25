@@ -749,10 +749,17 @@ function getFilteredSubjects() {
 }
 
 function getResourceItems(topic) {
-  const lectureItems = (topic.lectureUrls || []).map((item) => ({ ...item, type: 'lecture' }))
+  const lectureUrls = topic.lectureUrls || []
+  const driveLectureItems = lectureUrls.filter((item) => isDriveUrl(item.url))
+  const otherLectureItems = lectureUrls
+    .filter((item) => !isDriveUrl(item.url))
+    .map((item) => ({ ...item, type: 'lecture' }))
+  const driveItems = driveLectureItems.length > 1
+    ? [{ label: 'Drive resources', type: 'drive-group', items: driveLectureItems }]
+    : driveLectureItems.map((item) => ({ ...item, type: 'lecture' }))
   const pdfItems = (topic.pdfUrls || []).map((item) => ({ ...item, type: 'pdf' }))
   const audioItem = topic.audioUrl ? [{ label: 'Lecture record', url: topic.audioUrl, type: 'audio' }] : []
-  return [...lectureItems, ...pdfItems, ...audioItem]
+  return [...driveItems, ...otherLectureItems, ...pdfItems, ...audioItem]
 }
 
 function renderResourceItem(item) {
@@ -761,6 +768,25 @@ function renderResourceItem(item) {
       <a class="topic-resource topic-resource--audio" href="${item.url}" target="_blank" rel="noopener noreferrer" aria-label="Open lecture record in Google Drive">
         <img class="topic-resource__play-icon" src="${PLAY_ICON_URL}" alt="" loading="lazy">
       </a>
+    `
+  }
+
+  if (item.type === 'drive-group') {
+    const links = item.items.map((driveItem) => `
+      <a href="${driveItem.url}" target="_blank" rel="noopener noreferrer">
+        ${escapeHtml(driveItem.label || 'Lecture source')}
+      </a>
+    `).join('')
+
+    return `
+      <details class="topic-resource-menu">
+        <summary class="topic-resource topic-resource--drive" aria-label="Open Drive resources">
+          <img class="topic-resource__drive-icon" src="${DRIVE_ICON_URL}" alt="" loading="lazy">
+        </summary>
+        <span class="topic-resource-menu__links">
+          ${links}
+        </span>
+      </details>
     `
   }
 
@@ -788,9 +814,9 @@ function renderResourceLinks(topic) {
 
   if (!coveredStates.has(topic.state)) {
     return quizButton ? `
-      <span class="topic-resources" aria-label="Topic resources">
+      <div class="topic-resources" aria-label="Topic resources">
         ${quizButton}
-      </span>
+      </div>
     ` : ''
   }
 
@@ -801,12 +827,12 @@ function renderResourceLinks(topic) {
   const pendingAudio = topic.audioUrl ? '' : '<span class="topic-resource topic-resource--pending">Lecture record pending</span>'
 
   return `
-    <span class="topic-resources" aria-label="Topic resources">
+    <div class="topic-resources" aria-label="Topic resources">
       ${links}
       ${quizButton}
       ${pendingLecture}
       ${pendingAudio}
-    </span>
+    </div>
   `
 }
 
