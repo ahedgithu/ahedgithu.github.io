@@ -3383,12 +3383,6 @@ main {
   max-width: 760px;
 }
 
-.schedule-updated {
-  margin: 12px 0 0;
-  color: var(--muted);
-  font-weight: 750;
-}
-
 .schedule-today,
 .schedule-section {
   display: grid;
@@ -4460,7 +4454,6 @@ main {
   }
 
   .schedule-page .section-heading .eyebrow,
-  .schedule-updated,
   .schedule-tabs,
   .schedule-section#today,
   .schedule-card__icon,
