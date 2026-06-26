@@ -539,6 +539,31 @@ const midtermExamSchedule = [
   }
 ]
 
+const courseSchedule = [
+  { type: 'lecture', day: 0, dayLabel: 'Sunday', start: '09:00', end: '11:00', title: 'MED 401-1', icon: 'stethoscope' },
+  { type: 'lecture', day: 0, dayLabel: 'Sunday', start: '11:00', end: '11:55', title: 'ONC 401', icon: 'microscope' },
+  { type: 'lecture', day: 0, dayLabel: 'Sunday', start: '12:00', end: '13:00', title: 'SUR 401-2', icon: 'scalpel' },
+  { type: 'lecture', day: 0, dayLabel: 'Sunday', start: '13:00', end: '14:30', title: 'MED 401-2', icon: 'case' },
+  { type: 'lecture', day: 0, dayLabel: 'Sunday', start: '14:30', end: '16:00', title: 'SUR 401-1', icon: 'clinical' },
+  { type: 'lecture', day: 2, dayLabel: 'Tuesday', start: '12:00', end: '13:00', title: 'SUR 401-1', icon: 'scalpel' },
+  { type: 'lecture', day: 2, dayLabel: 'Tuesday', start: '13:00', end: '14:30', title: 'MED 401-2', icon: 'case' },
+  { type: 'lecture', day: 2, dayLabel: 'Tuesday', start: '14:30', end: '16:00', title: 'ANAE 401', icon: 'syringe' },
+  { type: 'lecture', day: 3, dayLabel: 'Wednesday', start: '12:00', end: '13:00', title: 'NUT 401', icon: 'nutrition' },
+  { type: 'lecture', day: 3, dayLabel: 'Wednesday', start: '13:00', end: '14:30', title: 'LAB 401', icon: 'lab' },
+  { type: 'round', day: 2, dayLabel: 'Tuesday', start: '09:00', end: '10:30', title: 'MED 401-2 (A)', room: 'HR1' },
+  { type: 'round', day: 2, dayLabel: 'Tuesday', start: '10:30', end: '12:00', title: 'SUR 401 (A)', room: 'HR1' },
+  { type: 'round', day: 2, dayLabel: 'Tuesday', start: '09:00', end: '10:30', title: 'SUR 401 (B)', room: 'HR5' },
+  { type: 'round', day: 2, dayLabel: 'Tuesday', start: '10:30', end: '12:00', title: 'MED 401-2 (B)', room: 'HR5' },
+  { type: 'round', day: 3, dayLabel: 'Wednesday', start: '09:00', end: '10:30', title: 'MED 401-1 (A)', room: 'HR1' },
+  { type: 'round', day: 3, dayLabel: 'Wednesday', start: '10:30', end: '12:00', title: 'MED 401-1 (B)', room: 'HR1' }
+]
+
+const scheduleDayOrder = [
+  { day: 0, label: 'Sunday' },
+  { day: 2, label: 'Tuesday' },
+  { day: 3, label: 'Wednesday' }
+]
+
 function makeResourceList(items) {
   if (!Array.isArray(items)) return []
   return items
@@ -648,6 +673,12 @@ const substanceOtherField = document.getElementById('substance-other-field')
 const newsFeed = document.getElementById('news-feed')
 const newsCourseFilter = document.getElementById('news-course-filter')
 const newsDateFilter = document.getElementById('news-date-filter')
+const scheduleTodayTitle = document.getElementById('schedule-today-title')
+const scheduleTodaySummary = document.getElementById('schedule-today-summary')
+const scheduleNextCard = document.getElementById('schedule-next-card')
+const scheduleTodayList = document.getElementById('schedule-today-list')
+const lectureSchedule = document.getElementById('lecture-schedule')
+const roundSchedule = document.getElementById('round-schedule')
 const whatsappFeedbackUrl = 'https://wa.me/201030469634?text=Hi%20Ahmed%2C%20I%20have%20a%20recommendation%20to%20improve%20the%20MED%20401%20tracker%3A%20'
 
 const initialParams = new URLSearchParams(window.location.search)
@@ -1819,6 +1850,165 @@ function renderAssignmentProgress() {
   }
 }
 
+function minutesFromTime(value) {
+  const [hours, minutes] = value.split(':').map(Number)
+  return hours * 60 + minutes
+}
+
+function formatScheduleTime(start, end) {
+  const formatOne = (value) => {
+    const [hourValue, minuteValue] = value.split(':').map(Number)
+    const suffix = hourValue >= 12 ? 'PM' : 'AM'
+    const hour = hourValue % 12 || 12
+    return `${hour}:${String(minuteValue).padStart(2, '0')} ${suffix}`
+  }
+
+  return `${formatOne(start)} - ${formatOne(end)}`
+}
+
+function getScheduleStatus(item, now = new Date()) {
+  if (item.day !== now.getDay()) return 'upcoming'
+
+  const currentMinutes = now.getHours() * 60 + now.getMinutes()
+  const startMinutes = minutesFromTime(item.start)
+  const endMinutes = minutesFromTime(item.end)
+
+  if (currentMinutes < startMinutes) return 'upcoming'
+  if (currentMinutes >= endMinutes) return 'done'
+  return 'now'
+}
+
+function minutesUntilNext(item, now = new Date()) {
+  const today = now.getDay()
+  const startMinutes = minutesFromTime(item.start)
+  const currentMinutes = now.getHours() * 60 + now.getMinutes()
+  const dayDelta = (item.day - today + 7) % 7
+
+  if (dayDelta === 0 && startMinutes > currentMinutes) {
+    return startMinutes - currentMinutes
+  }
+
+  return dayDelta * 24 * 60 + startMinutes - currentMinutes
+}
+
+function getNextScheduleItem(items, now = new Date()) {
+  return [...items]
+    .map((item) => ({ ...item, waitMinutes: minutesUntilNext(item, now) }))
+    .filter((item) => item.waitMinutes > 0)
+    .sort((a, b) => a.waitMinutes - b.waitMinutes)[0] || null
+}
+
+function formatWait(minutes) {
+  if (minutes < 60) return `starts in ${minutes} min`
+  const days = Math.floor(minutes / 1440)
+  const hours = Math.floor((minutes % 1440) / 60)
+  if (days > 0 && hours > 0) return `starts in ${days}d ${hours}h`
+  if (days > 0) return `starts in ${days} day${days > 1 ? 's' : ''}`
+  return `starts in ${hours}h`
+}
+
+function getScheduleIcon(icon) {
+  const icons = {
+    stethoscope: '+',
+    microscope: 'ONC',
+    scalpel: 'SUR',
+    case: 'MED',
+    clinical: 'CR',
+    syringe: 'AN',
+    nutrition: 'NUT',
+    lab: 'LAB'
+  }
+
+  return icons[icon] || '401'
+}
+
+function renderScheduleCard(item, now = new Date(), options = {}) {
+  const status = options.status || getScheduleStatus(item, now)
+  const typeLabel = item.type === 'round' ? 'Clinical round' : 'Lecture'
+  const roomMarkup = item.room ? `<span>${escapeHtml(item.room)}</span>` : ''
+  const statusLabel = status === 'now' ? 'Now' : status === 'done' ? 'Finished' : 'Upcoming'
+
+  return `
+    <article class="schedule-card schedule-card--${status}">
+      <div class="schedule-card__icon" aria-hidden="true">${escapeHtml(getScheduleIcon(item.icon))}</div>
+      <div class="schedule-card__body">
+        <div class="schedule-card__meta">
+          <span>${escapeHtml(typeLabel)}</span>
+          <span>${escapeHtml(item.dayLabel)}</span>
+          ${roomMarkup}
+        </div>
+        <h3>${escapeHtml(item.title)}</h3>
+        <p>${escapeHtml(formatScheduleTime(item.start, item.end))}</p>
+      </div>
+      <span class="schedule-card__status">${escapeHtml(statusLabel)}</span>
+    </article>
+  `
+}
+
+function renderScheduleGroup(items, day, now = new Date()) {
+  const dayItems = items
+    .filter((item) => item.day === day.day)
+    .sort((a, b) => minutesFromTime(a.start) - minutesFromTime(b.start) || (a.room || '').localeCompare(b.room || ''))
+
+  if (!dayItems.length) return ''
+
+  const isToday = day.day === now.getDay()
+
+  return `
+    <section class="schedule-day ${isToday ? 'schedule-day--today' : ''}" aria-label="${escapeHtml(day.label)} schedule">
+      <div class="schedule-day__top">
+        <h3>${escapeHtml(day.label)}</h3>
+        ${isToday ? '<span>Today</span>' : ''}
+      </div>
+      <div class="schedule-card-stack">
+        ${dayItems.map((item) => renderScheduleCard(item, now)).join('')}
+      </div>
+    </section>
+  `
+}
+
+function renderSchedulePage() {
+  if (!scheduleTodayTitle || !scheduleTodaySummary || !scheduleTodayList || !lectureSchedule || !roundSchedule) return
+
+  const now = new Date()
+  const todayName = now.toLocaleDateString('en-US', { weekday: 'long' })
+  const todayItems = courseSchedule
+    .filter((item) => item.day === now.getDay())
+    .sort((a, b) => minutesFromTime(a.start) - minutesFromTime(b.start) || (a.room || '').localeCompare(b.room || ''))
+  const currentItem = todayItems.find((item) => getScheduleStatus(item, now) === 'now')
+  const nextItem = getNextScheduleItem(courseSchedule, now)
+
+  scheduleTodayTitle.textContent = `Today is ${todayName}`
+  if (currentItem) {
+    scheduleTodaySummary.textContent = `${currentItem.title} is happening now until ${formatScheduleTime(currentItem.start, currentItem.end).split(' - ')[1]}.`
+  } else if (nextItem) {
+    const nextPrefix = nextItem.day === now.getDay() ? 'Next today' : `Next on ${nextItem.dayLabel}`
+    scheduleTodaySummary.textContent = `${nextPrefix}: ${nextItem.title} at ${formatScheduleTime(nextItem.start, nextItem.end).split(' - ')[0]}.`
+  } else {
+    scheduleTodaySummary.textContent = 'No upcoming university items found in the weekly schedule.'
+  }
+
+  if (scheduleNextCard) {
+    scheduleNextCard.innerHTML = currentItem
+      ? renderScheduleCard(currentItem, now, { status: 'now' })
+      : nextItem
+        ? `${renderScheduleCard(nextItem, now)}<p class="schedule-next-card__wait">${escapeHtml(formatWait(nextItem.waitMinutes))}</p>`
+        : '<p class="empty-state">No upcoming schedule item.</p>'
+  }
+
+  scheduleTodayList.innerHTML = todayItems.length
+    ? todayItems.map((item) => renderScheduleCard(item, now)).join('')
+    : '<p class="empty-state">No lectures or clinical rounds scheduled for today.</p>'
+
+  lectureSchedule.innerHTML = scheduleDayOrder
+    .map((day) => renderScheduleGroup(courseSchedule.filter((item) => item.type === 'lecture'), day, now))
+    .join('')
+
+  roundSchedule.innerHTML = scheduleDayOrder
+    .map((day) => renderScheduleGroup(courseSchedule.filter((item) => item.type === 'round'), day, now))
+    .join('')
+}
+
 function handleBookingSubmit(event) {
   event.preventDefault()
 
@@ -2141,6 +2331,7 @@ if (copyHistorySummary && historySummaryText) {
 
 renderWhatsappFeedback()
 renderAssignmentProgress()
+renderSchedulePage()
 
 // ========== GLOBAL CLICK GLOW EFFECT ==========
 

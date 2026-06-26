@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script defer src="/src/analytics.js?v=20260620-ga4"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>401 Schedule | Ahmed Sayed</title>
+  <meta name="description" content="MED 401 lecture and clinical round schedule with today and next-session highlights." />
+  <meta property="og:title" content="401 Schedule | Ahmed Sayed" />
+  <meta property="og:description" content="Check today's MED 401 lectures, clinical rounds, and the next scheduled university item." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="stylesheet" href="/src/style.css?v=20260626-schedule" />
+  <script type="importmap">
+    {
+      "imports": {
+        "canvas-confetti": "https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.module.mjs"
+      }
+    }
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="Ahmed Sayed tracker home">
+      <span class="brand__mark">AS</span>
+      <span>
+        <strong>Ahmed Sayed</strong>
+        <small>MED 401 hub</small>
+      </span>
+    </a>
+
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href="/">Tracker</a>
+      <a href="/news.html">News</a>
+      <a href="/schedule.html" aria-current="page">Schedule</a>
+      <a href="/history.html">History</a>
+      <a href="/work.html">Work with me</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="schedule-page" aria-labelledby="schedule-title">
+      <div class="section-heading">
+        <p class="eyebrow">Lectures and clinical rounds</p>
+        <h1 id="schedule-title">401 schedule</h1>
+        <p class="schedule-updated">Spring 2026 schedule from the official clinical schedule image.</p>
+      </div>
+
+      <section class="schedule-today" aria-labelledby="schedule-today-title">
+        <div>
+          <p class="card__kicker">Today</p>
+          <h2 id="schedule-today-title">Loading schedule</h2>
+          <p id="schedule-today-summary">Checking current day and time.</p>
+        </div>
+        <div class="schedule-next-card" id="schedule-next-card" aria-live="polite"></div>
+      </section>
+
+      <div class="schedule-tabs" aria-label="Schedule views">
+        <a href="#today">Today</a>
+        <a href="#lectures">Lectures</a>
+        <a href="#rounds">Clinical rounds</a>
+      </div>
+
+      <section class="schedule-section" id="today" aria-labelledby="today-items-title">
+        <div class="schedule-section__top">
+          <p class="card__kicker">Current day</p>
+          <h2 id="today-items-title">Today's university items</h2>
+        </div>
+        <div class="schedule-card-grid" id="schedule-today-list"></div>
+      </section>
+
+      <section class="schedule-section" id="lectures" aria-labelledby="lectures-title">
+        <div class="schedule-section__top">
+          <p class="card__kicker">Section 1</p>
+          <h2 id="lectures-title">Lecture schedule</h2>
+        </div>
+        <div class="schedule-week-grid" id="lecture-schedule"></div>
+      </section>
+
+      <section class="schedule-section" id="rounds" aria-labelledby="rounds-title">
+        <div class="schedule-section__top">
+          <p class="card__kicker">Section 2</p>
+          <h2 id="rounds-title">Clinical rounds</h2>
+          <span class="schedule-location">Hospital, fourth floor</span>
+        </div>
+        <div class="schedule-week-grid schedule-week-grid--rounds" id="round-schedule"></div>
+      </section>
+    </section>
+  </main>
+
+  <script type="module" src="/src/main.js?v=20260626-schedule"></script>
+</body>
+</html>
