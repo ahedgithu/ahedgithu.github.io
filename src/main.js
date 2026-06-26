@@ -189,7 +189,7 @@ let subjects = [
     totalCount: 28,
     examNote: 'Midterm: Wed Jul 22, 2026, 2:30-3:30.',
     topics: [
-      // Cardiology (14 topics)
+      // Cardiology (15 topics)
       { label: 'Cardiology Symptomatology', state: 'remaining', art: 9, section: 'Cardio' },
       { label: 'Acute Coronary Artery Disease', state: 'remaining', art: 9, section: 'Cardio' },
       { label: 'Chronic Coronary Artery Disease', state: 'remaining', art: 9, section: 'Cardio' },
@@ -222,7 +222,18 @@ let subjects = [
         ],
         audioUrl: 'https://drive.google.com/file/d/1ryTmHHfCBcIzK0AXKgYYxqSKvvbMHAZk/view?usp=drivesdk'
       },
-      // Chest (14 topics)
+      {
+        label: 'Pulmonary Embolism',
+        state: 'taken',
+        art: 10,
+        section: 'Cardio',
+        note: 'Sunday report 21 Jun: taught by Dr. Ibrahim Abdelhamid.',
+        lectureUrls: [
+          { label: 'Lecture', url: 'https://drive.google.com/file/d/1N4XIY296nvaftsjrXUEbYUaGH2-UJBT0' }
+        ],
+        audioUrl: 'https://drive.google.com/file/d/15PxmYb9SjFLIoabrFFI0XfBqFVaRhjUO/view?usp=drivesdk'
+      },
+      // Chest (13 topics)
       {
         label: 'Chest Symptomatology',
         state: 'taken',
@@ -270,17 +281,6 @@ let subjects = [
         audioUrl: 'https://drive.google.com/file/d/1QpUB6w-BoBRmhutzUwzUUi9kbf_L_Q0p/view?usp=drivesdk'
       },
       { label: 'Suppurative Lung Diseases', state: 'remaining', art: 10, section: 'Chest' },
-      {
-        label: 'Pulmonary Embolism',
-        state: 'taken',
-        art: 10,
-        section: 'Chest',
-        note: 'Sunday report 21 Jun: taught by Dr. Ibrahim Abdelhamid.',
-        lectureUrls: [
-          { label: 'Lecture', url: 'https://drive.google.com/file/d/1N4XIY296nvaftsjrXUEbYUaGH2-UJBT0' }
-        ],
-        audioUrl: 'https://drive.google.com/file/d/15PxmYb9SjFLIoabrFFI0XfBqFVaRhjUO/view?usp=drivesdk'
-      },
       { label: 'CAP and HAP', state: 'remaining', art: 10, section: 'Chest' },
       { label: 'Interstitial Lung Diseases and Sarcoidosis', state: 'remaining', art: 10, section: 'Chest' },
       { label: 'Pulmonary Tuberculosis', state: 'remaining', art: 10, section: 'Chest' },
