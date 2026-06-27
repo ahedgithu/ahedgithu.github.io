@@ -5,7 +5,7 @@ let subjects = [
   {
     code: 'SUR-1',
     name: 'Surgery 1',
-    totalCount: 16,
+    totalCount: 14,
     examNote: 'Midterm: Sat Jul 25, 2026, 2:30-3:30.',
     topics: [
       {
@@ -28,26 +28,6 @@ let subjects = [
           { label: 'Achalasia / GERD lecture', url: 'https://drive.google.com/file/d/1-uzZPnXaDetSZxCujFNDLudZ_TOJaQEh/view?usp=drivesdk' }
         ],
         audioUrl: 'https://drive.google.com/file/d/1vt23RUJTWuT_1ZRUHGm4gvWJKW1sxUyI/view?usp=drivesdk'
-      },
-      {
-        label: 'Corrosive Injury',
-        state: 'taken',
-        art: 1,
-        note: 'Sunday report 21 Jun: taught by Dr. Hisham Ahmed.',
-        lectureUrls: [
-          { label: 'Esophagus lecture', url: 'https://drive.google.com/file/d/1-uzZPnXaDetSZxCujFNDLudZ_TOJaQEh' }
-        ],
-        audioUrl: 'https://drive.google.com/file/d/1Xy8aJmb30RgLP7C0-0uRa5Q8fLaJChIr/view?usp=drivesdk'
-      },
-      {
-        label: 'Carcinoma of the Esophagus',
-        state: 'taken',
-        art: 1,
-        note: 'Sunday report 21 Jun: taught by Dr. Hisham Ahmed.',
-        lectureUrls: [
-          { label: 'Esophagus lecture', url: 'https://drive.google.com/file/d/1-uzZPnXaDetSZxCujFNDLudZ_TOJaQEh' }
-        ],
-        audioUrl: 'https://drive.google.com/file/d/1Xy8aJmb30RgLP7C0-0uRa5Q8fLaJChIr/view?usp=drivesdk'
       },
       {
         label: 'Clinical round overview',
@@ -96,7 +76,7 @@ let subjects = [
   {
     code: 'SUR-2',
     name: 'Surgery 2',
-    totalCount: 6,
+    totalCount: 7,
     examNote: 'Midterm starts Jul 18, 2026. Exact SUR-2 schedule pending.',
     topics: [
       {
@@ -113,6 +93,16 @@ let subjects = [
         lectureUrls: [
           { label: 'Lecture', url: 'https://drive.google.com/file/d/18BP11uNEJk5eq6GKSAtj_mBEMN59l8U' }
         ]
+      },
+      {
+        label: 'Cardiothoracic Trauma Part 1',
+        state: 'taken',
+        art: 10,
+        lectureUrls: [
+          { label: 'Lecture slides', url: 'https://docs.google.com/presentation/d/18BP11uNEJk5eq6GKSAtj_mBEMN59l8U_/edit?usp=drivesdk&ouid=118432020364493231826&rtpof=true&sd=true' },
+          { label: 'SharePoint recording', url: 'https://mustedueg-my.sharepoint.com/:v:/g/personal/200022569_must_edu_eg/IQB3Dc4y6O42QJ6eMAnau4B-AV_P59BYY7lhONBTlEb4YAs' }
+        ],
+        audioUrl: 'https://drive.google.com/file/d/10m1QAEj6AhRE1cD8_zK1jbpejunbeRMX/view?usp=drivesdk'
       },
       { label: 'Rib fracture', state: 'remaining', art: 10 },
       { label: 'Pneumothorax, tension pneumothorax, hemothorax', state: 'remaining', art: 10 },
