@@ -57,14 +57,11 @@ let subjects = [
       { label: 'Tongue', state: 'remaining', art: 2 },
       { label: 'Salivary glands', state: 'remaining', art: 13 },
       {
-        label: 'Overview of the Stomach',
+        label: 'Stomach anatomy, physiology, histology and peptic ulcers',
         state: 'taken',
         art: 6,
-        note: 'Sunday report 21 Jun: taught by Dr. Hisham Ahmed.',
-        lectureUrls: [
-          { label: 'Summary / Stomach file', url: 'https://drive.google.com/file/d/1XX_NpXX5jb0VGaL_-LW-O_6SAwFv0c1-' }
-        ],
-        audioUrl: 'https://drive.google.com/file/d/1Xy8aJmb30RgLP7C0-0uRa5Q8fLaJChIr/view?usp=drivesdk'
+        note: 'Sunday report 28 Jun: anatomy, physiology and histology of the stomach plus acute and chronic peptic/gastric ulcers, taught by Dr. Hisham Ahmed.',
+        audioUrl: 'https://drive.google.com/file/d/19U-2vhMabUKGYhF_reeNy2NDovYvN0wl/view?usp=drivesdk'
       },
       { label: 'Pancreas', state: 'remaining', art: 4 },
       { label: 'Intestines', state: 'remaining', art: 7 },
@@ -103,9 +100,36 @@ let subjects = [
         ],
         audioUrl: 'https://drive.google.com/file/d/10m1QAEj6AhRE1cD8_zK1jbpejunbeRMX/view?usp=drivesdk'
       },
-      { label: 'Rib fracture', state: 'remaining', art: 10 },
-      { label: 'Pneumothorax, tension pneumothorax, hemothorax', state: 'remaining', art: 10 },
-      { label: 'Pulmonary contusion and flail chest', state: 'remaining', art: 10 },
+      {
+        label: 'Rib fracture',
+        state: 'taken',
+        art: 10,
+        note: 'Sunday report 28 Jun: covered in Cardiothoracic Trauma Part 2, taught by Dr. Mohand Mostafa.',
+        lectureUrls: [
+          { label: 'Cardiothoracic Trauma Part 2', url: 'https://docs.google.com/presentation/d/17kjMBNHhun5-76h7saPBwGnZVV4rG588/edit?usp=drivesdk&ouid=109054155258701630059&rtpof=true&sd=true' }
+        ],
+        audioUrl: 'https://drive.google.com/file/d/1JdFbfB1xuLD-WSCnXs7jgBAA1KoSJ1Rj/view?usp=drivesdk'
+      },
+      {
+        label: 'Pneumothorax, tension pneumothorax, hemothorax',
+        state: 'taken',
+        art: 10,
+        note: 'Sunday report 28 Jun: covered in Cardiothoracic Trauma Part 2, taught by Dr. Mohand Mostafa.',
+        lectureUrls: [
+          { label: 'Cardiothoracic Trauma Part 2', url: 'https://docs.google.com/presentation/d/17kjMBNHhun5-76h7saPBwGnZVV4rG588/edit?usp=drivesdk&ouid=109054155258701630059&rtpof=true&sd=true' }
+        ],
+        audioUrl: 'https://drive.google.com/file/d/1JdFbfB1xuLD-WSCnXs7jgBAA1KoSJ1Rj/view?usp=drivesdk'
+      },
+      {
+        label: 'Pulmonary contusion and flail chest',
+        state: 'taken',
+        art: 10,
+        note: 'Sunday report 28 Jun: covered in Cardiothoracic Trauma Part 2, taught by Dr. Mohand Mostafa.',
+        lectureUrls: [
+          { label: 'Cardiothoracic Trauma Part 2', url: 'https://docs.google.com/presentation/d/17kjMBNHhun5-76h7saPBwGnZVV4rG588/edit?usp=drivesdk&ouid=109054155258701630059&rtpof=true&sd=true' }
+        ],
+        audioUrl: 'https://drive.google.com/file/d/1JdFbfB1xuLD-WSCnXs7jgBAA1KoSJ1Rj/view?usp=drivesdk'
+      },
       { label: 'Empyema', state: 'remaining', art: 10 }
     ]
   },
@@ -115,7 +139,16 @@ let subjects = [
     totalCount: 15,
     examNote: 'Midterm: Sat Jul 18, 2026, 2:30-3:30.',
     topics: [
-      { label: "GERD, Barrett's Esophagus, Esophageal Motility Disorders", state: 'remaining', art: 1 },
+      {
+        label: "GERD, Barrett's Esophagus, Esophageal Motility Disorders",
+        state: 'taken',
+        art: 1,
+        note: 'Sunday report 28 Jun: Disease of the esophagus, taught by Dr. Hisham Samy.',
+        lectureUrls: [
+          { label: 'Diseases of the oesophagus', url: 'https://docs.google.com/presentation/d/1p7aTSiqNJZa-R63z-pcqjAGhHTTNehrf/edit?usp=drivesdk&ouid=109054155258701630059&rtpof=true&sd=true' }
+        ],
+        audioUrl: 'https://drive.google.com/file/d/1RIQ-z7QWxEY2QNgMXpE-GCYwYwDM-I7l/view?usp=drivesdk'
+      },
       {
         label: 'Investigation of Acute Hepatitis',
         state: 'taken',
@@ -175,10 +208,10 @@ let subjects = [
   {
     code: 'MED-2',
     name: 'Internal Medicine 2',
-    totalCount: 28,
+    totalCount: 29,
     examNote: 'Midterm: Wed Jul 22, 2026, 2:30-3:30.',
     topics: [
-      // Cardiology (15 topics)
+      // Cardiology (16 topics)
       { label: 'Cardiology Symptomatology', state: 'remaining', art: 9, section: 'Cardio' },
       { label: 'Acute Coronary Artery Disease', state: 'remaining', art: 9, section: 'Cardio' },
       { label: 'Chronic Coronary Artery Disease', state: 'remaining', art: 9, section: 'Cardio' },
@@ -193,7 +226,18 @@ let subjects = [
         audioUrl: 'https://drive.google.com/file/d/1G7x3QDKNsrxEZXdm-iQBAEeQzijaul2K/view?usp=drivesdk'
       },
       { label: 'Acute coronary syndrome', state: 'remaining', art: 9, section: 'Cardio' },
-      { label: 'Aortic and mitral valve diseases', state: 'remaining', art: 9, section: 'Cardio' },
+      {
+        label: 'Mitral valve diseases',
+        state: 'taken',
+        art: 9,
+        section: 'Cardio',
+        note: 'Sunday report 28 Jun: Mitral Valve Diseases taught by Dr. Nashwa El Hagrasy.',
+        lectureUrls: [
+          { label: 'Mitral valve lecture', url: 'https://docs.google.com/presentation/d/1yZxhWUh5KDgQp_Z_Le10RL_JmdooXpwb/edit?usp=drivesdk&ouid=109054155258701630059&rtpof=true&sd=true' }
+        ],
+        audioUrl: 'https://drive.google.com/file/d/1iA7K5sZ3xXEcHJLey6JUr9WmHFrxlCFS/view?usp=drivesdk'
+      },
+      { label: 'Aortic valve diseases', state: 'remaining', art: 9, section: 'Cardio' },
       { label: 'Pericardial diseases', state: 'remaining', art: 9, section: 'Cardio' },
       { label: 'ECG', state: 'remaining', art: 9, section: 'Cardio' },
       { label: 'Arrhythmia I', state: 'remaining', art: 9, section: 'Cardio' },
@@ -316,7 +360,16 @@ let subjects = [
         ],
         audioUrl: 'https://drive.google.com/file/d/1UuxB_UA6w7NKqgPerO6yadsKbpdNcNle/view?usp=drivesdk'
       },
-      { label: 'Bleeding disorders', state: 'remaining', art: 14 },
+      {
+        label: 'Bleeding disorders',
+        state: 'taken',
+        art: 14,
+        note: 'Sunday report 28 Jun: taught by Dr. Manal Mahmoud.',
+        lectureUrls: [
+          { label: 'Bleeding disorders file', url: 'https://drive.google.com/file/d/1hPJX5OwPkKD59GqU5BuElPYo9vy8Kc4Y/view?usp=drivesdk' }
+        ],
+        audioUrl: 'https://drive.google.com/file/d/1PS3CFen5xTgFj5UhiGmZHFxVr2DNEdSL/view?usp=drivesdk'
+      },
       { label: 'Polycythemia vera and essential thrombocytosis', state: 'remaining', art: 12 },
       { label: 'WBC Diseases: Neutropenia and Leukocytosis', state: 'remaining', art: 12 },
       { label: 'Malignancy Pathophysiology and Lymphoma', state: 'remaining', art: 12 },
