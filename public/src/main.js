@@ -1,5 +1,4 @@
 import confetti from 'canvas-confetti'
-import { fetchTrackerData, isSupabaseConfigured } from './supabaseClient.js'
 
 let subjects = [
   {
@@ -553,79 +552,6 @@ const scheduleDayOrder = [
   { day: 2, label: 'Tuesday' },
   { day: 3, label: 'Wednesday' }
 ]
-
-function makeResourceList(items) {
-  if (!Array.isArray(items)) return []
-  return items
-    .filter((item) => item?.label && item?.url)
-    .map((item) => ({
-      label: item.label,
-      url: item.url,
-      download: Boolean(item.download)
-    }))
-}
-
-function mapDatabaseTopic(topic, index) {
-  const lectureUrls = makeResourceList(topic.lecture_urls)
-  if (topic.lecture_url) {
-    lectureUrls.unshift({ label: 'Lecture', url: topic.lecture_url })
-  }
-
-  const pdfUrls = makeResourceList(topic.pdf_urls)
-  if (topic.pdf_url) {
-    pdfUrls.unshift({ label: topic.pdf_label || 'Download PDF', url: topic.pdf_url, download: true })
-  }
-
-  return {
-    label: topic.title,
-    state: topic.status || 'remaining',
-    art: Number.isFinite(topic.art) ? topic.art : index % 16,
-    section: topic.section || '',
-    note: topic.notes || '',
-    lectureUrls,
-    pdfUrls,
-    audioUrl: topic.audio_url || ''
-  }
-}
-
-function mapDatabaseSubjects(subjectRows, topicRows) {
-  return subjectRows.map((subject) => {
-    const topics = topicRows
-      .filter((topic) => topic.subject_id === subject.id)
-      .map((topic, index) => mapDatabaseTopic(topic, index))
-
-    return {
-      id: subject.id,
-      code: subject.code,
-      name: subject.name,
-      totalCount: subject.total_count || topics.length,
-      examNote: subjectExamNotes[subject.code] || subject.exam_note || '',
-      topics
-    }
-  })
-}
-
-async function loadRemoteTrackerData() {
-  if (!subjectList || !isSupabaseConfigured()) return
-
-  try {
-    const data = await fetchTrackerData()
-    if (!data.topics.length) return
-    const remoteSubjects = mapDatabaseSubjects(data.subjects, data.topics)
-    if (!remoteSubjects.length) return
-
-    subjects = remoteSubjects
-    const params = new URLSearchParams(window.location.search)
-    const initialRemoteSubject = subjects.find((subject) => subject.code === params.get('subject'))
-    activeSubjectCode = params.get('tracker') === '1' && initialRemoteSubject ? initialRemoteSubject.code : null
-    expandedSubjectCode = mobileQuery.matches && activeSubjectCode ? activeSubjectCode : null
-    renderSubjects()
-    if (activeSubjectCode) setActiveSubject(activeSubjectCode, 'open')
-    else clearSubjectDetail()
-  } catch (error) {
-    console.warn('Supabase tracker data unavailable; using local fallback.', error)
-  }
-}
 
 const subjectList = document.getElementById('subject-list')
 const selectedCode = document.getElementById('selected-code')
@@ -2373,7 +2299,6 @@ if (subjectList) {
   renderSemesterTimeline()
   render401ExamSchedule()
   window.setInterval(render401ExamSchedule, 3600000)
-  loadRemoteTrackerData()
 }
 
 document.addEventListener('click', handleQuizClick)
