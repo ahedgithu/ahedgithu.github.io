@@ -10,7 +10,7 @@
   <meta property="og:description" content="Check today's MED 401 lectures, clinical rounds, and the next scheduled university item." />
   <meta property="og:type" content="website" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="stylesheet" href="/src/style.css?v=20260627-mobile-schedule" />
+  <link rel="stylesheet" href="/src/style.css?v=20260628-calendar" />
   <script type="importmap">
     {
       "imports": {
@@ -56,9 +56,18 @@
 
       <div class="schedule-tabs" aria-label="Schedule views">
         <a href="#today">Today</a>
-        <a href="#lectures">Lectures</a>
-        <a href="#rounds">Clinical rounds</a>
+        <a href="#week-grid">Week grid</a>
+        <a href="#list">List</a>
       </div>
+
+      <section class="schedule-section schedule-section--calendar" id="week-grid" aria-labelledby="week-grid-title">
+        <div class="schedule-section__top">
+          <p class="card__kicker">Week grid</p>
+          <h2 id="week-grid-title">Lectures and clinical rounds</h2>
+          <span class="schedule-location">Hospital, fourth floor</span>
+        </div>
+        <div class="schedule-calendar" id="schedule-calendar-grid"></div>
+      </section>
 
       <section class="schedule-section" id="today" aria-labelledby="today-items-title">
         <div class="schedule-section__top">
@@ -68,25 +77,16 @@
         <div class="schedule-card-grid" id="schedule-today-list"></div>
       </section>
 
-      <section class="schedule-section" id="lectures" aria-labelledby="lectures-title">
+      <section class="schedule-section" id="list" aria-labelledby="list-title">
         <div class="schedule-section__top">
-          <p class="card__kicker">Section 1</p>
-          <h2 id="lectures-title">Lecture schedule</h2>
+          <p class="card__kicker">Compact list</p>
+          <h2 id="list-title">Full weekly list</h2>
         </div>
-        <div class="schedule-week-grid" id="lecture-schedule"></div>
-      </section>
-
-      <section class="schedule-section" id="rounds" aria-labelledby="rounds-title">
-        <div class="schedule-section__top">
-          <p class="card__kicker">Section 2</p>
-          <h2 id="rounds-title">Clinical rounds</h2>
-          <span class="schedule-location">Hospital, fourth floor</span>
-        </div>
-        <div class="schedule-week-grid schedule-week-grid--rounds" id="round-schedule"></div>
+        <div class="schedule-week-grid" id="schedule-list"></div>
       </section>
     </section>
   </main>
 
-  <script type="module" src="/src/main.js?v=20260626-schedule"></script>
+  <script type="module" src="/src/main.js?v=20260628-calendar"></script>
 </body>
 </html>

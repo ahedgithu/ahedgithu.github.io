@@ -667,8 +667,8 @@ const scheduleTodayTitle = document.getElementById('schedule-today-title')
 const scheduleTodaySummary = document.getElementById('schedule-today-summary')
 const scheduleNextCard = document.getElementById('schedule-next-card')
 const scheduleTodayList = document.getElementById('schedule-today-list')
-const lectureSchedule = document.getElementById('lecture-schedule')
-const roundSchedule = document.getElementById('round-schedule')
+const scheduleCalendarGrid = document.getElementById('schedule-calendar-grid')
+const scheduleList = document.getElementById('schedule-list')
 const whatsappFeedbackUrl = 'https://wa.me/201030469634?text=Hi%20Ahmed%2C%20I%20have%20a%20recommendation%20to%20improve%20the%20MED%20401%20tracker%3A%20'
 
 const initialParams = new URLSearchParams(window.location.search)
@@ -1957,8 +1957,126 @@ function renderScheduleGroup(items, day, now = new Date()) {
   `
 }
 
+function formatScheduleHour(hour) {
+  const suffix = hour >= 12 ? 'PM' : 'AM'
+  const label = hour % 12 || 12
+  return `${label} ${suffix}`
+}
+
+function getCalendarBounds(items) {
+  const starts = items.map((item) => minutesFromTime(item.start))
+  const ends = items.map((item) => minutesFromTime(item.end))
+  const startHour = Math.floor(Math.min(...starts) / 60)
+  const endHour = Math.ceil(Math.max(...ends) / 60)
+
+  return {
+    startMinutes: startHour * 60,
+    endMinutes: endHour * 60,
+    hours: Array.from({ length: endHour - startHour + 1 }, (_, index) => startHour + index)
+  }
+}
+
+function getScheduleLane(item, dayItems) {
+  const itemStart = minutesFromTime(item.start)
+  const itemEnd = minutesFromTime(item.end)
+  const overlapping = dayItems
+    .filter((candidate) => {
+      const candidateStart = minutesFromTime(candidate.start)
+      const candidateEnd = minutesFromTime(candidate.end)
+      return itemStart < candidateEnd && itemEnd > candidateStart
+    })
+    .sort((a, b) => {
+      const roomSort = (a.room || '').localeCompare(b.room || '')
+      if (roomSort) return roomSort
+      return a.title.localeCompare(b.title)
+    })
+
+  return {
+    lane: Math.max(0, overlapping.indexOf(item)),
+    laneCount: Math.max(1, overlapping.length)
+  }
+}
+
+function renderScheduleCalendarEvent(item, dayItems, bounds, now = new Date()) {
+  const startMinutes = minutesFromTime(item.start)
+  const endMinutes = minutesFromTime(item.end)
+  const totalMinutes = bounds.endMinutes - bounds.startMinutes
+  const top = ((startMinutes - bounds.startMinutes) / totalMinutes) * 100
+  const height = ((endMinutes - startMinutes) / totalMinutes) * 100
+  const { lane, laneCount } = getScheduleLane(item, dayItems)
+  const gap = laneCount > 1 ? 1.5 : 0
+  const width = 100 / laneCount
+  const left = lane * width
+  const status = getScheduleStatus(item, now)
+  const typeLabel = item.type === 'round' ? 'Round' : 'Lecture'
+  const roomMarkup = item.room ? `<span>${escapeHtml(item.room)}</span>` : ''
+
+  return `
+    <article
+      class="schedule-calendar-event schedule-calendar-event--${escapeHtml(item.type)} schedule-calendar-event--${escapeHtml(status)}"
+      style="--event-top: ${top}%; --event-height: ${height}%; --event-left: calc(${left}% + ${gap}px); --event-width: calc(${width}% - ${gap * 2}px);"
+      aria-label="${escapeHtml(item.title)}, ${escapeHtml(formatScheduleTime(item.start, item.end))}"
+    >
+      <div class="schedule-calendar-event__top">
+        <strong>${escapeHtml(item.title)}</strong>
+        <span>${escapeHtml(typeLabel)}</span>
+      </div>
+      <p>${escapeHtml(formatScheduleTime(item.start, item.end))}</p>
+      ${roomMarkup}
+    </article>
+  `
+}
+
+function renderScheduleCalendar(now = new Date()) {
+  if (!courseSchedule.length) return '<p class="empty-state">No schedule items found.</p>'
+
+  const bounds = getCalendarBounds(courseSchedule)
+  const hourCount = bounds.hours.length - 1
+
+  const dayHeaders = scheduleDayOrder.map((day) => {
+    const isToday = day.day === now.getDay()
+    return `
+      <div class="schedule-calendar__day-head ${isToday ? 'schedule-calendar__day-head--today' : ''}">
+        <span>${escapeHtml(day.label.slice(0, 3))}</span>
+        <strong>${escapeHtml(day.label)}</strong>
+      </div>
+    `
+  }).join('')
+
+  const hourLabels = bounds.hours.map((hour) => `
+    <div class="schedule-calendar__hour-label">${escapeHtml(formatScheduleHour(hour))}</div>
+  `).join('')
+
+  const dayColumns = scheduleDayOrder.map((day) => {
+    const dayItems = courseSchedule
+      .filter((item) => item.day === day.day)
+      .sort((a, b) => minutesFromTime(a.start) - minutesFromTime(b.start) || (a.room || '').localeCompare(b.room || ''))
+    const isToday = day.day === now.getDay()
+
+    return `
+      <div class="schedule-calendar__day ${isToday ? 'schedule-calendar__day--today' : ''}" aria-label="${escapeHtml(day.label)} calendar column">
+        <div class="schedule-calendar__hour-lines" aria-hidden="true">
+          ${Array.from({ length: hourCount }, () => '<span></span>').join('')}
+        </div>
+        ${dayItems.map((item) => renderScheduleCalendarEvent(item, dayItems, bounds, now)).join('')}
+      </div>
+    `
+  }).join('')
+
+  return `
+    <div class="schedule-calendar__scroller">
+      <div class="schedule-calendar__frame" style="--hour-count: ${hourCount};">
+        <div class="schedule-calendar__corner" aria-hidden="true"></div>
+        ${dayHeaders}
+        <div class="schedule-calendar__hours" aria-hidden="true">${hourLabels}</div>
+        ${dayColumns}
+      </div>
+    </div>
+  `
+}
+
 function renderSchedulePage() {
-  if (!scheduleTodayTitle || !scheduleTodaySummary || !scheduleTodayList || !lectureSchedule || !roundSchedule) return
+  if (!scheduleTodayTitle || !scheduleTodaySummary || !scheduleTodayList || !scheduleCalendarGrid || !scheduleList) return
 
   const now = new Date()
   const todayName = now.toLocaleDateString('en-US', { weekday: 'long' })
@@ -1990,12 +2108,10 @@ function renderSchedulePage() {
     ? todayItems.map((item) => renderScheduleCard(item, now)).join('')
     : '<p class="empty-state">No lectures or clinical rounds scheduled for today.</p>'
 
-  lectureSchedule.innerHTML = scheduleDayOrder
-    .map((day) => renderScheduleGroup(courseSchedule.filter((item) => item.type === 'lecture'), day, now))
-    .join('')
+  scheduleCalendarGrid.innerHTML = renderScheduleCalendar(now)
 
-  roundSchedule.innerHTML = scheduleDayOrder
-    .map((day) => renderScheduleGroup(courseSchedule.filter((item) => item.type === 'round'), day, now))
+  scheduleList.innerHTML = scheduleDayOrder
+    .map((day) => renderScheduleGroup(courseSchedule, day, now))
     .join('')
 }
 
