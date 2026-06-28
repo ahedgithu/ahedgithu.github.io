@@ -3478,6 +3478,57 @@ main {
   line-height: 1.25;
 }
 
+.schedule-progress {
+  display: grid;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.schedule-progress__track {
+  height: 7px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.schedule-progress__track span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--green), var(--gold));
+  box-shadow: 0 0 18px rgba(54, 211, 153, 0.36);
+  transition: width 260ms ease;
+}
+
+.schedule-progress__label {
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 850;
+  line-height: 1.2;
+}
+
+.schedule-progress__label strong {
+  color: var(--green);
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.schedule-progress--calendar {
+  gap: 4px;
+  margin-top: 6px;
+}
+
+.schedule-progress--calendar .schedule-progress__track {
+  height: 5px;
+}
+
+.schedule-progress--calendar .schedule-progress__label {
+  font-size: 0.58rem;
+}
+
 .schedule-day {
   display: grid;
   gap: 12px;
@@ -4519,6 +4570,10 @@ main {
   .schedule-calendar-event p {
     margin-top: 4px;
     font-size: 0.64rem;
+  }
+
+  .schedule-progress--calendar .schedule-progress__label {
+    display: none;
   }
 
   .schedule-calendar-event > span {

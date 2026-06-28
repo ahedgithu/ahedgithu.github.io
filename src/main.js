@@ -529,16 +529,16 @@ const midtermExamSchedule = [
 ]
 
 const courseSchedule = [
-  { type: 'lecture', day: 0, dayLabel: 'Sunday', start: '09:00', end: '11:00', title: 'MED 401-1', icon: 'stethoscope' },
-  { type: 'lecture', day: 0, dayLabel: 'Sunday', start: '11:00', end: '11:55', title: 'ONC 401', icon: 'microscope' },
-  { type: 'lecture', day: 0, dayLabel: 'Sunday', start: '12:00', end: '13:00', title: 'SUR 401-2', icon: 'scalpel' },
-  { type: 'lecture', day: 0, dayLabel: 'Sunday', start: '13:00', end: '14:30', title: 'MED 401-2', icon: 'case' },
-  { type: 'lecture', day: 0, dayLabel: 'Sunday', start: '14:30', end: '16:00', title: 'SUR 401-1', icon: 'clinical' },
-  { type: 'lecture', day: 2, dayLabel: 'Tuesday', start: '12:00', end: '13:00', title: 'SUR 401-1', icon: 'scalpel' },
-  { type: 'lecture', day: 2, dayLabel: 'Tuesday', start: '13:00', end: '14:30', title: 'MED 401-2', icon: 'case' },
-  { type: 'lecture', day: 2, dayLabel: 'Tuesday', start: '14:30', end: '16:00', title: 'ANAE 401', icon: 'syringe' },
-  { type: 'lecture', day: 3, dayLabel: 'Wednesday', start: '12:00', end: '13:00', title: 'NUT 401', icon: 'nutrition' },
-  { type: 'lecture', day: 3, dayLabel: 'Wednesday', start: '13:00', end: '14:30', title: 'LAB 401', icon: 'lab' },
+  { type: 'lecture', day: 0, dayLabel: 'Sunday', start: '09:00', end: '11:00', title: 'MED 401-1', room: 'SS 116B', icon: 'stethoscope' },
+  { type: 'lecture', day: 0, dayLabel: 'Sunday', start: '11:00', end: '11:55', title: 'ONC 401', room: 'SS 116B', icon: 'microscope' },
+  { type: 'lecture', day: 0, dayLabel: 'Sunday', start: '12:00', end: '13:00', title: 'SUR 401-2', room: 'SS 116B', icon: 'scalpel' },
+  { type: 'lecture', day: 0, dayLabel: 'Sunday', start: '13:00', end: '14:30', title: 'MED 401-2', room: 'SS 116B', icon: 'case' },
+  { type: 'lecture', day: 0, dayLabel: 'Sunday', start: '14:30', end: '16:00', title: 'SUR 401-1', room: 'SS 116B', icon: 'clinical' },
+  { type: 'lecture', day: 2, dayLabel: 'Tuesday', start: '12:00', end: '13:00', title: 'SUR 401-1', room: 'SS 116B', icon: 'scalpel' },
+  { type: 'lecture', day: 2, dayLabel: 'Tuesday', start: '13:00', end: '14:30', title: 'MED 401-2', room: 'SS 116B', icon: 'case' },
+  { type: 'lecture', day: 2, dayLabel: 'Tuesday', start: '14:30', end: '16:00', title: 'ANAE 401', room: 'SS 116B', icon: 'syringe' },
+  { type: 'lecture', day: 3, dayLabel: 'Wednesday', start: '12:00', end: '13:00', title: 'NUT 401', room: 'SS 116B', icon: 'nutrition' },
+  { type: 'lecture', day: 3, dayLabel: 'Wednesday', start: '13:00', end: '14:30', title: 'LAB 401', room: 'SS 116B', icon: 'lab' },
   { type: 'round', day: 2, dayLabel: 'Tuesday', start: '09:00', end: '10:30', title: 'MED 401-2 (A)', room: 'HR1' },
   { type: 'round', day: 2, dayLabel: 'Tuesday', start: '10:30', end: '12:00', title: 'SUR 401 (A)', room: 'HR1' },
   { type: 'round', day: 2, dayLabel: 'Tuesday', start: '09:00', end: '10:30', title: 'SUR 401 (B)', room: 'HR5' },
@@ -1794,6 +1794,42 @@ function getScheduleStatus(item, now = new Date()) {
   return 'now'
 }
 
+function getScheduleProgress(item, now = new Date()) {
+  const startMinutes = minutesFromTime(item.start)
+  const endMinutes = minutesFromTime(item.end)
+  const currentMinutes = now.getHours() * 60 + now.getMinutes()
+  const durationMinutes = endMinutes - startMinutes
+  if (durationMinutes <= 0) return { percent: 0, remainingMinutes: 0 }
+
+  const elapsedMinutes = Math.max(0, Math.min(durationMinutes, currentMinutes - startMinutes))
+  const remainingMinutes = Math.max(0, endMinutes - currentMinutes)
+
+  return {
+    percent: Math.round((elapsedMinutes / durationMinutes) * 100),
+    remainingMinutes
+  }
+}
+
+function renderScheduleProgress(item, now = new Date(), modifierClass = '') {
+  if (getScheduleStatus(item, now) !== 'now') return ''
+
+  const { percent, remainingMinutes } = getScheduleProgress(item, now)
+  const label = remainingMinutes <= 1 ? 'ending now' : `${remainingMinutes} min left`
+  const className = ['schedule-progress', modifierClass].filter(Boolean).join(' ')
+
+  return `
+    <div class="${className}" aria-label="${escapeHtml(`${percent}% done, ${label}`)}">
+      <div class="schedule-progress__track">
+        <span style="width: ${percent}%;"></span>
+      </div>
+      <div class="schedule-progress__label">
+        <span>${escapeHtml(`${percent}% done`)}</span>
+        <strong>${escapeHtml(label)}</strong>
+      </div>
+    </div>
+  `
+}
+
 function minutesUntilNext(item, now = new Date()) {
   const today = now.getDay()
   const startMinutes = minutesFromTime(item.start)
@@ -1855,6 +1891,7 @@ function renderScheduleCard(item, now = new Date(), options = {}) {
         </div>
         <h3>${escapeHtml(item.title)}</h3>
         <p>${escapeHtml(formatScheduleTime(item.start, item.end))}</p>
+        ${renderScheduleProgress(item, now)}
       </div>
       <span class="schedule-card__status">${escapeHtml(statusLabel)}</span>
     </article>
@@ -1949,6 +1986,7 @@ function renderScheduleCalendarEvent(item, dayItems, bounds, now = new Date()) {
       </div>
       <p>${escapeHtml(formatScheduleTime(item.start, item.end))}</p>
       ${roomMarkup}
+      ${renderScheduleProgress(item, now, 'schedule-progress--calendar')}
     </article>
   `
 }
@@ -2363,6 +2401,9 @@ if (copyHistorySummary && historySummaryText) {
 renderWhatsappFeedback()
 renderAssignmentProgress()
 renderSchedulePage()
+if (scheduleTodayTitle) {
+  window.setInterval(renderSchedulePage, 60 * 1000)
+}
 
 // ========== GLOBAL CLICK GLOW EFFECT ==========
 
