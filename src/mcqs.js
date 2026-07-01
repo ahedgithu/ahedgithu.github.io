@@ -3513,6 +3513,58 @@ window.mcqQuizzes['Monitoring and Fluid Therapy'] = [
     ]
   }
 
+  toSource('Cardiothoracic Trauma Part 1', {
+    id: 'sur401-2-trauma-past-exams',
+    label: 'SUR401-2 Past Exam MCQs',
+    description: 'Cardiothoracic trauma questions from the SUR401-2 topic-split past-exam bank.',
+    mcqs: [
+      q('What is the most common intervention required for patients with thoracic trauma?', ['Chest tube insertion', 'Thoracotomy', 'VATS', 'Pericardiocentesis'], 0, 'The SUR401-2 source keys chest tube insertion as the most common intervention.'),
+      q('Which injuries require immediate life-saving intervention?', ['Tension pneumothorax and pericardial tamponade', 'Cardiac contusion and rib fractures', 'Clavicle fracture and pulmonary contusion', 'Pneumomediastinum and subcutaneous emphysema'], 0, 'Tension pneumothorax and cardiac tamponade are primary-survey emergencies.'),
+      q('Which statement is true about chest trauma?', ['It is commonly blunt', 'It is commonly penetrating', 'It is commonly rapidly fatal', 'It commonly involves airway injuries'], 0, 'The source keys blunt trauma as the common pattern.'),
+      q('What is the initial management priority in traumatic hemorrhagic shock?', ['Insert a CVP line early', 'Type and crossmatch blood', 'Secure the airway and ventilate adequately', 'Rapidly infuse colloids'], 2, 'ATLS starts with airway and adequate ventilation before circulation details.'),
+      q('Which thoracic injury should be identified and urgently managed during the primary ATLS survey?', ['Aortic disruption', 'Cardiac tamponade', 'Ruptured diaphragm', 'Simple pneumothorax'], 1, 'Cardiac tamponade can rapidly obstruct circulation and is treated during the primary survey.')
+    ]
+  })
+
+  toSource('Pneumothorax, tension pneumothorax, hemothorax', {
+    id: 'sur401-2-pleural-trauma-past-exams',
+    label: 'SUR401-2 Past Exam MCQs',
+    description: 'Pleural trauma questions from the SUR401-2 cardiothoracic past-exam bank.',
+    mcqs: [
+      q('Typical intercostal chest-tube insertion site is:', ['5th intercostal space at anterior axillary line', '5th intercostal space at midclavicular line', '5th intercostal space at midaxillary line', 'All of the above'], 2, 'The source keys the 5th intercostal space at the midaxillary line.'),
+      q('About chest tubes, which statement is false?', ['A haemopneumothorax tube is inserted in the 5th intercostal space at the midaxillary line', 'A haemothorax tube is inserted in the 2nd intercostal space at the midclavicular line', 'Chest tube insertion can be done under local anaesthesia', 'Tube removal is usually a bedside procedure'], 1, 'The 2nd intercostal midclavicular site is not the usual haemothorax chest tube site.'),
+      q('In closed chest trauma, pneumothorax is due to:', ['Injury to the visceral pleura', 'Injury to the parietal pleura', 'Injury to both visceral and parietal pleura', 'All of the above'], 0, 'The keyed source answer is injury to the visceral pleura.'),
+      q('A patient with rib fractures and hemopneumothorax has a chest tube. Which is not an indication for thoracotomy?', ['Mild air leak', 'Massive initial blood loss', 'Persistent blood loss', 'Associated oesophageal injury'], 0, 'Mild air leak alone is not keyed as an indication for thoracotomy.'),
+      q('Best first-aid treatment of tension pneumothorax is:', ['Oxygen by mask', 'Oxygen by nasal cannula', 'Insertion of a needle into the pleural space', 'Observation only'], 2, 'The source keys needle decompression as the first-aid treatment.')
+    ]
+  })
+
+  toSource('Mitral valve diseases', {
+    id: 'sur401-2-mitral-past-exams',
+    label: 'SUR401-2 VHD MCQs',
+    description: 'Mitral valve questions from the SUR401-2 valvular-heart-disease past-exam bank.',
+    mcqs: [
+      q('All are options for severely symptomatic mitral regurgitation except:', ['Mitral valve repair', 'Mitral valve replacement', 'Trans-catheter mitral clipping', 'Trans-catheter mitral balloon valvotomy'], 3, 'Balloon valvotomy is used for selected mitral stenosis, not severe mitral regurgitation.'),
+      q('Which is a relative indication for mitral valve replacement rather than repair?', ['Extensive leaflet calcification', 'Mitral regurgitation', 'Chordal rupture of the anterior leaflet', 'Significant annular dilatation'], 0, 'The source keys extensive leaflet calcification as favoring replacement over repair.'),
+      q('Which finding is not associated with severe mitral stenosis?', ['Pulmonary vascular congestion', 'Atrial fibrillation', 'Valve area > 2 cm2', 'Left atrial thrombus'], 2, 'A valve area greater than 2 cm2 is not severe mitral stenosis.'),
+      q('Which may indicate operation in mitral stenosis?', ['Embolization', 'Valve area less than 1.5 cm2', 'Onset of atrial fibrillation', 'All of the above'], 3, 'The source keys all listed options as possible operative indications.'),
+      q('The most common cause of mitral stenosis is:', ['Congenital disease', 'Coronary artery disease', 'Bacterial endocarditis', 'Rheumatic heart disease'], 3, 'Rheumatic heart disease is the classic common cause of mitral stenosis.')
+    ]
+  })
+
+  toSource('Rabies and Tetanus', {
+    id: 'nut401-tetanus-mcqs',
+    label: 'NUT401 Tetanus MCQs',
+    description: 'Tetanus questions from the NUT401 tetanus and yellow-fever MCQ file.',
+    mcqs: [
+      q('What is the causative agent of tetanus?', ['Clostridium botulinum', 'Clostridium perfringens', 'Clostridium tetani', 'Bacillus anthracis'], 2, 'The NUT401 source keys Clostridium tetani.'),
+      q('Tetanus bacilli produce which toxin?', ['Botulinum', 'Tetanospasmin', 'Hemolysin', 'Shiga toxin'], 1, 'The source keys tetanospasmin.'),
+      q('What is the usual incubation period of tetanus?', ['6 days', '1-3 weeks', '10-30 days', '2 months'], 1, 'The source answer key gives 1-3 weeks.'),
+      q('The first sign of tetanus often starts in the:', ['Legs', 'Abdomen', 'Masseters (lockjaw)', 'Chest muscles'], 2, 'The source keys masseter spasm, or lockjaw, as the first sign.'),
+      q('Category C wound management with tetanus risk uses:', ['No treatment', 'Toxoid only', 'Toxoid + TIG', 'TIG only'], 2, 'The source keys toxoid plus tetanus immunoglobulin.')
+    ]
+  })
+
   toSource('Metabolic Liver Disease', {
     id: 'golden-metabolic-liver',
     label: 'Golden Medicine MCQs',
