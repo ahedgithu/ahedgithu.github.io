@@ -3565,6 +3565,39 @@ window.mcqQuizzes['Monitoring and Fluid Therapy'] = [
     ]
   })
 
+  toSource('Vitamins', {
+    id: 'nut401-vitamins-mcqs',
+    label: 'NUT401 Vitamins MCQs',
+    description: 'Focused vitamin questions from Vitamins MCQs.pdf.',
+    mcqs: [
+      q('The term "vitamin" originates from the Latin word "vita," meaning:', ['Energy', 'Life', 'Nutrition', 'Growth'], 1, 'The NUT401 source says "vitamin" comes from Latin vita, meaning life.'),
+      q('Which statement about vitamins is true?', ['They are absorbed in changed forms', 'They provide more energy than proteins and fats', 'They act mainly as catalytic agents', 'They are synthesized adequately by the body'], 2, 'The source keys vitamins as mainly catalytic agents, not energy sources.'),
+      q('Which vitamin classification is based on solubility?', ['Essential vs nonessential', 'Natural vs synthetic', 'Fat-soluble vs water-soluble', 'Catalytic vs metabolic'], 2, 'Vitamins are commonly classified by solubility into fat-soluble and water-soluble groups.'),
+      q('Which of the following is water-soluble?', ['Vitamin A', 'Vitamin K', 'Vitamin B1', 'Vitamin D'], 2, 'Vitamin B1, or thiamine, is water-soluble.'),
+      q('Excess amounts of water-soluble vitamins are:', ['Stored in adipose tissue', 'Stored in the liver', 'Excreted in urine', 'Converted into fat'], 2, 'The source keys excess water-soluble vitamins as excreted in urine.'),
+      q('Intestinal microorganisms play a role in synthesizing:', ['Vitamin C', 'Vitamin K and biotin', 'Vitamin E and D', 'Niacin and folic acid'], 1, 'Gut flora can synthesize vitamin K and biotin.'),
+      q('Humans produce vitamin A from:', ['Niacin', 'Beta-carotene', 'Tryptophan', 'Retinol'], 1, 'Beta-carotene is converted to vitamin A.'),
+      q('The earliest sign of vitamin A deficiency is:', ['Scurvy', 'Night blindness', 'Beriberi', 'Pellagra'], 1, 'The source keys night blindness as the earliest sign of vitamin A deficiency.'),
+      q('Vitamin D is primarily synthesized:', ['By gut flora', 'In the liver', 'In the skin via UV light', 'In the kidneys'], 2, 'UV light in skin initiates vitamin D synthesis.'),
+      q('Deficiency of vitamin D in adults results in:', ['Rickets', 'Osteomalacia', 'Pellagra', 'Scurvy'], 1, 'Vitamin D deficiency causes osteomalacia in adults and rickets in children.'),
+      q('Vitamin E is commonly known as:', ['Anti-aging factor', 'Coagulation vitamin', 'Anti-scurvy vitamin', 'Beta-carotene vitamin'], 0, 'The source keys vitamin E as the anti-aging antioxidant factor.'),
+      q('The main function of vitamin E includes:', ['Bone mineralization', 'Intracellular antioxidant activity', 'Prothrombin synthesis', 'Collagen formation'], 1, 'Vitamin E acts as an intracellular antioxidant.'),
+      q('Vitamin K plays a primary role in:', ['Bone collagen synthesis', 'Prothrombin formation', 'Energy production', 'Intracellular antioxidant reactions'], 1, 'Vitamin K is essential for prothrombin formation.'),
+      q('Vitamin B1 is also called:', ['Niacin', 'Riboflavin', 'Thiamine', 'Pyridoxine'], 2, 'Vitamin B1 is thiamine.'),
+      q('A hallmark feature of vitamin B1 deficiency is:', ['Pellagra', 'Beriberi', 'Rickets', 'Megaloblastic anemia'], 1, 'Thiamine deficiency causes beriberi.'),
+      q('Pellagra is primarily caused by deficiency of:', ['Niacin', 'Riboflavin', 'Ascorbic acid', 'Pyridoxine'], 0, 'Pellagra is caused by niacin, or vitamin B3, deficiency.'),
+      q('Vitamin B6 is essential for:', ['Collagen formation', 'Porphyrin and heme synthesis', 'DNA replication', 'Platelet aggregation'], 1, 'The source keys pyridoxine as essential for heme synthesis.'),
+      q('Biotin deficiency manifests as:', ['Pellagra', 'Dermatitis and glossitis', 'Rickets', 'Neuropathy'], 1, 'The source keys biotin deficiency as dermatitis and glossitis.'),
+      q('Vitamin B12 is mostly derived from:', ['Citrus fruits', 'Whole grains', 'Animal products', 'Vegetables'], 2, 'Vitamin B12 is mainly from animal products.'),
+      q('Pernicious anemia results from deficiency of:', ['Vitamin C', 'Vitamin A', 'Vitamin B12', 'Vitamin K'], 2, 'The source keys pernicious anemia as vitamin B12 deficiency.'),
+      q('Vitamin C deficiency leads to:', ['Pellagra', 'Scurvy', 'Rickets', 'Beriberi'], 1, 'Vitamin C deficiency causes scurvy.'),
+      q('In prolonged raw egg consumption, the likely deficiency is:', ['Vitamin B7', 'Vitamin A', 'Vitamin E', 'Vitamin D'], 0, 'Raw egg white avidin can cause biotin, or vitamin B7, deficiency.'),
+      q('Which vitamin acts synergistically with selenium?', ['Vitamin K', 'Vitamin E', 'Vitamin B12', 'Vitamin B2'], 1, 'Vitamin E works with selenium as an antioxidant.'),
+      q('Which vitamin plays a dual role in coagulation and bone health?', ['Vitamin A', 'Vitamin K', 'Vitamin C', 'Niacin'], 1, 'Vitamin K contributes to coagulation and bone health.'),
+      q('Which vitamin is destroyed by heat?', ['Vitamin B12', 'Vitamin C', 'Vitamin D', 'Vitamin E'], 1, 'The source keys vitamin C as heat-labile.')
+    ]
+  })
+
   toSource('Nutrition in cancer and obesity', {
     id: 'nut401-obesity-mcqs',
     label: 'NUT401 Obesity MCQs',
