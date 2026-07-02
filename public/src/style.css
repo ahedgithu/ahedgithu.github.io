@@ -2,25 +2,25 @@
 
 :root {
   color-scheme: light;
-  --bg: #f7fbfa;
-  --bg2: #eef8f6;
-  --text: #102b33;
-  --muted: #6c7f88;
-  --line: rgba(49, 95, 114, 0.14);
-  --line-strong: rgba(49, 95, 114, 0.24);
-  --gold: #c89d3f;
-  --green: #36c993;
-  --blue: #4f9ca7;
+  --bg: #eef1ed;
+  --bg2: #e3ebe8;
+  --text: #13282f;
+  --muted: #65777d;
+  --line: rgba(34, 70, 78, 0.13);
+  --line-strong: rgba(34, 70, 78, 0.22);
+  --gold: #b89445;
+  --green: #55a987;
+  --blue: #5f9ba3;
   --red: #ee8097;
-  --gold-soft: rgba(200, 157, 63, 0.14);
-  --primary-soft: rgba(49, 95, 114, 0.10);
+  --gold-soft: rgba(184, 148, 69, 0.11);
+  --primary-soft: rgba(47, 102, 112, 0.09);
   --radius: 24px;
-  --shadow: 0 24px 70px rgba(31, 70, 88, 0.13);
-  --shadow-soft: 0 12px 34px rgba(31, 70, 88, 0.08);
-  --paper: rgba(255, 255, 255, 0.78);
-  --paper-strong: rgba(255, 255, 255, 0.94);
-  --teal: #315f72;
-  --mint: #4f9ca7;
+  --shadow: 0 18px 48px rgba(34, 70, 78, 0.10);
+  --shadow-soft: 0 10px 26px rgba(34, 70, 78, 0.07);
+  --paper: rgba(250, 252, 249, 0.72);
+  --paper-strong: rgba(255, 255, 252, 0.88);
+  --teal: #2f6670;
+  --mint: #5f9ba3;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -39,8 +39,8 @@ body {
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color: var(--text);
   background:
-    radial-gradient(circle at 8% -4%, rgba(79, 156, 167, 0.22), transparent 30%),
-    radial-gradient(circle at 92% 2%, rgba(200, 157, 63, 0.22), transparent 26%),
+    radial-gradient(circle at 8% -4%, rgba(95, 155, 163, 0.14), transparent 30%),
+    radial-gradient(circle at 92% 2%, rgba(184, 148, 69, 0.10), transparent 26%),
     linear-gradient(180deg, var(--bg), var(--bg2) 56%, var(--bg));
   overflow-x: hidden;
 }
@@ -51,8 +51,8 @@ body::before {
   inset: 0;
   pointer-events: none;
   background-image:
-    linear-gradient(rgba(49, 95, 114, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(49, 95, 114, 0.035) 1px, transparent 1px);
+    linear-gradient(rgba(34, 70, 78, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 70, 78, 0.028) 1px, transparent 1px);
   background-size: 52px 52px;
   mask-image: linear-gradient(to bottom, #000 0 35%, transparent 92%);
 }
@@ -3917,7 +3917,7 @@ main {
 }
 
 .schedule-progress--calendar .schedule-progress__label {
-  font-size: 0.58rem;
+  font-size: 0.68rem;
 }
 
 .schedule-day {
@@ -4448,11 +4448,11 @@ main {
   border-color: var(--line);
   border-radius: var(--radius);
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.70), rgba(255, 255, 255, 0.20)),
+    linear-gradient(180deg, rgba(250, 252, 249, 0.46), rgba(232, 239, 235, 0.18)),
     var(--paper);
   box-shadow: var(--shadow-soft);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 
 .semester-timeline,
@@ -4479,8 +4479,8 @@ main {
   pointer-events: none;
   border-radius: inherit;
   background:
-    radial-gradient(circle at 100% 0%, rgba(200, 157, 63, 0.16), transparent 30%),
-    radial-gradient(circle at 0% 100%, rgba(79, 156, 167, 0.14), transparent 30%);
+    radial-gradient(circle at 100% 0%, rgba(184, 148, 69, 0.10), transparent 30%),
+    radial-gradient(circle at 0% 100%, rgba(95, 155, 163, 0.10), transparent 30%);
 }
 
 .semester-timeline > *,
@@ -4498,10 +4498,10 @@ main {
 .section-heading h2,
 .history-hero .section-heading h1 {
   color: transparent;
-  background: linear-gradient(180deg, var(--text), var(--teal) 58%, var(--gold));
+  background: linear-gradient(180deg, var(--text), var(--teal) 68%, var(--gold));
   background-clip: text;
   -webkit-background-clip: text;
-  filter: drop-shadow(0 18px 44px rgba(49, 95, 114, 0.12));
+  filter: none;
   text-shadow: none;
 }
 
@@ -4534,7 +4534,7 @@ main {
   border-color: var(--line);
   border-radius: 20px;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.50), transparent),
+    linear-gradient(180deg, rgba(250, 252, 249, 0.34), transparent),
     var(--paper-strong);
   box-shadow: var(--shadow-soft);
 }
@@ -4549,9 +4549,9 @@ main {
 .quiz-choice:hover:not(:disabled) {
   border-color: rgba(79, 156, 167, 0.42);
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.72), transparent),
+    linear-gradient(180deg, rgba(250, 252, 249, 0.48), transparent),
     var(--paper-strong);
-  box-shadow: 0 18px 46px rgba(31, 70, 88, 0.12);
+  box-shadow: 0 14px 34px rgba(34, 70, 78, 0.10);
 }
 
 .exam-card strong,
@@ -4589,7 +4589,7 @@ main {
 .schedule-card--now,
 .schedule-day--today {
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.62), transparent),
+    linear-gradient(180deg, rgba(250, 252, 249, 0.42), transparent),
     linear-gradient(135deg, var(--gold-soft), transparent 62%),
     var(--paper-strong);
 }
@@ -4602,7 +4602,7 @@ main {
 
 .exam-card--next small,
 .schedule-day__top span {
-  color: #073124;
+  color: #16372f;
   background: var(--green);
 }
 
@@ -4613,9 +4613,9 @@ main {
   border-radius: 18px;
   color: #fff;
   background:
-    radial-gradient(circle at 28% 22%, rgba(255, 255, 255, 0.62), transparent 24%),
+    radial-gradient(circle at 28% 22%, rgba(250, 252, 249, 0.48), transparent 24%),
     linear-gradient(135deg, var(--teal), var(--blue));
-  box-shadow: 0 12px 28px rgba(49, 95, 114, 0.18);
+  box-shadow: 0 10px 22px rgba(34, 70, 78, 0.13);
 }
 
 .subject-button.active .subject-icon,
@@ -4646,7 +4646,7 @@ main {
 .scope-toggle,
 .site-nav,
 .history-progress {
-  background: rgba(255, 255, 255, 0.72);
+  background: rgba(250, 252, 249, 0.62);
 }
 
 .subject-track-tab:hover,
@@ -4658,7 +4658,7 @@ main {
 }
 
 .topic-item::after {
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.84) 0%, rgba(255, 255, 255, 0.68) 58%, rgba(255, 255, 255, 0.18) 100%);
+  background: linear-gradient(90deg, rgba(250, 252, 249, 0.74) 0%, rgba(250, 252, 249, 0.52) 58%, rgba(250, 252, 249, 0.12) 100%);
 }
 
 .topic-item__image {
@@ -4677,8 +4677,8 @@ main {
 .topic-item--remaining {
   color: rgba(49, 95, 114, 0.58);
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.68), rgba(255, 255, 255, 0.46)),
-    rgba(255, 255, 255, 0.52);
+    linear-gradient(180deg, rgba(250, 252, 249, 0.50), rgba(232, 239, 235, 0.36)),
+    rgba(250, 252, 249, 0.42);
 }
 
 .topic-item--remaining .topic-item__label {
@@ -4720,19 +4720,19 @@ main {
 .quiz-action--primary {
   color: #fff;
   background: linear-gradient(135deg, var(--teal), var(--blue));
-  box-shadow: 0 14px 34px rgba(49, 95, 114, 0.20);
+  box-shadow: 0 10px 24px rgba(34, 70, 78, 0.15);
 }
 
 .quiz-modal__panel {
   border-color: var(--line);
   border-radius: var(--radius);
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.82)),
+    linear-gradient(180deg, rgba(250, 252, 249, 0.64), rgba(232, 239, 235, 0.40)),
     var(--paper-strong);
 }
 
 .quiz-modal__backdrop {
-  background: rgba(238, 248, 247, 0.72);
+  background: rgba(227, 235, 232, 0.72);
 }
 
 .quiz-question,
@@ -4766,8 +4766,8 @@ main {
   border-radius: 999px;
   background: color-mix(in srgb, var(--paper-strong) 86%, transparent);
   box-shadow: var(--shadow);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
   pointer-events: auto;
 }
 
@@ -4804,7 +4804,7 @@ main {
 .bottom-nav a.active {
   color: #fff;
   background: linear-gradient(135deg, var(--teal), var(--blue));
-  box-shadow: 0 16px 32px rgba(49, 95, 114, 0.24);
+  box-shadow: 0 12px 26px rgba(34, 70, 78, 0.18);
 }
 
 .history-preview-grid,
@@ -4841,9 +4841,9 @@ main {
   transform: translate(-50%, -50%) scale(0);
   background:
     radial-gradient(circle,
-      rgba(255, 255, 255, 0.80) 0%,
-      rgba(79, 156, 167, 0.24) 32%,
-      rgba(79, 156, 167, 0.08) 58%,
+      rgba(250, 252, 249, 0.62) 0%,
+      rgba(95, 155, 163, 0.18) 32%,
+      rgba(95, 155, 163, 0.06) 58%,
       transparent 74%);
   animation: apple-ripple 620ms var(--ease) forwards;
 }
@@ -5127,7 +5127,7 @@ main {
 
   .semester-date-scale__tick {
     min-width: 58px;
-    font-size: 0.55rem;
+    font-size: 0.64rem;
   }
 
   .semester-date-scale__tick i {
@@ -5140,7 +5140,7 @@ main {
 
   .race-marker {
     min-width: 72px;
-    font-size: 0.56rem;
+    font-size: 0.64rem;
   }
 
   .race-marker b {
@@ -5206,7 +5206,7 @@ main {
   .exam-calendar-tile span,
   .exam-card span,
   .exam-card small {
-    font-size: 0.52rem;
+    font-size: 0.64rem;
     letter-spacing: 0.04em;
   }
 
@@ -5237,12 +5237,12 @@ main {
 
   .exam-card time,
   .exam-card em {
-    font-size: 0.58rem;
+    font-size: 0.64rem;
     line-height: 1.15;
   }
 
   .exam-card__meta {
-    font-size: 0.58rem;
+    font-size: 0.64rem;
     line-height: 1.15;
   }
 
@@ -5330,7 +5330,7 @@ main {
   }
 
   .site-nav a[data-mobile-label]::after {
-    font-size: 0.62rem;
+    font-size: 0.66rem;
   }
 
   .bottom-nav-wrap {
@@ -5346,9 +5346,9 @@ main {
 
   .bottom-nav a {
     min-height: 52px;
-    padding: 7px 5px;
+    padding: 7px 4px;
     border-radius: 20px;
-    font-size: 0.58rem;
+    font-size: 0.62rem;
   }
 
   .bottom-nav a svg {
@@ -5362,8 +5362,8 @@ main {
   }
 
   .schedule-page {
-    gap: 6px;
-    padding: 8px 0 10px;
+    gap: 12px;
+    padding: 16px 0 28px;
   }
 
   .schedule-page .section-heading {
@@ -5373,46 +5373,43 @@ main {
 
   .schedule-page .section-heading .eyebrow,
   .schedule-tabs,
-  .schedule-section#today,
   .schedule-card__icon,
-  .schedule-card__meta,
   .schedule-card__status,
   .schedule-day__top span {
     display: none;
   }
 
   .schedule-page .section-heading h1 {
-    font-size: 1.18rem;
-    line-height: 1;
+    font-size: 1.55rem;
+    line-height: 1.08;
   }
 
   .schedule-today,
   .schedule-section {
-    gap: 5px;
-    padding: 6px;
-    border-radius: 6px;
-    box-shadow: none;
+    gap: 10px;
+    padding: 12px;
+    border-radius: 16px;
+    box-shadow: var(--shadow-soft);
   }
 
   .schedule-today {
-    grid-template-columns: minmax(0, 1fr) minmax(112px, 0.72fr);
-    align-items: stretch;
+    grid-template-columns: 1fr;
   }
 
   .schedule-today .card__kicker {
-    font-size: 0.56rem;
+    font-size: 0.68rem;
   }
 
   .schedule-today h2 {
-    margin-top: 2px;
-    font-size: 0.96rem;
-    line-height: 1.05;
+    margin-top: 4px;
+    font-size: 1.35rem;
+    line-height: 1.12;
   }
 
   .schedule-today > div:first-child > p:last-child {
-    margin-top: 3px;
-    font-size: 0.58rem;
-    line-height: 1.18;
+    margin-top: 6px;
+    font-size: 0.78rem;
+    line-height: 1.35;
   }
 
   .schedule-next-card {
@@ -5421,10 +5418,10 @@ main {
 
   .schedule-next-card__wait {
     justify-self: stretch;
-    padding: 3px 5px;
-    border-radius: 6px;
-    font-size: 0.52rem;
-    line-height: 1;
+    padding: 6px 8px;
+    border-radius: 999px;
+    font-size: 0.68rem;
+    line-height: 1.15;
     text-align: center;
   }
 
@@ -5434,7 +5431,7 @@ main {
 
   .schedule-section__top {
     display: grid;
-    gap: 1px;
+    gap: 4px;
   }
 
   .schedule-section__top .card__kicker {
@@ -5443,13 +5440,13 @@ main {
 
   .schedule-section__top h2 {
     margin: 0;
-    font-size: 0.74rem;
-    line-height: 1;
+    font-size: 1rem;
+    line-height: 1.12;
   }
 
   .schedule-location {
-    font-size: 0.52rem;
-    line-height: 1;
+    font-size: 0.72rem;
+    line-height: 1.25;
   }
 
   .schedule-calendar__frame {
@@ -5472,12 +5469,12 @@ main {
   }
 
   .schedule-calendar-event strong {
-    font-size: 0.76rem;
+    font-size: 0.82rem;
   }
 
   .schedule-calendar-event p {
     margin-top: 4px;
-    font-size: 0.64rem;
+    font-size: 0.72rem;
   }
 
   .schedule-progress--calendar .schedule-progress__label {
@@ -5488,38 +5485,38 @@ main {
     display: inline-block;
     margin-top: 4px;
     padding: 2px 5px;
-    font-size: 0.58rem;
+    font-size: 0.68rem;
   }
 
   .schedule-week-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 4px;
+    grid-template-columns: 1fr;
+    gap: 8px;
   }
 
   .schedule-week-grid--rounds {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr;
   }
 
   .schedule-day {
-    gap: 3px;
-    padding: 4px;
-    border-radius: 6px;
+    gap: 8px;
+    padding: 10px;
+    border-radius: 16px;
   }
 
   .schedule-day__top h3 {
-    font-size: 0.6rem;
-    line-height: 1;
+    font-size: 0.9rem;
+    line-height: 1.12;
   }
 
   .schedule-card-stack {
-    gap: 2px;
+    gap: 7px;
   }
 
   .schedule-card {
     display: block;
     min-height: 0;
-    padding: 3px 4px;
-    border-radius: 5px;
+    padding: 9px 10px;
+    border-radius: 14px;
   }
 
   .schedule-card__body {
@@ -5527,20 +5524,14 @@ main {
   }
 
   .schedule-card h3 {
-    overflow: hidden;
-    font-size: 0.54rem;
-    line-height: 1.05;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    font-size: 0.82rem;
+    line-height: 1.2;
   }
 
   .schedule-card p {
-    margin-top: 1px;
-    overflow: hidden;
-    font-size: 0.48rem;
-    line-height: 1;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    margin-top: 3px;
+    font-size: 0.72rem;
+    line-height: 1.28;
   }
 
   .profile-card,
