@@ -367,7 +367,7 @@ let subjects = [
         art: 10,
         section: 'Chest',
         midtermScope: true,
-        midtermScopeNote: 'MED 401-2 Chest scope: ACO / ACOS is included. Dr. Serag notes are VIP with PDFs and records.',
+        midtermScopeNote: 'MED 401-2 Chest scope: chronic bronchitis is included; COPD is excluded.',
         updatedAt: '2026-06-30',
         updateBatch: 'tuesday-report-2026-06-30',
         note: 'Tuesday report 30 Jun: COPD, taught by Dr. Serageldin Ali Sadek. Covers chronic bronchitis, emphysema, spirometry, CT chest, risk factors, airflow limitation, and management.',

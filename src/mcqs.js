@@ -3565,6 +3565,52 @@ window.mcqQuizzes['Monitoring and Fluid Therapy'] = [
     ]
   })
 
+  toSource('Nutrition in cancer and obesity', {
+    id: 'nut401-obesity-mcqs',
+    label: 'NUT401 Obesity MCQs',
+    description: 'Focused obesity questions from obesity mcq.pdf.',
+    mcqs: [
+      q('BMI is calculated using which formula?', ['Weight (kg) x height (m2)', 'Weight (kg) / height (m)', 'Weight (kg) / height (m2)', 'Height (m2) / weight (kg)'], 2, 'The NUT401 source keys BMI as weight in kilograms divided by height in meters squared.'),
+      q('A BMI of 34.5 kg/m2 falls under which category?', ['Underweight', 'Normal weight', 'Overweight', 'Obese'], 3, 'The source classifies BMI 30.0-39.9 as obese.'),
+      q('Which BMI value is considered morbid obesity?', ['BMI 30.0-39.9', 'BMI < 18.5', 'BMI >= 40', 'BMI 25-29.9'], 2, 'The source keys BMI >= 40 as morbid obesity.'),
+      q('The relative weight equation used to assess obesity is:', ['Actual weight x 100 / height', 'Actual weight x 100 / ideal weight', 'Ideal weight x 100 / actual weight', 'BMI x 100 / ideal weight'], 1, 'The source uses actual weight multiplied by 100 and divided by ideal weight.'),
+      q('A person is considered obese by relative weight when the value is:', ['> 110%', '> 115%', '>= 120%', '>= 100%'], 2, 'The NUT401 source keys relative weight >= 120% as obese.'),
+      q('A waist circumference greater than 102 cm in men suggests:', ['Normal', 'Mild obesity', 'Abdominal obesity', 'Visceral leanness'], 2, 'The keyed source answer is abdominal obesity.'),
+      q('Which is NOT a component of nutritional assessment?', ['Anthropometric measures', 'Historical data', 'Endoscopy', 'Laboratory data'], 2, 'Endoscopy is not listed as a core nutritional assessment component in the source.'),
+      q('All are anthropometric measures except:', ['BMI', 'Serum albumin', 'Head circumference', 'Mid-arm circumference'], 1, 'Serum albumin is a laboratory marker, not an anthropometric measure.'),
+      q('All of the following are complications of obesity except:', ['Osteoarthritis', 'Depression', 'Sickle cell anemia', 'Type 2 diabetes'], 2, 'Sickle cell anemia is not keyed as an obesity complication.'),
+      q('Which cancer group is associated with obesity in the source?', ['Colon', 'Uterus', 'Prostate', 'All of the above'], 3, 'The source keys all listed cancers as associated with obesity.'),
+      q('The most common cause of obesity is:', ['Hypothyroidism', 'Excess food intake', 'Cushing syndrome', 'Antidepressant use'], 1, 'The keyed source answer is excess food intake.'),
+      q('Which drug reduces fat absorption?', ['Sibutramine', 'Insulin', 'Orlistat', 'Statins'], 2, 'Orlistat reduces intestinal fat absorption.'),
+      q('Recommended exercise guidance in the source is:', ['30 minutes high intensity once weekly', '15 minutes walking daily', '30 minutes moderate activity most days', '60 minutes exercise once weekly'], 2, 'The source keys 30 minutes of moderate activity on most days.'),
+      q('Which factor can falsely elevate BMI?', ['Old age', 'High fat mass', 'Muscularity', 'Short stature'], 2, 'Muscularity can increase weight and BMI without reflecting excess fat.'),
+      q('Which condition does NOT cause obesity?', ['Insulinoma', 'Growth hormone deficiency', 'Addison disease', 'Cushing syndrome'], 2, 'The source keys Addison disease as not causing obesity.')
+    ]
+  })
+
+  toSource('Iron deficiency anemia', {
+    id: 'nut401-ida-mcqs',
+    label: 'NUT401 IDA MCQs',
+    description: 'Focused iron deficiency anemia questions from IDA MCQ.pdf.',
+    mcqs: [
+      q('What is the primary site of iron absorption in the gastrointestinal tract?', ['Jejunum', 'Duodenum', 'Ileum', 'Stomach'], 1, 'The NUT401 source keys the duodenum as the primary site of iron absorption.'),
+      q('Which is NOT a common global cause of iron-deficiency anemia?', ['Hookworm infestation', 'High dietary calcium', 'Parasitic infections', 'Viral hepatitis'], 3, 'The source keys viral hepatitis as not a common global cause of IDA.'),
+      q('A newborn contains approximately how much iron?', ['1 g', '0.5 g', '2 g', '5 g'], 1, 'The source answer key gives about 0.5 g.'),
+      q('Which of the following decreases iron absorption?', ['Ascorbic acid', 'Phytates', 'Gastric acid', 'Lactose'], 1, 'Phytates decrease iron absorption.'),
+      q('Which test is most accurate for assessing body iron stores?', ['Serum iron', 'TIBC', 'Ferritin', 'Hematocrit'], 2, 'The source keys ferritin as the most accurate test for iron stores.'),
+      q('Iron is transported in blood in which form?', ['Hemoglobin-bound', 'Ferritin-bound', 'Apoferritin-bound', 'Transferrin-bound'], 3, 'The source keys transferrin-bound iron.'),
+      q('Iron in cow milk is less absorbed due to:', ['High lactose content', 'High vitamin D', 'High calcium', 'Low fat'], 2, 'The source keys high calcium as reducing iron absorption from cow milk.'),
+      q('Which feature is NOT typically associated with iron-deficiency anemia?', ['Pallor', 'Pica', 'Sideroblastic anemia', 'Koilonychia'], 2, 'Sideroblastic anemia is a separate cause of microcytic anemia, not a typical feature of IDA.'),
+      q('The hemoglobin level where irritability and anorexia become prominent is:', ['< 10 g/dL', '< 7 g/dL', '< 5 g/dL', '< 8 g/dL'], 2, 'The source keys symptoms becoming prominent below 5 g/dL.'),
+      q('Iron therapy should be continued for how long after hemoglobin normalizes?', ['1 week', '2 weeks', '4 weeks', '8 weeks'], 3, 'The source keys 8 weeks to replenish iron stores.'),
+      q('Which age group is at highest risk for IDA due to growth requirements?', ['Adults', 'Infants', 'Elderly', 'Toddlers'], 3, 'The source answer key marks toddlers as highest risk in this question.'),
+      q('The presence of koilonychia suggests:', ['Vitamin B12 deficiency', 'Hemolysis', 'Iron deficiency', 'Lead poisoning'], 2, 'Koilonychia is classically associated with iron deficiency.'),
+      q('Iron absorption is enhanced by:', ['Tea', 'Whole wheat bread', 'Vitamin C', 'Phosphates'], 2, 'Vitamin C enhances iron absorption.'),
+      q('Common side effect of oral iron supplementation is:', ['Rash', 'Weight gain', 'Constipation', 'Hypoglycemia'], 2, 'Constipation is a common oral iron side effect.'),
+      q('Which test indicates early response to iron therapy?', ['Serum iron', 'Reticulocyte count', 'MCH', 'RDW'], 1, 'A reticulocyte response is an early sign that iron therapy is working.')
+    ]
+  })
+
   toSource('Metabolic Liver Disease', {
     id: 'golden-metabolic-liver',
     label: 'Golden Medicine MCQs',
