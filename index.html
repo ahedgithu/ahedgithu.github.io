@@ -12,27 +12,9 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="manifest" href="/manifest.webmanifest" />
   <meta name="theme-color" content="#315f72" />
-  <link rel="stylesheet" href="/src/style.css?v=20260702-scope-pills" />
+  <link rel="stylesheet" href="/src/style.css?v=20260702-timeline-colors" />
 </head>
 <body>
-  <header class="site-header">
-    <a class="brand" href="/" aria-label="Ahmed Sayed tracker home">
-      <span class="brand__mark">AS</span>
-      <span>
-        <strong>Ahmed Sayed</strong>
-        <small>MED 401 hub</small>
-      </span>
-    </a>
-
-    <nav class="site-nav" aria-label="Primary navigation">
-      <a href="/" data-mobile-label="Tracker">Tracker</a>
-      <a href="/news.html" data-mobile-label="News">News</a>
-      <a href="/schedule.html" data-mobile-label="Sched">Schedule</a>
-      <a href="/history.html" data-mobile-label="History">History</a>
-      <a href="/work.html" data-mobile-label="Work">Work with me</a>
-    </nav>
-  </header>
-
   <main>
     <section class="tracker-home" id="tracker" aria-labelledby="tracker-title">
       <div class="section-heading">
@@ -42,13 +24,12 @@
       <div class="semester-timeline" aria-label="Semester exam timeline">
         <div class="exam-schedule" aria-label="401 subject exam dates">
           <div class="exam-schedule__cards" id="exam-schedule-cards" aria-label="401 subject exam dates">
-            <div class="exam-card exam-card--quiz" data-code="NUT" style="cursor: pointer;">
+            <div class="exam-card exam-card--quiz exam-card--has-action" data-code="NUT">
               <strong>NUT Quiz</strong>
-              <time datetime="2026-07-08T14:30">Wed Jul 8, 2026</time>
               <em>Vitamins, Food-borne, Tetanus & Rabies, Obesity, 1st half IDA</em>
               <span class="exam-card__meta">10 marks</span>
-              <button class="topic-resource topic-resource--quiz" type="button" data-quiz-topic="NUT Quiz" style="margin-top: 8px; width: fit-content; justify-content: center; z-index: 10;">
-                Solve Past Exams (52 Qs)
+              <button class="exam-card__quiz-action" type="button" data-quiz-topic="NUT Quiz">
+                Past Exams (52 Qs)
               </button>
             </div>
             <article class="exam-card">
@@ -139,7 +120,188 @@
         </article>
       </div>
     </section>
+
+    <section class="updates-hero hub-section" id="news" aria-labelledby="news-title">
+      <div class="section-heading">
+        <p class="eyebrow">Class board</p>
+        <h1 id="news-title">MED 401 news</h1>
+      </div>
+      <div class="updates-board updates-board--hub" id="news-feed" aria-live="polite">
+        <article class="update-panel update-panel--primary update-panel--wide" data-news-id="nutrition-quiz-2026-07-08" data-course="Nutrition" data-date="2026-07-08" data-priority="1">
+          <div class="assignment-progress assignment-progress--top assignment-progress--quiz" dir="rtl" data-deadline-progress data-progress-mode="remaining" data-deadline-locale="ar" data-start-date="2026-07-01" data-due-date="2026-07-08" data-due-label="8 July 2026">
+            <div class="assignment-progress__top">
+              <strong data-deadline-days>8 July 2026</strong>
+            </div>
+            <div class="assignment-progress__bar" aria-hidden="true">
+              <span data-deadline-fill></span>
+            </div>
+          </div>
+          <div class="update-panel__top">
+            <p class="card__kicker">Nutrition</p>
+            <span class="status-pill status-pill--exam">Jul 8</span>
+          </div>
+          <h2 dir="rtl">تأكيد كويز Nutrition</h2>
+          <div class="arabic-news" dir="rtl">
+            <p>كويز <span dir="ltr">Nutrition</span> اتحدد رسميًا يوم <strong>8 July 2026</strong>.</p>
+            <p>الكويز على <strong><span dir="ltr">Vitamins</span>، <span dir="ltr">Food-borne Diseases</span>، <span dir="ltr">Tetanus & Rabies</span>، <span dir="ltr">Obesity</span>، وأول نصف من <span dir="ltr">IDA</span></strong>، ودرجته <strong>10 marks</strong>.</p>
+          </div>
+          <a class="news-action" href="/news.html">Open full news board</a>
+        </article>
+
+        <article class="update-panel update-panel--primary" data-course="SUR401-1" data-date="2026-06-25" data-priority="1" data-persistent="true">
+          <div class="update-panel__top">
+            <p class="card__kicker">SUR401-1</p>
+            <span class="status-pill status-pill--due">4 marks</span>
+          </div>
+          <h2>Incision Academy reminder</h2>
+          <div class="arabic-news" dir="rtl">
+            <p>تذكير بموضوع <span dir="ltr">Incision Academy</span> الخاص بمادة <span dir="ltr">Surgery 401-1</span>. عليه <strong>4 درجات</strong>، ولازم تجيبوا <span dir="ltr">70%+</span>.</p>
+          </div>
+          <a class="news-action" href="https://academy.incision.care/" target="_blank" rel="noopener noreferrer">Open Incision Academy</a>
+        </article>
+
+        <article class="update-panel update-panel--primary" data-course="LAB401" data-date="2026-09-05">
+          <div class="assignment-progress assignment-progress--top" dir="rtl" data-assignment-progress data-progress-mode="remaining" data-deadline-locale="ar" data-start-date="2026-06-06" data-due-date="2026-09-05">
+            <div class="assignment-progress__top">
+              <strong data-assignment-days>Due Sep 5, 2026</strong>
+            </div>
+            <div class="assignment-progress__bar" aria-hidden="true">
+              <span data-assignment-fill></span>
+            </div>
+          </div>
+          <div class="update-panel__top">
+            <p class="card__kicker">Required assignment</p>
+            <span class="status-pill status-pill--due">Due Sep 5</span>
+          </div>
+          <h2>LAB401 Clinical Pathology Research</h2>
+          <div class="arabic-news" dir="rtl">
+            <p>مطلوب بحث مطبوع <span dir="ltr">hard copy</span> في <span dir="ltr">Clinical Pathology / Laboratory Medicine</span>.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="schedule-page hub-section" id="schedule" aria-labelledby="schedule-title">
+      <div class="section-heading">
+        <p class="eyebrow">Lectures and clinical rounds</p>
+        <h1 id="schedule-title">401 schedule</h1>
+      </div>
+
+      <section class="schedule-today" aria-labelledby="schedule-today-title">
+        <div>
+          <p class="card__kicker">Today</p>
+          <h2 id="schedule-today-title">Loading schedule</h2>
+          <p id="schedule-today-summary">Checking current day and time.</p>
+        </div>
+        <div class="schedule-next-card" id="schedule-next-card" aria-live="polite"></div>
+      </section>
+
+      <div class="schedule-tabs" aria-label="Schedule views">
+        <a href="#today">Today</a>
+        <a href="#week-grid">Week grid</a>
+        <a href="#list">List</a>
+      </div>
+
+      <section class="schedule-section schedule-section--calendar" id="week-grid" aria-labelledby="week-grid-title">
+        <div class="schedule-section__top">
+          <p class="card__kicker">Week grid</p>
+          <h2 id="week-grid-title">Lectures and clinical rounds</h2>
+          <span class="schedule-location">Lectures: SS 116B - Clinical rounds: Hospital, fourth floor</span>
+        </div>
+        <div class="schedule-calendar" id="schedule-calendar-grid"></div>
+      </section>
+
+      <section class="schedule-section" id="today" aria-labelledby="today-items-title">
+        <div class="schedule-section__top">
+          <p class="card__kicker">Current day</p>
+          <h2 id="today-items-title">Today's university items</h2>
+        </div>
+        <div class="schedule-card-grid" id="schedule-today-list"></div>
+      </section>
+    </section>
+
+    <section class="hub-section history-preview-section" id="history" aria-labelledby="history-title">
+      <div class="section-heading">
+        <p class="eyebrow">Clinical tool</p>
+        <h1 id="history-title">History Taking Tool</h1>
+        <p>Use the full clinical history prototype for system selection, step-by-step history taking, and live case summary output.</p>
+      </div>
+      <div class="history-preview-grid">
+        <article class="history-panel">
+          <p class="card__kicker">Full tool</p>
+          <h2>Open the clinical history builder</h2>
+          <p class="history-note">The complete form stays on its own page so the home hub remains fast and easy to scan.</p>
+          <a class="news-action" href="/history.html">Open History Tool</a>
+        </article>
+        <article class="history-summary">
+          <div class="history-summary__top">
+            <div>
+              <p class="card__kicker">Output preview</p>
+              <h2>Live case summary</h2>
+            </div>
+          </div>
+          <pre id="history-preview-text">SYSTEM: General
+
+PERSONAL HISTORY
+A polished case summary appears here after completing the tool.
+
+MISSING
+Friendly reminders show what still needs to be asked.</pre>
+        </article>
+      </div>
+    </section>
+
+    <section class="hub-section work-preview-section" id="work" aria-labelledby="work-title">
+      <div class="section-heading">
+        <p class="eyebrow">Work with me</p>
+        <h1 id="work-title">Premium services</h1>
+        <p>Medical websites, AI study systems, and visual medical content built with a student-first workflow.</p>
+      </div>
+      <div class="service-grid service-grid--hub">
+        <article class="service-card">
+          <span class="service-icon">AI</span>
+          <h3>AI Study Agent Setup</h3>
+          <p>Personalized AI study systems for lectures, notes, and revision.</p>
+        </article>
+        <article class="service-card">
+          <span class="service-icon">MG</span>
+          <h3>Medical Motion Graphics</h3>
+          <p>Animated explainers that make complex medicine more memorable.</p>
+        </article>
+        <article class="service-card">
+          <span class="service-icon">WEB</span>
+          <h3>Website Design & Build</h3>
+          <p>Fast, premium, mobile-first websites designed by hand.</p>
+        </article>
+      </div>
+      <p class="work-preview-cta"><a class="news-action" href="/work.html">Open full Work page</a></p>
+    </section>
   </main>
+
+  <div class="bottom-nav-wrap">
+    <nav class="bottom-nav" aria-label="Bottom navigation">
+      <a class="active" href="#tracker" data-section-nav="tracker" aria-label="Tracker">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5"/><path d="M4 19h16"/><path d="m7 15 3-4 3 2 4-6"/></svg>
+        <span>Tracker</span>
+      </a>
+      <a href="#news" data-section-nav="news" aria-label="News">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16"/><path d="M4 12h10"/><path d="M4 18h16"/><path d="m17 10 3 2-3 2z"/></svg>
+        <span>News</span>
+      </a>
+      <a href="#schedule" data-section-nav="schedule" aria-label="Schedule">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="4"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>
+        <span>Schedule</span>
+      </a>
+      <a href="#history" data-section-nav="history" aria-label="History">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6l1 2h3v16H5V5h3z"/><path d="M8 11h8M8 15h6"/></svg>
+        <span>History</span>
+      </a>
+      <a href="#work" data-section-nav="work" aria-label="Work with me">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6V5a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v1"/><rect x="3" y="6" width="18" height="14" rx="4"/><path d="M3 12h18"/></svg>
+        <span>Work</span>
+      </a>
+    </nav>
+  </div>
 
   <script defer src="/src/mcqs.js?v=20260702-814"></script>
   <script type="importmap">
@@ -149,7 +311,7 @@
       }
     }
   </script>
-  <script type="module" src="/src/main.js?v=20260702-scope-pills"></script>
+  <script type="module" src="/src/main.js?v=20260702-timeline-colors"></script>
   <script defer src="/pwa.js?v=20260701-pwa"></script>
 </body>
 </html>

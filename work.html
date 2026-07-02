@@ -174,6 +174,172 @@
 
   /* WA icon SVG path helper */
   .wa-icon-path-1 { d: path("M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"); }
+  /* Premium visual skin: visual-only overrides, layout preserved. */
+  :root {
+    --bg: #f6f4ef;
+    --bg2: #eef8f6;
+    --surface: rgba(255, 255, 255, 0.82);
+    --surface2: rgba(255, 255, 255, 0.92);
+    --ink: #17313d;
+    --ink2: #6c7f88;
+    --ink3: #94a4aa;
+    --accent: #4f9ca7;
+    --accent-dim: rgba(79, 156, 167, 0.12);
+    --accent-border: rgba(79, 156, 167, 0.28);
+    --border: rgba(49, 95, 114, 0.16);
+    --border2: rgba(49, 95, 114, 0.08);
+    --radius: 26px;
+    --shadow: 0 24px 70px rgba(31, 70, 88, 0.13);
+  }
+
+  body {
+    background:
+      radial-gradient(circle at 10% 0%, rgba(79, 156, 167, 0.24), transparent 31%),
+      radial-gradient(circle at 91% 5%, rgba(245, 216, 135, 0.38), transparent 28%),
+      radial-gradient(circle at 48% 40%, rgba(141, 123, 247, 0.10), transparent 35%),
+      linear-gradient(180deg, #fbfaf6 0%, #eef8f6 52%, #fffaf1 100%);
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgba(49, 95, 114, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(49, 95, 114, 0.035) 1px, transparent 1px);
+    background-size: 52px 52px;
+    mask-image: linear-gradient(to bottom, #000 0 35%, transparent 92%);
+  }
+
+  nav {
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.74);
+    box-shadow: 0 12px 30px rgba(31, 70, 88, 0.08);
+  }
+
+  .hero,
+  .section,
+  .skill-card,
+  .service-card,
+  .short-wrap,
+  .about-avatar,
+  .chip,
+  .tag {
+    border-color: var(--border);
+  }
+
+  .skill-card,
+  .service-card,
+  .chip,
+  .tag,
+  .about-avatar,
+  .short-wrap {
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.90), rgba(255, 255, 255, 0.68)),
+      var(--surface);
+    box-shadow: 0 12px 30px rgba(31, 70, 88, 0.08);
+  }
+
+  .service-card,
+  .skill-card {
+    border-radius: var(--radius);
+  }
+
+  .service-card:hover,
+  .skill-card:hover,
+  .short-wrap:hover {
+    border-color: var(--accent-border);
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(238, 248, 247, 0.76)),
+      var(--surface2);
+    box-shadow: var(--shadow);
+  }
+
+  .hero h1 em,
+  .nav-back:hover,
+  .cta-pill,
+  .site-proof-item::before,
+  .site-proof-item a,
+  .video-caption a {
+    color: var(--accent);
+  }
+
+  .cta-pill {
+    border-color: var(--accent-border);
+    background: var(--accent-dim);
+  }
+
+  .cta-pill:hover {
+    color: #fff;
+    background: var(--accent);
+  }
+
+  body { padding-bottom: 118px; }
+  .bottom-nav-wrap {
+    position: fixed;
+    z-index: 40;
+    left: 50%;
+    bottom: 18px;
+    width: min(720px, calc(100% - 28px));
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+  .bottom-nav {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 6px;
+    padding: 7px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.78);
+    box-shadow: 0 24px 70px rgba(31, 70, 88, 0.18);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    pointer-events: auto;
+  }
+  .bottom-nav a {
+    display: grid;
+    place-items: center;
+    gap: 4px;
+    min-height: 58px;
+    padding: 8px 10px;
+    border-radius: 999px;
+    color: var(--ink2);
+    font-size: 0.68rem;
+    font-weight: 900;
+    text-align: center;
+    text-decoration: none;
+  }
+  .bottom-nav a svg { width: 20px; height: 20px; }
+  .bottom-nav a:hover { color: var(--accent); background: rgba(238, 248, 247, 0.84); }
+  .bottom-nav a.active { color: #fff; background: linear-gradient(135deg, #315f72, var(--accent)); box-shadow: 0 16px 32px rgba(49, 95, 114, 0.24); }
+  .ripple-host { position: relative; overflow: hidden !important; isolation: isolate; }
+  .apple-ripple {
+    position: absolute;
+    z-index: 5;
+    left: var(--ripple-x);
+    top: var(--ripple-y);
+    width: var(--ripple-size);
+    height: var(--ripple-size);
+    border-radius: 999px;
+    pointer-events: none;
+    transform: translate(-50%, -50%) scale(0);
+    background: radial-gradient(circle, rgba(255,255,255,.92) 0%, rgba(255,255,255,.58) 28%, rgba(49,95,114,.13) 58%, transparent 74%);
+    animation: apple-ripple 620ms cubic-bezier(.16,1,.3,1) forwards;
+  }
+  @keyframes apple-ripple {
+    0% { opacity: .88; transform: translate(-50%, -50%) scale(0); }
+    55% { opacity: .42; }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(1); }
+  }
+  @media (max-width: 520px) {
+    .bottom-nav-wrap { bottom: 10px; width: calc(100% - 16px); }
+    .bottom-nav { gap: 4px; padding: 5px; border-radius: 28px; }
+    .bottom-nav a { min-height: 52px; padding: 7px 5px; border-radius: 20px; font-size: .58rem; }
+    .bottom-nav a svg { width: 18px; height: 18px; }
+  }
 </style>
 </head>
 <body>
@@ -388,5 +554,31 @@
 </div>
 
 <script defer src="/pwa.js?v=20260701-pwa"></script>
+<div class="bottom-nav-wrap">
+  <nav class="bottom-nav" aria-label="Bottom navigation">
+    <a href="/#tracker" aria-label="Tracker"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5"/><path d="M4 19h16"/><path d="m7 15 3-4 3 2 4-6"/></svg><span>Tracker</span></a>
+    <a href="/#news" aria-label="News"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16"/><path d="M4 12h10"/><path d="M4 18h16"/><path d="m17 10 3 2-3 2z"/></svg><span>News</span></a>
+    <a href="/#schedule" aria-label="Schedule"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="4"/><path d="M8 2v4M16 2v4M3 10h18"/></svg><span>Schedule</span></a>
+    <a href="/#history" aria-label="History"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6l1 2h3v16H5V5h3z"/><path d="M8 11h8M8 15h6"/></svg><span>History</span></a>
+    <a class="active" href="/#work" aria-label="Work with me"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6V5a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v1"/><rect x="3" y="6" width="18" height="14" rx="4"/><path d="M3 12h18"/></svg><span>Work</span></a>
+  </nav>
+</div>
+<script>
+  document.addEventListener('pointerdown', (event) => {
+    if (event.button !== 0 && event.button !== undefined) return
+    const target = event.target.closest('a, button, .service-card, .skill-card, .short-wrap, .booking-section')
+    if (!target) return
+    target.classList.add('ripple-host')
+    const rect = target.getBoundingClientRect()
+    const size = Math.max(rect.width, rect.height) * 1.85
+    const ripple = document.createElement('span')
+    ripple.className = 'apple-ripple'
+    ripple.style.setProperty('--ripple-x', `${event.clientX - rect.left}px`)
+    ripple.style.setProperty('--ripple-y', `${event.clientY - rect.top}px`)
+    ripple.style.setProperty('--ripple-size', `${size}px`)
+    target.appendChild(ripple)
+    ripple.addEventListener('animationend', () => ripple.remove(), { once: true })
+  }, { passive: true })
+</script>
 </body>
 </html>

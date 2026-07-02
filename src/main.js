@@ -2004,15 +2004,13 @@ function render401ExamSchedule() {
 
     if (exam.type === 'quiz') {
       return `
-        <div class="exam-card${stateClass}" data-code="${exam.subjectCode}" style="cursor: pointer;">
+        <div class="exam-card exam-card--has-action${stateClass}" data-code="${exam.subjectCode}">
           <strong>${escapeHtml(exam.code)}</strong>
-          <time datetime="${exam.date}T14:30">${exam.dayLabel} ${formatExamDate(exam.date)}</time>
           <em>${escapeHtml(exam.time)}</em>
           ${exam.meta ? `<span class="exam-card__meta">${escapeHtml(exam.meta)}</span>` : ''}
-          <button class="topic-resource topic-resource--quiz" type="button" data-quiz-topic="NUT Quiz" style="margin-top: 8px; width: fit-content; justify-content: center; z-index: 10;">
-            Solve Past Exams (52 Qs)
+          <button class="exam-card__quiz-action" type="button" data-quiz-topic="NUT Quiz">
+            Past Exams (52 Qs)
           </button>
-          <small style="margin-top: auto;">${escapeHtml(statusLabel)}</small>
         </div>
       `
     }
@@ -2880,31 +2878,81 @@ if (scheduleTodayTitle) {
   window.setInterval(renderSchedulePage, 60 * 1000)
 }
 
-// ========== GLOBAL CLICK GLOW EFFECT ==========
+function initBottomSectionNav() {
+  const navLinks = [...document.querySelectorAll('[data-section-nav]')]
+  if (!navLinks.length) return
 
-function createClickGlow(event) {
-  // Only trigger on primary pointer (left click/tap)
-  if (event.button !== 0 && event.button !== undefined) return
-  if (!event.isPrimary) return
-  
-  const glow = document.createElement('div')
-  glow.className = 'click-glow'
-  glow.setAttribute('aria-hidden', 'true')
-  glow.style.setProperty('--x', event.clientX + 'px')
-  glow.style.setProperty('--y', event.clientY + 'px')
-  
-  document.body.appendChild(glow)
-  
-  // Clean up after animation
-  glow.addEventListener('animationend', () => {
-    glow.remove()
-  }, { once: true })
-  
-  // Fallback cleanup for safety
-  setTimeout(() => {
-    if (glow.parentNode) glow.remove()
-  }, 700)
+  const sections = navLinks
+    .map((link) => document.getElementById(link.dataset.sectionNav))
+    .filter(Boolean)
+
+  const setActive = (id) => {
+    navLinks.forEach((link) => {
+      link.classList.toggle('active', link.dataset.sectionNav === id)
+    })
+  }
+
+  navLinks.forEach((link) => {
+    link.addEventListener('click', () => {
+      if (link.hash) setActive(link.hash.slice(1))
+    })
+  })
+
+  if (!sections.length || !('IntersectionObserver' in window)) return
+
+  const observer = new IntersectionObserver((entries) => {
+    const visible = entries
+      .filter((entry) => entry.isIntersecting)
+      .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
+    if (visible?.target?.id) setActive(visible.target.id)
+  }, {
+    rootMargin: '-35% 0px -45% 0px',
+    threshold: [0.12, 0.28, 0.5]
+  })
+
+  sections.forEach((section) => observer.observe(section))
 }
 
-// Attach click glow listener
-document.addEventListener('pointerdown', createClickGlow, true)
+function createAppleRipple(event) {
+  if (event.button !== 0 && event.button !== undefined) return
+  if (!event.isPrimary) return
+
+  const target = event.target.closest([
+    'button',
+    'a',
+    '.exam-card',
+    '.subject-button',
+    '.topic-resource',
+    '.topic-item',
+    '.update-panel',
+    '.class-rep',
+    '.schedule-card',
+    '.schedule-calendar-event',
+    '.history-panel',
+    '.history-summary',
+    '.service-card',
+    '.agent-service',
+    '.booking-panel'
+  ].join(','))
+
+  if (!target || target.disabled) return
+
+  target.classList.add('ripple-host')
+
+  const rect = target.getBoundingClientRect()
+  const size = Math.max(rect.width, rect.height) * 1.85
+  const x = event.clientX - rect.left
+  const y = event.clientY - rect.top
+
+  const ripple = document.createElement('span')
+  ripple.className = 'apple-ripple'
+  ripple.style.setProperty('--ripple-x', `${x}px`)
+  ripple.style.setProperty('--ripple-y', `${y}px`)
+  ripple.style.setProperty('--ripple-size', `${size}px`)
+
+  target.appendChild(ripple)
+  ripple.addEventListener('animationend', () => ripple.remove(), { once: true })
+}
+
+initBottomSectionNav()
+document.addEventListener('pointerdown', createAppleRipple, { passive: true })
