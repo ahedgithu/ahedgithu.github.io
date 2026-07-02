@@ -791,6 +791,80 @@ window.mcqQuizzes = {
     }
   }
 
+  toSource('Nutrition in cancer and obesity', {
+    id: 'nut401-obesity-mcqs',
+    label: 'NUT401 Obesity MCQs',
+    description: 'Focused obesity questions from obesity mcq.pdf.',
+    mcqs: [
+      q('BMI is calculated using which formula?', ['Weight (kg) x height (m2)', 'Weight (kg) / height (m)', 'Weight (kg) / height (m2)', 'Height (m2) / weight (kg)'], 2, 'The NUT401 source keys BMI as weight in kilograms divided by height in meters squared.'),
+      q('A BMI of 34.5 kg/m2 falls under which category?', ['Underweight', 'Normal weight', 'Overweight', 'Obese'], 3, 'The source classifies BMI 30.0-39.9 as obese.'),
+      q('Which BMI value is considered morbid obesity?', ['BMI 30.0-39.9', 'BMI < 18.5', 'BMI >= 40', 'BMI 25-29.9'], 2, 'The source keys BMI >= 40 as morbid obesity.'),
+      q('The relative weight equation used to assess obesity is:', ['Actual weight x 100 / height', 'Actual weight x 100 / ideal weight', 'Ideal weight x 100 / actual weight', 'BMI x 100 / ideal weight'], 1, 'The source uses actual weight multiplied by 100 and divided by ideal weight.'),
+      q('A person is considered obese by relative weight when the value is:', ['> 110%', '> 115%', '>= 120%', '>= 100%'], 2, 'The NUT401 source keys relative weight >= 120% as obese.'),
+      q('A waist circumference greater than 102 cm in men suggests:', ['Normal', 'Mild obesity', 'Abdominal obesity', 'Visceral leanness'], 2, 'The keyed source answer is abdominal obesity.'),
+      q('Which is NOT a component of nutritional assessment?', ['Anthropometric measures', 'Historical data', 'Endoscopy', 'Laboratory data'], 2, 'Endoscopy is not listed as a core nutritional assessment component in the source.'),
+      q('All are anthropometric measures except:', ['BMI', 'Serum albumin', 'Head circumference', 'Mid-arm circumference'], 1, 'Serum albumin is a laboratory marker, not an anthropometric measure.'),
+      q('All of the following are complications of obesity except:', ['Osteoarthritis', 'Depression', 'Sickle cell anemia', 'Type 2 diabetes'], 2, 'Sickle cell anemia is not keyed as an obesity complication.'),
+      q('Which cancer group is associated with obesity in the source?', ['Colon', 'Uterus', 'Prostate', 'All of the above'], 3, 'The source keys all listed cancers as associated with obesity.'),
+      q('The most common cause of obesity is:', ['Hypothyroidism', 'Excess food intake', 'Cushing syndrome', 'Antidepressant use'], 1, 'The keyed source answer is excess food intake.'),
+      q('Which drug reduces fat absorption?', ['Sibutramine', 'Insulin', 'Orlistat', 'Statins'], 2, 'Orlistat reduces intestinal fat absorption.'),
+      q('Recommended exercise guidance in the source is:', ['30 minutes high intensity once weekly', '15 minutes walking daily', '30 minutes moderate activity most days', '60 minutes exercise once weekly'], 2, 'The source keys 30 minutes of moderate activity on most days.'),
+      q('Which factor can falsely elevate BMI?', ['Old age', 'High fat mass', 'Muscularity', 'Short stature'], 2, 'Muscularity can increase weight and BMI without reflecting excess fat.'),
+      q('Which condition does NOT cause obesity?', ['Insulinoma', 'Growth hormone deficiency', 'Addison disease', 'Cushing syndrome'], 2, 'The source keys Addison disease as not causing obesity.')
+    ]
+  })
+
+  toSource('Nutrition in cancer and obesity', {
+    id: 'nut401-obesity-extra-mcqs',
+    label: 'NUT401 Extra Obesity MCQs',
+    description: 'Additional obesity and nutritional assessment questions (43 MCQs).',
+    mcqs: [
+      q('BMI is calculated using which of the following formulas?', ['Weight (kg) x Height (m2)', 'Weight (kg) / Height (m)', 'Weight (kg) / Height (m2)', 'Height (m2) / Weight (kg)'], 2, 'BMI = weight in kilograms divided by height in meters squared.'),
+      q('A BMI of 34.5 kg/m2 falls under which category?', ['Underweight', 'Normal weight', 'Overweight', 'Obese'], 3, 'BMI 30.0-39.9 is classified as obese.'),
+      q('Which of the following is considered morbid obesity?', ['BMI 30.0-39.9', 'BMI < 18.5', 'BMI >= 40', 'BMI 25-29.9'], 2, 'Morbid obesity is defined as BMI >= 40.'),
+      q('According to the source, underweight is defined as BMI:', ['< 20', '< 19', '< 18.5', '< 17.5'], 2, 'The source keys underweight as BMI < 18.5.'),
+      q('The RW equation used to assess obesity is:', ['Actual weight x 100 / Height', 'Actual weight x 100 / Ideal weight', 'Ideal weight x 100 / Actual weight', 'BMI x 100 / Ideal weight'], 1, 'Relative weight = actual weight x 100 divided by ideal weight.'),
+      q('A person is considered obese based on RW when the value is:', ['> 110%', '> 115%', '>= 120%', '>= 100%'], 2, 'The source keys RW >= 120% as obese.'),
+      q('Normal skin fold thickness in boys should be:', ['< 25 mm', '< 30 mm', '< 20 mm', '< 18 mm'], 2, 'The source keys normal triceps skin fold in boys as < 20 mm.'),
+      q('The normal sum of skin fold thickness in girls should be:', ['< 25 mm', '< 30 mm', '< 20 mm', '< 15 mm'], 1, 'The source keys normal skin fold sum in girls as < 30 mm.'),
+      q('Obesity in children can present with all EXCEPT:', ['Early puberty', 'Tall stature', 'Increased abdominal striae', 'Reduced pubic fat pad'], 3, 'Obesity is associated with increased pubic fat pad, not reduced.'),
+      q('A waist circumference of > 102 cm in men suggests:', ['Normal', 'Mild obesity', 'Abdominal obesity', 'Visceral leanness'], 2, 'WC > 102 cm in men indicates abdominal obesity.'),
+      q('A WHR > 0.9 in men indicates:', ['Healthy weight', 'Central obesity', 'Underweight', 'Malnutrition'], 1, 'WHR > 0.9 in men is a marker of central obesity.'),
+      q('Which is NOT a component of nutritional assessment?', ['Anthropometric measures', 'Historical data', 'Endoscopy', 'Laboratory data'], 2, 'Endoscopy is not a component of nutritional assessment.'),
+      q('All are anthropometric measures EXCEPT:', ['BMI', 'Serum albumin', 'Head circumference', 'Mid-arm circumference'], 1, 'Serum albumin is a laboratory marker, not an anthropometric measure.'),
+      q('Which BMI range indicates overweight?', ['18.5-24.9', '25-29.9', '30-34.9', '> 40'], 1, 'BMI 25-29.9 is classified as overweight.'),
+      q('A patient with BMI = 27.2 is considered:', ['Underweight', 'Normal weight', 'Overweight', 'Obese'], 2, 'BMI 25-29.9 falls in the overweight category.'),
+      q('Albumin level suggestive of kwashiorkor is:', ['35-50 g/L', '25-35 g/L', '10-25 g/L', '> 50 g/L'], 2, 'Kwashiorkor is associated with severely low albumin, 10-25 g/L.'),
+      q('Which lab test indicates prolonged protein depletion?', ['Hematocrit', 'Creatinine excretion', 'Plasma albumin', 'Uric acid'], 2, 'Plasma albumin reflects prolonged protein depletion due to its long half-life.'),
+      q('Which lab change indicates muscle breakdown?', ['Increased creatinine', 'Increased albumin', 'Increased 3-methylhistidine', 'Increased transferrin'], 2, 'Increased urinary 3-methylhistidine reflects skeletal muscle protein breakdown.'),
+      q('The desirable daily water intake is:', ['6 glasses', '7 glasses', '8 glasses', '9 glasses'], 2, 'The source keys 8 glasses as the desirable daily water intake.'),
+      q('One large apple contains approximately how much fiber?', ['2 g', '3 g', '4 g', '5 g'], 3, 'The source keys one large apple as containing approximately 5 g of fiber.'),
+      q('All the following are complications of obesity EXCEPT:', ['Osteoarthritis', 'Depression', 'Sickle cell anemia', 'Type 2 diabetes'], 2, 'Sickle cell anemia is a genetic condition unrelated to obesity.'),
+      q('Which of the following cancers is associated with obesity?', ['Colon', 'Uterus', 'Prostate', 'All of the above'], 3, 'The source keys colon, uterus, and prostate cancers as all associated with obesity.'),
+      q('The most common cause of obesity is:', ['Hypothyroidism', 'Excess food intake', 'Cushing syndrome', 'Antidepressant use'], 1, 'Excess food intake is the most common cause of obesity.'),
+      q('Which drug reduces fat absorption?', ['Sibutramine', 'Insulin', 'Orlistat', 'Statins'], 2, 'Orlistat inhibits intestinal lipase and reduces fat absorption.'),
+      q('The National Cholesterol Education Program recommends fat intake should not exceed:', ['20% of calories', '25% of calories', '30% of calories', '35% of calories'], 2, 'The NCEP recommends fat intake not exceed 30% of total calories.'),
+      q('Which exercise guideline is correct?', ['30 min of high intensity, once a week', '15 min/day of walking', '30 min moderate activity most days', '60 min exercise once a week'], 2, 'The source keys 30 minutes of moderate activity on most days of the week.'),
+      q('What is the first step in 24-hour recall method?', ['Ask about dinner', 'Ask about lunch', 'Ask about breakfast', 'Ask when the person wakes up'], 3, 'The 24-hour recall starts by asking the time the person woke up to anchor the day.'),
+      q('What is the major limitation of 24-hour recall in elderly?', ['Physical weakness', 'Hearing loss', 'Memory impairment', 'Lack of appetite'], 2, 'Memory impairment is the main limitation of 24-hour recall in elderly patients.'),
+      q('Which factor can cause false elevation of BMI?', ['Old age', 'High fat mass', 'Muscularity', 'Short stature'], 2, 'High muscle mass increases weight and can falsely elevate BMI without excess fat.'),
+      q('Which of the following does NOT cause obesity?', ['Insulinoma', 'GH deficiency', 'Addison disease', 'Cushing syndrome'], 2, 'The source keys Addison disease as not causing obesity.'),
+      q('In Egypt, central obesity prevalence by waist circumference is:', ['18.7%', '20.1%', '24.1%', '28.7%'], 2, 'The source keys 24.1% as the prevalence of central obesity by WC in Egypt.'),
+      q('Which is true about obesity in Egypt?', ['More common in males', 'More common in children', 'More common in females', 'Affects all equally'], 2, 'The source keys obesity in Egypt as more prevalent in females.'),
+      q('What is the effect of alcohol on obesity risk?', ['Reduces risk', 'No effect', 'Increases risk', 'Depends on food intake'], 2, 'Alcohol provides excess calories and increases obesity risk.'),
+      q('Which lab change indicates skeletal muscle atrophy?', ['Low transferrin', 'Low creatinine excretion', 'Low ferritin', 'High HDL'], 1, 'Low urinary creatinine excretion reflects reduced muscle mass.'),
+      q('The earliest anthropometric sign of malnutrition is:', ['Weight loss', 'Albumin drop', 'BMI drop', 'Skin fold reduction'], 0, 'Weight loss is the earliest and most sensitive anthropometric sign of malnutrition.'),
+      q('Which clinical feature is common in obese adults?', ['Tall stature', 'Fatigue', 'Delayed puberty', 'Alopecia'], 1, 'Fatigue is a common clinical feature in obese adults.'),
+      q('Which is a feature of Prader-Willi syndrome?', ['Hyperthyroidism', 'Hypogonadism', 'Hyperpigmentation', 'Gigantism'], 1, 'Prader-Willi syndrome is characterized by hypogonadism, hypotonia, and hyperphagia.'),
+      q('Which of the following is an appetite suppressor?', ['Insulin', 'Orlistat', 'Sibutramine', 'Glucagon'], 2, 'Sibutramine acts centrally to suppress appetite.'),
+      q('Which equation is used for BMI in lbs and inches?', ['Weight / Height2', '(Weight in lbs / Height2 in inches) x 703', '(Weight in kg / Height2 in meters) x 2.2', 'Weight in kg x Height in m2 x 703'], 1, 'BMI in imperial units = (weight in lbs / height in inches squared) x 703.'),
+      q('WHR > 0.85 in women is considered:', ['Normal', 'Borderline', 'Abdominal obesity', 'Underweight'], 2, 'WHR > 0.85 in women is a marker of abdominal obesity.'),
+      q('A 45-year-old man weighing 110 kg with height 1.75 m, WC 106 cm, and RW 130% — what is the correct classification?', ['Normal weight', 'Overweight', 'Obese', 'Morbidly obese'], 2, 'BMI = 110 / (1.75)2 = 35.9 (obese range 30-39.9); RW >= 120% and WC > 102 cm confirm obesity.'),
+      q('A 17-year-old male with sweating, snoring, poor physical tolerance, triceps skinfold 28 mm, WHR 0.95 — most likely diagnosis?', ['Normal adolescent development', 'Early puberty', 'Adolescent obesity', 'Endocrine disorder'], 2, 'Symptoms plus WHR > 0.9 and elevated triceps skinfold confirm adolescent obesity.'),
+      q('A 35-year-old woman with fatigue, weight gain, decreased albumin, transferrin, and creatinine excretion — best description of nutritional status?', ['Acute infection', 'Normal nutrition', 'Prolonged protein depletion', 'Early pregnancy'], 2, 'Low albumin, transferrin, and creatinine excretion together indicate prolonged protein depletion.')
+    ]
+  })
+
   addAinShamsSource('Oesophagus: surgical anatomy and physiology', [
     q('The normal pressure of the lower oesophageal sphincter is:', ['5-40 cm H2O', '10-20 cm H2O', '20-30 cm H2O', '30-40 cm H2O'], 3, 67),
     q('The most common form of oesophageal atresia is:', ['Lower segment opens into trachea', 'Upper segment opens into trachea', 'Both segments open into trachea', 'Both segments end blindly'], 0, 67),
@@ -3565,6 +3639,52 @@ window.mcqQuizzes['Monitoring and Fluid Therapy'] = [
     ]
   })
 
+  toSource('Rabies and Tetanus', {
+    id: 'nut401-tetanus-extra-mcqs',
+    label: 'NUT401 Extra Tetanus MCQs',
+    description: 'Additional tetanus questions from tetanus and yellow fever Mcq.pdf.',
+    mcqs: [
+      q('How many doses of tetanus toxoid are needed in pregnancy for effective protection?', ['1', '2', '3', '5'], 1, 'The source keys two doses of TT during pregnancy for effective protection.'),
+      q('When should the first dose of tetanus toxoid be given during pregnancy?', ['At birth', '8 weeks', '16 weeks', 'After delivery'], 2, 'The source keys 16 weeks for the first pregnancy TT dose.'),
+      q('TT vaccine in EPI is given at:', ['Birth', '2, 4, 6, 18 months', '3, 6, 12 months', '1 year and 5 years'], 1, 'The source keys the 2, 4, 6, and 18 month EPI schedule.'),
+      q('Which is NOT a strategic principle for eliminating neonatal tetanus?', ['Health education', 'High vaccine coverage', 'Mass antibiotic use', 'Hygienic delivery'], 2, 'The source keys mass antibiotic use as not a strategic elimination principle.'),
+      q('Isolation of tetanus patients is:', ['Mandatory due to contagiousness', 'Unnecessary', 'Preferred in febrile cases', 'Enforced for 10 days'], 1, 'Tetanus is not transmitted person to person, so isolation is unnecessary.'),
+      q('Tetanus is transmitted through:', ['Contaminated water', 'Person to person contact', 'Soil contamination of wounds', 'Aerosol inhalation'], 2, 'The source keys soil contamination of wounds.'),
+      q('Neonatal tetanus is caused by:', ['Meningitis', 'Umbilical stump infection', 'Measles', 'Congenital defects'], 1, 'The source keys umbilical stump infection.'),
+      q('Tetanus spores are mainly found in:', ['Food', 'Saliva', 'Soil and animal feces', 'Air'], 2, 'The source keys soil and animal feces.'),
+      q('Humans acquire tetanus through:', ['Breathing spores', 'Blood transfusion', 'Wound contamination', 'Sexual contact'], 2, 'The source keys wound contamination.'),
+      q('Diagnosis of tetanus is usually made by:', ['Culture from sputum', 'Serology', 'Clinical picture', 'Blood smear'], 2, 'Tetanus diagnosis is usually clinical.'),
+      q('Treatment of tetanus includes:', ['Isolation only', 'Antitoxin + penicillin', 'Surgery only', 'Passive immunization only'], 1, 'The source keys antitoxin plus penicillin.'),
+      q('A booster tetanus toxoid dose for adults is required every:', ['5 years', '10 years', '3 years', 'Lifetime'], 1, 'The source keys a booster every 10 years.'),
+      q('Period of communicability of tetanus is:', ['1-3 days', 'During rash', 'None', 'Throughout illness'], 2, 'Tetanus has no person-to-person communicability.'),
+      q('Neonatal tetanus typically starts:', ['At birth', 'After 7 days', 'In first 48 hours', 'After 1 month'], 1, 'The source keys onset after 7 days.'),
+      q('A wound older than 6 hours with last TT more than 10 years ago requires:', ['No action', 'TT only', 'TT + TIG', 'Antibiotics only'], 2, 'The source keys TT plus tetanus immunoglobulin for this high-risk wound scenario.')
+    ]
+  })
+
+  toSource('Food-borne Diseases', {
+    id: 'nut401-food-poisoning-extra-mcqs',
+    label: 'NUT401 Food Poisoning MCQs',
+    description: 'Additional food-poisoning questions from FOOD POISING 3 MCQ.pdf.',
+    mcqs: [
+      q('Staphylococcal food poisoning is primarily caused by:', ['Endotoxin', 'Exotoxin', 'Heat-resistant enterotoxin', 'Lipopolysaccharide'], 2, 'The source keys heat-resistant enterotoxin from Staphylococcus aureus.'),
+      q('The reservoir of Staphylococcus aureus responsible for food poisoning is commonly found in:', ['Human nasopharynx and infected skin lesions', 'Soil and sewage', 'Seafood', 'Raw vegetables'], 0, 'The source keys human nasopharynx and infected skin lesions.'),
+      q('Which food is classically implicated in staphylococcal food poisoning outbreaks?', ['Cream-filled pastries', 'Uncooked vegetables', 'Bottled water', 'Fresh fruit juice'], 0, 'Cream-filled pastries are a classic high-risk food in the source.'),
+      q('The incubation period of Staphylococcus aureus food poisoning usually ranges between:', ['30 minutes-8 hours', '8-12 hours', '12-36 hours', '2-4 days'], 0, 'The source keys a short incubation of 30 minutes to 8 hours.'),
+      q('Staphylococcal food poisoning differs from salmonellosis mainly by:', ['Longer incubation', 'Person-to-person transmission', 'Absence of fever and short incubation', 'Bloodstream involvement'], 2, 'The source contrasts staphylococcal poisoning by short incubation and absence of fever.'),
+      q('The main causative organisms of salmonella food poisoning are:', ['S. typhi and S. paratyphi', 'S. typhimurium and S. enteritidis', 'S. dysenteriae and S. sonnei', 'S. choleraesuis and S. enterica'], 1, 'The source keys S. typhimurium and S. enteritidis.'),
+      q('The incubation period of salmonellosis is:', ['1-3 hours', '12-36 hours', '3-5 days', '7-10 days'], 1, 'The source keys 12-36 hours.'),
+      q('Which statement is true regarding salmonella food poisoning?', ['It is mainly caused by preformed toxins', 'It never spreads person to person', 'The organism multiplies inside the gut after ingestion', 'It is primarily waterborne'], 2, 'The source keys multiplication inside the gut after ingestion.'),
+      q('The neurotoxin responsible for botulism is produced by:', ['Clostridium tetani', 'Clostridium botulinum', 'Bacillus cereus', 'Clostridium difficile'], 1, 'Botulinum neurotoxin is produced by Clostridium botulinum.'),
+      q('Botulism is primarily transmitted by ingestion of:', ['Uncooked meat', 'Improperly canned or home-preserved foods', 'Raw vegetables', 'Unpasteurized milk'], 1, 'The source keys improperly canned or home-preserved foods.'),
+      q('The neurological signs of botulism are mainly due to:', ['Intestinal mucosal damage', 'Acetylcholine inhibition at neuromuscular junctions', 'Central nervous system inflammation', 'Endotoxin effect'], 1, 'The source keys acetylcholine inhibition at neuromuscular junctions.'),
+      q('Typical ocular manifestations of botulism include:', ['Ptosis and dilated fixed pupils', 'Nystagmus and myosis', 'Diplopia and papilledema', 'Retinal hemorrhage'], 0, 'The source keys ptosis and dilated fixed pupils.'),
+      q('A foodborne outbreak is defined as:', ['Any single person ill after eating food', 'Two or more people with similar illness after consuming a common food', 'Infection spreading in a hospital', 'Any GI illness of unknown cause'], 1, 'The source defines foodborne outbreak as two or more similar illnesses after a common food exposure.'),
+      q('A point-source epidemic curve is characterized by:', ['Gradual rise and fall over several weeks', 'Sharp peak followed by gradual decline', 'Multiple waves of cases', 'Continuous plateau'], 1, 'The source keys a sharp peak followed by gradual decline.'),
+      q('According to WHO, safe temperature for cooked food should be maintained:', ['Above 45 C', 'Above 50 C', 'Above 60 C', 'Above 70 C'], 2, 'The source keys above 60 C for safe cooked food holding.')
+    ]
+  })
+
   toSource('Vitamins', {
     id: 'nut401-vitamins-mcqs',
     label: 'NUT401 Vitamins MCQs',
@@ -3595,29 +3715,6 @@ window.mcqQuizzes['Monitoring and Fluid Therapy'] = [
       q('Which vitamin acts synergistically with selenium?', ['Vitamin K', 'Vitamin E', 'Vitamin B12', 'Vitamin B2'], 1, 'Vitamin E works with selenium as an antioxidant.'),
       q('Which vitamin plays a dual role in coagulation and bone health?', ['Vitamin A', 'Vitamin K', 'Vitamin C', 'Niacin'], 1, 'Vitamin K contributes to coagulation and bone health.'),
       q('Which vitamin is destroyed by heat?', ['Vitamin B12', 'Vitamin C', 'Vitamin D', 'Vitamin E'], 1, 'The source keys vitamin C as heat-labile.')
-    ]
-  })
-
-  toSource('Nutrition in cancer and obesity', {
-    id: 'nut401-obesity-mcqs',
-    label: 'NUT401 Obesity MCQs',
-    description: 'Focused obesity questions from obesity mcq.pdf.',
-    mcqs: [
-      q('BMI is calculated using which formula?', ['Weight (kg) x height (m2)', 'Weight (kg) / height (m)', 'Weight (kg) / height (m2)', 'Height (m2) / weight (kg)'], 2, 'The NUT401 source keys BMI as weight in kilograms divided by height in meters squared.'),
-      q('A BMI of 34.5 kg/m2 falls under which category?', ['Underweight', 'Normal weight', 'Overweight', 'Obese'], 3, 'The source classifies BMI 30.0-39.9 as obese.'),
-      q('Which BMI value is considered morbid obesity?', ['BMI 30.0-39.9', 'BMI < 18.5', 'BMI >= 40', 'BMI 25-29.9'], 2, 'The source keys BMI >= 40 as morbid obesity.'),
-      q('The relative weight equation used to assess obesity is:', ['Actual weight x 100 / height', 'Actual weight x 100 / ideal weight', 'Ideal weight x 100 / actual weight', 'BMI x 100 / ideal weight'], 1, 'The source uses actual weight multiplied by 100 and divided by ideal weight.'),
-      q('A person is considered obese by relative weight when the value is:', ['> 110%', '> 115%', '>= 120%', '>= 100%'], 2, 'The NUT401 source keys relative weight >= 120% as obese.'),
-      q('A waist circumference greater than 102 cm in men suggests:', ['Normal', 'Mild obesity', 'Abdominal obesity', 'Visceral leanness'], 2, 'The keyed source answer is abdominal obesity.'),
-      q('Which is NOT a component of nutritional assessment?', ['Anthropometric measures', 'Historical data', 'Endoscopy', 'Laboratory data'], 2, 'Endoscopy is not listed as a core nutritional assessment component in the source.'),
-      q('All are anthropometric measures except:', ['BMI', 'Serum albumin', 'Head circumference', 'Mid-arm circumference'], 1, 'Serum albumin is a laboratory marker, not an anthropometric measure.'),
-      q('All of the following are complications of obesity except:', ['Osteoarthritis', 'Depression', 'Sickle cell anemia', 'Type 2 diabetes'], 2, 'Sickle cell anemia is not keyed as an obesity complication.'),
-      q('Which cancer group is associated with obesity in the source?', ['Colon', 'Uterus', 'Prostate', 'All of the above'], 3, 'The source keys all listed cancers as associated with obesity.'),
-      q('The most common cause of obesity is:', ['Hypothyroidism', 'Excess food intake', 'Cushing syndrome', 'Antidepressant use'], 1, 'The keyed source answer is excess food intake.'),
-      q('Which drug reduces fat absorption?', ['Sibutramine', 'Insulin', 'Orlistat', 'Statins'], 2, 'Orlistat reduces intestinal fat absorption.'),
-      q('Recommended exercise guidance in the source is:', ['30 minutes high intensity once weekly', '15 minutes walking daily', '30 minutes moderate activity most days', '60 minutes exercise once weekly'], 2, 'The source keys 30 minutes of moderate activity on most days.'),
-      q('Which factor can falsely elevate BMI?', ['Old age', 'High fat mass', 'Muscularity', 'Short stature'], 2, 'Muscularity can increase weight and BMI without reflecting excess fat.'),
-      q('Which condition does NOT cause obesity?', ['Insulinoma', 'Growth hormone deficiency', 'Addison disease', 'Cushing syndrome'], 2, 'The source keys Addison disease as not causing obesity.')
     ]
   })
 
