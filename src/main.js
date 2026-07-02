@@ -4,7 +4,7 @@ let subjects = [
   {
     code: 'SUR-1',
     name: 'Surgery 1',
-    totalCount: 15,
+    totalCount: 16,
     examNote: 'Midterm: Sat Jul 25, 2026, 2:30-3:30.',
     topics: [
       {
@@ -51,6 +51,16 @@ let subjects = [
         audioUrl: 'https://drive.google.com/file/d/1mhHDVMOU6lPAar5xesF0eLKtNUJDwVR9/view?usp=drivesdk'
       },
       {
+        label: 'Liver Tumors',
+        state: 'taken',
+        art: 8,
+        midtermScope: true,
+        midtermScopeNote: 'SUR 401-1 scope: Liver. Source: Dr. Abu Alata PDFs and lecture recordings.',
+        updatedAt: '2026-06-30',
+        updateBatch: 'tuesday-report-2026-06-30',
+        note: 'Tuesday report 30 Jun: Liver Tumors, taught by Dr. Abu Alata. Covers benign liver lesions, hepatocellular carcinoma, metastatic nodules, risk factors, diagnosis, and treatment options.'
+      },
+      {
         label: 'Cirrhosis, portal hypertension and hepatic vascular disease',
         state: 'taken',
         art: 8,
@@ -76,7 +86,7 @@ let subjects = [
         midtermScopeNote: "SUR 401-1 scope: Stomach. Source: Dr. Hisham's book and lecture recordings.",
         updatedAt: '2026-06-28',
         updateBatch: 'sunday-report-2026-06-28',
-        note: 'Sunday report 28 Jun: anatomy, physiology and histology of the stomach; acute and chronic peptic ulcer; chronic gastric ulcer, taught by Dr. Eman Reda. Sections: anatomy/physiology, histology, and disease.',
+        note: 'Sunday report 28 Jun: anatomy, physiology and histology of the stomach; acute and chronic peptic ulcer; chronic gastric ulcer, taught by Dr. Hisham Ahmed.',
         audioUrl: 'https://drive.google.com/file/d/19U-2vhMabUKGYhF_reeNy2NDovYvN0wl/view?usp=drivesdk'
       },
       { label: 'Pancreas', state: 'remaining', art: 4 },
@@ -135,7 +145,7 @@ let subjects = [
         art: 10,
         updatedAt: '2026-06-28',
         updateBatch: 'sunday-report-2026-06-28',
-        note: 'Sunday report 28 Jun: Cardiothoracic Trauma Part 2, taught by Dr. Ahmed Mostafa. Covers types of thoracic injuries, chest X-ray and CT findings, and trauma management.',
+        note: 'Sunday report 28 Jun: Cardiothoracic Trauma Part 2, taught by Dr. Mohand Mostafa. Covers rib fractures, hemothorax, pneumothorax, pulmonary contusion, cardiac injury, great vessel injury, chest tube insertion, trauma priorities, and emergency management.',
         lectureUrls: [
           { label: 'Cardiothoracic Trauma Part 2', url: 'https://docs.google.com/presentation/d/17kjMBNHhun5-76h7saPBwGnZVV4rG588/edit?usp=drivesdk&ouid=109054155258701630059&rtpof=true&sd=true' }
         ],
@@ -147,7 +157,7 @@ let subjects = [
         art: 10,
         updatedAt: '2026-06-28',
         updateBatch: 'sunday-report-2026-06-28',
-        note: 'Sunday report 28 Jun: Cardiothoracic Trauma Part 2, taught by Dr. Ahmed Mostafa. Covers types of thoracic injuries, chest X-ray and CT findings, and trauma management.',
+        note: 'Sunday report 28 Jun: Cardiothoracic Trauma Part 2, taught by Dr. Mohand Mostafa. Covers rib fractures, hemothorax, pneumothorax, pulmonary contusion, cardiac injury, great vessel injury, chest tube insertion, trauma priorities, and emergency management.',
         lectureUrls: [
           { label: 'Cardiothoracic Trauma Part 2', url: 'https://docs.google.com/presentation/d/17kjMBNHhun5-76h7saPBwGnZVV4rG588/edit?usp=drivesdk&ouid=109054155258701630059&rtpof=true&sd=true' }
         ],
@@ -159,7 +169,7 @@ let subjects = [
         art: 10,
         updatedAt: '2026-06-28',
         updateBatch: 'sunday-report-2026-06-28',
-        note: 'Sunday report 28 Jun: Cardiothoracic Trauma Part 2, taught by Dr. Ahmed Mostafa. Covers types of thoracic injuries, chest X-ray and CT findings, and trauma management.',
+        note: 'Sunday report 28 Jun: Cardiothoracic Trauma Part 2, taught by Dr. Mohand Mostafa. Covers rib fractures, hemothorax, pneumothorax, pulmonary contusion, cardiac injury, great vessel injury, chest tube insertion, trauma priorities, and emergency management.',
         lectureUrls: [
           { label: 'Cardiothoracic Trauma Part 2', url: 'https://docs.google.com/presentation/d/17kjMBNHhun5-76h7saPBwGnZVV4rG588/edit?usp=drivesdk&ouid=109054155258701630059&rtpof=true&sd=true' }
         ],
@@ -270,7 +280,7 @@ let subjects = [
         section: 'Cardio',
         updatedAt: '2026-06-28',
         updateBatch: 'sunday-report-2026-06-28',
-        note: 'Sunday report 28 Jun: Mitral Valve Diseases, taught by Dr. Ahmed Lotfy. Covers mitral valve structure and function, mitral stenosis, mitral regurgitation, and clinical manifestations.',
+        note: 'Sunday report 28 Jun: Mitral Valve Diseases, taught by Dr. Nashwa El Hagrasy. Covers symptoms, diagnostics, clinical evaluation, mitral stenosis, mitral regurgitation, and mitral valve prolapse.',
         lectureUrls: [
           { label: 'Mitral valve lecture', url: 'https://docs.google.com/presentation/d/1yZxhWUh5KDgQp_Z_Le10RL_JmdooXpwb/edit?usp=drivesdk&ouid=109054155258701630059&rtpof=true&sd=true' }
         ],
@@ -354,7 +364,9 @@ let subjects = [
         section: 'Chest',
         midtermScope: true,
         midtermScopeNote: 'MED 401-2 Chest scope: ACO / ACOS is included. Dr. Serag notes are VIP with PDFs and records.',
-        note: 'Tuesday report: Asthma Part 2 & COPD & ACOS taught by Dr. Serageldin Ali Sadek.',
+        updatedAt: '2026-06-30',
+        updateBatch: 'tuesday-report-2026-06-30',
+        note: 'Tuesday report 30 Jun: COPD, taught by Dr. Serageldin Ali Sadek. Covers chronic bronchitis, emphysema, spirometry, CT chest, risk factors, airflow limitation, and management.',
         lectureUrls: [
           { label: 'Lecture folder', url: 'https://drive.google.com/drive/folders/1KYLyxp67TVvPqmcnl33siqUB5SSbbwYF' }
         ],
@@ -413,7 +425,7 @@ let subjects = [
         art: 14,
         updatedAt: '2026-06-28',
         updateBatch: 'sunday-report-2026-06-28',
-        note: 'Stopped at slide number 23.',
+        note: 'Sunday report 28 Jun: Bleeding Disorders, taught by Dr. Manal Mahmoud. Covers hemostasis overview, coagulation cascade, fibrin clot formation, bleeding manifestations, and causes. Stopped at slide number 23.',
         lectureUrls: [
           { label: 'Bleeding disorders file', url: 'https://drive.google.com/file/d/1hPJX5OwPkKD59GqU5BuElPYo9vy8Kc4Y/view?usp=drivesdk' }
         ],
@@ -469,8 +481,28 @@ let subjects = [
       { label: 'Iodine', state: 'remaining', art: 13 },
       { label: 'Nutrition in elderly', state: 'remaining', art: 13 },
       { label: 'AIDS nutrition', state: 'remaining', art: 13 },
-      { label: 'Iron deficiency anemia', state: 'remaining', art: 12 },
-      { label: 'Nutrition in cancer and obesity', state: 'remaining', art: 13 },
+      {
+        label: 'Iron deficiency anemia',
+        state: 'partial',
+        art: 12,
+        updatedAt: '2026-07-01',
+        updateBatch: 'wednesday-report-2026-07-01',
+        note: 'Wednesday report 1 Jul: first half of iron deficiency anemia, taught by Dr. Hanan Samah.',
+        lectureUrls: [
+          { label: 'Iron deficiency anemia lecture', url: 'https://drive.google.com/file/d/1AGNjjX1lUoTE56keCrC57Wt-Esq87Gr_/view?usp=drivesdk' }
+        ]
+      },
+      {
+        label: 'Nutrition in cancer and obesity',
+        state: 'partial',
+        art: 13,
+        updatedAt: '2026-07-01',
+        updateBatch: 'wednesday-report-2026-07-01',
+        note: 'Wednesday report 1 Jul: obesity portion taught by Dr. Hanan Samah; cancer nutrition remains pending.',
+        lectureUrls: [
+          { label: 'Obesity lecture', url: 'https://drive.google.com/file/d/1_LAXxkYF-i3nnTrSIOCUv0q6qAAPGlKl/view?usp=drivesdk' }
+        ]
+      },
       { label: 'TB and influenza nutrition', state: 'remaining', art: 13 }
     ]
   },
@@ -507,10 +539,12 @@ let subjects = [
         audioUrl: 'https://drive.google.com/file/d/168l5PhCSMGsl3GWyVeFpDiw8WEWaJlmC/view?usp=drivesdk'
       },
       {
-        label: 'Clinical Immunology Part 1',
+        label: 'Clinical Immunology',
         state: 'taken',
         art: 14,
-        note: 'Wednesday report 24 Jun: taught by Dr. Mohamed Mostafa.'
+        updatedAt: '2026-07-01',
+        updateBatch: 'wednesday-report-2026-07-01',
+        note: 'Wednesday report 1 Jul: completion of Clinical Immunology, taught by Dr. Mohamed Mostafa.'
       },
       { label: 'Clinical Pathology Research Assignment', state: 'remaining', art: 14 },
       {
@@ -564,7 +598,9 @@ let subjects = [
         label: 'General anaesthesia',
         state: 'taken',
         art: 15,
-        note: 'Tuesday report: taught by Dr. Alaa Neyazy; stopped at muscle relaxant.'
+        updatedAt: '2026-06-30',
+        updateBatch: 'tuesday-report-2026-06-30',
+        note: 'Tuesday report 30 Jun: General Anesthesia completed, taught by Dr. Alaa Neyazy. Continued from muscle relaxants through maintenance, reversal, emergence, and postoperative care.'
       },
       { label: 'CPR', state: 'remaining', art: 15 },
       { label: 'Oxygen therapy', state: 'remaining', art: 15 },
@@ -614,7 +650,7 @@ const midtermExamSchedule = [
     subjectName: 'Nutrition',
     date: '2026-07-08',
     dayLabel: 'Wed',
-    time: 'First 8 topics',
+    time: 'Vitamins, Food-borne, Tetanus & Rabies, Obesity, 1st half IDA',
     meta: '10 marks',
     type: 'quiz'
   },
