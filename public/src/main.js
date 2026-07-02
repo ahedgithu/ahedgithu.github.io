@@ -4,8 +4,8 @@ let subjects = [
   {
     code: 'SUR-1',
     name: 'Surgery 1',
-    totalCount: 16,
-    examNote: 'Midterm: Sat Jul 25, 2026, 2:30-3:30.',
+    totalCount: 15,
+    examNote: 'Midterm: Wed Jul 22, 2026, 2:30-3:30.',
     topics: [
       {
         label: 'Liver Introduction',
@@ -31,12 +31,6 @@ let subjects = [
           { label: 'Achalasia / GERD lecture', url: 'https://drive.google.com/file/d/1-uzZPnXaDetSZxCujFNDLudZ_TOJaQEh/view?usp=drivesdk' }
         ],
         audioUrl: 'https://drive.google.com/file/d/1vt23RUJTWuT_1ZRUHGm4gvWJKW1sxUyI/view?usp=drivesdk'
-      },
-      {
-        label: 'Clinical round overview',
-        state: 'taken',
-        art: 2,
-        audioUrl: 'https://drive.google.com/file/d/1mpckOjHYl__72iCCGy4jXU7EJfzgzKlX/view?usp=drivesdk'
       },
       {
         label: 'Liver Trauma and Infections',
@@ -106,20 +100,22 @@ let subjects = [
         midtermScope: true,
         midtermScopeNote: 'SUR 401-1 scope: Spleen. Source: Dr. Abu Alata PDFs and lecture recordings.'
       }
+    ],
+    clinicalTopics: [
+      {
+        label: 'Clinical round overview',
+        state: 'taken',
+        art: 2,
+        audioUrl: 'https://drive.google.com/file/d/1mpckOjHYl__72iCCGy4jXU7EJfzgzKlX/view?usp=drivesdk'
+      }
     ]
   },
   {
     code: 'SUR-2',
     name: 'Surgery 2',
-    totalCount: 7,
+    totalCount: 6,
     examNote: 'Midterm starts Jul 18, 2026. Exact SUR-2 schedule pending.',
     topics: [
-      {
-        label: 'Overview of the Subject',
-        state: 'taken',
-        art: 2,
-        audioUrl: 'https://drive.google.com/file/d/1JCS1ZR8BiLL2sGVi-0B6UBExsstVOZEP/view?usp=drivesdk'
-      },
       {
         label: 'Chest trauma / trauma up to sternal fractures',
         state: 'taken',
@@ -176,13 +172,21 @@ let subjects = [
         audioUrl: 'https://drive.google.com/file/d/1JdFbfB1xuLD-WSCnXs7jgBAA1KoSJ1Rj/view?usp=drivesdk'
       },
       { label: 'Empyema', state: 'remaining', art: 10 }
+    ],
+    clinicalTopics: [
+      {
+        label: 'Overview of the Subject',
+        state: 'taken',
+        art: 2,
+        audioUrl: 'https://drive.google.com/file/d/1JCS1ZR8BiLL2sGVi-0B6UBExsstVOZEP/view?usp=drivesdk'
+      }
     ]
   },
   {
     code: 'MED-1',
     name: 'Internal Medicine 1',
     totalCount: 15,
-    examNote: 'Midterm: Sat Jul 18, 2026, 2:30-3:30.',
+    examNote: 'Midterm: Wed Jul 29, 2026, 2:30-3:30.',
     topics: [
       {
         label: "GERD, Barrett's Esophagus, Esophageal Motility Disorders",
@@ -256,7 +260,7 @@ let subjects = [
     code: 'MED-2',
     name: 'Internal Medicine 2',
     totalCount: 29,
-    examNote: 'Midterm: Wed Jul 22, 2026, 2:30-3:30.',
+    examNote: 'Midterm: Sat Jul 25, 2026, 2:30-3:30.',
     topics: [
       // Cardiology (16 topics)
       { label: 'Cardiology Symptomatology', state: 'remaining', art: 9, section: 'Cardio' },
@@ -638,9 +642,9 @@ const stateLabels = {
 }
 
 const subjectExamNotes = {
-  'SUR-1': 'Midterm: Sat Jul 25, 2026, 2:30-3:30.',
-  'MED-1': 'Midterm: Sat Jul 18, 2026, 2:30-3:30.',
-  'MED-2': 'Midterm: Wed Jul 22, 2026, 2:30-3:30.'
+  'SUR-1': 'Midterm: Wed Jul 22, 2026, 2:30-3:30.',
+  'MED-1': 'Midterm: Wed Jul 29, 2026, 2:30-3:30.',
+  'MED-2': 'Midterm: Sat Jul 25, 2026, 2:30-3:30.'
 }
 
 const midtermExamSchedule = [
@@ -655,27 +659,27 @@ const midtermExamSchedule = [
     type: 'quiz'
   },
   {
-    code: 'MED 401-1',
-    subjectCode: 'MED-1',
-    subjectName: 'Internal Medicine 1',
-    date: '2026-07-18',
-    dayLabel: 'Sat',
+    code: 'SUR 401-1',
+    subjectCode: 'SUR-1',
+    subjectName: 'Surgery 1',
+    date: '2026-07-22',
+    dayLabel: 'Wed',
     time: '2:30-3:30'
   },
   {
     code: 'MED 401-2',
     subjectCode: 'MED-2',
     subjectName: 'Internal Medicine 2',
-    date: '2026-07-22',
-    dayLabel: 'Wed',
+    date: '2026-07-25',
+    dayLabel: 'Sat',
     time: '2:30-3:30'
   },
   {
-    code: 'SUR 401-1',
-    subjectCode: 'SUR-1',
-    subjectName: 'Surgery 1',
-    date: '2026-07-25',
-    dayLabel: 'Sat',
+    code: 'MED 401-1',
+    subjectCode: 'MED-1',
+    subjectName: 'Internal Medicine 1',
+    date: '2026-07-29',
+    dayLabel: 'Wed',
     time: '2:30-3:30'
   }
 ]
@@ -933,7 +937,7 @@ function getFilteredSubjects() {
 
   return subjects.filter((subject) => {
     if (!query && status === 'all' && scope === 'all') return true
-    return getFilteredTopics(subject).length > 0
+    return getFilteredTopics(subject).length > 0 || getFilteredClinicalTopics(subject).length > 0
   })
 }
 
