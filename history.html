@@ -12,7 +12,7 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="manifest" href="/manifest.webmanifest" />
   <meta name="theme-color" content="#315f72" />
-  <link rel="stylesheet" href="/src/style.css?v=20260702-hub-nav-ripple" />
+  <link rel="stylesheet" href="/src/style.css?v=20260702-premium-clean" />
   <style>
     :root {
       --bg: #060914;
@@ -559,33 +559,36 @@
     /* Premium visual skin: visual-only overrides, layout preserved. */
     :root {
       color-scheme: light;
-      --bg: #f6f4ef;
-      --panel: rgba(255, 255, 255, 0.82);
-      --panel-2: rgba(255, 255, 255, 0.92);
-      --card: rgba(255, 255, 255, 0.72);
-      --stroke: rgba(49, 95, 114, 0.16);
-      --stroke-strong: rgba(49, 95, 114, 0.28);
-      --text: #17313d;
+      --bg: #f7fbfa;
+      --bg2: #eef8f6;
+      --panel: rgba(255, 255, 255, 0.78);
+      --panel-2: rgba(255, 255, 255, 0.94);
+      --card: rgba(255, 255, 255, 0.74);
+      --stroke: rgba(49, 95, 114, 0.14);
+      --stroke-strong: rgba(49, 95, 114, 0.24);
+      --text: #102b33;
       --muted: #6c7f88;
       --soft: #315f72;
       --cyan: #4f9ca7;
       --blue: #4f9ca7;
       --amber: #c89d3f;
-      --green: #36d399;
+      --gold-soft: rgba(200, 157, 63, 0.14);
+      --primary-soft: rgba(49, 95, 114, 0.10);
+      --green: #36c993;
       --red: #ee8097;
-      --purple: #8d7bf7;
+      --purple: #4f9ca7;
       --shadow: 0 24px 70px rgba(31, 70, 88, 0.13);
-      --radius: 26px;
-      --radius-sm: 18px;
+      --soft-shadow: 0 12px 34px rgba(31, 70, 88, 0.08);
+      --radius: 24px;
+      --radius-sm: 16px;
       --focus: 0 0 0 3px rgba(79, 156, 167, 0.22), 0 0 0 1px rgba(79, 156, 167, 0.54) inset;
     }
 
     body {
       background:
-        radial-gradient(circle at 10% 0%, rgba(79, 156, 167, 0.24), transparent 31%),
-        radial-gradient(circle at 91% 5%, rgba(245, 216, 135, 0.38), transparent 28%),
-        radial-gradient(circle at 48% 40%, rgba(141, 123, 247, 0.10), transparent 35%),
-        linear-gradient(180deg, #fbfaf6 0%, #eef8f6 52%, #fffaf1 100%);
+        radial-gradient(circle at 8% -4%, rgba(79, 156, 167, 0.22), transparent 30%),
+        radial-gradient(circle at 92% 2%, rgba(200, 157, 63, 0.22), transparent 26%),
+        linear-gradient(180deg, var(--bg), var(--bg2) 56%, var(--bg));
     }
 
     body::before {
@@ -610,11 +613,11 @@
     textarea {
       border-color: var(--stroke);
       background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.90), rgba(255, 255, 255, 0.68)),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.70), transparent),
         var(--panel);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      box-shadow: var(--soft-shadow);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
     }
 
     .hero,
@@ -639,7 +642,7 @@
       pointer-events: none;
       border-radius: inherit;
       background:
-        radial-gradient(circle at 100% 0%, rgba(245, 216, 135, 0.24), transparent 28%),
+        radial-gradient(circle at 100% 0%, rgba(200, 157, 63, 0.16), transparent 30%),
         radial-gradient(circle at 0% 100%, rgba(79, 156, 167, 0.14), transparent 30%);
     }
 
@@ -670,6 +673,27 @@
       color: var(--muted);
     }
 
+    .mode-toggle,
+    .tabs {
+      border-color: var(--stroke);
+      background: color-mix(in srgb, var(--panel-2) 86%, transparent);
+      box-shadow: var(--soft-shadow);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .mode-toggle button,
+    .tabs button {
+      color: var(--muted);
+    }
+
+    .mode-toggle button.active,
+    .tabs button.active {
+      color: #fff;
+      background: linear-gradient(135deg, var(--soft), var(--cyan));
+      box-shadow: 0 12px 28px rgba(49, 95, 114, 0.20);
+    }
+
     .system-btn:hover,
     .step-btn:hover,
     .chip:hover,
@@ -684,7 +708,46 @@
     .chip.active {
       border-color: rgba(79, 156, 167, 0.38);
       color: var(--soft);
-      background: rgba(79, 156, 167, 0.12);
+      background: var(--primary-soft);
+    }
+
+    .progress-bar,
+    .step-dot,
+    .stat,
+    .sub-card,
+    .symptom-card,
+    .hint,
+    .notice {
+      border-color: var(--stroke);
+      background: rgba(255, 255, 255, 0.62);
+      color: var(--muted);
+    }
+
+    .progress-fill,
+    .step-btn.done .step-dot {
+      background: linear-gradient(90deg, var(--soft), var(--cyan), var(--amber));
+    }
+
+    .tag,
+    .missing-item,
+    .good-item {
+      border-color: rgba(200, 157, 63, 0.24);
+      color: #7b5b13;
+      background: var(--gold-soft);
+    }
+
+    .btn.primary,
+    .btn.green {
+      color: #fff;
+      border-color: rgba(49, 95, 114, 0.24);
+      background: linear-gradient(135deg, var(--soft), var(--cyan));
+      box-shadow: 0 14px 34px rgba(49, 95, 114, 0.20);
+    }
+
+    .btn.danger {
+      color: #9f354b;
+      background: rgba(238, 128, 151, 0.12);
+      border-color: rgba(238, 128, 151, 0.28);
     }
   </style>
 <body>
