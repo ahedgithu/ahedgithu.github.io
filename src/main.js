@@ -4,13 +4,15 @@ let subjects = [
   {
     code: 'SUR-1',
     name: 'Surgery 1',
-    totalCount: 14,
+    totalCount: 15,
     examNote: 'Midterm: Sat Jul 25, 2026, 2:30-3:30.',
     topics: [
       {
         label: 'Liver Introduction',
         state: 'taken',
         art: 0,
+        midtermScope: true,
+        midtermScopeNote: 'SUR 401-1 scope: Liver. Source: Dr. Abu Alata PDFs and lecture recordings.',
         lectureUrls: [
           { label: 'Lecture', url: 'https://docs.google.com/presentation/d/12BIYR9r2h_fwkUQpXQI0xOyPy-lSI9D_/edit?usp=drivesdk&ouid=109054155258701630059&rtpof=true&sd=true' }
         ],
@@ -21,6 +23,8 @@ let subjects = [
         state: 'taken',
         art: 1,
         coverageUnits: 3,
+        midtermScope: true,
+        midtermScopeNote: "SUR 401-1 scope: Esophagus. Source: Dr. Hisham's book and lecture recordings.",
         note: 'Contains 3 topics: surgical anatomy and physiology; achalasia, hiatus hernia and GERD; esophageal perforation.',
         lectureUrls: [
           { label: 'Anatomy lecture', url: 'https://drive.google.com/file/d/1-iY3KOVw6vUWm_7k--A9lWFJnuGxYqoo/view?usp=drivesdk' },
@@ -38,6 +42,8 @@ let subjects = [
         label: 'Liver Trauma and Infections',
         state: 'taken',
         art: 3,
+        midtermScope: true,
+        midtermScopeNote: 'SUR 401-1 scope: Liver. Source: Dr. Abu Alata PDFs and lecture recordings.',
         note: 'Hepatobiliary surgery coverage includes amoebic hepatitis and abscess.',
         lectureUrls: [
           { label: 'Lecture', url: 'https://docs.google.com/presentation/d/1yjIUZolwSkC9DLnvTGCWBsxtPMuqalgY/edit?usp=drivesdk&ouid=109054155258701630059&rtpof=true&sd=true' }
@@ -54,19 +60,42 @@ let subjects = [
         ],
         audioUrl: 'https://drive.google.com/file/d/1t1i2zjXOYw9jaSdIRYn1GvBOrsToq30u/view?usp=drivesdk'
       },
-      { label: 'Tongue', state: 'remaining', art: 2 },
+      {
+        label: 'Tongue',
+        state: 'remaining',
+        art: 2,
+        midtermScope: true,
+        midtermScopeNote: 'SUR 401-1 scope: Tongue. Source: Dr. Abu Alata PDFs and lecture recordings.'
+      },
       { label: 'Salivary glands', state: 'remaining', art: 13 },
       {
         label: 'Stomach anatomy, physiology, histology and peptic ulcers',
         state: 'taken',
         art: 6,
-        note: 'Sunday report 28 Jun: anatomy, physiology and histology of the stomach plus acute and chronic peptic/gastric ulcers, taught by Dr. Hisham Ahmed.',
+        midtermScope: true,
+        midtermScopeNote: "SUR 401-1 scope: Stomach. Source: Dr. Hisham's book and lecture recordings.",
+        updatedAt: '2026-06-28',
+        updateBatch: 'sunday-report-2026-06-28',
+        note: 'Sunday report 28 Jun: anatomy, physiology and histology of the stomach; acute and chronic peptic ulcer; chronic gastric ulcer, taught by Dr. Eman Reda. Sections: anatomy/physiology, histology, and disease.',
         audioUrl: 'https://drive.google.com/file/d/19U-2vhMabUKGYhF_reeNy2NDovYvN0wl/view?usp=drivesdk'
       },
       { label: 'Pancreas', state: 'remaining', art: 4 },
       { label: 'Intestines', state: 'remaining', art: 7 },
+      {
+        label: 'Appendix',
+        state: 'remaining',
+        art: 7,
+        midtermScope: true,
+        midtermScopeNote: "SUR 401-1 scope: Appendix. Source: Dr. Hisham's book and lecture recordings."
+      },
       { label: 'Biliary tract', state: 'remaining', art: 0 },
-      { label: 'Spleen', state: 'remaining', art: 12 }
+      {
+        label: 'Spleen',
+        state: 'remaining',
+        art: 12,
+        midtermScope: true,
+        midtermScopeNote: 'SUR 401-1 scope: Spleen. Source: Dr. Abu Alata PDFs and lecture recordings.'
+      }
     ]
   },
   {
@@ -104,7 +133,9 @@ let subjects = [
         label: 'Rib fracture',
         state: 'taken',
         art: 10,
-        note: 'Sunday report 28 Jun: covered in Cardiothoracic Trauma Part 2, taught by Dr. Mohand Mostafa.',
+        updatedAt: '2026-06-28',
+        updateBatch: 'sunday-report-2026-06-28',
+        note: 'Sunday report 28 Jun: Cardiothoracic Trauma Part 2, taught by Dr. Ahmed Mostafa. Covers types of thoracic injuries, chest X-ray and CT findings, and trauma management.',
         lectureUrls: [
           { label: 'Cardiothoracic Trauma Part 2', url: 'https://docs.google.com/presentation/d/17kjMBNHhun5-76h7saPBwGnZVV4rG588/edit?usp=drivesdk&ouid=109054155258701630059&rtpof=true&sd=true' }
         ],
@@ -114,7 +145,9 @@ let subjects = [
         label: 'Pneumothorax, tension pneumothorax, hemothorax',
         state: 'taken',
         art: 10,
-        note: 'Sunday report 28 Jun: covered in Cardiothoracic Trauma Part 2, taught by Dr. Mohand Mostafa.',
+        updatedAt: '2026-06-28',
+        updateBatch: 'sunday-report-2026-06-28',
+        note: 'Sunday report 28 Jun: Cardiothoracic Trauma Part 2, taught by Dr. Ahmed Mostafa. Covers types of thoracic injuries, chest X-ray and CT findings, and trauma management.',
         lectureUrls: [
           { label: 'Cardiothoracic Trauma Part 2', url: 'https://docs.google.com/presentation/d/17kjMBNHhun5-76h7saPBwGnZVV4rG588/edit?usp=drivesdk&ouid=109054155258701630059&rtpof=true&sd=true' }
         ],
@@ -124,7 +157,9 @@ let subjects = [
         label: 'Pulmonary contusion and flail chest',
         state: 'taken',
         art: 10,
-        note: 'Sunday report 28 Jun: covered in Cardiothoracic Trauma Part 2, taught by Dr. Mohand Mostafa.',
+        updatedAt: '2026-06-28',
+        updateBatch: 'sunday-report-2026-06-28',
+        note: 'Sunday report 28 Jun: Cardiothoracic Trauma Part 2, taught by Dr. Ahmed Mostafa. Covers types of thoracic injuries, chest X-ray and CT findings, and trauma management.',
         lectureUrls: [
           { label: 'Cardiothoracic Trauma Part 2', url: 'https://docs.google.com/presentation/d/17kjMBNHhun5-76h7saPBwGnZVV4rG588/edit?usp=drivesdk&ouid=109054155258701630059&rtpof=true&sd=true' }
         ],
@@ -143,7 +178,9 @@ let subjects = [
         label: "GERD, Barrett's Esophagus, Esophageal Motility Disorders",
         state: 'taken',
         art: 1,
-        note: 'Sunday report 28 Jun: Disease of the esophagus, taught by Dr. Hisham Samy.',
+        updatedAt: '2026-06-28',
+        updateBatch: 'sunday-report-2026-06-28',
+        note: 'Sunday report 28 Jun: Disease of the Esophagus, taught by Dr. Hisham Samy. Covers anatomy of the esophagus, physiology of the esophagus, physiology of swallowing, and physiology of GERD.',
         lectureUrls: [
           { label: 'Diseases of the oesophagus', url: 'https://docs.google.com/presentation/d/1p7aTSiqNJZa-R63z-pcqjAGhHTTNehrf/edit?usp=drivesdk&ouid=109054155258701630059&rtpof=true&sd=true' }
         ],
@@ -231,7 +268,9 @@ let subjects = [
         state: 'taken',
         art: 9,
         section: 'Cardio',
-        note: 'Sunday report 28 Jun: Mitral Valve Diseases taught by Dr. Nashwa El Hagrasy.',
+        updatedAt: '2026-06-28',
+        updateBatch: 'sunday-report-2026-06-28',
+        note: 'Sunday report 28 Jun: Mitral Valve Diseases, taught by Dr. Ahmed Lotfy. Covers mitral valve structure and function, mitral stenosis, mitral regurgitation, and clinical manifestations.',
         lectureUrls: [
           { label: 'Mitral valve lecture', url: 'https://docs.google.com/presentation/d/1yZxhWUh5KDgQp_Z_Le10RL_JmdooXpwb/edit?usp=drivesdk&ouid=109054155258701630059&rtpof=true&sd=true' }
         ],
@@ -272,6 +311,8 @@ let subjects = [
         state: 'taken',
         art: 10,
         section: 'Chest',
+        midtermScope: true,
+        midtermScopeNote: 'MED 401-2 Chest scope: cough, sputum, hemoptysis, and dyspnea.',
         lectureUrls: [
           { label: 'Lecture', url: 'https://drive.google.com/file/d/1SX1PStcEfLVwTwYt_WfjesGwkieI2Pfd/view?usp=drivesdk' }
         ],
@@ -282,6 +323,8 @@ let subjects = [
         state: 'taken',
         art: 11,
         section: 'Chest',
+        midtermScope: true,
+        midtermScopeNote: 'MED 401-2 Chest scope: PFTs, lung volumes, capacities, flow rates, diffusion, and obstructive vs restrictive clinical applications.',
         lectureUrls: [
           { label: 'Lecture', url: 'https://drive.google.com/file/d/1k5IlWjpjnwEeKt4UmcD-zdBNtqiyr0S2/view?usp=drivesdk' },
           { label: 'Slides', url: 'https://docs.google.com/presentation/d/1I3A5NgJf0YtX932PbftokMNZeKfjGEln/edit?usp=drivesdk&ouid=109054155258701630059&rtpof=true&sd=true' }
@@ -293,6 +336,8 @@ let subjects = [
         state: 'taken',
         art: 10,
         section: 'Chest',
+        midtermScope: true,
+        midtermScopeNote: 'MED 401-2 Chest scope: airway diseases, small airway diseases, subglottic stenosis, vocal cord dysfunction, and bronchial asthma basics.',
         note: 'Tuesday report: diseases of upper and lower airways and bronchial asthma part 1.',
         lectureUrls: [
           { label: 'Lecture', url: 'https://drive.google.com/file/d/133Ae9Po7wzSJBOf-GqANHRBHmPBufviI/view?usp=drivesdk' },
@@ -307,6 +352,8 @@ let subjects = [
         state: 'taken',
         art: 10,
         section: 'Chest',
+        midtermScope: true,
+        midtermScopeNote: 'MED 401-2 Chest scope: ACO / ACOS is included. Dr. Serag notes are VIP with PDFs and records.',
         note: 'Tuesday report: Asthma Part 2 & COPD & ACOS taught by Dr. Serageldin Ali Sadek.',
         lectureUrls: [
           { label: 'Lecture folder', url: 'https://drive.google.com/drive/folders/1KYLyxp67TVvPqmcnl33siqUB5SSbbwYF' }
@@ -364,7 +411,9 @@ let subjects = [
         label: 'Bleeding disorders',
         state: 'taken',
         art: 14,
-        note: 'Sunday report 28 Jun: taught by Dr. Manal Mahmoud.',
+        updatedAt: '2026-06-28',
+        updateBatch: 'sunday-report-2026-06-28',
+        note: 'Stopped at slide number 23.',
         lectureUrls: [
           { label: 'Bleeding disorders file', url: 'https://drive.google.com/file/d/1hPJX5OwPkKD59GqU5BuElPYo9vy8Kc4Y/view?usp=drivesdk' }
         ],
@@ -528,6 +577,10 @@ let subjects = [
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 const mobileQuery = window.matchMedia('(max-width: 860px)')
 const QUIZ_STORAGE_PREFIX = 'mcq-progress-'
+const TOPIC_UPDATE_STORAGE_KEY = 'tracker-seen-topic-updates-v1'
+const TOPIC_UPDATE_VISIBLE_DAYS = 14
+const NEWS_SEEN_STORAGE_KEY = 'news-seen-cards-v1'
+const NEWS_EXPIRY_HOURS = 6
 const DRIVE_ICON_URL = '/assets/icons/drive-icon.png'
 const PLAY_ICON_URL = '/assets/icons/play-button-v1.png'
 const mcqQuizzes = window.mcqQuizzes || {}
@@ -555,6 +608,16 @@ const subjectExamNotes = {
 }
 
 const midtermExamSchedule = [
+  {
+    code: 'NUT Quiz',
+    subjectCode: 'NUT',
+    subjectName: 'Nutrition',
+    date: '2026-07-08',
+    dayLabel: 'Wed',
+    time: 'First 8 topics',
+    meta: '10 marks',
+    type: 'quiz'
+  },
   {
     code: 'MED 401-1',
     subjectCode: 'MED-1',
@@ -613,24 +676,26 @@ const selectedCount = document.getElementById('selected-count')
 const selectedPercent = document.getElementById('selected-percent')
 const progressFill = document.getElementById('progress-fill')
 const topicList = document.getElementById('topic-list')
+const topicListTitle = document.getElementById('topic-list-title')
+const subjectTrackTabs = document.getElementById('subject-track-tabs')
 const trackerSearch = document.getElementById('tracker-search')
 const trackerStatusFilter = document.getElementById('tracker-status-filter')
+const trackerScopeFilter = document.getElementById('tracker-scope-filter')
 const semesterFill = document.getElementById('semester-fill')
 const todayMarker = document.getElementById('today-marker')
 const midtermMarker = document.getElementById('midterm-marker')
 const finalsMarker = document.getElementById('finals-marker')
 const semesterDateScale = document.getElementById('semester-date-scale')
 const nextCheckpoint = document.getElementById('next-checkpoint')
-const examTodayDay = document.getElementById('exam-today-day')
-const examTodayMonth = document.getElementById('exam-today-month')
 const next401Exam = document.getElementById('next-401-exam')
 const next401Countdown = document.getElementById('next-401-countdown')
 const examScheduleCards = document.getElementById('exam-schedule-cards')
+const newsNavLink = document.querySelector('.site-nav a[href="/news.html"]')
 const bookingForm = document.getElementById('booking-form')
 const bookingName = document.getElementById('booking-name')
 const bookingService = document.getElementById('booking-service')
 const bookingTime = document.getElementById('booking-time')
-const assignmentProgress = document.querySelector('[data-assignment-progress]')
+const deadlineProgressItems = document.querySelectorAll('[data-assignment-progress], [data-deadline-progress]')
 const historyForm = document.getElementById('history-form')
 const historyProgressCount = document.getElementById('history-progress-count')
 const historyProgressFill = document.getElementById('history-progress-fill')
@@ -651,9 +716,14 @@ const scheduleList = document.getElementById('schedule-list')
 const whatsappFeedbackUrl = 'https://wa.me/201030469634?text=Hi%20Ahmed%2C%20I%20have%20a%20recommendation%20to%20improve%20the%20MED%20401%20tracker%3A%20'
 
 const initialParams = new URLSearchParams(window.location.search)
+subjects = subjects.map((subject) => ({
+  ...subject,
+  clinicalTopics: Array.isArray(subject.clinicalTopics) ? subject.clinicalTopics : []
+}))
 const initialSubject = subjects.find((subject) => subject.code === initialParams.get('subject'))
 let activeSubjectCode = initialParams.get('tracker') === '1' && initialSubject ? initialSubject.code : null
 let expandedSubjectCode = mobileQuery.matches && activeSubjectCode ? activeSubjectCode : null
+let activeSubjectTrack = 'theoretical'
 
 function getPercent(subject) {
   if (!subject.totalCount) return 0
@@ -679,14 +749,89 @@ function getStateCounts(subject) {
 
 function getSubjectSummary(subject) {
   const counts = getStateCounts(subject)
+  const midtermCount = subject.topics.filter((topic) => topic.midtermScope).length
   const parts = [
     counts.taken ? `${counts.taken} taken` : '',
     counts.partial ? `${counts.partial} partial` : '',
     counts.announced ? `${counts.announced} announced` : '',
-    (counts.remaining || 0) ? `${counts.remaining || 0} remaining` : ''
+    (counts.remaining || 0) ? `${counts.remaining || 0} remaining` : '',
+    midtermCount ? `${midtermCount} midterm scope` : ''
   ].filter(Boolean)
 
   return parts.join(' · ')
+}
+
+function getTopicUpdateId(subject, topic) {
+  if (!topic.updatedAt) return ''
+  return `${subject.code}::${topic.label}::${topic.updateBatch || topic.updatedAt}`
+}
+
+function getSeenTopicUpdates() {
+  try {
+    return new Set(JSON.parse(localStorage.getItem(TOPIC_UPDATE_STORAGE_KEY) || '[]'))
+  } catch {
+    localStorage.removeItem(TOPIC_UPDATE_STORAGE_KEY)
+    return new Set()
+  }
+}
+
+function saveSeenTopicUpdates(seenUpdates) {
+  try {
+    localStorage.setItem(TOPIC_UPDATE_STORAGE_KEY, JSON.stringify([...seenUpdates]))
+  } catch {
+    // Keep the tracker usable when browser storage is blocked.
+  }
+}
+
+function isRecentTopicUpdate(topic) {
+  if (!topic.updatedAt) return false
+  const updatedTime = new Date(`${topic.updatedAt}T00:00:00`).getTime()
+  if (!Number.isFinite(updatedTime)) return false
+  const ageDays = (Date.now() - updatedTime) / 86400000
+  return ageDays >= 0 && ageDays <= TOPIC_UPDATE_VISIBLE_DAYS
+}
+
+function getNextSundayStart(date) {
+  const dateStart = startOfDay(date)
+  const daysUntilSunday = (7 - dateStart.getDay()) % 7 || 7
+  const nextSunday = new Date(dateStart)
+  nextSunday.setDate(dateStart.getDate() + daysUntilSunday)
+  return nextSunday
+}
+
+function isWeeklyTopicUpdateEligible(topic, today = new Date()) {
+  if (!topic.updatedAt) return false
+  const updatedDate = getLocalDate(topic.updatedAt)
+  const updatedTime = updatedDate.getTime()
+  if (!Number.isFinite(updatedTime)) return false
+
+  const todayStart = startOfDay(today)
+  return updatedDate <= todayStart && todayStart < getNextSundayStart(updatedDate)
+}
+
+function getUnreadTopicUpdates(subject) {
+  const seenUpdates = getSeenTopicUpdates()
+  return subject.topics.filter((topic) => {
+    const updateId = getTopicUpdateId(subject, topic)
+    return updateId && isWeeklyTopicUpdateEligible(topic) && !seenUpdates.has(updateId)
+  })
+}
+
+function markSubjectUpdatesSeen(subject) {
+  const updateIds = subject.topics.map((topic) => getTopicUpdateId(subject, topic)).filter(Boolean)
+  if (!updateIds.length) return false
+
+  const seenUpdates = getSeenTopicUpdates()
+  let changed = false
+  updateIds.forEach((updateId) => {
+    if (!seenUpdates.has(updateId)) {
+      seenUpdates.add(updateId)
+      changed = true
+    }
+  })
+
+  if (changed) saveSeenTopicUpdates(seenUpdates)
+  return changed
 }
 
 function escapeHtml(value) {
@@ -715,26 +860,43 @@ function getDriveDownloadUrl(url = '') {
 function getTrackerFilters() {
   return {
     query: trackerSearch?.value.trim().toLowerCase() || '',
-    status: trackerStatusFilter?.value || 'all'
+    status: trackerStatusFilter?.value || 'all',
+    scope: trackerScopeFilter?.value || 'all'
   }
 }
 
 function getFilteredTopics(subject) {
-  const { query, status } = getTrackerFilters()
+  const { query, status, scope } = getTrackerFilters()
 
   return subject.topics.filter((topic) => {
     const matchesStatus = status === 'all' || topic.state === status
-    const searchable = `${subject.code} ${subject.name} ${topic.label} ${topic.section || ''} ${topic.note || ''}`.toLowerCase()
+    const matchesScope = scope === 'all' || (scope === 'midterm' && topic.midtermScope)
+    const searchable = `${subject.code} ${subject.name} ${topic.label} ${topic.section || ''} ${topic.note || ''} ${topic.midtermScopeNote || ''} ${topic.midtermScope ? 'midterm scope included' : ''}`.toLowerCase()
+    const matchesQuery = !query || searchable.includes(query)
+    return matchesStatus && matchesScope && matchesQuery
+  })
+}
+
+function getClinicalTopics(subject) {
+  return Array.isArray(subject.clinicalTopics) ? subject.clinicalTopics : []
+}
+
+function getFilteredClinicalTopics(subject) {
+  const { query, status } = getTrackerFilters()
+
+  return getClinicalTopics(subject).filter((topic) => {
+    const matchesStatus = status === 'all' || topic.state === status
+    const searchable = `${subject.code} ${subject.name} ${topic.label || ''} ${topic.note || ''} ${topic.roundDate || ''} ${topic.room || ''}`.toLowerCase()
     const matchesQuery = !query || searchable.includes(query)
     return matchesStatus && matchesQuery
   })
 }
 
 function getFilteredSubjects() {
-  const { query, status } = getTrackerFilters()
+  const { query, status, scope } = getTrackerFilters()
 
   return subjects.filter((subject) => {
-    if (!query && status === 'all') return true
+    if (!query && status === 'all' && scope === 'all') return true
     return getFilteredTopics(subject).length > 0
   })
 }
@@ -835,12 +997,12 @@ function updateTrackerUrl(subjectCode) {
   window.history.replaceState({}, '', url)
 }
 
-function sortTopicsForDisplay(subject, topics) {
+function sortTopicsForDisplay(subject, topics, collection = subject.topics) {
   const { status } = getTrackerFilters()
 
   if (status !== 'all') {
     return [...topics].sort((a, b) => {
-      return subject.topics.indexOf(a) - subject.topics.indexOf(b)
+      return collection.indexOf(a) - collection.indexOf(b)
     })
   }
 
@@ -860,22 +1022,37 @@ function sortTopicsForDisplay(subject, topics) {
     if (pA !== pB) {
       return pA - pB
     }
-    return subject.topics.indexOf(a) - subject.topics.indexOf(b)
+    return collection.indexOf(a) - collection.indexOf(b)
   })
 }
 
-function renderTopicCard(subject, topic, index) {
-  const tileX = topic.art % 4
-  const tileY = Math.floor(topic.art / 4)
-  const displayNum = String(subject.topics.indexOf(topic) + 1).padStart(2, '0')
+function renderTopicCard(subject, topic, index, collection = subject.topics) {
+  const art = Number.isFinite(topic.art) ? topic.art : index % 16
+  const tileX = art % 4
+  const tileY = Math.floor(art / 4)
+  const topicPosition = collection.indexOf(topic)
+  const displayNum = String((topicPosition >= 0 ? topicPosition : index) + 1).padStart(2, '0')
+  const midtermBadge = topic.midtermScope ? '<span class="topic-item__scope">Midterm scope</span>' : ''
+  const midtermNote = topic.midtermScopeNote ? `<span class="topic-item__midterm-note">${topic.midtermScopeNote}</span>` : ''
+  const roundMeta = [topic.roundDate, topic.room].filter(Boolean).join(' - ')
+  const newBadge = isRecentTopicUpdate(topic) ? `
+    <span class="topic-item__new" aria-label="Newly updated topic">
+      <span class="topic-item__new-pulse" aria-hidden="true"></span>
+      New
+    </span>
+  ` : ''
 
   return `
     <li class="topic-item topic-item--${topic.state}" style="--delay: ${index * 45}ms; --tile-x: ${tileX}; --tile-y: ${tileY};">
+      ${newBadge}
       <span class="topic-item__image" aria-hidden="true"></span>
       <span class="topic-item__index">${displayNum}</span>
       <span class="topic-item__body">
         <span class="topic-item__label">${topic.label}</span>
+        ${midtermBadge}
         <span class="topic-item__state topic-item__state--${topic.state}">${stateLabels[topic.state] || topic.state}</span>
+        ${midtermNote}
+        ${roundMeta ? `<span class="topic-item__note">${escapeHtml(roundMeta)}</span>` : ''}
         ${topic.note ? `<span class="topic-item__note">${topic.note}</span>` : ''}
         ${renderResourceLinks(topic)}
       </span>
@@ -883,12 +1060,13 @@ function renderTopicCard(subject, topic, index) {
   `
 }
 
-function renderTopicCards(subject, topics = getFilteredTopics(subject)) {
+function renderTopicCards(subject, topics = getFilteredTopics(subject), options = {}) {
   if (!topics.length) {
-    return '<li class="topic-empty">No topics match the current filters.</li>'
+    return `<li class="topic-empty">${options.emptyMessage || 'No topics match the current filters.'}</li>`
   }
 
-  const sortedTopics = sortTopicsForDisplay(subject, topics)
+  const collection = options.collection || subject.topics
+  const sortedTopics = sortTopicsForDisplay(subject, topics, collection)
   const takenStates = new Set(['taken', 'partial', 'taken-in-university'])
   const takenGroup = sortedTopics.filter(t => takenStates.has(t.state))
   const upcomingGroup = sortedTopics.filter(t => !takenStates.has(t.state))
@@ -902,7 +1080,7 @@ function renderTopicCards(subject, topics = getFilteredTopics(subject)) {
     const hasSections = groupTopics.some((t) => t.section)
 
     if (!hasSections) {
-      groupHtml += groupTopics.map((topic) => renderTopicCard(subject, topic, globalIndex++)).join('')
+      groupHtml += groupTopics.map((topic) => renderTopicCard(subject, topic, globalIndex++, collection)).join('')
     } else {
       const sections = groupTopics.reduce((collection, topic) => {
         const title = topic.section || 'Topics'
@@ -919,7 +1097,7 @@ function renderTopicCards(subject, topics = getFilteredTopics(subject)) {
       groupHtml += sections.map((section) => {
         const headingDelay = globalIndex * 45
         const sectionTitleMarkup = `<li class="topic-section-subheading" style="--delay: ${headingDelay}ms">${section.title}</li>`
-        const topicMarkup = section.topics.map((topic) => renderTopicCard(subject, topic, globalIndex++)).join('')
+        const topicMarkup = section.topics.map((topic) => renderTopicCard(subject, topic, globalIndex++, collection)).join('')
         return sectionTitleMarkup + topicMarkup
       }).join('')
     }
@@ -928,6 +1106,66 @@ function renderTopicCards(subject, topics = getFilteredTopics(subject)) {
   }
 
   return renderGroup(takenGroup, 'Taken in University') + renderGroup(upcomingGroup, 'Upcoming / Remaining')
+}
+
+function renderSubjectTrackTabs(subject) {
+  const clinicalCount = getClinicalTopics(subject).length
+  const tracks = [
+    { key: 'theoretical', label: 'Theoretical', count: subject.topics.length },
+    { key: 'clinical', label: 'Clinical', count: clinicalCount }
+  ]
+
+  return tracks.map((track) => `
+    <button
+      class="subject-track-tab${activeSubjectTrack === track.key ? ' active' : ''}"
+      type="button"
+      role="tab"
+      aria-selected="${activeSubjectTrack === track.key}"
+      data-subject-track="${track.key}"
+      data-code="${subject.code}"
+    >
+      <span>${track.label}</span>
+      <b>${track.count}</b>
+    </button>
+  `).join('')
+}
+
+function renderSubjectTrackList(subject) {
+  if (activeSubjectTrack === 'clinical') {
+    const clinicalTopics = getClinicalTopics(subject)
+    const visibleClinicalTopics = getFilteredClinicalTopics(subject)
+    return renderTopicCards(subject, visibleClinicalTopics, {
+      collection: clinicalTopics,
+      emptyMessage: clinicalTopics.length
+        ? 'No clinical round topics match the current filters.'
+        : 'Clinical round topics have not been added from Drive yet.'
+    })
+  }
+
+  return renderTopicCards(subject, getFilteredTopics(subject))
+}
+
+function getSubjectTrackTitle() {
+  return activeSubjectTrack === 'clinical' ? 'Clinical rounds' : 'Topic list'
+}
+
+function getSubjectTrackCount(subject) {
+  if (activeSubjectTrack === 'clinical') {
+    const clinicalCount = getFilteredClinicalTopics(subject).length
+    return `${clinicalCount} clinical`
+  }
+
+  return `${getFilteredTopics(subject).length} shown`
+}
+
+function bindSubjectTrackTabs(root = document) {
+  root.querySelectorAll('[data-subject-track]').forEach((button) => {
+    button.addEventListener('click', () => {
+      activeSubjectTrack = button.dataset.subjectTrack || 'theoretical'
+      const code = button.dataset.code || activeSubjectCode
+      if (code) setActiveSubject(code, 'open')
+    })
+  })
 }
 
 function ensureQuizModal() {
@@ -1522,19 +1760,33 @@ function renderSubjects() {
 
   subjectList.innerHTML = visibleSubjects.map((subject, index) => {
     const percent = getPercent(subject)
-    const filteredTopics = getFilteredTopics(subject)
     const isActive = subject.code === activeSubjectCode
     const isExpanded = subject.code === expandedSubjectCode
     const activeClass = isActive ? ' active' : ''
     const expandedClass = isExpanded ? ' expanded' : ''
+    const unreadUpdateCount = getUnreadTopicUpdates(subject).length
+    const updateNotice = unreadUpdateCount ? `
+      <span class="subject-button__updates" aria-label="${unreadUpdateCount} unread topic updates">
+        <span class="subject-button__updates-pulse" aria-hidden="true"></span>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M18 16v-5a6 6 0 0 0-12 0v5l-2 2h16l-2-2Z"></path>
+          <path d="M10 21h4"></path>
+        </svg>
+        <b>${unreadUpdateCount}</b>
+      </span>
+    ` : ''
     const inlinePanel = isExpanded ? `
       <div class="subject-inline-detail">
         <div class="subject-inline-detail__top">
           <span>${getCoveredCount(subject)} covered</span>
           <span>${subject.totalCount - getCoveredCount(subject)} not covered</span>
         </div>
+        <div class="subject-track-tabs subject-track-tabs--inline" role="tablist" aria-label="${subject.code} sections">
+          ${renderSubjectTrackTabs(subject)}
+        </div>
+        <h3 class="subject-inline-detail__title">${getSubjectTrackTitle()}</h3>
         <ul class="topic-list topic-list--inline">
-          ${renderTopicCards(subject, filteredTopics)}
+          ${renderSubjectTrackList(subject)}
         </ul>
       </div>
     ` : ''
@@ -1545,9 +1797,11 @@ function renderSubjects() {
           <span>
             <strong>${subject.code}</strong>
             <small>${subject.name}</small>
-            <em class="subject-button__summary">${getSubjectSummary(subject)}</em>
           </span>
-          <span class="subject-button__meta">${filteredTopics.length}/${subject.totalCount}</span>
+          <span class="subject-button__meta">
+            ${updateNotice}
+            <span>${getCoveredCount(subject)}/${subject.totalCount}</span>
+          </span>
           <span class="subject-button__bar" aria-hidden="true">
             <span style="width: ${percent}%"></span>
           </span>
@@ -1562,6 +1816,7 @@ function renderSubjects() {
       setActiveSubject(button.dataset.code)
     })
   })
+  bindSubjectTrackTabs(subjectList)
 }
 
 function clearSubjectDetail() {
@@ -1571,11 +1826,15 @@ function clearSubjectDetail() {
   selectedCount.textContent = 'Closed'
   selectedPercent.textContent = '0%'
   progressFill.style.width = '0%'
+  if (subjectTrackTabs) subjectTrackTabs.innerHTML = ''
+  if (topicListTitle) topicListTitle.textContent = 'Topic list'
   topicList.innerHTML = '<li class="topic-empty">Click a subject card to view its topics.</li>'
 }
 
 function setActiveSubject(code, mobileMode = 'toggle') {
   const subject = subjects.find((item) => item.code === code) || subjects[0]
+  const subjectChanged = activeSubjectCode !== subject.code
+  if (subjectChanged) activeSubjectTrack = 'theoretical'
   updateTrackerUrl(subject.code)
 
   if (mobileQuery.matches) {
@@ -1587,12 +1846,18 @@ function setActiveSubject(code, mobileMode = 'toggle') {
       expandedSubjectCode = expandedSubjectCode === subject.code ? null : subject.code
     }
     activeSubjectCode = subject.code
+    markSubjectUpdatesSeen(subject)
     renderSubjects()
     return
   }
 
   activeSubjectCode = subject.code
   expandedSubjectCode = null
+  const clearedUpdates = markSubjectUpdatesSeen(subject)
+
+  if (clearedUpdates) {
+    renderSubjects()
+  }
 
   subjectList.querySelectorAll('.subject-button').forEach((button) => {
     button.classList.toggle('active', button.dataset.code === subject.code)
@@ -1600,11 +1865,15 @@ function setActiveSubject(code, mobileMode = 'toggle') {
   })
 
   const percent = getPercent(subject)
-  const visibleTopics = getFilteredTopics(subject)
   selectedCode.textContent = subject.code
   selectedName.textContent = subject.name
-  selectedCount.textContent = `${visibleTopics.length} shown`
+  selectedCount.textContent = getSubjectTrackCount(subject)
   selectedPercent.textContent = `${percent}%`
+  if (subjectTrackTabs) {
+    subjectTrackTabs.innerHTML = renderSubjectTrackTabs(subject)
+    bindSubjectTrackTabs(subjectTrackTabs)
+  }
+  if (topicListTitle) topicListTitle.textContent = getSubjectTrackTitle()
 
   progressFill.style.width = '0%'
   if (prefersReducedMotion) {
@@ -1617,7 +1886,7 @@ function setActiveSubject(code, mobileMode = 'toggle') {
     })
   }
 
-  topicList.innerHTML = renderTopicCards(subject, visibleTopics)
+  topicList.innerHTML = renderSubjectTrackList(subject)
 }
 
 function getTodayLabel() {
@@ -1656,15 +1925,10 @@ function render401ExamSchedule() {
 
   const today = new Date()
   const todayStart = startOfDay(today)
-  const todayParts = new Intl.DateTimeFormat('en-US', {
-    day: '2-digit',
-    month: 'short'
-  }).formatToParts(today)
-  const dayPart = todayParts.find((part) => part.type === 'day')?.value || ''
-  const monthPart = todayParts.find((part) => part.type === 'month')?.value || ''
-
-  if (examTodayDay) examTodayDay.textContent = dayPart
-  if (examTodayMonth) examTodayMonth.textContent = monthPart
+  const dayNum = today.getDate()
+  const monthNum = today.getMonth() + 1
+  const todayMarkerLabel = todayMarker?.querySelector('b')
+  if (todayMarkerLabel) todayMarkerLabel.textContent = `${dayNum}/${monthNum}`
 
   const scheduleWithState = midtermExamSchedule.map((exam) => {
     const examDate = getLocalDate(exam.date)
@@ -1696,14 +1960,14 @@ function render401ExamSchedule() {
     const isNext = nextExam?.code === exam.code
     const isDone = exam.daysUntil < 0
     const statusLabel = isNext ? getExamCountdownText(exam.daysUntil) : isDone ? 'Completed' : 'Upcoming'
-    const stateClass = isNext ? ' exam-card--next' : isDone ? ' exam-card--done' : ''
+    const stateClass = `${isNext ? ' exam-card--next' : ''}${isDone ? ' exam-card--done' : ''}${exam.type ? ` exam-card--${exam.type}` : ''}`
 
     return `
       <button class="exam-card${stateClass}" type="button" data-code="${exam.subjectCode}" aria-label="Open ${escapeHtml(exam.subjectName)} tracker">
-        <span>${escapeHtml(exam.code)}</span>
-        <strong>${escapeHtml(exam.subjectName)}</strong>
+        <strong>${escapeHtml(exam.code)}</strong>
         <time datetime="${exam.date}T14:30">${exam.dayLabel} ${formatExamDate(exam.date)}</time>
         <em>${escapeHtml(exam.time)}</em>
+        ${exam.meta ? `<span class="exam-card__meta">${escapeHtml(exam.meta)}</span>` : ''}
         <small>${escapeHtml(statusLabel)}</small>
       </button>
     `
@@ -1787,36 +2051,54 @@ function renderSemesterTimeline() {
 }
 
 function renderAssignmentProgress() {
-  if (!assignmentProgress) return
+  const items = document.querySelectorAll('[data-assignment-progress], [data-deadline-progress]')
+  if (!items.length) return
 
-  const startDate = new Date(`${assignmentProgress.dataset.startDate}T00:00:00`)
-  const dueDate = new Date(`${assignmentProgress.dataset.dueDate}T00:00:00`)
-  const today = new Date()
-  const fill = assignmentProgress.querySelector('[data-assignment-fill]')
-  const daysLabel = assignmentProgress.querySelector('[data-assignment-days]')
-  const caption = assignmentProgress.querySelector('[data-assignment-caption]')
-  const totalDays = Math.max(1, Math.ceil((dueDate - startDate) / 86400000))
-  const daysLeft = Math.ceil((dueDate - today) / 86400000)
-  const elapsedDays = totalDays - daysLeft
-  const percent = clamp((elapsedDays / totalDays) * 100, 0, 100)
+  items.forEach((progress) => {
+    const startDate = getLocalDate(progress.dataset.startDate)
+    const dueDate = getLocalDate(progress.dataset.dueDate)
+    const dueLabel = progress.dataset.dueLabel || formatExamDate(progress.dataset.dueDate)
+    const isArabic = progress.dataset.deadlineLocale === 'ar'
+    const today = new Date()
+    const fill = progress.querySelector('[data-assignment-fill], [data-deadline-fill]')
+    const daysLabel = progress.querySelector('[data-assignment-days], [data-deadline-days]')
+    const caption = progress.querySelector('[data-assignment-caption], [data-deadline-caption]')
 
-  if (fill) fill.style.width = `${percent}%`
+    const totalMs = dueDate - startDate
+    const elapsedMs = today - startDate
+    const percent = clamp((elapsedMs / totalMs) * 100, 0, 100)
+    const displayPercent = progress.dataset.progressMode === 'remaining' ? 100 - percent : percent
 
-  if (daysLabel) {
-    if (daysLeft > 1) {
-      daysLabel.textContent = `${daysLeft} days left`
-    } else if (daysLeft === 1) {
-      daysLabel.textContent = '1 day left'
-    } else if (daysLeft === 0) {
-      daysLabel.textContent = 'Due today'
-    } else {
-      daysLabel.textContent = 'Deadline passed'
+    const daysLeft = Math.ceil((dueDate - today) / 86400000)
+
+    if (fill) fill.style.width = `${displayPercent}%`
+
+    if (daysLabel) {
+      if (isArabic && daysLeft > 1) {
+        daysLabel.textContent = `${daysLeft} أيام متبقية`
+      } else if (isArabic && daysLeft === 1) {
+        daysLabel.textContent = 'يوم واحد متبق'
+      } else if (isArabic && daysLeft === 0) {
+        daysLabel.textContent = 'الموعد اليوم'
+      } else if (isArabic) {
+        daysLabel.textContent = 'انتهى الموعد'
+      } else if (daysLeft > 1) {
+        daysLabel.textContent = `${daysLeft} days left`
+      } else if (daysLeft === 1) {
+        daysLabel.textContent = '1 day left'
+      } else if (daysLeft === 0) {
+        daysLabel.textContent = 'Due today'
+      } else {
+        daysLabel.textContent = 'Deadline passed'
+      }
     }
-  }
 
-  if (caption) {
-    caption.textContent = `Due Sep 5, 2026 - ${Math.round(percent)}% of the assignment window has passed.`
-  }
+    if (caption) {
+      caption.textContent = isArabic
+        ? `الموعد ${dueLabel} - متبقي ${Math.round(displayPercent)}% من الوقت.`
+        : `Due ${dueLabel} - ${Math.round(percent)}% of the window has passed.`
+    }
+  })
 }
 
 function minutesFromTime(value) {
@@ -2348,12 +2630,77 @@ function renderWhatsappFeedback() {
   document.body.append(button)
 }
 
+function getNewsCardId(card) {
+  const title = card.querySelector('h2')?.textContent?.trim() || 'news'
+  return card.dataset.newsId || `${card.dataset.course || 'all'}::${card.dataset.date || ''}::${title}`
+}
+
+function getNewsSeenCards() {
+  try {
+    return new Set(JSON.parse(localStorage.getItem(NEWS_SEEN_STORAGE_KEY) || '[]'))
+  } catch {
+    localStorage.removeItem(NEWS_SEEN_STORAGE_KEY)
+    return new Set()
+  }
+}
+
+function getNewsExpiryDate(card) {
+  if (!card.dataset.date) return null
+  const expiry = new Date(`${card.dataset.date}T00:00:00`)
+  if (!Number.isFinite(expiry.getTime())) return null
+  expiry.setHours(expiry.getHours() + NEWS_EXPIRY_HOURS)
+  return expiry
+}
+
+function isNewsCardExpired(card, now = new Date()) {
+  if (card.dataset.persistent === 'true') return false
+  const expiry = getNewsExpiryDate(card)
+  return expiry ? now >= expiry : false
+}
+
+function renderNewsNavBadge(cards = []) {
+  if (!newsNavLink) return
+
+  newsNavLink.querySelector('.site-nav__badge')?.remove()
+  newsNavLink.classList.remove('site-nav__link--has-news')
+
+  const seenCards = getNewsSeenCards()
+  const unreadCount = cards.filter((card) => !isNewsCardExpired(card) && !seenCards.has(getNewsCardId(card))).length
+  if (!unreadCount) return
+
+  newsNavLink.classList.add('site-nav__link--has-news')
+  newsNavLink.insertAdjacentHTML('beforeend', `
+    <span class="site-nav__badge" aria-label="${unreadCount} new news update${unreadCount === 1 ? '' : 's'}">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M18 16v-5a6 6 0 0 0-12 0v5l-2 2h16l-2-2Z"></path>
+        <path d="M10 21h4"></path>
+      </svg>
+      <b>${unreadCount}</b>
+    </span>
+  `)
+}
+
+function markNewsCardsSeen(cards = []) {
+  if (!cards.length) return
+  const seenCards = getNewsSeenCards()
+  cards
+    .filter((card) => !isNewsCardExpired(card))
+    .forEach((card) => seenCards.add(getNewsCardId(card)))
+  try {
+    localStorage.setItem(NEWS_SEEN_STORAGE_KEY, JSON.stringify([...seenCards]))
+  } catch {
+    // Keep the page usable when browser storage is blocked.
+  }
+}
+
 function renderNewsFilters() {
   if (!newsFeed) return
 
   const course = newsCourseFilter?.value || 'all'
   const order = newsDateFilter?.value || 'newest'
+  const now = new Date()
   const cards = [...newsFeed.querySelectorAll('.update-panel')]
+  renderNewsNavBadge(cards)
 
   cards
     .sort((a, b) => {
@@ -2363,7 +2710,8 @@ function renderNewsFilters() {
       return order === 'oldest' ? difference : -difference
     })
     .forEach((card) => {
-      card.hidden = course !== 'all' && card.dataset.course !== course
+      const expired = isNewsCardExpired(card, now)
+      card.hidden = expired || (course !== 'all' && card.dataset.course !== course)
       newsFeed.append(card)
     })
 
@@ -2396,7 +2744,7 @@ document.addEventListener('click', handleQuizClick)
 
 
 if (trackerSearch && trackerStatusFilter) {
-  ;[trackerSearch, trackerStatusFilter].forEach((control) => {
+  ;[trackerSearch, trackerStatusFilter, trackerScopeFilter].filter(Boolean).forEach((control) => {
     control.addEventListener('input', () => {
       renderSubjects()
       if (activeSubjectCode) setActiveSubject(activeSubjectCode, 'open')
@@ -2405,8 +2753,23 @@ if (trackerSearch && trackerStatusFilter) {
   })
 }
 
+// Scope pill button wiring
+document.querySelectorAll('.scope-toggle__btn').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.scope-toggle__btn').forEach((b) => b.classList.remove('scope-toggle__btn--active'))
+    btn.classList.add('scope-toggle__btn--active')
+    if (trackerScopeFilter) {
+      trackerScopeFilter.value = btn.dataset.scope
+      trackerScopeFilter.dispatchEvent(new Event('input'))
+    }
+  })
+})
+
 if (newsFeed) {
   renderNewsFilters()
+  newsNavLink?.addEventListener('click', () => {
+    markNewsCardsSeen([...newsFeed.querySelectorAll('.update-panel')])
+  })
   ;[newsCourseFilter, newsDateFilter].filter(Boolean).forEach((control) => {
     control.addEventListener('input', renderNewsFilters)
     control.addEventListener('change', renderNewsFilters)
@@ -2420,6 +2783,7 @@ if (newsFeed) {
       renderNewsFilters()
     }
   }, 300)
+  window.setInterval(renderNewsFilters, 60000)
 }
 
 requestAnimationFrame(() => {

@@ -10,7 +10,9 @@
   <meta property="og:description" content="Public class board for MED 401 assignments, quiz reminders, and student-submitted corrections." />
   <meta property="og:type" content="website" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="stylesheet" href="/src/style.css?v=20260627-mobile-schedule" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <meta name="theme-color" content="#315f72" />
+  <link rel="stylesheet" href="/src/style.css?v=20260702-quiz-row" />
   <script type="importmap">
     {
       "imports": {
@@ -134,39 +136,59 @@
         </dl>
       </article>
 
-      <article class="update-panel update-panel--primary update-panel--wide" data-course="Nutrition" data-date="2026-07-08" data-priority="1">
+      <article class="update-panel update-panel--primary update-panel--wide" data-news-id="nutrition-quiz-2026-07-08" data-course="Nutrition" data-date="2026-07-08" data-priority="1">
+        <div class="assignment-progress assignment-progress--top assignment-progress--quiz" dir="rtl" data-deadline-progress data-progress-mode="remaining" data-deadline-locale="ar" data-start-date="2026-07-01" data-due-date="2026-07-08" data-due-label="8 July 2026">
+          <div class="assignment-progress__top">
+            <strong data-deadline-days>8 July 2026</strong>
+          </div>
+          <div class="assignment-progress__bar" aria-hidden="true">
+            <span data-deadline-fill></span>
+          </div>
+        </div>
         <div class="update-panel__top">
           <p class="card__kicker">Nutrition</p>
           <span class="status-pill status-pill--exam">Jul 8</span>
         </div>
-        <h2>Nutrition quiz confirmed</h2>
+        <h2 dir="rtl">تأكيد كويز Nutrition</h2>
         <div class="arabic-news" dir="rtl">
           <p>
-            السلام عليكم يا دكاترة، ميعاد <span dir="ltr">Nutrition quiz</span> اتحدد بعد تصويت الطلبة:
-            <strong>يوم 8 July 2026</strong>.
+            كويز <span dir="ltr">Nutrition</span> اتحدد رسميًا يوم <strong>8 July 2026</strong>.
           </p>
           <p>
-            بعد الاستقرار على الميعاد، مش هيكون فيه تأجيل فردي لأي سبب، سواء سفر أو إقامة أو ظروف شخصية.
-            أي حد هيتخلف ويمتحن لوحده في ميعاد خاص، الدرجة هتتقسم على 2.
+            الكويز على أول <strong>8 موضوعات</strong> من المادة، ودرجته <strong>10 marks</strong>.
           </p>
         </div>
-        <dl class="update-facts update-facts--three">
+        <div class="assignment-progress assignment-progress--quiz" dir="rtl" data-deadline-progress data-progress-mode="remaining" data-deadline-locale="ar" data-start-date="2026-07-01" data-due-date="2026-07-08" data-due-label="8 July 2026" hidden style="display: none;">
+          <div class="assignment-progress__top">
+            <span>الوقت المتبقي للكويز</span>
+            <strong data-deadline-days>8 July 2026</strong>
+          </div>
+          <div class="assignment-progress__bar" aria-hidden="true">
+            <span data-deadline-fill></span>
+          </div>
+          <small data-deadline-caption>يتحدث تلقائيًا.</small>
+        </div>
+        <dl class="update-facts">
           <div>
-            <dt>Date</dt>
+            <dt>التاريخ</dt>
             <dd>8 July 2026</dd>
           </div>
           <div>
-            <dt>Course</dt>
+            <dt>المادة</dt>
             <dd>Nutrition</dd>
           </div>
           <div>
-            <dt>Rule</dt>
-            <dd>No individual postponement</dd>
+            <dt>المقرر</dt>
+            <dd>أول 8 موضوعات</dd>
+          </div>
+          <div>
+            <dt>الدرجة</dt>
+            <dd>10 marks</dd>
           </div>
         </dl>
       </article>
 
-      <article class="update-panel update-panel--primary update-panel--wide" data-course="SUR401-1" data-date="2026-06-25" data-priority="1">
+      <article class="update-panel update-panel--primary update-panel--wide" data-course="SUR401-1" data-date="2026-06-25" data-priority="1" data-persistent="true">
         <div class="update-panel__top">
           <p class="card__kicker">SUR401-1</p>
           <span class="status-pill status-pill--due">4 marks</span>
@@ -201,7 +223,7 @@
         </a>
       </article>
 
-      <article class="update-panel update-panel--compact" data-course="Anaesthesia" data-date="2026-06-16">
+      <article class="update-panel update-panel--compact" data-course="Anaesthesia" data-date="2026-06-16" data-persistent="true">
         <div class="update-panel__top">
           <p class="card__kicker">Anaesthesia</p>
           <span class="status-pill status-pill--open">Jun 16</span>
@@ -225,6 +247,14 @@
       </article>
 
       <article class="update-panel update-panel--primary" data-course="LAB401" data-date="2026-09-05">
+        <div class="assignment-progress assignment-progress--top" dir="rtl" data-assignment-progress data-progress-mode="remaining" data-deadline-locale="ar" data-start-date="2026-06-06" data-due-date="2026-09-05">
+          <div class="assignment-progress__top">
+            <strong data-assignment-days>Due Sep 5, 2026</strong>
+          </div>
+          <div class="assignment-progress__bar" aria-hidden="true">
+            <span data-assignment-fill></span>
+          </div>
+        </div>
         <div class="update-panel__top">
           <p class="card__kicker">Required assignment</p>
           <span class="status-pill status-pill--due">Due Sep 5</span>
@@ -236,7 +266,7 @@
             التسليم من خلال مسؤول التجميع.
           </p>
         </div>
-        <div class="assignment-progress" data-assignment-progress data-start-date="2026-06-06" data-due-date="2026-09-05">
+        <div class="assignment-progress" data-assignment-progress data-start-date="2026-06-06" data-due-date="2026-09-05" hidden style="display: none;">
           <div class="assignment-progress__top">
             <span>Time until deadline</span>
             <strong data-assignment-days>Due Sep 5, 2026</strong>
@@ -278,7 +308,7 @@
         </div>
       </article>
 
-      <article class="update-panel update-panel--compact" data-course="SUR401-2" data-date="2026-06-16">
+      <article class="update-panel update-panel--compact" data-course="SUR401-2" data-date="2026-06-16" data-persistent="true">
         <div class="update-panel__top">
           <p class="card__kicker">SUR401-2</p>
           <span class="status-pill status-pill--open">Jun 16</span>
@@ -306,6 +336,7 @@
   </main>
 
   <script type="module" src="/src/main.js?v=20260625-taken-mcq-batch"></script>
+  <script defer src="/pwa.js?v=20260701-pwa"></script>
 </body>
 </html>
 

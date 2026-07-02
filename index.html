@@ -10,7 +10,9 @@
   <meta property="og:description" content="Track MED 401 university coverage, lecture resources, and work with Ahmed on AI agents or creative medical content." />
   <meta property="og:type" content="website" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="stylesheet" href="/src/style.css?v=20260627-mobile-schedule" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <meta name="theme-color" content="#315f72" />
+  <link rel="stylesheet" href="/src/style.css?v=20260702-scope-pills" />
 </head>
 <body>
   <header class="site-header">
@@ -35,45 +37,29 @@
     <section class="tracker-home" id="tracker" aria-labelledby="tracker-title">
       <div class="section-heading">
         <h1 id="tracker-title">401</h1>
-        <p class="tracker-updated">Last updated: Jun 25, 2026 · Sources: Week 4 report + latest Drive lecture folders + official midterm schedule</p>
       </div>
 
       <div class="semester-timeline" aria-label="Semester exam timeline">
-        <div class="semester-timeline__top">
-          <span>
-            <strong>Next checkpoint</strong>
-            <em id="next-checkpoint">Midterm</em>
-          </span>
-        </div>
-        <div class="exam-schedule" aria-labelledby="exam-schedule-title">
-          <div class="exam-schedule__summary">
-            <div class="exam-calendar-tile" aria-label="Today">
-              <span>Today</span>
-              <strong id="exam-today-day">24</strong>
-              <em id="exam-today-month">Jun</em>
-            </div>
-            <div>
-              <strong id="exam-schedule-title">401 Midterm Calendar</strong>
-              <p id="next-401-exam">Next 401 exam: MED 401-1 on Jul 18, 2026</p>
-              <small id="next-401-countdown">Updates automatically every day.</small>
-            </div>
-          </div>
+        <div class="exam-schedule" aria-label="401 subject exam dates">
           <div class="exam-schedule__cards" id="exam-schedule-cards" aria-label="401 subject exam dates">
+            <article class="exam-card exam-card--quiz">
+              <strong>NUT Quiz</strong>
+              <time datetime="2026-07-08T14:30">Wed Jul 8, 2026</time>
+              <em>First 8 topics</em>
+              <span class="exam-card__meta">10 marks</span>
+            </article>
             <article class="exam-card">
-              <span>MED 401-1</span>
-              <strong>Internal Medicine 1</strong>
+              <strong>MED 401-1</strong>
               <time datetime="2026-07-18T14:30">Sat Jul 18, 2026</time>
               <em>2:30-3:30</em>
             </article>
             <article class="exam-card">
-              <span>MED 401-2</span>
-              <strong>Internal Medicine 2</strong>
+              <strong>MED 401-2</strong>
               <time datetime="2026-07-22T14:30">Wed Jul 22, 2026</time>
               <em>2:30-3:30</em>
             </article>
             <article class="exam-card">
-              <span>SUR 401-1</span>
-              <strong>Surgery 1</strong>
+              <strong>SUR 401-1</strong>
               <time datetime="2026-07-25T14:30">Sat Jul 25, 2026</time>
               <em>2:30-3:30</em>
             </article>
@@ -93,24 +79,30 @@
             <time datetime="2026-09-19">Sep 19, 2026</time>
           </span>
         </div>
-        <div class="semester-date-scale" id="semester-date-scale" aria-label="Semester date scale"></div>
       </div>
 
       <div class="filter-panel" aria-label="Tracker topic filters">
-        <label>
-          <span>Search topics</span>
-          <input id="tracker-search" type="search" placeholder="Search by topic or subject" autocomplete="off" />
-        </label>
-        <label>
-          <span>Status</span>
-          <select id="tracker-status-filter">
+        <div class="filter-panel__search">
+          <svg class="filter-panel__search-icon" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input id="tracker-search" type="search" placeholder="Search topics or subjects…" autocomplete="off" />
+        </div>
+        <div class="scope-toggle" role="group" aria-label="Topic scope filter">
+          <div class="scope-toggle__buttons">
+            <button class="scope-toggle__btn scope-toggle__btn--active" data-scope="all" id="scope-btn-all">All topics</button>
+            <button class="scope-toggle__btn" data-scope="midterm" id="scope-btn-midterm">Midterm</button>
+          </div>
+          <select id="tracker-scope-filter" aria-hidden="true" style="display:none">
+            <option value="all">All topics</option>
+            <option value="midterm">Midterm scope only</option>
+          </select>
+          <select id="tracker-status-filter" aria-hidden="true" style="display:none">
             <option value="all">All statuses</option>
             <option value="taken">Taken</option>
             <option value="partial">Partially taken</option>
             <option value="announced">Announced only</option>
             <option value="remaining">Remaining</option>
           </select>
-        </label>
+        </div>
       </div>
 
       <div class="tracker-layout tracker-layout--home">
@@ -135,8 +127,10 @@
             </div>
           </div>
 
+          <div class="subject-track-tabs" id="subject-track-tabs" role="tablist" aria-label="Subject sections"></div>
+
           <div>
-            <h3>Taken in university</h3>
+            <h3 id="topic-list-title">Topic list</h3>
             <ul class="topic-list" id="topic-list"></ul>
           </div>
         </article>
@@ -152,8 +146,7 @@
       }
     }
   </script>
-  <script type="module" src="/src/main.js?v=20260625-tracker-closed"></script>
+  <script type="module" src="/src/main.js?v=20260702-scope-pills"></script>
+  <script defer src="/pwa.js?v=20260701-pwa"></script>
 </body>
 </html>
-
-
