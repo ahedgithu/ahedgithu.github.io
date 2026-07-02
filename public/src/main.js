@@ -2002,6 +2002,21 @@ function render401ExamSchedule() {
     const statusLabel = isNext ? getExamCountdownText(exam.daysUntil) : isDone ? 'Completed' : 'Upcoming'
     const stateClass = `${isNext ? ' exam-card--next' : ''}${isDone ? ' exam-card--done' : ''}${exam.type ? ` exam-card--${exam.type}` : ''}`
 
+    if (exam.type === 'quiz') {
+      return `
+        <div class="exam-card${stateClass}" data-code="${exam.subjectCode}" style="cursor: pointer;">
+          <strong>${escapeHtml(exam.code)}</strong>
+          <time datetime="${exam.date}T14:30">${exam.dayLabel} ${formatExamDate(exam.date)}</time>
+          <em>${escapeHtml(exam.time)}</em>
+          ${exam.meta ? `<span class="exam-card__meta">${escapeHtml(exam.meta)}</span>` : ''}
+          <button class="topic-resource topic-resource--quiz" type="button" data-quiz-topic="NUT Quiz" style="margin-top: 8px; width: fit-content; justify-content: center; z-index: 10;">
+            Solve Past Exams (52 Qs)
+          </button>
+          <small style="margin-top: auto;">${escapeHtml(statusLabel)}</small>
+        </div>
+      `
+    }
+
     return `
       <button class="exam-card${stateClass}" type="button" data-code="${exam.subjectCode}" aria-label="Open ${escapeHtml(exam.subjectName)} tracker">
         <strong>${escapeHtml(exam.code)}</strong>
@@ -2014,7 +2029,10 @@ function render401ExamSchedule() {
   }).join('')
 
   examScheduleCards.querySelectorAll('.exam-card').forEach((card) => {
-    card.addEventListener('click', () => {
+    card.addEventListener('click', (e) => {
+      if (e.target.closest('[data-quiz-topic]')) {
+        return
+      }
       setActiveSubject(card.dataset.code, 'open')
     })
   })
