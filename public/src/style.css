@@ -2,17 +2,44 @@
 
 :root {
   color-scheme: dark;
-  --bg: #08090c;
-  --text: #f4f5f7;
-  --muted: #9ba3b4;
-  --line: rgba(255, 255, 255, 0.1);
-  --line-strong: rgba(255, 255, 255, 0.18);
-  --gold: #d8b24d;
-  --green: #36d399;
-  --blue: #69a7ff;
-  --red: #ff6b6b;
-  --radius: 8px;
-  --shadow: 0 24px 80px rgba(0, 0, 0, 0.42);
+
+  /* ── Backgrounds ─────────────────────────────────── */
+  --bg:  #0d0f16;
+  --bg2: #0d0f16;
+
+  /* ── Text ────────────────────────────────────────── */
+  --text:  #eaecf2;
+  --muted: #7a8494;
+
+  /* ── Borders ─────────────────────────────────────── */
+  --line:        rgba(255, 255, 255, 0.08);
+  --line-strong: rgba(255, 255, 255, 0.15);
+
+  /* ── Accent colours (each with one clear role) ───── */
+  --blue:  #5b9cf6;   /* actions, active states, brand      */
+  --green: #34c78a;   /* correct, success, live             */
+  --gold:  #e2b84a;   /* exams, important, progress head    */
+  --red:   #f06b6b;   /* wrong, error                       */
+
+  /* ── Soft tints ──────────────────────────────────── */
+  --gold-soft:    rgba(226, 184, 74,  0.11);
+  --primary-soft: rgba(91,  156, 246, 0.10);
+
+  /* ── Surfaces ────────────────────────────────────── */
+  --paper:        rgba(255, 255, 255, 0.03);
+  --paper-strong: rgba(255, 255, 255, 0.05);
+
+  /* ── Radius — slightly rounded for glass feel ─────── */
+  --radius: 10px;
+
+  /* ── Shadows ─────────────────────────────────────── */
+  --shadow:      0 24px 80px rgba(0, 0, 0, 0.52);
+  --shadow-soft: 0 12px 38px rgba(0, 0, 0, 0.30);
+
+  /* ── Aliases kept for back-compat ────────────────── */
+  --teal: #5b9cf6;
+  --mint: #5b9cf6;
+
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -31,10 +58,14 @@ body {
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color: var(--text);
   background:
-    linear-gradient(135deg, rgba(216, 178, 77, 0.08), transparent 34%),
-    linear-gradient(225deg, rgba(105, 167, 255, 0.08), transparent 34%),
+    radial-gradient(ellipse 70% 45% at 8%  0%, rgba(91,  156, 246, 0.07), transparent),
+    radial-gradient(ellipse 55% 35% at 92% 0%, rgba(226, 184,  74, 0.06), transparent),
     var(--bg);
   overflow-x: hidden;
+}
+
+body::before {
+  content: none;
 }
 
 body.panel-open {
@@ -58,6 +89,7 @@ button {
 main {
   width: min(1180px, calc(100% - 40px));
   margin: 0 auto;
+  padding-bottom: 120px;
 }
 
 .site-header {
@@ -71,8 +103,12 @@ main {
   width: min(1180px, calc(100% - 40px));
   margin: 0 auto;
   padding: 16px 0;
-  background: rgba(8, 9, 12, 0.84);
-  backdrop-filter: blur(18px);
+  border: 0;
+  border-radius: 0;
+  background: rgba(13, 15, 22, 0.82);
+  box-shadow: none;
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
 }
 
 .brand {
@@ -96,6 +132,7 @@ main {
   border-radius: var(--radius);
   color: #06101d;
   background: var(--blue);
+  box-shadow: none;
   font-weight: 900;
 }
 
@@ -118,6 +155,7 @@ main {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: rgba(255, 255, 255, 0.035);
+  box-shadow: none;
 }
 
 .site-nav a {
@@ -132,7 +170,7 @@ main {
 .site-nav a:hover,
 .site-nav a:focus-visible {
   color: var(--text);
-  background: rgba(105, 167, 255, 0.1);
+  background: rgba(105, 167, 255, 0.10);
   outline: none;
 }
 
@@ -140,6 +178,11 @@ main {
 .work-section {
   padding: 58px 0;
   scroll-margin-top: 86px;
+}
+
+.hub-section {
+  padding: 58px 0;
+  scroll-margin-top: 92px;
 }
 
 .tracker-home {
@@ -156,7 +199,7 @@ main {
   aspect-ratio: 1;
   pointer-events: none;
   background:
-    linear-gradient(180deg, rgba(8, 9, 12, 0.12), rgba(8, 9, 12, 0.88)),
+    linear-gradient(180deg, rgba(13, 15, 22, 0.12), rgba(13, 15, 22, 0.88)),
     url("/assets/brain-profile.png") center / cover no-repeat;
   opacity: 0.18;
   filter: grayscale(1) contrast(1.08);
@@ -372,10 +415,6 @@ main {
   transition: color 180ms var(--ease);
 }
 
-.filter-panel__search input {
-  padding-left: 42px;
-}
-
 .filter-panel__search:focus-within .filter-panel__search-icon {
   color: var(--green);
 }
@@ -397,7 +436,7 @@ main {
 .filter-panel select {
   width: 100%;
   min-height: 44px;
-  padding: 10px 12px;
+  padding: 10px 14px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   color: var(--text);
@@ -408,6 +447,10 @@ main {
 .filter-panel select:focus {
   outline: none;
   border-color: rgba(105, 167, 255, 0.55);
+}
+
+.filter-panel__search input {
+  padding: 10px 14px 10px 44px;
 }
 
 .topic-empty {
@@ -488,6 +531,7 @@ main {
 .race-track::before {
   width: 100%;
   background: rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
 .race-track__fill {
@@ -495,6 +539,22 @@ main {
   max-width: 100%;
   background: linear-gradient(90deg, var(--green), var(--gold));
   transition: width 850ms var(--ease);
+}
+
+/* dot head — sits at the right tip of the fill bar */
+.race-track__fill::after {
+  content: none;
+  position: absolute;
+  right: -7px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow:
+    0 0 0 4px rgba(216, 178, 77, 0.18),
+    0 0 12px rgba(216, 178, 77, 0.34);
 }
 
 .race-marker {
@@ -519,8 +579,11 @@ main {
   padding: 0 8px;
   border: 1px solid var(--line-strong);
   border-radius: var(--radius);
-  color: var(--text);
-  background: #121722;
+  color: var(--teal);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(238, 248, 247, 0.82)),
+    rgba(255, 255, 255, 0.86);
+  box-shadow: 0 10px 26px rgba(31, 70, 88, 0.12);
 }
 
 .race-marker time {
@@ -560,7 +623,7 @@ main {
   white-space: nowrap;
 }
 
-/* vertical callout line */
+/* vertical callout line — connects pill to bar head */
 .race-marker--today b::after {
   content: '';
   position: absolute;
@@ -572,7 +635,8 @@ main {
   background: linear-gradient(to bottom, rgba(255,255,255,0.55), rgba(255,255,255,0.15));
 }
 
-/* dot at the bar */
+/* no separate ::before dot — dot lives on the fill bar itself (race-track__fill::after) */
+
 .race-marker--today b::before {
   content: '';
   position: absolute;
@@ -588,11 +652,52 @@ main {
 
 .race-marker--midterm b,
 .race-marker--finals b {
-  min-width: 74px;
-  color: var(--text);
-  background:
-    linear-gradient(180deg, rgba(216, 178, 77, 0.16), rgba(255, 255, 255, 0.025)),
-    #121722;
+  min-width: 0;
+  height: auto;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  color: rgba(244, 245, 247, 0.92);
+  background: transparent;
+  box-shadow: none;
+  font-size: 0.68rem;
+  line-height: 1;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.52);
+}
+
+.race-marker--midterm,
+.race-marker--finals {
+  top: -34px;
+  min-width: 52px;
+  gap: 3px;
+}
+
+.race-marker--midterm b,
+.race-marker--midterm time,
+.race-marker--finals b,
+.race-marker--finals time {
+  display: block;
+  transform: rotate(-45deg);
+}
+
+.race-marker--midterm time,
+.race-marker--finals time {
+  color: var(--gold);
+  font-size: 0.62rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.race-marker--midterm::after,
+.race-marker--finals::after {
+  content: '';
+  position: absolute;
+  top: 38px;
+  left: 50%;
+  width: 1px;
+  height: 20px;
+  background: linear-gradient(to bottom, rgba(216, 178, 77, 0.58), rgba(216, 178, 77, 0.08));
+  transform: translateX(-50%);
 }
 
 .semester-date-scale {
@@ -763,16 +868,17 @@ main {
 }
 
 .exam-schedule__cards {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 10px;
 }
 
 .exam-card {
+  position: relative;
   display: grid;
   gap: 8px;
-  width: 100%;
-  min-height: 122px;
+  align-content: start;
+  width: 210px;
   padding: 14px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -784,6 +890,10 @@ main {
     border-color 180ms var(--ease),
     transform 180ms var(--ease),
     background 180ms var(--ease);
+}
+
+.exam-card--has-action {
+  padding-bottom: 42px;
 }
 
 .exam-card:hover,
@@ -821,9 +931,47 @@ main {
 }
 
 .exam-card__meta {
-  color: rgba(244, 245, 247, 0.82);
-  font-size: 0.74rem;
+  position: absolute;
+  top: 8px;
+  right: -10px;
+  padding: 2px 10px;
+  border-radius: 4px !important;
+  background: var(--gold) !important;
+  color: #0c0e14 !important;
+  font-size: 0.65rem;
   font-weight: 900;
+  letter-spacing: 0.5px;
+  transform: rotate(45deg);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  z-index: 5;
+}
+
+.exam-card__quiz-action {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  max-width: calc(100% - 24px);
+  min-height: 26px;
+  padding: 5px 8px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 107, 107, 0.38);
+  border-radius: 999px;
+  color: #ffd5d5;
+  font-size: 0.62rem;
+  font-weight: 900;
+  line-height: 1;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  background: rgba(255, 107, 107, 0.1);
+  cursor: pointer;
+}
+
+.exam-card__quiz-action:hover,
+.exam-card__quiz-action:focus-visible {
+  border-color: rgba(255, 107, 107, 0.62);
+  background: rgba(255, 107, 107, 0.18);
+  outline: none;
 }
 
 .exam-card--next {
@@ -1044,8 +1192,8 @@ main {
   z-index: 0;
   pointer-events: none;
   background:
-    linear-gradient(90deg, rgba(8, 9, 12, 0.96) 0%, rgba(8, 9, 12, 0.74) 48%, rgba(8, 9, 12, 0.18) 100%),
-    linear-gradient(180deg, rgba(8, 9, 12, 0.12), rgba(8, 9, 12, 0.82)),
+    linear-gradient(90deg, rgba(13, 15, 22, 0.96) 0%, rgba(13, 15, 22, 0.74) 48%, rgba(13, 15, 22, 0.18) 100%),
+    linear-gradient(180deg, rgba(13, 15, 22, 0.12), rgba(13, 15, 22, 0.82)),
     url("/assets/medical-topic-sprite.png");
   background-size: auto, auto, 760px 760px;
   background-position: center, center, right -120px center;
@@ -1505,7 +1653,7 @@ main {
   border-radius: var(--radius);
   background: rgba(255, 255, 255, 0.035);
   overflow: hidden;
-  animation: topic-pop 430ms var(--ease) both;
+  animation: topic-pop 260ms var(--ease) both;
   animation-delay: var(--delay);
 }
 
@@ -1521,7 +1669,7 @@ main {
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  animation: topic-pop 320ms var(--ease) both;
+  animation: topic-pop 220ms var(--ease) both;
   animation-delay: var(--delay);
 }
 
@@ -1542,7 +1690,7 @@ main {
   border-left: 3px solid var(--blue);
   background: rgba(255, 255, 255, 0.02);
   border-radius: 0 var(--radius) var(--radius) 0;
-  animation: topic-pop 320ms var(--ease) both;
+  animation: topic-pop 220ms var(--ease) both;
   animation-delay: var(--delay);
 }
 
@@ -2159,6 +2307,8 @@ main {
 }
 
 .quiz-choice {
+  position: relative;
+  overflow: hidden;
   display: grid;
   grid-template-columns: 34px 1fr;
   gap: 10px;
@@ -2172,6 +2322,9 @@ main {
   text-align: left;
   cursor: pointer;
   background: rgba(255, 255, 255, 0.045);
+  transition:
+    border-color 160ms var(--ease),
+    background 160ms var(--ease);
 }
 
 .quiz-choice:hover:not(:disabled) {
@@ -3625,7 +3778,7 @@ main {
   border-radius: var(--radius);
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent),
-    rgba(8, 9, 12, 0.62);
+    rgba(13, 15, 22, 0.62);
   overflow: hidden;
 }
 
@@ -3847,7 +4000,7 @@ main {
 }
 
 .schedule-progress--calendar .schedule-progress__label {
-  font-size: 0.58rem;
+  font-size: 0.68rem;
 }
 
 .schedule-day {
@@ -3897,14 +4050,14 @@ main {
   padding: 14px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  background: rgba(8, 9, 12, 0.58);
+  background: rgba(13, 15, 22, 0.58);
 }
 
 .schedule-card--now {
   border-color: rgba(54, 211, 153, 0.52);
   background:
     linear-gradient(180deg, rgba(54, 211, 153, 0.12), rgba(255, 255, 255, 0.03)),
-    rgba(8, 9, 12, 0.68);
+    rgba(13, 15, 22, 0.68);
 }
 
 .schedule-card--done {
@@ -4361,6 +4514,695 @@ main {
   }
 }
 
+/* Premium visual skin. These rules intentionally preserve layout and ordering. */
+.semester-timeline,
+.filter-panel,
+.subject-detail,
+.update-panel,
+.class-reps,
+.schedule-today,
+.schedule-section,
+.history-progress,
+.history-panel,
+.history-summary,
+.service-card,
+.agent-service,
+.booking-panel {
+  border-color: var(--line);
+  border-radius: var(--radius);
+  background: var(--paper);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.semester-timeline,
+.subject-detail,
+.update-panel,
+.schedule-today,
+.schedule-section,
+.history-panel,
+.history-summary {
+  position: relative;
+  overflow: hidden;
+}
+
+.semester-timeline::before,
+.subject-detail::before,
+.update-panel::before,
+.schedule-today::before,
+.schedule-section::before,
+.history-panel::before,
+.history-summary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background: none;
+}
+
+.semester-timeline > *,
+.subject-detail > *,
+.update-panel > *,
+.schedule-today > *,
+.schedule-section > *,
+.history-panel > *,
+.history-summary > * {
+  position: relative;
+  z-index: 1;
+}
+
+.section-heading h1,
+.section-heading h2,
+.history-hero .section-heading h1 {
+  color: var(--text);
+  background: none;
+  background-clip: initial;
+  -webkit-background-clip: initial;
+  filter: none;
+  text-shadow: none;
+}
+
+.tracker-home::before {
+  opacity: 0.11;
+  filter: grayscale(0.25) saturate(0.8) contrast(0.96);
+}
+
+.tracker-updated {
+  color: rgba(155, 163, 180, 0.84);
+}
+
+.exam-card,
+.subject-button,
+.topic-item,
+.schedule-card,
+.schedule-day,
+.exam-strip span,
+.history-fields input,
+.history-fields select,
+.history-form textarea,
+.history-conditional,
+.history-age,
+.empty-state,
+.quiz-card,
+.quiz-source-option,
+.quiz-choice,
+.quiz-review-item,
+.quiz-prompt {
+  border-color: var(--line);
+  border-radius: 22px;
+  background: var(--paper);
+  box-shadow: var(--shadow-soft);
+}
+
+.exam-card:hover,
+.exam-card:focus-visible,
+.subject-button:hover,
+.subject-button.active,
+.topic-item:hover,
+.schedule-card:hover,
+.quiz-source-option:hover,
+.quiz-choice:hover:not(:disabled) {
+  border-color: rgba(105, 167, 255, 0.42);
+  background: rgba(105, 167, 255, 0.08);
+  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.28);
+}
+
+.exam-card strong,
+.subject-detail h2,
+.subject-detail h3,
+.topic-item__label,
+.update-panel h2,
+.schedule-card h3,
+.history-panel h2,
+.history-summary h2,
+.service-card h3,
+.agent-service h3 {
+  color: var(--text);
+  text-shadow: none;
+}
+
+.exam-card time,
+.exam-card em,
+.exam-card span,
+.exam-card small,
+.topic-item__note,
+.schedule-card p,
+.update-panel p:not(.card__kicker),
+.arabic-news,
+.history-fields label span,
+.history-summary pre,
+.service-card p,
+.agent-service p {
+  color: var(--muted);
+}
+
+.exam-card--quiz,
+.exam-card--next,
+.update-panel--primary,
+.schedule-card--now,
+.schedule-day--today {
+  background:
+    linear-gradient(135deg, var(--gold-soft), transparent 62%),
+    var(--paper-strong);
+}
+
+.exam-card--next,
+.schedule-card--now,
+.schedule-day--today {
+  border-color: rgba(72, 207, 174, 0.38);
+}
+
+.exam-card--next small,
+.schedule-day__top span {
+  color: #16372f;
+  background: var(--green);
+}
+
+.subject-icon,
+.schedule-card__icon,
+.topic-item__index,
+.service-icon {
+  border-radius: 10px;
+  color: #06101d;
+  background: var(--blue);
+  box-shadow: none;
+}
+
+.subject-button.active .subject-icon,
+.topic-item--partial .topic-item__index {
+  color: #fff;
+  background: linear-gradient(135deg, var(--blue), var(--gold));
+}
+
+.subject-button__bar,
+.progress-bar,
+.history-progress__bar,
+.assignment-progress__track,
+.quiz-progress {
+  border-color: rgba(49, 95, 114, 0.10);
+  background: rgba(105, 167, 255, 0.10);
+}
+
+.subject-button__bar span,
+.progress-bar__fill,
+.history-progress__bar span,
+.assignment-progress__bar,
+.quiz-progress span {
+  background: linear-gradient(90deg, var(--blue), var(--gold));
+}
+
+.filter-panel,
+.subject-track-tabs,
+.scope-toggle,
+.site-nav,
+.history-progress {
+  background: rgba(13, 15, 22, 0.72);
+}
+
+.subject-track-tab:hover,
+.subject-track-tab.active,
+.scope-toggle__btn--active {
+  border-color: rgba(79, 156, 167, 0.36);
+  color: var(--blue);
+  background: var(--primary-soft);
+}
+
+.topic-item::after {
+  background: linear-gradient(90deg, rgba(13, 15, 22, 0.92) 0%, rgba(13, 15, 22, 0.66) 58%, rgba(13, 15, 22, 0.16) 100%);
+}
+
+.topic-item__image {
+  opacity: 0.28;
+  filter: saturate(0.85) contrast(0.9);
+}
+
+.topic-item:hover .topic-item__image {
+  opacity: 0.38;
+}
+
+.topic-item--taken {
+  border-color: rgba(54, 211, 153, 0.34);
+}
+
+.topic-item--remaining {
+  color: rgba(155, 163, 180, 0.72);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.018)),
+    rgba(255, 255, 255, 0.035);
+}
+
+.topic-item--remaining .topic-item__label {
+  color: rgba(155, 163, 180, 0.82);
+}
+
+.topic-item--remaining .topic-item__index {
+  color: var(--muted);
+  background: rgba(49, 95, 114, 0.10);
+}
+
+.topic-resource,
+.status-pill,
+.class-rep small,
+.exam-card__meta,
+.topic-item__state,
+.topic-item__scope,
+.schedule-card__meta span,
+.schedule-card__status {
+  border-color: rgba(49, 95, 114, 0.16);
+  color: var(--blue);
+  background: rgba(105, 167, 255, 0.10);
+}
+
+.topic-resource--quiz,
+.exam-card__quiz-action {
+  border-color: rgba(238, 128, 151, 0.36);
+  color: #9f354b;
+  background: rgba(238, 128, 151, 0.12);
+}
+
+.topic-resource--pending,
+.topic-item--remaining .topic-item__state {
+  color: var(--muted);
+  background: rgba(49, 95, 114, 0.08);
+}
+
+.news-action,
+.quiz-action--primary {
+  color: #f8fbf7;
+  background: linear-gradient(135deg, var(--blue), #4f87de);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.24);
+}
+
+.quiz-modal__panel {
+  border-color: var(--line);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.028)),
+    var(--paper-strong);
+}
+
+.quiz-modal__backdrop {
+  background: rgba(10, 16, 18, 0.74);
+}
+
+.quiz-question,
+.quiz-summary__score,
+.quiz-review-question {
+  color: var(--text);
+}
+
+.quiz-choice--correct,
+.quiz-choice--selected,
+.quiz-choice--wrong {
+  color: var(--text);
+}
+
+.bottom-nav-wrap {
+  position: fixed;
+  z-index: 40;
+  left: 50%;
+  bottom: 18px;
+  width: min(720px, calc(100% - 28px));
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.bottom-nav {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 6px;
+  padding: 7px;
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  background: rgba(13, 15, 22, 0.88);
+  box-shadow: 0 18px 55px rgba(0, 0, 0, 0.42);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  pointer-events: auto;
+}
+
+.bottom-nav a {
+  display: grid;
+  place-items: center;
+  gap: 4px;
+  min-height: 58px;
+  padding: 8px 10px;
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 900;
+  text-align: center;
+  transition:
+    color 180ms var(--ease),
+    background 180ms var(--ease),
+    box-shadow 180ms var(--ease),
+    transform 180ms var(--ease);
+}
+
+.bottom-nav a svg {
+  width: 20px;
+  height: 20px;
+}
+
+.bottom-nav a:hover,
+.bottom-nav a:focus-visible {
+  color: var(--teal);
+  background: var(--primary-soft);
+  outline: none;
+}
+
+.bottom-nav a.active {
+  color: #06101d;
+  background: var(--blue);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.26);
+}
+
+.history-preview-grid,
+.service-grid--hub {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.service-grid--hub {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.work-preview-cta {
+  margin: 18px 0 0;
+  text-align: center;
+}
+
+.ripple-host {
+  position: relative;
+  overflow: hidden !important;
+  isolation: isolate;
+}
+
+.apple-ripple {
+  position: absolute;
+  z-index: 5;
+  left: var(--ripple-x);
+  top: var(--ripple-y);
+  width: var(--ripple-size);
+  height: var(--ripple-size);
+  border-radius: 999px;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0);
+  background:
+    radial-gradient(circle,
+      rgba(238, 245, 241, 0.28) 0%,
+      rgba(105, 167, 255, 0.18) 32%,
+      rgba(105, 167, 255, 0.06) 58%,
+      transparent 74%);
+  animation: apple-ripple 620ms var(--ease) forwards;
+}
+
+@keyframes apple-ripple {
+  0% {
+    opacity: 0.88;
+    transform: translate(-50%, -50%) scale(0);
+  }
+
+  55% {
+    opacity: 0.42;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.schedule-heading {
+  max-width: none;
+  padding-bottom: 0;
+}
+
+.schedule-section--home {
+  gap: 18px;
+  padding: 20px;
+  border-radius: 34px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025)),
+    rgba(13, 15, 22, 0.78);
+}
+
+.schedule-section--home .schedule-section__top {
+  align-items: end;
+}
+
+.schedule-section--home .schedule-section__top h2 {
+  font-size: 1.42rem;
+}
+
+.schedule-section--home .schedule-location {
+  color: var(--green);
+  text-align: right;
+}
+
+.schedule-section--home .schedule-calendar__scroller {
+  margin: 0;
+  padding: 0;
+}
+
+.schedule-section--home .schedule-calendar__frame {
+  display: grid;
+  grid-template-columns: 76px repeat(3, minmax(210px, 1fr));
+  grid-template-rows: 70px minmax(488px, auto);
+  min-width: 760px;
+  border: 1px solid var(--line-strong);
+  border-radius: 26px;
+  background:
+    linear-gradient(180deg, rgba(105, 167, 255, 0.055), rgba(255, 255, 255, 0.015)),
+    rgba(255, 255, 255, 0.025);
+}
+
+.schedule-section--home .schedule-calendar__corner,
+.schedule-section--home .schedule-calendar__day-head {
+  background:
+    linear-gradient(180deg, rgba(105, 167, 255, 0.085), rgba(255, 255, 255, 0.025));
+}
+
+.schedule-section--home .schedule-calendar__day-head strong {
+  min-height: auto;
+  min-width: 0;
+  border-radius: 0;
+  color: rgba(244, 245, 247, 0.9);
+  background: transparent;
+  font-size: 0.98rem;
+}
+
+.schedule-section--home .schedule-calendar__day-head--today strong {
+  color: var(--blue);
+  background: transparent;
+}
+
+.schedule-section--home .schedule-calendar__hours {
+  display: grid;
+  grid-template-rows: 82px 82px 96px 96px 1fr;
+  border-right: 1px solid var(--line);
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035), transparent);
+}
+
+.schedule-section--home .schedule-calendar__hour-label {
+  align-items: start;
+  justify-content: end;
+  padding: 10px 10px 0 0;
+  transform: none;
+  color: rgba(155, 163, 180, 0.92);
+  font-size: 0.8rem;
+}
+
+.schedule-section--home .schedule-calendar__hour-label:first-child {
+  transform: none;
+}
+
+.schedule-section--home .schedule-calendar__day {
+  position: static;
+  display: grid;
+  grid-template-rows: 82px 82px 96px 96px;
+  gap: 0;
+  padding: 10px 8px 104px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.022), transparent);
+}
+
+.schedule-section--home .schedule-calendar__day--today {
+  background:
+    linear-gradient(180deg, rgba(105, 167, 255, 0.075), rgba(255, 255, 255, 0.018));
+}
+
+.schedule-section--home .schedule-calendar-event {
+  position: static;
+  display: grid;
+  align-content: center;
+  width: auto;
+  height: auto;
+  min-height: 80px;
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 18px;
+  background:
+    linear-gradient(180deg, rgba(105, 167, 255, 0.18), rgba(105, 167, 255, 0.075)),
+    rgba(11, 18, 31, 0.86);
+}
+
+.schedule-section--home .schedule-calendar-event--round {
+  background:
+    linear-gradient(180deg, rgba(54, 211, 153, 0.18), rgba(54, 211, 153, 0.075)),
+    rgba(9, 25, 20, 0.86);
+}
+
+.schedule-section--home .schedule-calendar-event strong {
+  font-size: 0.86rem;
+}
+
+.schedule-section--home .schedule-calendar-event p {
+  margin-top: 10px;
+  color: rgba(244, 245, 247, 0.78);
+  font-size: 0.78rem;
+}
+
+.apple-ripple {
+  background:
+    radial-gradient(circle,
+      rgba(255, 255, 255, 0.9) 0%,
+      rgba(255, 255, 255, 0.42) 34%,
+      rgba(105, 167, 255, 0.16) 58%,
+      transparent 74%);
+  mix-blend-mode: screen;
+  animation-duration: 680ms;
+}
+
+.site-header {
+  background:
+    linear-gradient(180deg, rgba(18, 24, 38, 0.82), rgba(13, 15, 22, 0.66)),
+    rgba(13, 15, 22, 0.62);
+  backdrop-filter: blur(28px) saturate(1.3);
+  -webkit-backdrop-filter: blur(28px) saturate(1.3);
+}
+
+.site-nav,
+.bottom-nav {
+  border-color: rgba(255, 255, 255, 0.12);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.03)),
+    rgba(13, 15, 22, 0.68);
+  box-shadow:
+    0 18px 48px rgba(0, 0, 0, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(28px) saturate(1.3);
+  -webkit-backdrop-filter: blur(28px) saturate(1.3);
+}
+
+.site-nav a,
+.bottom-nav a {
+  overflow: hidden;
+}
+
+.site-nav a:hover,
+.site-nav a:focus-visible,
+.bottom-nav a:hover,
+.bottom-nav a:focus-visible {
+  background:
+    linear-gradient(180deg, rgba(105, 167, 255, 0.18), rgba(105, 167, 255, 0.08));
+}
+
+.exam-schedule .exam-card {
+  min-height: 116px;
+  padding: 13px 14px;
+  border-color: rgba(255, 255, 255, 0.13);
+  border-radius: 20px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.026)),
+    rgba(12, 16, 23, 0.62);
+  box-shadow:
+    0 18px 48px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.075);
+  backdrop-filter: blur(18px) saturate(1.16);
+  -webkit-backdrop-filter: blur(18px) saturate(1.16);
+}
+
+.exam-schedule .exam-card:hover,
+.exam-schedule .exam-card:focus-visible {
+  border-color: rgba(105, 167, 255, 0.4);
+  background:
+    linear-gradient(180deg, rgba(105, 167, 255, 0.13), rgba(255, 255, 255, 0.035)),
+    rgba(12, 16, 23, 0.68);
+  transform: translateY(-2px);
+}
+
+.exam-schedule .exam-card strong {
+  font-size: 1.12rem;
+  line-height: 1.08;
+}
+
+.exam-schedule .exam-card time,
+.exam-schedule .exam-card em {
+  color: rgba(215, 222, 235, 0.78);
+  font-size: 0.74rem;
+  line-height: 1.28;
+}
+
+.exam-schedule .exam-card small {
+  color: rgba(244, 245, 247, 0.78);
+  background: rgba(255, 255, 255, 0.09);
+}
+
+.exam-schedule .exam-card--quiz {
+  border-color: rgba(216, 178, 77, 0.32);
+  background:
+    linear-gradient(145deg, rgba(216, 178, 77, 0.14), rgba(105, 167, 255, 0.045) 56%, rgba(255, 255, 255, 0.026)),
+    rgba(12, 16, 23, 0.66);
+}
+
+.exam-schedule .exam-card--next {
+  border-color: rgba(54, 211, 153, 0.44);
+  background:
+    linear-gradient(145deg, rgba(54, 211, 153, 0.13), rgba(105, 167, 255, 0.045) 58%, rgba(255, 255, 255, 0.026)),
+    rgba(12, 16, 23, 0.68);
+}
+
+.exam-schedule .exam-card__quiz-action {
+  color: #ffc4cf;
+  border-color: rgba(255, 107, 107, 0.42);
+  background: rgba(255, 107, 107, 0.11);
+}
+
+.race-marker--today {
+  top: -34px;
+}
+
+.race-marker--today b::before,
+.race-marker--today b::after {
+  content: '';
+}
+
+.race-marker--today::before {
+  content: none;
+  position: absolute;
+  top: 53px;
+  left: 50%;
+  z-index: 2;
+  width: 9px;
+  height: 9px;
+  border: 2px solid rgba(13, 15, 22, 0.92);
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow:
+    0 0 0 4px rgba(216, 178, 77, 0.16),
+    0 0 18px rgba(216, 178, 77, 0.38);
+  transform: translate(-50%, -50%);
+}
+
+.quiz-choice {
+  overflow: hidden;
+}
+
 @media (max-width: 860px) {
   main,
   .site-header {
@@ -4407,6 +5249,11 @@ main {
   .tracker-home,
   .work-section {
     padding: 22px 0;
+    scroll-margin-top: 130px;
+  }
+
+  .hub-section {
+    padding: 34px 0;
     scroll-margin-top: 130px;
   }
 
@@ -4512,6 +5359,11 @@ main {
     min-height: 118px;
   }
 
+  .history-preview-grid,
+  .service-grid--hub {
+    grid-template-columns: 1fr;
+  }
+
   .schedule-card__body {
     padding-right: 58px;
   }
@@ -4553,22 +5405,21 @@ main {
   .subject-row.expanded .subject-button {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-    border-color: rgba(105, 167, 255, 0.52);
-    background: rgba(105, 167, 255, 0.11);
+    border-color: rgba(79, 156, 167, 0.36);
+    background: var(--primary-soft);
   }
 
   .subject-inline-detail {
     display: grid;
     gap: 12px;
     padding: 14px;
-    border: 1px solid rgba(105, 167, 255, 0.34);
+    border: 1px solid rgba(79, 156, 167, 0.28);
     border-top: 0;
     border-bottom-left-radius: var(--radius);
     border-bottom-right-radius: var(--radius);
-    background:
-      linear-gradient(180deg, rgba(105, 167, 255, 0.08), rgba(255, 255, 255, 0.025)),
-      rgba(7, 9, 12, 0.8);
-    animation: accordion-open 320ms var(--ease) both;
+    background: var(--paper);
+    box-shadow: var(--shadow-soft);
+    animation: accordion-open 180ms var(--ease) both;
   }
 
   .topic-list {
@@ -4613,7 +5464,7 @@ main {
 
   .semester-date-scale__tick {
     min-width: 58px;
-    font-size: 0.55rem;
+    font-size: 0.64rem;
   }
 
   .semester-date-scale__tick i {
@@ -4626,7 +5477,7 @@ main {
 
   .race-marker {
     min-width: 72px;
-    font-size: 0.56rem;
+    font-size: 0.64rem;
   }
 
   .race-marker b {
@@ -4640,8 +5491,39 @@ main {
     font-size: 0.74rem;
   }
 
+  .race-marker--midterm,
+  .race-marker--finals {
+    top: -36px;
+    min-width: 48px;
+  }
+
+  .race-marker--midterm b,
+  .race-marker--finals b {
+    min-width: 0;
+    height: auto;
+    padding: 0;
+    font-size: 0.58rem;
+  }
+
+  .race-marker--midterm time,
+  .race-marker--finals time {
+    display: block;
+    font-size: 0.56rem;
+  }
+
+  .race-marker--midterm::after,
+  .race-marker--finals::after {
+    top: 39px;
+    height: 20px;
+  }
+
   .race-marker time {
     display: none;
+  }
+
+  .race-marker--midterm time,
+  .race-marker--finals time {
+    display: block;
   }
 
   .exam-schedule {
@@ -4670,6 +5552,7 @@ main {
   }
 
   .exam-schedule__cards {
+    display: grid;
     grid-auto-flow: column;
     grid-auto-columns: minmax(132px, 1fr);
     grid-template-columns: none;
@@ -4692,7 +5575,7 @@ main {
   .exam-calendar-tile span,
   .exam-card span,
   .exam-card small {
-    font-size: 0.52rem;
+    font-size: 0.64rem;
     letter-spacing: 0.04em;
   }
 
@@ -4703,8 +5586,13 @@ main {
   .exam-card {
     gap: 5px;
     min-height: 82px;
+    width: auto;
     padding: 7px 6px;
     scroll-snap-align: start;
+  }
+
+  .exam-card--has-action {
+    padding-bottom: 30px;
   }
 
   .exam-card strong {
@@ -4719,13 +5607,19 @@ main {
 
   .exam-card time,
   .exam-card em {
-    font-size: 0.58rem;
+    font-size: 0.64rem;
     line-height: 1.15;
   }
 
   .exam-card__meta {
-    font-size: 0.58rem;
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    transform: none;
+    font-size: 0.55rem;
     line-height: 1.15;
+    padding: 1px 4px;
+    border-radius: 3px !important;
   }
 
   .exam-card time {
@@ -4735,6 +5629,15 @@ main {
   .exam-card small {
     margin-top: 2px;
     padding: 3px 4px;
+  }
+
+  .exam-card__quiz-action {
+    right: 6px;
+    bottom: 6px;
+    max-width: calc(100% - 12px);
+    min-height: 20px;
+    padding: 4px 6px;
+    font-size: 0.5rem;
   }
 
   .whatsapp-feedback {
@@ -4763,6 +5666,10 @@ main {
   main,
   .site-header {
     width: min(100% - 14px, 640px);
+  }
+
+  main {
+    padding-bottom: 104px;
   }
 
   .site-header {
@@ -4799,7 +5706,30 @@ main {
   }
 
   .site-nav a[data-mobile-label]::after {
+    font-size: 0.66rem;
+  }
+
+  .bottom-nav-wrap {
+    bottom: 10px;
+    width: calc(100% - 16px);
+  }
+
+  .bottom-nav {
+    gap: 4px;
+    padding: 5px;
+    border-radius: 28px;
+  }
+
+  .bottom-nav a {
+    min-height: 52px;
+    padding: 7px 4px;
+    border-radius: 20px;
     font-size: 0.62rem;
+  }
+
+  .bottom-nav a svg {
+    width: 18px;
+    height: 18px;
   }
 
   .section-heading h1,
@@ -4808,8 +5738,8 @@ main {
   }
 
   .schedule-page {
-    gap: 6px;
-    padding: 8px 0 10px;
+    gap: 12px;
+    padding: 16px 0 28px;
   }
 
   .schedule-page .section-heading {
@@ -4819,46 +5749,43 @@ main {
 
   .schedule-page .section-heading .eyebrow,
   .schedule-tabs,
-  .schedule-section#today,
   .schedule-card__icon,
-  .schedule-card__meta,
   .schedule-card__status,
   .schedule-day__top span {
     display: none;
   }
 
   .schedule-page .section-heading h1 {
-    font-size: 1.18rem;
-    line-height: 1;
+    font-size: 1.55rem;
+    line-height: 1.08;
   }
 
   .schedule-today,
   .schedule-section {
-    gap: 5px;
-    padding: 6px;
-    border-radius: 6px;
-    box-shadow: none;
+    gap: 10px;
+    padding: 12px;
+    border-radius: 16px;
+    box-shadow: var(--shadow-soft);
   }
 
   .schedule-today {
-    grid-template-columns: minmax(0, 1fr) minmax(112px, 0.72fr);
-    align-items: stretch;
+    grid-template-columns: 1fr;
   }
 
   .schedule-today .card__kicker {
-    font-size: 0.56rem;
+    font-size: 0.68rem;
   }
 
   .schedule-today h2 {
-    margin-top: 2px;
-    font-size: 0.96rem;
-    line-height: 1.05;
+    margin-top: 4px;
+    font-size: 1.35rem;
+    line-height: 1.12;
   }
 
   .schedule-today > div:first-child > p:last-child {
-    margin-top: 3px;
-    font-size: 0.58rem;
-    line-height: 1.18;
+    margin-top: 6px;
+    font-size: 0.78rem;
+    line-height: 1.35;
   }
 
   .schedule-next-card {
@@ -4867,10 +5794,10 @@ main {
 
   .schedule-next-card__wait {
     justify-self: stretch;
-    padding: 3px 5px;
-    border-radius: 6px;
-    font-size: 0.52rem;
-    line-height: 1;
+    padding: 6px 8px;
+    border-radius: 999px;
+    font-size: 0.68rem;
+    line-height: 1.15;
     text-align: center;
   }
 
@@ -4880,7 +5807,7 @@ main {
 
   .schedule-section__top {
     display: grid;
-    gap: 1px;
+    gap: 4px;
   }
 
   .schedule-section__top .card__kicker {
@@ -4889,13 +5816,13 @@ main {
 
   .schedule-section__top h2 {
     margin: 0;
-    font-size: 0.74rem;
-    line-height: 1;
+    font-size: 1rem;
+    line-height: 1.12;
   }
 
   .schedule-location {
-    font-size: 0.52rem;
-    line-height: 1;
+    font-size: 0.72rem;
+    line-height: 1.25;
   }
 
   .schedule-calendar__frame {
@@ -4918,12 +5845,12 @@ main {
   }
 
   .schedule-calendar-event strong {
-    font-size: 0.76rem;
+    font-size: 0.82rem;
   }
 
   .schedule-calendar-event p {
     margin-top: 4px;
-    font-size: 0.64rem;
+    font-size: 0.72rem;
   }
 
   .schedule-progress--calendar .schedule-progress__label {
@@ -4934,38 +5861,38 @@ main {
     display: inline-block;
     margin-top: 4px;
     padding: 2px 5px;
-    font-size: 0.58rem;
+    font-size: 0.68rem;
   }
 
   .schedule-week-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 4px;
+    grid-template-columns: 1fr;
+    gap: 8px;
   }
 
   .schedule-week-grid--rounds {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr;
   }
 
   .schedule-day {
-    gap: 3px;
-    padding: 4px;
-    border-radius: 6px;
+    gap: 8px;
+    padding: 10px;
+    border-radius: 16px;
   }
 
   .schedule-day__top h3 {
-    font-size: 0.6rem;
-    line-height: 1;
+    font-size: 0.9rem;
+    line-height: 1.12;
   }
 
   .schedule-card-stack {
-    gap: 2px;
+    gap: 7px;
   }
 
   .schedule-card {
     display: block;
     min-height: 0;
-    padding: 3px 4px;
-    border-radius: 5px;
+    padding: 9px 10px;
+    border-radius: 14px;
   }
 
   .schedule-card__body {
@@ -4973,20 +5900,14 @@ main {
   }
 
   .schedule-card h3 {
-    overflow: hidden;
-    font-size: 0.54rem;
-    line-height: 1.05;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    font-size: 0.82rem;
+    line-height: 1.2;
   }
 
   .schedule-card p {
-    margin-top: 1px;
-    overflow: hidden;
-    font-size: 0.48rem;
-    line-height: 1;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    margin-top: 3px;
+    font-size: 0.72rem;
+    line-height: 1.28;
   }
 
   .profile-card,
@@ -5015,58 +5936,6 @@ main {
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
     transition-duration: 1ms !important;
-  }
-}
-
-/* Click glow effect */
-.click-glow {
-  position: fixed;
-  pointer-events: none;
-  border-radius: 999px;
-  top: calc(var(--y) - 90px);
-  left: calc(var(--x) - 90px);
-  width: 180px;
-  height: 180px;
-  animation: click-glow-expand 600ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-  z-index: 50;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .click-glow {
-    animation: click-glow-fade 300ms ease forwards;
-  }
-}
-
-@keyframes click-glow-expand {
-  0% {
-    background: radial-gradient(
-      circle at center,
-      rgba(105, 167, 255, 0.45) 0%,
-      rgba(54, 211, 153, 0.3) 25%,
-      rgba(105, 167, 255, 0.15) 60%,
-      transparent 100%
-    );
-    transform: scale(0.8);
-    opacity: 1;
-  }
-  100% {
-    background: radial-gradient(
-      circle at center,
-      rgba(105, 167, 255, 0.2) 0%,
-      rgba(54, 211, 153, 0.1) 30%,
-      transparent 80%
-    );
-    transform: scale(1.4);
-    opacity: 0;
-  }
-}
-
-@keyframes click-glow-fade {
-  0% {
-    opacity: 0.2;
-  }
-  100% {
-    opacity: 0;
   }
 }
 
@@ -5234,7 +6103,7 @@ main {
   margin-bottom: 14px;
   border: 1px solid rgba(105, 167, 255, 0.18);
   border-radius: var(--radius);
-  background: rgba(8, 9, 12, 0.88);
+  background: rgba(13, 15, 22, 0.88);
   backdrop-filter: blur(18px);
   font-size: 0.82rem;
   font-weight: 800;
@@ -5355,7 +6224,7 @@ main {
   border: 1px solid rgba(105, 167, 255, 0.3);
   border-radius: 50%;
   color: var(--blue);
-  background: rgba(8, 9, 12, 0.86);
+  background: rgba(13, 15, 22, 0.86);
   backdrop-filter: blur(12px);
   cursor: pointer;
   opacity: 0;
@@ -5560,3 +6429,57 @@ main {
     bottom: 72px;
   }
 }
+
+@media (max-width: 860px) {
+  .schedule-section--home {
+    padding: 14px;
+    border-radius: 24px;
+  }
+
+  .schedule-section--home .schedule-section__top {
+    display: grid;
+    gap: 8px;
+  }
+
+  .schedule-section--home .schedule-location {
+    text-align: left;
+  }
+
+  .schedule-section--home .schedule-calendar__frame {
+    grid-template-columns: 58px repeat(3, minmax(172px, 1fr));
+    grid-template-rows: 58px minmax(420px, auto);
+    min-width: 610px;
+    border-radius: 20px;
+  }
+
+  .schedule-section--home .schedule-calendar__hours {
+    grid-template-rows: 74px 74px 86px 86px 1fr;
+  }
+
+  .schedule-section--home .schedule-calendar__hour-label {
+    padding: 8px 8px 0 0;
+    font-size: 0.7rem;
+  }
+
+  .schedule-section--home .schedule-calendar__day {
+    grid-template-rows: 74px 74px 86px 86px;
+    padding: 8px 7px 74px;
+  }
+
+  .schedule-section--home .schedule-calendar-event {
+    min-height: 72px;
+    padding: 10px;
+    border-radius: 16px;
+  }
+
+  .schedule-section--home .schedule-calendar-event strong {
+    font-size: 0.78rem;
+  }
+
+  .schedule-section--home .schedule-calendar-event p {
+    font-size: 0.7rem;
+  }
+}
+
+
+

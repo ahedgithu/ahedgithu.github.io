@@ -12,7 +12,7 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="manifest" href="/manifest.webmanifest" />
   <meta name="theme-color" content="#315f72" />
-  <link rel="stylesheet" href="/src/style.css?v=20260702-quiz-row" />
+  <link rel="stylesheet" href="/src/style.css?v=20260702-live-match" />
   <style>
     :root {
       --bg: #060914;
@@ -556,6 +556,192 @@
       .preview { box-shadow: none; border: none; background: white; color: black; max-height: none; }
       .output-box { border: none; background: white; color: black; max-height: none; }
     }
+    /* Premium visual skin: visual-only overrides, layout preserved. */
+    :root {
+      color-scheme: dark;
+      --bg: #08090c;
+      --bg2: #11141a;
+      --panel: rgba(255, 255, 255, 0.045);
+      --panel-2: rgba(255, 255, 255, 0.075);
+      --card: rgba(255, 255, 255, 0.055);
+      --stroke: rgba(255, 255, 255, 0.10);
+      --stroke-strong: rgba(255, 255, 255, 0.18);
+      --text: #f4f5f7;
+      --muted: #9ba3b4;
+      --soft: #69a7ff;
+      --cyan: #69a7ff;
+      --blue: #69a7ff;
+      --amber: #d8b24d;
+      --gold-soft: rgba(216, 178, 77, 0.13);
+      --primary-soft: rgba(105, 167, 255, 0.12);
+      --green: #36d399;
+      --red: #ff6b6b;
+      --purple: #69a7ff;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.42);
+      --soft-shadow: 0 12px 34px rgba(0, 0, 0, 0.28);
+      --radius: 8px;
+      --radius-sm: 8px;
+      --focus: 0 0 0 3px rgba(105, 167, 255, 0.22), 0 0 0 1px rgba(105, 167, 255, 0.54) inset;
+    }
+
+    body {
+      background:
+        linear-gradient(135deg, rgba(216, 178, 77, 0.08), transparent 34%),
+        linear-gradient(225deg, rgba(105, 167, 255, 0.08), transparent 34%),
+        var(--bg);
+    }
+
+    body::before {
+      content: none;
+    }
+
+    .hero,
+    .sidebar,
+    .main-panel,
+    .preview,
+    .system-btn,
+    .step-btn,
+    .chip,
+    .section-card,
+    .missing-box,
+    .output-box,
+    input,
+    select,
+    textarea {
+      border-color: var(--stroke);
+      background: var(--panel);
+      box-shadow: var(--soft-shadow);
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+
+    .hero,
+    .sidebar,
+    .main-panel,
+    .preview {
+      position: sticky;
+      overflow: hidden;
+    }
+
+    .main-panel {
+      position: relative;
+    }
+
+    .hero::before,
+    .sidebar::before,
+    .main-panel::before,
+    .preview::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      border-radius: inherit;
+      background: none;
+    }
+
+    .hero > *,
+    .sidebar > *,
+    .main-panel > *,
+    .preview > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1,
+    h1,
+    h2,
+    h3,
+    strong {
+      color: var(--text);
+    }
+
+    .hero p,
+    p,
+    label,
+    small,
+    .muted,
+    .hint,
+    .output-box,
+    .missing-box {
+      color: var(--muted);
+    }
+
+    .mode-toggle,
+    .tabs {
+      border-color: var(--stroke);
+      background: color-mix(in srgb, var(--panel-2) 86%, transparent);
+      box-shadow: var(--soft-shadow);
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+
+    .mode-toggle button,
+    .tabs button {
+      color: var(--muted);
+    }
+
+    .mode-toggle button.active,
+    .tabs button.active {
+      color: #f8fbf7;
+      background: linear-gradient(135deg, var(--soft), var(--cyan));
+      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.24);
+    }
+
+    .system-btn:hover,
+    .step-btn:hover,
+    .chip:hover,
+    button:hover {
+      border-color: rgba(79, 156, 167, 0.42);
+      background: rgba(105, 167, 255, 0.10);
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.26);
+    }
+
+    .system-btn.active,
+    .step-btn.active,
+    .chip.active {
+      border-color: rgba(79, 156, 167, 0.38);
+      color: var(--soft);
+      background: var(--primary-soft);
+    }
+
+    .progress-bar,
+    .step-dot,
+    .stat,
+    .sub-card,
+    .symptom-card,
+    .hint,
+    .notice {
+      border-color: var(--stroke);
+      background: rgba(255, 255, 255, 0.055);
+      color: var(--muted);
+    }
+
+    .progress-fill,
+    .step-btn.done .step-dot {
+      background: linear-gradient(90deg, var(--soft), var(--cyan), var(--amber));
+    }
+
+    .tag,
+    .missing-item,
+    .good-item {
+      border-color: rgba(184, 148, 69, 0.22);
+      color: #e0c783;
+      background: var(--gold-soft);
+    }
+
+    .btn.primary,
+    .btn.green {
+      color: #f8fbf7;
+      border-color: rgba(49, 95, 114, 0.24);
+      background: linear-gradient(135deg, var(--soft), var(--cyan));
+      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.24);
+    }
+
+    .btn.danger {
+      color: #9f354b;
+      background: rgba(238, 128, 151, 0.12);
+      border-color: rgba(238, 128, 151, 0.28);
+    }
   </style>
 <body>
   <header class="site-header">
@@ -569,8 +755,8 @@
 
     <nav class="site-nav" aria-label="Primary navigation">
       <a href="/" data-mobile-label="Tracker">Tracker</a>
-      <a href="/news.html" data-mobile-label="News">News</a>
-      <a href="/schedule.html" data-mobile-label="Sched">Schedule</a>
+      <a href="/#news" data-mobile-label="News">News</a>
+      <a href="/#schedule" data-mobile-label="Schedule">Schedule</a>
       <a href="/history.html" data-mobile-label="History">History</a>
       <a href="/work.html" data-mobile-label="Work">Work with me</a>
     </nav>
@@ -861,6 +1047,16 @@
         <p class="footer-note">Tip: in Presentation Mode, the right panel focuses on the clean case presentation.</p>
       </aside>
     </main>
+  </div>
+
+  <div class="bottom-nav-wrap">
+    <nav class="bottom-nav" aria-label="Bottom navigation">
+      <a href="/#tracker" data-section-nav="tracker" aria-label="Tracker"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5"/><path d="M4 19h16"/><path d="m7 15 3-4 3 2 4-6"/></svg><span>Tracker</span></a>
+      <a href="/#news" data-section-nav="news" aria-label="News"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16"/><path d="M4 12h10"/><path d="M4 18h16"/><path d="m17 10 3 2-3 2z"/></svg><span>News</span></a>
+      <a href="/#schedule" data-section-nav="schedule" aria-label="Schedule"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="4"/><path d="M8 2v4M16 2v4M3 10h18"/></svg><span>Schedule</span></a>
+      <a class="active" href="/history.html" aria-label="History"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6l1 2h3v16H5V5h3z"/><path d="M8 11h8M8 15h6"/></svg><span>History</span></a>
+      <a href="/work.html" aria-label="Work with me"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6V5a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v1"/><rect x="3" y="6" width="18" height="14" rx="4"/><path d="M3 12h18"/></svg><span>Work</span></a>
+    </nav>
   </div>
 
   <div class="toast" id="toast">Copied.</div>
@@ -1506,6 +1702,23 @@
 
     bindEvents();
     renderAll();
+  </script>
+  <script>
+    document.addEventListener('pointerdown', (event) => {
+      if (event.button !== 0 && event.button !== undefined) return
+      const target = event.target.closest('a, button, .sidebar, .main-panel, .preview, .system-btn, .step-btn, .chip')
+      if (!target) return
+      target.classList.add('ripple-host')
+      const rect = target.getBoundingClientRect()
+      const size = Math.max(rect.width, rect.height) * 1.85
+      const ripple = document.createElement('span')
+      ripple.className = 'apple-ripple'
+      ripple.style.setProperty('--ripple-x', `${event.clientX - rect.left}px`)
+      ripple.style.setProperty('--ripple-y', `${event.clientY - rect.top}px`)
+      ripple.style.setProperty('--ripple-size', `${size}px`)
+      target.appendChild(ripple)
+      ripple.addEventListener('animationend', () => ripple.remove(), { once: true })
+    }, { passive: true })
   </script>
   <script defer src="/pwa.js?v=20260701-pwa"></script>
 </body>

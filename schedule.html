@@ -12,7 +12,7 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="manifest" href="/manifest.webmanifest" />
   <meta name="theme-color" content="#315f72" />
-  <link rel="stylesheet" href="/src/style.css?v=20260702-quiz-row" />
+  <link rel="stylesheet" href="/src/style.css?v=20260702-live-match" />
   <script type="importmap">
     {
       "imports": {
@@ -33,8 +33,8 @@
 
     <nav class="site-nav" aria-label="Primary navigation">
       <a href="/" data-mobile-label="Tracker">Tracker</a>
-      <a href="/news.html" data-mobile-label="News">News</a>
-      <a href="/schedule.html" aria-current="page" data-mobile-label="Sched">Schedule</a>
+      <a href="/#news" data-mobile-label="News">News</a>
+      <a href="/#schedule" aria-current="page" data-mobile-label="Schedule">Schedule</a>
       <a href="/history.html" data-mobile-label="History">History</a>
       <a href="/work.html" data-mobile-label="Work">Work with me</a>
     </nav>
@@ -47,20 +47,9 @@
         <h1 id="schedule-title">401 schedule</h1>
       </div>
 
-      <section class="schedule-today" aria-labelledby="schedule-today-title">
-        <div>
-          <p class="card__kicker">Today</p>
-          <h2 id="schedule-today-title">Loading schedule</h2>
-          <p id="schedule-today-summary">Checking current day and time.</p>
-        </div>
-        <div class="schedule-next-card" id="schedule-next-card" aria-live="polite"></div>
-      </section>
 
-      <div class="schedule-tabs" aria-label="Schedule views">
-        <a href="#today">Today</a>
-        <a href="#week-grid">Week grid</a>
-        <a href="#list">List</a>
-      </div>
+
+
 
       <section class="schedule-section schedule-section--calendar" id="week-grid" aria-labelledby="week-grid-title">
         <div class="schedule-section__top">
@@ -71,25 +60,23 @@
         <div class="schedule-calendar" id="schedule-calendar-grid"></div>
       </section>
 
-      <section class="schedule-section" id="today" aria-labelledby="today-items-title">
-        <div class="schedule-section__top">
-          <p class="card__kicker">Current day</p>
-          <h2 id="today-items-title">Today's university items</h2>
-        </div>
-        <div class="schedule-card-grid" id="schedule-today-list"></div>
-      </section>
 
-      <section class="schedule-section" id="list" aria-labelledby="list-title">
-        <div class="schedule-section__top">
-          <p class="card__kicker">Compact list</p>
-          <h2 id="list-title">Full weekly list</h2>
-        </div>
-        <div class="schedule-week-grid" id="schedule-list"></div>
-      </section>
+
+
     </section>
   </main>
 
-  <script type="module" src="/src/main.js?v=20260628-calendar"></script>
+  <div class="bottom-nav-wrap">
+    <nav class="bottom-nav" aria-label="Bottom navigation">
+      <a href="/#tracker" data-section-nav="tracker" aria-label="Tracker"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5"/><path d="M4 19h16"/><path d="m7 15 3-4 3 2 4-6"/></svg><span>Tracker</span></a>
+      <a href="/#news" data-section-nav="news" aria-label="News"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16"/><path d="M4 12h10"/><path d="M4 18h16"/><path d="m17 10 3 2-3 2z"/></svg><span>News</span></a>
+      <a class="active" href="/#schedule" data-section-nav="schedule" aria-label="Schedule"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="4"/><path d="M8 2v4M16 2v4M3 10h18"/></svg><span>Schedule</span></a>
+      <a href="/history.html" aria-label="History"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6l1 2h3v16H5V5h3z"/><path d="M8 11h8M8 15h6"/></svg><span>History</span></a>
+      <a href="/work.html" aria-label="Work with me"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6V5a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v1"/><rect x="3" y="6" width="18" height="14" rx="4"/><path d="M3 12h18"/></svg><span>Work</span></a>
+    </nav>
+  </div>
+
+  <script type="module" src="/src/main.js?v=20260702-fast-topic-open"></script>
   <script defer src="/pwa.js?v=20260701-pwa"></script>
 </body>
 </html>
