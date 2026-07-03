@@ -730,7 +730,7 @@ const nextCheckpoint = document.getElementById('next-checkpoint')
 const next401Exam = document.getElementById('next-401-exam')
 const next401Countdown = document.getElementById('next-401-countdown')
 const examScheduleCards = document.getElementById('exam-schedule-cards')
-const newsNavLink = document.querySelector('.site-nav a[href="/news.html"]')
+const newsNavLinks = document.querySelectorAll('a[href="#news"], a[href="/#news"]')
 const bookingForm = document.getElementById('booking-form')
 const bookingName = document.getElementById('booking-name')
 const bookingService = document.getElementById('booking-service')
@@ -1066,6 +1066,10 @@ function sortTopicsForDisplay(subject, topics, collection = subject.topics) {
   })
 }
 
+function getFastStaggerDelay(index, step = 14, max = 120) {
+  return `${Math.min(index * step, max)}ms`
+}
+
 function renderTopicCard(subject, topic, index, collection = subject.topics) {
   const art = Number.isFinite(topic.art) ? topic.art : index % 16
   const tileX = art % 4
@@ -1083,7 +1087,7 @@ function renderTopicCard(subject, topic, index, collection = subject.topics) {
   ` : ''
 
   return `
-    <li class="topic-item topic-item--${topic.state}" style="--delay: ${index * 45}ms; --tile-x: ${tileX}; --tile-y: ${tileY};">
+    <li class="topic-item topic-item--${topic.state}" style="--delay: ${getFastStaggerDelay(index)}; --tile-x: ${tileX}; --tile-y: ${tileY};">
       ${newBadge}
       <span class="topic-item__image" aria-hidden="true"></span>
       <span class="topic-item__index">${displayNum}</span>
@@ -1116,7 +1120,7 @@ function renderTopicCards(subject, topics = getFilteredTopics(subject), options 
   function renderGroup(groupTopics, groupTitle) {
     if (!groupTopics.length) return ''
 
-    let groupHtml = `<li class="topic-section-heading" style="--delay: ${globalIndex * 45}ms">${groupTitle}</li>`
+    let groupHtml = `<li class="topic-section-heading" style="--delay: ${getFastStaggerDelay(globalIndex)}">${groupTitle}</li>`
     const hasSections = groupTopics.some((t) => t.section)
 
     if (!hasSections) {
@@ -1135,8 +1139,8 @@ function renderTopicCards(subject, topics = getFilteredTopics(subject), options 
       }, [])
 
       groupHtml += sections.map((section) => {
-        const headingDelay = globalIndex * 45
-        const sectionTitleMarkup = `<li class="topic-section-subheading" style="--delay: ${headingDelay}ms">${section.title}</li>`
+        const headingDelay = getFastStaggerDelay(globalIndex)
+        const sectionTitleMarkup = `<li class="topic-section-subheading" style="--delay: ${headingDelay}">${section.title}</li>`
         const topicMarkup = section.topics.map((topic) => renderTopicCard(subject, topic, globalIndex++, collection)).join('')
         return sectionTitleMarkup + topicMarkup
       }).join('')
@@ -1832,7 +1836,7 @@ function renderSubjects() {
     ` : ''
 
     return `
-      <div class="subject-row${expandedClass}" style="--delay: ${index * 45}ms">
+      <div class="subject-row${expandedClass}" style="--delay: ${getFastStaggerDelay(index, 10, 90)}">
         <button class="subject-button${activeClass}" type="button" data-code="${subject.code}" aria-expanded="${isExpanded}">
           <span>
             <strong>${subject.code}</strong>
@@ -1953,6 +1957,11 @@ function formatExamDate(dateString) {
   }).format(getLocalDate(dateString))
 }
 
+function formatShortDate(dateLike) {
+  const date = typeof dateLike === 'string' ? getLocalDate(dateLike) : dateLike
+  return `${date.getDate()}/${date.getMonth() + 1}`
+}
+
 function getExamCountdownText(daysUntil) {
   if (daysUntil > 1) return `${daysUntil} days left`
   if (daysUntil === 1) return '1 day left'
@@ -2006,6 +2015,7 @@ function render401ExamSchedule() {
       return `
         <div class="exam-card exam-card--has-action${stateClass}" data-code="${exam.subjectCode}">
           <strong>${escapeHtml(exam.code)}</strong>
+          <time datetime="${exam.date}T14:30">${formatShortDate(exam.date)}</time>
           <em>${escapeHtml(exam.time)}</em>
           ${exam.meta ? `<span class="exam-card__meta">${escapeHtml(exam.meta)}</span>` : ''}
           <button class="exam-card__quiz-action" type="button" data-quiz-topic="NUT Quiz">
@@ -2018,7 +2028,7 @@ function render401ExamSchedule() {
     return `
       <button class="exam-card${stateClass}" type="button" data-code="${exam.subjectCode}" aria-label="Open ${escapeHtml(exam.subjectName)} tracker">
         <strong>${escapeHtml(exam.code)}</strong>
-        <time datetime="${exam.date}T14:30">${exam.dayLabel} ${formatExamDate(exam.date)}</time>
+        <time datetime="${exam.date}T14:30">${formatShortDate(exam.date)}</time>
         <em>${escapeHtml(exam.time)}</em>
         ${exam.meta ? `<span class="exam-card__meta">${escapeHtml(exam.meta)}</span>` : ''}
         <small>${escapeHtml(statusLabel)}</small>
@@ -2047,10 +2057,7 @@ function getTimelinePercent(date, startDate, endDate) {
 }
 
 function formatTimelineDate(date) {
-  return new Intl.DateTimeFormat('en-US', {
-    month: 'short',
-    day: 'numeric'
-  }).format(date)
+  return formatShortDate(date)
 }
 
 function renderSemesterTimeline() {
@@ -2058,7 +2065,8 @@ function renderSemesterTimeline() {
 
   const today = new Date()
   const semesterStart = new Date('2026-05-25T00:00:00')
-  const midterm = new Date('2026-07-18T00:00:00')
+  const midtermExam = midtermExamSchedule.find((exam) => exam.type !== 'quiz') || midtermExamSchedule[0]
+  const midterm = midtermExam ? getLocalDate(midtermExam.date) : new Date('2026-07-22T00:00:00')
   const finals = new Date('2026-09-19T00:00:00')
   const todayPercent = getTimelinePercent(today, semesterStart, finals)
   const midtermPercent = getTimelinePercent(midterm, semesterStart, finals)
@@ -2067,6 +2075,21 @@ function renderSemesterTimeline() {
   todayMarker.style.left = `${todayPercent}%`
   midtermMarker.style.left = `${midtermPercent}%`
   finalsMarker.style.left = '100%'
+
+  const midtermLabel = midtermMarker.querySelector('b')
+  const midtermDateLabel = midtermMarker.querySelector('time')
+  const finalsLabel = finalsMarker.querySelector('b')
+  const finalsDateLabel = finalsMarker.querySelector('time')
+  if (midtermLabel) midtermLabel.textContent = 'Midterm'
+  if (midtermDateLabel) {
+    midtermDateLabel.dateTime = midterm.toISOString().slice(0, 10)
+    midtermDateLabel.textContent = formatShortDate(midterm)
+  }
+  if (finalsLabel) finalsLabel.textContent = 'Finals'
+  if (finalsDateLabel) {
+    finalsDateLabel.dateTime = finals.toISOString().slice(0, 10)
+    finalsDateLabel.textContent = formatShortDate(finals)
+  }
 
   if (semesterDateScale) {
     const ticks = [
@@ -2431,7 +2454,7 @@ function renderScheduleCalendar(now = new Date()) {
 }
 
 function renderSchedulePage() {
-  if (!scheduleTodayTitle || !scheduleTodaySummary || !scheduleTodayList || !scheduleCalendarGrid || !scheduleList) return
+  if (!scheduleTodayTitle && !scheduleTodaySummary && !scheduleNextCard && !scheduleTodayList && !scheduleCalendarGrid && !scheduleList) return
 
   const now = new Date()
   const todayName = now.toLocaleDateString('en-US', { weekday: 'long' })
@@ -2441,14 +2464,16 @@ function renderSchedulePage() {
   const currentItem = todayItems.find((item) => getScheduleStatus(item, now) === 'now')
   const nextItem = getNextScheduleItem(courseSchedule, now)
 
-  scheduleTodayTitle.textContent = `Today is ${todayName}`
-  if (currentItem) {
-    scheduleTodaySummary.textContent = `${currentItem.title} is happening now until ${formatScheduleTime(currentItem.start, currentItem.end).split(' - ')[1]}.`
-  } else if (nextItem) {
-    const nextPrefix = nextItem.day === now.getDay() ? 'Next today' : `Next on ${nextItem.dayLabel}`
-    scheduleTodaySummary.textContent = `${nextPrefix}: ${nextItem.title} at ${formatScheduleTime(nextItem.start, nextItem.end).split(' - ')[0]}.`
-  } else {
-    scheduleTodaySummary.textContent = 'No upcoming university items found in the weekly schedule.'
+  if (scheduleTodayTitle) scheduleTodayTitle.textContent = `Today is ${todayName}`
+  if (scheduleTodaySummary) {
+    if (currentItem) {
+      scheduleTodaySummary.textContent = `${currentItem.title} is happening now until ${formatScheduleTime(currentItem.start, currentItem.end).split(' - ')[1]}.`
+    } else if (nextItem) {
+      const nextPrefix = nextItem.day === now.getDay() ? 'Next today' : `Next on ${nextItem.dayLabel}`
+      scheduleTodaySummary.textContent = `${nextPrefix}: ${nextItem.title} at ${formatScheduleTime(nextItem.start, nextItem.end).split(' - ')[0]}.`
+    } else {
+      scheduleTodaySummary.textContent = 'No upcoming university items found in the weekly schedule.'
+    }
   }
 
   if (scheduleNextCard) {
@@ -2459,15 +2484,19 @@ function renderSchedulePage() {
         : '<p class="empty-state">No upcoming schedule item.</p>'
   }
 
-  scheduleTodayList.innerHTML = todayItems.length
-    ? todayItems.map((item) => renderScheduleCard(item, now)).join('')
-    : '<p class="empty-state">No lectures or clinical rounds scheduled for today.</p>'
+  if (scheduleTodayList) {
+    scheduleTodayList.innerHTML = todayItems.length
+      ? todayItems.map((item) => renderScheduleCard(item, now)).join('')
+      : '<p class="empty-state">No lectures or clinical rounds scheduled for today.</p>'
+  }
 
-  scheduleCalendarGrid.innerHTML = renderScheduleCalendar(now)
+  if (scheduleCalendarGrid) scheduleCalendarGrid.innerHTML = renderScheduleCalendar(now)
 
-  scheduleList.innerHTML = scheduleDayOrder
-    .map((day) => renderScheduleGroup(courseSchedule, day, now))
-    .join('')
+  if (scheduleList) {
+    scheduleList.innerHTML = scheduleDayOrder
+      .map((day) => renderScheduleGroup(courseSchedule, day, now))
+      .join('')
+  }
 }
 
 function handleBookingSubmit(event) {
@@ -2715,25 +2744,29 @@ function isNewsCardExpired(card, now = new Date()) {
 }
 
 function renderNewsNavBadge(cards = []) {
-  if (!newsNavLink) return
+  if (!newsNavLinks.length) return
 
-  newsNavLink.querySelector('.site-nav__badge')?.remove()
-  newsNavLink.classList.remove('site-nav__link--has-news')
+  newsNavLinks.forEach((link) => {
+    link.querySelector('.site-nav__badge')?.remove()
+    link.classList.remove('site-nav__link--has-news')
+  })
 
   const seenCards = getNewsSeenCards()
   const unreadCount = cards.filter((card) => !isNewsCardExpired(card) && !seenCards.has(getNewsCardId(card))).length
   if (!unreadCount) return
 
-  newsNavLink.classList.add('site-nav__link--has-news')
-  newsNavLink.insertAdjacentHTML('beforeend', `
-    <span class="site-nav__badge" aria-label="${unreadCount} new news update${unreadCount === 1 ? '' : 's'}">
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M18 16v-5a6 6 0 0 0-12 0v5l-2 2h16l-2-2Z"></path>
-        <path d="M10 21h4"></path>
-      </svg>
-      <b>${unreadCount}</b>
-    </span>
-  `)
+  newsNavLinks.forEach((link) => {
+    link.classList.add('site-nav__link--has-news')
+    link.insertAdjacentHTML('beforeend', `
+      <span class="site-nav__badge" aria-label="${unreadCount} new news update${unreadCount === 1 ? '' : 's'}">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M18 16v-5a6 6 0 0 0-12 0v5l-2 2h16l-2-2Z"></path>
+          <path d="M10 21h4"></path>
+        </svg>
+        <b>${unreadCount}</b>
+      </span>
+    `)
+  })
 }
 
 function markNewsCardsSeen(cards = []) {
@@ -2823,9 +2856,9 @@ document.querySelectorAll('.scope-toggle__btn').forEach((btn) => {
 
 if (newsFeed) {
   renderNewsFilters()
-  newsNavLink?.addEventListener('click', () => {
+  newsNavLinks.forEach((link) => link.addEventListener('click', () => {
     markNewsCardsSeen([...newsFeed.querySelectorAll('.update-panel')])
-  })
+  }))
   ;[newsCourseFilter, newsDateFilter].filter(Boolean).forEach((control) => {
     control.addEventListener('input', renderNewsFilters)
     control.addEventListener('change', renderNewsFilters)
@@ -2913,17 +2946,42 @@ function initBottomSectionNav() {
   sections.forEach((section) => observer.observe(section))
 }
 
+function createElementRipple(target, event) {
+  if (!target) return
+  target.classList.add('ripple-host')
+
+  const rect = target.getBoundingClientRect()
+  const size = Math.max(rect.width, rect.height) * 1.85
+  const x = Number.isFinite(event?.clientX) ? event.clientX - rect.left : rect.width / 2
+  const y = Number.isFinite(event?.clientY) ? event.clientY - rect.top : rect.height / 2
+
+  const ripple = document.createElement('span')
+  ripple.className = 'apple-ripple'
+  ripple.style.setProperty('--ripple-x', `${x}px`)
+  ripple.style.setProperty('--ripple-y', `${y}px`)
+  ripple.style.setProperty('--ripple-size', `${size}px`)
+
+  target.appendChild(ripple)
+  ripple.addEventListener('animationend', () => ripple.remove(), { once: true })
+}
+
 function createAppleRipple(event) {
   if (event.button !== 0 && event.button !== undefined) return
   if (!event.isPrimary) return
+  if (event.target.closest('.quiz-modal')) return
 
   const target = event.target.closest([
     'button',
     'a',
     '.exam-card',
+    '.exam-card__quiz-action',
     '.subject-button',
     '.topic-resource',
     '.topic-item',
+    '.quiz-card',
+    '.quiz-source-option',
+    '.quiz-choice',
+    '.quiz-action',
     '.update-panel',
     '.class-rep',
     '.schedule-card',
@@ -2935,23 +2993,8 @@ function createAppleRipple(event) {
     '.booking-panel'
   ].join(','))
 
-  if (!target || target.disabled) return
-
-  target.classList.add('ripple-host')
-
-  const rect = target.getBoundingClientRect()
-  const size = Math.max(rect.width, rect.height) * 1.85
-  const x = event.clientX - rect.left
-  const y = event.clientY - rect.top
-
-  const ripple = document.createElement('span')
-  ripple.className = 'apple-ripple'
-  ripple.style.setProperty('--ripple-x', `${x}px`)
-  ripple.style.setProperty('--ripple-y', `${y}px`)
-  ripple.style.setProperty('--ripple-size', `${size}px`)
-
-  target.appendChild(ripple)
-  ripple.addEventListener('animationend', () => ripple.remove(), { once: true })
+  if (!target || target.disabled || target.matches(':disabled') || target.closest('[aria-disabled="true"]')) return
+  createElementRipple(target, event)
 }
 
 initBottomSectionNav()

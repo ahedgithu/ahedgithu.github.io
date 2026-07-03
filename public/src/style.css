@@ -1,26 +1,45 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 :root {
-  color-scheme: light;
-  --bg: #eef1ed;
-  --bg2: #e3ebe8;
-  --text: #13282f;
-  --muted: #65777d;
-  --line: rgba(34, 70, 78, 0.13);
-  --line-strong: rgba(34, 70, 78, 0.22);
-  --gold: #b89445;
-  --green: #55a987;
-  --blue: #5f9ba3;
-  --red: #ee8097;
-  --gold-soft: rgba(184, 148, 69, 0.11);
-  --primary-soft: rgba(47, 102, 112, 0.09);
-  --radius: 24px;
-  --shadow: 0 18px 48px rgba(34, 70, 78, 0.10);
-  --shadow-soft: 0 10px 26px rgba(34, 70, 78, 0.07);
-  --paper: rgba(250, 252, 249, 0.72);
-  --paper-strong: rgba(255, 255, 252, 0.88);
-  --teal: #2f6670;
-  --mint: #5f9ba3;
+  color-scheme: dark;
+
+  /* ── Backgrounds ─────────────────────────────────── */
+  --bg:  #0d0f16;
+  --bg2: #0d0f16;
+
+  /* ── Text ────────────────────────────────────────── */
+  --text:  #eaecf2;
+  --muted: #7a8494;
+
+  /* ── Borders ─────────────────────────────────────── */
+  --line:        rgba(255, 255, 255, 0.08);
+  --line-strong: rgba(255, 255, 255, 0.15);
+
+  /* ── Accent colours (each with one clear role) ───── */
+  --blue:  #5b9cf6;   /* actions, active states, brand      */
+  --green: #34c78a;   /* correct, success, live             */
+  --gold:  #e2b84a;   /* exams, important, progress head    */
+  --red:   #f06b6b;   /* wrong, error                       */
+
+  /* ── Soft tints ──────────────────────────────────── */
+  --gold-soft:    rgba(226, 184, 74,  0.11);
+  --primary-soft: rgba(91,  156, 246, 0.10);
+
+  /* ── Surfaces ────────────────────────────────────── */
+  --paper:        rgba(255, 255, 255, 0.03);
+  --paper-strong: rgba(255, 255, 255, 0.05);
+
+  /* ── Radius — slightly rounded for glass feel ─────── */
+  --radius: 10px;
+
+  /* ── Shadows ─────────────────────────────────────── */
+  --shadow:      0 24px 80px rgba(0, 0, 0, 0.52);
+  --shadow-soft: 0 12px 38px rgba(0, 0, 0, 0.30);
+
+  /* ── Aliases kept for back-compat ────────────────── */
+  --teal: #5b9cf6;
+  --mint: #5b9cf6;
+
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -39,22 +58,14 @@ body {
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color: var(--text);
   background:
-    radial-gradient(circle at 8% -4%, rgba(95, 155, 163, 0.14), transparent 30%),
-    radial-gradient(circle at 92% 2%, rgba(184, 148, 69, 0.10), transparent 26%),
-    linear-gradient(180deg, var(--bg), var(--bg2) 56%, var(--bg));
+    radial-gradient(ellipse 70% 45% at 8%  0%, rgba(91,  156, 246, 0.07), transparent),
+    radial-gradient(ellipse 55% 35% at 92% 0%, rgba(226, 184,  74, 0.06), transparent),
+    var(--bg);
   overflow-x: hidden;
 }
 
 body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background-image:
-    linear-gradient(rgba(34, 70, 78, 0.028) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(34, 70, 78, 0.028) 1px, transparent 1px);
-  background-size: 52px 52px;
-  mask-image: linear-gradient(to bottom, #000 0 35%, transparent 92%);
+  content: none;
 }
 
 body.panel-open {
@@ -91,13 +102,13 @@ main {
   gap: 18px;
   width: min(1180px, calc(100% - 40px));
   margin: 0 auto;
-  padding: 12px 14px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.74);
-  box-shadow: var(--shadow-soft);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  padding: 16px 0;
+  border: 0;
+  border-radius: 0;
+  background: rgba(13, 15, 22, 0.82);
+  box-shadow: none;
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
 }
 
 .brand {
@@ -117,13 +128,11 @@ main {
   place-items: center;
   width: 42px;
   height: 42px;
-  border: 1px solid rgba(49, 95, 114, 0.16);
-  border-radius: 18px;
-  color: #fff;
-  background:
-    radial-gradient(circle at 28% 22%, rgba(255, 255, 255, 0.65), transparent 24%),
-    linear-gradient(135deg, var(--teal), var(--blue));
-  box-shadow: 0 16px 34px rgba(49, 95, 114, 0.22);
+  border: 1px solid rgba(105, 167, 255, 0.3);
+  border-radius: var(--radius);
+  color: #06101d;
+  background: var(--blue);
+  box-shadow: none;
   font-weight: 900;
 }
 
@@ -144,15 +153,15 @@ main {
   gap: 8px;
   padding: 5px;
   border: 1px solid var(--line);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.68);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.76);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.035);
+  box-shadow: none;
 }
 
 .site-nav a {
   min-height: 36px;
   padding: 9px 12px;
-  border-radius: 999px;
+  border-radius: 7px;
   color: var(--muted);
   font-size: 0.86rem;
   font-weight: 800;
@@ -161,7 +170,7 @@ main {
 .site-nav a:hover,
 .site-nav a:focus-visible {
   color: var(--text);
-  background: rgba(79, 156, 167, 0.12);
+  background: rgba(105, 167, 255, 0.10);
   outline: none;
 }
 
@@ -190,7 +199,7 @@ main {
   aspect-ratio: 1;
   pointer-events: none;
   background:
-    linear-gradient(180deg, rgba(8, 9, 12, 0.12), rgba(8, 9, 12, 0.88)),
+    linear-gradient(180deg, rgba(13, 15, 22, 0.12), rgba(13, 15, 22, 0.88)),
     url("/assets/brain-profile.png") center / cover no-repeat;
   opacity: 0.18;
   filter: grayscale(1) contrast(1.08);
@@ -521,16 +530,31 @@ main {
 
 .race-track::before {
   width: 100%;
-  background: rgba(49, 95, 114, 0.14);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
 .race-track__fill {
   width: 0;
   max-width: 100%;
-  background: linear-gradient(90deg, var(--mint), var(--teal), var(--gold));
-  box-shadow: 0 6px 16px rgba(49, 95, 114, 0.16);
+  background: linear-gradient(90deg, var(--green), var(--gold));
   transition: width 850ms var(--ease);
+}
+
+/* dot head — sits at the right tip of the fill bar */
+.race-track__fill::after {
+  content: none;
+  position: absolute;
+  right: -7px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow:
+    0 0 0 4px rgba(216, 178, 77, 0.18),
+    0 0 12px rgba(216, 178, 77, 0.34);
 }
 
 .race-marker {
@@ -580,23 +604,26 @@ main {
   align-items: center;
   justify-content: center;
   padding: 3px 9px;
-  border: 1px solid rgba(79, 156, 167, 0.24);
+  border: 1px solid rgba(255, 255, 255, 0.55);
   border-radius: 999px;
-  color: var(--teal);
+  color: #fff;
   font-size: 0.72rem;
   font-weight: 900;
   letter-spacing: 0.04em;
-  background: rgba(255, 255, 255, 0.82);
+  background: rgba(255, 255, 255, 0.07);
   backdrop-filter: blur(6px);
   box-shadow:
-    0 10px 24px rgba(31, 70, 88, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.82);
-  text-shadow: none;
+    0 0 0 1px rgba(255, 255, 255, 0.12),
+    0 0 12px rgba(255, 255, 255, 0.22),
+    0 0 28px rgba(255, 255, 255, 0.10);
+  text-shadow:
+    0 0 6px rgba(255, 255, 255, 0.85),
+    0 0 16px rgba(255, 255, 255, 0.45);
   transform: none;
   white-space: nowrap;
 }
 
-/* vertical callout line */
+/* vertical callout line — connects pill to bar head */
 .race-marker--today b::after {
   content: '';
   position: absolute;
@@ -605,10 +632,11 @@ main {
   transform: translateX(-50%);
   width: 1px;
   height: 20px;
-  background: linear-gradient(to bottom, rgba(79, 156, 167, 0.46), rgba(79, 156, 167, 0.12));
+  background: linear-gradient(to bottom, rgba(255,255,255,0.55), rgba(255,255,255,0.15));
 }
 
-/* dot at the bar */
+/* no separate ::before dot — dot lives on the fill bar itself (race-track__fill::after) */
+
 .race-marker--today b::before {
   content: '';
   position: absolute;
@@ -618,17 +646,58 @@ main {
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: var(--teal);
-  box-shadow: 0 0 0 5px rgba(79, 156, 167, 0.14);
+  background: #fff;
+  box-shadow: 0 0 6px rgba(255,255,255,0.8), 0 0 12px rgba(255,255,255,0.4);
 }
 
 .race-marker--midterm b,
 .race-marker--finals b {
-  min-width: 74px;
-  color: var(--teal);
-  background:
-    linear-gradient(180deg, rgba(245, 216, 135, 0.28), rgba(255, 255, 255, 0.78)),
-    rgba(255, 255, 255, 0.88);
+  min-width: 0;
+  height: auto;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  color: rgba(244, 245, 247, 0.92);
+  background: transparent;
+  box-shadow: none;
+  font-size: 0.68rem;
+  line-height: 1;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.52);
+}
+
+.race-marker--midterm,
+.race-marker--finals {
+  top: -34px;
+  min-width: 52px;
+  gap: 3px;
+}
+
+.race-marker--midterm b,
+.race-marker--midterm time,
+.race-marker--finals b,
+.race-marker--finals time {
+  display: block;
+  transform: rotate(-45deg);
+}
+
+.race-marker--midterm time,
+.race-marker--finals time {
+  color: var(--gold);
+  font-size: 0.62rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.race-marker--midterm::after,
+.race-marker--finals::after {
+  content: '';
+  position: absolute;
+  top: 38px;
+  left: 50%;
+  width: 1px;
+  height: 20px;
+  background: linear-gradient(to bottom, rgba(216, 178, 77, 0.58), rgba(216, 178, 77, 0.08));
+  transform: translateX(-50%);
 }
 
 .semester-date-scale {
@@ -799,8 +868,8 @@ main {
 }
 
 .exam-schedule__cards {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 10px;
 }
 
@@ -809,8 +878,7 @@ main {
   display: grid;
   gap: 8px;
   align-content: start;
-  width: 100%;
-  min-height: 122px;
+  width: 210px;
   padding: 14px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -863,9 +931,19 @@ main {
 }
 
 .exam-card__meta {
-  color: rgba(244, 245, 247, 0.82);
-  font-size: 0.74rem;
+  position: absolute;
+  top: 8px;
+  right: -10px;
+  padding: 2px 10px;
+  border-radius: 4px !important;
+  background: var(--gold) !important;
+  color: #0c0e14 !important;
+  font-size: 0.65rem;
   font-weight: 900;
+  letter-spacing: 0.5px;
+  transform: rotate(45deg);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  z-index: 5;
 }
 
 .exam-card__quiz-action {
@@ -1114,8 +1192,8 @@ main {
   z-index: 0;
   pointer-events: none;
   background:
-    linear-gradient(90deg, rgba(8, 9, 12, 0.96) 0%, rgba(8, 9, 12, 0.74) 48%, rgba(8, 9, 12, 0.18) 100%),
-    linear-gradient(180deg, rgba(8, 9, 12, 0.12), rgba(8, 9, 12, 0.82)),
+    linear-gradient(90deg, rgba(13, 15, 22, 0.96) 0%, rgba(13, 15, 22, 0.74) 48%, rgba(13, 15, 22, 0.18) 100%),
+    linear-gradient(180deg, rgba(13, 15, 22, 0.12), rgba(13, 15, 22, 0.82)),
     url("/assets/medical-topic-sprite.png");
   background-size: auto, auto, 760px 760px;
   background-position: center, center, right -120px center;
@@ -1575,7 +1653,7 @@ main {
   border-radius: var(--radius);
   background: rgba(255, 255, 255, 0.035);
   overflow: hidden;
-  animation: topic-pop 430ms var(--ease) both;
+  animation: topic-pop 260ms var(--ease) both;
   animation-delay: var(--delay);
 }
 
@@ -1591,7 +1669,7 @@ main {
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  animation: topic-pop 320ms var(--ease) both;
+  animation: topic-pop 220ms var(--ease) both;
   animation-delay: var(--delay);
 }
 
@@ -1612,7 +1690,7 @@ main {
   border-left: 3px solid var(--blue);
   background: rgba(255, 255, 255, 0.02);
   border-radius: 0 var(--radius) var(--radius) 0;
-  animation: topic-pop 320ms var(--ease) both;
+  animation: topic-pop 220ms var(--ease) both;
   animation-delay: var(--delay);
 }
 
@@ -2229,6 +2307,8 @@ main {
 }
 
 .quiz-choice {
+  position: relative;
+  overflow: hidden;
   display: grid;
   grid-template-columns: 34px 1fr;
   gap: 10px;
@@ -2242,6 +2322,9 @@ main {
   text-align: left;
   cursor: pointer;
   background: rgba(255, 255, 255, 0.045);
+  transition:
+    border-color 160ms var(--ease),
+    background 160ms var(--ease);
 }
 
 .quiz-choice:hover:not(:disabled) {
@@ -3695,7 +3778,7 @@ main {
   border-radius: var(--radius);
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent),
-    rgba(8, 9, 12, 0.62);
+    rgba(13, 15, 22, 0.62);
   overflow: hidden;
 }
 
@@ -3967,14 +4050,14 @@ main {
   padding: 14px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  background: rgba(8, 9, 12, 0.58);
+  background: rgba(13, 15, 22, 0.58);
 }
 
 .schedule-card--now {
   border-color: rgba(54, 211, 153, 0.52);
   background:
     linear-gradient(180deg, rgba(54, 211, 153, 0.12), rgba(255, 255, 255, 0.03)),
-    rgba(8, 9, 12, 0.68);
+    rgba(13, 15, 22, 0.68);
 }
 
 .schedule-card--done {
@@ -4447,12 +4530,10 @@ main {
 .booking-panel {
   border-color: var(--line);
   border-radius: var(--radius);
-  background:
-    linear-gradient(180deg, rgba(250, 252, 249, 0.46), rgba(232, 239, 235, 0.18)),
-    var(--paper);
+  background: var(--paper);
   box-shadow: var(--shadow-soft);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 .semester-timeline,
@@ -4478,9 +4559,7 @@ main {
   inset: 0;
   pointer-events: none;
   border-radius: inherit;
-  background:
-    radial-gradient(circle at 100% 0%, rgba(184, 148, 69, 0.10), transparent 30%),
-    radial-gradient(circle at 0% 100%, rgba(95, 155, 163, 0.10), transparent 30%);
+  background: none;
 }
 
 .semester-timeline > *,
@@ -4497,10 +4576,10 @@ main {
 .section-heading h1,
 .section-heading h2,
 .history-hero .section-heading h1 {
-  color: transparent;
-  background: linear-gradient(180deg, var(--text), var(--teal) 68%, var(--gold));
-  background-clip: text;
-  -webkit-background-clip: text;
+  color: var(--text);
+  background: none;
+  background-clip: initial;
+  -webkit-background-clip: initial;
   filter: none;
   text-shadow: none;
 }
@@ -4511,7 +4590,7 @@ main {
 }
 
 .tracker-updated {
-  color: rgba(49, 95, 114, 0.68);
+  color: rgba(155, 163, 180, 0.84);
 }
 
 .exam-card,
@@ -4532,10 +4611,8 @@ main {
 .quiz-review-item,
 .quiz-prompt {
   border-color: var(--line);
-  border-radius: 20px;
-  background:
-    linear-gradient(180deg, rgba(250, 252, 249, 0.34), transparent),
-    var(--paper-strong);
+  border-radius: 22px;
+  background: var(--paper);
   box-shadow: var(--shadow-soft);
 }
 
@@ -4547,11 +4624,9 @@ main {
 .schedule-card:hover,
 .quiz-source-option:hover,
 .quiz-choice:hover:not(:disabled) {
-  border-color: rgba(79, 156, 167, 0.42);
-  background:
-    linear-gradient(180deg, rgba(250, 252, 249, 0.48), transparent),
-    var(--paper-strong);
-  box-shadow: 0 14px 34px rgba(34, 70, 78, 0.10);
+  border-color: rgba(105, 167, 255, 0.42);
+  background: rgba(105, 167, 255, 0.08);
+  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.28);
 }
 
 .exam-card strong,
@@ -4589,7 +4664,6 @@ main {
 .schedule-card--now,
 .schedule-day--today {
   background:
-    linear-gradient(180deg, rgba(250, 252, 249, 0.42), transparent),
     linear-gradient(135deg, var(--gold-soft), transparent 62%),
     var(--paper-strong);
 }
@@ -4610,18 +4684,16 @@ main {
 .schedule-card__icon,
 .topic-item__index,
 .service-icon {
-  border-radius: 18px;
-  color: #fff;
-  background:
-    radial-gradient(circle at 28% 22%, rgba(250, 252, 249, 0.48), transparent 24%),
-    linear-gradient(135deg, var(--teal), var(--blue));
-  box-shadow: 0 10px 22px rgba(34, 70, 78, 0.13);
+  border-radius: 10px;
+  color: #06101d;
+  background: var(--blue);
+  box-shadow: none;
 }
 
 .subject-button.active .subject-icon,
 .topic-item--partial .topic-item__index {
   color: #fff;
-  background: linear-gradient(135deg, var(--teal), var(--gold));
+  background: linear-gradient(135deg, var(--blue), var(--gold));
 }
 
 .subject-button__bar,
@@ -4630,7 +4702,7 @@ main {
 .assignment-progress__track,
 .quiz-progress {
   border-color: rgba(49, 95, 114, 0.10);
-  background: rgba(49, 95, 114, 0.10);
+  background: rgba(105, 167, 255, 0.10);
 }
 
 .subject-button__bar span,
@@ -4638,7 +4710,7 @@ main {
 .history-progress__bar span,
 .assignment-progress__bar,
 .quiz-progress span {
-  background: linear-gradient(90deg, var(--teal), var(--blue), var(--gold));
+  background: linear-gradient(90deg, var(--blue), var(--gold));
 }
 
 .filter-panel,
@@ -4646,19 +4718,19 @@ main {
 .scope-toggle,
 .site-nav,
 .history-progress {
-  background: rgba(250, 252, 249, 0.62);
+  background: rgba(13, 15, 22, 0.72);
 }
 
 .subject-track-tab:hover,
 .subject-track-tab.active,
 .scope-toggle__btn--active {
   border-color: rgba(79, 156, 167, 0.36);
-  color: var(--teal);
+  color: var(--blue);
   background: var(--primary-soft);
 }
 
 .topic-item::after {
-  background: linear-gradient(90deg, rgba(250, 252, 249, 0.74) 0%, rgba(250, 252, 249, 0.52) 58%, rgba(250, 252, 249, 0.12) 100%);
+  background: linear-gradient(90deg, rgba(13, 15, 22, 0.92) 0%, rgba(13, 15, 22, 0.66) 58%, rgba(13, 15, 22, 0.16) 100%);
 }
 
 .topic-item__image {
@@ -4675,14 +4747,14 @@ main {
 }
 
 .topic-item--remaining {
-  color: rgba(49, 95, 114, 0.58);
+  color: rgba(155, 163, 180, 0.72);
   background:
-    linear-gradient(180deg, rgba(250, 252, 249, 0.50), rgba(232, 239, 235, 0.36)),
-    rgba(250, 252, 249, 0.42);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.018)),
+    rgba(255, 255, 255, 0.035);
 }
 
 .topic-item--remaining .topic-item__label {
-  color: rgba(49, 95, 114, 0.68);
+  color: rgba(155, 163, 180, 0.82);
 }
 
 .topic-item--remaining .topic-item__index {
@@ -4699,8 +4771,8 @@ main {
 .schedule-card__meta span,
 .schedule-card__status {
   border-color: rgba(49, 95, 114, 0.16);
-  color: var(--teal);
-  background: rgba(79, 156, 167, 0.10);
+  color: var(--blue);
+  background: rgba(105, 167, 255, 0.10);
 }
 
 .topic-resource--quiz,
@@ -4718,21 +4790,21 @@ main {
 
 .news-action,
 .quiz-action--primary {
-  color: #fff;
-  background: linear-gradient(135deg, var(--teal), var(--blue));
-  box-shadow: 0 10px 24px rgba(34, 70, 78, 0.15);
+  color: #f8fbf7;
+  background: linear-gradient(135deg, var(--blue), #4f87de);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.24);
 }
 
 .quiz-modal__panel {
   border-color: var(--line);
   border-radius: var(--radius);
   background:
-    linear-gradient(180deg, rgba(250, 252, 249, 0.64), rgba(232, 239, 235, 0.40)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.028)),
     var(--paper-strong);
 }
 
 .quiz-modal__backdrop {
-  background: rgba(227, 235, 232, 0.72);
+  background: rgba(10, 16, 18, 0.74);
 }
 
 .quiz-question,
@@ -4763,9 +4835,9 @@ main {
   gap: 6px;
   padding: 7px;
   border: 1px solid var(--line);
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--paper-strong) 86%, transparent);
-  box-shadow: var(--shadow);
+  border-radius: 28px;
+  background: rgba(13, 15, 22, 0.88);
+  box-shadow: 0 18px 55px rgba(0, 0, 0, 0.42);
   backdrop-filter: blur(22px);
   -webkit-backdrop-filter: blur(22px);
   pointer-events: auto;
@@ -4802,9 +4874,9 @@ main {
 }
 
 .bottom-nav a.active {
-  color: #fff;
-  background: linear-gradient(135deg, var(--teal), var(--blue));
-  box-shadow: 0 12px 26px rgba(34, 70, 78, 0.18);
+  color: #06101d;
+  background: var(--blue);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.26);
 }
 
 .history-preview-grid,
@@ -4841,9 +4913,9 @@ main {
   transform: translate(-50%, -50%) scale(0);
   background:
     radial-gradient(circle,
-      rgba(250, 252, 249, 0.62) 0%,
-      rgba(95, 155, 163, 0.18) 32%,
-      rgba(95, 155, 163, 0.06) 58%,
+      rgba(238, 245, 241, 0.28) 0%,
+      rgba(105, 167, 255, 0.18) 32%,
+      rgba(105, 167, 255, 0.06) 58%,
       transparent 74%);
   animation: apple-ripple 620ms var(--ease) forwards;
 }
@@ -4862,6 +4934,273 @@ main {
     opacity: 0;
     transform: translate(-50%, -50%) scale(1);
   }
+}
+
+.schedule-heading {
+  max-width: none;
+  padding-bottom: 0;
+}
+
+.schedule-section--home {
+  gap: 18px;
+  padding: 20px;
+  border-radius: 34px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025)),
+    rgba(13, 15, 22, 0.78);
+}
+
+.schedule-section--home .schedule-section__top {
+  align-items: end;
+}
+
+.schedule-section--home .schedule-section__top h2 {
+  font-size: 1.42rem;
+}
+
+.schedule-section--home .schedule-location {
+  color: var(--green);
+  text-align: right;
+}
+
+.schedule-section--home .schedule-calendar__scroller {
+  margin: 0;
+  padding: 0;
+}
+
+.schedule-section--home .schedule-calendar__frame {
+  display: grid;
+  grid-template-columns: 76px repeat(3, minmax(210px, 1fr));
+  grid-template-rows: 70px minmax(488px, auto);
+  min-width: 760px;
+  border: 1px solid var(--line-strong);
+  border-radius: 26px;
+  background:
+    linear-gradient(180deg, rgba(105, 167, 255, 0.055), rgba(255, 255, 255, 0.015)),
+    rgba(255, 255, 255, 0.025);
+}
+
+.schedule-section--home .schedule-calendar__corner,
+.schedule-section--home .schedule-calendar__day-head {
+  background:
+    linear-gradient(180deg, rgba(105, 167, 255, 0.085), rgba(255, 255, 255, 0.025));
+}
+
+.schedule-section--home .schedule-calendar__day-head strong {
+  min-height: auto;
+  min-width: 0;
+  border-radius: 0;
+  color: rgba(244, 245, 247, 0.9);
+  background: transparent;
+  font-size: 0.98rem;
+}
+
+.schedule-section--home .schedule-calendar__day-head--today strong {
+  color: var(--blue);
+  background: transparent;
+}
+
+.schedule-section--home .schedule-calendar__hours {
+  display: grid;
+  grid-template-rows: 82px 82px 96px 96px 1fr;
+  border-right: 1px solid var(--line);
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035), transparent);
+}
+
+.schedule-section--home .schedule-calendar__hour-label {
+  align-items: start;
+  justify-content: end;
+  padding: 10px 10px 0 0;
+  transform: none;
+  color: rgba(155, 163, 180, 0.92);
+  font-size: 0.8rem;
+}
+
+.schedule-section--home .schedule-calendar__hour-label:first-child {
+  transform: none;
+}
+
+.schedule-section--home .schedule-calendar__day {
+  position: static;
+  display: grid;
+  grid-template-rows: 82px 82px 96px 96px;
+  gap: 0;
+  padding: 10px 8px 104px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.022), transparent);
+}
+
+.schedule-section--home .schedule-calendar__day--today {
+  background:
+    linear-gradient(180deg, rgba(105, 167, 255, 0.075), rgba(255, 255, 255, 0.018));
+}
+
+.schedule-section--home .schedule-calendar-event {
+  position: static;
+  display: grid;
+  align-content: center;
+  width: auto;
+  height: auto;
+  min-height: 80px;
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 18px;
+  background:
+    linear-gradient(180deg, rgba(105, 167, 255, 0.18), rgba(105, 167, 255, 0.075)),
+    rgba(11, 18, 31, 0.86);
+}
+
+.schedule-section--home .schedule-calendar-event--round {
+  background:
+    linear-gradient(180deg, rgba(54, 211, 153, 0.18), rgba(54, 211, 153, 0.075)),
+    rgba(9, 25, 20, 0.86);
+}
+
+.schedule-section--home .schedule-calendar-event strong {
+  font-size: 0.86rem;
+}
+
+.schedule-section--home .schedule-calendar-event p {
+  margin-top: 10px;
+  color: rgba(244, 245, 247, 0.78);
+  font-size: 0.78rem;
+}
+
+.apple-ripple {
+  background:
+    radial-gradient(circle,
+      rgba(255, 255, 255, 0.9) 0%,
+      rgba(255, 255, 255, 0.42) 34%,
+      rgba(105, 167, 255, 0.16) 58%,
+      transparent 74%);
+  mix-blend-mode: screen;
+  animation-duration: 680ms;
+}
+
+.site-header {
+  background:
+    linear-gradient(180deg, rgba(18, 24, 38, 0.82), rgba(13, 15, 22, 0.66)),
+    rgba(13, 15, 22, 0.62);
+  backdrop-filter: blur(28px) saturate(1.3);
+  -webkit-backdrop-filter: blur(28px) saturate(1.3);
+}
+
+.site-nav,
+.bottom-nav {
+  border-color: rgba(255, 255, 255, 0.12);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.03)),
+    rgba(13, 15, 22, 0.68);
+  box-shadow:
+    0 18px 48px rgba(0, 0, 0, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(28px) saturate(1.3);
+  -webkit-backdrop-filter: blur(28px) saturate(1.3);
+}
+
+.site-nav a,
+.bottom-nav a {
+  overflow: hidden;
+}
+
+.site-nav a:hover,
+.site-nav a:focus-visible,
+.bottom-nav a:hover,
+.bottom-nav a:focus-visible {
+  background:
+    linear-gradient(180deg, rgba(105, 167, 255, 0.18), rgba(105, 167, 255, 0.08));
+}
+
+.exam-schedule .exam-card {
+  min-height: 116px;
+  padding: 13px 14px;
+  border-color: rgba(255, 255, 255, 0.13);
+  border-radius: 20px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.026)),
+    rgba(12, 16, 23, 0.62);
+  box-shadow:
+    0 18px 48px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.075);
+  backdrop-filter: blur(18px) saturate(1.16);
+  -webkit-backdrop-filter: blur(18px) saturate(1.16);
+}
+
+.exam-schedule .exam-card:hover,
+.exam-schedule .exam-card:focus-visible {
+  border-color: rgba(105, 167, 255, 0.4);
+  background:
+    linear-gradient(180deg, rgba(105, 167, 255, 0.13), rgba(255, 255, 255, 0.035)),
+    rgba(12, 16, 23, 0.68);
+  transform: translateY(-2px);
+}
+
+.exam-schedule .exam-card strong {
+  font-size: 1.12rem;
+  line-height: 1.08;
+}
+
+.exam-schedule .exam-card time,
+.exam-schedule .exam-card em {
+  color: rgba(215, 222, 235, 0.78);
+  font-size: 0.74rem;
+  line-height: 1.28;
+}
+
+.exam-schedule .exam-card small {
+  color: rgba(244, 245, 247, 0.78);
+  background: rgba(255, 255, 255, 0.09);
+}
+
+.exam-schedule .exam-card--quiz {
+  border-color: rgba(216, 178, 77, 0.32);
+  background:
+    linear-gradient(145deg, rgba(216, 178, 77, 0.14), rgba(105, 167, 255, 0.045) 56%, rgba(255, 255, 255, 0.026)),
+    rgba(12, 16, 23, 0.66);
+}
+
+.exam-schedule .exam-card--next {
+  border-color: rgba(54, 211, 153, 0.44);
+  background:
+    linear-gradient(145deg, rgba(54, 211, 153, 0.13), rgba(105, 167, 255, 0.045) 58%, rgba(255, 255, 255, 0.026)),
+    rgba(12, 16, 23, 0.68);
+}
+
+.exam-schedule .exam-card__quiz-action {
+  color: #ffc4cf;
+  border-color: rgba(255, 107, 107, 0.42);
+  background: rgba(255, 107, 107, 0.11);
+}
+
+.race-marker--today {
+  top: -34px;
+}
+
+.race-marker--today b::before,
+.race-marker--today b::after {
+  content: '';
+}
+
+.race-marker--today::before {
+  content: none;
+  position: absolute;
+  top: 53px;
+  left: 50%;
+  z-index: 2;
+  width: 9px;
+  height: 9px;
+  border: 2px solid rgba(13, 15, 22, 0.92);
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow:
+    0 0 0 4px rgba(216, 178, 77, 0.16),
+    0 0 18px rgba(216, 178, 77, 0.38);
+  transform: translate(-50%, -50%);
+}
+
+.quiz-choice {
+  overflow: hidden;
 }
 
 @media (max-width: 860px) {
@@ -5078,11 +5417,9 @@ main {
     border-top: 0;
     border-bottom-left-radius: var(--radius);
     border-bottom-right-radius: var(--radius);
-    background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.62), rgba(238, 248, 246, 0.56)),
-      var(--paper);
+    background: var(--paper);
     box-shadow: var(--shadow-soft);
-    animation: accordion-open 320ms var(--ease) both;
+    animation: accordion-open 180ms var(--ease) both;
   }
 
   .topic-list {
@@ -5154,8 +5491,39 @@ main {
     font-size: 0.74rem;
   }
 
+  .race-marker--midterm,
+  .race-marker--finals {
+    top: -36px;
+    min-width: 48px;
+  }
+
+  .race-marker--midterm b,
+  .race-marker--finals b {
+    min-width: 0;
+    height: auto;
+    padding: 0;
+    font-size: 0.58rem;
+  }
+
+  .race-marker--midterm time,
+  .race-marker--finals time {
+    display: block;
+    font-size: 0.56rem;
+  }
+
+  .race-marker--midterm::after,
+  .race-marker--finals::after {
+    top: 39px;
+    height: 20px;
+  }
+
   .race-marker time {
     display: none;
+  }
+
+  .race-marker--midterm time,
+  .race-marker--finals time {
+    display: block;
   }
 
   .exam-schedule {
@@ -5184,6 +5552,7 @@ main {
   }
 
   .exam-schedule__cards {
+    display: grid;
     grid-auto-flow: column;
     grid-auto-columns: minmax(132px, 1fr);
     grid-template-columns: none;
@@ -5217,6 +5586,7 @@ main {
   .exam-card {
     gap: 5px;
     min-height: 82px;
+    width: auto;
     padding: 7px 6px;
     scroll-snap-align: start;
   }
@@ -5242,8 +5612,14 @@ main {
   }
 
   .exam-card__meta {
-    font-size: 0.64rem;
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    transform: none;
+    font-size: 0.55rem;
     line-height: 1.15;
+    padding: 1px 4px;
+    border-radius: 3px !important;
   }
 
   .exam-card time {
@@ -5727,7 +6103,7 @@ main {
   margin-bottom: 14px;
   border: 1px solid rgba(105, 167, 255, 0.18);
   border-radius: var(--radius);
-  background: rgba(8, 9, 12, 0.88);
+  background: rgba(13, 15, 22, 0.88);
   backdrop-filter: blur(18px);
   font-size: 0.82rem;
   font-weight: 800;
@@ -5848,7 +6224,7 @@ main {
   border: 1px solid rgba(105, 167, 255, 0.3);
   border-radius: 50%;
   color: var(--blue);
-  background: rgba(8, 9, 12, 0.86);
+  background: rgba(13, 15, 22, 0.86);
   backdrop-filter: blur(12px);
   cursor: pointer;
   opacity: 0;
@@ -6053,3 +6429,57 @@ main {
     bottom: 72px;
   }
 }
+
+@media (max-width: 860px) {
+  .schedule-section--home {
+    padding: 14px;
+    border-radius: 24px;
+  }
+
+  .schedule-section--home .schedule-section__top {
+    display: grid;
+    gap: 8px;
+  }
+
+  .schedule-section--home .schedule-location {
+    text-align: left;
+  }
+
+  .schedule-section--home .schedule-calendar__frame {
+    grid-template-columns: 58px repeat(3, minmax(172px, 1fr));
+    grid-template-rows: 58px minmax(420px, auto);
+    min-width: 610px;
+    border-radius: 20px;
+  }
+
+  .schedule-section--home .schedule-calendar__hours {
+    grid-template-rows: 74px 74px 86px 86px 1fr;
+  }
+
+  .schedule-section--home .schedule-calendar__hour-label {
+    padding: 8px 8px 0 0;
+    font-size: 0.7rem;
+  }
+
+  .schedule-section--home .schedule-calendar__day {
+    grid-template-rows: 74px 74px 86px 86px;
+    padding: 8px 7px 74px;
+  }
+
+  .schedule-section--home .schedule-calendar-event {
+    min-height: 72px;
+    padding: 10px;
+    border-radius: 16px;
+  }
+
+  .schedule-section--home .schedule-calendar-event strong {
+    font-size: 0.78rem;
+  }
+
+  .schedule-section--home .schedule-calendar-event p {
+    font-size: 0.7rem;
+  }
+}
+
+
+
