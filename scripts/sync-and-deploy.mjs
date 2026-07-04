@@ -59,8 +59,8 @@ try {
   console.log(`Committing changes: "${commitMsg}"...`);
   execSync(`git commit -m "${commitMsg}"`, { stdio: 'inherit' });
   
-  console.log('Pushing to origin live-ainshams:main...');
-  execSync('git push origin live-ainshams:main', { stdio: 'inherit' });
+  console.log('Pushing to origin HEAD:main...');
+  execSync('git push origin HEAD:main', { stdio: 'inherit' });
   console.log('✓ Successfully deployed!');
 } catch (err) {
   console.error('Error during git deployment:', err.message);
