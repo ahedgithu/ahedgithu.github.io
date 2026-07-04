@@ -7802,6 +7802,276 @@ window.mcqQuizzes['Monitoring and Fluid Therapy'] = [
 
 
 
+  toSource('Nutrition in cancer and obesity', {
+
+    id: 'kellawi-obesity-mcqs',
+
+    label: 'Kellawi MCQs',
+
+    description: 'Obesity and nutritional assessment questions from Kellawi (Questions 44-170).',
+
+    mcqs: [
+
+      q('Which of the following best defines obesity according to the provided text?', ['A cosmetic concern easily fixed by exercise.', 'A short-term increase in fluid retention.', 'A complex disease involving an excessive amount of body fat.', 'Having a BMI precisely between 25 and 29.9.'], 2, 'Obesity is defined as a complex disease involving an excessive amount of body fat, increasing the risk of other health problems. [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('What is the clinical BMI range for a person considered "overweight" but not obese?', ['18.5 - 24.9 kg/m²', '20 - 24.9 kg/m²', '25 - 29.9 kg/m²', '30 - 34.9 kg/m²'], 2, 'In clinical terms, a person with a BMI between 25 and 29.9 kg/m² is called overweight. [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('What is the primary goal of obesity treatment?', ['To reach the lowest possible body weight.', 'To exclusively use medication to suppress appetite.', 'To reach and stay at a healthy weight.', 'To strictly eliminate all fats from the diet.'], 2, 'The goal of obesity treatment is to reach and stay at a healthy weight through diet and lifestyle changes. [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('When modifying the diet for an obese patient, which specific types of fats should be reduced?', ['Only saturated fats', 'Saturated fats, trans fats, and cholesterol', 'Polyunsaturated fats and omega-3s', 'Only trans fats'], 1, 'Dietary treatment for obesity includes a low caloric diet and the reduction of saturated fats, trans fats, and cholesterol. [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('Bariatric surgery is typically considered an option for which group of individuals?', ['Anyone classified as overweight.', 'Anyone who wishes to lose 10 pounds quickly.', 'People with morbid obesity.', 'Children with early-onset obesity.'], 2, 'Weight-loss surgery (bariatric surgery) is indicated for individuals with morbid obesity (e.g., BMI > 40). [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('Effective care for obese children should primarily involve:', ['Immediate bariatric surgery.', 'High doses of appetite suppressants.', 'Parents\' observation, control of food proportions, and developing healthy eating habits.', 'Complete elimination of carbohydrates from the child\'s diet.'], 2, 'Care of obese children relies heavily on parental observation, portion control, and cultivating healthy eating habits. [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('In the context of treating obesity, why is it recommended to avoid stressful events?', ['Stress increases metabolic rate excessively.', 'Stress management helps avoid the general risk of exacerbating associated diseases.', 'Stress directly breaks down muscle tissue.', 'Stress improves digestion, leading to faster fat storage.'], 1, 'Avoiding stressful events and controlling stress helps mitigate the general risks of diseases associated with obesity. [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('A limitation of using BMI as a surrogate marker for body fat is that it underestimates obesity in which population?', ['Bodybuilders', 'Extremely muscular athletes', 'Elderly individuals who have lost body mass', 'Young children'], 2, 'BMI underestimates body fat in persons who have lost body mass, such as the elderly. [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('During hospitalization, a person\'s nutritional status often deteriorates. Which of the following is a way an illness contributes to this?', ['By increasing the resting metabolic rate to double the normal level.', 'By causing a loss of appetite.', 'By enhancing the absorption of essential fatty acids.', 'By increasing the patient\'s desire for physical activity.'], 1, 'An illness can lead to a loss of appetite, contributing to malnutrition during hospitalization. [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('Which dietary assessment tool involves asking a hospitalized patient to keep a record of their intake for a specified period, usually 3 or 7 days?', ['24-hour recall', 'Food Frequency List', 'Food records', 'Caloric titration'], 2, 'Food records involve patients keeping a written account of their food intake for a specified period, typically 3 or 7 days. [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('The "Food Frequency List" method is best described as:', ['A 24-hour detailed dietary interview.', 'Asking the patient how often they eat specific foods in a day or week.', 'Measuring the number of chewing cycles per meal.', 'A continuous 7-day written journal.'], 1, 'In a Food Frequency List, the patient is asked how often they eat certain foods in a day or week. [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('According to studies mentioned in the text, what is the prevalence of central obesity among Egyptian adults according to waist-hip ratio (WHR)?', ['20.1%', '24.1%', '28.7%', '30.7%'], 2, 'The overall prevalence of central obesity among Egyptian adults according to the WHR indicator is 28.7%. [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('Which of the following is a sociocultural factor contributing to the significantly higher prevalence of obesity among females in Egypt?', ['High rate of physical labor', 'Restricted outdoor activities', 'Excessive mandatory sports in schools', 'Increased consumption of seafood'], 1, 'High unemployment, restricted outdoor activities, and high illiteracy rates among females are sociocultural factors contributing to female obesity in Egypt. [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('Which demographic issue is explicitly linked to the higher rates of female obesity in Egyptian communities?', ['High illiteracy rate among females', 'High average income among females', 'Widespread use of public transport', 'Early retirement'], 0, 'A high illiteracy rate among females is cited as one of the sociocultural factors contributing to their higher prevalence of obesity in Egypt. [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('What is a surrogate marker commonly used to estimate body fat content in the general population?', ['Total blood volume', 'Body Mass Index (BMI)', 'Serum albumin', 'Fasting blood glucose'], 1, 'Body Mass Index (BMI) is a simple index of weight-for-height used as a surrogate marker for body fat content. [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('When performing a skin fold test, which specific area is measured?', ['Thickness of skin over the abdomen', 'Thickness of skin over the subscapular region', 'Thickness of skin over the middle of the triceps muscle', 'Thickness of skin over the quadriceps'], 2, 'The skin fold test measures the thickness of the skin over the middle of the triceps muscle. [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('According to the text, what is the normal skin fold thickness for women?', ['10 mm', '20 mm', '30 mm', '40 mm'], 2, 'The normal skin fold thickness is 30 mm in women. [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('Which of the following represents a direct tool of nutritional assessment?', ['Dietary survey', 'Clinical examination', 'Serum proteins and amino acids', 'All of the above are direct tools.'], 2, 'Serum proteins and amino acids are direct (biochemical) tools. Dietary surveys, clinical exams, and assessing prevalence are indirect or clinical tools. Wait, the exact MCQ text says: "Direct tools of nutritional assessment include the following EXCEPT: c) prevalence of iron deficiency anemia." This means dietary survey, clinical exam, and serum proteins ARE direct tools in that context. Thus, "Prevalence of iron deficiency anemia" is the exception. [Source: DOC-20240316-WA0569_240316_193043.pdf]'),
+
+      q('Direct tools of nutritional assessment include all of the following EXCEPT:', ['Dietary survey', 'Clinical examination', 'Prevalence of iron deficiency anemia', 'Serum proteins and amino acids'], 2, 'Assessing the prevalence of a condition in a population is an epidemiological (indirect) tool, not a direct assessment of an individual\'s nutritional status. [Source: Nutrition Q (answered) _240316_194315.pdf]'),
+
+      q('The main cause of obesity is classified primarily as:', ['Endocrinal', 'Genetic', 'Nutritional', 'Familial tendency'], 2, 'While genetics and endocrinal factors play a role, the primary main cause of obesity is nutritional (excess caloric intake). [Source: Nutrition Q (answered) _240316_194315.pdf]'),
+
+      q('A man is 200 cm in height and weighs 96 kg. He is considered:', ['Non obese', 'Mild overweight', 'Moderate overweight', 'Severe overweight'], 0, 'BMI = Weight (96) / Height squared (2.0 x 2.0 = 4) = 24 kg/m². A BMI of 24 is in the normal range, so he is non-obese. [Source: Nutrition Q (answered) _240316_194315.pdf]'),
+
+      q('If a person\'s height is 170 cm, their actual weight is 80 kg, and their desired weight is 70 kg, what is their relative weight?', ['100%', '114%', '14%', '150%'], 1, 'Relative weight = (Actual Weight / Desirable Weight) × 100 = (80 / 70) × 100 ≈ 114.28%. [Source: Nutrition Q (answered) _240316_194315.pdf]'),
+
+      q('A woman whose relative weight is calculated at 125% should be clinically considered:', ['Underweight', 'Normal weight', 'Overweight but not obese', 'Obese'], 3, 'A relative weight of 120% or more meets the clinical criteria for obesity. Therefore, 125% is obese. [Source: Nutrition Q (answered) _240316_194315.pdf]'),
+
+      q('Which of the following statements about childhood obesity is correct according to the provided material?', ['There is no association between childhood obesity and adult obesity.', 'Obesity is not a problem for kids because they usually grow out of it.', 'There is a proven association between childhood obesity and adult obesity.', 'Childhood obesity is solely caused by genetic factors.'], 2, 'Research shows there is a clear association between childhood obesity and adult obesity; kids do not simply "grow out of it." [Source: Nutrition Q (answered) _240316_194315.pdf]'),
+
+      q('What effect does lack of sleep have on body weight?', ['It increases resting metabolism causing weight loss.', 'It has no effect on body weight.', 'It can lead to weight gain.', 'It selectively reduces visceral fat.'], 2, 'Lack of sleep alters hormones regulating hunger and metabolism, which can lead to weight gain. [Source: Nutrition Q (answered) _240316_194315.pdf]'),
+
+      q('A male patient has a waist-hip ratio (WHR) of 0.9. Is he classified as having central obesity based on this exact measurement?', ['Yes, because it is exactly 0.9.', 'No, the ratio must be strictly greater than 0.9 (> 0.9).', 'Yes, anything above 0.85 in men is obese.', 'No, the threshold for men is 1.0.'], 1, 'The criterion for central obesity in men is a WHR strictly greater than 0.9. A WHR of exactly 0.9 is borderline/not classified as obese. [Source: Nutrition Q (answered) _240316_194315.pdf]'),
+
+      q('A female patient has a waist-hip ratio (WHR) of 0.9. How is this classified?', ['Normal weight', 'Underweight', 'Obese', 'Morbidly obese'], 2, 'For women, a WHR greater than 0.85 is considered obese. Since 0.9 > 0.85, she is classified as having central obesity. [Source: Nutrition Q (answered) _240316_194315.pdf]'),
+
+      q('When 300 calories of excess carbohydrate are consumed, how does the resulting weight gain compare to consuming 300 calories of excess fat in a normal person?', ['They lead to exactly the same amount of weight gain.', 'Excess fat leads to more weight gain because fat storage is more metabolically efficient.', 'Excess carbohydrates lead to more weight gain due to water retention.', 'Carbohydrates are entirely excreted if consumed in excess.'], 1, 'The statement "300 calories of excess carbohydrate will lead to the same weight gain as 300 calories of excess fat" is marked as False, due to differences in the metabolic cost of converting and storing these macronutrients. [Source: Nutrition Q (answered) _240316_194315.pdf]'),
+
+      q('Weight-loss (bariatric) surgery is generally recommended for:', ['Anyone who is slightly overweight.', 'Adolescents wanting to improve athletic performance.', 'Patients classified as morbidly obese.', 'Individuals with a BMI of 25.'], 2, 'Weight-loss surgery is not an option for just anyone who is overweight; it is reserved for individuals who are morbidly obese or have severe comorbidities. [Source: Nutrition Q (answered) _240316_194315.pdf]'),
+
+      q('Carrying excess fat in which area of the body is considered most dangerous to health?', ['Around the hips', 'Around the waist (visceral fat)', 'In the thighs', 'In the upper arms'], 1, 'Central or abdominal obesity (carrying excess weight around the waist) is metabolically active and more dangerous than carrying it around the hips. [Source: Nutrition Q (answered) _240316_194315.pdf]'),
+
+      q('Watching too much television contributes to obesity primarily by:', ['Exposing viewers to radiation that slows metabolism.', 'Promoting a sedentary lifestyle and exposure to food advertising.', 'Directly altering thyroid hormone levels.', 'Reducing the body\'s need for sleep.'], 1, 'Watching television is a sedentary activity that reduces energy expenditure and often pairs with mindless eating, contributing to obesity. [Source: Nutrition Q (answered) _240316_194315.pdf]'),
+
+      q('What often happens to the body weight of individuals who quit smoking tobacco?', ['They experience rapid, uncontrollable weight loss.', 'Their weight stays exactly the same.', 'They may gain weight.', 'They lose muscle mass but gain bone density.'], 2, 'Quitters of tobacco smoking frequently experience weight gain due to metabolic changes and increased food intake as a substitute behavior. [Source: Nutrition Q (answered) _240316_194315.pdf]'),
+
+      q('Which type of diabetes is recognized as a major direct complication of obesity?', ['Type I Diabetes Mellitus', 'Type II Diabetes Mellitus', 'Gestational Diabetes exclusively', 'Diabetes Insipidus'], 1, 'Type II diabetes mellitus is a primary metabolic complication of obesity due to increased insulin resistance. [Source: Nutrition Q (answered) _240316_194315.pdf]'),
+
+      q('Bariatric surgeries such as gastric bypass or vertical sleeve gastrectomy often lead to:', ['Rapid progression of Type II diabetes.', 'Rapid remission of Type II diabetes.', 'Immediate onset of Type I diabetes.', 'No effect on blood glucose levels.'], 1, 'These surgeries often result in the rapid remission (not progression) of Type II diabetes mellitus. [Source: Nutrition Q (answered) _240316_194315.pdf]'),
+
+      q('High fat intake in the diet increases the risk of which specific cancers?', ['Lung and stomach cancer', 'Skin and bone cancer', 'Breast and colon cancer', 'Brain and thyroid cancer'], 2, 'High dietary fat, a common factor in obesity, is known to increase the risk of both breast and colon cancer. [Source: Nutrition Q (answered) _240316_194315.pdf]'),
+
+      q('What percentage of cancer causes are estimated to be dietetic and preventable by improving lifestyle and nutrition?', ['10%', '25%', '50%', '90%'], 2, 'It is estimated that 50% of cancer causes are dietetic and can be prevented through improved lifestyle and nutrition. [Source: Nutrition Q (answered) _240316_194315.pdf]'),
+
+      q('A 50-year-old patient has a BMI of 29 kg/m². This patient is at highest risk for developing which of the following conditions?', ['Stroke', 'Coronary artery disease', 'Non-insulin-dependent diabetes', 'Pulmonary embolism'], 2, 'A BMI of 29 (overweight/borderline obese) significantly increases insulin resistance, making the patient at highest risk for developing non-insulin-dependent (Type 2) diabetes. [Source: Pretest_Self_Assessment_and_Review_Preventive_Medicine_and_Public.pdf]'),
+
+      q('Obesity in women increases the risk for which specific group of cancers?', ['Breast, pancreas, and ovary', 'Endometrium, breast, and colon', 'Ovary, cervix, and colon', 'Cervix, ovary, and breast'], 1, 'Obesity is a known major risk factor for cancers of the endometrium, postmenopausal breast, and colon. [Source: Pretest_Self_Assessment_and_Review_Preventive_Medicine_and_Public.pdf]'),
+
+      q('What is the most appropriate initial dietary intervention for weight loss in an obese patient without acute medical emergencies?', ['Complete fasting', 'A diet with less than 25% of total calories from fat', 'Restriction to exactly three meals per day with no calorie limit', 'Liquid protein diets only'], 1, 'A prudent starting intervention for weight loss is modifying the diet to ensure that less than 25-30% of total daily calories come from fat. [Source: Pretest_Self_Assessment_and_Review_Preventive_Medicine_and_Public.pdf]'),
+
+      q('Which of the following is NOT an endocrine cause of obesity?', ['Growth hormone deficiency', 'Insulinoma', 'Hypothyroidism', 'Hyperthyroidism'], 3, 'Hyperthyroidism typically leads to weight loss due to an increased metabolic rate. Hypothyroidism, insulinoma, and GH deficiency can contribute to obesity. [Source: DOC-20240316-WA0569_240316_193043.pdf]'),
+
+      q('Corticosteroid use is a known risk factor for:', ['Anorexia', 'Obesity', 'Rapid linear growth', 'Hyperthyroidism'], 1, 'Prolonged use of corticosteroids can lead to altered fat distribution and weight gain, causing iatrogenic obesity. [Source: DOC-20240316-WA0569_240316_193043.pdf]'),
+
+      q('Which of the following defines a Food Frequency Questionnaire?', ['A written survey of food consumption during a specific period.', 'A guided interview of everything eaten in the past 24 hours.', 'Observation of a patient eating a meal.', 'Measuring the exact caloric value of a prepared meal.'], 0, 'A Food Frequency Questionnaire asks patients to report how frequently they consume certain foods over a specific period. [Source: Nutrition Q (answered) _240316_194315.pdf]'),
+
+      q('Which of the following accurately describes a "Food Record"?', ['Recalling food eaten yesterday from memory.', 'A written account of food consumed during a specified period (3-7 days), usually several consecutive days and a weekend.', 'A blood test assessing long-term nutrient intake.', 'A standard hospital menu given to patients.'], 1, 'A food record requires the patient to accurately write down everything they eat for a set period, typically 3 to 7 days. [Source: Nutrition Q (answered) _240316_194315.pdf]'),
+
+      q('Which of the following is considered an indirect method of nutritional assessment?', ['Serum protein levels', 'Hemoglobin test', 'Dietary surveys and historical data', 'Bone marrow biopsy'], 2, 'Dietary surveys and historical records indirectly assess nutrition by looking at intake habits rather than physiological markers in the body. [Source: DOC-20240316-WA0569_240316_193043.pdf]'),
+
+      q('What is the main cause of the global obesity epidemic?', ['Changes in genetic profiles across populations.', 'Decreased leisure time activity only.', 'Increased energy quantity/density combined with a more sedentary lifestyle.', 'Widespread hormonal imbalances.'], 2, 'The epidemic is primarily driven by nutritional factors (high calorie, energy-dense foods) and decreased physical activity (sedentary lifestyle). [Source: Nutrition Q (answered) _240316_194315.pdf]'),
+
+      q('A woman has a height of 1.60 m and a weight of 85 kg. What is her BMI?', ['26.5', '33.2', '42.1', '53.1'], 1, 'BMI = 85 / (1.6 * 1.6) = 85 / 2.56 = 33.2 kg/m². [Calculation derived from BMI formula provided in sources].'),
+
+      q('Based on a BMI of 33.2 kg/m², the woman in the previous question is classified as:', ['Normal weight', 'Overweight', 'Obese', 'Morbidly obese'], 2, 'A BMI between 30 and 39.9 kg/m² is classified as obese. [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('A patient complains of frequent waking during the night, loud snoring, and daytime sleepiness. They have a BMI of 36. Which obesity complication is most likely occurring?', ['Type 2 diabetes', 'Obstructive sleep apnea', 'Osteoarthritis', 'Depression'], 1, 'Obstructive sleep apnea is a major complication of obesity characterized by snoring and interrupted sleep. [Source: DOC-20240316-WA0569_240316_193043.pdf]'),
+
+      q('How does obesity negatively impact joint health?', ['By increasing the risk of rheumatoid arthritis.', 'By causing osteoporosis and bone thinning.', 'By increasing mechanical stress, leading to osteoarthritis.', 'By preventing the absorption of calcium.'], 2, 'The excess weight of obesity puts immense physical stress on weight-bearing joints, leading to osteoarthritis. [Source: DOC-20240316-WA0569_240316_193043.pdf]'),
+
+      q('Which psychological condition is explicitly listed as a complication of obesity?', ['Schizophrenia', 'Bipolar disorder', 'Depression', 'Autism'], 2, 'Depression is frequently associated with obesity due to biological, social, and body-image factors. [Source: DOC-20240316-WA0569_240316_193043.pdf]'),
+
+      q('What is a recommended strategy to maintain weight loss after initially achieving a healthier weight?', ['Discontinuing all physical activity to preserve calories.', 'Returning to previous dietary habits.', 'Continuing regular exercise and a balanced diet.', 'Relying entirely on appetite-suppressing medication long-term.'], 2, 'Exercise and maintained dietary modifications are essential to sustain weight loss over time. [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('In evaluating a patient\'s risk of cardiovascular disease, why is carrying excess weight around the waist more dangerous than around the hips?', ['Waist fat is purely cosmetic and does not burn calories.', 'Abdominal (visceral) fat is more metabolically active and releases inflammatory markers.', 'Hip fat puts more stress on the heart directly.', 'Waist fat compresses the lungs and stops breathing.'], 1, 'Central obesity (waist fat) is highly correlated with metabolic syndrome, insulin resistance, and cardiovascular diseases compared to peripheral (hip) fat. [Source: Nutrition Q (answered) _240316_194315.pdf]'),
+
+      q('Which BMI threshold defines "extremely high" or morbid obesity?', ['BMI > 30', 'BMI > 35', 'BMI > 40', 'BMI > 50'], 2, 'Morbid obesity is classified as a BMI of 40 or above. [Source: obesity mcq.pdf]'),
+
+      q('An adult has a waist circumference of 95 cm. For a woman, this indicates:', ['Normal risk', 'Increased risk of metabolic complications', 'Malnutrition', 'Underweight'], 1, 'A waist circumference > 88 cm in women indicates central obesity and an increased risk of metabolic complications. [Source: DOC-20240316-WA0569_240316_193043.pdf]'),
+
+      q('An adult male has a waist circumference of 95 cm. For a man, this indicates:', ['Normal risk', 'Increased risk of metabolic complications', 'Morbid obesity', 'Malnutrition'], 0, 'For men, the threshold for increased metabolic risk is a waist circumference > 102 cm. Thus, 95 cm is below the high-risk threshold. [Source: DOC-20240316-WA0569_240316_193043.pdf]'),
+
+      q('When recording a dietary history in hospitalized patients, which group can provide highly useful supplementary information regarding the patient\'s actual food intake?', ['The hospital\'s billing department', 'The nursing staff', 'The hospital pharmacists', 'The physical therapists'], 1, 'In a hospitalized patient, the nursing staff is very helpful in providing information about what the patient has actually eaten. [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('Which type of dietary assessment requires the patient to rely purely on their memory of the past 24 hours?', ['Food Record', 'Food Frequency Questionnaire', '24-hour dietary recall', 'Biochemical analysis'], 2, 'The 24-hour recall relies on the patient remembering everything they ate and drank in the preceding 24 hours. [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('Which of the following factors does NOT cause an overestimation of body fat when using BMI?', ['High bone density', 'Severe edema (fluid retention)', 'High muscle mass (muscularity)', 'Loss of muscle mass (sarcopenia)'], 3, 'Loss of muscle mass causes BMI to underestimate body fat, whereas high muscularity causes it to overestimate body fat. [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('Which of the following is true regarding BMI\'s accuracy in the elderly?', ['It perfectly estimates body fat percentage.', 'It tends to overestimate body fat because bones get heavier.', 'It underestimates body fat in persons who have lost body mass.', 'It is completely useless and never measured in the elderly.'], 2, 'BMI underestimates fat in elderly persons who have experienced muscle wasting and loss of body mass. [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('Which is a recognized sociocultural factor contributing to high obesity rates among Egyptian women?', ['High levels of competitive sports participation', 'Over-employment and long working hours', 'Restricted outdoor activities', 'Widespread use of bicycles'], 2, 'Factors such as restricted outdoor activities, high unemployment, and high illiteracy contribute to higher obesity rates among Egyptian women. [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('How does high unemployment contribute to the high prevalence of obesity in certain populations?', ['It leads to increased physical labor at home.', 'It often results in a more sedentary lifestyle and lower access to healthy food choices.', 'It causes rapid weight loss due to stress.', 'It has no measurable effect on obesity.'], 1, 'Unemployment promotes a sedentary lifestyle and limits resources, culturally correlating with higher obesity rates in the mentioned Egyptian demographics. [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('In the context of cardiovascular disease prevention, the NCEP diet suggests limiting which component to improve heart health in obese patients?', ['Complex carbohydrates', 'Dietary fiber', 'Saturated fats and cholesterol', 'Water intake'], 2, 'The National Cholesterol Education Program emphasizes reducing saturated fats and dietary cholesterol to protect cardiovascular health. [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('Which of the following represents a primary preventive measure against obesity in children?', ['Performing bariatric surgery at age 10.', 'Prescribing Orlistat routinely to all children.', 'Developing healthy eating habits and controlling food proportions early.', 'Encouraging television watching to keep them safe indoors.'], 2, 'Observing and controlling food portions while developing healthy habits in children prevents the onset of obesity. [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('A male patient has a calculated RW of 115%. How should his weight status be described clinically?', ['Underweight', 'Desirable weight', 'Overweight but not definitively obese', 'Obese'], 2, 'Obesity is defined as an RW of 120% or more. A value of 115% indicates he is carrying excess weight but is below the strict cutoff for obesity. [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('Which is a characteristic symptom that may indicate an individual\'s obesity is causing sleep apnea?', ['Excessive sweating', 'Insomnia', 'Snoring', 'Early puberty'], 2, 'Snoring and daytime fatigue/sleepiness are hallmark symptoms of obstructive sleep apnea, a common obesity complication. [Source: obesity mcq.pdf]'),
+
+      q('Which drug mechanism applies to Orlistat in treating obesity?', ['Suppressing appetite in the brain.', 'Increasing resting metabolic rate by stimulating the thyroid.', 'Reducing fat absorption in the gastrointestinal tract.', 'Blocking carbohydrate digestion.'], 2, 'Orlistat works locally in the gut to inhibit lipases, reducing the absorption of dietary fats. [Source: obesity mcq.pdf]'),
+
+      q('Which drug mechanism applies to Sibutramine in treating obesity?', ['It acts as a bulk-forming laxative.', 'It acts centrally to suppress appetite.', 'It acts as a diuretic to reduce water weight.', 'It blocks the absorption of vitamins.'], 1, 'Sibutramine is an appetite suppressant that acts on the central nervous system. [Source: obesity mcq.pdf]'),
+
+      q('Which disease condition does NOT mechanically interfere with a person\'s ability to chew or swallow food?', ['Severe dental decay', 'Esophageal stricture', 'Mild sprained ankle', 'Stroke with dysphagia'], 2, 'Mechanical interference with chewing or swallowing can cause malnutrition. A sprained ankle does not affect this ability. [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('A 30-year-old woman with a BMI of 42 kg/m² has failed multiple diet and exercise programs. What is the next most appropriate evidence-based intervention?', ['More vigorous daily jogging', 'High-dose corticosteroids', 'Bariatric surgery', 'Complete starvation diet'], 2, 'With a BMI over 40 and failed conservative measures, weight-loss (bariatric) surgery is considered a viable and appropriate option. [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('If a patient is placed on a diet to treat obesity, the primary energetic goal is to:', ['Increase energy density of foods.', 'Create a caloric deficit by consuming a low caloric diet.', 'Maintain current caloric intake but change the timing of meals.', 'Double the intake of protein to force weight loss.'], 1, 'Weight loss diets function by providing a low caloric diet to create an energy deficit. [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('Which dietary component provides 9 kcal/gram, making it the most energy-dense macronutrient?', ['Carbohydrate', 'Protein', 'Fat', 'Fiber'], 2, 'Fat yields 9 kcal/g, making it highly energy-dense and a target for reduction in obesity management. [Source: L1 PPt - NUT401 - Vitamins.pdf]'),
+
+      q('A diet rich in simple sugars and saturated fats is known as:', ['A protective diet', 'An empty-calorie, energy-dense diet', 'A therapeutic DASH diet', 'A high-fiber diet'], 1, 'Foods providing large amounts of energy (calories) relative to their nutrient content (like sugars and fats) contribute to obesity. [Source: DOC-20240316-WA0569_240316_193043.pdf]'),
+
+      q('Which statement best reflects the relationship between genetics and obesity?', ['Genetics play absolutely no role in obesity.', 'Obesity is 100% determined by a single gene in all individuals.', 'Genetics is a risk factor, but environmental factors (diet, lifestyle) are crucial in the epidemic.', 'Only men inherit obesity genes.'], 2, 'The obesity epidemic is driven by energy density and sedentary lifestyle, though genetic profiles do act as risk factors/predispositions. [Source: Nutrition Q (answered) _240316_194315.pdf]'),
+
+      q('What is a "sedentary lifestyle"?', ['A lifestyle involving rigorous daily athletics.', 'A lifestyle characterized by a lot of sitting and very little physical exercise.', 'A lifestyle that involves a strictly vegetarian diet.', 'A lifestyle of frequent international travel.'], 1, 'A sedentary lifestyle lacks sufficient physical activity, heavily contributing to the obesity epidemic. [Source: Nutrition Q (answered) _240316_194315.pdf]'),
+
+      q('Which statement is true regarding the impact of obesity on mortality?', ['Obesity decreases overall mortality.', 'Obesity increases mortality primarily through cardiovascular disease, diabetes, and cancers.', 'Obesity only increases mortality if the BMI is above 50.', 'Obesity has no proven link to mortality rates.'], 1, 'Increased mortality from obesity results from complications like cardiovascular disease, hypertension, diabetes, and certain cancers. [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('How does obesity typically affect the lipid profile?', ['It increases HDL and decreases LDL.', 'It causes hypertriglyceridemia, decreased HDL, and increased LDL.', 'It has no effect on lipid profiles.', 'It completely eliminates triglycerides from the blood.'], 1, 'Obesity is associated with negative lipid changes: elevated triglycerides, decreased HDL (good cholesterol), and increased LDL (bad cholesterol). [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('In the treatment of obesity, what behavioral strategy is recommended to reduce food intake?', ['Eating one massive meal at the end of the day.', 'Taking frequent small meals.', 'Eating as quickly as possible.', 'Drinking alcohol before meals.'], 1, 'Taking frequent small meals can help regulate hunger and reduce overall food intake in obesity treatment. [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('What is the recommended strategy for alcohol consumption when trying to lose weight?', ['Increase intake to suppress appetite.', 'Switch exclusively to beer.', 'Reduce or eliminate alcohol intake.', 'Consume alcohol only after exercise.'], 2, 'Reducing or eliminating alcohol intake is recommended as it provides empty calories and contributes to weight gain. [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('How does physical exercise help in obesity management?', ['It acts as the primary driver of immediate, massive weight loss.', 'It helps maintain weight loss and improves cardiovascular health.', 'It permanently shrinks fat cells so they cannot regrow.', 'It replaces the need for dietary modifications entirely.'], 1, 'Exercise helps maintain weight loss, improves insulin resistance, and is an adjunct to dietary therapy, not a replacement. [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('A 40-year-old male has a BMI of 28 kg/m². He has hypertension and high cholesterol. What is the most appropriate primary intervention?', ['Immediate gastric bypass surgery.', 'Prescribing Orlistat without diet changes.', 'Modifying diet to reduce calories and saturated fats, and increasing physical activity.', 'Advising him that he is perfectly healthy.'], 2, 'For overweight individuals with comorbidities, the first-line treatment is lifestyle modification (diet and exercise). [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('At what BMI is pharmacotherapy (medication) generally considered if diet and exercise are insufficient and comorbidities are present?', ['BMI > 22', 'BMI > 25', 'BMI > 27', 'BMI > 18.5'], 2, 'Medication is generally reserved for women/men with a BMI above 30, or above 27 kg/m² if comorbidities are present. [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('At what BMI is pharmacotherapy (medication) generally considered for a patient WITHOUT comorbidities?', ['BMI > 25', 'BMI > 27', 'BMI > 30', 'BMI > 40'], 2, 'Medication is reserved for individuals with a BMI > 30 kg/m² if no other comorbidities are present. [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('An adolescent is diagnosed with obesity. During examination, the doctor notes rapid linear growth and early pubertal development. Is this a typical presentation?', ['Yes, obese children often present with tall stature and early puberty.', 'No, obese children are always short with delayed puberty.', 'No, early puberty only occurs in underweight children.', 'Yes, but only if they have Prader-Willi syndrome.'], 0, 'Tall stature and early puberty are common presentations in adolescent/childhood obesity. [Source: obesity mcq.pdf]'),
+
+      q('Which of the following is a physical sign often seen on the skin of rapidly growing obese adolescents?', ['Psoriasis', 'Increased abdominal striae (stretch marks)', 'Vitiligo', 'Severe eczema'], 1, 'Increased abdominal striae are a common physical presentation in adolescent obesity due to rapid skin stretching. [Source: obesity mcq.pdf]'),
+
+      q('What happens to the pubic fat pad in obese children/adolescents?', ['It completely disappears.', 'It is significantly reduced.', 'It is increased/prominent.', 'It hardens into cartilage.'], 2, 'A prominent or increased pubic fat pad is common in obesity; stating it is "reduced" is incorrect. [Source: obesity mcq.pdf]'),
+
+      q('If a person\'s weight is 70 kg and their height is 1.70 m, their BMI is calculated as:', ['70 / 1.70 = 41.1', '70 / (1.70 × 1.70) = 24.2', '(70 × 1.70) / 2 = 59.5', '1.70 / 70 = 0.02'], 1, 'BMI = Weight (kg) / Height² (m²) = 70 / 2.89 = 24.2 kg/m². [Source: obesity mcq.pdf]'),
+
+      q('Based on a BMI of 24.2 kg/m², the individual is considered:', ['Underweight', 'Normal weight', 'Overweight', 'Obese'], 1, 'A BMI between 18.5 and 24.9 is within the normal, healthy weight range. [Source: obesity mcq.pdf]'),
+
+      q('Which of the following indicates an increased risk of postmenopausal breast cancer?', ['Underweight', 'High fiber diet', 'Obesity', 'Low animal fat intake'], 2, 'Obesity is a known risk factor for postmenopausal breast cancer, as excess fat tissue can increase estrogen levels. [Source: Nutrition in Cancer mcq.pdf]'),
+
+      q('What is the impact of obesity on the respiratory system?', ['It increases lung capacity.', 'It cures asthma.', 'It can lead to obstructive sleep apnea and respiratory infections.', 'It prevents pneumonia.'], 2, 'Obesity restricts airway mechanics and is a leading cause of obstructive sleep apnea. [Source: DOC-20240316-WA0569_240316_193043.pdf]'),
+
+      q('When considering cancer risk, which combination is highly problematic for an obese individual?', ['High fruit intake and exercise', 'Sedentary lifestyle, high red meat intake, and alcohol consumption', 'Vegetarian diet and water', 'Low-fat diet and adequate sleep'], 1, 'Obesity combined with a sedentary lifestyle, red meat, and alcohol heavily compounds the risk for cancers like breast and colon cancer. [Source: Nutrition in Cancer mcq.pdf]'),
+
+      q('Which of the following best defines "anthropometric measurements"?', ['Chemical analysis of blood serum.', 'Measurement of the size, weight, and proportions of the human body.', 'Assessment of a patient\'s dietary recall.', 'Checking blood pressure and heart rate.'], 1, 'Anthropometric measurements include weight, height, BMI, waist circumference, and skin fold thickness. [Source: DOC-20240316-WA0569_240316_193043.pdf]'),
+
+      q('Why is "prevalence of iron deficiency anemia" NOT considered a direct tool of nutritional assessment for an individual?', ['Because iron deficiency doesn\'t exist.', 'Because prevalence is an epidemiological statistic of a population, not an individual measurement.', 'Because iron cannot be measured in the blood.', 'Because anemia only affects animals.'], 1, 'Prevalence indicates how common a disease is in a population. It is not a direct tool to assess a single patient\'s nutritional status. [Source: Nutrition Q (answered) _240316_194315.pdf]'),
+
+      q('What is the primary focus of the "DASH eating plan"?', ['Increasing saturated fat intake.', 'A diet rich in fruits, vegetables, and low in sodium to manage hypertension.', 'An all-meat diet for rapid weight loss.', 'A diet specifically designed to cure bone fractures.'], 1, 'The DASH diet is used to lower blood pressure and is protective against cardiovascular diseases commonly associated with obesity. [Source: DOC-20240316-WA0569_240316_193043.pdf]'),
+
+      q('Which of the following is considered a protective diet against diabetes (a complication of obesity)?', ['Refined sugar and fatty meat', 'Poultry with skin', 'Fresh vegetables, fruits, and whole grains', 'Empty-calorie foods'], 2, 'Protective diets against diabetes and obesity emphasize fresh vegetables, fruits, and complex carbohydrates over refined sugars and fats. [Source: DOC-20240316-WA0569_240316_193043.pdf]'),
+
+      q('If a patient requires nutritional assessment, which of the following provides historical data?', ['Serum albumin test', 'Triceps skin fold measurement', '24-hour dietary recall', 'Weighing the patient on a scale'], 2, 'Dietary recalls and food frequency questionnaires provide historical data about a patient\'s intake. [Source: DOC-20240316-WA0569_240316_193043.pdf]'),
+
+      q('How is the "Food Record" method different from the "24-hour recall"?', ['The food record relies entirely on memory from the past day.', 'The food record involves writing down food as it is consumed over a period of 3-7 days.', 'The food record only asks about liquid intake.', 'The food record is conducted by observing the patient eat.'], 1, 'A food record is a written account kept over several days, whereas a 24-hour recall relies on memory of the previous day. [Source: Nutrition Q (answered) _240316_194315.pdf]'),
+
+      q('Which of the following indicates an increased risk of developing Osteoarthritis?', ['Underweight', 'Vitamin C deficiency', 'Obesity', 'Excess calcium intake'], 2, 'Obesity is a major mechanical risk factor for osteoarthritis due to the excessive load placed on weight-bearing joints. [Source: obesity mcq.pdf]'),
+
+      q('True or False converted: Is weight-loss surgery a standard option for anyone who feels they are slightly overweight?', ['Yes, it is the first line of treatment.', 'Yes, anyone can elect to have it.', 'No, it is generally an option only for morbidly obese individuals or those with severe obesity-related comorbidities.', 'No, weight-loss surgery is illegal.'], 2, 'Weight-loss surgery is reserved for morbid obesity (BMI >40) or BMI >35 with severe comorbidities, not just anyone who is overweight. [Source: Nutrition Q (answered) _240316_194315.pdf]'),
+
+      q('A patient with a BMI of 19.5 is classified as:', ['Underweight', 'Normal weight', 'Overweight', 'Obese'], 1, 'A BMI between 18.5 and 24.9 is considered normal weight. [Source: obesity mcq.pdf]'),
+
+      q('Which of the following is a primary physiological consequence of reducing saturated fats, trans fats, and cholesterol in an obese patient\'s diet?', ['Increased risk of scurvy', 'Reduced risk of cardiovascular disease', 'Increased risk of osteoporosis', 'Rapid loss of eyesight'], 1, 'These fats strongly contribute to dyslipidemia and cardiovascular disease; reducing them lowers cardiovascular risk. [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('Which tool directly measures subcutaneous fat stores as an estimate of total body fat?', ['Stethoscope', 'Skin fold caliper', 'Sphygmomanometer', 'Thermometer'], 1, 'Skin fold calipers are the special devices used to measure the thickness of a fold of skin and subcutaneous fat. [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('When calculating BMI in clinical practice, what unit of measurement MUST height be converted to?', ['Centimeters', 'Millimeters', 'Meters', 'Kilometers'], 2, 'The standard BMI formula divides weight in kilograms by height in meters squared. [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('A male patient\'s desirable weight is 80 kg, but he weighs 100 kg. What is his Relative Weight (RW)?', ['80%', '125%', '150%', '200%'], 1, 'RW = (100 / 80) * 100 = 1.25 * 100 = 125%. [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('Based on the calculation in the previous question (RW = 125%), how is the patient classified?', ['Underweight', 'Normal', 'Overweight but not obese', 'Obese'], 3, 'A Relative Weight (RW) of 120% or more is considered obese. [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('A woman\'s desirable weight is 60 kg, and her actual weight is 66 kg. What is her Relative Weight (RW)?', ['90%', '100%', '110%', '120%'], 2, 'RW = (66 / 60) * 100 = 110%. [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('Based on the RW of 110%, the woman in the previous question is classified as:', ['Obese', 'Morbidly Obese', 'Not obese (under the 120% threshold)', 'Severely malnourished'], 2, 'Because her RW is below 120%, she has not reached the clinical threshold for obesity based on RW alone. [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('A BMI of exactly 25.0 kg/m² places an individual in which category?', ['Normal', 'Overweight', 'Obese', 'Underweight'], 1, 'The overweight category begins at a BMI of exactly 25.0 kg/m². [Source: obesity mcq.pdf]'),
+
+      q('A BMI of exactly 30.0 kg/m² places an individual in which category?', ['Overweight', 'Obese', 'Morbidly obese', 'Normal'], 1, 'The clinical threshold for obesity begins at a BMI of 30.0 kg/m². [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('Which condition, common in hospitalized patients, is NOT linked to an increase in body fat/obesity?', ['High caloric tube feeding exceeding needs', 'Prolonged immobility and overfeeding', 'Sarcopenia and prolonged protein depletion', 'Steroid therapy'], 2, 'Sarcopenia and prolonged protein depletion (evidenced by low albumin) signify malnutrition and wasting, not obesity. [Source: obesity mcq.pdf]'),
+
+      q('True or False converted: Do quitters of tobacco smoking run a risk of weight gain?', ['No, smoking cessation universally causes weight loss.', 'Yes, quitters of tobacco smoking may gain weight.', 'No, tobacco has no interaction with metabolism or eating habits.', 'Yes, but only if they start drinking alcohol.'], 1, 'Quitting smoking can often lead to weight gain due to metabolic adjustments and increased appetite/snacking. [Source: Nutrition Q (answered) _240316_194315.pdf]'),
+
+      q('True or False converted: Does watching too much television contribute to obesity?', ['Yes, it is a significant contributing factor.', 'No, it burns substantial calories.', 'Only if the television emits radiation.', 'No, screen time is entirely unlinked to body weight.'], 0, 'Watching television encourages a sedentary lifestyle and is linked to overeating, contributing to obesity. [Source: Nutrition Q (answered) _240316_194315.pdf]'),
+
+      q('Which of the following is considered a \'macronutrient undernutrition\' problem, as opposed to an overnutrition problem like obesity?', ['Type 2 Diabetes', 'Osteoarthritis', 'Protein Energy Malnutrition (PEM)', 'Coronary Heart Disease'], 2, 'Protein Energy Malnutrition (like Marasmus and Kwashiorkor) represents undernutrition, whereas obesity is a form of overnutrition/malnutrition. [Source: Nutrition Q (answered) _240316_194315.pdf]'),
+
+      q('In the assessment of childhood obesity, tracking the rate of growth is crucial. Which chart is primarily used for this?', ['Electrocardiogram', 'Normal growth curves (percentiles)', 'Audiogram', 'Visual acuity chart'], 1, 'Normal growth curves (tracking weight-for-age and height-for-age percentiles) are used to assess growth and detect obesity in children. [Source: DOC-20240316-WA0569_240316_193043.pdf]'),
+
+      q('Which medication is noted for treating obesity by acting locally in the gut rather than in the brain?', ['Sibutramine', 'Orlistat', 'Fluoxetine', 'Amphetamines'], 1, 'Orlistat reduces fat absorption in the digestive tract, whereas drugs like Sibutramine act on the central nervous system to suppress appetite. [Source: obesity mcq.pdf]'),
+
+      q('If an individual has a waist-hip ratio of 0.95, and is a woman, what is her clinical risk status?', ['Normal, low risk.', 'High risk due to central obesity.', 'Low risk because the threshold is 1.0.', 'Undetermined without a blood test.'], 1, 'For women, a WHR > 0.85 signifies central obesity and a high risk of metabolic complications. [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('If an individual has a waist-hip ratio of 0.95, and is a man, what is his clinical risk status?', ['Normal, low risk.', 'High risk due to central obesity.', 'Low risk because the threshold is 1.0.', 'Undetermined without a blood test.'], 1, 'For men, a WHR > 0.9 signifies central obesity and a high risk of metabolic complications. [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('Which of the following is NOT a complication associated with obesity?', ['Sleep apnea', 'Cardiovascular diseases', 'Type 1 Diabetes', 'Osteoarthritis'], 2, 'Obesity is a major risk factor for Type 2 Diabetes, not Type 1 Diabetes (which is primarily an autoimmune condition). [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('A 60-year-old man visits his doctor for routine checkup. His BMI is 28.5. How should his weight be classified?', ['Normal', 'Overweight', 'Obese Class I', 'Morbidly Obese'], 1, 'A BMI of 28.5 is between 25 and 29.9, classifying him as overweight. [Source: obesity mcq.pdf]'),
+
+      q('Which method measures the amount of subcutaneous fat to estimate total body fat percentage?', ['24-hour recall', 'Skin fold test', 'Waist circumference', 'Relative Weight calculation'], 1, 'The skin fold test (typically at the triceps) directly pinches the skin and subcutaneous fat to estimate body fatness. [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('When recommending an exercise regimen for an obese patient, the goal is typically:', ['5 minutes of extreme lifting daily.', '30 minutes of moderate activity most days of the week.', '2 hours of running once a month.', 'Complete rest to avoid joint damage.'], 1, 'Guidelines recommend at least 30 minutes of moderate physical activity on most days of the week for weight management and cardiovascular health. [Source: obesity mcq.pdf]'),
+
+      q('What is the impact of obesity on fertility and reproductive health in women?', ['It enhances fertility.', 'It has no effect.', 'It is a risk factor for hormonal imbalances and issues like polycystic ovarian syndrome (PCOS).', 'It prevents menopause.'], 2, 'Obesity causes hormonal imbalances and is associated with an increased risk of reproductive issues and certain cancers (endometrial, ovary). [Source: DOC-20240316-WA0569_240316_193043.pdf]'),
+
+      q('Why might a highly trained, very muscular athlete be misclassified as obese by BMI?', ['Because muscle weighs more than fat for the same volume, artificially raising the BMI score.', 'Because athletes eat more junk food.', 'Because BMI only measures bone density.', 'Because BMI calculations are different for athletes.'], 0, 'BMI overestimates fat in very muscular persons because it relies solely on weight and height, not distinguishing between muscle mass and fat mass. [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('A 55-year-old female presents with a waist circumference of 85 cm. According to the text, is she at increased risk for metabolic complications?', ['Yes, because it is > 80 cm.', 'No, because it is not > 88 cm.', 'Yes, because she is over 50.', 'No, because the threshold is 102 cm for women.'], 1, 'The threshold for abdominal obesity and increased risk in women is a waist circumference > 88 cm. [Source: DOC-20240316-WA0569_240316_193043.pdf]'),
+
+      q('A 55-year-old male presents with a waist circumference of 105 cm. According to the text, is he at increased risk for metabolic complications?', ['Yes, because it is > 102 cm.', 'No, because it is not > 110 cm.', 'No, because the threshold is 88 cm for men.', 'Yes, but only if his BMI is over 40.'], 0, 'The threshold for abdominal obesity and increased risk in men is a waist circumference > 102 cm. [Source: L5 - NUT401 - Obesity.pdf]'),
+
+      q('Which dietary practice is NOT recommended for managing obesity?', ['Drinking 8 glasses of water daily.', 'Taking frequent small meals.', 'Consuming empty-calorie foods.', 'Increasing intake of dietary fiber.'], 2, 'Empty-calorie foods (high in sugar and fats with few nutrients) contribute to obesity and should be avoided. [Source: DOC-20240316-WA0569_240316_193043.pdf]'),
+
+      q('What role does dietary fiber play in managing obesity?', ['It increases caloric density dramatically.', 'It promotes feelings of fullness (satiety) and helps relieve constipation.', 'It digests rapidly, causing blood sugar spikes.', 'It converts directly into adipose tissue.'], 1, 'Dietary fiber provides bulk, prevents constipation, and can help control weight by increasing satiety without adding excessive calories. [Source: DOC-20240316-WA0569_240316_193043.pdf]'),
+
+      q('Which of the following is considered an indirect measure of body composition?', ['Magnetic Resonance Imaging (MRI)', 'Dual-energy X-ray absorptiometry (DEXA)', 'Bioelectrical impedance analysis (BIA)', 'Both B and C'], 3, 'Dual-energy X-ray absorptiometry (DEXA) and Bioelectrical impedance analysis (BIA) are indirect measures of body composition, whereas MRI is a direct/multicompartment method. [Source: L5 - NUT401 - Obesity.pdf]')
+
+    ]
+
+  })
+
+
+
   toSource('Iron deficiency anemia', {
 
     id: 'nut401-ida-mcqs',
@@ -7927,6 +8197,162 @@ window.mcqQuizzes['Monitoring and Fluid Therapy'] = [
       q('In the first 12-24 hours of iron therapy, which improvement is expected?', ['Hb normalization', 'Appetite increase', 'Ferritin increase', 'MCH rise'], 1, 'Improved appetite and well-being are the earliest clinical responses to iron therapy.'),
 
       q('The desire to chew non-nutritive substances is termed:', ['Plumbism', 'Koilonychia', 'Pagophagia', 'Poikilocytosis'], 2, 'Pagophagia is chewing ice; the general term for non-nutritive substance craving is pica.')
+
+    ]
+
+  })
+
+
+
+  toSource('Iron deficiency anemia', {
+
+    id: 'kellawi-ida-mcqs',
+
+    label: 'Kellawi MCQs',
+
+    description: 'Iron deficiency anemia questions from Kellawi (Questions 51-120).',
+
+    mcqs: [
+
+      q('How is anemia strictly defined?', ['Reduction of white blood cell volume', 'Increase in red blood cell volume above reference level', 'Reduction of the red blood cell volume or hemoglobin concentration below reference level', 'Excessive destruction of platelets'], 2, 'Anemia is the reduction of the RBC volume or hemoglobin concentration below the reference level for the age and sex of the individual. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('What percentage of the global population suffers from iron-deficiency anemia?', ['10%', '30%', '50%', '70%'], 1, 'Approximately 30% of the global population suffers from iron-deficiency anemia, mostly in developing countries. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('The most important cause of iron deficiency anemia in developing countries is:', ['Parasitic infection (hookworms, whipworms, roundworms)', 'Vitamin C deficiency', 'Autoimmune destruction', 'Bone marrow failure'], 0, 'Infestation with parasitic worms is the most important cause worldwide, particularly in developing areas. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('Microcytic hypochromic anemia can be caused by iron deficiency and which of the following?', ['Hemolytic anemia', 'Aplastic anemia', 'Ineffective erythropoiesis', 'Megaloblastic erythropoiesis'], 2, 'The two main causes of microcytic hypochromic anemia are iron deficiency and ineffective erythropoiesis (such as thalassemia and lead poisoning). [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('Which of the following conditions classically leads to macrocytic anemia?', ['Thalassemia', 'Acute blood loss', 'Megaloblastic erythropoiesis', 'Hypersplenism'], 2, 'Macrocytic anemia is caused by megaloblastic erythropoiesis (from Folate or B12 deficiency) and congenital disorders of DNA synthesis. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('In the etiological classification of anemia, "Decreased iron adjustment" includes:', ['Acute blood loss', 'Microangiopathic anemias', 'Nutritional deficiency', 'Hypersplenism'], 2, 'Nutritional deficiency, along with hypoplastic anemia and bone marrow infiltration, causes anemia through decreased iron adjustment/intake. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('A normal adult body contains roughly how much total iron?', ['0.5 g', '1.5 g', '5 g', '10 g'], 2, 'The adult content of iron is estimated to be 5 g. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('A diet must provide how much iron daily for optimal nutrition in an adult?', ['1-2 mg', '8-10 mg', '20-30 mg', '50 mg'], 1, 'A diet containing 8-10 mg of iron daily is necessary since about 10% is absorbed to meet the 1 mg daily requirement. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('Compared to cow\'s milk, iron from human breast milk is:', ['Absorbed 2-3 times more efficiently', 'Absorbed equally', 'Poorly absorbed due to high calcium', 'Destroyed in the infant\'s stomach'], 0, 'Iron is absorbed 2-3 times more efficiently from human milk than from cow\'s milk. [Source: 4-كويز_240316_194457.pdf, L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('Which of the following is considered a poor source of dietary iron?', ['Spinach', 'Shrimps', 'Cow\'s milk', 'Cashew nuts'], 2, 'Cow\'s milk is explicitly noted as a poor source of iron and contributes to deficiency in infants. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('How much iron must be absorbed every day for normal functioning in children below 15 years?', ['0.1-0.2 mg', '0.8-1 mg', '3-4 mg', '5-10 mg'], 1, 'Children under 15 require 0.8-1 mg of absorbed iron per day. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('What percentage of dietary iron is generally absorbed by the intestines?', ['2%', '10%', '50%', '90%'], 1, 'Absorption of dietary iron is assumed to be about 10% of the intake. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('Which demographic in Egypt specifically benefits from the Student Health Insurance Program (SHIP) regarding anemia prevention?', ['Pregnant women', 'School children and adolescents', 'Elderly', 'Toddlers'], 1, 'The HIO expanded its program to cover all school children under SHIP to provide preventive/curative services for anemia. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('Which of the following amino acids increases iron absorption?', ['Tryptophan', 'Cystine', 'Glutamate', 'Leucine'], 1, 'Amino acids such as cystine, lysine, and histidine increase iron absorption. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('Which of the following is a known inhibitor of iron absorption?', ['Vitamin C', 'Tannic acid', 'Gastric HCl', 'Lactose'], 1, 'Tannic acid (found in tea), phytates, calcium salts, and phosphates decrease iron absorption. [Source: 4-كويز_240316_194457.pdf, L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('After hemoglobin is destroyed by the spleen, what organ metabolizes the resulting bilirubin for excretion?', ['Kidney', 'Lung', 'Liver', 'Pancreas'], 2, 'The spleen converts old Hb to bilirubin, and the liver metabolizes bilirubin to excrete it in bile. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('At what age do infants typically exhaust their stored maternal iron if fed an iron-deficient diet?', ['1 month', '2-3 months', '6 months', '12 months'], 2, 'Considerable iron stored at birth is usually sufficient for blood formation for the first 6 months of life. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('Why do adolescent females have a significantly higher risk of iron deficiency anemia?', ['Because their bodies stop producing transferrin', 'Due to menstrual iron losses and preparation for future childbearing', 'Due to high testosterone levels', 'Because they consume more cow\'s milk than boys'], 1, 'Women during reproductive ages/adolescence suffer iron losses sustained with menses and need iron for growth and pregnancy. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('In adult males, severe siderosis from frequent blood transfusions can lead to a maximum daily iron loss via skin and GI tract of:', ['1 mg', '2 mg', '4 mg', '10 mg'], 2, 'Males with severe siderosis from blood transfusions can lose a maximum of 4 mg daily via these routes without additional blood loss. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('How much iron does a woman lose with a typical pregnancy?', ['100 mg', '250 mg', '500 mg', '1000 mg'], 2, 'A woman loses about 500 mg of iron with each pregnancy. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('A single hookworm can suck approximately how much blood per day?', ['0.001 - 0.01 ml', '0.03 - 0.2 ml', '1.0 - 2.0 ml', '5.0 - 10.0 ml'], 1, 'Hookworms suck 0.03 - 0.2 ml of blood per worm per day, heavily contributing to iron deficiency. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('Which of the following is an early clinical feature of iron deficiency?', ['Massive hepatomegaly', 'Extreme weight gain', 'Hair loss and lightheadedness', 'Hypertension'], 2, 'Hair loss, lightheadedness, fainting, sleepiness, and tinnitus are general clinical features of iron deficiency. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('The most important physical sign of iron deficiency anemia is:', ['Jaundice', 'Pallor', 'Cyanosis', 'Erythema'], 1, 'Pallor is the most important sign, although palmer, nail bed, and conjunctival pallor have varying false-positive/negative rates. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('When evaluating the CBC of a patient with iron deficiency anemia, which parameter is characteristically increased?', ['Mean Corpuscular Volume (MCV)', 'Red Blood Cell Distribution Width (RDW)', 'Mean Corpuscular Hemoglobin (MCH)', 'Percentage saturation of transferrin'], 1, 'The MCV, MCH, and MCHC decrease, while the RBC distribution width (RDW) increases due to poikilocytosis and anisocytosis. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('In the bone marrow of an iron-deficient patient, erythroid cells are typically:', ['Hypoplastic', 'Hypercellular with erythroid hyperplasia', 'Replaced by fat cells', 'Completely absent'], 1, 'Bone marrow exam shows it is hypercellular with erythroid hyperplasia, with no stainable iron. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('Occult blood can be detected in the stool of approximately what fraction of IDA cases?', ['1/10', '1/3', '1/2', '9/10'], 1, 'In about 1/3 of cases, occult blood can be detected in the stool. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('Which symptom is considered a neurological manifestation of IDA involving the urge to move the legs?', ['Tourette\'s syndrome', 'Restless legs syndrome (RLS)', 'Parkinson\'s disease', 'Sciatica'], 1, 'Some people who have iron-deficiency anemia develop restless legs syndrome (RLS). [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('Which of the following high-risk groups is specifically recommended for screening by hematocrit?', ['Adult males over 50', 'All pregnant women in the third trimester only', 'Premature infants and individuals in low socioeconomic circumstances', 'Professional athletes'], 2, 'Screening by hematocrit is cost-effective for premature infants, infants of multiple pregnancies or iron-deficient women, and individuals in low socioeconomic circumstances. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('The term "fortification" in the context of IDA control means:', ['Providing iron pills directly to patients', 'Removing inhibitors like phytates from crops', 'Addition of one or more nutrients to food to improve the quality of the diet', 'Sterilizing water to prevent parasite transmission'], 2, 'Fortification is defined as the addition of one or more nutrients to any food to improve the diet of a community. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('What is a common gastrointestinal adverse effect of oral iron therapy?', ['Peptic ulcer rupture', 'Black stool and constipation', 'Severe watery diarrhea', 'Gallstones'], 1, 'Common adverse effects include nausea, epigastric discomfort, constipation or diarrhea, and black stool. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('Which medications must be strictly avoided within 2 hours of taking an iron supplement?', ['Acetaminophen', 'Beta-blockers', 'Antacids and certain antibiotics like levofloxacin', 'Antihistamines'], 2, 'Antacids and antibiotics like ciprofloxacin and levofloxacin must be avoided within 2 hours before or after taking iron. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('In the treatment timeline of IDA, what happens roughly 4-30 days after starting iron therapy?', ['Subjective improvement', 'Erythroid hyperplasia begins', 'Reticulocytosis peaks', 'Increase in hemoglobin level'], 3, 'Hemoglobin levels increase between 4-30 days, while reticulocytosis peaks at 5-7 days. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('What is the impact of providing safe water and sanitation on IDA?', ['It increases dietary iron levels', 'It directly provides iron fortification', 'It decreases diarrheal diseases which negatively affect iron absorption', 'It converts non-heme iron to heme iron'], 2, 'Provision of safe water and sanitation will decrease diarrheal diseases which affect iron absorption. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('What is the recommended strategy for an adolescent female who develops IDA due to abnormal uterine blood flow?', ['Immediate blood transfusion', 'Iron and hormone therapy', 'Iron dextran only', 'Dietary modification alone'], 1, 'Adolescent females who develop iron deficiency due to abnormal uterine blood flow loss should be treated with iron and hormone therapy. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('Which type of dietary iron is more easily absorbed by the body?', ['Non-heme iron from beans', 'Heme iron from red meat and poultry', 'Elemental iron from fortified cereals', 'Ferric iron from supplements'], 1, 'Heme iron, found in animal products, is more easily absorbed than non-heme iron from plant sources. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('Which of the following is true about pregnant women and iron supplements?', ['They should avoid vitamin C', 'They are typically prescribed ferrous sulfate or ferrous gluconate if hemoglobin is low', 'They must take supplements with milk to prevent nausea', 'They do not need extra iron'], 1, 'Pregnant women are often prescribed ferrous sulfate or ferrous gluconate if they have low hemoglobin or ferritin. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('Infants consuming cow\'s milk have a greater incidence of IDA than those consuming breast milk because:', ['Cow\'s milk has no iron at all', 'Cow\'s milk causes immediate destruction of red blood cells', 'Calcium in cow\'s milk competes with iron for absorption', 'Cow\'s milk is rich in phytates'], 2, 'Bovine milk has a higher concentration of calcium, which competes with iron for absorption. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('True or False: Milk enhances the absorption of iron.', ['True', 'False', 'Only breast milk', 'Only powdered milk'], 1, 'Milk, due to its high calcium content, actually inhibits iron absorption. [Source: 4-كويز_240316_194457.pdf, questions nutrition_240316_195933.pdf]'),
+
+      q('True or False: Iron requirements are the same in men and women.', ['True', 'False', 'Only after menopause', 'Only before puberty'], 1, 'Women need more iron (due to menstruation and pregnancy) than men. [Source: 4-كويز_240316_194457.pdf, questions nutrition_240316_195933.pdf]'),
+
+      q('The most common cause of iron deficiency anemia in adults is:', ['Pregnancy', 'Lack of iron in the diet', 'Chronic blood loss', 'Inability to absorb iron'], 2, 'Chronic blood loss (such as GI bleeding or heavy menstruation) is the most common cause of IDA in adults. [Source: NUT Previous Quiz MCQs_240316_200428.pdf]'),
+
+      q('Iron requirements in women generally:', ['Increase after menopause', 'Decrease after menopause', 'Stay the same throughout life', 'Drop to zero after menopause'], 1, 'The statement "Iron requirements of women increase after menopause" is marked as False. They decrease because menstrual blood loss ceases. [Source: questions nutrition_240316_195933.pdf]'),
+
+      q('Iron deficiency during pregnancy can lead to which of the following?', ['Cretinism', 'Neural tube defects', 'Premature birth, low birth weight, and perinatal mortality', 'Macrosomia'], 2, 'Anemia puts the child at risk of premature birth, low birth weight, and perinatal mortality. (Note: Cretinism is caused by iodine deficiency, not iron). [Source: L5 - NUT401 - Iron deficiency anemia.pdf, 4-كويز_240316_194457.pdf]'),
+
+      q('Which vitamin is critical for converting non-heme iron to an absorbable form?', ['Vitamin D', 'Vitamin E', 'Ascorbic acid (Vitamin C)', 'Vitamin K'], 2, 'Ascorbic acid enhances the absorption of iron. [Source: 4-كويز_240316_194457.pdf]'),
+
+      q('What is the impact of tea consumption on iron bio-availability?', ['It increases it dramatically', 'It has no effect', 'It decreases it', 'It converts non-heme to heme iron'], 2, 'Tannins in tea inhibit iron absorption, decreasing its bioavailability. [Source: 4-كويز_240316_194457.pdf]'),
+
+      q('In which form is iron predominantly stored in the body?', ['Transferrin', 'Hemoglobin', 'Ferritin', 'Myoglobin'], 2, 'Ferritin is the primary intracellular iron-storage protein. [Source: L5 - NUT401 - Iron deficiency anemia.pdf, Nutrition Q (answered) _240316_194315.pdf]'),
+
+      q('Which factor is considered a dietary inhibitor of iron absorption found in whole wheat bread and spinach?', ['Lactic acid', 'Phytates', 'Citric acid', 'Amino acids'], 1, 'Phytates, found in spinach and bran/wheat, inhibit iron absorption. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('An adult male requires how much absorbed iron per day from his diet?', ['0.1 mg', '1 mg', '5 mg', '18 mg'], 1, 'A male absorbs and loses about 1 mg of iron daily. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('Which of the following contains the highest concentration of absorbable heme iron?', ['Spinach', 'Bran', 'Shrimps and liver', 'Cashew nuts'], 2, 'Meat, liver, kidney, and shrimps are sources of heme iron, which is absorbed better. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('When a patient takes oral iron supplements, what should they expect regarding their stools?', ['They will become red', 'They will become black', 'They will become white', 'They will become watery'], 1, 'Black stool is a common, harmless side effect of oral iron therapy. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('If an iron-deficient patient is prescribed a 3-month course of oral iron, what is the primary physiological goal of the final two months?', ['To raise hemoglobin', 'To stop blood loss', 'To replete iron stores (ferritin)', 'To prevent scurvy'], 2, 'Iron is continued for 3-4 months (or 8 weeks post-Hb normalization) to completely replace depleted iron stores. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('A 16-year-old girl complains of extreme fatigue, brittle nails, and cracks in the sides of her mouth. Her diet is mostly vegetarian. What is the most likely diagnosis?', ['Vitamin A deficiency', 'Iron deficiency anemia', 'Thalassemia', 'Scurvy'], 1, 'Brittle nails, angular cheilitis, and fatigue in a vegetarian adolescent point strongly to IDA. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('Which of the following best describes the appearance of RBCs in advanced Iron Deficiency Anemia?', ['Macrocytic and normochromic', 'Microcytic and hypochromic', 'Normocytic and hypochromic', 'Megaloblastic'], 1, 'IDA causes microcytosis (small size) and hypochromia (pale color due to poor hemoglobination). [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('What is the role of the spleen in iron recycling?', ['It absorbs iron from food', 'It converts old hemoglobin into bilirubin, releasing iron', 'It stores all the body\'s ferritin', 'It creates new transferrin'], 1, 'The spleen destroys old RBCs and converts Hb to bilirubin, allowing iron to be recycled. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('Which of the following is NOT an extracorpuscular cause of increased physiological requirement for iron?', ['Alloimmune hemolytic anemia', 'Hypersplenism', 'Aplastic anemia', 'Infections'], 2, 'Aplastic anemia is a cause of decreased iron adjustment (impaired cell production), not an extracorpuscular cause of increased requirement. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('During the first 6 months of life, a healthy term baby fed on an iron-deficient milk diet relies primarily on:', ['Iron synthesis in the liver', 'Iron obtained from the mother during gestation', 'Dietary iron from water', 'Fetal hemoglobin conversion'], 1, 'Babies use the 250 mg of iron obtained from maternal sources, which usually suffices for the first 6 months. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('In Egypt, what percentage of adolescents are considered anemic based on the 2000 Demographic and Health Survey?', ['10%', '20%', '30%', '50%'], 2, '30% of adolescents in Egypt were found to be anemic. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('Which of the following significantly contributes to the high rate of IDA in the typical Egyptian diet?', ['Low consumption of vegetables', 'High intake of foods that inhibit absorption like tea and whole wheat bread', 'Excessive intake of citrus fruits', 'High intake of red meat'], 1, 'The Egyptian diet often features considerable amounts of tea and whole wheat bread (phytates), which inhibit iron absorption. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('Why is cow\'s milk considered a risk factor for IDA in infants?', ['It contains high levels of phytates', 'Its high calcium content competes with iron for absorption', 'It causes immediate gastric bleeding in all infants', 'It destroys transferrin'], 1, 'Bovine milk has a higher concentration of calcium, which competes with iron for absorption, and may cause occult blood loss due to intolerance. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('Which amino acid is known to increase iron absorption?', ['Tryptophan', 'Leucine', 'Histidine', 'Glycine'], 2, 'Amino acids such as cystine, lysine, and histidine increase iron absorption. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('Plumbism is a severe risk in IDA children who:', ['Consume too much milk', 'Engage in pica and ingest lead-containing substances', 'Refuse to eat meat', 'Have a comorbid infection'], 1, 'Pica can lead children to ingest dirt or paint chips containing lead, causing plumbism. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('What is the typical effect of iron deficiency on the transferrin saturation percentage?', ['It rises above normal', 'It falls below normal', 'It stays exactly the same', 'It fluctuates wildly'], 1, 'The percentage saturation of transferrin falls below normal in IDA as iron stores deplete while transferrin levels rise. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('In the bone marrow examination for IDA, what is the status of megakaryocytes?', ['Markedly decreased', 'Hyperplastic', 'Normal', 'Absent'], 2, 'In IDA, leukocytes and megakaryocytes are normal in the bone marrow; only erythroid lines are affected (hyperplasia with poor hemoglobination). [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('When giving a blood transfusion to a severely anemic child (Hb < 4 g/dL), what volume of packed cells should be given at one time?', ['10-15 ml/kg', '20-30 ml/kg', '2-3 ml/kg', '50 ml/kg'], 2, 'Severely anemic children should be given only 2-3 ml/kg of packed cells at any one time, often with a diuretic to prevent fluid overload. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('How long does it take for a patient\'s irritability to decrease and appetite to increase after initiating iron therapy?', ['1-2 hours', '12-24 hours', '5-7 days', '4 weeks'], 1, 'Subjective improvement, including decreased irritability and increased appetite, occurs within 12-24 hours. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('Which of the following describes the bone marrow response 36-48 hours after starting iron therapy?', ['Initial erythroid hyperplasia', 'Maximum reticulocytosis', 'Repletion of stores', 'Subjective improvement'], 0, 'At 36-48 hours, there is an initial bone marrow response with erythroid hyperplasia. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('Which form of parenteral iron is preferred for patients who have hypersensitivity reactions to iron dextran?', ['Ferrous sulfate', 'Ferrous gluconate (oral)', 'Iron sucrose complex or ferric sodium gluconate complex', 'Intravenous hemoglobin'], 2, 'Iron sucrose and ferric sodium gluconate complexes have less risk of anaphylaxis and are alternatives to iron dextran. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('An adult female during childbearing years must absorb how much iron daily to maintain equilibrium?', ['1 mg', '2 mg', '5 mg', '10 mg'], 1, 'An adult female loses an average of 2 mg daily (due to menses) and must absorb a similar quantity to maintain equilibrium. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('Which statement is true regarding the prevalence of IDA?', ['It affects 10% of the global population.', 'It affects 30% of the global population.', 'It is strictly an inherited genetic condition.', 'It is only found in developed countries.'], 1, 'IDA affects approximately 30% of the global population, mostly in developing countries. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('What is a specific social and physical risk factor for IDA?', ['High altitude living', 'Poverty and alcohol abuse', 'Excessive sunlight exposure', 'High income'], 1, 'Poverty, alcohol abuse, and GI diseases are listed as social and physical risk factors for IDA. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]'),
+
+      q('How does vitamin C (ascorbic acid) affect iron absorption?', ['It converts heme iron to non-heme iron.', 'It provides an acidic environment that increases iron absorption.', 'It blocks transferrin receptors.', 'It binds iron and prevents its uptake.'], 1, 'An acidic environment increases absorption; thus, iron tablets are often given with ascorbic acid. [Source: L5 - NUT401 - Iron deficiency anemia.pdf]')
 
     ]
 
