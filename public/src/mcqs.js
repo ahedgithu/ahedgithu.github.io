@@ -7654,7 +7654,7 @@ window.mcqQuizzes['Monitoring and Fluid Therapy'] = [
 
 
 
-  toSource('Nutrition in cancer', {
+  toSource('Nutrition in obesity', {
 
     id: 'nut401-obesity-mcqs',
 
@@ -7700,7 +7700,7 @@ window.mcqQuizzes['Monitoring and Fluid Therapy'] = [
 
 
 
-  toSource('Nutrition in cancer', {
+  toSource('Nutrition in obesity', {
 
     id: 'nut401-obesity-extra-mcqs',
 
@@ -7802,7 +7802,7 @@ window.mcqQuizzes['Monitoring and Fluid Therapy'] = [
 
 
 
-  toSource('Nutrition in cancer', {
+  toSource('Nutrition in obesity', {
 
     id: 'kellawi-obesity-mcqs',
 
