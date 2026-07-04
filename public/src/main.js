@@ -205,11 +205,7 @@ let subjects = [
         state: 'taken',
         art: 5,
         lectureUrls: [
-          { label: 'Lecture', url: 'https://drive.google.com/file/d/1LQ-zgjWNlzGar7OgfX1WhBxkqvsTIAhQ/view?usp=drivesdk' },
-          { label: 'Hepatitis map', url: '/assets/acute-viral-hepatitis-map-v3.png' }
-        ],
-        pdfUrls: [
-          { label: 'Download PDF', url: '/assets/acute-viral-hepatitis-map-v3.pdf', download: true }
+          { label: 'Lecture', url: 'https://drive.google.com/file/d/1LQ-zgjWNlzGar7OgfX1WhBxkqvsTIAhQ/view?usp=drivesdk' }
         ],
         audioUrl: 'https://drive.google.com/file/d/1pCiruJJQ6rB84pyxeGy_NUY5QMUzDJVi/view?usp=drivesdk'
       },
@@ -354,11 +350,7 @@ let subjects = [
         midtermScopeNote: 'MED 401-2 Chest scope: airway diseases, small airway diseases, subglottic stenosis, vocal cord dysfunction, and bronchial asthma basics.',
         note: 'Tuesday report: diseases of upper and lower airways and bronchial asthma part 1.',
         lectureUrls: [
-          { label: 'Lecture', url: 'https://drive.google.com/file/d/133Ae9Po7wzSJBOf-GqANHRBHmPBufviI/view?usp=drivesdk' },
-          { label: 'Asthma map', url: '/assets/asthma-guidelines-map-v1.png' }
-        ],
-        pdfUrls: [
-          { label: 'Download PDF', url: '/assets/asthma-guidelines-map-v1.pdf', download: true }
+          { label: 'Lecture', url: 'https://drive.google.com/file/d/133Ae9Po7wzSJBOf-GqANHRBHmPBufviI/view?usp=drivesdk' }
         ]
       },
       {
@@ -459,6 +451,9 @@ let subjects = [
         lectureUrls: [
           { label: 'Lecture', url: 'https://drive.google.com/file/d/1rCjJqBqu8wOWIW0SMHoGjvyXSCIniwsR/view?usp=drivesdk' }
         ],
+        pdfUrls: [
+          { label: 'Compact preview', title: 'Vitamins compact preview', url: '/assets/nut-compact/vitamins-compact.pdf', preview: true, download: true }
+        ],
         audioUrl: 'https://drive.google.com/file/d/1twQvgbaRxLMP2vBRu4dVV7nU6zmMHUFV/view?usp=drivesdk'
       },
       {
@@ -468,11 +463,10 @@ let subjects = [
         note: 'Covers bacterial, viral foodborne infections, polio virus, and hepatitis A/E viruses.',
         lectureUrls: [
           { label: 'Lecture Part 1', url: 'https://drive.google.com/file/d/1q5b51GzxLYXT-iOOLfA1M1KnigeJTE1b/view?usp=drivesdk' },
-          { label: 'Lecture Part 2', url: 'https://drive.google.com/file/d/15d6Q4cfi8jJ9XW2NpuLBk76ctKe8mKSZ/view?usp=drivesdk' },
-          { label: 'Foodborne map', url: '/assets/foodborne-viral-part2-map-v1.png' }
+          { label: 'Lecture Part 2', url: 'https://drive.google.com/file/d/15d6Q4cfi8jJ9XW2NpuLBk76ctKe8mKSZ/view?usp=drivesdk' }
         ],
         pdfUrls: [
-          { label: 'Download PDF', url: '/assets/foodborne-viral-part2-map-v1.pdf', download: true }
+          { label: 'Compact preview', title: 'Food-borne Diseases compact preview', url: '/assets/nut-compact/food-borne-diseases-compact.pdf', preview: true, download: true }
         ],
         audioUrl: 'https://drive.google.com/file/d/1Lr0LftsOc_-uhH2X82uqzJ0eSkUWgSDz/view?usp=drivesdk'
       },
@@ -483,6 +477,9 @@ let subjects = [
         note: 'Wednesday report 24 Jun: taught by Dr. Enas Abd El-Rahim.',
         lectureUrls: [
           { label: 'Lecture', url: 'https://drive.google.com/file/d/1KB6lV5bwjB2AjkZja2IGy4HGQnYoFi9c/view?usp=drivesdk' }
+        ],
+        pdfUrls: [
+          { label: 'Compact preview', title: 'Rabies and Tetanus compact preview', url: '/assets/nut-compact/rabies-tetanus-compact.pdf', preview: true, download: true }
         ],
         audioUrl: 'https://drive.google.com/file/d/1jFCfRCkClJyvgSfNnLIGHNQd0Kg1Le5O/view?usp=drivesdk'
       },
@@ -498,6 +495,9 @@ let subjects = [
         note: 'Wednesday report 1 Jul: first half of iron deficiency anemia, taught by Dr. Hanan Samah.',
         lectureUrls: [
           { label: 'Iron deficiency anemia lecture', url: 'https://drive.google.com/file/d/1AGNjjX1lUoTE56keCrC57Wt-Esq87Gr_/view?usp=drivesdk' }
+        ],
+        pdfUrls: [
+          { label: 'Compact preview', title: 'Iron deficiency anemia compact preview', url: '/assets/nut-compact/iron-deficiency-anemia-compact.pdf', preview: true, download: true }
         ]
       },
       {
@@ -509,6 +509,9 @@ let subjects = [
         note: 'Wednesday report 1 Jul: obesity portion taught by Dr. Hanan Samah; cancer nutrition remains pending.',
         lectureUrls: [
           { label: 'Obesity lecture', url: 'https://drive.google.com/file/d/1_LAXxkYF-i3nnTrSIOCUv0q6qAAPGlKl/view?usp=drivesdk' }
+        ],
+        pdfUrls: [
+          { label: 'Compact preview', title: 'Nutrition in obesity compact preview', url: '/assets/nut-compact/obesity-compact.pdf', preview: true, download: true }
         ]
       },
       { label: 'TB and influenza nutrition', state: 'remaining', art: 13 }
@@ -525,11 +528,7 @@ let subjects = [
         state: 'taken',
         art: 5,
         lectureUrls: [
-          { label: 'Lecture', url: 'https://drive.google.com/file/d/154Sxxn2R_Y-6l2i3pvhFtWP_Roi_GR0Q/view?usp=drivesdk' },
-          { label: 'Lecture map', url: '/assets/lft-full-lecture-map-v2.png' }
-        ],
-        pdfUrls: [
-          { label: 'Download PDF', url: '/assets/lft-full-lecture-map-v2.pdf', download: true }
+          { label: 'Lecture', url: 'https://drive.google.com/file/d/154Sxxn2R_Y-6l2i3pvhFtWP_Roi_GR0Q/view?usp=drivesdk' }
         ],
         audioUrl: 'https://drive.google.com/file/d/122BV8-mfoCWNXt979EaO2ZkMGbGuHpm5/view?usp=drivesdk'
       },
@@ -538,11 +537,7 @@ let subjects = [
         state: 'taken',
         art: 14,
         lectureUrls: [
-          { label: 'Lecture', url: 'https://drive.google.com/file/d/1RkmsX-_jlL3klayg5fvPwk6gk-LYPYHA/view?usp=drivesdk' },
-          { label: 'Biomarkers map', url: '/assets/cardiac-biomarkers-map-v1.png' }
-        ],
-        pdfUrls: [
-          { label: 'Download PDF', url: '/assets/cardiac-biomarkers-map-v1.pdf', download: true }
+          { label: 'Lecture', url: 'https://drive.google.com/file/d/1RkmsX-_jlL3klayg5fvPwk6gk-LYPYHA/view?usp=drivesdk' }
         ],
         audioUrl: 'https://drive.google.com/file/d/168l5PhCSMGsl3GWyVeFpDiw8WEWaJlmC/view?usp=drivesdk'
       },
@@ -559,14 +554,10 @@ let subjects = [
         label: 'Diabetes mellitus & disorders of plasma lipids and lipoproteins',
         state: 'taken',
         art: 14,
-        note: 'Wednesday report: combined LAB topic. The lecture map currently covers the diabetes/glucose-testing lecture only.',
+        note: 'Wednesday report: combined LAB topic.',
         lectureUrls: [
           { label: 'DM lecture', url: 'https://drive.google.com/file/d/1wu3gyA28ynSIPuHvqMAvqCmCPIp5zIzp/view?usp=drivesdk' },
-          { label: 'Lipid lecture', url: 'https://drive.google.com/file/d/15At9wbM85dRi_4Cbx9AZ76vRuHTiAL_L/view?usp=drivesdk' },
-          { label: 'Diabetes map', url: '/assets/diabetes-glucose-testing-map-v1.png' }
-        ],
-        pdfUrls: [
-          { label: 'Download PDF', url: '/assets/diabetes-glucose-testing-map-v1.pdf', download: true }
+          { label: 'Lipid lecture', url: 'https://drive.google.com/file/d/15At9wbM85dRi_4Cbx9AZ76vRuHTiAL_L/view?usp=drivesdk' }
         ]
       },
       { label: 'WBCs and leukemia', state: 'remaining', art: 12 },
@@ -594,11 +585,7 @@ let subjects = [
         art: 15,
         note: 'Tuesday report: continuation of monitoring and fluid therapy.',
         lectureUrls: [
-          { label: 'Lecture', url: 'https://drive.google.com/file/d/1ICi7ExmMJ3zhXnp-dfh0rlHo0cEYub0E/view?usp=drivesdk' },
-          { label: 'Monitoring map', url: '/assets/monitoring-fluid-therapy-map-v1.png' }
-        ],
-        pdfUrls: [
-          { label: 'Download PDF', url: '/assets/monitoring-fluid-therapy-map-v1.pdf', download: true }
+          { label: 'Lecture', url: 'https://drive.google.com/file/d/1ICi7ExmMJ3zhXnp-dfh0rlHo0cEYub0E/view?usp=drivesdk' }
         ],
         audioUrl: 'https://drive.google.com/file/d/1o1biv_U_2DBaIVnJPvbN5UXlmPfSkGlq/view?usp=drivesdk'
       },
@@ -984,6 +971,16 @@ function renderResourceItem(item) {
           ${links}
         </span>
       </details>
+    `
+  }
+
+  if (item.type === 'pdf' && item.preview) {
+    const title = item.title || item.label || 'PDF preview'
+    const downloadUrl = item.downloadUrl || item.url
+    return `
+      <button class="topic-resource topic-resource--pdf topic-resource--pdf-preview" type="button" data-pdf-preview="${escapeHtml(item.url)}" data-pdf-title="${escapeHtml(title)}" data-pdf-download="${escapeHtml(downloadUrl)}">
+        ${escapeHtml(item.label || 'Preview PDF')}
+      </button>
     `
   }
 
@@ -1468,6 +1465,27 @@ function scrollToQuizQuestion(questionId) {
   if (firstChoice) firstChoice.focus({ preventScroll: true })
 }
 
+function scrollToNextQuizQuestion(answeredQuestionId) {
+  const quiz = getCurrentQuiz()
+  const questionIndex = quiz.findIndex((question) => question.id === answeredQuestionId)
+  const nextQuestion = quiz[questionIndex + 1]
+  if (!nextQuestion) return
+
+  setTimeout(() => {
+    const modal = ensureQuizModal()
+    const panel = modal.querySelector('.quiz-modal__panel')
+    const questionCard = modal.querySelector(`[data-quiz-card="${CSS.escape(nextQuestion.id)}"]`)
+    if (!panel || !questionCard) return
+
+    const panelRect = panel.getBoundingClientRect()
+    const questionRect = questionCard.getBoundingClientRect()
+    panel.scrollTo({
+      top: Math.max(panel.scrollTop + questionRect.top - panelRect.top - 22, 0),
+      behavior: prefersReducedMotion ? 'auto' : 'smooth'
+    })
+  }, 450)
+}
+
 function renderQuizActions() {
   const modal = ensureQuizModal()
   const actions = modal.querySelector('.quiz-modal__actions')
@@ -1736,7 +1754,91 @@ function closeQuiz() {
   document.body.classList.remove('panel-open')
 }
 
+function ensurePdfPreviewModal() {
+  let modal = document.getElementById('pdf-preview-modal')
+  if (modal) return modal
+
+  modal = document.createElement('div')
+  modal.id = 'pdf-preview-modal'
+  modal.className = 'pdf-preview-modal'
+  modal.setAttribute('aria-hidden', 'true')
+  modal.innerHTML = `
+    <div class="pdf-preview-modal__backdrop" data-pdf-close></div>
+    <section class="pdf-preview-modal__panel" role="dialog" aria-modal="true" aria-labelledby="pdf-preview-title">
+      <div class="pdf-preview-modal__top">
+        <div>
+          <p class="card__kicker">Compact PDF</p>
+          <h2 id="pdf-preview-title">PDF preview</h2>
+          <p class="pdf-preview-modal__meta">Preview opens inside the website.</p>
+        </div>
+        <button class="icon-button" type="button" data-pdf-close aria-label="Close PDF preview">X</button>
+      </div>
+      <div class="pdf-preview-frame-wrap">
+        <iframe class="pdf-preview-frame" title="PDF preview" loading="lazy"></iframe>
+      </div>
+      <div class="pdf-preview-modal__actions">
+        <a class="quiz-action" data-pdf-open target="_blank" rel="noopener noreferrer">Open PDF</a>
+        <a class="quiz-action quiz-action--primary" data-pdf-download download>Download</a>
+      </div>
+    </section>
+  `
+  document.body.appendChild(modal)
+  return modal
+}
+
+function openPdfPreview({ url, title, downloadUrl }, event = null) {
+  if (!url) return
+
+  const modal = ensurePdfPreviewModal()
+  const panel = modal.querySelector('.pdf-preview-modal__panel')
+  const heading = modal.querySelector('#pdf-preview-title')
+  const frame = modal.querySelector('.pdf-preview-frame')
+  const openLink = modal.querySelector('[data-pdf-open]')
+  const downloadLink = modal.querySelector('[data-pdf-download]')
+
+  if (event && event.clientX && event.clientY && panel) {
+    const rect = panel.getBoundingClientRect()
+    const x = event.clientX - rect.left
+    const y = event.clientY - rect.top
+    panel.style.transformOrigin = `${x}px ${y}px`
+  } else if (panel) {
+    panel.style.transformOrigin = 'center center'
+  }
+
+  heading.textContent = title || 'PDF preview'
+  frame.src = url
+  frame.title = title || 'PDF preview'
+  openLink.href = url
+  downloadLink.href = downloadUrl || url
+  downloadLink.setAttribute('download', '')
+  modal.setAttribute('aria-hidden', 'false')
+  document.body.classList.add('panel-open')
+}
+
+function closePdfPreview() {
+  const modal = ensurePdfPreviewModal()
+  const frame = modal.querySelector('.pdf-preview-frame')
+  modal.setAttribute('aria-hidden', 'true')
+  document.body.classList.remove('panel-open')
+  if (frame) frame.src = 'about:blank'
+}
+
 function handleQuizClick(event) {
+  const pdfButton = event.target.closest('[data-pdf-preview]')
+  if (pdfButton) {
+    openPdfPreview({
+      url: pdfButton.dataset.pdfPreview,
+      title: pdfButton.dataset.pdfTitle,
+      downloadUrl: pdfButton.dataset.pdfDownload
+    }, event)
+    return
+  }
+
+  if (event.target.closest('[data-pdf-close]')) {
+    closePdfPreview()
+    return
+  }
+
   const sourceButton = event.target.closest('[data-quiz-source]')
   if (sourceButton) {
     openQuiz(sourceButton.dataset.quizTopic, sourceButton.dataset.quizSource, event)
@@ -1822,6 +1924,7 @@ function handleQuizClick(event) {
 
     if (question.correctOptionId === selectedOptionId) {
       triggerCorrectAnswerCelebration()
+      scrollToNextQuizQuestion(question.id)
     }
   }
 }
