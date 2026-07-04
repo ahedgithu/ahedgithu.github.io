@@ -480,7 +480,11 @@ let subjects = [
         label: 'Rabies and Tetanus',
         state: 'taken',
         art: 13,
-        note: 'Wednesday report 24 Jun: taught by Dr. Enas Abd El-Rahim.'
+        note: 'Wednesday report 24 Jun: taught by Dr. Enas Abd El-Rahim.',
+        lectureUrls: [
+          { label: 'Lecture', url: 'https://drive.google.com/file/d/1KB6lV5bwjB2AjkZja2IGy4HGQnYoFi9c/view?usp=drivesdk' }
+        ],
+        audioUrl: 'https://drive.google.com/file/d/1jFCfRCkClJyvgSfNnLIGHNQd0Kg1Le5O/view?usp=drivesdk'
       },
       { label: 'Iodine', state: 'remaining', art: 13 },
       { label: 'Nutrition in elderly', state: 'remaining', art: 13 },
@@ -1470,11 +1474,7 @@ function renderQuizActions() {
   if (!actions) return
 
   if (quizState.showResumePrompt) {
-    actions.innerHTML = `
-      <button class="quiz-action quiz-action--secondary" type="button" data-quiz-resume>Resume</button>
-      <button class="quiz-action quiz-action--secondary" type="button" data-quiz-start-over>Start over</button>
-      <button class="quiz-action quiz-action--primary" type="button" data-quiz-close>Close</button>
-    `
+    actions.innerHTML = ''
     return
   }
 
@@ -1633,14 +1633,32 @@ function renderResumePrompt() {
   const modal = ensureQuizModal()
   const body = modal.querySelector('#quiz-body')
   body.innerHTML = `
-    <article class="quiz-card quiz-prompt">
-      <p class="quiz-prompt__label">You have a saved attempt for this quiz.</p>
-      <p class="quiz-prompt__message">Resume your previous attempt or start over with a fresh quiz.</p>
+    <article class="quiz-resume-card">
+      <div class="quiz-resume-card__header">
+        <div class="quiz-resume-card__icon-container">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
+            <path d="M12 6v6l4 2"/>
+          </svg>
+        </div>
+        <h3 class="quiz-resume-card__title">Saved Attempt</h3>
+      </div>
+      <p class="quiz-resume-card__desc">
+        You have an active attempt saved for this topic. Would you like to resume where you left off or start fresh?
+      </p>
+      <div class="quiz-resume-card__actions">
+        <button class="quiz-resume-card__btn quiz-resume-card__btn--secondary" type="button" data-quiz-start-over>
+          Start over
+        </button>
+        <button class="quiz-resume-card__btn quiz-resume-card__btn--primary" type="button" data-quiz-resume>
+          Resume Quiz
+        </button>
+      </div>
     </article>
   `
 }
 
-function renderQuizSourcePicker(topicLabel) {
+function renderQuizSourcePicker(topicLabel, event = null) {
   const sources = getQuizSources(topicLabel)
   const modal = ensureQuizModal()
   const title = modal.querySelector('#quiz-title')
@@ -1648,6 +1666,16 @@ function renderQuizSourcePicker(topicLabel) {
   const fill = modal.querySelector('#quiz-progress-fill')
   const body = modal.querySelector('#quiz-body')
   const actions = modal.querySelector('.quiz-modal__actions')
+  const panel = modal.querySelector('.quiz-modal__panel')
+
+  if (event && event.clientX && event.clientY && panel) {
+    const rect = panel.getBoundingClientRect()
+    const x = event.clientX - rect.left
+    const y = event.clientY - rect.top
+    panel.style.transformOrigin = `${x}px ${y}px`
+  } else if (panel) {
+    panel.style.transformOrigin = 'center center'
+  }
 
   title.textContent = topicLabel
   meta.textContent = 'Choose an MCQ source.'
@@ -1668,7 +1696,7 @@ function renderQuizSourcePicker(topicLabel) {
 }
 
 
-function openQuiz(topicLabel, sourceId = 'current') {
+function openQuiz(topicLabel, sourceId = 'current', event = null) {
   const config = getQuizConfig(topicLabel, sourceId)
   if (!config || !config.mcqs.length) return
 
@@ -1677,6 +1705,17 @@ function openQuiz(topicLabel, sourceId = 'current') {
   initializeQuiz(topicLabel, { sourceId: config.id, useSaved, fresh: false })
 
   const modal = ensureQuizModal()
+  const panel = modal.querySelector('.quiz-modal__panel')
+
+  if (event && event.clientX && event.clientY && panel) {
+    const rect = panel.getBoundingClientRect()
+    const x = event.clientX - rect.left
+    const y = event.clientY - rect.top
+    panel.style.transformOrigin = `${x}px ${y}px`
+  } else if (panel) {
+    panel.style.transformOrigin = 'center center'
+  }
+
   modal.setAttribute('aria-hidden', 'false')
   document.body.classList.add('panel-open')
   renderQuizMeta()
@@ -1700,15 +1739,15 @@ function closeQuiz() {
 function handleQuizClick(event) {
   const sourceButton = event.target.closest('[data-quiz-source]')
   if (sourceButton) {
-    openQuiz(sourceButton.dataset.quizTopic, sourceButton.dataset.quizSource)
+    openQuiz(sourceButton.dataset.quizTopic, sourceButton.dataset.quizSource, event)
     return
   }
 
   const openButton = event.target.closest('[data-quiz-topic]')
   if (openButton) {
     const sources = getQuizSources(openButton.dataset.quizTopic)
-    if (sources.length > 1) renderQuizSourcePicker(openButton.dataset.quizTopic)
-    else openQuiz(openButton.dataset.quizTopic, sources[0]?.id || 'current')
+    if (sources.length > 1) renderQuizSourcePicker(openButton.dataset.quizTopic, event)
+    else openQuiz(openButton.dataset.quizTopic, sources[0]?.id || 'current', event)
     return
   }
 
