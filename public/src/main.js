@@ -501,7 +501,7 @@ let subjects = [
         ]
       },
       {
-        label: 'Nutrition in cancer',
+        label: 'Nutrition in obesity',
         state: 'partial',
         art: 13,
         updatedAt: '2026-07-01',
