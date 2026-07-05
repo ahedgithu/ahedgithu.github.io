@@ -30,4 +30,11 @@ Recent commits use short imperative summaries, for example `Refine calm clinical
 
 ## Agent-Specific Instructions
 
-Production repo is `E:\website\app`; `E:\website` is only the parent folder. At the start of every website session, read the Obsidian `Agent-Codex` context first, especially `C:\Users\ahmed\OneDrive\المستندات\Obsidian Vault\Agent-Codex\00-start-here.md` and `C:\Users\ahmed\OneDrive\المستندات\Obsidian Vault\Agent-Codex\working-context.md`, before making or recommending repo changes. If a terminal renders the Arabic folder name incorrectly, locate the same files under the OneDrive Documents folder, then `Obsidian Vault\Agent-Codex`. Start website edits by checking branch and `git status`. GitHub Pages deploys from `main` only. Do not push or deploy unless Ahmed explicitly asks. If the worktree is dirty, inspect and explain the dirty files before editing. For narrow live pushes from a dirty repo, use a clean temporary worktree from `origin/main`.
+Production repo is `E:\website\app`; `E:\website` is only the parent folder. At the start of every website session, read the Obsidian `Agent-Codex` context first through the ASCII-safe vault alias:
+
+- `C:\Users\ahmed\ObsidianVault\Agent-Codex\00-start-here.md`
+- `C:\Users\ahmed\ObsidianVault\Agent-Codex\working-context.md`
+
+`C:\Users\ahmed\ObsidianVault` is a Windows junction to the real OneDrive Obsidian vault. Use this alias instead of typing the localized OneDrive Documents folder path, because some terminals render that folder name incorrectly. Do not rename the real OneDrive Documents folder. If the alias is missing, recreate it as a junction to the real `Obsidian Vault` folder under OneDrive Documents, then continue using the alias.
+
+Start website edits by checking branch and `git status`. GitHub Pages deploys from `main` only. Do not push or deploy unless Ahmed explicitly asks. If the worktree is dirty, inspect and explain the dirty files before editing. For narrow live pushes from a dirty repo, use a clean temporary worktree from `origin/main`.

@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&display=swap" rel="stylesheet" />
   <meta name="theme-color" content="#315f72" />
-  <link rel="stylesheet" href="/src/style.css?v=20260705-home-sections" />
+  <link rel="stylesheet" href="/src/style.css?v=20260705-tracker-mobile-polish-3" />
 </head>
 <body>
   <main>
@@ -28,7 +28,7 @@
           <div class="exam-schedule__cards" id="exam-schedule-cards" aria-label="401 subject exam dates">
             <div class="exam-card exam-card--quiz exam-card--has-action" data-code="NUT">
               <strong>NUT Quiz</strong>
-              <em>Vitamins, Food-borne, Tetanus & Rabies, Obesity, 1st half IDA</em>
+              <time datetime="2026-07-08">Jul 8</time>
               <span class="exam-card__meta">10 MARKS</span>
               <button class="exam-card__quiz-action" type="button" data-quiz-topic="NUT Quiz">
                 Past Exams (52 Qs)
@@ -75,7 +75,7 @@
         <div class="scope-toggle" role="group" aria-label="Topic scope filter">
           <div class="scope-toggle__buttons">
             <button class="scope-toggle__btn scope-toggle__btn--active" data-scope="all" id="scope-btn-all">All topics</button>
-            <button class="scope-toggle__btn" data-scope="midterm" id="scope-btn-midterm">Midterm</button>
+            <button class="scope-toggle__btn" data-scope="midterm" id="scope-btn-midterm" dir="rtl">تحديدات الميد</button>
           </div>
           <select id="tracker-scope-filter" aria-hidden="true" style="display:none">
             <option value="all">All topics</option>
@@ -116,7 +116,6 @@
           <div class="subject-track-tabs" id="subject-track-tabs" role="tablist" aria-label="Subject sections"></div>
 
           <div>
-            <h3 id="topic-list-title">Topic list</h3>
             <ul class="topic-list" id="topic-list"></ul>
           </div>
         </article>
@@ -394,10 +393,7 @@
       </div>
     </section>
     <section class="schedule-page hub-section" id="schedule" aria-labelledby="schedule-title">
-      <div class="section-heading">
-        <p class="eyebrow">Lectures and clinical rounds</p>
-        <h1 id="schedule-title">401 schedule</h1>
-      </div>
+      <h1 class="sr-only" id="schedule-title">401 schedule</h1>
 
 
 
@@ -423,8 +419,7 @@
       <div class="app" id="history-app">
           <header class="hero">
             <div>
-              <h1>History Taking Tool</h1>
-              <p>Clinical history prototype: choose a system, take the history step-by-step, and get a live case presentation with missing-question feedback.</p>
+              <h1>History taking only</h1>
             </div>
             <div class="hero-actions">
               <div class="mode-toggle" role="group" aria-label="Mode selector">
@@ -948,7 +943,7 @@
       }
     }
   </script>
-  <script type="module" src="/src/main.js?v=20260705-home-sections-3"></script>
+  <script type="module" src="/src/main.js?v=20260705-tracker-mobile-polish-3"></script>
   <script defer src="/pwa.js?v=20260701-pwa"></script>
 </body>
 </html>

@@ -656,8 +656,8 @@ const midtermExamSchedule = [
     subjectName: 'Nutrition',
     date: '2026-07-08',
     dayLabel: 'Wed',
-    time: 'Vitamins, Food-borne, Tetanus & Rabies, Obesity, 1st half IDA',
-    meta: '10 marks',
+    time: 'Jul 8',
+    meta: '10 MARKS',
     type: 'quiz'
   },
   {
@@ -718,7 +718,6 @@ const selectedCount = document.getElementById('selected-count')
 const selectedPercent = document.getElementById('selected-percent')
 const progressFill = document.getElementById('progress-fill')
 const topicList = document.getElementById('topic-list')
-const topicListTitle = document.getElementById('topic-list-title')
 const subjectDetail = document.querySelector('.subject-detail')
 const subjectTrackTabs = document.getElementById('subject-track-tabs')
 const trackerSearch = document.getElementById('tracker-search')
@@ -831,12 +830,14 @@ function getTopicCompletionKey(subjectCode, topicLabel) {
 }
 
 function getTopicCompletionState(subjectCode, topicLabel) {
-  const emptyState = { studied: false, mcqs: false, finished: false }
+  const emptyState = { studied: false, mcqs: false }
 
   try {
+    const savedState = JSON.parse(localStorage.getItem(getTopicCompletionKey(subjectCode, topicLabel)) || '{}')
     return {
       ...emptyState,
-      ...JSON.parse(localStorage.getItem(getTopicCompletionKey(subjectCode, topicLabel)) || '{}')
+      studied: !!savedState.studied,
+      mcqs: !!savedState.mcqs
     }
   } catch {
     localStorage.removeItem(getTopicCompletionKey(subjectCode, topicLabel))
@@ -847,8 +848,7 @@ function getTopicCompletionState(subjectCode, topicLabel) {
 function saveTopicCompletionState(subjectCode, topicLabel, state) {
   const normalizedState = {
     studied: !!state.studied,
-    mcqs: !!state.mcqs,
-    finished: !!state.finished
+    mcqs: !!state.mcqs
   }
 
   try {
@@ -862,8 +862,7 @@ function renderTopicCompletionControls(subject, topic) {
   const state = getTopicCompletionState(subject.code, topic.label)
   const controls = [
     { key: 'studied', label: 'Studied' },
-    { key: 'mcqs', label: 'MCQs done' },
-    { key: 'finished', label: 'Finished' }
+    { key: 'mcqs', label: 'MCQs only' }
   ]
 
   return `
@@ -1141,25 +1140,12 @@ function getFastStaggerDelay(index, step = 14, max = 120) {
   return `${Math.min(index * step, max)}ms`
 }
 
-const topicGroupLinks = {
-  'Taken in University': [
-    {
-      label: 'DR',
-      url: 'https://drive.google.com/drive/folders/1OJTlqA-zBX6ES6KQkItviY0e5qd6Wfl1'
-    }
-  ]
-}
-
 function renderTopicGroupHeading(groupTitle, globalIndex) {
-  const links = topicGroupLinks[groupTitle] || []
-  const linkMarkup = links.map((link) => `
-    <a class="topic-section-heading__link" href="${link.url}" target="_blank" rel="noopener">${escapeHtml(link.label)}</a>
-  `).join('')
+  if (groupTitle === 'Taken in University') return ''
 
   return `
     <li class="topic-section-heading" style="--delay: ${getFastStaggerDelay(globalIndex)}">
       <span>${groupTitle}</span>
-      ${linkMarkup ? `<span class="topic-section-heading__links">${linkMarkup}</span>` : ''}
     </li>
   `
 }
@@ -1170,10 +1156,12 @@ function renderTopicCard(subject, topic, index, collection = subject.topics) {
   const tileY = Math.floor(art / 4)
   const topicPosition = collection.indexOf(topic)
   const displayNum = String((topicPosition >= 0 ? topicPosition : index) + 1).padStart(2, '0')
-  const midtermBadge = topic.midtermScope ? '<span class="topic-item__scope">Midterm scope</span>' : ''
+  const midtermBadge = topic.midtermScope ? '<span class="topic-item__scope" dir="rtl">داخل في الميد</span>' : ''
   const midtermNote = topic.midtermScopeNote ? `<span class="topic-item__midterm-note">${topic.midtermScopeNote}</span>` : ''
   const roundMeta = [topic.roundDate, topic.room].filter(Boolean).join(' - ')
-  const newBadge = isRecentTopicUpdate(topic) ? `
+  const stateBadge = topic.state === 'taken-in-university' ? '' : `<span class="topic-item__state topic-item__state--${topic.state}">${stateLabels[topic.state] || topic.state}</span>`
+  const hasRecentUpdate = isRecentTopicUpdate(topic)
+  const newBadge = hasRecentUpdate ? `
     <span class="topic-item__new" aria-label="Newly updated topic">
       <span class="topic-item__new-pulse" aria-hidden="true"></span>
       New
@@ -1181,17 +1169,16 @@ function renderTopicCard(subject, topic, index, collection = subject.topics) {
   ` : ''
 
   return `
-    <li class="topic-item topic-item--${topic.state}" style="--delay: ${getFastStaggerDelay(index)}; --tile-x: ${tileX}; --tile-y: ${tileY};">
+    <li class="topic-item topic-item--${topic.state}${hasRecentUpdate ? ' topic-item--has-new' : ''}" style="--delay: ${getFastStaggerDelay(index)}; --tile-x: ${tileX}; --tile-y: ${tileY};">
       ${newBadge}
       <span class="topic-item__image" aria-hidden="true"></span>
       <span class="topic-item__index">${displayNum}</span>
       <span class="topic-item__body">
         <span class="topic-item__label">${topic.label}</span>
         ${midtermBadge}
-        <span class="topic-item__state topic-item__state--${topic.state}">${stateLabels[topic.state] || topic.state}</span>
+        ${stateBadge}
         ${midtermNote}
         ${roundMeta ? `<span class="topic-item__note">${escapeHtml(roundMeta)}</span>` : ''}
-        ${topic.note ? `<span class="topic-item__note">${topic.note}</span>` : ''}
         ${renderResourceLinks(topic)}
         ${renderTopicCompletionControls(subject, topic)}
       </span>
@@ -1282,6 +1269,75 @@ function renderSubjectTrackList(subject) {
   }
 
   return renderTopicCards(subject, getFilteredTopics(subject))
+}
+
+function getSubjectGridColumnCount() {
+  if (!mobileQuery.matches) return 1
+  if (window.matchMedia('(max-width: 560px)').matches) return 2
+  if (window.matchMedia('(min-width: 760px) and (max-width: 860px)').matches) return 4
+  return 3
+}
+
+function renderSubjectInlineDetail(subject) {
+  return `
+    <div class="subject-inline-detail">
+      <div class="subject-track-tabs subject-track-tabs--inline" role="tablist" aria-label="${subject.code} sections">
+        ${renderSubjectTrackTabs(subject)}
+      </div>
+      <ul class="topic-list topic-list--inline">
+        ${renderSubjectTrackList(subject)}
+      </ul>
+    </div>
+  `
+}
+
+function bindSubjectButtons(root = subjectList) {
+  root.querySelectorAll('.subject-button').forEach((button) => {
+    button.addEventListener('click', () => {
+      setActiveSubject(button.dataset.code)
+    })
+  })
+}
+
+function updateSubjectButtonStates(subject) {
+  subjectList.querySelectorAll('.subject-row').forEach((row) => {
+    const button = row.querySelector('.subject-button')
+    const isExpanded = button?.dataset.code === expandedSubjectCode
+    row.classList.toggle('expanded', isExpanded)
+    if (button) {
+      const isActive = button.dataset.code === subject.code
+      button.classList.toggle('active', isActive)
+      button.setAttribute('aria-expanded', String(isExpanded))
+      if (isActive) button.querySelector('.subject-button__updates')?.remove()
+    }
+  })
+}
+
+function updateMobileSubjectInlineDetail(subject) {
+  subjectList.querySelector('.subject-inline-detail')?.remove()
+  updateSubjectButtonStates(subject)
+  if (!expandedSubjectCode) return
+
+  const visibleSubjects = getFilteredSubjects()
+  const subjectIndex = visibleSubjects.findIndex((item) => item.code === expandedSubjectCode)
+  if (subjectIndex === -1) {
+    renderSubjects()
+    return
+  }
+
+  const columnCount = getSubjectGridColumnCount()
+  const rowEndIndex = Math.min(visibleSubjects.length - 1, subjectIndex + (columnCount - 1 - (subjectIndex % columnCount)))
+  const rowEndCode = visibleSubjects[rowEndIndex]?.code
+  const rowEndButton = subjectList.querySelector(`.subject-button[data-code="${CSS.escape(rowEndCode)}"]`)
+  const rowEnd = rowEndButton?.closest('.subject-row')
+  if (!rowEnd) {
+    renderSubjects()
+    return
+  }
+
+  rowEnd.insertAdjacentHTML('afterend', renderSubjectInlineDetail(subject))
+  const detail = rowEnd.nextElementSibling
+  if (detail) bindSubjectTrackTabs(detail)
 }
 
 function getSubjectTrackTitle() {
@@ -1943,15 +1999,6 @@ function handleQuizClick(event) {
     const state = getTopicCompletionState(subjectCode, topicLabel)
     state[completionKey] = topicCompletionInput.checked
 
-    if (completionKey === 'finished' && topicCompletionInput.checked) {
-      state.studied = true
-      state.mcqs = true
-    }
-
-    if ((completionKey === 'studied' || completionKey === 'mcqs') && !topicCompletionInput.checked) {
-      state.finished = false
-    }
-
     saveTopicCompletionState(subjectCode, topicLabel, state)
     setActiveSubject(subjectCode, 'open')
     return
@@ -2077,12 +2124,7 @@ function renderSubjects() {
     clearSubjectDetail()
   }
 
-  const subjectGridColumnCount = (() => {
-    if (!mobileQuery.matches) return 1
-    if (window.matchMedia('(max-width: 560px)').matches) return 2
-    if (window.matchMedia('(min-width: 760px) and (max-width: 860px)').matches) return 4
-    return 3
-  })()
+  const subjectGridColumnCount = getSubjectGridColumnCount()
   const subjectCards = []
 
   visibleSubjects.forEach((subject, index) => {
@@ -2128,31 +2170,12 @@ function renderSubjects() {
     const expandedSubjectInRow = rowSubjects.find((item) => item.code === expandedSubjectCode)
 
     if (expandedSubjectInRow && (isRowEnd || isLastSubject)) {
-      subjectCards.push(`
-        <div class="subject-inline-detail">
-          <div class="subject-inline-detail__top">
-            <span>${getCoveredCount(expandedSubjectInRow)} covered</span>
-            <span>${expandedSubjectInRow.totalCount - getCoveredCount(expandedSubjectInRow)} not covered</span>
-          </div>
-          <div class="subject-track-tabs subject-track-tabs--inline" role="tablist" aria-label="${expandedSubjectInRow.code} sections">
-            ${renderSubjectTrackTabs(expandedSubjectInRow)}
-          </div>
-          <h3 class="subject-inline-detail__title">${getSubjectTrackTitle()}</h3>
-          <ul class="topic-list topic-list--inline">
-            ${renderSubjectTrackList(expandedSubjectInRow)}
-          </ul>
-        </div>
-      `)
+      subjectCards.push(renderSubjectInlineDetail(expandedSubjectInRow))
     }
   })
 
   subjectList.innerHTML = subjectCards.join('')
-
-  subjectList.querySelectorAll('.subject-button').forEach((button) => {
-    button.addEventListener('click', () => {
-      setActiveSubject(button.dataset.code)
-    })
-  })
+  bindSubjectButtons()
   bindSubjectTrackTabs(subjectList)
 }
 
@@ -2175,6 +2198,7 @@ function setActiveSubject(code, mobileMode = 'toggle') {
   updateTrackerUrl(subject.code)
 
   if (mobileQuery.matches) {
+    const wasMobileRendered = Boolean(subjectList.querySelector('.subject-button'))
     if (mobileMode === 'open') {
       expandedSubjectCode = subject.code
     } else if (mobileMode === 'closed') {
@@ -2184,7 +2208,11 @@ function setActiveSubject(code, mobileMode = 'toggle') {
     }
     activeSubjectCode = subject.code
     markSubjectUpdatesSeen(subject)
-    renderSubjects()
+    if (wasMobileRendered) {
+      updateMobileSubjectInlineDetail(subject)
+    } else {
+      renderSubjects()
+    }
     return
   }
 
@@ -2216,8 +2244,6 @@ function setActiveSubject(code, mobileMode = 'toggle') {
     subjectTrackTabs.innerHTML = renderSubjectTrackTabs(subject)
     bindSubjectTrackTabs(subjectTrackTabs)
   }
-  if (topicListTitle) topicListTitle.textContent = getSubjectTrackTitle()
-
   progressFill.style.width = '0%'
   if (prefersReducedMotion) {
     progressFill.style.width = `${percent}%`
@@ -2315,8 +2341,7 @@ function render401ExamSchedule() {
       return `
         <div class="exam-card exam-card--has-action${stateClass}" data-code="${exam.subjectCode}">
           <strong>${escapeHtml(exam.code)}</strong>
-          <time datetime="${exam.date}T14:30">${formatShortDate(exam.date)}</time>
-          <em>${escapeHtml(exam.time)}</em>
+          <time datetime="${exam.date}">${escapeHtml(exam.time)}</time>
           ${exam.meta ? `<span class="exam-card__meta">${escapeHtml(exam.meta)}</span>` : ''}
           <button class="exam-card__quiz-action" type="button" data-quiz-topic="NUT Quiz">
             Past Exams (52 Qs)
@@ -3400,6 +3425,10 @@ function initFullHistoryTool() {
           state.step = s.id;
           saveState();
           renderAll();
+          const section = $(`.step-section[data-step="${s.id}"]`);
+          const bottomNavSpace = document.querySelector('.bottom-nav-wrap')?.offsetHeight || 0;
+          const targetTop = section ? section.getBoundingClientRect().top + window.scrollY - Math.max(bottomNavSpace + 22, 96) : null;
+          if (targetTop !== null) window.scrollTo({ top: targetTop, behavior: "smooth" });
         });
         list.appendChild(btn);
       });
