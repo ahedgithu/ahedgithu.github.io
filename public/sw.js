@@ -1,10 +1,8 @@
-const CACHE_VERSION = 'med401-pwa-v2';
+const CACHE_VERSION = 'med401-pwa-v3';
 const APP_SHELL = [
   '/',
   '/index.html',
   '/schedule.html',
-  '/history.html',
-  '/work.html',
   '/favicon.svg',
   '/manifest.webmanifest',
   '/pwa.js',

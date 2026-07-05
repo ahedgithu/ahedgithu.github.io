@@ -632,6 +632,16 @@ const stateLabels = {
   remaining: 'Remaining'
 }
 
+function replayTrackerMotion(container, selector) {
+  if (prefersReducedMotion || !container) return
+  const items = [...container.querySelectorAll(selector)]
+  items.forEach((item) => {
+    item.classList.remove('motion-replay')
+    void item.offsetWidth
+    item.classList.add('motion-replay')
+  })
+}
+
 const subjectExamNotes = {
   'SUR-1': 'Midterm: Wed Jul 22, 2026, 2:30-3:30.',
   'MED-1': 'Midterm: Wed Jul 29, 2026, 2:30-3:30.',
@@ -708,6 +718,7 @@ const selectedPercent = document.getElementById('selected-percent')
 const progressFill = document.getElementById('progress-fill')
 const topicList = document.getElementById('topic-list')
 const topicListTitle = document.getElementById('topic-list-title')
+const subjectDetail = document.querySelector('.subject-detail')
 const subjectTrackTabs = document.getElementById('subject-track-tabs')
 const trackerSearch = document.getElementById('tracker-search')
 const trackerStatusFilter = document.getElementById('tracker-status-filter')
@@ -1576,7 +1587,7 @@ function renderQuizQuestion() {
       const isCorrect = option && option.id === question.correctOptionId
       const isSelected = option && option.id === selectedOptionId
       let stateClass = ''
-      
+
       if (shouldReveal) {
         if (isCorrect) stateClass = ' quiz-choice--correct'
         else if (isSelected) stateClass = ' quiz-choice--wrong'
@@ -1585,7 +1596,7 @@ function renderQuizQuestion() {
       }
 
       return `
-        <button class="quiz-choice${stateClass}" type="button" data-quiz-question="${escapeHtml(question.id)}" data-quiz-answer="${escapeHtml(option.id)}" ${shouldReveal ? 'disabled' : ''}>
+        <button class="quiz-choice${stateClass}" type="button" data-quiz-question="${escapeHtml(question.id)}" data-quiz-answer="${escapeHtml(option.id)}" ${shouldReveal ? 'disabled' : ''} ${isSelected ? 'data-quiz-selected="true"' : ''}>
           <span>${String.fromCharCode(65 + optionIndex)}</span>
           ${escapeHtml(option.text)}
         </button>
@@ -1613,6 +1624,8 @@ function renderQuizQuestion() {
     ${resultBanner}
     <div class="quiz-question-list">${questionCards}</div>
   `
+
+  replayTrackerMotion(body, '.quiz-card, .quiz-choice[data-quiz-selected="true"]')
 }
 
 function triggerCorrectAnswerCelebration() {
@@ -2045,6 +2058,12 @@ function setActiveSubject(code, mobileMode = 'toggle') {
     renderSubjects()
   }
 
+  if (subjectChanged && !prefersReducedMotion) {
+    subjectDetail?.classList.remove('subject-detail--entered')
+    void subjectDetail?.offsetWidth
+    subjectDetail?.classList.add('subject-detail--entered')
+  }
+
   subjectList.querySelectorAll('.subject-button').forEach((button) => {
     button.classList.toggle('active', button.dataset.code === subject.code)
     button.setAttribute('aria-expanded', 'false')
@@ -2073,6 +2092,7 @@ function setActiveSubject(code, mobileMode = 'toggle') {
   }
 
   topicList.innerHTML = renderSubjectTrackList(subject)
+  replayTrackerMotion(topicList, '.topic-section-heading, .topic-section-subheading, .topic-item')
 }
 
 function getTodayLabel() {
@@ -2213,8 +2233,23 @@ function renderSemesterTimeline() {
   const todayPercent = getTimelinePercent(today, semesterStart, finals)
   const midtermPercent = getTimelinePercent(midterm, semesterStart, finals)
 
-  semesterFill.style.width = `${todayPercent}%`
-  todayMarker.style.left = `${todayPercent}%`
+  const shouldAnimateTimeline = !prefersReducedMotion && !semesterFill.dataset.motionPlayed
+  const raceTrack = semesterFill.closest('.race-track')
+  if (shouldAnimateTimeline) {
+    semesterFill.dataset.motionPlayed = 'true'
+    raceTrack?.classList.add('race-track--motion')
+    semesterFill.style.width = '0%'
+    todayMarker.style.left = '0%'
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        semesterFill.style.width = `${todayPercent}%`
+        todayMarker.style.left = `${todayPercent}%`
+      })
+    })
+  } else {
+    semesterFill.style.width = `${todayPercent}%`
+    todayMarker.style.left = `${todayPercent}%`
+  }
   midtermMarker.style.left = `${midtermPercent}%`
   finalsMarker.style.left = '100%'
 
@@ -2931,6 +2966,7 @@ function renderNewsFilters() {
   const order = newsDateFilter?.value || 'newest'
   const now = new Date()
   const cards = [...newsFeed.querySelectorAll('.update-panel')]
+  const seenCards = getNewsSeenCards()
   renderNewsNavBadge(cards)
 
   cards
@@ -2943,6 +2979,12 @@ function renderNewsFilters() {
     .forEach((card) => {
       const expired = isNewsCardExpired(card, now)
       card.hidden = expired || (course !== 'all' && card.dataset.course !== course)
+      const isUnseen = !expired && !seenCards.has(getNewsCardId(card))
+      card.classList.toggle('update-panel--new', isUnseen)
+      if (!prefersReducedMotion && isUnseen && !card.dataset.motionSeen) {
+        card.dataset.motionSeen = 'true'
+        card.classList.add('update-panel--new-flash')
+      }
       newsFeed.append(card)
     })
 
@@ -3053,6 +3095,654 @@ if (scheduleTodayTitle) {
   window.setInterval(renderSchedulePage, 60 * 1000)
 }
 
+function initFullHistoryTool() {
+  const historyRoot = document.getElementById('history')
+  const historyApp = document.getElementById('history-app')
+  if (!historyRoot || !historyApp || historyRoot.dataset.historyToolReady) return
+  historyRoot.dataset.historyToolReady = 'true'
+    const systems = {
+      general: {
+        label: "General",
+        desc: "Basic history sheet",
+        complaints: ["Fever", "Weight loss", "Fatigue", "Swelling", "Pallor", "Jaundice"],
+        symptoms: [
+          ["Fever", "pattern, grade, chills"], ["Weight loss", "amount, duration, appetite"], ["Night sweats", "TB/lymphoma clue"], ["Pallor", "anemia clue"],
+          ["Jaundice", "urine/stool/pruritus"], ["Cyanosis", "central/peripheral"], ["Edema", "site, pitting, timing"], ["Rash", "type, distribution"]
+        ]
+      },
+      cardiology: {
+        label: "Cardiology",
+        desc: "Cardiac symptoms",
+        complaints: ["Dyspnea", "Chest pain", "Palpitations", "Syncope", "LL edema", "Orthopnea"],
+        symptoms: [
+          ["Dyspnea", "exertional grade"], ["Orthopnea", "number of pillows"], ["PND", "wakes from sleep"], ["Chest pain", "site/character/radiation"],
+          ["Palpitations", "onset/rhythm/duration"], ["Syncope", "pre/post-event"], ["LL edema", "dependent/pitting"], ["Cyanosis", "central/peripheral"],
+          ["Cough/hemoptysis", "pulmonary congestion"], ["Fatigue", "low COP clue"]
+        ]
+      },
+      chest: {
+        label: "Chest",
+        desc: "Respiratory symptoms",
+        complaints: ["Cough", "Sputum", "Dyspnea", "Wheeze", "Hemoptysis", "Chest pain"],
+        symptoms: [
+          ["Cough", "dry/productive, timing"], ["Sputum", "amount/color/odour"], ["Hemoptysis", "streaks vs massive"], ["Dyspnea", "acute/subacute/chronic"],
+          ["Wheeze", "episodic/triggered"], ["Chest pain", "pleuritic/localized"], ["Fever", "infection clue"], ["Weight loss", "TB/malignancy"],
+          ["Occupational exposure", "dust/asbestos/farm"], ["Allergy/asthma", "personal/family"]
+        ]
+      },
+      abdomen: {
+        label: "Abdomen / GIT",
+        desc: "GIT + hepatology",
+        complaints: ["Abdominal pain", "Vomiting", "Diarrhea", "Constipation", "Jaundice", "Abdominal swelling"],
+        symptoms: [
+          ["Dysphagia", "solids/liquids"], ["Vomiting", "content/amount/relation"], ["Hematemesis", "fresh/coffee ground"], ["Abdominal pain", "site/character/radiation"],
+          ["Diarrhea", "frequency/consistency/blood"], ["Constipation", "duration/obstruction"], ["Melena", "black tarry stool"], ["Jaundice", "urine/stool/pruritus"],
+          ["Abdominal swelling", "ascites/mass"], ["LL swelling", "hepatic/cardiac clue"], ["Urinary symptoms", "renal overlap"], ["Gynecological symptoms", "female patients"]
+        ]
+      },
+      neurology: {
+        label: "Neurology",
+        desc: "CNS history",
+        complaints: ["Weakness", "Headache", "Convulsions", "Sensory loss", "Speech trouble", "Sphincter trouble"],
+        symptoms: [
+          ["Headache", "ICT/red flags"], ["Projectile vomiting", "ICT clue"], ["Blurring of vision", "optic/ICT"], ["Convulsions", "type/post-ictal"],
+          ["Motor weakness", "side/distribution"], ["Sensory symptoms", "level/modality"], ["Speech symptoms", "aphasia/dysarthria"], ["Sphincter troubles", "retention/incontinence"],
+          ["Cranial nerves", "vision/diplopia/facial"], ["Trauma", "exclude in history"], ["Fever/malaise", "inflammation clue"], ["Hypothalamic symptoms", "sleep/appetite/temp"]
+        ]
+      },
+      rheumatology: {
+        label: "Rheumatology",
+        desc: "Articular + extra-articular",
+        complaints: ["Joint pain", "Joint swelling", "Morning stiffness", "Back pain", "Rash", "Oral ulcers"],
+        symptoms: [
+          ["Joint pain", "site, number, symmetry"], ["Swelling", "inflammatory/mechanical"], ["Morning stiffness", "duration"], ["Deformity", "type/progression"],
+          ["Limitation", "function/disability"], ["Skin rash", "malar/psoriasis/nodules"], ["Eye symptoms", "redness/uveitis"], ["Oral ulcers", "SLE/Behçet clue"],
+          ["Raynaud’s", "color change/cold"], ["Back pain", "inflammatory features"], ["Fever/weight loss", "systemic"], ["Drug history", "steroids/NSAIDs"]
+        ]
+      }
+    };
+
+    const steps = [
+      { id: "personal", label: "Personal", desc: "NASOMRH" },
+      { id: "complaint", label: "Complaint", desc: "C/O + duration" },
+      { id: "hpi", label: "HPI", desc: "analysis story" },
+      { id: "related", label: "Related", desc: "system symptoms" },
+      { id: "past", label: "Past", desc: "disease/drugs" },
+      { id: "family", label: "Family", desc: "risk context" },
+      { id: "final", label: "Final", desc: "review/copy" }
+    ];
+
+    const requiredKeys = [
+      "age", "sex", "occupation", "residence", "mainComplaint", "complaintDuration",
+      "complaintType", "onset", "course", "associated", "aggravating", "relieving",
+      "treatmentEffect", "dm", "htn", "tb", "familyDM", "familyHTN", "consanguinity"
+    ];
+
+    const defaultState = {
+      system: "general",
+      step: "personal",
+      mode: "study",
+      tab: "full",
+      relatedSymptoms: []
+    };
+
+    let state = loadState();
+
+    function loadState() {
+      try {
+        const saved = localStorage.getItem("historyToolState.v1");
+        return saved ? { ...defaultState, ...JSON.parse(saved) } : { ...defaultState };
+      } catch {
+        return { ...defaultState };
+      }
+    }
+
+    function saveState() {
+      localStorage.setItem("historyToolState.v1", JSON.stringify(state));
+    }
+
+    const $ = (sel) => historyRoot.querySelector(sel);
+    const $$ = (sel) => Array.from(historyRoot.querySelectorAll(sel));
+
+    function value(key) {
+      const v = state[key];
+      if (v === undefined || v === null || v === false) return "";
+      return String(v).trim();
+    }
+
+    function sentence(text) {
+      const t = String(text || "").trim();
+      if (!t) return "";
+      return /[.!?]$/.test(t) ? t : t + ".";
+    }
+
+    function joinParts(parts, sep = ", ") {
+      return parts.filter(Boolean).map(x => String(x).trim()).filter(Boolean).join(sep);
+    }
+
+    function smokingStats() {
+      const cigs = Number(value("cigsDay")) || 0;
+      const years = Number(value("smokingYears")) || 0;
+      const index = cigs * years;
+      const pack = cigs * years / 20;
+      let grade = "";
+      if (index > 0) grade = index < 100 ? "mild" : index <= 400 ? "moderate" : "heavy";
+      return { index, pack: Number.isInteger(pack) ? pack : pack.toFixed(1), grade };
+    }
+
+    function renderSystems() {
+      const grid = $("#systemGrid");
+      grid.innerHTML = "";
+      Object.entries(systems).forEach(([id, sys]) => {
+        const btn = document.createElement("button");
+        btn.className = "system-btn" + (state.system === id ? " active" : "");
+        btn.type = "button";
+        btn.innerHTML = `<b>${sys.label}</b><span>${sys.desc}</span>`;
+        btn.addEventListener("click", () => {
+          state.system = id;
+          state.relatedSymptoms = [];
+          state.step = "personal";
+          saveState();
+          renderAll();
+        });
+        grid.appendChild(btn);
+      });
+    }
+
+    function renderSteps() {
+      const list = $("#stepList");
+      list.innerHTML = "";
+      const currentIndex = steps.findIndex(s => s.id === state.step);
+      steps.forEach((s, i) => {
+        const btn = document.createElement("button");
+        btn.className = "step-btn" + (state.step === s.id ? " active" : "") + (i < currentIndex ? " done" : "");
+        btn.type = "button";
+        btn.innerHTML = `<span class="step-dot">${i < currentIndex ? "✓" : i + 1}</span><span class="step-label"><b>${s.label}</b><span>${s.desc}</span></span>`;
+        btn.addEventListener("click", () => {
+          state.step = s.id;
+          saveState();
+          renderAll();
+        });
+        list.appendChild(btn);
+      });
+    }
+
+    function renderMode() {
+      $$(".mode-btn").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.mode === state.mode);
+      });
+      historyApp.classList.toggle("osce", state.mode === "osce");
+      if (state.mode === "presentation") state.tab = "osce";
+    }
+
+    function renderStepSections() {
+      $$(".step-section").forEach(sec => sec.classList.toggle("active", sec.dataset.step === state.step));
+      const index = steps.findIndex(s => s.id === state.step);
+      $("#prevStep").disabled = index === 0;
+      $("#nextStep").textContent = index === steps.length - 1 ? "Back to start →" : "Next →";
+      $("#systemTag").textContent = systems[state.system].label;
+    }
+
+    function renderInputs() {
+      $$('[data-key]').forEach(el => {
+        const key = el.dataset.key;
+        if (el.type === "checkbox") {
+          el.checked = Boolean(state[key]);
+        } else if (el.tagName === "SELECT" || el.tagName === "INPUT" || el.tagName === "TEXTAREA") {
+          el.value = state[key] ?? "";
+        }
+      });
+      updateConditionals();
+    }
+
+    function renderComplaintChips() {
+      const wrap = $("#complaintChips");
+      wrap.innerHTML = "";
+      systems[state.system].complaints.forEach(label => {
+        const chip = document.createElement("button");
+        chip.type = "button";
+        chip.className = "chip" + (value("mainComplaint").toLowerCase() === label.toLowerCase() ? " active" : "");
+        chip.textContent = label;
+        chip.addEventListener("click", () => {
+          state.mainComplaint = label.toLowerCase();
+          const lower = label.toLowerCase();
+          if (lower.includes("pain")) state.complaintType = "pain";
+          else if (lower.includes("cough") || lower.includes("sputum")) state.complaintType = "cough-sputum";
+          else if (lower.includes("dyspnea") || lower.includes("breath")) state.complaintType = "dyspnea";
+          else if (lower.includes("swelling") || lower.includes("edema")) state.complaintType = "swelling";
+          else if (lower.includes("fever")) state.complaintType = "fever";
+          else if (lower.includes("weakness")) state.complaintType = "weakness";
+          saveState();
+          renderAll();
+        });
+        wrap.appendChild(chip);
+      });
+    }
+
+    function renderRelatedSymptoms() {
+      const wrap = $("#relatedSymptoms");
+      wrap.innerHTML = "";
+      const selected = new Set(state.relatedSymptoms || []);
+      systems[state.system].symptoms.forEach(([name, detail]) => {
+        const label = document.createElement("label");
+        label.className = "symptom-card";
+        label.innerHTML = `<input type="checkbox" ${selected.has(name) ? "checked" : ""} /><span><b>${name}</b><span>${detail}</span></span>`;
+        label.querySelector("input").addEventListener("change", (e) => {
+          if (e.target.checked) selected.add(name); else selected.delete(name);
+          state.relatedSymptoms = Array.from(selected);
+          saveState();
+          renderOutput();
+          renderProgress();
+        });
+        wrap.appendChild(label);
+      });
+    }
+
+    function updateConditionals() {
+      $("#femaleWrap").classList.toggle("show", value("sex") === "Female");
+      $("#handednessWrap").classList.toggle("show", state.system === "neurology");
+      $("#smokingWrap").classList.toggle("show", Boolean(state.isSmoker));
+      const type = value("complaintType");
+      const needsPain = type === "pain" || value("mainComplaint").toLowerCase().includes("pain");
+      const needsExcreta = ["excreta", "cough-sputum", "bleeding"].includes(type) || ["sputum", "diarrhea", "vomit", "urine", "stool", "hemoptysis", "hematemesis", "melena"].some(w => value("mainComplaint").toLowerCase().includes(w));
+      $("#painWrap").classList.toggle("show", needsPain);
+      $("#excretaWrap").classList.toggle("show", needsExcreta);
+
+      const stats = smokingStats();
+      $("#smokingIndex").textContent = stats.index ? `${stats.index} ${stats.grade ? `(${stats.grade})` : ""}` : "0";
+      $("#packYears").textContent = stats.pack || "0";
+    }
+
+    function missingQuestions() {
+      const missing = [];
+      const add = (key, text) => { if (!value(key)) missing.push(text); };
+
+      add("age", "Ask the patient’s age.");
+      add("sex", "Record sex.");
+      add("occupation", "Ask occupation and occupational exposure.");
+      add("residence", "Ask residence / place of living.");
+      add("mainComplaint", "Write the main complaint.");
+      add("complaintDuration", "Add duration to the complaint.");
+      add("complaintType", "Choose complaint type so the tool can guide analysis.");
+      add("onset", "Analyze onset.");
+      add("course", "Analyze course.");
+      add("associated", "Ask associated symptoms.");
+      add("aggravating", "Ask what increases the complaint.");
+      add("relieving", "Ask what decreases the complaint.");
+      add("treatmentEffect", "Ask about effect of treatment.");
+      add("dm", "Ask past history of DM.");
+      add("htn", "Ask past history of hypertension.");
+      add("tb", "Ask past/contact history of TB.");
+      add("familyDM", "Ask family history of DM.");
+      add("familyHTN", "Ask family history of HTN.");
+      add("consanguinity", "Ask consanguinity.");
+
+      const type = value("complaintType");
+      const lowerComplaint = value("mainComplaint").toLowerCase();
+      const needsPain = type === "pain" || lowerComplaint.includes("pain");
+      const needsExcreta = ["excreta", "cough-sputum", "bleeding"].includes(type) || ["sputum", "diarrhea", "vomit", "urine", "stool", "hemoptysis", "hematemesis", "melena"].some(w => lowerComplaint.includes(w));
+
+      if (needsPain) {
+        add("painSite", "Pain complaint: ask site.");
+        add("painCharacter", "Pain complaint: ask character.");
+        add("painRadiation", "Pain complaint: ask radiation.");
+      }
+      if (needsExcreta) {
+        add("amount", "Excreta complaint: ask amount.");
+        add("color", "Excreta complaint: ask color.");
+        add("consistency", "Excreta complaint: ask consistency.");
+        add("odour", "Excreta complaint: ask odour.");
+      }
+      if (state.system === "neurology") add("handedness", "Neurology mode: add handedness.");
+      if (value("sex") === "Female") {
+        add("menarche", "Female patient: ask menarche.");
+        add("cycleRhythm", "Female patient: ask menstrual cycle rhythm.");
+        add("flowDuration", "Female patient: ask duration of flow.");
+        add("dysmenorrhea", "Female patient: ask dysmenorrhea.");
+        add("contraception", "Female patient: ask current contraception.");
+      }
+      if (!state.relatedSymptoms || state.relatedSymptoms.length === 0) missing.push("Ask/check related system symptoms.");
+
+      return missing;
+    }
+
+    function completion() {
+      const keys = [...requiredKeys];
+      const type = value("complaintType");
+      const lowerComplaint = value("mainComplaint").toLowerCase();
+      if (type === "pain" || lowerComplaint.includes("pain")) keys.push("painSite", "painCharacter", "painRadiation");
+      if (["excreta", "cough-sputum", "bleeding"].includes(type) || ["sputum", "diarrhea", "vomit", "urine", "stool", "hemoptysis", "hematemesis", "melena"].some(w => lowerComplaint.includes(w))) keys.push("amount", "color", "consistency", "odour");
+      if (state.system === "neurology") keys.push("handedness");
+      if (value("sex") === "Female") keys.push("menarche", "cycleRhythm", "flowDuration", "dysmenorrhea", "contraception");
+      const done = keys.filter(k => value(k)).length + ((state.relatedSymptoms || []).length ? 1 : 0);
+      const total = keys.length + 1;
+      return Math.round((done / total) * 100);
+    }
+
+    function renderProgress() {
+      const pct = completion();
+      $("#completionLabel").textContent = pct + "%";
+      $("#completionFill").style.width = pct + "%";
+    }
+
+    function personalParagraph() {
+      const parts = [];
+      const gender = value("sex") ? value("sex").toLowerCase() : "Patient";
+      const name = value("name") ? ` ${value("name")}` : "";
+      let opener = `${value("sex") || "Patient"}${name}`;
+      if (value("age")) opener += `, ${value("age")}-year-old`;
+      if (value("occupation")) opener += `, ${value("occupation")}`;
+      parts.push(opener);
+
+      const residence = value("residence") ? `living in ${value("residence")}` : "";
+      const marital = value("marital") ? value("marital").toLowerCase() : "";
+      const marriage = value("marriageDuration") ? `for ${value("marriageDuration")}` : "";
+      const children = value("children") ? `with ${value("children")} living offspring` : "";
+      const youngest = value("youngestChild") ? `the youngest is ${value("youngestChild")}` : "";
+      parts.push(joinParts([residence, marital, marriage, children, youngest]));
+
+      if (state.system === "neurology" && value("handedness")) parts.push(value("handedness"));
+
+      if (state.isSmoker) {
+        const stats = smokingStats();
+        const smoke = joinParts([
+          value("smokingStatus") || "smoker",
+          value("cigsDay") ? `${value("cigsDay")} cigarettes/day` : "",
+          value("smokingYears") ? `for ${value("smokingYears")} years` : "",
+          stats.index ? `smoking index ${stats.index}${stats.grade ? ` (${stats.grade})` : ""}` : "",
+          stats.pack ? `${stats.pack} pack-years` : "",
+          value("smokingType") ? `type: ${value("smokingType")}` : ""
+        ]);
+        parts.push(smoke);
+      } else {
+        parts.push("no special habits documented");
+      }
+      if (value("otherHabits")) parts.push(`Other habits: ${value("otherHabits")}`);
+
+      if (value("sex") === "Female") {
+        const menstrual = joinParts([
+          value("menarche") ? `menarche at ${value("menarche")}` : "",
+          value("menopause") ? `menopause: ${value("menopause")}` : "",
+          value("cycleRhythm") ? `cycle ${value("cycleRhythm")}` : "",
+          value("flowDuration") ? `flow duration ${value("flowDuration")}` : "",
+          value("flowAmount") ? `flow ${value("flowAmount")}` : "",
+          value("dysmenorrhea"),
+          value("contraception") ? `contraception: ${value("contraception")}` : "",
+          value("obstetric") ? `obstetric note: ${value("obstetric")}` : ""
+        ]);
+        if (menstrual) parts.push(`Menstrual history: ${menstrual}`);
+      }
+
+      if (value("socialClass")) parts.push(value("socialClass"));
+      return sentence(joinParts(parts));
+    }
+
+    function complaintLine() {
+      const complaint = value("mainComplaint") || "[main complaint]";
+      const duration = value("complaintDuration") ? ` of ${value("complaintDuration")} duration` : "";
+      return `C/O: ${complaint}${duration}.`;
+    }
+
+    function hpiParagraph() {
+      const chunks = [];
+      const complaint = value("mainComplaint") || "the complaint";
+      chunks.push(`The patient presented with ${complaint}${value("complaintDuration") ? ` for ${value("complaintDuration")}` : ""}`);
+      if (value("onset")) chunks.push(`onset was ${value("onset")}`);
+      if (value("course")) chunks.push(`course was ${value("course")}`);
+      if (value("hpiDuration")) chunks.push(`duration details: ${value("hpiDuration")}`);
+      if (value("associated")) chunks.push(`associated with ${value("associated")}`);
+      if (value("aggravating")) chunks.push(`increased by ${value("aggravating")}`);
+      if (value("relieving")) chunks.push(`relieved by ${value("relieving")}`);
+      if (value("treatmentEffect")) chunks.push(`effect of treatment: ${value("treatmentEffect")}`);
+      if (value("lastAttack")) chunks.push(`last attack: ${value("lastAttack")}`);
+
+      const pain = joinParts([
+        value("painSite") ? `site: ${value("painSite")}` : "",
+        value("painCharacter") ? `character: ${value("painCharacter")}` : "",
+        value("painRadiation") ? `radiation: ${value("painRadiation")}` : ""
+      ]);
+      if (pain) chunks.push(`Pain analysis: ${pain}`);
+
+      const excreta = joinParts([
+        value("amount") ? `amount: ${value("amount")}` : "",
+        value("content") ? `content: ${value("content")}` : "",
+        value("color") ? `color: ${value("color")}` : "",
+        value("consistency") ? `consistency: ${value("consistency")}` : "",
+        value("odour") ? `odour: ${value("odour")}` : ""
+      ]);
+      if (excreta) chunks.push(`Excreta analysis: ${excreta}`);
+
+      const variants = joinParts([
+        value("postural") ? `postural variation: ${value("postural")}` : "",
+        value("diurnal") ? `diurnal variation: ${value("diurnal")}` : "",
+        value("seasonal") ? `seasonal variation: ${value("seasonal")}` : ""
+      ]);
+      if (variants) chunks.push(`Variants: ${variants}`);
+      if (value("investigationTreatment")) chunks.push(`Investigations/treatment for current illness: ${value("investigationTreatment")}`);
+
+      return sentence(chunks.join("; "));
+    }
+
+    function relatedParagraph() {
+      const symptoms = (state.relatedSymptoms || []).join(", ");
+      const parts = [];
+      if (symptoms) parts.push(`Related ${systems[state.system].label} symptoms checked: ${symptoms}`);
+      if (value("relatedNotes")) parts.push(value("relatedNotes"));
+      if (value("systemicReview")) parts.push(`Systemic review: ${value("systemicReview")}`);
+      return sentence(parts.join(". "));
+    }
+
+    function pastParagraph() {
+      const parts = [];
+      ["dm", "htn", "tb", "ihd"].forEach(k => { if (value(k)) parts.push(value(k)); });
+      if (value("similarAttacks")) parts.push(`similar attacks: ${value("similarAttacks")}`);
+      if (value("operations")) parts.push(`operations: ${value("operations")}`);
+      if (value("transfusion")) parts.push(`blood transfusion: ${value("transfusion")}`);
+      if (value("drugs")) parts.push(`drug history: ${value("drugs")}`);
+      if (value("allergies")) parts.push(`allergies: ${value("allergies")}`);
+      if (value("pastDetails")) parts.push(value("pastDetails"));
+      return sentence(parts.length ? `Past history: ${parts.join("; ")}` : "Past history not completed");
+    }
+
+    function familyParagraph() {
+      const parts = [];
+      ["consanguinity", "similarFamily", "familyDM", "familyHTN", "familyTB", "familyIHD"].forEach(k => { if (value(k)) parts.push(value(k)); });
+      if (value("familyDetails")) parts.push(`family details: ${value("familyDetails")}`);
+      if (value("livingConditions")) parts.push(`living/exposure: ${value("livingConditions")}`);
+      return sentence(parts.length ? `Family and social history: ${parts.join("; ")}` : "Family and social history not completed");
+    }
+
+    function fullHistory() {
+      const lines = [
+        `SYSTEM: ${systems[state.system].label}`,
+        "",
+        "PERSONAL HISTORY",
+        personalParagraph(),
+        "",
+        "COMPLAINT",
+        complaintLine(),
+        value("patientWords") ? `Patient’s own words: “${value("patientWords")}”` : "",
+        "",
+        "HISTORY OF PRESENT ILLNESS",
+        hpiParagraph(),
+        "",
+        "RELATED SYSTEM + SYSTEMIC REVIEW",
+        relatedParagraph(),
+        "",
+        "PAST HISTORY",
+        pastParagraph(),
+        "",
+        "FAMILY + SOCIAL HISTORY",
+        familyParagraph()
+      ];
+      return lines.filter(line => line !== "").join("\n");
+    }
+
+    function osceSummary() {
+      const demo = joinParts([
+        value("age") ? `${value("age")}-year-old` : "",
+        value("sex") ? value("sex").toLowerCase() : "patient",
+        value("occupation") || ""
+      ], " ");
+      const smoker = state.isSmoker ? `, ${value("smokingStatus") || "smoker"}${value("cigsDay") ? ` ${value("cigsDay")} cigarettes/day` : ""}${value("smokingYears") ? ` for ${value("smokingYears")} years` : ""}` : "";
+      const complaint = value("mainComplaint") || "[main complaint]";
+      const duration = value("complaintDuration") ? `for ${value("complaintDuration")}` : "with unspecified duration";
+      const assoc = value("associated") ? ` It was associated with ${value("associated")}.` : "";
+      const systemPos = (state.relatedSymptoms || []).length ? ` Related positive/checklisted symptoms include ${(state.relatedSymptoms || []).join(", ")}.` : "";
+      const risks = joinParts([value("dm"), value("htn"), value("tb"), value("ihd")], "; ");
+      return `This is a ${demo || "patient"}${smoker}, presenting with ${complaint} ${duration}. The illness had ${value("onset") || "[onset not specified]"} onset and ${value("course") || "[course not specified]"} course.${assoc}${systemPos}${risks ? ` Past history: ${risks}.` : ""}`;
+    }
+
+    function renderOutput() {
+      const missing = missingQuestions();
+      const missingBox = $("#missingBox");
+      const output = $("#outputBox");
+      const finalMissing = $("#finalMissing");
+
+      $$(".tab-btn").forEach(btn => btn.classList.toggle("active", btn.dataset.tab === state.tab));
+      if (state.tab === "full") output.textContent = fullHistory();
+      if (state.tab === "osce") output.textContent = osceSummary();
+      if (state.tab === "missing") output.textContent = missing.length ? "Complete the items below." : "Looks clean. No major missing items detected.";
+
+      missingBox.innerHTML = "";
+      if (state.tab === "missing") {
+        if (!missing.length) {
+          missingBox.innerHTML = `<div class="good-item">No major missing questions detected. Nice.</div>`;
+        } else {
+          missing.forEach(m => {
+            const div = document.createElement("div");
+            div.className = "missing-item";
+            div.textContent = m;
+            missingBox.appendChild(div);
+          });
+        }
+      }
+
+      if (finalMissing) {
+        finalMissing.innerHTML = "";
+        if (!missing.length) {
+          finalMissing.innerHTML = `<div class="good-item">No major missing questions detected. You can present this case.</div>`;
+        } else {
+          missing.slice(0, 12).forEach(m => {
+            const div = document.createElement("div");
+            div.className = "missing-item";
+            div.textContent = m;
+            finalMissing.appendChild(div);
+          });
+          if (missing.length > 12) {
+            const div = document.createElement("div");
+            div.className = "missing-item";
+            div.textContent = `+ ${missing.length - 12} more items in the Missing tab.`;
+            finalMissing.appendChild(div);
+          }
+        }
+      }
+    }
+
+    function renderAll() {
+      renderMode();
+      renderSystems();
+      renderSteps();
+      renderStepSections();
+      renderInputs();
+      renderComplaintChips();
+      renderRelatedSymptoms();
+      renderProgress();
+      renderOutput();
+    }
+
+    function bindEvents() {
+      historyRoot.addEventListener("input", (e) => {
+        const el = e.target.closest("[data-key]");
+        if (!el) return;
+        const key = el.dataset.key;
+        if (el.type === "checkbox") state[key] = el.checked;
+        else state[key] = el.value;
+        saveState();
+        updateConditionals();
+        renderComplaintChips();
+        renderProgress();
+        renderOutput();
+      });
+
+      historyRoot.addEventListener("change", (e) => {
+        const el = e.target.closest("[data-key]");
+        if (!el) return;
+        const key = el.dataset.key;
+        if (el.type === "checkbox") state[key] = el.checked;
+        else state[key] = el.value;
+        saveState();
+        updateConditionals();
+        renderProgress();
+        renderOutput();
+      });
+
+      $$(".mode-btn").forEach(btn => btn.addEventListener("click", () => {
+        state.mode = btn.dataset.mode;
+        if (state.mode === "presentation") state.tab = "osce";
+        saveState();
+        renderAll();
+      }));
+
+      $$(".tab-btn").forEach(btn => btn.addEventListener("click", () => {
+        state.tab = btn.dataset.tab;
+        saveState();
+        renderOutput();
+      }));
+
+      $("#prevStep").addEventListener("click", () => {
+        const idx = steps.findIndex(s => s.id === state.step);
+        state.step = steps[Math.max(0, idx - 1)].id;
+        saveState();
+        renderAll();
+      });
+
+      $("#nextStep").addEventListener("click", () => {
+        const idx = steps.findIndex(s => s.id === state.step);
+        state.step = steps[(idx + 1) % steps.length].id;
+        saveState();
+        renderAll();
+      });
+
+      $("#copyBtn").addEventListener("click", () => copyText($("#outputBox").textContent));
+      $("#copyFinalBtn").addEventListener("click", () => copyText(fullHistory()));
+      $("#printBtn").addEventListener("click", () => window.print());
+
+      $("#resetBtn").addEventListener("click", () => {
+        if (!confirm("Reset the whole prototype form?")) return;
+        localStorage.removeItem("historyToolState.v1");
+        state = { ...defaultState };
+        renderAll();
+      });
+    }
+
+    async function copyText(text) {
+      try {
+        await navigator.clipboard.writeText(text);
+        showToast("Copied.");
+      } catch {
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        ta.remove();
+        showToast("Copied.");
+      }
+    }
+
+    function showToast(text) {
+      const toast = $("#toast");
+      toast.textContent = text;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 1600);
+    }
+
+    bindEvents();
+    renderAll();
+
+}
+
 function initBottomSectionNav() {
   const navLinks = [...document.querySelectorAll('[data-section-nav]')]
   if (!navLinks.length) return
@@ -3068,8 +3758,19 @@ function initBottomSectionNav() {
   }
 
   navLinks.forEach((link) => {
-    link.addEventListener('click', () => {
-      if (link.hash) setActive(link.hash.slice(1))
+    link.addEventListener('click', (event) => {
+      if (!link.hash) return
+      const targetId = link.hash.slice(1)
+      const targetSection = document.getElementById(targetId)
+      if (!targetSection) return
+
+      event.preventDefault()
+      setActive(targetId)
+      targetSection.scrollIntoView({
+        behavior: prefersReducedMotion ? 'auto' : 'smooth',
+        block: 'start'
+      })
+      window.history.pushState(null, '', link.hash)
     })
   })
 
@@ -3130,6 +3831,12 @@ function createAppleRipple(event) {
     '.schedule-calendar-event',
     '.history-panel',
     '.history-summary',
+    '.sidebar',
+    '.main-panel',
+    '.preview',
+    '.system-btn',
+    '.step-btn',
+    '.chip',
     '.service-card',
     '.agent-service',
     '.booking-panel'
@@ -3139,5 +3846,6 @@ function createAppleRipple(event) {
   createElementRipple(target, event)
 }
 
+initFullHistoryTool()
 initBottomSectionNav()
 document.addEventListener('pointerdown', createAppleRipple, { passive: true })

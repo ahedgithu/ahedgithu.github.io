@@ -11,8 +11,10 @@
   <meta property="og:type" content="website" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&display=swap" rel="stylesheet" />
   <meta name="theme-color" content="#315f72" />
-  <link rel="stylesheet" href="/src/style.css?v=20260704-nut-pdf-preview" />
+  <link rel="stylesheet" href="/src/style.css?v=20260705-home-sections" />
 </head>
 <body>
   <main>
@@ -416,6 +418,501 @@
 
 
 
+
+    <section class="history-page-section hub-section" id="history" aria-label="History Taking Tool">
+      <div class="app" id="history-app">
+          <header class="hero">
+            <div>
+              <h1>History Taking Tool</h1>
+              <p>Clinical history prototype: choose a system, take the history step-by-step, and get a live case presentation with missing-question feedback.</p>
+            </div>
+            <div class="hero-actions">
+              <div class="mode-toggle" role="group" aria-label="Mode selector">
+                <button class="mode-btn active" data-mode="study">Study</button>
+                <button class="mode-btn" data-mode="osce">OSCE</button>
+                <button class="mode-btn" data-mode="presentation">Presentation</button>
+              </div>
+              <button class="btn danger" id="resetBtn" type="button">Reset</button>
+            </div>
+          </header>
+
+          <main class="layout">
+            <aside class="sidebar" aria-label="History navigation">
+              <p class="small-title">Clinical system</p>
+              <div class="system-grid" id="systemGrid"></div>
+
+              <div class="progress-wrap">
+                <div class="progress-row"><span>Completion</span><strong id="completionLabel">0%</strong></div>
+                <div class="progress-bar"><div class="progress-fill" id="completionFill"></div></div>
+              </div>
+
+              <p class="small-title">Steps</p>
+              <div class="step-list" id="stepList"></div>
+
+              <p class="footer-note">Prototype v1. Data is saved locally in this browser only. No backend, no patient privacy risk.</p>
+            </aside>
+
+            <section class="main-panel" aria-live="polite">
+              <section class="step-section active" data-step="personal">
+                <div class="section-head">
+                  <div>
+                    <h2>Personal History</h2>
+                    <p>Build the opening paragraph: identity, demographics, occupation, residence, marital data, special habits, and conditional female/neuro items.</p>
+                  </div>
+                  <span class="tag">NASOMRH engine</span>
+                </div>
+
+                <div class="hint">Ask like a clinician, not a robot: “What is your name? How old are you? What do you do? Where do you live?” Then convert it into a clean paragraph.</div>
+
+                <div class="form-grid">
+                  <div class="field third"><label for="name">Name / initials</label><input id="name" data-key="name" placeholder="e.g., A.M." /></div>
+                  <div class="field third"><label for="age">Age</label><input id="age" data-key="age" type="number" min="0" placeholder="45" /></div>
+                  <div class="field third"><label for="sex">Sex</label><select id="sex" data-key="sex"><option value="">Select</option><option>Male</option><option>Female</option></select></div>
+
+                  <div class="field"><label for="occupation">Occupation</label><input id="occupation" data-key="occupation" placeholder="driver / farmer / medical staff" /></div>
+                  <div class="field"><label for="residence">Residence</label><input id="residence" data-key="residence" placeholder="born in..., living in..." /></div>
+
+                  <div class="field third"><label for="marital">Marital state</label><select id="marital" data-key="marital"><option value="">Select</option><option>Single</option><option>Married</option><option>Divorced</option><option>Widowed</option></select></div>
+                  <div class="field third"><label for="marriageDuration">Duration of marriage</label><input id="marriageDuration" data-key="marriageDuration" placeholder="20 years" /></div>
+                  <div class="field third"><label for="children">Number of children</label><input id="children" data-key="children" type="number" min="0" placeholder="3" /></div>
+                  <div class="field third"><label for="youngestChild">Age of youngest child</label><input id="youngestChild" data-key="youngestChild" placeholder="3 years" /></div>
+                  <div class="field third"><label for="socialClass">Socioeconomic note</label><select id="socialClass" data-key="socialClass"><option value="">Optional</option><option>High social class</option><option>Middle social class</option><option>Low social class</option></select></div>
+                  <div class="field third conditional" id="handednessWrap"><label for="handedness">Handedness</label><select id="handedness" data-key="handedness"><option value="">Select</option><option>Right-handed</option><option>Left-handed</option><option>Ambidextrous</option></select><div class="helper">Shown in Neurology mode.</div></div>
+
+                  <div class="sub-card">
+                    <label class="checkbox-row"><input type="checkbox" id="isSmoker" data-key="isSmoker" /> Smoking / special habits present</label>
+                    <div class="conditional" id="smokingWrap">
+                      <div class="form-grid">
+                        <div class="field third"><label for="smokingStatus">Smoking status</label><select id="smokingStatus" data-key="smokingStatus"><option value="Current smoker">Current smoker</option><option value="Ex-smoker">Ex-smoker</option><option value="Occasional smoker">Occasional smoker</option></select></div>
+                        <div class="field third"><label for="cigsDay">Cigarettes / day</label><input id="cigsDay" data-key="cigsDay" type="number" min="0" placeholder="20" /></div>
+                        <div class="field third"><label for="smokingYears">Duration in years</label><input id="smokingYears" data-key="smokingYears" type="number" min="0" placeholder="15" /></div>
+                        <div class="field"><label for="smokingType">Type</label><input id="smokingType" data-key="smokingType" placeholder="cigarettes / pipe / shisha" /></div>
+                        <div class="field"><label for="otherHabits">Other habits</label><input id="otherHabits" data-key="otherHabits" placeholder="shisha, cannabis, heroin, alcohol, drugs..." /></div>
+                      </div>
+                      <div class="mini-stats">
+                        <div class="stat"><b id="smokingIndex">0</b><span>Smoking index</span></div>
+                        <div class="stat"><b id="packYears">0</b><span>Pack-years</span></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="sub-card conditional" id="femaleWrap">
+                    <h3>Female / menstrual history</h3>
+                    <div class="form-grid">
+                      <div class="field third"><label for="menarche">Menarche</label><input id="menarche" data-key="menarche" placeholder="13 years" /></div>
+                      <div class="field third"><label for="menopause">Menopause</label><input id="menopause" data-key="menopause" placeholder="if applicable" /></div>
+                      <div class="field third"><label for="cycleRhythm">Cycle rhythm</label><input id="cycleRhythm" data-key="cycleRhythm" placeholder="regular every 28 days" /></div>
+                      <div class="field third"><label for="flowDuration">Flow duration</label><input id="flowDuration" data-key="flowDuration" placeholder="4 days" /></div>
+                      <div class="field third"><label for="flowAmount">Amount / color</label><input id="flowAmount" data-key="flowAmount" placeholder="moderate, normal color" /></div>
+                      <div class="field third"><label for="dysmenorrhea">Dysmenorrhea</label><select id="dysmenorrhea" data-key="dysmenorrhea"><option value="">Select</option><option>No dysmenorrhea</option><option>Has dysmenorrhea</option></select></div>
+                      <div class="field"><label for="contraception">Current contraception</label><input id="contraception" data-key="contraception" placeholder="none / OCP / IUD" /></div>
+                      <div class="field"><label for="obstetric">Obstetric note</label><input id="obstetric" data-key="obstetric" placeholder="pregnancies, deliveries, abortions if relevant" /></div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <section class="step-section" data-step="complaint">
+                <div class="section-head">
+                  <div>
+                    <h2>Complaint</h2>
+                    <p>Keep it short: patient’s own words, main complaint, and duration. This becomes your C/O line.</p>
+                  </div>
+                  <span class="tag">C/O + duration</span>
+                </div>
+
+                <div class="hint">Complaint should not be over-medicalized. Write what brought the patient, then summarize it clinically in one line.</div>
+
+                <div class="form-grid">
+                  <div class="field full"><label for="patientWords">Patient’s own words</label><textarea id="patientWords" data-key="patientWords" placeholder="e.g., I can’t breathe well since last week / مش قادر أتنفس من أسبوع"></textarea></div>
+                  <div class="field two-thirds"><label for="mainComplaint">Main complaint</label><input id="mainComplaint" data-key="mainComplaint" placeholder="shortness of breath" /></div>
+                  <div class="field third"><label for="complaintDuration">Duration</label><input id="complaintDuration" data-key="complaintDuration" placeholder="1 week" /></div>
+                  <div class="field"><label for="complaintType">Complaint type</label><select id="complaintType" data-key="complaintType">
+                    <option value="">Select</option>
+                    <option value="pain">Pain</option>
+                    <option value="dyspnea">Dyspnea</option>
+                    <option value="cough-sputum">Cough / sputum</option>
+                    <option value="bleeding">Bleeding</option>
+                    <option value="swelling">Swelling</option>
+                    <option value="weakness">Weakness</option>
+                    <option value="fever">Fever</option>
+                    <option value="abdominal">Abdominal complaint</option>
+                    <option value="neuro">Neurological complaint</option>
+                    <option value="excreta">Excreta: sputum / stool / urine / vomit</option>
+                    <option value="other">Other</option>
+                  </select></div>
+                  <div class="field"><label for="complaintPriority">Most agonizing / recent?</label><input id="complaintPriority" data-key="complaintPriority" placeholder="main recent agonizing complaint" /></div>
+                  <div class="field full">
+                    <label>Quick complaint chips</label>
+                    <div class="chips" id="complaintChips"></div>
+                  </div>
+                </div>
+              </section>
+
+              <section class="step-section" data-step="hpi">
+                <div class="section-head">
+                  <div>
+                    <h2>History of Present Illness</h2>
+                    <p>Analyze the complaint, then build a chronological story with related symptoms and prior management.</p>
+                  </div>
+                  <span class="tag">Story builder</span>
+                </div>
+
+                <div class="hint">Core analysis: onset, course, duration, associations, aggravating/relieving factors, effect of treatment, and last attack. Pain/excreta get extra fields.</div>
+
+                <div class="form-grid">
+                  <div class="field third"><label for="onset">Onset</label><input id="onset" data-key="onset" placeholder="sudden / gradual / since..." /></div>
+                  <div class="field third"><label for="course">Course</label><input id="course" data-key="course" placeholder="progressive / regressive / intermittent" /></div>
+                  <div class="field third"><label for="hpiDuration">Duration details</label><input id="hpiDuration" data-key="hpiDuration" placeholder="same as complaint or details" /></div>
+                  <div class="field full"><label for="associated">Associated symptoms</label><textarea id="associated" data-key="associated" placeholder="fever, cough, palpitations, vomiting..."></textarea></div>
+                  <div class="field"><label for="aggravating">What increases it?</label><input id="aggravating" data-key="aggravating" placeholder="exertion, meals, posture..." /></div>
+                  <div class="field"><label for="relieving">What decreases it?</label><input id="relieving" data-key="relieving" placeholder="rest, medications, position..." /></div>
+                  <div class="field"><label for="treatmentEffect">Effect of treatment</label><input id="treatmentEffect" data-key="treatmentEffect" placeholder="improved / no response / not tried" /></div>
+                  <div class="field"><label for="lastAttack">Date of last attack</label><input id="lastAttack" data-key="lastAttack" placeholder="yesterday / 2 months ago / first attack" /></div>
+
+                  <div class="sub-card conditional" id="painWrap">
+                    <h3>Pain analysis</h3>
+                    <div class="form-grid">
+                      <div class="field third"><label for="painSite">Site</label><input id="painSite" data-key="painSite" placeholder="retrosternal / epigastric / RUQ" /></div>
+                      <div class="field third"><label for="painCharacter">Character</label><input id="painCharacter" data-key="painCharacter" placeholder="burning / colicky / crushing" /></div>
+                      <div class="field third"><label for="painRadiation">Radiation</label><input id="painRadiation" data-key="painRadiation" placeholder="left arm / back / shoulder" /></div>
+                    </div>
+                  </div>
+
+                  <div class="sub-card conditional" id="excretaWrap">
+                    <h3>Excreta analysis</h3>
+                    <div class="form-grid">
+                      <div class="field third"><label for="amount">Amount</label><input id="amount" data-key="amount" placeholder="small / large / cups/day" /></div>
+                      <div class="field third"><label for="content">Content</label><input id="content" data-key="content" placeholder="blood / mucus / food particles" /></div>
+                      <div class="field third"><label for="color">Color</label><input id="color" data-key="color" placeholder="yellow / green / black / red" /></div>
+                      <div class="field"><label for="consistency">Consistency</label><input id="consistency" data-key="consistency" placeholder="watery / mucoid / hard" /></div>
+                      <div class="field"><label for="odour">Odour</label><input id="odour" data-key="odour" placeholder="offensive / normal / no odour" /></div>
+                    </div>
+                  </div>
+
+                  <div class="sub-card">
+                    <h3>Variants</h3>
+                    <div class="form-grid">
+                      <div class="field third"><label for="postural">Postural variation</label><input id="postural" data-key="postural" placeholder="worse lying / better sitting" /></div>
+                      <div class="field third"><label for="diurnal">Diurnal variation</label><input id="diurnal" data-key="diurnal" placeholder="morning / night / no variation" /></div>
+                      <div class="field third"><label for="seasonal">Seasonal variation</label><input id="seasonal" data-key="seasonal" placeholder="winter / spring / no variation" /></div>
+                    </div>
+                  </div>
+
+                  <div class="field full"><label for="investigationTreatment">Investigations / treatment already done for this complaint</label><textarea id="investigationTreatment" data-key="investigationTreatment" placeholder="X-ray, ECG, labs, medications, hospital visits..."></textarea></div>
+                </div>
+              </section>
+
+              <section class="step-section" data-step="related">
+                <div class="section-head">
+                  <div>
+                    <h2>Related System Symptoms</h2>
+                    <p>Checklist changes according to the selected system. Use notes to add positives and important negatives.</p>
+                  </div>
+                  <span class="tag" id="systemTag">General</span>
+                </div>
+
+                <div class="hint">In OSCE, related symptoms are where you prove you understand the system, not just the chief complaint.</div>
+
+                <div class="system-symptoms" id="relatedSymptoms"></div>
+                <div class="form-grid" style="margin-top:14px;">
+                  <div class="field full"><label for="relatedNotes">Related symptoms notes</label><textarea id="relatedNotes" data-key="relatedNotes" placeholder="Write important positives and negatives here..."></textarea></div>
+                  <div class="field full"><label for="systemicReview">Systemic review / other systems</label><textarea id="systemicReview" data-key="systemicReview" placeholder="fever, weight loss, appetite, urinary symptoms, other systems..."></textarea></div>
+                </div>
+              </section>
+
+              <section class="step-section" data-step="past">
+                <div class="section-head">
+                  <div>
+                    <h2>Past History</h2>
+                    <p>Diseases, operations, transfusion, drug history, allergies, and chronic risk factors like DM/HTN/TB/IHD.</p>
+                  </div>
+                  <span class="tag">Disease · Operative · Drugs</span>
+                </div>
+
+                <div class="hint">For any past disease: ask duration, manifestations, investigations, treatment, and complications.</div>
+
+                <div class="form-grid">
+                  <div class="field third"><label for="dm">Diabetes mellitus</label><select id="dm" data-key="dm"><option value="">Not asked</option><option>No DM</option><option>Known DM</option><option>Newly discovered DM</option></select></div>
+                  <div class="field third"><label for="htn">Hypertension</label><select id="htn" data-key="htn"><option value="">Not asked</option><option>No HTN</option><option>Known HTN</option><option>Newly discovered HTN</option></select></div>
+                  <div class="field third"><label for="tb">Tuberculosis</label><select id="tb" data-key="tb"><option value="">Not asked</option><option>No TB history</option><option>Past TB</option><option>Contact with TB</option></select></div>
+                  <div class="field third"><label for="ihd">IHD</label><select id="ihd" data-key="ihd"><option value="">Not asked</option><option>No IHD</option><option>Known IHD</option></select></div>
+                  <div class="field third"><label for="similarAttacks">Similar attacks</label><input id="similarAttacks" data-key="similarAttacks" placeholder="none / previous attacks" /></div>
+                  <div class="field third"><label for="allergies">Allergies</label><input id="allergies" data-key="allergies" placeholder="none / penicillin / food..." /></div>
+                  <div class="field"><label for="operations">Operations</label><textarea id="operations" data-key="operations" placeholder="date, site, outcome"></textarea></div>
+                  <div class="field"><label for="transfusion">Blood transfusion</label><textarea id="transfusion" data-key="transfusion" placeholder="history, date, reactions"></textarea></div>
+                  <div class="field full"><label for="drugs">Drug history / chronic medications</label><textarea id="drugs" data-key="drugs" placeholder="steroids, OCP, antihypertensives, anti-TB, anticoagulants..."></textarea></div>
+                  <div class="field full"><label for="pastDetails">Past history details</label><textarea id="pastDetails" data-key="pastDetails" placeholder="duration, manifestations, investigations, treatment, complications..."></textarea></div>
+                </div>
+              </section>
+
+              <section class="step-section" data-step="family">
+                <div class="section-head">
+                  <div>
+                    <h2>Family + Social History</h2>
+                    <p>Consanguinity, similar conditions, chronic diseases, living conditions, and occupational clues.</p>
+                  </div>
+                  <span class="tag">Risk context</span>
+                </div>
+
+                <div class="form-grid">
+                  <div class="field third"><label for="consanguinity">Consanguinity</label><select id="consanguinity" data-key="consanguinity"><option value="">Not asked</option><option>No consanguinity</option><option>Positive consanguinity</option></select></div>
+                  <div class="field third"><label for="familyDM">Family DM</label><select id="familyDM" data-key="familyDM"><option value="">Not asked</option><option>No family history of DM</option><option>Positive family history of DM</option></select></div>
+                  <div class="field third"><label for="familyHTN">Family HTN</label><select id="familyHTN" data-key="familyHTN"><option value="">Not asked</option><option>No family history of HTN</option><option>Positive family history of HTN</option></select></div>
+                  <div class="field third"><label for="familyTB">Family TB</label><select id="familyTB" data-key="familyTB"><option value="">Not asked</option><option>No family history of TB</option><option>Positive family history of TB</option></select></div>
+                  <div class="field third"><label for="familyIHD">Family IHD</label><select id="familyIHD" data-key="familyIHD"><option value="">Not asked</option><option>No family history of IHD</option><option>Positive family history of IHD</option></select></div>
+                  <div class="field third"><label for="similarFamily">Similar condition</label><select id="similarFamily" data-key="similarFamily"><option value="">Not asked</option><option>No similar condition</option><option>Similar condition present</option></select></div>
+                  <div class="field full"><label for="familyDetails">Family details</label><textarea id="familyDetails" data-key="familyDetails" placeholder="who has the disease, age, relation, details..."></textarea></div>
+                  <div class="field full"><label for="livingConditions">Living conditions / exposure</label><textarea id="livingConditions" data-key="livingConditions" placeholder="animals, insects, poor sanitation, crowding, occupational exposure..."></textarea></div>
+                </div>
+              </section>
+
+              <section class="step-section" data-step="final">
+                <div class="section-head">
+                  <div>
+                    <h2>Final Review</h2>
+                    <p>Review the generated history, missing questions, and OSCE summary. Then copy or print.</p>
+                  </div>
+                  <span class="tag">Ready to present</span>
+                </div>
+
+                <div class="notice">Use this page as a checkpoint: complete the amber missing items, then copy the polished history from the right panel.</div>
+                <div id="finalMissing" class="missing-list"></div>
+                <div class="nav-actions">
+                  <button class="btn ghost" type="button" id="printBtn">Print / Save as PDF</button>
+                  <button class="btn green" type="button" id="copyFinalBtn">Copy final history</button>
+                </div>
+              </section>
+
+              <div class="nav-actions">
+                <button class="btn ghost" type="button" id="prevStep">← Previous</button>
+                <button class="btn primary" type="button" id="nextStep">Next →</button>
+              </div>
+            </section>
+
+            <aside class="preview" aria-label="Generated output">
+              <div class="preview-head">
+                <h2>Live Output</h2>
+                <button class="btn green" id="copyBtn" type="button">Copy</button>
+              </div>
+              <div class="tabs">
+                <button class="tab-btn active" data-tab="full" type="button">Full</button>
+                <button class="tab-btn" data-tab="osce" type="button">OSCE</button>
+                <button class="tab-btn" data-tab="missing" type="button">Missing</button>
+              </div>
+              <div class="output-box" id="outputBox"></div>
+              <div class="missing-list" id="missingBox"></div>
+              <p class="footer-note">Tip: in Presentation Mode, the right panel focuses on the clean case presentation.</p>
+            </aside>
+          </main>
+        </div>
+      <div class="toast" id="toast">Copied.</div>
+    </section>
+
+    <section class="work-page-section hub-section" id="work" aria-label="Work with Ahmed Sayed">
+      <div class="container">
+
+        <!-- HERO -->
+        <section class="hero">
+          <p class="hero-eyebrow"><span class="dot"></span> Available for projects</p>
+          <h1>Medical student.<br><em>Builder. Creator.</em></h1>
+          <p class="hero-sub">I sit at the intersection of medicine, motion, and code. I build AI study systems for medical students, create animated explainers for educators, and design websites that actually work.</p>
+          <div class="hero-tags">
+            <span class="tag active">🤖 AI Agents</span>
+            <span class="tag active">🎬 Motion Graphics</span>
+            <span class="tag active">🌐 Websites</span>
+            <span class="tag">🇪🇬 Cairo, Egypt</span>
+            <span class="tag">Arabic · English · Russian · German</span>
+          </div>
+        </section>
+
+        <!-- SKILLS -->
+        <section class="section">
+          <p class="section-label">Skills & tools</p>
+          <div class="skills-grid">
+
+            <div class="skill-card">
+              <div class="skill-icon icon-blender"><img src="/assets/tools/blender-gen.jpg" alt="Blender" /></div>
+              <span class="skill-name">Blender</span>
+              <span class="skill-pct">60%</span>
+              <div class="skill-bar-wrap"><div class="skill-bar-fill" style="width:60%"></div></div>
+            </div>
+
+            <div class="skill-card">
+              <div class="skill-icon icon-ps"><img src="/assets/tools/photoshop-gen.jpg" alt="Photoshop" /></div>
+              <span class="skill-name">Photoshop</span>
+              <span class="skill-pct">60%</span>
+              <div class="skill-bar-wrap"><div class="skill-bar-fill" style="width:60%"></div></div>
+            </div>
+
+            <div class="skill-card">
+              <div class="skill-icon icon-au"><img src="/assets/tools/audition-gen.jpg" alt="Audition" /></div>
+              <span class="skill-name">Audition</span>
+              <span class="skill-pct">40%</span>
+              <div class="skill-bar-wrap"><div class="skill-bar-fill" style="width:40%"></div></div>
+            </div>
+
+            <div class="skill-card">
+              <div class="skill-icon icon-pr"><img src="/assets/tools/premiere-gen.jpg" alt="Premiere Pro" /></div>
+              <span class="skill-name">Premiere Pro</span>
+              <span class="skill-pct">90%</span>
+              <div class="skill-bar-wrap"><div class="skill-bar-fill" style="width:90%"></div></div>
+            </div>
+
+            <div class="skill-card">
+              <div class="skill-icon icon-ai"><img src="/assets/tools/illustrator-gen.jpg" alt="Illustrator" /></div>
+              <span class="skill-name">Illustrator</span>
+              <span class="skill-pct">40%</span>
+              <div class="skill-bar-wrap"><div class="skill-bar-fill" style="width:40%"></div></div>
+            </div>
+
+            <div class="skill-card">
+              <div class="skill-icon icon-ae"><img src="/assets/tools/after-effects-gen.jpg" alt="After Effects" /></div>
+              <span class="skill-name">After Effects</span>
+              <span class="skill-pct">95%</span>
+              <div class="skill-bar-wrap"><div class="skill-bar-fill" style="width:95%"></div></div>
+            </div>
+
+            <div class="skill-card">
+              <div class="skill-icon icon-notion"><img src="/assets/tools/notion-gen.jpg" alt="Notion" /></div>
+              <span class="skill-name">Notion</span>
+              <span class="skill-pct">90%</span>
+              <div class="skill-bar-wrap"><div class="skill-bar-fill" style="width:90%"></div></div>
+            </div>
+
+            <div class="skill-card">
+              <div class="skill-icon icon-obsidian"><img src="/assets/tools/obsidian-gen.jpg" alt="Obsidian" /></div>
+              <span class="skill-name">Obsidian</span>
+              <span class="skill-pct">90%</span>
+              <div class="skill-bar-wrap"><div class="skill-bar-fill" style="width:90%"></div></div>
+            </div>
+
+            <div class="skill-card">
+              <div class="skill-icon icon-word"><img src="/assets/tools/word-gen.jpg" alt="Microsoft Word" /></div>
+              <span class="skill-name">Microsoft Word</span>
+              <span class="skill-pct">83%</span>
+              <div class="skill-bar-wrap"><div class="skill-bar-fill" style="width:83%"></div></div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- SERVICES -->
+        <section class="section">
+          <p class="section-label">Services I offer</p>
+
+          <div class="services-grid-top">
+            <div class="service-card">
+              <div class="service-icon">🤖</div>
+              <h3>AI Study Agent Setup</h3>
+              <p>A personalised AI system built around how you actually study — not a generic chatbot.</p>
+              <ul class="service-bullets">
+                <li>Obsidian vault you can search mid-lecture</li>
+                <li>Flashcard system connected to your notes</li>
+                <li>Custom AI tuned to your curriculum</li>
+                <li>Update it in under 2 minutes a day</li>
+              </ul>
+              <a href="https://wa.me/201030469634?text=Hi%20Ahmed%2C%20I'm%20interested%20in%20the%20AI%20Study%20Agent%20setup." class="cta-pill" target="_blank">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.113.553 4.094 1.522 5.815L.057 23.25a.75.75 0 0 0 .916.919l5.562-1.453A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.699 9.699 0 0 1-4.953-1.355l-.355-.21-3.677.961.984-3.595-.228-.37A9.699 9.699 0 0 1 2.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
+                Book via WhatsApp
+              </a>
+            </div>
+
+            <div class="service-card">
+              <div class="service-icon">🎬</div>
+              <h3>Medical Motion Graphics</h3>
+              <p>Animated explainers that make complex medicine actually watchable.</p>
+              <ul class="service-bullets">
+                <li>Mechanism of action animations</li>
+                <li>Anatomy & physiology explainers</li>
+                <li>Short-form educational reels</li>
+                <li>After Effects · Premiere · 95%+ proficiency</li>
+              </ul>
+              <a href="https://wa.me/201030469634?text=Hi%20Ahmed%2C%20I'm%20interested%20in%20motion%20graphics%20for%20medical%20content." class="cta-pill" target="_blank">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.113.553 4.094 1.522 5.815L.057 23.25a.75.75 0 0 0 .916.919l5.562-1.453A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.699 9.699 0 0 1-4.953-1.355l-.355-.21-3.677.961.984-3.595-.228-.37A9.699 9.699 0 0 1 2.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
+                Book via WhatsApp
+              </a>
+            </div>
+          </div>
+
+          <div class="service-card wide">
+            <div class="card-left">
+              <div class="service-icon">🌐</div>
+              <h3>Website Design & Build</h3>
+              <p>Clean, fast, purposeful websites — built from scratch or redesigned to actually convert.</p>
+              <ul class="service-bullets">
+                <li>Personal portfolios & landing pages</li>
+                <li>Medical educator & creator sites</li>
+                <li>Fast, mobile-first, no bloat</li>
+                <li>HTML · CSS · JS · custom-coded</li>
+              </ul>
+              <a href="https://wa.me/201030469634?text=Hi%20Ahmed%2C%20I'm%20interested%20in%20a%20website%20project." class="cta-pill" target="_blank">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.113.553 4.094 1.522 5.815L.057 23.25a.75.75 0 0 0 .916.919l5.562-1.453A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.699 9.699 0 0 1-4.953-1.355l-.355-.21-3.677.961.984-3.595-.228-.37A9.699 9.699 0 0 1 2.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
+                Book via WhatsApp
+              </a>
+            </div>
+            <div class="wide-divider">
+              <p class="site-proof-label">Live example</p>
+              <div class="site-proof-items">
+                <div class="site-proof-item">This very page — <a href="https://ahmedsayed.app/#work" target="_blank">ahmedsayed.app</a></div>
+                <div class="site-proof-item">Portfolio, tracker & booking system built as one cohesive site</div>
+                <div class="site-proof-item">Designed & coded entirely by hand — no templates</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- VIDEOS -->
+        <section class="section">
+          <p class="section-label">Motion graphics — from my channel</p>
+          <div class="videos-grid">
+            <div class="short-wrap"><iframe src="https://www.youtube.com/embed/fEma3IZCRMs" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+            <div class="short-wrap"><iframe src="https://www.youtube.com/embed/vSPN9LEPrYo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+            <div class="short-wrap"><iframe src="https://www.youtube.com/embed/DZY6JvDHXl8" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+            <div class="short-wrap"><iframe src="https://www.youtube.com/embed/0iEbiIsdou8" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+          </div>
+          <div class="video-caption">
+            <p>Medical concepts made visual — motion graphics for students and educators.</p>
+            <a href="https://www.youtube.com/@MediFuntomy" target="_blank">See more on @MediFuntomy ↗</a>
+          </div>
+        </section>
+
+        <!-- ABOUT -->
+        <section class="section">
+          <p class="section-label">About me</p>
+          <div class="about-strip">
+            <div class="about-avatar">AS</div>
+            <div class="about-text">
+              <h2>Ahmed Sayed</h2>
+              <p>Medical student, motion graphics creator, AI builder, and web designer based in Cairo. I've spent the last few years combining all of these — figuring out how AI can make studying medicine more humane, how good visuals make it more memorable, and how a well-built website makes everything easier to share.</p>
+              <div class="about-chips">
+                <span class="chip">🎓 Medical student</span>
+                <span class="chip">🇪🇬 Cairo, Egypt</span>
+                <span class="chip">Arabic · English · Russian · German</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- BOOKING CTA -->
+      <div class="container">
+        <div class="booking-section">
+          <h2>Let's work <em>together.</em></h2>
+          <p>Tell me about your project and we'll figure out the best fit — no pressure.</p>
+          <div class="booking-options">
+            <a href="https://wa.me/201030469634?text=Hi%20Ahmed%2C%20I'd%20like%20to%20work%20with%20you%20on%20" class="wa-btn" target="_blank">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.113.553 4.094 1.522 5.815L.057 23.25a.75.75 0 0 0 .916.919l5.562-1.453A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.699 9.699 0 0 1-4.953-1.355l-.355-.21-3.677.961.984-3.595-.228-.37A9.699 9.699 0 0 1 2.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
+              Message on WhatsApp
+            </a>
+            <a href="https://www.youtube.com/@MediFuntomy" class="secondary-btn" target="_blank">▶ Watch my work first</a>
+          </div>
+          <p class="booking-times">Available evenings · Cairo time (EET)</p>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <div class="bottom-nav-wrap">
@@ -432,11 +929,11 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="4"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>
         <span>Schedule</span>
       </a>
-      <a href="/history.html" aria-label="History">
+      <a href="#history" data-section-nav="history" aria-label="History">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6l1 2h3v16H5V5h3z"/><path d="M8 11h8M8 15h6"/></svg>
         <span>History</span>
       </a>
-      <a href="/work.html" aria-label="Work with me">
+      <a href="#work" data-section-nav="work" aria-label="Work with me">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6V5a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v1"/><rect x="3" y="6" width="18" height="14" rx="4"/><path d="M3 12h18"/></svg>
         <span>Work</span>
       </a>
@@ -451,7 +948,7 @@
       }
     }
   </script>
-  <script type="module" src="/src/main.js?v=20260704-nut-pdf-preview"></script>
+  <script type="module" src="/src/main.js?v=20260705-home-sections-3"></script>
   <script defer src="/pwa.js?v=20260701-pwa"></script>
 </body>
 </html>
