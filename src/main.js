@@ -767,19 +767,36 @@ let activeSubjectCode = initialParams.get('tracker') === '1' && initialSubject ?
 let expandedSubjectCode = mobileQuery.matches && activeSubjectCode ? activeSubjectCode : null
 let activeSubjectTrack = 'theoretical'
 
-function getPercent(subject) {
-  if (!subject.totalCount) return 0
-  return Math.round((getCoveredCount(subject) / subject.totalCount) * 100)
-}
-
 function getTopicUnits(topic) {
   return topic.coverageUnits || 1
 }
 
-function getCoveredCount(subject) {
-  return subject.topics.reduce((count, topic) => {
+function getScopedProgressTopics(subject) {
+  const { scope } = getTrackerFilters()
+  return scope === 'midterm'
+    ? subject.topics.filter((topic) => topic.midtermScope)
+    : subject.topics
+}
+
+function getTopicUnitTotal(topics) {
+  return topics.reduce((count, topic) => count + getTopicUnits(topic), 0)
+}
+
+function getCoveredCount(subject, topics = subject.topics) {
+  return topics.reduce((count, topic) => {
     return coveredStates.has(topic.state) ? count + getTopicUnits(topic) : count
   }, 0)
+}
+
+function getProgressTotal(subject) {
+  return getTopicUnitTotal(getScopedProgressTopics(subject)) || subject.totalCount || 0
+}
+
+function getPercent(subject) {
+  const progressTopics = getScopedProgressTopics(subject)
+  const total = getTopicUnitTotal(progressTopics)
+  if (!total) return 0
+  return Math.round((getCoveredCount(subject, progressTopics) / total) * 100)
 }
 
 function getStateCounts(subject) {
@@ -2154,7 +2171,7 @@ function renderSubjects() {
           </span>
           <span class="subject-button__meta">
             ${updateNotice}
-            <span>${getCoveredCount(subject)}/${subject.totalCount}</span>
+            <span>${getCoveredCount(subject, getScopedProgressTopics(subject))}/${getProgressTotal(subject)}</span>
           </span>
           <span class="subject-button__bar" aria-hidden="true">
             <span style="width: ${percent}%"></span>
@@ -2187,7 +2204,6 @@ function clearSubjectDetail() {
   selectedPercent.textContent = '0%'
   progressFill.style.width = '0%'
   if (subjectTrackTabs) subjectTrackTabs.innerHTML = ''
-  if (topicListTitle) topicListTitle.textContent = 'Topic list'
   topicList.innerHTML = '<li class="topic-empty">Click a subject card to view its topics.</li>'
 }
 
@@ -3179,25 +3195,32 @@ if (subjectList) {
 document.addEventListener('click', handleQuizClick)
 
 
+function refreshTrackerFilters() {
+  if (trackerScopeFilter) {
+    document.querySelectorAll('.scope-toggle__btn').forEach((button) => {
+      button.classList.toggle('scope-toggle__btn--active', button.dataset.scope === trackerScopeFilter.value)
+    })
+  }
+
+  renderSubjects()
+  if (activeSubjectCode) setActiveSubject(activeSubjectCode, 'open')
+  else clearSubjectDetail()
+}
+
 if (trackerSearch && trackerStatusFilter) {
   ;[trackerSearch, trackerStatusFilter, trackerScopeFilter].filter(Boolean).forEach((control) => {
-    control.addEventListener('input', () => {
-      renderSubjects()
-      if (activeSubjectCode) setActiveSubject(activeSubjectCode, 'open')
-      else clearSubjectDetail()
-    })
+    control.addEventListener('input', refreshTrackerFilters)
+    control.addEventListener('change', refreshTrackerFilters)
   })
 }
 
 // Scope pill button wiring
 document.querySelectorAll('.scope-toggle__btn').forEach((btn) => {
   btn.addEventListener('click', () => {
-    document.querySelectorAll('.scope-toggle__btn').forEach((b) => b.classList.remove('scope-toggle__btn--active'))
-    btn.classList.add('scope-toggle__btn--active')
     if (trackerScopeFilter) {
       trackerScopeFilter.value = btn.dataset.scope
-      trackerScopeFilter.dispatchEvent(new Event('input'))
     }
+    refreshTrackerFilters()
   })
 })
 
