@@ -608,6 +608,7 @@ let subjects = [
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 const mobileQuery = window.matchMedia('(max-width: 860px)')
 const QUIZ_STORAGE_PREFIX = 'mcq-progress-'
+const TOPIC_COMPLETION_STORAGE_PREFIX = 'med401-topic-progress-v1::'
 const TOPIC_UPDATE_STORAGE_KEY = 'tracker-seen-topic-updates-v1'
 const TOPIC_UPDATE_VISIBLE_DAYS = 14
 const NEWS_SEEN_STORAGE_KEY = 'news-seen-cards-v1'
@@ -823,6 +824,64 @@ function saveSeenTopicUpdates(seenUpdates) {
   } catch {
     // Keep the tracker usable when browser storage is blocked.
   }
+}
+
+function getTopicCompletionKey(subjectCode, topicLabel) {
+  return `${TOPIC_COMPLETION_STORAGE_PREFIX}${encodeURIComponent(subjectCode)}::${encodeURIComponent(topicLabel)}`
+}
+
+function getTopicCompletionState(subjectCode, topicLabel) {
+  const emptyState = { studied: false, mcqs: false, finished: false }
+
+  try {
+    return {
+      ...emptyState,
+      ...JSON.parse(localStorage.getItem(getTopicCompletionKey(subjectCode, topicLabel)) || '{}')
+    }
+  } catch {
+    localStorage.removeItem(getTopicCompletionKey(subjectCode, topicLabel))
+    return emptyState
+  }
+}
+
+function saveTopicCompletionState(subjectCode, topicLabel, state) {
+  const normalizedState = {
+    studied: !!state.studied,
+    mcqs: !!state.mcqs,
+    finished: !!state.finished
+  }
+
+  try {
+    localStorage.setItem(getTopicCompletionKey(subjectCode, topicLabel), JSON.stringify(normalizedState))
+  } catch {
+    // Local checklist controls should not break topic rendering if storage is blocked.
+  }
+}
+
+function renderTopicCompletionControls(subject, topic) {
+  const state = getTopicCompletionState(subject.code, topic.label)
+  const controls = [
+    { key: 'studied', label: 'Studied' },
+    { key: 'mcqs', label: 'MCQs done' },
+    { key: 'finished', label: 'Finished' }
+  ]
+
+  return `
+    <fieldset class="topic-completion" aria-label="${escapeHtml(topic.label)} progress">
+      ${controls.map((control) => `
+        <label class="topic-completion__item${state[control.key] ? ' is-checked' : ''}">
+          <input
+            type="checkbox"
+            data-topic-completion="${control.key}"
+            data-subject-code="${escapeHtml(subject.code)}"
+            data-topic-label="${escapeHtml(topic.label)}"
+            ${state[control.key] ? 'checked' : ''}
+          >
+          <span>${control.label}</span>
+        </label>
+      `).join('')}
+    </fieldset>
+  `
 }
 
 function isRecentTopicUpdate(topic) {
@@ -1082,6 +1141,29 @@ function getFastStaggerDelay(index, step = 14, max = 120) {
   return `${Math.min(index * step, max)}ms`
 }
 
+const topicGroupLinks = {
+  'Taken in University': [
+    {
+      label: 'DR',
+      url: 'https://drive.google.com/drive/folders/1OJTlqA-zBX6ES6KQkItviY0e5qd6Wfl1'
+    }
+  ]
+}
+
+function renderTopicGroupHeading(groupTitle, globalIndex) {
+  const links = topicGroupLinks[groupTitle] || []
+  const linkMarkup = links.map((link) => `
+    <a class="topic-section-heading__link" href="${link.url}" target="_blank" rel="noopener">${escapeHtml(link.label)}</a>
+  `).join('')
+
+  return `
+    <li class="topic-section-heading" style="--delay: ${getFastStaggerDelay(globalIndex)}">
+      <span>${groupTitle}</span>
+      ${linkMarkup ? `<span class="topic-section-heading__links">${linkMarkup}</span>` : ''}
+    </li>
+  `
+}
+
 function renderTopicCard(subject, topic, index, collection = subject.topics) {
   const art = Number.isFinite(topic.art) ? topic.art : index % 16
   const tileX = art % 4
@@ -1111,6 +1193,7 @@ function renderTopicCard(subject, topic, index, collection = subject.topics) {
         ${roundMeta ? `<span class="topic-item__note">${escapeHtml(roundMeta)}</span>` : ''}
         ${topic.note ? `<span class="topic-item__note">${topic.note}</span>` : ''}
         ${renderResourceLinks(topic)}
+        ${renderTopicCompletionControls(subject, topic)}
       </span>
     </li>
   `
@@ -1132,7 +1215,7 @@ function renderTopicCards(subject, topics = getFilteredTopics(subject), options 
   function renderGroup(groupTopics, groupTitle) {
     if (!groupTopics.length) return ''
 
-    let groupHtml = `<li class="topic-section-heading" style="--delay: ${getFastStaggerDelay(globalIndex)}">${groupTitle}</li>`
+    let groupHtml = renderTopicGroupHeading(groupTitle, globalIndex)
     const hasSections = groupTopics.some((t) => t.section)
 
     if (!hasSections) {
@@ -1234,17 +1317,17 @@ function ensureQuizModal() {
   modal.setAttribute('aria-hidden', 'true')
   modal.innerHTML = `
     <div class="quiz-modal__backdrop" data-quiz-close></div>
-    <section class="quiz-modal__panel" role="dialog" aria-modal="true" aria-labelledby="quiz-title">
+    <section class="quiz-modal__panel" role="dialog" aria-modal="true" aria-label="MCQ quiz">
       <div class="quiz-modal__top">
-        <div>
-          <p class="card__kicker">Interactive MCQs</p>
-          <h2 id="quiz-title">Quiz</h2>
-          <p class="quiz-modal__meta" id="quiz-meta"></p>
-        </div>
         <button class="icon-button" type="button" data-quiz-close aria-label="Close quiz">X</button>
       </div>
       <div class="quiz-progress" aria-label="Quiz progress">
+        <div class="quiz-progress__stats">
+          <strong id="quiz-progress-count">0/0</strong>
+        </div>
+        <div class="quiz-progress__track">
         <span id="quiz-progress-fill"></span>
+        </div>
       </div>
       <div class="quiz-modal__body" id="quiz-body"></div>
       <div class="quiz-modal__actions">
@@ -1446,6 +1529,16 @@ function getQuizScore() {
   }, 0)
 }
 
+function getQuizProgressStats() {
+  const quiz = getCurrentQuiz()
+  const answeredCount = quiz.filter((question) => quizState.answers[question.id] !== undefined).length
+  const total = quiz.length
+  const remainingCount = Math.max(total - answeredCount, 0)
+  const percent = total ? Math.round((answeredCount / total) * 100) : 0
+
+  return { answeredCount, remainingCount, percent, total }
+}
+
 function getPerformanceLabel(score, total) {
   const percent = total ? Math.round((score / total) * 100) : 0
   if (percent >= 90) return 'Excellent'
@@ -1527,29 +1620,32 @@ function renderQuizMeta() {
   const title = modal.querySelector('#quiz-title')
   const meta = modal.querySelector('#quiz-meta')
   const fill = modal.querySelector('#quiz-progress-fill')
+  const progressCount = modal.querySelector('#quiz-progress-count')
   const quiz = getCurrentQuiz()
   const score = getQuizScore()
+  const { answeredCount, percent, total } = getQuizProgressStats()
 
-  title.textContent = quizState.topicLabel || 'Quiz'
+  if (title) title.textContent = quizState.topicLabel || 'Quiz'
+  if (progressCount) progressCount.textContent = `${answeredCount}/${total}`
+  if (fill) fill.style.width = `${percent}%`
+
   if (quizState.showResumePrompt) {
-    meta.textContent = `${quizState.sourceLabel} - resume your previous attempt or start over.`
-    fill.style.width = '0%'
+    if (meta) meta.textContent = `${quizState.sourceLabel} - resume your previous attempt or start over.`
     return
   }
 
   if (quizState.completed) {
-    const percent = quiz.length ? Math.round((score / quiz.length) * 100) : 0
-    meta.textContent = `${quizState.sourceLabel} - final score ${score} / ${quiz.length} (${percent}%)`
-    fill.style.width = '100%'
+    const scorePercent = quiz.length ? Math.round((score / quiz.length) * 100) : 0
+    if (meta) meta.textContent = `${quizState.sourceLabel} - final score ${score} / ${quiz.length} (${scorePercent}%)`
     return
   }
 
-  const answeredCount = Object.keys(quizState.answers).length
   const missedCount = quizState.missingQuestionIds?.length || 0
-  meta.textContent = missedCount
-    ? `${quizState.sourceLabel} - ${missedCount} unanswered question${missedCount === 1 ? '' : 's'}`
-    : `${quizState.sourceLabel} - ${answeredCount} / ${quiz.length} answered`
-  fill.style.width = `${(answeredCount / Math.max(quiz.length, 1)) * 100}%`
+  if (meta) {
+    meta.textContent = missedCount
+      ? `${quizState.sourceLabel} - ${missedCount} unanswered question${missedCount === 1 ? '' : 's'}`
+      : `${quizState.sourceLabel} - ${answeredCount} / ${quiz.length} answered`
+  }
 }
 
 function renderQuizQuestion() {
@@ -1695,6 +1791,7 @@ function renderQuizSourcePicker(topicLabel, event = null) {
   const title = modal.querySelector('#quiz-title')
   const meta = modal.querySelector('#quiz-meta')
   const fill = modal.querySelector('#quiz-progress-fill')
+  const progressCount = modal.querySelector('#quiz-progress-count')
   const body = modal.querySelector('#quiz-body')
   const actions = modal.querySelector('.quiz-modal__actions')
   const panel = modal.querySelector('.quiz-modal__panel')
@@ -1708,9 +1805,10 @@ function renderQuizSourcePicker(topicLabel, event = null) {
     panel.style.transformOrigin = 'center center'
   }
 
-  title.textContent = topicLabel
-  meta.textContent = 'Choose an MCQ source.'
-  fill.style.width = '0%'
+  if (title) title.textContent = topicLabel
+  if (meta) meta.textContent = 'Choose an MCQ source.'
+  if (fill) fill.style.width = '0%'
+  if (progressCount) progressCount.textContent = '0/0'
   body.innerHTML = `
     <article class="quiz-card quiz-source-picker">
       ${sources.map((source) => `
@@ -1837,6 +1935,28 @@ function closePdfPreview() {
 }
 
 function handleQuizClick(event) {
+  const topicCompletionInput = event.target.closest('[data-topic-completion]')
+  if (topicCompletionInput) {
+    const subjectCode = topicCompletionInput.dataset.subjectCode
+    const topicLabel = topicCompletionInput.dataset.topicLabel
+    const completionKey = topicCompletionInput.dataset.topicCompletion
+    const state = getTopicCompletionState(subjectCode, topicLabel)
+    state[completionKey] = topicCompletionInput.checked
+
+    if (completionKey === 'finished' && topicCompletionInput.checked) {
+      state.studied = true
+      state.mcqs = true
+    }
+
+    if ((completionKey === 'studied' || completionKey === 'mcqs') && !topicCompletionInput.checked) {
+      state.finished = false
+    }
+
+    saveTopicCompletionState(subjectCode, topicLabel, state)
+    setActiveSubject(subjectCode, 'open')
+    return
+  }
+
   const pdfButton = event.target.closest('[data-pdf-preview]')
   if (pdfButton) {
     openPdfPreview({
@@ -1957,7 +2077,15 @@ function renderSubjects() {
     clearSubjectDetail()
   }
 
-  subjectList.innerHTML = visibleSubjects.map((subject, index) => {
+  const subjectGridColumnCount = (() => {
+    if (!mobileQuery.matches) return 1
+    if (window.matchMedia('(max-width: 560px)').matches) return 2
+    if (window.matchMedia('(min-width: 760px) and (max-width: 860px)').matches) return 4
+    return 3
+  })()
+  const subjectCards = []
+
+  visibleSubjects.forEach((subject, index) => {
     const percent = getPercent(subject)
     const isActive = subject.code === activeSubjectCode
     const isExpanded = subject.code === expandedSubjectCode
@@ -1974,23 +2102,8 @@ function renderSubjects() {
         <b>${unreadUpdateCount}</b>
       </span>
     ` : ''
-    const inlinePanel = isExpanded ? `
-      <div class="subject-inline-detail">
-        <div class="subject-inline-detail__top">
-          <span>${getCoveredCount(subject)} covered</span>
-          <span>${subject.totalCount - getCoveredCount(subject)} not covered</span>
-        </div>
-        <div class="subject-track-tabs subject-track-tabs--inline" role="tablist" aria-label="${subject.code} sections">
-          ${renderSubjectTrackTabs(subject)}
-        </div>
-        <h3 class="subject-inline-detail__title">${getSubjectTrackTitle()}</h3>
-        <ul class="topic-list topic-list--inline">
-          ${renderSubjectTrackList(subject)}
-        </ul>
-      </div>
-    ` : ''
 
-    return `
+    subjectCards.push(`
       <div class="subject-row${expandedClass}" style="--delay: ${getFastStaggerDelay(index, 10, 90)}">
         <button class="subject-button${activeClass}" type="button" data-code="${subject.code}" aria-expanded="${isExpanded}">
           <span>
@@ -2005,10 +2118,35 @@ function renderSubjects() {
             <span style="width: ${percent}%"></span>
           </span>
         </button>
-        ${inlinePanel}
       </div>
-    `
-  }).join('')
+    `)
+
+    const isRowEnd = (index + 1) % subjectGridColumnCount === 0
+    const isLastSubject = index === visibleSubjects.length - 1
+    const rowStart = index - (index % subjectGridColumnCount)
+    const rowSubjects = visibleSubjects.slice(rowStart, index + 1)
+    const expandedSubjectInRow = rowSubjects.find((item) => item.code === expandedSubjectCode)
+
+    if (expandedSubjectInRow && (isRowEnd || isLastSubject)) {
+      subjectCards.push(`
+        <div class="subject-inline-detail">
+          <div class="subject-inline-detail__top">
+            <span>${getCoveredCount(expandedSubjectInRow)} covered</span>
+            <span>${expandedSubjectInRow.totalCount - getCoveredCount(expandedSubjectInRow)} not covered</span>
+          </div>
+          <div class="subject-track-tabs subject-track-tabs--inline" role="tablist" aria-label="${expandedSubjectInRow.code} sections">
+            ${renderSubjectTrackTabs(expandedSubjectInRow)}
+          </div>
+          <h3 class="subject-inline-detail__title">${getSubjectTrackTitle()}</h3>
+          <ul class="topic-list topic-list--inline">
+            ${renderSubjectTrackList(expandedSubjectInRow)}
+          </ul>
+        </div>
+      `)
+    }
+  })
+
+  subjectList.innerHTML = subjectCards.join('')
 
   subjectList.querySelectorAll('.subject-button').forEach((button) => {
     button.addEventListener('click', () => {
@@ -3757,6 +3895,35 @@ function initBottomSectionNav() {
     })
   }
 
+  const sectionIds = new Set(sections.map((section) => section.id))
+  const activeIdFromHash = () => {
+    const id = window.location.hash.replace('#', '')
+    return sectionIds.has(id) ? id : ''
+  }
+
+  const updateActiveFromViewport = () => {
+    const hashId = activeIdFromHash()
+    if (hashId) {
+      setActive(hashId)
+      return
+    }
+
+    const referenceY = window.innerHeight * 0.45
+    const activeSection = sections
+      .map((section) => {
+        const rect = section.getBoundingClientRect()
+        return {
+          id: section.id,
+          distance: Math.abs(rect.top - referenceY),
+          visible: rect.bottom > 0 && rect.top < window.innerHeight
+        }
+      })
+      .filter((section) => section.visible)
+      .sort((a, b) => a.distance - b.distance)[0]
+
+    if (activeSection?.id) setActive(activeSection.id)
+  }
+
   navLinks.forEach((link) => {
     link.addEventListener('click', (event) => {
       if (!link.hash) return
@@ -3774,9 +3941,18 @@ function initBottomSectionNav() {
     })
   })
 
+  updateActiveFromViewport()
+  window.addEventListener('hashchange', updateActiveFromViewport)
+  window.addEventListener('popstate', updateActiveFromViewport)
+
   if (!sections.length || !('IntersectionObserver' in window)) return
 
   const observer = new IntersectionObserver((entries) => {
+    if (activeIdFromHash()) {
+      updateActiveFromViewport()
+      return
+    }
+
     const visible = entries
       .filter((entry) => entry.isIntersecting)
       .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
