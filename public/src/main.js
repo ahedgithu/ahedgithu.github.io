@@ -605,17 +605,142 @@ let subjects = [
   }
 ]
 
+const subjects401 = subjects
+const subjects402 = [
+  {
+    code: 'SUR402-1',
+    name: 'Surgery 402-1',
+    totalCount: 5,
+    examNote: 'Midterm: Wed Jul 22, 2026, 11:30-12:30.',
+    topics: [
+      { label: 'Thyroid', state: 'taken', art: 0, midtermScope: true, midtermScopeNote: 'SUR402-1 midterm scope. Source: Midterm exams curriculum 402.', note: 'Covered Week 1-3, completed by Week 3. Source: Weekly Reports.', mcqTopicKey: '402::SUR402-1::Thyroid' },
+      { label: 'Parathyroid', state: 'taken', art: 1, midtermScope: true, midtermScopeNote: 'SUR402-1 midterm scope. Source: Midterm exams curriculum 402.', note: 'Covered Week 3. Source: Weekly Reports.', mcqTopicKey: '402::SUR402-1::Parathyroid' },
+      { label: 'Breast / Fibroadenoma', state: 'taken', art: 2, midtermScope: true, midtermScopeNote: 'SUR402-1 midterm scope: Breast. Source: Midterm exams curriculum 402.', note: 'Covered Week 4. Source: Weekly Reports.', mcqTopicKey: '402::SUR402-1::Breast Fibroadenoma' },
+      { label: 'Breast tumor & cancer', state: 'taken', art: 3, midtermScope: true, midtermScopeNote: 'SUR402-1 midterm scope: Breast. Source: Midterm exams curriculum 402.', note: 'Covered Week 5. Source: Weekly Reports.', mcqTopicKey: '402::SUR402-1::Breast tumor cancer' },
+      { label: 'Hernia', state: 'partial', art: 4, midtermScope: true, midtermScopeNote: 'SUR402-1 midterm scope: all hernia including abdominal and inguino-scrotal hernia. Source: Midterm exams curriculum 402.', note: 'Started Week 6 and reached the start of umbilical hernia; not complete. Source: Weekly Reports.', mcqTopicKey: '402::SUR402-1::Hernia' }
+    ]
+  },
+  {
+    code: 'SUR402-2',
+    name: 'Surgery 402-2',
+    totalCount: 5,
+    examNote: 'Covered in Weekly Reports; no midterm scope source confirmed yet.',
+    topics: [
+      { label: 'Head trauma', state: 'taken', art: 5, note: 'Covered Week 1-2. Source: Weekly Reports.', mcqTopicKey: '402::SUR402-2::Head trauma' },
+      { label: 'Cervical and lumbar disc prolapse', state: 'taken', art: 6, note: 'Covered Week 3. Source: Weekly Reports.', mcqTopicKey: '402::SUR402-2::Disc prolapse' },
+      { label: 'Cases', state: 'announced', art: 7, note: 'Mentioned Week 4 as not included / not with us in exam. Source: Weekly Reports.', mcqTopicKey: '402::SUR402-2::Cases' },
+      { label: 'Spine fractures', state: 'taken', art: 8, note: 'Covered Week 5. Source: Weekly Reports.', mcqTopicKey: '402::SUR402-2::Spine fractures' },
+      { label: 'Incomplete & complete spinal cord injury', state: 'taken', art: 9, note: 'Covered Week 6. Source: Weekly Reports.', mcqTopicKey: '402::SUR402-2::Spinal cord injury' }
+    ]
+  },
+  {
+    code: 'MED402-1',
+    name: 'Medicine 402-1',
+    totalCount: 12,
+    examNote: 'Midterm: Sat Jul 25, 2026, 11:30-12:30.',
+    topics: [
+      { label: 'Acromegaly', state: 'taken', art: 10, midtermScope: true, midtermScopeNote: 'MED402-1 endocrinology midterm scope. Source: Midterm exams curriculum 402.', note: 'Covered Week 1. Source: Weekly Reports.', mcqTopicKey: '402::MED402-1::Acromegaly' },
+      { label: 'Geriatric assessment and changes', state: 'taken', art: 11, midtermScope: true, midtermScopeNote: 'MED402-1 geriatrics midterm scope. Source: Midterm exams curriculum 402.', note: 'Covered Week 2. Source: Weekly Reports.', mcqTopicKey: '402::MED402-1::Geriatric assessment' },
+      { label: 'Atypical presentations of diseases', state: 'taken', art: 12, midtermScope: true, midtermScopeNote: 'MED402-1 geriatrics midterm scope. Source: Midterm exams curriculum 402.', note: 'Covered Week 3. Source: Weekly Reports.', mcqTopicKey: '402::MED402-1::Atypical presentations' },
+      { label: 'Prolactin', state: 'taken', art: 13, midtermScope: true, midtermScopeNote: 'MED402-1 endocrinology midterm scope. Source: Midterm exams curriculum 402.', note: 'Covered Week 3. Source: Weekly Reports.', mcqTopicKey: '402::MED402-1::Prolactin' },
+      { label: 'Comprehensive assessment', state: 'taken', art: 14, midtermScope: true, midtermScopeNote: 'MED402-1 geriatrics midterm scope. Source: Midterm exams curriculum 402.', note: 'Covered Week 4. Source: Weekly Reports.', mcqTopicKey: '402::MED402-1::Comprehensive assessment' },
+      { label: 'DM till end of DKA', state: 'taken', art: 15, midtermScope: true, midtermScopeNote: 'MED402-1 endocrinology midterm scope: DM. Source: Midterm exams curriculum 402.', note: 'Covered Week 4. Source: Weekly Reports.', mcqTopicKey: '402::MED402-1::DM DKA' },
+      { label: 'Complications of DM', state: 'taken', art: 0, midtermScope: true, midtermScopeNote: 'MED402-1 endocrinology midterm scope: DM. Source: Midterm exams curriculum 402.', note: 'Covered Week 5. Source: Weekly Reports.', mcqTopicKey: '402::MED402-1::DM complications' },
+      { label: 'Management of DM', state: 'taken', art: 1, midtermScope: true, midtermScopeNote: 'MED402-1 endocrinology midterm scope: DM. Source: Midterm exams curriculum 402.', note: 'Covered Week 6. Source: Weekly Reports.', mcqTopicKey: '402::MED402-1::DM management' },
+      { label: 'Osteoporosis', state: 'taken', art: 2, midtermScope: true, midtermScopeNote: 'MED402-1 geriatrics midterm scope. Source: Midterm exams curriculum 402.', note: 'Covered Week 6. Source: Weekly Reports.', mcqTopicKey: '402::MED402-1::Osteoporosis' },
+      { label: 'Panhypopituitarism', state: 'remaining', art: 3, midtermScope: true, midtermScopeNote: 'MED402-1 endocrinology midterm scope. Source: Midterm exams curriculum 402.', mcqTopicKey: '402::MED402-1::Panhypopituitarism' },
+      { label: 'SIADH', state: 'remaining', art: 4, midtermScope: true, midtermScopeNote: 'MED402-1 endocrinology midterm scope. Source: Midterm exams curriculum 402.', mcqTopicKey: '402::MED402-1::SIADH' },
+      { label: 'Diabetes insipidus', state: 'remaining', art: 5, midtermScope: true, midtermScopeNote: 'MED402-1 endocrinology midterm scope. Source: Midterm exams curriculum 402.', mcqTopicKey: '402::MED402-1::Diabetes insipidus' }
+    ]
+  },
+  {
+    code: 'MED402-2',
+    name: 'Medicine 402-2',
+    totalCount: 9,
+    examNote: 'Midterm: Wed Jul 29, 2026, 11:30-12:30.',
+    topics: [
+      { label: 'Intro into neuro, book p.1-15', state: 'taken', art: 6, midtermScope: true, midtermScopeNote: 'MED402-2 neurology midterm scope starts from page 1. Source: Midterm exams curriculum 402.', note: 'Covered Week 2. Source: Weekly Reports.', mcqTopicKey: '402::MED402-2::Intro neuro' },
+      { label: 'Psych history and examination', state: 'taken', art: 7, midtermScope: true, midtermScopeNote: 'MED402-2 psychiatry midterm scope. Source: Midterm exams curriculum 402.', note: 'Covered Week 3. Source: Weekly Reports.', mcqTopicKey: '402::MED402-2::Psych history MSE' },
+      { label: 'Hemiplegia', state: 'taken', art: 8, midtermScope: true, midtermScopeNote: 'MED402-2 neurology midterm scope. Source: Midterm exams curriculum 402.', note: 'Covered Week 4. Source: Weekly Reports.', mcqTopicKey: '402::MED402-2::Hemiplegia' },
+      { label: 'Mood disorders', state: 'taken', art: 9, midtermScope: true, midtermScopeNote: 'MED402-2 psychiatry midterm scope. Source: Midterm exams curriculum 402.', note: 'Covered Week 5. Source: Weekly Reports.', mcqTopicKey: '402::MED402-2::Mood disorders' },
+      { label: 'Paraplegia', state: 'taken', art: 10, midtermScope: true, midtermScopeNote: 'MED402-2 neurology midterm scope. Source: Midterm exams curriculum 402.', note: 'Covered Week 6. Source: Weekly Reports.', mcqTopicKey: '402::MED402-2::Paraplegia' },
+      { label: 'Mood stabilizers', state: 'remaining', art: 11, midtermScope: true, midtermScopeNote: 'MED402-2 psychiatry midterm scope. Source: Midterm exams curriculum 402.', mcqTopicKey: '402::MED402-2::Mood stabilizers' },
+      { label: 'Antidepressants', state: 'remaining', art: 12, midtermScope: true, midtermScopeNote: 'MED402-2 psychiatry midterm scope. Source: Midterm exams curriculum 402.', mcqTopicKey: '402::MED402-2::Antidepressants' },
+      { label: 'Cranial nerves / speech / sensory system', state: 'remaining', art: 13, midtermScope: true, midtermScopeNote: 'MED402-2 neurology page 1-69 scope. Source: Midterm exams curriculum 402.', mcqTopicKey: '402::MED402-2::Neuro systems' },
+      { label: 'Vascular occlusive syndrome and brain blood supply', state: 'remaining', art: 14, midtermScope: true, midtermScopeNote: 'MED402-2 neurology page 1-69 scope. Source: Midterm exams curriculum 402.', mcqTopicKey: '402::MED402-2::Vascular occlusive syndrome' }
+    ]
+  },
+  {
+    code: 'GYNA402',
+    name: 'Gynecology & Obstetrics 402',
+    totalCount: 13,
+    examNote: 'Midterm: Sat Aug 1, 2026, 11:30-12:30.',
+    topics: [
+      { label: 'Menstrual cycle', state: 'taken', art: 15, midtermScope: true, midtermScopeNote: 'GYNA402 midterm scope. 2026 book pages 12-16.', note: 'Covered Week 1. Source: Weekly Reports.', mcqTopicKey: '402::GYNA402::Menstrual cycle' },
+      { label: 'Abortion', state: 'taken', art: 0, midtermScope: true, midtermScopeNote: 'GYNA402 midterm scope. 2026 book pages 19-25.', note: 'Covered Week 2. Source: Weekly Reports.', mcqTopicKey: '402::GYNA402::Abortion' },
+      { label: 'Amenorrhea', state: 'taken', art: 1, midtermScope: true, midtermScopeNote: 'GYNA402 midterm scope. 2026 book pages 25-29.', note: 'Covered Week 2. Source: Weekly Reports.', mcqTopicKey: '402::GYNA402::Amenorrhea' },
+      { label: 'Ectopic pregnancy', state: 'taken', art: 2, midtermScope: true, midtermScopeNote: 'GYNA402 midterm scope. 2026 book pages 25-29.', note: 'Covered Week 3. Source: Weekly Reports.', mcqTopicKey: '402::GYNA402::Ectopic pregnancy' },
+      { label: 'PCOS', state: 'taken', art: 3, midtermScope: true, midtermScopeNote: 'GYNA402 midterm scope. 2026 book pages 34-36.', note: 'Covered Week 3. Source: Weekly Reports.', mcqTopicKey: '402::GYNA402::PCOS' },
+      { label: 'Vesicular mole', state: 'taken', art: 4, midtermScope: true, midtermScopeNote: 'GYNA402 midterm scope. 2026 book pages 30-33. Malignant GTD is not included.', note: 'Covered Week 4. Source: Weekly Reports.', mcqTopicKey: '402::GYNA402::Vesicular mole' },
+      { label: 'Antenatal care round', state: 'taken', art: 5, midtermScope: true, midtermScopeNote: 'OBS rounds midterm scope. 2026 book pages 147-149, 1-13.', note: 'Covered Week 4. Source: Weekly Reports.', mcqTopicKey: '402::GYNA402::Antenatal care round' },
+      { label: 'Abnormal uterine bleeding', state: 'taken', art: 6, midtermScope: true, midtermScopeNote: 'GYNA402 midterm scope. 2026 book pages 92-96.', note: 'Covered Week 4. Source: Weekly Reports.', mcqTopicKey: '402::GYNA402::AUB' },
+      { label: 'Endometrial hyperplasia', state: 'taken', art: 7, note: 'Covered Week 4, but not listed in the provided midterm scope. Source: Weekly Reports.', mcqTopicKey: '402::GYNA402::Endometrial hyperplasia' },
+      { label: 'Dysmenorrhea', state: 'taken', art: 8, midtermScope: true, midtermScopeNote: 'GYNA402 midterm scope. 2026 book pages 17-18.', note: 'Covered Week 5. Source: Weekly Reports.', mcqTopicKey: '402::GYNA402::Dysmenorrhea' },
+      { label: 'Hyperprolactinemia', state: 'taken', art: 9, midtermScope: true, midtermScopeNote: 'GYNA402 midterm scope. 2026 book page 30.', note: 'Covered Week 5. Source: Weekly Reports.', mcqTopicKey: '402::GYNA402::Hyperprolactinemia' },
+      { label: 'Antepartum hemorrhage', state: 'taken', art: 10, midtermScope: true, midtermScopeNote: 'GYNA402 midterm scope. 2026 book pages 35-41.', note: 'Covered Week 6. Source: Weekly Reports.', mcqTopicKey: '402::GYNA402::Antepartum hemorrhage' },
+      { label: 'Lower genital tract infection', state: 'remaining', art: 11, midtermScope: true, midtermScopeNote: 'GYNA rounds midterm scope. 2026 book pages 61-67.', mcqTopicKey: '402::GYNA402::Lower genital tract infection' }
+    ]
+  },
+  {
+    code: 'PED402',
+    name: 'Pediatrics 402',
+    totalCount: 8,
+    examNote: 'Midterm scope: Growth & Development, Nutrition, Cardiology.',
+    topics: [
+      { label: 'Growth & Development', state: 'taken', art: 12, midtermScope: true, midtermScopeNote: 'PED402 midterm scope. Source: Midterm exams curriculum 402 and PED402 notes.', note: 'Covered Week 1. Source: Weekly Reports.', mcqTopicKey: '402::PED402::Growth Development' },
+      { label: 'Nutrition', state: 'taken', art: 13, midtermScope: true, midtermScopeNote: 'PED402 midterm scope. Source: Midterm exams curriculum 402 and PED402 notes.', note: 'Covered Week 2-3. Source: Weekly Reports.', mcqTopicKey: '402::PED402::Nutrition' },
+      { label: 'Cardiology intro/pages 323-326/362', state: 'taken', art: 14, midtermScope: true, midtermScopeNote: 'PED402 midterm scope: Cardiology. Source: Midterm exams curriculum 402 and PED402 notes.', note: 'Covered Week 3. Source: Weekly Reports.', mcqTopicKey: '402::PED402::Cardiology intro' },
+      { label: 'ASD / VSD / PDA', state: 'taken', art: 15, midtermScope: true, midtermScopeNote: 'PED402 midterm scope: Cardiology. Source: Midterm exams curriculum 402 and PED402 notes.', note: 'Covered Week 4. Source: Weekly Reports.', mcqTopicKey: '402::PED402::ASD VSD PDA' },
+      { label: 'F4 / TGA / AVC', state: 'taken', art: 0, midtermScope: true, midtermScopeNote: 'PED402 midterm scope: Cardiology. Source: Midterm exams curriculum 402 and PED402 notes.', note: 'Covered Week 4. Source: Weekly Reports.', mcqTopicKey: '402::PED402::F4 TGA AVC' },
+      { label: 'RHD / SBE / Cardiomyopathy', state: 'taken', art: 1, midtermScope: true, midtermScopeNote: 'PED402 midterm scope: Cardiology. Source: Midterm exams curriculum 402 and PED402 notes.', note: 'Covered Week 5. Source: Weekly Reports.', mcqTopicKey: '402::PED402::RHD SBE Cardiomyopathy' },
+      { label: 'AS / PS / CoA', state: 'taken', art: 2, midtermScope: true, midtermScopeNote: 'PED402 midterm scope: Cardiology. Source: Midterm exams curriculum 402 and PED402 notes.', note: 'Covered Week 5. Source: Weekly Reports.', mcqTopicKey: '402::PED402::AS PS CoA' },
+      { label: 'GIT Pain & Constipation', state: 'taken', art: 3, note: 'Covered Week 6. Source: Weekly Reports. Not included in the reduced midterm scope unless confirmed later.', mcqTopicKey: '402::PED402::GIT Pain Constipation' }
+    ]
+  },
+  {
+    code: 'RAD402',
+    name: 'Radiology 402',
+    totalCount: 5,
+    examNote: 'Covered in Weekly Reports; no midterm scope source confirmed yet.',
+    topics: [
+      { label: 'Liver and biliary + small and large bowel', state: 'taken', art: 4, note: 'Covered Week 2. Source: Weekly Reports.', mcqTopicKey: '402::RAD402::Liver biliary bowel' },
+      { label: 'Breast imaging', state: 'taken', art: 5, note: 'Covered Week 3. Source: Weekly Reports.', mcqTopicKey: '402::RAD402::Breast imaging' },
+      { label: 'Nuclear Medicine', state: 'taken', art: 6, note: 'Covered Week 4. Source: Weekly Reports.', mcqTopicKey: '402::RAD402::Nuclear Medicine' },
+      { label: 'Cardiothoracic imaging', state: 'taken', art: 7, note: 'Covered Week 5. Source: Weekly Reports.', mcqTopicKey: '402::RAD402::Cardiothoracic imaging' },
+      { label: 'CNS imaging', state: 'taken', art: 8, note: 'Covered Week 6. Source: Weekly Reports.', mcqTopicKey: '402::RAD402::CNS imaging' }
+    ]
+  }
+]
+
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 const mobileQuery = window.matchMedia('(max-width: 860px)')
-const QUIZ_STORAGE_PREFIX = 'mcq-progress-'
-const TOPIC_COMPLETION_STORAGE_PREFIX = 'med401-topic-progress-v1::'
-const TOPIC_UPDATE_STORAGE_KEY = 'tracker-seen-topic-updates-v1'
+const QUIZ_STORAGE_PREFIX = 'quizState'
+const LEGACY_QUIZ_STORAGE_PREFIX = 'mcq-progress-'
+const TOPIC_COMPLETION_STORAGE_PREFIX = 'topicCompletion'
+const LEGACY_TOPIC_COMPLETION_STORAGE_PREFIX = 'med401-topic-progress-v1::'
+const TOPIC_UPDATE_STORAGE_KEY_PREFIX = 'tracker-seen-topic-updates-v1'
+let TOPIC_UPDATE_STORAGE_KEY = `${TOPIC_UPDATE_STORAGE_KEY_PREFIX}::401`
 const TOPIC_UPDATE_VISIBLE_DAYS = 14
-const NEWS_SEEN_STORAGE_KEY = 'news-seen-cards-v1'
+const NEWS_SEEN_STORAGE_KEY_PREFIX = 'newsSeen'
+let NEWS_SEEN_STORAGE_KEY = `${NEWS_SEEN_STORAGE_KEY_PREFIX}::401`
 const NEWS_EXPIRY_HOURS = 6
 const DRIVE_ICON_URL = '/assets/icons/drive-icon.png'
 const PLAY_ICON_URL = '/assets/icons/play-button-v1.png'
 const mcqQuizzes = window.mcqQuizzes || {}
+const mcqQuizzesBySection = {
+  '401': mcqQuizzes,
+  '402': window.mcqQuizzes402 || {}
+}
 const quizState = {
   topicLabel: null,
   sourceId: 'current',
@@ -656,7 +781,7 @@ const midtermExamSchedule = [
     subjectName: 'Nutrition',
     date: '2026-07-08',
     dayLabel: 'Wed',
-    time: 'Jul 8',
+    time: '8/7',
     meta: '10 MARKS',
     type: 'quiz'
   },
@@ -704,6 +829,34 @@ const courseSchedule = [
   { type: 'round', day: 3, dayLabel: 'Wednesday', start: '09:00', end: '10:30', title: 'MED 401-1 (A)', room: 'HR1' },
   { type: 'round', day: 3, dayLabel: 'Wednesday', start: '10:30', end: '12:00', title: 'MED 401-1 (B)', room: 'HR1' }
 ]
+
+const midtermExamSchedule402 = [
+  { code: 'SUR 402-1', subjectCode: 'SUR402-1', subjectName: 'Surgery 402-1', date: '2026-07-22', dayLabel: 'Wed', time: '11:30-12:30' },
+  { code: 'MED 402-1', subjectCode: 'MED402-1', subjectName: 'Medicine 402-1', date: '2026-07-25', dayLabel: 'Sat', time: '11:30-12:30' },
+  { code: 'MED 402-2', subjectCode: 'MED402-2', subjectName: 'Medicine 402-2', date: '2026-07-29', dayLabel: 'Wed', time: '11:30-12:30' },
+  { code: 'GYN 402', subjectCode: 'GYNA402', subjectName: 'Gynecology & Obstetrics 402', date: '2026-08-01', dayLabel: 'Sat', time: '11:30-12:30' }
+]
+
+const academicSections = {
+  '401': {
+    id: '401',
+    title: '401',
+    newsTitle: 'MED 401 news',
+    trackerSearchPlaceholder: 'Search 401 topics or subjects...',
+    subjects: subjects401,
+    midtermExamSchedule,
+    courseSchedule
+  },
+  '402': {
+    id: '402',
+    title: '402',
+    newsTitle: 'MED 402 news',
+    trackerSearchPlaceholder: 'Search 402 topics or subjects...',
+    subjects: subjects402,
+    midtermExamSchedule: midtermExamSchedule402,
+    courseSchedule: []
+  }
+}
 
 const scheduleDayOrder = [
   { day: 0, label: 'Sunday' },
@@ -755,17 +908,148 @@ const scheduleNextCard = document.getElementById('schedule-next-card')
 const scheduleTodayList = document.getElementById('schedule-today-list')
 const scheduleCalendarGrid = document.getElementById('schedule-calendar-grid')
 const scheduleList = document.getElementById('schedule-list')
-const whatsappFeedbackUrl = 'https://wa.me/201030469634?text=Hi%20Ahmed%2C%20I%20have%20a%20recommendation%20to%20improve%20the%20MED%20401%20tracker%3A%20'
+const sectionSelector = document.getElementById('section-selector')
+const trackerTitle = document.getElementById('tracker-title')
+const newsTitle = document.getElementById('news-title')
+const scheduleTitle = document.getElementById('schedule-title')
+const bottomNavSwitch = document.querySelector('.bottom-nav__switch')
 
 const initialParams = new URLSearchParams(window.location.search)
 subjects = subjects.map((subject) => ({
   ...subject,
   clinicalTopics: Array.isArray(subject.clinicalTopics) ? subject.clinicalTopics : []
 }))
+subjects401.forEach((subject) => {
+  subject.clinicalTopics = Array.isArray(subject.clinicalTopics) ? subject.clinicalTopics : []
+})
+subjects402.forEach((subject) => {
+  subject.clinicalTopics = Array.isArray(subject.clinicalTopics) ? subject.clinicalTopics : []
+})
+let activeAcademicSection = '401'
+let activeSiteMode = 'selector'
+let activeAcademicSectionData = academicSections[activeAcademicSection]
+subjects = activeAcademicSectionData.subjects
 const initialSubject = subjects.find((subject) => subject.code === initialParams.get('subject'))
 let activeSubjectCode = initialParams.get('tracker') === '1' && initialSubject ? initialSubject.code : null
 let expandedSubjectCode = mobileQuery.matches && activeSubjectCode ? activeSubjectCode : null
 let activeSubjectTrack = 'theoretical'
+
+function getAcademicSection(sectionId = activeAcademicSection) {
+  return academicSections[sectionId] || academicSections['401']
+}
+
+function getInitialSiteMode() {
+  const hash = window.location.hash.replace('#', '')
+  if (initialParams.get('section') === '402') return '402'
+  if (initialParams.get('section') === '401') return '401'
+  if (initialParams.get('section') === 'tools' || hash === 'history') return 'tools'
+  if (hash || initialParams.get('tracker') === '1') return '401'
+  return 'selector'
+}
+
+function setSectionStorageKeys(sectionId) {
+  TOPIC_UPDATE_STORAGE_KEY = `${TOPIC_UPDATE_STORAGE_KEY_PREFIX}::${sectionId}`
+  NEWS_SEEN_STORAGE_KEY = `${NEWS_SEEN_STORAGE_KEY_PREFIX}::${sectionId}`
+}
+
+function updateAcademicSectionUi() {
+  activeAcademicSectionData = getAcademicSection()
+  subjects = activeAcademicSectionData.subjects
+  setSectionStorageKeys(activeAcademicSection)
+
+  if (trackerTitle) trackerTitle.textContent = activeAcademicSectionData.title
+  if (newsTitle) newsTitle.textContent = activeAcademicSectionData.newsTitle
+  if (scheduleTitle) scheduleTitle.textContent = `${activeAcademicSectionData.title} schedule`
+  if (trackerSearch) trackerSearch.placeholder = activeAcademicSectionData.trackerSearchPlaceholder
+  if (examScheduleCards) {
+    examScheduleCards.setAttribute('aria-label', `${activeAcademicSectionData.title} subject exam dates`)
+  }
+  if (bottomNavSwitch) bottomNavSwitch.textContent = activeAcademicSectionData.title
+}
+
+function resetActiveSubjectForSection(preferredCode = '') {
+  const preferredSubject = preferredCode ? subjects.find((subject) => subject.code === preferredCode) : null
+  activeSubjectCode = preferredSubject?.code || null
+  expandedSubjectCode = mobileQuery.matches && activeSubjectCode ? activeSubjectCode : null
+  activeSubjectTrack = 'theoretical'
+}
+
+function syncModeToBody() {
+  document.body.dataset.siteMode = activeSiteMode
+  document.body.dataset.academicSection = activeAcademicSection
+}
+
+function showAcademicSection(sectionId, options = {}) {
+  activeAcademicSection = sectionId === '402' ? '402' : '401'
+  activeSiteMode = activeAcademicSection
+  updateAcademicSectionUi()
+  resetActiveSubjectForSection(options.subjectCode || initialParams.get('subject') || '')
+  syncModeToBody()
+  refreshTrackerFilters()
+  renderSemesterTimeline()
+  render401ExamSchedule()
+  renderSchedulePage()
+  renderNewsFilters()
+
+  try {
+    localStorage.setItem('selectedAcademicSection', activeAcademicSection)
+  } catch {
+    // Section choice should not depend on browser storage.
+  }
+
+  const targetHash = options.hash || window.location.hash || '#tracker'
+  const url = new URL(window.location.href)
+  url.searchParams.set('section', activeAcademicSection)
+  if (!url.hash) url.hash = targetHash
+  window.history.replaceState({}, '', url)
+  const targetSection = document.getElementById(targetHash.replace('#', '')) || document.getElementById('tracker')
+  if (targetSection && options.scroll !== false) {
+    targetSection.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' })
+  }
+}
+
+function showSelector() {
+  activeSiteMode = 'selector'
+  syncModeToBody()
+  window.history.replaceState({}, '', window.location.pathname)
+}
+
+function showToolsSection(options = {}) {
+  activeSiteMode = 'tools'
+  syncModeToBody()
+  try {
+    localStorage.setItem('selectedAcademicSection', 'tools')
+  } catch {
+    // Section choice should not depend on browser storage.
+  }
+  const url = new URL(window.location.href)
+  url.searchParams.set('section', 'tools')
+  url.hash = 'history'
+  window.history.replaceState({}, '', url)
+  const historyRoot = document.getElementById('history')
+  if (historyRoot && options.scroll !== false) {
+    historyRoot.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' })
+  }
+}
+
+function selectSiteSection(sectionId, options = {}) {
+  if (sectionId === 'selector') {
+    showSelector()
+  } else if (sectionId === 'tools') {
+    showToolsSection(options)
+  } else {
+    showAcademicSection(sectionId, options)
+  }
+}
+
+function handleLegacyHashRoute() {
+  const hash = window.location.hash.replace('#', '')
+  if (activeSiteMode === 'selector' && ['tracker', 'news', 'schedule', 'work'].includes(hash)) {
+    showAcademicSection('401', { hash: `#${hash}`, scroll: false })
+  } else if (hash === 'history' && activeSiteMode !== 'tools') {
+    showToolsSection({ scroll: false })
+  }
+}
 
 function getTopicUnits(topic) {
   return topic.coverageUnits || 1
@@ -774,8 +1058,12 @@ function getTopicUnits(topic) {
 function getScopedProgressTopics(subject) {
   const { scope } = getTrackerFilters()
   return scope === 'midterm'
-    ? subject.topics.filter((topic) => topic.midtermScope)
+    ? subject.topics.filter((topic) => isTopicMidtermScopeConfirmed(topic))
     : subject.topics
+}
+
+function isTopicMidtermScopeConfirmed(topic) {
+  return activeAcademicSection !== '402' && !!topic.midtermScope
 }
 
 function getTopicUnitTotal(topics) {
@@ -808,7 +1096,7 @@ function getStateCounts(subject) {
 
 function getSubjectSummary(subject) {
   const counts = getStateCounts(subject)
-  const midtermCount = subject.topics.filter((topic) => topic.midtermScope).length
+  const midtermCount = subject.topics.filter((topic) => isTopicMidtermScopeConfirmed(topic)).length
   const parts = [
     counts.taken ? `${counts.taken} taken` : '',
     counts.partial ? `${counts.partial} partial` : '',
@@ -822,7 +1110,7 @@ function getSubjectSummary(subject) {
 
 function getTopicUpdateId(subject, topic) {
   if (!topic.updatedAt) return ''
-  return `${subject.code}::${topic.label}::${topic.updateBatch || topic.updatedAt}`
+  return `${activeAcademicSection}::${subject.code}::${topic.label}::${topic.updateBatch || topic.updatedAt}`
 }
 
 function getSeenTopicUpdates() {
@@ -843,14 +1131,20 @@ function saveSeenTopicUpdates(seenUpdates) {
 }
 
 function getTopicCompletionKey(subjectCode, topicLabel) {
-  return `${TOPIC_COMPLETION_STORAGE_PREFIX}${encodeURIComponent(subjectCode)}::${encodeURIComponent(topicLabel)}`
+  return `${TOPIC_COMPLETION_STORAGE_PREFIX}::${activeAcademicSection}::${encodeURIComponent(subjectCode)}::${encodeURIComponent(topicLabel)}`
+}
+
+function getLegacyTopicCompletionKey(subjectCode, topicLabel) {
+  return `${LEGACY_TOPIC_COMPLETION_STORAGE_PREFIX}${encodeURIComponent(subjectCode)}::${encodeURIComponent(topicLabel)}`
 }
 
 function getTopicCompletionState(subjectCode, topicLabel) {
   const emptyState = { studied: false, mcqs: false }
 
   try {
-    const savedState = JSON.parse(localStorage.getItem(getTopicCompletionKey(subjectCode, topicLabel)) || '{}')
+    const savedRaw = localStorage.getItem(getTopicCompletionKey(subjectCode, topicLabel))
+      || (activeAcademicSection === '401' ? localStorage.getItem(getLegacyTopicCompletionKey(subjectCode, topicLabel)) : null)
+    const savedState = JSON.parse(savedRaw || '{}')
     return {
       ...emptyState,
       studied: !!savedState.studied,
@@ -879,7 +1173,7 @@ function renderTopicCompletionControls(subject, topic) {
   const state = getTopicCompletionState(subject.code, topic.label)
   const controls = [
     { key: 'studied', label: 'Studied' },
-    { key: 'mcqs', label: 'MCQs only' }
+    { key: 'mcqs', label: 'MCQs' }
   ]
 
   return `
@@ -987,8 +1281,8 @@ function getFilteredTopics(subject) {
 
   return subject.topics.filter((topic) => {
     const matchesStatus = status === 'all' || topic.state === status
-    const matchesScope = scope === 'all' || (scope === 'midterm' && topic.midtermScope)
-    const searchable = `${subject.code} ${subject.name} ${topic.label} ${topic.section || ''} ${topic.note || ''} ${topic.midtermScopeNote || ''} ${topic.midtermScope ? 'midterm scope included' : ''}`.toLowerCase()
+    const matchesScope = scope === 'all' || (scope === 'midterm' && isTopicMidtermScopeConfirmed(topic))
+    const searchable = `${subject.code} ${subject.name} ${topic.label} ${topic.section || ''} ${topic.note || ''} ${isTopicMidtermScopeConfirmed(topic) ? topic.midtermScopeNote || '' : ''} ${isTopicMidtermScopeConfirmed(topic) ? 'midterm scope included' : ''}`.toLowerCase()
     const matchesQuery = !query || searchable.includes(query)
     return matchesStatus && matchesScope && matchesQuery
   })
@@ -1084,10 +1378,11 @@ function renderResourceItem(item) {
 }
 
 function renderResourceLinks(topic) {
-  const quizSources = getQuizSources(topic.label)
+  const quizTopicKey = topic.mcqTopicKey || topic.label
+  const quizSources = getQuizSources(quizTopicKey)
   const quizCount = quizSources.reduce((total, source) => total + source.mcqs.length, 0)
   const quizButton = quizCount ? `
-    <button class="topic-resource topic-resource--quiz" type="button" data-quiz-topic="${escapeHtml(topic.label)}">
+    <button class="topic-resource topic-resource--quiz" type="button" data-quiz-topic="${escapeHtml(quizTopicKey)}">
       MCQs (${quizCount})
     </button>
   ` : ''
@@ -1118,6 +1413,7 @@ function renderResourceLinks(topic) {
 
 function updateTrackerUrl(subjectCode) {
   const url = new URL(window.location.href)
+  url.searchParams.set('section', activeAcademicSection)
   url.searchParams.set('tracker', '1')
   url.searchParams.set('subject', subjectCode)
   url.hash = 'tracker'
@@ -1173,8 +1469,9 @@ function renderTopicCard(subject, topic, index, collection = subject.topics) {
   const tileY = Math.floor(art / 4)
   const topicPosition = collection.indexOf(topic)
   const displayNum = String((topicPosition >= 0 ? topicPosition : index) + 1).padStart(2, '0')
-  const midtermBadge = topic.midtermScope ? '<span class="topic-item__scope" dir="rtl">داخل في الميد</span>' : ''
-  const midtermNote = topic.midtermScopeNote ? `<span class="topic-item__midterm-note">${topic.midtermScopeNote}</span>` : ''
+  const midtermScopeConfirmed = isTopicMidtermScopeConfirmed(topic)
+  const midtermBadge = midtermScopeConfirmed ? '<span class="topic-item__scope" dir="rtl">داخل في الميد</span>' : ''
+  const midtermNote = midtermScopeConfirmed && topic.midtermScopeNote ? `<span class="topic-item__midterm-note">${topic.midtermScopeNote}</span>` : ''
   const roundMeta = [topic.roundDate, topic.room].filter(Boolean).join(' - ')
   const stateBadge = topic.state === 'taken-in-university' ? '' : `<span class="topic-item__state topic-item__state--${topic.state}">${stateLabels[topic.state] || topic.state}</span>`
   const hasRecentUpdate = isRecentTopicUpdate(topic)
@@ -1416,12 +1713,18 @@ function ensureQuizModal() {
 }
 
 function getQuizStorageKey(topicLabel, sourceId = quizState.sourceId || 'current') {
-  return `${QUIZ_STORAGE_PREFIX}${encodeURIComponent(topicLabel)}::${encodeURIComponent(sourceId)}`
+  return `${QUIZ_STORAGE_PREFIX}::${activeAcademicSection}::${encodeURIComponent(topicLabel)}::${encodeURIComponent(sourceId)}`
+}
+
+function getLegacyQuizStorageKey(topicLabel, sourceId = quizState.sourceId || 'current') {
+  return `${LEGACY_QUIZ_STORAGE_PREFIX}${encodeURIComponent(topicLabel)}::${encodeURIComponent(sourceId)}`
 }
 
 function getSavedQuizState(topicLabel, sourceId = 'current') {
   try {
-    return JSON.parse(localStorage.getItem(getQuizStorageKey(topicLabel, sourceId)) || 'null')
+    const savedRaw = localStorage.getItem(getQuizStorageKey(topicLabel, sourceId))
+      || (activeAcademicSection === '401' ? localStorage.getItem(getLegacyQuizStorageKey(topicLabel, sourceId)) : null)
+    return JSON.parse(savedRaw || 'null')
   } catch {
     localStorage.removeItem(getQuizStorageKey(topicLabel, sourceId))
     return null
@@ -1460,7 +1763,8 @@ function shuffleArray(array) {
 }
 
 function getQuizSources(topicLabel) {
-  const raw = mcqQuizzes[topicLabel]
+  const sectionQuizzes = mcqQuizzesBySection[activeAcademicSection] || {}
+  const raw = sectionQuizzes[topicLabel]
   if (!raw) return []
 
   if (raw.sources?.length) {
@@ -1526,7 +1830,7 @@ function normalizeQuestion(question, index) {
 }
 
 function getTopicData(topicLabel) {
-  return subjects.flatMap((subject) => subject.topics).find((topic) => topic.label === topicLabel)
+  return subjects.flatMap((subject) => subject.topics).find((topic) => (topic.mcqTopicKey || topic.label) === topicLabel || topic.label === topicLabel)
 }
 
 function initializeQuiz(topicLabel, { sourceId = 'current', useSaved = false, fresh = false } = {}) {
@@ -2314,6 +2618,7 @@ function getExamCountdownText(daysUntil) {
 function render401ExamSchedule() {
   if (!examScheduleCards) return
 
+  const activeExamSchedule = activeAcademicSectionData.midtermExamSchedule || []
   const today = new Date()
   const todayStart = startOfDay(today)
   const dayNum = today.getDate()
@@ -2321,7 +2626,7 @@ function render401ExamSchedule() {
   const todayMarkerLabel = todayMarker?.querySelector('b')
   if (todayMarkerLabel) todayMarkerLabel.textContent = `${dayNum}/${monthNum}`
 
-  const scheduleWithState = midtermExamSchedule.map((exam) => {
+  const scheduleWithState = activeExamSchedule.map((exam) => {
     const examDate = getLocalDate(exam.date)
     const daysUntil = Math.ceil((examDate - todayStart) / 86400000)
     return { ...exam, examDate, daysUntil }
@@ -2334,7 +2639,7 @@ function render401ExamSchedule() {
       nextCheckpoint.innerHTML = `<span class="checkpoint-code">${escapeHtml(nextExam.code)}</span><span class="checkpoint-meta">${escapeHtml(getExamCountdownText(nextExam.daysUntil))} - ${escapeHtml(formatExamDate(nextExam.date))}, ${escapeHtml(nextExam.time)}</span>`
     }
     if (next401Exam) {
-      next401Exam.textContent = `Next 401 exam: ${nextExam.code} on ${formatExamDate(nextExam.date)}`
+      next401Exam.textContent = `Next ${activeAcademicSectionData.title} exam: ${nextExam.code} on ${formatExamDate(nextExam.date)}`
     }
     if (next401Countdown) {
       next401Countdown.textContent = `${getExamCountdownText(nextExam.daysUntil)} - ${nextExam.subjectName} at ${nextExam.time}.`
@@ -2343,8 +2648,8 @@ function render401ExamSchedule() {
     if (nextCheckpoint) {
       nextCheckpoint.innerHTML = '<span class="checkpoint-code">Finals</span><span class="checkpoint-meta">Sep 19, 2026</span>'
     }
-    if (next401Exam) next401Exam.textContent = '401 midterm schedule complete'
-    if (next401Countdown) next401Countdown.textContent = 'All listed 401 midterm exams have passed.'
+    if (next401Exam) next401Exam.textContent = `${activeAcademicSectionData.title} midterm schedule complete`
+    if (next401Countdown) next401Countdown.textContent = `All listed ${activeAcademicSectionData.title} midterm exams have passed.`
   }
 
   examScheduleCards.innerHTML = scheduleWithState.map((exam) => {
@@ -2406,7 +2711,8 @@ function renderSemesterTimeline() {
 
   const today = new Date()
   const semesterStart = new Date('2026-05-25T00:00:00')
-  const midtermExam = midtermExamSchedule.find((exam) => exam.type !== 'quiz') || midtermExamSchedule[0]
+  const activeExamSchedule = activeAcademicSectionData.midtermExamSchedule || []
+  const midtermExam = activeExamSchedule.find((exam) => exam.type !== 'quiz') || activeExamSchedule[0]
   const midterm = midtermExam ? getLocalDate(midtermExam.date) : new Date('2026-07-22T00:00:00')
   const finals = new Date('2026-09-19T00:00:00')
   const todayPercent = getTimelinePercent(today, semesterStart, finals)
@@ -2469,7 +2775,7 @@ function renderSemesterTimeline() {
   }
 
   if (nextCheckpoint) {
-    const nextExam = midtermExamSchedule
+    const nextExam = activeExamSchedule
       .map((exam) => {
         const examDate = getLocalDate(exam.date)
         return {
@@ -2742,7 +3048,7 @@ function renderScheduleCalendarEvent(item, dayItems, bounds, now = new Date()) {
   const left = lane * width
   const status = getScheduleStatus(item, now)
   const typeLabel = item.type === 'round' ? 'Round' : 'Lecture'
-  const roomMarkup = item.room ? `<span>${escapeHtml(item.room)}</span>` : ''
+  const roomMarkup = item.room ? `<span class="schedule-calendar-event__room">${escapeHtml(item.room)}</span>` : ''
 
   return `
     <article
@@ -2762,9 +3068,10 @@ function renderScheduleCalendarEvent(item, dayItems, bounds, now = new Date()) {
 }
 
 function renderScheduleCalendar(now = new Date()) {
-  if (!courseSchedule.length) return '<p class="empty-state">No schedule items found.</p>'
+  const activeCourseSchedule = activeAcademicSectionData.courseSchedule || []
+  if (!activeCourseSchedule.length) return '<p class="empty-state">No weekly schedule has been added for this section yet.</p>'
 
-  const bounds = getCalendarBounds(courseSchedule)
+  const bounds = getCalendarBounds(activeCourseSchedule)
   const hourCount = bounds.hours.length - 1
 
   const dayHeaders = scheduleDayOrder.map((day) => {
@@ -2782,7 +3089,7 @@ function renderScheduleCalendar(now = new Date()) {
   `).join('')
 
   const dayColumns = scheduleDayOrder.map((day) => {
-    const dayItems = courseSchedule
+    const dayItems = activeCourseSchedule
       .filter((item) => item.day === day.day)
       .sort((a, b) => minutesFromTime(a.start) - minutesFromTime(b.start) || (a.room || '').localeCompare(b.room || ''))
     const isToday = day.day === now.getDay()
@@ -2813,12 +3120,13 @@ function renderSchedulePage() {
   if (!scheduleTodayTitle && !scheduleTodaySummary && !scheduleNextCard && !scheduleTodayList && !scheduleCalendarGrid && !scheduleList) return
 
   const now = new Date()
+  const activeCourseSchedule = activeAcademicSectionData.courseSchedule || []
   const todayName = now.toLocaleDateString('en-US', { weekday: 'long' })
-  const todayItems = courseSchedule
+  const todayItems = activeCourseSchedule
     .filter((item) => item.day === now.getDay())
     .sort((a, b) => minutesFromTime(a.start) - minutesFromTime(b.start) || (a.room || '').localeCompare(b.room || ''))
   const currentItem = todayItems.find((item) => getScheduleStatus(item, now) === 'now')
-  const nextItem = getNextScheduleItem(courseSchedule, now)
+  const nextItem = getNextScheduleItem(activeCourseSchedule, now)
 
   if (scheduleTodayTitle) scheduleTodayTitle.textContent = `Today is ${todayName}`
   if (scheduleTodaySummary) {
@@ -2828,7 +3136,9 @@ function renderSchedulePage() {
       const nextPrefix = nextItem.day === now.getDay() ? 'Next today' : `Next on ${nextItem.dayLabel}`
       scheduleTodaySummary.textContent = `${nextPrefix}: ${nextItem.title} at ${formatScheduleTime(nextItem.start, nextItem.end).split(' - ')[0]}.`
     } else {
-      scheduleTodaySummary.textContent = 'No upcoming university items found in the weekly schedule.'
+      scheduleTodaySummary.textContent = activeCourseSchedule.length
+        ? 'No upcoming university items found in the weekly schedule.'
+        : `No weekly ${activeAcademicSectionData.title} schedule has been added yet.`
     }
   }
 
@@ -2837,20 +3147,20 @@ function renderSchedulePage() {
       ? renderScheduleCard(currentItem, now, { status: 'now' })
       : nextItem
         ? `${renderScheduleCard(nextItem, now)}<p class="schedule-next-card__wait">${escapeHtml(formatWait(nextItem.waitMinutes))}</p>`
-        : '<p class="empty-state">No upcoming schedule item.</p>'
+        : `<p class="empty-state">No upcoming ${activeAcademicSectionData.title} schedule item.</p>`
   }
 
   if (scheduleTodayList) {
     scheduleTodayList.innerHTML = todayItems.length
       ? todayItems.map((item) => renderScheduleCard(item, now)).join('')
-      : '<p class="empty-state">No lectures or clinical rounds scheduled for today.</p>'
+      : `<p class="empty-state">No ${activeAcademicSectionData.title} lectures or clinical rounds scheduled for today.</p>`
   }
 
   if (scheduleCalendarGrid) scheduleCalendarGrid.innerHTML = renderScheduleCalendar(now)
 
   if (scheduleList) {
     scheduleList.innerHTML = scheduleDayOrder
-      .map((day) => renderScheduleGroup(courseSchedule, day, now))
+      .map((day) => renderScheduleGroup(activeCourseSchedule, day, now))
       .join('')
   }
 }
@@ -3049,28 +3359,6 @@ function toggleHistoryConditionalSections() {
   }
 }
 
-function renderWhatsappFeedback() {
-  if (document.querySelector('.whatsapp-feedback')) return
-
-  const button = document.createElement('a')
-  button.className = 'whatsapp-feedback'
-  button.href = whatsappFeedbackUrl
-  button.target = '_blank'
-  button.rel = 'noopener noreferrer'
-  button.setAttribute('aria-label', 'Send improvement recommendation on WhatsApp')
-  button.innerHTML = `
-    <span class="whatsapp-feedback__ring" aria-hidden="true"></span>
-    <span class="whatsapp-feedback__icon" aria-hidden="true">
-      <svg viewBox="0 0 32 32" role="img">
-        <path d="M16 3.2c-7.05 0-12.8 5.55-12.8 12.38 0 2.25.64 4.45 1.84 6.36L3.1 28.8l7.08-1.82A13.18 13.18 0 0 0 16 28c7.05 0 12.8-5.55 12.8-12.42S23.05 3.2 16 3.2Zm0 22.64c-1.86 0-3.68-.5-5.27-1.45l-.38-.23-4.2 1.08 1.13-4.02-.25-.4a9.93 9.93 0 0 1-1.62-5.24C5.41 9.98 10.16 5.36 16 5.36s10.59 4.62 10.59 10.22S21.84 25.84 16 25.84Zm5.82-7.67c-.32-.15-1.88-.9-2.17-1-.29-.1-.5-.15-.72.15-.21.31-.82 1-.99 1.2-.18.2-.36.23-.67.08-.32-.15-1.33-.47-2.53-1.51-.94-.81-1.57-1.81-1.75-2.12-.18-.31-.02-.47.13-.62.14-.13.32-.36.47-.54.16-.18.21-.31.32-.52.1-.2.05-.38-.03-.54-.08-.15-.72-1.67-.98-2.29-.26-.6-.52-.52-.72-.53h-.61c-.21 0-.54.08-.83.38-.29.31-1.09 1.04-1.09 2.53 0 1.49 1.12 2.93 1.28 3.14.16.2 2.2 3.25 5.34 4.56.75.31 1.33.5 1.78.64.75.23 1.43.2 1.97.12.6-.09 1.88-.74 2.14-1.46.27-.72.27-1.33.19-1.46-.08-.13-.29-.2-.61-.36Z" />
-      </svg>
-    </span>
-    <span class="whatsapp-feedback__label">Recommend</span>
-  `
-
-  document.body.append(button)
-}
-
 function getNewsCardId(card) {
   const title = card.querySelector('h2')?.textContent?.trim() || 'news'
   return card.dataset.newsId || `${card.dataset.course || 'all'}::${card.dataset.date || ''}::${title}`
@@ -3108,7 +3396,10 @@ function renderNewsNavBadge(cards = []) {
   })
 
   const seenCards = getNewsSeenCards()
-  const unreadCount = cards.filter((card) => !isNewsCardExpired(card) && !seenCards.has(getNewsCardId(card))).length
+  const unreadCount = cards.filter((card) => {
+    const cardSection = card.dataset.section || '401'
+    return cardSection === activeAcademicSection && !isNewsCardExpired(card) && !seenCards.has(getNewsCardId(card))
+  }).length
   if (!unreadCount) return
 
   newsNavLinks.forEach((link) => {
@@ -3129,7 +3420,7 @@ function markNewsCardsSeen(cards = []) {
   if (!cards.length) return
   const seenCards = getNewsSeenCards()
   cards
-    .filter((card) => !isNewsCardExpired(card))
+    .filter((card) => (card.dataset.section || '401') === activeAcademicSection && !isNewsCardExpired(card))
     .forEach((card) => seenCards.add(getNewsCardId(card)))
   try {
     localStorage.setItem(NEWS_SEEN_STORAGE_KEY, JSON.stringify([...seenCards]))
@@ -3138,9 +3429,38 @@ function markNewsCardsSeen(cards = []) {
   }
 }
 
+function ensureSectionNewsCard() {
+  if (!newsFeed || activeAcademicSection !== '402') return
+  if (newsFeed.querySelector('[data-news-id="402-tracker-launch"]')) return
+
+  const card = document.createElement('article')
+  card.className = 'update-panel update-panel--primary update-panel--wide'
+  card.dataset.newsId = '402-tracker-launch'
+  card.dataset.section = '402'
+  card.dataset.course = 'all'
+  card.dataset.date = '2026-07-06'
+  card.dataset.priority = '1'
+  card.dataset.persistent = 'true'
+  card.innerHTML = `
+    <div class="update-panel__top">
+      <p class="card__kicker">402</p>
+      <span class="status-pill status-pill--open">Now</span>
+    </div>
+    <h2>MED 402 tracker shell is live locally</h2>
+    <p>The 402 hub now tracks covered Weekly Reports topics. Midterm badges are hidden until the scope is confirmed, and MCQs are not active until answer-key-backed sources are added.</p>
+    <dl class="update-facts update-facts--three">
+      <div><dt>Source</dt><dd>Weekly Reports Weeks 1-6</dd></div>
+      <div><dt>Midterm</dt><dd>Not confirmed yet</dd></div>
+      <div><dt>MCQs</dt><dd>Pending answer keys</dd></div>
+    </dl>
+  `
+  newsFeed.prepend(card)
+}
+
 function renderNewsFilters() {
   if (!newsFeed) return
 
+  ensureSectionNewsCard()
   const course = newsCourseFilter?.value || 'all'
   const order = newsDateFilter?.value || 'newest'
   const now = new Date()
@@ -3156,8 +3476,9 @@ function renderNewsFilters() {
       return order === 'oldest' ? difference : -difference
     })
     .forEach((card) => {
+      const cardSection = card.dataset.section || '401'
       const expired = isNewsCardExpired(card, now)
-      card.hidden = expired || (course !== 'all' && card.dataset.course !== course)
+      card.hidden = cardSection !== activeAcademicSection || expired || (course !== 'all' && card.dataset.course !== course)
       const isUnseen = !expired && !seenCards.has(getNewsCardId(card))
       card.classList.toggle('update-panel--new', isUnseen)
       if (!prefersReducedMotion && isUnseen && !card.dataset.motionSeen) {
@@ -3184,15 +3505,38 @@ function renderNewsFilters() {
 }
 
 if (subjectList) {
-  renderSubjects()
-  if (activeSubjectCode) setActiveSubject(activeSubjectCode, 'open')
-  else clearSubjectDetail()
-  renderSemesterTimeline()
-  render401ExamSchedule()
+  const initialMode = getInitialSiteMode()
+  updateAcademicSectionUi()
+  syncModeToBody()
+  if (initialMode === '402') {
+    selectSiteSection('402', { scroll: false, hash: window.location.hash || '#tracker' })
+  } else if (initialMode === '401') {
+    selectSiteSection('401', { scroll: false, hash: window.location.hash || '#tracker' })
+  } else if (initialMode === 'tools') {
+    showToolsSection({ scroll: false })
+  } else {
+    showSelector()
+    renderSubjects()
+    clearSubjectDetail()
+    renderSemesterTimeline()
+    render401ExamSchedule()
+    renderSchedulePage()
+  }
   window.setInterval(render401ExamSchedule, 3600000)
 }
 
-document.addEventListener('click', handleQuizClick)
+document.addEventListener('click', (event) => {
+  const sectionButton = event.target.closest('[data-select-section]')
+  if (sectionButton) {
+    event.preventDefault()
+    selectSiteSection(sectionButton.dataset.selectSection)
+    return
+  }
+
+  handleQuizClick(event)
+})
+
+window.addEventListener('hashchange', handleLegacyHashRoute)
 
 
 function refreshTrackerFilters() {
@@ -3274,7 +3618,6 @@ if (copyHistorySummary && historySummaryText) {
   })
 }
 
-renderWhatsappFeedback()
 renderAssignmentProgress()
 renderSchedulePage()
 if (scheduleTodayTitle) {
@@ -4056,7 +4399,6 @@ function createAppleRipple(event) {
     '.update-panel',
     '.class-rep',
     '.schedule-card',
-    '.schedule-calendar-event',
     '.history-panel',
     '.history-summary',
     '.sidebar',

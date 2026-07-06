@@ -38,3 +38,7 @@ Production repo is `E:\website\app`; `E:\website` is only the parent folder. At 
 `C:\Users\ahmed\ObsidianVault` is a Windows junction to the real OneDrive Obsidian vault. Use this alias instead of typing the localized OneDrive Documents folder path, because some terminals render that folder name incorrectly. Do not rename the real OneDrive Documents folder. If the alias is missing, recreate it as a junction to the real `Obsidian Vault` folder under OneDrive Documents, then continue using the alias.
 
 Start website edits by checking branch and `git status`. GitHub Pages deploys from `main` only. Do not push or deploy unless Ahmed explicitly asks. If the worktree is dirty, inspect and explain the dirty files before editing. For narrow live pushes from a dirty repo, use a clean temporary worktree from `origin/main`.
+
+For browser verification, use Codex's in-app browser that Ahmed already has open. Do not use the installed Chrome, Edge, or other machine browsers unless Ahmed explicitly asks for that.
+
+Whenever local website changes are completed, include the relevant page link at the end of the final response and clearly state whether the changes are local-only or live.
