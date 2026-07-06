@@ -911,6 +911,7 @@ const scheduleList = document.getElementById('schedule-list')
 const sectionSelector = document.getElementById('section-selector')
 const trackerTitle = document.getElementById('tracker-title')
 const newsTitle = document.getElementById('news-title')
+const classRepsGrid = document.querySelector('.class-reps__grid')
 const scheduleTitle = document.getElementById('schedule-title')
 const bottomNavSwitch = document.querySelector('.bottom-nav__switch')
 
@@ -959,12 +960,87 @@ function updateAcademicSectionUi() {
 
   if (trackerTitle) trackerTitle.textContent = activeAcademicSectionData.title
   if (newsTitle) newsTitle.textContent = activeAcademicSectionData.newsTitle
+  renderClassRepresentatives()
   if (scheduleTitle) scheduleTitle.textContent = `${activeAcademicSectionData.title} schedule`
   if (trackerSearch) trackerSearch.placeholder = activeAcademicSectionData.trackerSearchPlaceholder
   if (examScheduleCards) {
     examScheduleCards.setAttribute('aria-label', `${activeAcademicSectionData.title} subject exam dates`)
   }
   if (bottomNavSwitch) bottomNavSwitch.textContent = activeAcademicSectionData.title
+}
+
+const classRepresentativesBySection = {
+  '401': [
+    {
+      name: 'Mohamed Kellawi',
+      role: 'Anaesthesia, Nutrition, Lab',
+      phone: '201151672255',
+      image: '/assets/mohamed-kellawi-avatar.jpg'
+    },
+    {
+      name: 'Mohamed Ragab',
+      role: 'Medicine'
+    },
+    {
+      name: 'Yousef El Rouby',
+      role: 'Surgery, Oncology'
+    }
+  ],
+  '402': [
+    {
+      name: 'Shahd Sedky',
+      role: 'MED 402 representative',
+      phone: '201014245576'
+    }
+  ]
+}
+
+function renderRepresentativeAvatar(rep) {
+  if (rep.image) {
+    return `<img src="${escapeHtml(rep.image)}" alt="" />`
+  }
+
+  return `
+    <svg viewBox="0 0 48 48" role="img">
+      <path d="M24 24.6c5.15 0 9.33-4.18 9.33-9.33S29.15 5.94 24 5.94s-9.33 4.18-9.33 9.33S18.85 24.6 24 24.6Zm0 4.32c-7.88 0-14.64 4.82-17.5 11.68-.42 1 .31 2.1 1.39 2.1h32.22c1.08 0 1.81-1.1 1.39-2.1C38.64 33.74 31.88 28.92 24 28.92Z" />
+    </svg>
+  `
+}
+
+function renderClassRepresentatives() {
+  if (!classRepsGrid) return
+
+  const reps = classRepresentativesBySection[activeAcademicSection] || classRepresentativesBySection['401']
+  classRepsGrid.innerHTML = reps.map((rep) => {
+    const avatar = renderRepresentativeAvatar(rep)
+    if (rep.phone) {
+      return `
+        <a
+          class="class-rep class-rep--link"
+          href="https://wa.me/${escapeHtml(rep.phone)}"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Contact ${escapeHtml(rep.name)} on WhatsApp"
+        >
+          <span class="class-rep__avatar" aria-hidden="true">
+            ${avatar}
+          </span>
+          <strong>${escapeHtml(rep.name)}</strong>
+          <small>${escapeHtml(rep.role)}</small>
+        </a>
+      `
+    }
+
+    return `
+      <article class="class-rep" aria-label="${escapeHtml(rep.name)}, ${escapeHtml(rep.role)}">
+        <span class="class-rep__avatar" aria-hidden="true">
+          ${avatar}
+        </span>
+        <strong>${escapeHtml(rep.name)}</strong>
+        <small>${escapeHtml(rep.role)}</small>
+      </article>
+    `
+  }).join('')
 }
 
 function resetActiveSubjectForSection(preferredCode = '') {
@@ -1063,7 +1139,7 @@ function getScopedProgressTopics(subject) {
 }
 
 function isTopicMidtermScopeConfirmed(topic) {
-  return activeAcademicSection !== '402' && !!topic.midtermScope
+  return !!topic.midtermScope
 }
 
 function getTopicUnitTotal(topics) {
