@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&display=swap" rel="stylesheet" />
   <meta name="theme-color" content="#315f72" />
-  <link rel="stylesheet" href="/src/style.css?v=20260706-402-midterm-unconfirmed" />
+  <link rel="stylesheet" href="/src/style.css?v=20260707-local-undo" />
 </head>
 <body>
   <main>
@@ -89,6 +89,30 @@
             <b>Finals</b>
             <time datetime="2026-09-19">Sep 19, 2026</time>
           </span>
+        </div>
+      </div>
+
+      <!-- Mini Dashboard -->
+      <div class="mini-dashboard" id="mini-dashboard" aria-label="Section dashboard">
+        <div class="dashboard-card" id="dash-next-exam">
+          <span class="dash-card__label">Next Exam</span>
+          <strong class="dash-card__value">-</strong>
+          <span class="dash-card__sub">-</span>
+        </div>
+        <div class="dashboard-card" id="dash-latest-update">
+          <span class="dash-card__label">Latest Update</span>
+          <strong class="dash-card__value">-</strong>
+          <span class="dash-card__sub">-</span>
+        </div>
+        <div class="dashboard-card" id="dash-covered-topics">
+          <span class="dash-card__label">Covered Topics</span>
+          <strong class="dash-card__value">-</strong>
+          <span class="dash-card__sub">-</span>
+        </div>
+        <div class="dashboard-card" id="dash-mcqs-available">
+          <span class="dash-card__label">MCQs Available</span>
+          <strong class="dash-card__value">-</strong>
+          <span class="dash-card__sub">-</span>
         </div>
       </div>
 
@@ -191,7 +215,7 @@
       <div class="updates-board" id="news-feed" aria-live="polite">
       <article class="update-panel update-panel--primary update-panel--wide" data-course="all" data-date="2026-06-25" data-priority="1">
         <div class="update-panel__top">
-          <p class="card__kicker">Smart Learning</p>
+          <p class="card__kicker">Smart Learning</p><span class="news-tag news-tag--assignment">Assignment</span>
           <span class="status-pill status-pill--open">Jun 25</span>
         </div>
         <h2>Smart Learning group instructions</h2>
@@ -231,7 +255,7 @@
           </div>
         </div>
         <div class="update-panel__top">
-          <p class="card__kicker">Nutrition</p>
+          <p class="card__kicker">Nutrition</p><span class="news-tag news-tag--exam">Exam</span>
           <span class="status-pill status-pill--exam">8/7</span>
         </div>
         <h2 dir="rtl">تأكيد كويز Nutrition</h2>
@@ -275,7 +299,7 @@
 
       <article class="update-panel update-panel--primary update-panel--wide" data-course="SUR401-1" data-date="2026-06-25" data-priority="1" data-persistent="true">
         <div class="update-panel__top">
-          <p class="card__kicker">SUR401-1</p>
+          <p class="card__kicker">SUR401-1</p><span class="news-tag news-tag--schedule">Schedule</span>
           <span class="status-pill status-pill--due">4 marks</span>
         </div>
         <h2>Incision Academy reminder</h2>
@@ -310,7 +334,7 @@
 
       <article class="update-panel update-panel--compact" data-course="Anaesthesia" data-date="2026-06-16" data-persistent="true">
         <div class="update-panel__top">
-          <p class="card__kicker">Anaesthesia</p>
+          <p class="card__kicker">Anaesthesia</p><span class="news-tag news-tag--resource">Resource</span>
           <span class="status-pill status-pill--open">Jun 16</span>
         </div>
         <h2>Anaesthesia assessment</h2>
@@ -341,7 +365,7 @@
           </div>
         </div>
         <div class="update-panel__top">
-          <p class="card__kicker">Required assignment</p>
+          <p class="card__kicker">Required assignment</p><span class="news-tag news-tag--assignment">Assignment</span>
           <span class="status-pill status-pill--due">Due Sep 5</span>
         </div>
         <h2>LAB401 Clinical Pathology Research</h2>
@@ -395,7 +419,7 @@
 
       <article class="update-panel update-panel--compact" data-course="SUR401-2" data-date="2026-06-16" data-persistent="true">
         <div class="update-panel__top">
-          <p class="card__kicker">SUR401-2</p>
+          <p class="card__kicker">SUR401-2</p><span class="news-tag news-tag--resource">Resource</span>
           <span class="status-pill status-pill--open">Jun 16</span>
         </div>
         <h2>SUR401-2 assessment</h2>
@@ -930,12 +954,42 @@
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.113.553 4.094 1.522 5.815L.057 23.25a.75.75 0 0 0 .916.919l5.562-1.453A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.699 9.699 0 0 1-4.953-1.355l-.355-.21-3.677.961.984-3.595-.228-.37A9.699 9.699 0 0 1 2.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
               Message on WhatsApp
             </a>
-            <a href="https://www.youtube.com/@MediFuntomy" class="secondary-btn" target="_blank">▶ Watch my work first</a>
+            <a href="https://www.youtube.com/@MediFuntomy" class="secondary-btn" target="_blank" rel="noopener noreferrer">YouTube</a>
+            <a href="https://www.instagram.com/ahmed_badwi_c/?hl=ar" class="secondary-btn" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href="https://www.tiktok.com/@ahed_gtr" class="secondary-btn" target="_blank" rel="noopener noreferrer">TikTok</a>
           </div>
           <p class="booking-times">Available evenings · Cairo time (EET)</p>
         </div>
       </div>
     </section>
+
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <p class="site-footer__brand">MUST Hub</p>
+        <p class="site-footer__desc">Made to help students track lectures, schedules, resources, and clinical tools.</p>
+        <div class="site-footer__links">
+          <span>Built by Ahmed Sayed</span>
+          <span class="site-footer__divider">·</span>
+          <button type="button" class="site-footer__link-btn" data-select-section="work">Work with me</button>
+          <span class="site-footer__divider">·</span>
+          <a href="https://wa.me/201030469634?text=Hi%20Ahmed%2C%20I%20have%20feedback%20about%20MUST%20Hub." class="site-footer__link" target="_blank" rel="noopener noreferrer">Feedback</a>
+        </div>
+        <div class="site-footer__socials" aria-label="Ahmed social media">
+          <a href="https://www.youtube.com/@MediFuntomy" class="site-footer__social-link site-footer__social-link--youtube" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="5.5" width="19" height="13" rx="4" fill="#ff0033"/><path d="M10 9.1v5.8l5.2-2.9L10 9.1z" fill="#fff"/></svg>
+            <span class="sr-only">YouTube</span>
+          </a>
+          <a href="https://www.instagram.com/ahmed_badwi_c/?hl=ar" class="site-footer__social-link site-footer__social-link--instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="footer-instagram-gradient" x1="4" y1="21" x2="20" y2="3" gradientUnits="userSpaceOnUse"><stop stop-color="#feda75"/><stop offset="0.28" stop-color="#fa7e1e"/><stop offset="0.5" stop-color="#d62976"/><stop offset="0.72" stop-color="#962fbf"/><stop offset="1" stop-color="#4f5bd5"/></linearGradient></defs><rect x="3" y="3" width="18" height="18" rx="5" fill="url(#footer-instagram-gradient)"/><rect x="7.4" y="7.4" width="9.2" height="9.2" rx="3" fill="none" stroke="#fff" stroke-width="1.8"/><circle cx="12" cy="12" r="2.3" fill="none" stroke="#fff" stroke-width="1.8"/><circle cx="16.7" cy="7.7" r="1.1" fill="#fff"/></svg>
+            <span class="sr-only">Instagram</span>
+          </a>
+          <a href="https://www.tiktok.com/@ahed_gtr" class="site-footer__social-link site-footer__social-link--tiktok" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.7 4.2h2.3c.2 1.7 1.2 3 3.1 3.5v2.5c-1.3-.1-2.4-.5-3.3-1.2v5.9c0 3.1-2 5.1-5 5.1-2.8 0-4.7-1.8-4.7-4.3 0-2.6 2-4.4 4.9-4.4.3 0 .6 0 .9.1v2.6c-.3-.1-.6-.1-.9-.1-1.2 0-2 .7-2 1.7s.8 1.8 1.9 1.8c1.3 0 2.1-.8 2.1-2.5V4.2h.7z" fill="#25f4ee"/><path d="M15.7 5.2H18c.2 1.7 1.2 3 3.1 3.5v2.5c-1.3-.1-2.4-.5-3.3-1.2v5.9c0 3.1-2 5.1-5 5.1-2.8 0-4.7-1.8-4.7-4.3 0-2.6 2-4.4 4.9-4.4.3 0 .6 0 .9.1v2.6c-.3-.1-.6-.1-.9-.1-1.2 0-2 .7-2 1.7s.8 1.8 1.9 1.8c1.3 0 2.1-.8 2.1-2.5V5.2h.7z" fill="#fe2c55"/><path d="M15.2 4.7h2.3c.2 1.7 1.2 3 3.1 3.5v2.5c-1.3-.1-2.4-.5-3.3-1.2v5.9c0 3.1-2 5.1-5 5.1-2.8 0-4.7-1.8-4.7-4.3 0-2.6 2-4.4 4.9-4.4.3 0 .6 0 .9.1v2.6c-.3-.1-.6-.1-.9-.1-1.2 0-2 .7-2 1.7s.8 1.8 1.9 1.8c1.3 0 2.1-.8 2.1-2.5V4.7h.7z" fill="#fff"/></svg>
+            <span class="sr-only">TikTok</span>
+          </a>
+        </div>
+      </div>
+    </footer>
 
   </main>
 
@@ -953,10 +1007,6 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="4"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>
         <span>Schedule</span>
       </a>
-      <a href="#work" data-section-nav="work" aria-label="Work with me">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6V5a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v1"/><rect x="3" y="6" width="18" height="14" rx="4"/><path d="M3 12h18"/></svg>
-        <span>Work</span>
-      </a>
       <button class="bottom-nav__switch" type="button" data-select-section="selector" aria-label="Switch section">401</button>
     </nav>
   </div>
@@ -969,7 +1019,7 @@
       }
     }
   </script>
-  <script type="module" src="/src/main.js?v=20260706-402-rep"></script>
+  <script type="module" src="/src/main.js?v=20260707-local-undo"></script>
   <script defer src="/pwa.js?v=20260701-pwa"></script>
 </body>
 </html>

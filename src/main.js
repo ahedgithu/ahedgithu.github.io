@@ -1,4 +1,4 @@
-import confetti from 'canvas-confetti'
+﻿import confetti from 'canvas-confetti'
 
 let subjects = [
   {
@@ -66,7 +66,6 @@ let subjects = [
       },
       {
         label: 'Tongue',
-        state: 'remaining',
         art: 2,
         midtermScope: true,
         midtermScopeNote: 'SUR 401-1 scope: Tongue. Source: Dr. Abu Alata PDFs and lecture recordings.'
@@ -88,9 +87,7 @@ let subjects = [
       {
         label: 'Appendix',
         state: 'remaining',
-        art: 7,
-        midtermScope: true,
-        midtermScopeNote: "SUR 401-1 scope: Appendix. Source: Dr. Hisham's book and lecture recordings."
+        art: 7
       },
       { label: 'Biliary tract', state: 'remaining', art: 0 },
       {
@@ -114,7 +111,7 @@ let subjects = [
     code: 'SUR-2',
     name: 'Surgery 2',
     totalCount: 6,
-    examNote: 'Midterm starts Jul 18, 2026. Exact SUR-2 schedule pending.',
+    examNote: 'Finals only (no midterm exam).',
     topics: [
       {
         label: 'Chest trauma / trauma up to sternal fractures',
@@ -944,6 +941,7 @@ function getInitialSiteMode() {
   if (initialParams.get('section') === '402') return '402'
   if (initialParams.get('section') === '401') return '401'
   if (initialParams.get('section') === 'tools' || hash === 'history') return 'tools'
+  if (initialParams.get('section') === 'work' || hash === 'work') return 'work'
   if (hash || initialParams.get('tracker') === '1') return '401'
   return 'selector'
 }
@@ -967,6 +965,106 @@ function updateAcademicSectionUi() {
     examScheduleCards.setAttribute('aria-label', `${activeAcademicSectionData.title} subject exam dates`)
   }
   if (bottomNavSwitch) bottomNavSwitch.textContent = activeAcademicSectionData.title
+
+  updateMiniDashboard()
+}
+
+function getActiveSectionQuizStats() {
+  const sectionQuizzes = mcqQuizzesBySection[activeAcademicSection] || {}
+  let activeQuizzesCount = 0
+  let totalMcqsCount = 0
+
+  for (const topicLabel in sectionQuizzes) {
+    const raw = sectionQuizzes[topicLabel]
+    if (!raw) continue
+
+    let mcqCount = 0
+    if (raw.sources?.length) {
+      mcqCount = raw.sources.reduce((total, source) => total + (source.mcqs?.length || 0), 0)
+    } else if (Array.isArray(raw)) {
+      mcqCount = raw.length
+    }
+
+    if (mcqCount > 0) {
+      activeQuizzesCount++
+      totalMcqsCount += mcqCount
+    }
+  }
+
+  return {
+    quizzesCount: activeQuizzesCount,
+    mcqsCount: totalMcqsCount
+  }
+}
+
+function updateMiniDashboard() {
+  const dashNextExamVal = document.querySelector('#dash-next-exam .dash-card__value')
+  const dashNextExamSub = document.querySelector('#dash-next-exam .dash-card__sub')
+  const dashLatestUpdateVal = document.querySelector('#dash-latest-update .dash-card__value')
+  const dashLatestUpdateSub = document.querySelector('#dash-latest-update .dash-card__sub')
+  const dashCoveredTopicsVal = document.querySelector('#dash-covered-topics .dash-card__value')
+  const dashCoveredTopicsSub = document.querySelector('#dash-covered-topics .dash-card__sub')
+  const dashMcqsVal = document.querySelector('#dash-mcqs-available .dash-card__value')
+  const dashMcqsSub = document.querySelector('#dash-mcqs-available .dash-card__sub')
+
+  if (!dashNextExamVal) return
+
+  // 1. Next Exam
+  const activeExamSchedule = activeAcademicSectionData.midtermExamSchedule || []
+  const today = new Date()
+  const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate())
+
+  const scheduleWithState = activeExamSchedule.map((exam) => {
+    const examDate = getLocalDate(exam.date)
+    const daysUntil = Math.ceil((examDate - todayStart) / 86400000)
+    return { ...exam, examDate, daysUntil }
+  })
+  const nextExam = scheduleWithState.find((exam) => exam.daysUntil >= 0)
+
+  if (nextExam) {
+    dashNextExamVal.textContent = nextExam.code
+    dashNextExamSub.textContent = `${getExamCountdownText(nextExam.daysUntil)} (${formatExamDate(nextExam.date)})`
+  } else {
+    dashNextExamVal.textContent = 'None'
+    dashNextExamSub.textContent = 'Midterms complete'
+  }
+
+  // 2. Latest Update
+  const activeSectionNews = Array.from(document.querySelectorAll('.update-panel')).filter(card => {
+    const cardSection = card.dataset.section || '401'
+    return cardSection === activeAcademicSection
+  })
+
+  if (activeSectionNews.length) {
+    activeSectionNews.sort((a, b) => b.dataset.date.localeCompare(a.dataset.date))
+    const latestCard = activeSectionNews[0]
+    const titleText = latestCard.querySelector('h2')?.textContent || 'New Update'
+    dashLatestUpdateVal.textContent = titleText.length > 18 ? titleText.substring(0, 16) + '...' : titleText
+    const datePill = latestCard.querySelector('.status-pill')?.textContent || latestCard.dataset.date
+    dashLatestUpdateSub.textContent = datePill
+  } else {
+    dashLatestUpdateVal.textContent = 'None'
+    dashLatestUpdateSub.textContent = 'No recent updates'
+  }
+
+  // 3. Covered Topics
+  let totalTopics = 0
+  let coveredTopics = 0
+  subjects.forEach(subject => {
+    subject.topics.forEach(topic => {
+      totalTopics++
+      if (topic.state === 'taken') {
+        coveredTopics++
+      }
+    })
+  })
+  dashCoveredTopicsVal.textContent = `${coveredTopics} / ${totalTopics}`
+  dashCoveredTopicsSub.textContent = 'taken in university'
+
+  // 4. MCQs Available
+  const stats = getActiveSectionQuizStats()
+  dashMcqsVal.textContent = `${stats.quizzesCount} Quizzes`
+  dashMcqsSub.textContent = `${stats.mcqsCount} questions`
 }
 
 const classRepresentativesBySection = {
@@ -1108,11 +1206,31 @@ function showToolsSection(options = {}) {
   }
 }
 
+function showWorkSection(options = {}) {
+  activeSiteMode = 'work'
+  syncModeToBody()
+  try {
+    localStorage.setItem('selectedAcademicSection', 'work')
+  } catch {
+    // Section choice should not depend on browser storage.
+  }
+  const url = new URL(window.location.href)
+  url.searchParams.set('section', 'work')
+  url.hash = 'work'
+  window.history.replaceState({}, '', url)
+  const workRoot = document.getElementById('work')
+  if (workRoot && options.scroll !== false) {
+    workRoot.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' })
+  }
+}
+
 function selectSiteSection(sectionId, options = {}) {
   if (sectionId === 'selector') {
     showSelector()
   } else if (sectionId === 'tools') {
     showToolsSection(options)
+  } else if (sectionId === 'work') {
+    showWorkSection(options)
   } else {
     showAcademicSection(sectionId, options)
   }
@@ -1121,9 +1239,15 @@ function selectSiteSection(sectionId, options = {}) {
 function handleLegacyHashRoute() {
   const hash = window.location.hash.replace('#', '')
   if (activeSiteMode === 'selector' && ['tracker', 'news', 'schedule', 'work'].includes(hash)) {
-    showAcademicSection('401', { hash: `#${hash}`, scroll: false })
+    if (hash === 'work') {
+      showWorkSection({ scroll: false })
+    } else {
+      showAcademicSection('401', { hash: `#${hash}`, scroll: false })
+    }
   } else if (hash === 'history' && activeSiteMode !== 'tools') {
     showToolsSection({ scroll: false })
+  } else if (hash === 'work' && activeSiteMode !== 'work') {
+    showWorkSection({ scroll: false })
   }
 }
 
@@ -1153,6 +1277,10 @@ function getCoveredCount(subject, topics = subject.topics) {
 }
 
 function getProgressTotal(subject) {
+  const { scope } = getTrackerFilters()
+  if (scope === 'midterm') {
+    return getTopicUnitTotal(getScopedProgressTopics(subject))
+  }
   return getTopicUnitTotal(getScopedProgressTopics(subject)) || subject.totalCount || 0
 }
 
@@ -1181,7 +1309,7 @@ function getSubjectSummary(subject) {
     midtermCount ? `${midtermCount} midterm scope` : ''
   ].filter(Boolean)
 
-  return parts.join(' · ')
+  return parts.join(' Â· ')
 }
 
 function getTopicUpdateId(subject, topic) {
@@ -1369,7 +1497,9 @@ function getClinicalTopics(subject) {
 }
 
 function getFilteredClinicalTopics(subject) {
-  const { query, status } = getTrackerFilters()
+  const { query, status, scope } = getTrackerFilters()
+
+  if (scope === 'midterm') return []
 
   return getClinicalTopics(subject).filter((topic) => {
     const matchesStatus = status === 'all' || topic.state === status
@@ -1382,8 +1512,28 @@ function getFilteredClinicalTopics(subject) {
 function getFilteredSubjects() {
   const { query, status, scope } = getTrackerFilters()
 
+  const activeExamSchedule = activeAcademicSectionData?.midtermExamSchedule || []
+  const subjectCodesInMidterm = activeExamSchedule
+    .filter(exam => exam.type !== 'quiz')
+    .map(exam => exam.subjectCode)
+
   return subjects.filter((subject) => {
     if (!query && status === 'all' && scope === 'all') return true
+
+    if (scope === 'midterm') {
+      const isInMidtermSchedule = subjectCodesInMidterm.includes(subject.code)
+      const hasMidtermTopics = subject.topics.some(topic => topic.midtermScope)
+      if (!isInMidtermSchedule && !hasMidtermTopics) return false
+
+      if (query || status !== 'all') {
+        const matchesQuery = !query || `${subject.code} ${subject.name}`.toLowerCase().includes(query)
+        const hasMatchingTopics = getFilteredTopics(subject).length > 0
+        return matchesQuery || hasMatchingTopics
+      }
+
+      return true
+    }
+
     return getFilteredTopics(subject).length > 0 || getFilteredClinicalTopics(subject).length > 0
   })
 }
@@ -1402,26 +1552,54 @@ function getResourceItems(topic) {
   return [...driveItems, ...otherLectureItems, ...pdfItems, ...audioItem]
 }
 
+function getCompactResourceLabel(item) {
+  const label = (item.label || '').toLowerCase()
+  const url = (item.url || '').toLowerCase()
+
+  if (item.type === 'audio') return 'Audio'
+  if (url.includes('youtube.com') || url.includes('youtu.be')) return 'YouTube'
+
+  if (label.includes('board') || label.includes('image') || label.includes('whiteboard')) {
+    return 'Board image'
+  }
+  if (label.includes('ppt') || label.includes('presentation') || label.includes('powerpoint')) {
+    return 'PPT'
+  }
+  if (item.type === 'pdf' || label.includes('pdf') || label.includes('booklet') || label.includes('summary') || label.includes('compact') || url.includes('.pdf')) {
+    return 'PDF'
+  }
+
+  if (item.type === 'drive-group') return 'Drive'
+  if (item.type === 'lecture') return 'Lecture'
+
+  return item.label || 'Resource'
+}
+
 function renderResourceItem(item) {
+  const compactLabel = getCompactResourceLabel(item)
+  const tooltip = item.title || item.label || compactLabel
+
   if (item.type === 'audio') {
     return `
-      <a class="topic-resource topic-resource--audio" href="${item.url}" target="_blank" rel="noopener noreferrer" aria-label="Open lecture record in Google Drive">
+      <a class="topic-resource topic-resource--audio" href="${item.url}" target="_blank" rel="noopener noreferrer" aria-label="Open lecture record in Google Drive" title="${escapeHtml(tooltip)}">
         <img class="topic-resource__play-icon" src="${PLAY_ICON_URL}" alt="" loading="lazy">
+        <span>${escapeHtml(compactLabel)}</span>
       </a>
     `
   }
 
   if (item.type === 'drive-group') {
     const links = item.items.map((driveItem) => `
-      <a href="${driveItem.url}" target="_blank" rel="noopener noreferrer">
-        ${escapeHtml(driveItem.label || 'Lecture source')}
+      <a href="${driveItem.url}" target="_blank" rel="noopener noreferrer" title="${escapeHtml(driveItem.label || '')}">
+        ${escapeHtml(getCompactResourceLabel(driveItem))}
       </a>
     `).join('')
 
     return `
       <details class="topic-resource-menu">
-        <summary class="topic-resource topic-resource--drive" aria-label="Open Drive resources">
+        <summary class="topic-resource topic-resource--drive" aria-label="Open Drive resources" title="${escapeHtml(tooltip)}">
           <img class="topic-resource__drive-icon" src="${DRIVE_ICON_URL}" alt="" loading="lazy">
+          <span>${escapeHtml(compactLabel)}</span>
         </summary>
         <span class="topic-resource-menu__links">
           ${links}
@@ -1434,21 +1612,19 @@ function renderResourceItem(item) {
     const title = item.title || item.label || 'PDF preview'
     const downloadUrl = item.downloadUrl || item.url
     return `
-      <button class="topic-resource topic-resource--pdf topic-resource--pdf-preview" type="button" data-pdf-preview="${escapeHtml(item.url)}" data-pdf-title="${escapeHtml(title)}" data-pdf-download="${escapeHtml(downloadUrl)}">
-        ${escapeHtml(item.label || 'Preview PDF')}
+      <button class="topic-resource topic-resource--pdf topic-resource--pdf-preview" type="button" data-pdf-preview="${escapeHtml(item.url)}" data-pdf-title="${escapeHtml(title)}" data-pdf-download="${escapeHtml(downloadUrl)}" title="${escapeHtml(tooltip)}">
+        ${escapeHtml(compactLabel)}
       </button>
     `
   }
 
   const isDriveLecture = item.type === 'lecture' && isDriveUrl(item.url)
-  const content = isDriveLecture
-    ? `<img class="topic-resource__drive-icon" src="${DRIVE_ICON_URL}" alt="" loading="lazy"><span class="sr-only">${escapeHtml(item.label || 'Lecture source')}</span>`
-    : escapeHtml(item.label)
-  const label = isDriveLecture ? ` aria-label="Open ${escapeHtml(item.label || 'lecture source')} in Google Drive"` : ''
+  const labelAttr = isDriveLecture ? ` aria-label="Open ${escapeHtml(item.label || 'lecture source')} in Google Drive"` : ''
 
   return `
-    <a class="topic-resource topic-resource--${item.type}${isDriveLecture ? ' topic-resource--drive' : ''}" href="${item.url}" target="_blank" rel="noopener noreferrer"${item.download ? ' download' : ''}${label}>
-      ${content}
+    <a class="topic-resource topic-resource--${item.type}${isDriveLecture ? ' topic-resource--drive' : ''}" href="${item.url}" target="_blank" rel="noopener noreferrer"${item.download ? ' download' : ''}${labelAttr} title="${escapeHtml(tooltip)}">
+      ${isDriveLecture ? `<img class="topic-resource__drive-icon" src="${DRIVE_ICON_URL}" alt="" loading="lazy">` : ''}
+      <span>${escapeHtml(compactLabel)}</span>
     </a>
   `
 }
@@ -1539,6 +1715,44 @@ function renderTopicGroupHeading(groupTitle, globalIndex) {
   `
 }
 
+function renderTopicBadges(topic) {
+  const badges = []
+
+  // 1 & 2 & 3. Covered / Partial / Remaining
+  const isCovered = topic.state === 'taken'
+  const isPartial = topic.state === 'partial' ||
+                    (topic.note && (topic.note.toLowerCase().includes('started') || topic.note.toLowerCase().includes('incomplete')))
+
+  if (isCovered) {
+    badges.push('<span class="t-badge t-badge--covered">Covered</span>')
+  } else if (isPartial) {
+    badges.push('<span class="t-badge t-badge--partial">Partial</span>')
+  } else {
+    badges.push('<span class="t-badge t-badge--remaining">Remaining</span>')
+  }
+
+  // 4. Midterm
+  if (topic.midtermScope) {
+    badges.push('<span class="t-badge t-badge--midterm">Midterm</span>')
+  }
+
+  // 5. Lecture
+  const hasLecture = (topic.lectureUrls && topic.lectureUrls.length > 0) ||
+                     (topic.resources && topic.resources.length > 0) ||
+                     topic.audioUrl || topic.videoUrl
+  if (hasLecture) {
+    badges.push('<span class="t-badge t-badge--lecture">Lecture</span>')
+  }
+
+  // 6. MCQs
+  const quizSources = getQuizSources(topic.mcqTopicKey || topic.label)
+  if (quizSources.length > 0) {
+    badges.push('<span class="t-badge t-badge--mcq">MCQs</span>')
+  }
+
+  return `<div class="topic-item__badges">${badges.join('')}</div>`
+}
+
 function renderTopicCard(subject, topic, index, collection = subject.topics) {
   const art = Number.isFinite(topic.art) ? topic.art : index % 16
   const tileX = art % 4
@@ -1546,10 +1760,8 @@ function renderTopicCard(subject, topic, index, collection = subject.topics) {
   const topicPosition = collection.indexOf(topic)
   const displayNum = String((topicPosition >= 0 ? topicPosition : index) + 1).padStart(2, '0')
   const midtermScopeConfirmed = isTopicMidtermScopeConfirmed(topic)
-  const midtermBadge = midtermScopeConfirmed ? '<span class="topic-item__scope" dir="rtl">داخل في الميد</span>' : ''
   const midtermNote = midtermScopeConfirmed && topic.midtermScopeNote ? `<span class="topic-item__midterm-note">${topic.midtermScopeNote}</span>` : ''
   const roundMeta = [topic.roundDate, topic.room].filter(Boolean).join(' - ')
-  const stateBadge = topic.state === 'taken-in-university' ? '' : `<span class="topic-item__state topic-item__state--${topic.state}">${stateLabels[topic.state] || topic.state}</span>`
   const hasRecentUpdate = isRecentTopicUpdate(topic)
   const newBadge = hasRecentUpdate ? `
     <span class="topic-item__new" aria-label="Newly updated topic">
@@ -1557,6 +1769,7 @@ function renderTopicCard(subject, topic, index, collection = subject.topics) {
       New
     </span>
   ` : ''
+  const badges = renderTopicBadges(topic)
 
   return `
     <li class="topic-item topic-item--${topic.state}${hasRecentUpdate ? ' topic-item--has-new' : ''}" style="--delay: ${getFastStaggerDelay(index)}; --tile-x: ${tileX}; --tile-y: ${tileY};">
@@ -1565,8 +1778,7 @@ function renderTopicCard(subject, topic, index, collection = subject.topics) {
       <span class="topic-item__index">${displayNum}</span>
       <span class="topic-item__body">
         <span class="topic-item__label">${topic.label}</span>
-        ${midtermBadge}
-        ${stateBadge}
+        ${badges}
         ${midtermNote}
         ${roundMeta ? `<span class="topic-item__note">${escapeHtml(roundMeta)}</span>` : ''}
         ${renderResourceLinks(topic)}
@@ -1658,7 +1870,12 @@ function renderSubjectTrackList(subject) {
     })
   }
 
-  return renderTopicCards(subject, getFilteredTopics(subject))
+  const { scope } = getTrackerFilters()
+  const emptyMessage = (scope === 'midterm' && subject.code === 'MED-1')
+    ? 'Ø§Ù„ØªØ­Ø¯ÙŠØ¯Ø§Øª Ù„Ø³Ù‡ Ù…Ù†Ø²Ù„ØªØ´'
+    : 'No topics match the current filters.'
+
+  return renderTopicCards(subject, getFilteredTopics(subject), { emptyMessage })
 }
 
 function getSubjectGridColumnCount() {
@@ -2892,13 +3109,13 @@ function renderAssignmentProgress() {
 
     if (daysLabel) {
       if (isArabic && daysLeft > 1) {
-        daysLabel.textContent = `${daysLeft} أيام متبقية`
+        daysLabel.textContent = `${daysLeft} Ø£ÙŠØ§Ù… Ù…ØªØ¨Ù‚ÙŠØ©`
       } else if (isArabic && daysLeft === 1) {
-        daysLabel.textContent = 'يوم واحد متبق'
+        daysLabel.textContent = 'ÙŠÙˆÙ… ÙˆØ§Ø­Ø¯ Ù…ØªØ¨Ù‚'
       } else if (isArabic && daysLeft === 0) {
-        daysLabel.textContent = 'الموعد اليوم'
+        daysLabel.textContent = 'Ø§Ù„Ù…ÙˆØ¹Ø¯ Ø§Ù„ÙŠÙˆÙ…'
       } else if (isArabic) {
-        daysLabel.textContent = 'انتهى الموعد'
+        daysLabel.textContent = 'Ø§Ù†ØªÙ‡Ù‰ Ø§Ù„Ù…ÙˆØ¹Ø¯'
       } else if (daysLeft > 1) {
         daysLabel.textContent = `${daysLeft} days left`
       } else if (daysLeft === 1) {
@@ -2912,7 +3129,7 @@ function renderAssignmentProgress() {
 
     if (caption) {
       caption.textContent = isArabic
-        ? `الموعد ${dueLabel} - متبقي ${Math.round(displayPercent)}% من الوقت.`
+        ? `Ø§Ù„Ù…ÙˆØ¹Ø¯ ${dueLabel} - Ù…ØªØ¨Ù‚ÙŠ ${Math.round(displayPercent)}% Ù…Ù† Ø§Ù„ÙˆÙ‚Øª.`
         : `Due ${dueLabel} - ${Math.round(percent)}% of the window has passed.`
     }
   })
@@ -3544,6 +3761,45 @@ function renderNewsFilters() {
   const seenCards = getNewsSeenCards()
   renderNewsNavBadge(cards)
 
+  // Find or create pinned container
+  let pinnedContainer = newsFeed.querySelector('.news-group--pinned')
+  if (!pinnedContainer) {
+    pinnedContainer = document.createElement('div')
+    pinnedContainer.className = 'news-group news-group--pinned'
+    pinnedContainer.innerHTML = '<h3 class="news-group-title">ðŸ“Œ Pinned & Important</h3><div class="news-group-list"></div>'
+    newsFeed.append(pinnedContainer)
+  }
+  const pinnedList = pinnedContainer.querySelector('.news-group-list')
+  pinnedList.innerHTML = ''
+
+  // Find or create older container
+  let olderContainer = newsFeed.querySelector('.news-group--older')
+  if (!olderContainer) {
+    olderContainer = document.createElement('div')
+    olderContainer.className = 'news-group news-group--older collapsed'
+    olderContainer.innerHTML = `
+      <div class="news-group-header">
+        <button class="news-older-toggle" type="button" id="news-older-toggle">
+          <span>Show Older Updates</span>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+      </div>
+      <div class="news-group-list"></div>
+    `
+    newsFeed.append(olderContainer)
+
+    const toggleBtn = olderContainer.querySelector('#news-older-toggle')
+    toggleBtn.addEventListener('click', () => {
+      const isCollapsed = olderContainer.classList.toggle('collapsed')
+      toggleBtn.querySelector('span').textContent = isCollapsed ? 'Show Older Updates' : 'Hide Older Updates'
+    })
+  }
+  const olderList = olderContainer.querySelector('.news-group-list')
+  olderList.innerHTML = ''
+
+  let hasPinned = false
+  let hasOlder = false
+
   cards
     .sort((a, b) => {
       const priorityDifference = Number(b.dataset.priority || 0) - Number(a.dataset.priority || 0)
@@ -3554,17 +3810,33 @@ function renderNewsFilters() {
     .forEach((card) => {
       const cardSection = card.dataset.section || '401'
       const expired = isNewsCardExpired(card, now)
-      card.hidden = cardSection !== activeAcademicSection || expired || (course !== 'all' && card.dataset.course !== course)
+      const isHidden = cardSection !== activeAcademicSection || expired || (course !== 'all' && card.dataset.course !== course)
+
+      card.hidden = isHidden
+      if (isHidden) return
+
       const isUnseen = !expired && !seenCards.has(getNewsCardId(card))
       card.classList.toggle('update-panel--new', isUnseen)
       if (!prefersReducedMotion && isUnseen && !card.dataset.motionSeen) {
         card.dataset.motionSeen = 'true'
         card.classList.add('update-panel--new-flash')
       }
-      newsFeed.append(card)
+
+      const isPinned = Number(card.dataset.priority || 0) > 0 || card.dataset.persistent === 'true' || card.classList.contains('update-panel--primary')
+
+      if (isPinned) {
+        pinnedList.append(card)
+        hasPinned = true
+      } else {
+        olderList.append(card)
+        hasOlder = true
+      }
     })
 
-  const hasVisibleCards = cards.some((card) => !card.hidden)
+  pinnedContainer.style.display = hasPinned ? 'block' : 'none'
+  olderContainer.style.display = hasOlder ? 'block' : 'none'
+
+  const hasVisibleCards = hasPinned || hasOlder
   let emptyState = newsFeed.querySelector('[data-news-empty]')
 
   if (!hasVisibleCards) {
@@ -3590,6 +3862,8 @@ if (subjectList) {
     selectSiteSection('401', { scroll: false, hash: window.location.hash || '#tracker' })
   } else if (initialMode === 'tools') {
     showToolsSection({ scroll: false })
+  } else if (initialMode === 'work') {
+    showWorkSection({ scroll: false })
   } else {
     showSelector()
     renderSubjects()
@@ -3761,8 +4035,8 @@ function initFullHistoryTool() {
         complaints: ["Joint pain", "Joint swelling", "Morning stiffness", "Back pain", "Rash", "Oral ulcers"],
         symptoms: [
           ["Joint pain", "site, number, symmetry"], ["Swelling", "inflammatory/mechanical"], ["Morning stiffness", "duration"], ["Deformity", "type/progression"],
-          ["Limitation", "function/disability"], ["Skin rash", "malar/psoriasis/nodules"], ["Eye symptoms", "redness/uveitis"], ["Oral ulcers", "SLE/Behçet clue"],
-          ["Raynaud’s", "color change/cold"], ["Back pain", "inflammatory features"], ["Fever/weight loss", "systemic"], ["Drug history", "steroids/NSAIDs"]
+          ["Limitation", "function/disability"], ["Skin rash", "malar/psoriasis/nodules"], ["Eye symptoms", "redness/uveitis"], ["Oral ulcers", "SLE/BehÃ§et clue"],
+          ["Raynaudâ€™s", "color change/cold"], ["Back pain", "inflammatory features"], ["Fever/weight loss", "systemic"], ["Drug history", "steroids/NSAIDs"]
         ]
       }
     };
@@ -3862,7 +4136,7 @@ function initFullHistoryTool() {
         const btn = document.createElement("button");
         btn.className = "step-btn" + (state.step === s.id ? " active" : "") + (i < currentIndex ? " done" : "");
         btn.type = "button";
-        btn.innerHTML = `<span class="step-dot">${i < currentIndex ? "✓" : i + 1}</span><span class="step-label"><b>${s.label}</b><span>${s.desc}</span></span>`;
+        btn.innerHTML = `<span class="step-dot">${i < currentIndex ? "âœ“" : i + 1}</span><span class="step-label"><b>${s.label}</b><span>${s.desc}</span></span>`;
         btn.addEventListener("click", () => {
           state.step = s.id;
           saveState();
@@ -3888,7 +4162,7 @@ function initFullHistoryTool() {
       $$(".step-section").forEach(sec => sec.classList.toggle("active", sec.dataset.step === state.step));
       const index = steps.findIndex(s => s.id === state.step);
       $("#prevStep").disabled = index === 0;
-      $("#nextStep").textContent = index === steps.length - 1 ? "Back to start →" : "Next →";
+      $("#nextStep").textContent = index === steps.length - 1 ? "Back to start â†’" : "Next â†’";
       $("#systemTag").textContent = systems[state.system].label;
     }
 
@@ -3966,7 +4240,7 @@ function initFullHistoryTool() {
       const missing = [];
       const add = (key, text) => { if (!value(key)) missing.push(text); };
 
-      add("age", "Ask the patient’s age.");
+      add("age", "Ask the patientâ€™s age.");
       add("sex", "Record sex.");
       add("occupation", "Ask occupation and occupational exposure.");
       add("residence", "Ask residence / place of living.");
@@ -4170,7 +4444,7 @@ function initFullHistoryTool() {
         "",
         "COMPLAINT",
         complaintLine(),
-        value("patientWords") ? `Patient’s own words: “${value("patientWords")}”` : "",
+        value("patientWords") ? `Patientâ€™s own words: â€œ${value("patientWords")}â€` : "",
         "",
         "HISTORY OF PRESENT ILLNESS",
         hpiParagraph(),

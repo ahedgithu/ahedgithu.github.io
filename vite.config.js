@@ -8,6 +8,7 @@ export default defineConfig({
         main: resolve(__dirname, 'index.html'),
         schedule: resolve(__dirname, 'schedule.html'),
         history: resolve(__dirname, 'history.html'),
+        work: resolve(__dirname, 'work.html'),
       },
     },
   },

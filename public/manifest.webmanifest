@@ -1,7 +1,7 @@
 {
-  "name": "Ahmed Sayed MED 401 Hub",
-  "short_name": "MED 401",
-  "description": "A public MED 401 university tracker for topics, resources, and exam awareness.",
+  "name": "MUST Hub",
+  "short_name": "MUST Hub",
+  "description": "MUST Hub is a student-first academic and clinical hub for trackers, schedules, resources, MCQs, and tools.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
