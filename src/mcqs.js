@@ -9020,6 +9020,1523 @@ window.mcqQuizzes['Monitoring and Fluid Therapy'] = [
 
   })
 
+  const getSourceMcqs = (topicLabel, sourceId) => {
+    const raw = window.mcqQuizzes[topicLabel]
+    if (!raw) return []
+    if (raw.sources?.length) {
+      return raw.sources.find((source) => source.id === sourceId)?.mcqs || []
+    }
+    return Array.isArray(raw) ? raw : raw.mcqs || []
+  }
+
+  const withHighYieldIds = (items, section, topicTags = []) => items.map((item) => ({
+    ...item,
+    section,
+    topicTags,
+  }))
+
+  const highYieldByMRagab = [
+    ...withHighYieldIds(
+      getSourceMcqs('Vitamins', 'nut401-vitamins-mcqs').slice(0, 16),
+      'Vitamins',
+      ['vitamins']
+    ),
+    ...withHighYieldIds(
+      getSourceMcqs('Food-borne Diseases', 'nut401-food-borne-extra-mcqs').slice(0, 12),
+      'Food-Borne Diseases & Food Safety',
+      ['food safety']
+    ),
+    ...withHighYieldIds(
+      getSourceMcqs('Iron deficiency anemia', 'nut401-ida-extra-mcqs').slice(0, 12),
+      'Iron Deficiency Anemia & Pregnancy/Lactation',
+      ['iron deficiency anemia']
+    ),
+    ...withHighYieldIds(
+      getSourceMcqs('Nutrition in obesity', 'nut401-obesity-extra-mcqs').slice(0, 10),
+      'Obesity & Nutritional Assessment',
+      ['obesity', 'anthropometry']
+    )
+  ].slice(0, 50).map((item, index) => ({
+    ...item,
+    id: `nut401-q${String(index + 1).padStart(2, '0')}`
+  }))
+
+  toSource('NUT Quiz', {
+
+    id: 'nut401-high-yield-m-ragab',
+
+    label: 'high yield by m.ragab',
+
+    description: 'Mixed high-yield NUT401 questions covering vitamins, food-borne diseases, IDA, pregnancy/lactation, obesity, and nutritional assessment.',
+
+    mcqs: highYieldByMRagab
+
+  })
+
+  const nut401Updated95WebsiteImport =   [
+      {
+          "id": "nut401-whatsapp-q001",
+          "question": "History of dietary intake is the best method to assess the nutritional status of elderly people.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 1,
+          "explanation": "Correct answer: False. Repeated as a T/F item. Notes indicate standardized formula using knee-height measurement is preferred for elderly assessment.",
+          "section": "Nutrition in elderly / Nutritional assessment",
+          "topicTags": [
+              "nutrition in elderly",
+              "nutritional assessment"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q002",
+          "question": "A standardized formula using knee-height measurement is the best method to assess nutritional status of elderly people.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: True. Appears as the corrective counterpart to the dietary-history item and in elderly assessment notes.",
+          "section": "Nutrition in elderly / Nutritional assessment",
+          "topicTags": [
+              "nutrition in elderly",
+              "nutritional assessment"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q003",
+          "question": "The estimated average requirement of food energy for males aged 60–74 years is:",
+          "choices": [
+              "2100 kcal/day",
+              "1810 kcal/day",
+              "2355 kcal/day",
+              "1900 kcal/day"
+          ],
+          "answerIndex": 2,
+          "explanation": "Correct answer: 2355 kcal/day. Repeated MCQ with answer marking on 2355 kcal/day.",
+          "section": "Nutrition in elderly / Energy requirements",
+          "topicTags": [
+              "nutrition in elderly",
+              "energy requirements"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q004",
+          "question": "The estimated average requirement of food energy for males aged 75 years is:",
+          "choices": [
+              "2355 kcal/day",
+              "2100 kcal/day",
+              "1900 kcal/day",
+              "1810 kcal/day"
+          ],
+          "answerIndex": 1,
+          "explanation": "Correct answer: 2100 kcal/day. Photo pages show 2100 kcal/day selected/marked for the 75-year male energy requirement item.",
+          "section": "Nutrition in elderly / Energy requirements",
+          "topicTags": [
+              "nutrition in elderly",
+              "energy requirements"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q005",
+          "question": "Iron requirements are satisfied by cow's milk.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 1,
+          "explanation": "Correct answer: False. Repeated with answer marked false.",
+          "section": "Iron deficiency anemia",
+          "topicTags": [
+              "iron deficiency anemia"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q006",
+          "question": "Milk enhances absorption of iron.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 1,
+          "explanation": "Correct answer: False. Repeated with answer marked false.",
+          "section": "Iron absorption",
+          "topicTags": [
+              "iron absorption"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q007",
+          "question": "Ascorbic acid enhances absorption of iron.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: True. Repeated with answer marked true.",
+          "section": "Iron absorption / Vitamin C",
+          "topicTags": [
+              "iron absorption",
+              "vitamin c"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q008",
+          "question": "Tannins and phytates inhibit absorption of iron.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: True. Student note repeated in multiple pages; useful as a possible T/F item.",
+          "section": "Iron absorption",
+          "topicTags": [
+              "iron absorption"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q009",
+          "question": "Iron requirements are the same in males and females.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 1,
+          "explanation": "Correct answer: False. Repeated T/F with false answer.",
+          "section": "Iron requirements",
+          "topicTags": [
+              "iron requirements"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q010",
+          "question": "Iron requirements of women increase after menopause.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 1,
+          "explanation": "Correct answer: False. Repeated as postmenopausal women item with false marking.",
+          "section": "Iron requirements",
+          "topicTags": [
+              "iron requirements"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q011",
+          "question": "Iron deficiency anemia is common in infants.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: True. Repeated many times with true answer.",
+          "section": "Iron deficiency anemia",
+          "topicTags": [
+              "iron deficiency anemia"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q012",
+          "question": "Iron deficiency anemia is common in children.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: True. Repeated with true answer.",
+          "section": "Iron deficiency anemia",
+          "topicTags": [
+              "iron deficiency anemia"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q013",
+          "question": "Iron deficiency anemia is more common in children than in infants.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 1,
+          "explanation": "Correct answer: False. Repeated with false answer.",
+          "section": "Iron deficiency anemia",
+          "topicTags": [
+              "iron deficiency anemia"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q014",
+          "question": "Iron deficiency anemia is more common in:",
+          "choices": [
+              "Infants",
+              "Men",
+              "Postmenopausal women",
+              "All of the above"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: Infants. Repeated MCQ; answer consistently marked infants.",
+          "section": "Iron deficiency anemia",
+          "topicTags": [
+              "iron deficiency anemia"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q015",
+          "question": "Iron deficiency anemia is more common in children and premenopausal women.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: True. Student note; no full MCQ options shown, but useful as possible T/F.",
+          "section": "Iron deficiency anemia",
+          "topicTags": [
+              "iron deficiency anemia"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q016",
+          "question": "Iron deficiency is uncommon in men and postmenopausal women.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: True. Student note repeated across pages.",
+          "section": "Iron deficiency anemia",
+          "topicTags": [
+              "iron deficiency anemia"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q017",
+          "question": "Infants consuming cow's milk have a greater incidence of iron deficiency anemia than infants consuming breast milk.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: True. Repeated with true answer.",
+          "section": "Infant nutrition / Iron deficiency anemia",
+          "topicTags": [
+              "infant nutrition",
+              "iron deficiency anemia"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q018",
+          "question": "Infants consuming breast milk have a greater incidence of iron deficiency anemia than infants consuming cow's milk.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 1,
+          "explanation": "Correct answer: False. Repeated with false answer; inverse wording of the cow's milk item.",
+          "section": "Infant nutrition / Iron deficiency anemia",
+          "topicTags": [
+              "infant nutrition",
+              "iron deficiency anemia"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q019",
+          "question": "Breastfeeding alone is insufficient to prevent iron deficiency anemia in infants.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: True. Repeated with true marking, but wording in source is rough: 'infants consume breastfeeding is insufficient to iron deficiency anemia'.",
+          "section": "Infant nutrition / Iron deficiency anemia",
+          "topicTags": [
+              "infant nutrition",
+              "iron deficiency anemia"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q020",
+          "question": "Breastfeeding has insufficient substances.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 1,
+          "explanation": "Correct answer: False. Vague T/F item repeated; preserved because it may reflect a quiz statement.",
+          "section": "Breastfeeding",
+          "topicTags": [
+              "breastfeeding"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q021",
+          "question": "Breast milk contains immunoglobulins.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: True. Repeated with true marking in raw notes.",
+          "section": "Breastfeeding / Immunity",
+          "topicTags": [
+              "breastfeeding",
+              "immunity"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q022",
+          "question": "Deficiency of folic acid causes microcytic hypochromic anemia.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 1,
+          "explanation": "Correct answer: False. Repeated with false marking. Preserved as T/F.",
+          "section": "Folate deficiency / Anemia",
+          "topicTags": [
+              "folate deficiency",
+              "anemia"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q023",
+          "question": "Major dietary sources of iodine include:",
+          "choices": [
+              "Sea foods",
+              "Sea salt",
+              "Cabbage and turnips",
+              "All of the above"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: Sea foods. Repeated MCQ; answer consistently marked sea foods/seafood.",
+          "section": "Iodine / Dietary sources",
+          "topicTags": [
+              "iodine",
+              "dietary sources"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q024",
+          "question": "Seafood is the best source of iodine.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: True. Student note; merges with iodine-source MCQ.",
+          "section": "Iodine / Dietary sources",
+          "topicTags": [
+              "iodine",
+              "dietary sources"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q025",
+          "question": "Sea salt is not the best source of iodine.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: True. Student note repeated.",
+          "section": "Iodine / Dietary sources",
+          "topicTags": [
+              "iodine",
+              "dietary sources"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q026",
+          "question": "Iodine occurs in the body in small quantity.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: True. Student note preserved as possible T/F.",
+          "section": "Iodine physiology",
+          "topicTags": [
+              "iodine physiology"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q027",
+          "question": "Iodine is part of thyroid hormones and helps regulate body temperature, metabolic rate, and nerve/muscle function.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: True. Useful note converted to possible T/F; no full options in source.",
+          "section": "Iodine physiology",
+          "topicTags": [
+              "iodine physiology"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q028",
+          "question": "Iodine deficiency can:",
+          "choices": [
+              "Occur especially in areas close to the sea",
+              "Only result from lack of iodine in drinking water",
+              "All of the above",
+              "Result in permanent mental retardation",
+              "Be unlikely to be seen in mountainous areas"
+          ],
+          "answerIndex": 3,
+          "explanation": "Correct answer: Result in permanent mental retardation. Original Moodle item has five options; Option E preserved in extra option column.",
+          "section": "Iodine deficiency",
+          "topicTags": [
+              "iodine deficiency"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q029",
+          "question": "Mild iodine deficiency causes severe hypothyroidism.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 1,
+          "explanation": "Correct answer: False. Repeated false-marked wording appears as 'iodine deficiency mild causes severe hypothyroidism'.",
+          "section": "Iodine deficiency",
+          "topicTags": [
+              "iodine deficiency"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q030",
+          "question": "Mild or moderate iodine deficiency causes enlargement of the thyroid gland/goiter.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: True. Repeated as note: mild/moderate iodine deficiency leads to goiter/enlarged thyroid.",
+          "section": "Iodine deficiency / Goiter",
+          "topicTags": [
+              "iodine deficiency",
+              "goiter"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q031",
+          "question": "Severe thyroid under-secretion during pregnancy causes extreme and irreversible mental and physical retardation.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: True. Student note; likely tied to cretinism.",
+          "section": "Iodine deficiency / Pregnancy",
+          "topicTags": [
+              "iodine deficiency",
+              "pregnancy"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q032",
+          "question": "Congenital hypothyroidism causes impairment in both mental and skeletal processes.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: True. Student note preserved as possible T/F.",
+          "section": "Hypothyroidism",
+          "topicTags": [
+              "hypothyroidism"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q033",
+          "question": "Juvenile hypothyroidism causes impairment in skeletal process only.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: True. Student note preserved as possible T/F.",
+          "section": "Hypothyroidism",
+          "topicTags": [
+              "hypothyroidism"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q034",
+          "question": "Overconsumption of cabbage and turnips may contribute to iodine deficiency because they contain antithyroid substances.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: True. Student note preserved as possible T/F.",
+          "section": "Iodine deficiency / Goitrogens",
+          "topicTags": [
+              "iodine deficiency",
+              "goitrogens"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q035",
+          "question": "A female with waist-hip ratio > 0.85 is considered obese.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: True. Repeated with true answer.",
+          "section": "Obesity / Waist-hip ratio",
+          "topicTags": [
+              "obesity",
+              "waist-hip ratio"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q036",
+          "question": "A female with waist-hip ratio = 0.85 is considered obese.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 1,
+          "explanation": "Correct answer: False. Repeated with false answer; cutoff uses >0.85 in source notes.",
+          "section": "Obesity / Waist-hip ratio",
+          "topicTags": [
+              "obesity",
+              "waist-hip ratio"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q037",
+          "question": "A female with waist-hip ratio = 0.9 is considered obese.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: True. Repeated with true answer.",
+          "section": "Obesity / Waist-hip ratio",
+          "topicTags": [
+              "obesity",
+              "waist-hip ratio"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q038",
+          "question": "A male with waist-hip ratio = 0.9 is considered obese.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 1,
+          "explanation": "Correct answer: False. Repeated with false answer; source note indicates male cutoff is >0.9.",
+          "section": "Obesity / Waist-hip ratio",
+          "topicTags": [
+              "obesity",
+              "waist-hip ratio"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q039",
+          "question": "Carrying excess weight around the waist is more dangerous than carrying it around the hips.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: True. Moodle item repeated with true answer.",
+          "section": "Obesity / Fat distribution",
+          "topicTags": [
+              "obesity",
+              "fat distribution"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q040",
+          "question": "A person whose relative weight is 125% should be considered obese.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: True. Repeated as woman/person relative weight 125%; source notes use RW ≥120% as obesity cutoff.",
+          "section": "Obesity / Relative weight",
+          "topicTags": [
+              "obesity",
+              "relative weight"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q041",
+          "question": "What is the definition of overweight?",
+          "choices": [
+              "BMI = 25 kg/m²",
+              "BMI 25–30 kg/m²",
+              "BMI 25–26.9 kg/m²",
+              "BMI <25 kg/m²"
+          ],
+          "answerIndex": 1,
+          "explanation": "Correct answer: BMI 25–30 kg/m². Merged with note 'BMI 25–29 is overweight'. The Moodle image has a confusing selected radio mark, so keep under review if strict lecture cutoff differs.",
+          "section": "Obesity / BMI",
+          "topicTags": [
+              "obesity",
+              "bmi"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q042",
+          "question": "The main cause of obesity is:",
+          "choices": [
+              "Genetic",
+              "Endocrinal",
+              "Familial tendency",
+              "Nutritional"
+          ],
+          "answerIndex": 3,
+          "explanation": "Correct answer: Nutritional. Repeated MCQ; answer consistently marked nutritional/nutritional factor.",
+          "section": "Obesity / Etiology",
+          "topicTags": [
+              "obesity",
+              "etiology"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q043",
+          "question": "Lack of sleep can lead to weight gain.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: True. Repeated in obesity notes and Moodle item.",
+          "section": "Obesity / Lifestyle factors",
+          "topicTags": [
+              "obesity",
+              "lifestyle factors"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q044",
+          "question": "Research has shown that there is no association between childhood obesity and adult obesity.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 1,
+          "explanation": "Correct answer: False. Source note says there is an association.",
+          "section": "Childhood obesity",
+          "topicTags": [
+              "childhood obesity"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q045",
+          "question": "Obesity is not a problem for children because they are likely to grow out of it.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 1,
+          "explanation": "Correct answer: False. Source note says childhood obesity is a problem.",
+          "section": "Childhood obesity",
+          "topicTags": [
+              "childhood obesity"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q046",
+          "question": "Weight-loss surgery is an option for anyone who is overweight.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 1,
+          "explanation": "Correct answer: False. Moodle item repeated with false answer.",
+          "section": "Obesity treatment",
+          "topicTags": [
+              "obesity treatment"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q047",
+          "question": "A man who is 200 cm in height and 96 kg in weight is considered:",
+          "choices": [
+              "Non obese",
+              "Mild overweight",
+              "Moderate overweight",
+              "Severe overweight"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: Non obese. Repeated in many pages; answer consistently non-obese.",
+          "section": "Obesity / BMI calculation",
+          "topicTags": [
+              "obesity",
+              "bmi calculation"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q048",
+          "question": "A man's body weight is 80 kg and his desirable weight is 70 kg. His relative weight is:",
+          "choices": [
+              "50%",
+              "114%",
+              "100%",
+              "150%"
+          ],
+          "answerIndex": 1,
+          "explanation": "Correct answer: 114%. Merged calculation variants. Relative weight = actual/desirable ×100 = 80/70×100 ≈114%. One source variant uses height 170 cm and desired weight 70 kg.",
+          "section": "Obesity / Relative weight calculation",
+          "topicTags": [
+              "obesity",
+              "relative weight calculation"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q049",
+          "question": "Direct tools of nutritional assessment include the following except:",
+          "choices": [
+              "Dietary survey",
+              "Clinical examination",
+              "Prevalence of iron deficiency anemia",
+              "Serum proteins and amino acids"
+          ],
+          "answerIndex": 2,
+          "explanation": "Correct answer: Prevalence of iron deficiency anemia. Repeated MCQ with answer marked prevalence of iron deficiency anemia.",
+          "section": "Nutritional assessment",
+          "topicTags": [
+              "nutritional assessment"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q050",
+          "question": "Food frequency questionnaire is best described as:",
+          "choices": [
+              "Guided interview in which foods consumed in the previous 24-hour period are described in detail",
+              "Observation of food meal before and after eating",
+              "Written account of food consumed during a specific period (3–7 days), usually several consecutive days and a weekend",
+              "Written survey of food consumption during a specific period"
+          ],
+          "answerIndex": 3,
+          "explanation": "Correct answer: Written survey of food consumption during a specific period. Repeated Moodle item; purple underline/marking indicates option D.",
+          "section": "Dietary assessment",
+          "topicTags": [
+              "dietary assessment"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q051",
+          "question": "Anthropometric measures are direct measurements of body composition.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 1,
+          "explanation": "Correct answer: False. Repeated with false answer.",
+          "section": "Anthropometry / Body composition",
+          "topicTags": [
+              "anthropometry",
+              "body composition"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q052",
+          "question": "Dietary assessment is the main/best assessment method for elderly people.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 1,
+          "explanation": "Correct answer: False. Converted from notes saying dietary assessment is for adults and standardized formula is preferred in elderly.",
+          "section": "Elderly assessment",
+          "topicTags": [
+              "elderly assessment"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q053",
+          "question": "Rickets affects boys more than girls.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: True. Repeated with true answer.",
+          "section": "Rickets / Vitamin D",
+          "topicTags": [
+              "rickets",
+              "vitamin d"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q054",
+          "question": "Vitamin C is necessary in wound healing.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: True. Repeated with true answer.",
+          "section": "Vitamin C",
+          "topicTags": [
+              "vitamin c"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q055",
+          "question": "Vitamin C is necessary in the formation of connective tissue.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: True. Repeated in exam paper pages.",
+          "section": "Vitamin C / Connective tissue",
+          "topicTags": [
+              "vitamin c",
+              "connective tissue"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q056",
+          "question": "Vitamin C is essential for osteoid tissue.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: True. Repeated note.",
+          "section": "Vitamin C / Bone",
+          "topicTags": [
+              "vitamin c",
+              "bone"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q057",
+          "question": "Vitamin toxicity can occur with excessive intake of:",
+          "choices": [
+              "Vitamin A",
+              "Vitamin B12",
+              "Vitamin C",
+              "All of the above"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: Vitamin A. Merged variants: one paper used options Vitamin A, thiamine, pyridoxine, all of the above; another used Vitamin A, Vitamin B12, Vitamin C.",
+          "section": "Vitamins / Toxicity",
+          "topicTags": [
+              "vitamins",
+              "toxicity"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q058",
+          "question": "Thiamine (vitamin B1) deficiency leads to beriberi.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: True. Repeated note/T-F item.",
+          "section": "Vitamin B1 / Thiamine",
+          "topicTags": [
+              "vitamin b1",
+              "thiamine"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q059",
+          "question": "Riboflavin (vitamin B2) deficiency leads to angular stomatitis.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: True. Repeated with true answer.",
+          "section": "Vitamin B2 / Riboflavin",
+          "topicTags": [
+              "vitamin b2",
+              "riboflavin"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q060",
+          "question": "Angular stomatitis results from deficiency of thiamine.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 1,
+          "explanation": "Correct answer: False. Repeated false item; correct association in notes is riboflavin deficiency.",
+          "section": "Vitamin B1 vs B2",
+          "topicTags": [
+              "vitamin b1 vs b2"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q061",
+          "question": "Pyridoxine (vitamin B6) deficiency may lead to anemia.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: True. Repeated with true answer.",
+          "section": "Vitamin B6 / Pyridoxine",
+          "topicTags": [
+              "vitamin b6",
+              "pyridoxine"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q062",
+          "question": "Niacin deficiency may cause stomatitis.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: True. Appears in matching set as 'Deficiency of niacin = stomatitis'. Verify if the lecture also expects pellagra details elsewhere.",
+          "section": "Vitamin B3 / Niacin",
+          "topicTags": [
+              "vitamin b3",
+              "niacin"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q063",
+          "question": "Biotin deficiency may cause dermatitis and glossitis.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: True. Appears in matching set and notes.",
+          "section": "Biotin",
+          "topicTags": [
+              "biotin"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q064",
+          "question": "Raw egg white contains avidin and can lead to dermatitis and glossitis.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: True. Repeated note. Avidin causes biotin deficiency.",
+          "section": "Biotin / Avidin",
+          "topicTags": [
+              "biotin",
+              "avidin"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q065",
+          "question": "Deficiency of vitamin D causes rickets.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: True. Appears in matching set.",
+          "section": "Vitamin D / Rickets",
+          "topicTags": [
+              "vitamin d",
+              "rickets"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q066",
+          "question": "We get an active form of vitamin D directly from the sun.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 1,
+          "explanation": "Correct answer: False. Single T/F item with answer false.",
+          "section": "Vitamin D",
+          "topicTags": [
+              "vitamin d"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q067",
+          "question": "Macronutrient undernutrition includes:",
+          "choices": [
+              "Rickets",
+              "Anemia",
+              "Protein-energy malnutrition",
+              "None of the above"
+          ],
+          "answerIndex": 2,
+          "explanation": "Correct answer: Protein-energy malnutrition. Merged with 'Disease result from macronutrients' item where 'malnutrition of protein' is marked.",
+          "section": "Protein-energy malnutrition",
+          "topicTags": [
+              "protein-energy malnutrition"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q068",
+          "question": "Fortification means adding one or more nutrients to food to improve the quality of diet.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: True. Repeated student note.",
+          "section": "Food fortification",
+          "topicTags": [
+              "food fortification"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q069",
+          "question": "Cancer promoters increase the formation of cancer.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: True. Student note repeated.",
+          "section": "Cancer / Promoters",
+          "topicTags": [
+              "cancer",
+              "promoters"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q070",
+          "question": "Fat acts as a colon cancer promoter.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: True. Exam paper item; aligned with notes that high-fat diet increases colon cancer risk.",
+          "section": "Cancer / Dietary fat",
+          "topicTags": [
+              "cancer",
+              "dietary fat"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q071",
+          "question": "A high-fiber diet reduces diseases/cancer risk of the digestive tract.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: True. Repeated note.",
+          "section": "Cancer / Fiber",
+          "topicTags": [
+              "cancer",
+              "fiber"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q072",
+          "question": "A high-fat diet increases breast and colon cancer risk.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: True. Repeated note.",
+          "section": "Cancer / Dietary fat",
+          "topicTags": [
+              "cancer",
+              "dietary fat"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q073",
+          "question": "Animal fat is more harmful than vegetable fat.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: True. Repeated note.",
+          "section": "Cancer / Dietary fat",
+          "topicTags": [
+              "cancer",
+              "dietary fat"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q074",
+          "question": "About 50% of cancer causes are dietetic and can be prevented by improving lifestyle and nutrition.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: True. Student note preserved as possible T/F.",
+          "section": "Cancer / Nutrition prevention",
+          "topicTags": [
+              "cancer",
+              "nutrition prevention"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q075",
+          "question": "Apoptosis means programmed cell death.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: True. Student note; OCR wrote 'abtosis'.",
+          "section": "Cancer / Cell biology",
+          "topicTags": [
+              "cancer",
+              "cell biology"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q076",
+          "question": "Bottle-fed infants are more liable to infection than breastfed infants.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: True. Student note preserved as possible T/F.",
+          "section": "Breastfeeding",
+          "topicTags": [
+              "breastfeeding"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q077",
+          "question": "In a normal person, 300 calories of excess carbohydrates will lead to the same weight gain as 300 calories of excess fat.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 1,
+          "explanation": "Correct answer: False. Repeated with false answer.",
+          "section": "Obesity / Energy balance",
+          "topicTags": [
+              "obesity",
+              "energy balance"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q078",
+          "question": "Osteomalacia means vitamin D deficiency in adults/elderly.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: True. Student note preserved as possible T/F.",
+          "section": "Osteomalacia / Vitamin D",
+          "topicTags": [
+              "osteomalacia",
+              "vitamin d"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q079",
+          "question": "Food record is observation of food meals before and after eating.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 1,
+          "explanation": "Correct answer: False. Student notes repeatedly state that a food record is not observation before/after meals; food record is a written record of consumed foods over a period. Source: NUT Previous Quiz MCQs_240316_200428.pdf.",
+          "section": "Dietary assessment / Food record",
+          "topicTags": [
+              "dietary assessment",
+              "food record"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q080",
+          "question": "Which of the following is the most accurate/specific test to estimate iron stores in the body?",
+          "choices": [
+              "Serum iron",
+              "Serum ferritin",
+              "Total iron binding capacity",
+              "Prussian blue reaction"
+          ],
+          "answerIndex": 1,
+          "explanation": "Correct answer: Serum ferritin. Repeated in student notes as the most accurate/specific test for iron stores. Source: NUT Previous Quiz MCQs_240316_200428.pdf.",
+          "section": "Iron deficiency anemia / Iron stores",
+          "topicTags": [
+              "iron deficiency anemia",
+              "iron stores"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q081",
+          "question": "What is the most common cause of iron deficiency anemia?",
+          "choices": [
+              "Pregnancy",
+              "Lack of iron intake in diet",
+              "Chronic blood loss",
+              "Inability to absorb iron"
+          ],
+          "answerIndex": 2,
+          "explanation": "Correct answer: Chronic blood loss. Repeated across the file; page 1 uses a variant with low iron intake / chronic blood loss / abnormal absorption. Source: NUT Previous Quiz MCQs_240316_200428.pdf.",
+          "section": "Iron deficiency anemia / Etiology",
+          "topicTags": [
+              "iron deficiency anemia",
+              "etiology"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q082",
+          "question": "What are the main causes of obesity?",
+          "choices": [
+              "Increased energy quantity",
+              "More sedentary lifestyle",
+              "Family/hereditary factors",
+              "A and B"
+          ],
+          "answerIndex": 3,
+          "explanation": "Correct answer: Increased energy quantity and more sedentary lifestyle. Repeated student notes identify increased energy intake and sedentary lifestyle as the answer. Source: NUT Previous Quiz MCQs_240316_200428.pdf.",
+          "section": "Obesity / Etiology",
+          "topicTags": [
+              "obesity",
+              "etiology"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q083",
+          "question": "Which factor plays a great role in the potential for developing obesity?",
+          "choices": [
+              "Lifestyle factors",
+              "Aging",
+              "Gender",
+              "Hereditary factors"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: Lifestyle factors. Repeated in student notes as a potential/high-risk factor for obesity. Source: NUT Previous Quiz MCQs_240316_200428.pdf.",
+          "section": "Obesity / Risk factors",
+          "topicTags": [
+              "obesity",
+              "risk factors"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q084",
+          "question": "Koplik spots are characteristic/diagnostic of which disease?",
+          "choices": [
+              "Rubella",
+              "Measles",
+              "Tetanus",
+              "Mumps"
+          ],
+          "answerIndex": 1,
+          "explanation": "Correct answer: Measles. Repeated in multiple WhatsApp notes; OCR sometimes misspells Koplik as Kiplock/Koplic/Kolpick. Source: NUT Previous Quiz MCQs_240316_200428.pdf.",
+          "section": "Measles / Clinical signs",
+          "topicTags": [
+              "measles",
+              "clinical signs"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q085",
+          "question": "What is the incubation period of measles?",
+          "choices": [
+              "10 days",
+              "7 days",
+              "5 days",
+              "21 days"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: 10 days. Repeated as 10 days in the student notes; one OCR line incorrectly reads '10 years'. Source: NUT Previous Quiz MCQs_240316_200428.pdf.",
+          "section": "Measles / Incubation period",
+          "topicTags": [
+              "measles",
+              "incubation period"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q086",
+          "question": "Regarding mumps, which of the following is true?",
+          "choices": [
+              "Submaxillary and submandibular glands may never be involved",
+              "70% of infections occur in children under 15 years",
+              "Its incubation period varies from 4–7 days",
+              "In 75% of cases it is complicated by epididymo-orchitis",
+              "Pancreatic involvement is a potentially serious manifestation of mumps"
+          ],
+          "answerIndex": 4,
+          "explanation": "Correct answer: Pancreatic involvement is a potentially serious manifestation of mumps. Repeated in the file as pancreatitis/pancreatic involvement being the true or serious mumps complication. Source: NUT Previous Quiz MCQs_240316_200428.pdf.",
+          "section": "Mumps / Complications",
+          "topicTags": [
+              "mumps",
+              "complications"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q087",
+          "question": "Mumps may never affect the submaxillary/submandibular or sublingual glands.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 1,
+          "explanation": "Correct answer: False. Student notes identify statements saying mumps never involves these glands as false. Source: NUT Previous Quiz MCQs_240316_200428.pdf.",
+          "section": "Mumps / Gland involvement",
+          "topicTags": [
+              "mumps",
+              "gland involvement"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q088",
+          "question": "Orchitis is associated with which disease?",
+          "choices": [
+              "Mumps",
+              "Measles",
+              "Rubella",
+              "Tetanus"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: Mumps. Appears as a student note: 'Orchitis — mumps'. Source: NUT Previous Quiz MCQs_240316_200428.pdf.",
+          "section": "Mumps / Complications",
+          "topicTags": [
+              "mumps",
+              "complications"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q089",
+          "question": "Tetanus infection is characteristically associated with:",
+          "choices": [
+              "Caused by aerobic Gram-positive bacteria",
+              "Rusty nails",
+              "Spores survive for days only in suitable environments",
+              "Clostridium tetani itself is responsible for clinical tetanus"
+          ],
+          "answerIndex": 1,
+          "explanation": "Correct answer: Rusty nails. One student note directly gives 'rusty nails' as the characteristic answer for tetanus. Source: NUT Previous Quiz MCQs_240316_200428.pdf.",
+          "section": "Tetanus / Epidemiology",
+          "topicTags": [
+              "tetanus",
+              "epidemiology"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q090",
+          "question": "Clostridium tetani is characterized by:",
+          "choices": [
+              "Spore formation that can survive in appropriate conditions",
+              "Blood transfusion transmission",
+              "Person-to-person transmission",
+              "Droplet transmission"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: Spore formation that can survive in appropriate conditions. Student notes identify spores surviving in appropriate/suitable conditions as the correct characterization. Source: NUT Previous Quiz MCQs_240316_200428.pdf.",
+          "section": "Tetanus / Clostridium tetani",
+          "topicTags": [
+              "tetanus",
+              "clostridium tetani"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q091",
+          "question": "Tetanus neonatorum results from:",
+          "choices": [
+              "Infection of the umbilical stump",
+              "Droplet transmission",
+              "Blood transfusion",
+              "Person-to-person transmission"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: Infection of the umbilical stump. Appears in multiple versions as the correct statement about tetanus neonatorum. Source: NUT Previous Quiz MCQs_240316_200428.pdf.",
+          "section": "Tetanus neonatorum",
+          "topicTags": [
+              "tetanus neonatorum"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q092",
+          "question": "Tetanus can transmit from one person to another.",
+          "choices": [
+              "True",
+              "False"
+          ],
+          "answerIndex": 1,
+          "explanation": "Correct answer: False. Student notes mark person-to-person transmission as false. Source: NUT Previous Quiz MCQs_240316_200428.pdf.",
+          "section": "Tetanus / Transmission",
+          "topicTags": [
+              "tetanus",
+              "transmission"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q093",
+          "question": "Congenital rubella syndrome is most associated with maternal rubella infection during:",
+          "choices": [
+              "First trimester",
+              "Second trimester",
+              "Third trimester",
+              "After delivery"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: First trimester. Student notes state congenital rubella syndrome is due to infection in the 1st trimester. Source: NUT Previous Quiz MCQs_240316_200428.pdf.",
+          "section": "Rubella / Congenital rubella syndrome",
+          "topicTags": [
+              "rubella",
+              "congenital rubella syndrome"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q094",
+          "question": "A child is bitten by a dog that escaped. What is the appropriate immediate management?",
+          "choices": [
+              "Clean/wash the wound and give vaccination",
+              "Give antibiotics only",
+              "Observe without treatment",
+              "Give tetanus toxoid only"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: Clean/wash the wound and give vaccination. Student notes repeatedly mention a child bitten by an escaped dog and give wound cleaning plus vaccination. Source: NUT Previous Quiz MCQs_240316_200428.pdf.",
+          "section": "Rabies / Post-exposure prophylaxis",
+          "topicTags": [
+              "rabies",
+              "post-exposure prophylaxis"
+          ]
+      },
+      {
+          "id": "nut401-whatsapp-q095",
+          "question": "Regarding rabies immunoglobulin (RIG), which statement is false?",
+          "choices": [
+              "The whole dose is given by the intramuscular route",
+              "It neutralizes the virus in the bite wound",
+              "It is given to humans bitten by escaped animals when indicated",
+              "It is given as soon as possible after exposure"
+          ],
+          "answerIndex": 0,
+          "explanation": "Correct answer: The whole dose is given by the intramuscular route. Multiple notes list 'whole dose given IM' as the false/except statement about RIG; another note mentions wound infiltration. Source: NUT Previous Quiz MCQs_240316_200428.pdf.",
+          "section": "Rabies / Rabies immunoglobulin",
+          "topicTags": [
+              "rabies",
+              "rabies immunoglobulin"
+          ]
+      }
+  ]
+
+  toSource('NUT Quiz', {
+
+    id: 'nut401-updated-95-website-import',
+
+    label: 'updated 95 website import',
+
+    description: 'Prepared NUT401 95-question website import bank from WhatsApp and previous-quiz sources.',
+
+    mcqs: nut401Updated95WebsiteImport
+
+  })
+
 
 
   window.mcqQuizzes['Chronic Bronchitis and COPD'] = {

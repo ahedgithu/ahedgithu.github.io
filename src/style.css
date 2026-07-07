@@ -2603,14 +2603,14 @@ body[data-site-mode="tools"] .section-selector {
 
 .quiz-progress {
   position: sticky;
-  top: 0;
+  top: 42px;
   z-index: 5;
   display: grid;
   gap: 7px;
-  margin: -40px 0 18px;
-  padding: 42px 0 10px;
+  margin: 4px 0 16px;
+  padding: 8px 0 10px;
   background:
-    linear-gradient(135deg, rgba(24, 29, 32, 0.98), rgba(24, 29, 32, 0.9) 68%, rgba(24, 29, 32, 0));
+    linear-gradient(180deg, rgba(24, 29, 32, 0.98), rgba(24, 29, 32, 0.88) 72%, rgba(24, 29, 32, 0));
 }
 
 .quiz-progress__stats {
@@ -2629,7 +2629,7 @@ body[data-site-mode="tools"] .section-selector {
 }
 
 .quiz-progress__track {
-  height: 8px;
+  height: 6px;
   overflow: hidden;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.08);
@@ -2646,7 +2646,8 @@ body[data-site-mode="tools"] .section-selector {
 
 @media (max-width: 640px) {
   .quiz-progress {
-    margin-top: 12px;
+    top: 42px;
+    margin-top: 0;
   }
 
   .quiz-progress__stats {
@@ -6830,14 +6831,15 @@ body[data-site-mode="tools"] .section-selector {
   }
 
   .schedule-calendar__frame {
-    --calendar-hour-height: 70px;
-    grid-template-columns: 64px repeat(3, minmax(176px, 1fr));
-    min-width: 650px;
+    --calendar-hour-height: 58px;
+    grid-template-columns: 48px repeat(3, minmax(142px, 1fr));
+    min-width: 500px;
     border-radius: 6px;
   }
 
   .schedule-calendar-event {
-    padding: 8px;
+    min-height: 38px;
+    padding: 6px;
   }
 
   .schedule-calendar-event__top {
@@ -6849,12 +6851,13 @@ body[data-site-mode="tools"] .section-selector {
   }
 
   .schedule-calendar-event strong {
-    font-size: 0.82rem;
+    font-size: 0.72rem;
+    line-height: 1.12;
   }
 
   .schedule-calendar-event p {
-    margin-top: 4px;
-    font-size: 0.72rem;
+    margin-top: 3px;
+    font-size: 0.64rem;
   }
 
   .schedule-progress--calendar .schedule-progress__label {
@@ -6863,9 +6866,9 @@ body[data-site-mode="tools"] .section-selector {
 
   .schedule-calendar-event__room {
     display: inline-block;
-    margin-top: 4px;
+    margin-top: 3px;
     padding: 2px 5px;
-    font-size: 0.68rem;
+    font-size: 0.6rem;
   }
 
   .schedule-week-grid {

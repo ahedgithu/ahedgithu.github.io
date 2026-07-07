@@ -1399,11 +1399,7 @@ function renderTopicCompletionControls(subject, topic) {
 }
 
 function isRecentTopicUpdate(topic) {
-  if (!topic.updatedAt) return false
-  const updatedTime = new Date(`${topic.updatedAt}T00:00:00`).getTime()
-  if (!Number.isFinite(updatedTime)) return false
-  const ageDays = (Date.now() - updatedTime) / 86400000
-  return ageDays >= 0 && ageDays <= TOPIC_UPDATE_VISIBLE_DAYS
+  return isWeeklyTopicUpdateEligible(topic)
 }
 
 function getNextSundayStart(date) {
@@ -2118,8 +2114,14 @@ function normalizeQuestion(question, index) {
     question: question.question,
     options,
     correctOptionId,
-    explanation: question.explanation || ''
+    explanation: question.explanation || '',
+    section: question.section || '',
+    topicTags: question.topicTags || []
   }
+}
+
+function getFirstUnansweredQuestion() {
+  return getCurrentQuiz().find((question) => quizState.answers[question.id] === undefined) || null
 }
 
 function getTopicData(topicLabel) {
@@ -2234,7 +2236,18 @@ function scrollToQuizQuestion(questionId) {
   const questionCard = modal.querySelector(`[data-quiz-card="${CSS.escape(questionId)}"]`)
   if (!questionCard) return
 
-  questionCard.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'center' })
+  const panel = modal.querySelector('.quiz-modal__panel')
+  if (panel) {
+    const panelRect = panel.getBoundingClientRect()
+    const questionRect = questionCard.getBoundingClientRect()
+    panel.scrollTo({
+      top: Math.max(panel.scrollTop + questionRect.top - panelRect.top - 72, 0),
+      behavior: prefersReducedMotion ? 'auto' : 'smooth'
+    })
+  } else {
+    questionCard.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'center' })
+  }
+
   const firstChoice = questionCard.querySelector('[data-quiz-answer]')
   if (firstChoice) firstChoice.focus({ preventScroll: true })
 }
@@ -2654,7 +2667,22 @@ function handleQuizClick(event) {
 
   if (event.target.closest('[data-quiz-resume]')) {
     quizState.showResumePrompt = false
+    const targetQuestion = getFirstUnansweredQuestion()
+    if (targetQuestion) {
+      quizState.index = getCurrentQuiz().findIndex((question) => question.id === targetQuestion.id)
+      saveQuizState()
+    }
     renderQuizQuestion()
+    setTimeout(() => {
+      if (targetQuestion) {
+        scrollToQuizQuestion(targetQuestion.id)
+        return
+      }
+
+      const modal = ensureQuizModal()
+      const panel = modal.querySelector('.quiz-modal__panel')
+      if (panel) panel.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' })
+    }, 80)
     return
   }
 
@@ -4768,4 +4796,4 @@ function createAppleRipple(event) {
 
 initFullHistoryTool()
 initBottomSectionNav()
-document.addEventListener('pointerdown', createAppleRipple, { passive: true })
+// The global glow ripple was removed; native hover/focus/active states remain.
