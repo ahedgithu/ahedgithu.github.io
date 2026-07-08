@@ -8906,7 +8906,7 @@ window.mcqQuizzes['Monitoring and Fluid Therapy'] = [
 
     id: 'nut401-quiz-past-exams',
 
-    label: 'NUT Quiz Past Exams',
+    label: 'PAST EXAMS',
 
     description: 'Actual past exam and quiz questions covering Vitamins, Food-Borne, Tetanus/Rabies, Obesity, and IDA.',
 
@@ -9018,6 +9018,36 @@ window.mcqQuizzes['Monitoring and Fluid Therapy'] = [
 
     ]
 
+  })
+
+  const nutQuizOneTwoCleanedMcqs = [
+    q('Which vitamin is most classically associated with toxicity when taken in excess?', ['Vitamin A', 'Vitamin B1', 'Vitamin C', 'Vitamin B12'], 0, 'Fat-soluble vitamins can accumulate in the body; Vitamin A toxicity is a classic example. Source: NUTR QUIZ 1(2) cleaned Notion bank.'),
+    q('Which vitamin is essential for normal blood clotting?', ['Vitamin A', 'Vitamin K', 'Vitamin C', 'Vitamin B6'], 1, 'Vitamin K is required for synthesis of prothrombin and other coagulation factors. Source: NUTR QUIZ 1(2) cleaned Notion bank.'),
+    q('Which vitamins commonly decrease or become deficient in elderly people?', ['Vitamin A and Vitamin E', 'Vitamin D and Vitamin B12', 'Vitamin K and Vitamin B6', 'Vitamin C and Vitamin B1'], 1, 'Elderly people commonly have reduced sunlight exposure and reduced absorption, especially affecting Vitamin D and B12. Source: NUTR QUIZ 1(2) cleaned Notion bank.'),
+    q('Which of the following foods may interfere with iodine utilization and contribute to iodine deficiency/goiter?', ['Cabbage', 'Fish', 'Milk', 'Egg'], 0, 'Cabbage is a goitrogenic food; goitrogens can interfere with thyroid hormone synthesis. Source: NUTR QUIZ 1(2) cleaned Notion bank.'),
+    q('Which laboratory test best reflects iron stores in iron deficiency anemia?', ['Hemoglobin level', 'Serum ferritin', 'Total leukocyte count', 'Bleeding time'], 1, 'Serum ferritin is the main marker of body iron stores and is usually decreased early in iron deficiency. Source: NUTR QUIZ 1(2) cleaned Notion bank.'),
+    q('Which substance decreases iron absorption?', ['Vitamin C', 'Tannic acid', 'Gastric acid', 'Meat protein'], 1, 'Tannic acid in tea decreases non-heme iron absorption. Source: NUTR QUIZ 1(2) cleaned Notion bank.'),
+    q('In iron deficiency anemia, all of the following are expected findings EXCEPT:', ['Decreased serum ferritin', 'Decreased serum iron', 'Increased total iron-binding capacity', 'Decreased protoporphyrin'], 3, 'Needs lecture confirmation. In iron deficiency, free erythrocyte/zinc protoporphyrin usually increases because iron is unavailable for heme synthesis, so decreased protoporphyrin is the likely false statement. Source: NUTR QUIZ 1(2) cleaned Notion bank.'),
+    q('A butcher who works with raw meat presents with fever, night sweating, and arthritis. What is the most likely diagnosis?', ['Brucellosis', 'Typhoid fever', 'Cholera', 'Poliomyelitis'], 0, 'Brucellosis causes undulant fever, night sweats, and joint symptoms, and is occupationally associated with animal handlers and butchers. Source: NUTR QUIZ 1(2) cleaned Notion bank.'),
+    q('For a person exposed to a confirmed typhoid case, which of the following was suggested in the remembered quiz note?', ['Chemoprophylaxis', 'BCG vaccine', 'Follow-up only', 'None of the above'], 0, 'Needs lecture confirmation. The raw note marks chemoprophylaxis, but the wording is incomplete and may depend on whether the question refers to a case or a contact. Source: NUTR QUIZ 1(2) cleaned Notion bank.'),
+    q('Which influenza virus subtype is classically associated with avian influenza?', ['H1N1', 'H5N1', 'H3N2', 'Influenza B'], 1, 'H5N1 is the classic avian influenza subtype. Source: NUTR QUIZ 1(2) cleaned Notion bank.'),
+    q('What is the usual incubation period of influenza?', ['1-3 days', '7-10 days', '14-21 days', '30-60 days'], 0, 'The raw note marks 1-3 days. Some references give 1-4 days or 2-4 days, so keep the lecture answer unless the source says otherwise. Source: NUTR QUIZ 1(2) cleaned Notion bank.'),
+    q('Which of the following may be used as an influenza vaccine?', ['Formalin-killed/inactivated vaccine', 'Live attenuated vaccine', 'Polysaccharide vaccine', 'Toxoid vaccine'], 1, 'Needs lecture confirmation. The raw note marks live attenuated, but influenza vaccines can include both inactivated and live attenuated types depending on wording. Source: NUTR QUIZ 1(2) cleaned Notion bank.'),
+    q('Which person is least likely to develop iodine deficiency?', ['A person living in a coastal area and eating seafood', 'A person using non-iodized salt', 'A person living in mountainous areas', 'A person avoiding seafood and iodized salt'], 0, 'Seafood is rich in iodine; mountainous areas are classically more associated with iodine deficiency. Source: NUTR QUIZ 1(2) cleaned Notion bank.'),
+    q('Which BMI range is classified as overweight in adults?', ['18.5-24.9 kg/m2', '25-29.9 kg/m2', '30-34.9 kg/m2', '>=40 kg/m2'], 1, 'Adult overweight is BMI 25-29.9 kg/m2. Source: NUTR QUIZ 1(2) cleaned Notion bank.'),
+    q('Which of the following is a serious complication of untreated typhoid fever?', ['Intestinal perforation', 'Night blindness', 'Rickets', 'Pellagra'], 0, 'Intestinal hemorrhage and perforation are classic serious complications of untreated typhoid. Source: NUTR QUIZ 1(2) cleaned Notion bank.'),
+    q('What is the main route of transmission of typhoid fever?', ['Fecal-oral route', 'Airborne route', 'Blood transfusion', 'Sexual transmission'], 0, 'Typhoid is transmitted mainly through contaminated food or water by the fecal-oral route. Source: NUTR QUIZ 1(2) cleaned Notion bank.'),
+    q('Which age group is sometimes referred to as the golden age in tuberculosis epidemiology?', ['5-15 years', '7-18 years', '6-12 years', 'Below 5 years'], 0, 'Needs lecture confirmation. The raw answer marks 5-15 years; this is likely lecture-specific wording. Source: NUTR QUIZ 1(2) cleaned Notion bank.'),
+    q('Which investigation is used to assess iron stores?', ['Serum ferritin', 'Platelet count', 'Bleeding time', 'Serum sodium'], 0, 'Serum ferritin reflects iron stores. This duplicates the ferritin concept but is preserved from the source bank. Source: NUTR QUIZ 1(2) cleaned Notion bank.'),
+    q('Which of the following is NOT a good dietary source of vitamin B12?', ['Vegetables', 'Milk', 'Meat', 'Eggs'], 0, 'Vitamin B12 is mainly found in animal-source foods; vegetables are not reliable sources. Source: NUTR QUIZ 1(2) cleaned Notion bank.')
+  ]
+
+  toSource('NUT Quiz', {
+    id: 'nutr-quiz-1-2-cleaned-bank',
+    label: 'امتحان الترم اللي فات',
+    description: '',
+    timeLimitMinutes: 15,
+    mcqs: nutQuizOneTwoCleanedMcqs
   })
 
   const getSourceMcqs = (topicLabel, sourceId) => {

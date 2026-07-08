@@ -727,7 +727,7 @@ const TOPIC_COMPLETION_STORAGE_PREFIX = 'topicCompletion'
 const LEGACY_TOPIC_COMPLETION_STORAGE_PREFIX = 'med401-topic-progress-v1::'
 const TOPIC_UPDATE_STORAGE_KEY_PREFIX = 'tracker-seen-topic-updates-v1'
 let TOPIC_UPDATE_STORAGE_KEY = `${TOPIC_UPDATE_STORAGE_KEY_PREFIX}::401`
-const TOPIC_UPDATE_VISIBLE_DAYS = 14
+const UNIVERSITY_WEEK_START_DAY = 0 // Sunday
 const NEWS_SEEN_STORAGE_KEY_PREFIX = 'newsSeen'
 let NEWS_SEEN_STORAGE_KEY = `${NEWS_SEEN_STORAGE_KEY_PREFIX}::401`
 const NEWS_EXPIRY_HOURS = 6
@@ -744,8 +744,12 @@ const quizState = {
   sourceLabel: 'Current MCQs',
   index: 0,
   answers: {},
-  missingQuestionIds: []
+  missingQuestionIds: [],
+  timeLimitMinutes: null,
+  timerEndsAt: null,
+  timerStartedAt: null
 }
+let quizTimerInterval = null
 
 const coveredStates = new Set(['taken', 'partial'])
 const stateLabels = {
@@ -1402,12 +1406,12 @@ function isRecentTopicUpdate(topic) {
   return isWeeklyTopicUpdateEligible(topic)
 }
 
-function getNextSundayStart(date) {
+function getNextUniversityWeekStart(date) {
   const dateStart = startOfDay(date)
-  const daysUntilSunday = (7 - dateStart.getDay()) % 7 || 7
-  const nextSunday = new Date(dateStart)
-  nextSunday.setDate(dateStart.getDate() + daysUntilSunday)
-  return nextSunday
+  const daysUntilWeekStart = (7 + UNIVERSITY_WEEK_START_DAY - dateStart.getDay()) % 7 || 7
+  const nextWeekStart = new Date(dateStart)
+  nextWeekStart.setDate(dateStart.getDate() + daysUntilWeekStart)
+  return nextWeekStart
 }
 
 function isWeeklyTopicUpdateEligible(topic, today = new Date()) {
@@ -1417,7 +1421,7 @@ function isWeeklyTopicUpdateEligible(topic, today = new Date()) {
   if (!Number.isFinite(updatedTime)) return false
 
   const todayStart = startOfDay(today)
-  return updatedDate <= todayStart && todayStart < getNextSundayStart(updatedDate)
+  return updatedDate <= todayStart && todayStart < getNextUniversityWeekStart(updatedDate)
 }
 
 function getUnreadTopicUpdates(subject) {
@@ -1977,9 +1981,6 @@ function ensureQuizModal() {
   modal.innerHTML = `
     <div class="quiz-modal__backdrop" data-quiz-close></div>
     <section class="quiz-modal__panel" role="dialog" aria-modal="true" aria-label="MCQ quiz">
-      <div class="quiz-modal__top">
-        <button class="icon-button" type="button" data-quiz-close aria-label="Close quiz">X</button>
-      </div>
       <div class="quiz-progress" aria-label="Quiz progress">
         <div class="quiz-progress__stats">
           <strong id="quiz-progress-count">0/0</strong>
@@ -1987,6 +1988,10 @@ function ensureQuizModal() {
         <div class="quiz-progress__track">
         <span id="quiz-progress-fill"></span>
         </div>
+      </div>
+      <div class="quiz-modal__top">
+        <span class="quiz-timer" id="quiz-timer" hidden aria-label="Quiz timer"></span>
+        <button class="icon-button" type="button" data-quiz-close aria-label="Close quiz">X</button>
       </div>
       <div class="quiz-modal__body" id="quiz-body"></div>
       <div class="quiz-modal__actions">
@@ -2032,7 +2037,10 @@ function saveQuizState() {
     completed: quizState.completed,
     order: quizState.order,
     questionOptionOrder: quizState.questionOptionOrder,
-    missingQuestionIds: quizState.missingQuestionIds || []
+    missingQuestionIds: quizState.missingQuestionIds || [],
+    timeLimitMinutes: quizState.timeLimitMinutes || null,
+    timerEndsAt: quizState.timerEndsAt || null,
+    timerStartedAt: quizState.timerStartedAt || null
   }
 
   localStorage.setItem(getQuizStorageKey(quizState.topicLabel), JSON.stringify(payload))
@@ -2040,6 +2048,110 @@ function saveQuizState() {
 
 function clearSavedQuizState(topicLabel, sourceId = quizState.sourceId || 'current') {
   localStorage.removeItem(getQuizStorageKey(topicLabel, sourceId))
+}
+
+function getSavedQuizProgress(topicLabel, source) {
+  const savedState = getSavedQuizState(topicLabel, source.id)
+  if (!savedState || savedState.completed) return null
+
+  const total = savedState.order?.length || source.quizSize || source.mcqs.length
+  const answeredCount = Object.keys(savedState.answers || {}).length
+  if (!total || !answeredCount) return null
+
+  return {
+    answeredCount: Math.min(answeredCount, total),
+    percent: Math.min(Math.round((answeredCount / total) * 100), 100),
+    total
+  }
+}
+
+function formatQuizTimer(ms) {
+  const safeMs = Math.max(ms, 0)
+  const totalSeconds = Math.ceil(safeMs / 1000)
+  const minutes = Math.floor(totalSeconds / 60)
+  const seconds = totalSeconds % 60
+  return `${minutes}:${String(seconds).padStart(2, '0')}`
+}
+
+function getQuizTimerRemainingMs() {
+  if (!quizState.timerEndsAt) return 0
+  return new Date(quizState.timerEndsAt).getTime() - Date.now()
+}
+
+function getQuizTimerElapsedMs() {
+  if (!quizState.timerStartedAt) return 0
+  return Date.now() - new Date(quizState.timerStartedAt).getTime()
+}
+
+function clearQuizTimerInterval() {
+  if (!quizTimerInterval) return
+  clearInterval(quizTimerInterval)
+  quizTimerInterval = null
+}
+
+function updateQuizTimerDisplay({ allowExpire = false } = {}) {
+  const modal = ensureQuizModal()
+  const timer = modal.querySelector('#quiz-timer')
+  if (!timer) return
+
+  if (quizState.completed || (!quizState.timeLimitMinutes && !quizState.timerStartedAt)) {
+    timer.textContent = ''
+    timer.hidden = true
+    timer.style.removeProperty('--quiz-timer-progress')
+    timer.classList.remove('quiz-timer--countup', 'quiz-timer--warning')
+    clearQuizTimerInterval()
+    return
+  }
+
+  if (!quizState.timeLimitMinutes) {
+    timer.hidden = false
+    timer.textContent = formatQuizTimer(getQuizTimerElapsedMs())
+    timer.style.setProperty('--quiz-timer-progress', '100%')
+    timer.classList.add('quiz-timer--countup')
+    timer.classList.remove('quiz-timer--warning')
+    return
+  }
+
+  const remainingMs = getQuizTimerRemainingMs()
+  const totalMs = quizState.timeLimitMinutes * 60000
+  const timerProgress = totalMs ? Math.max(Math.min(remainingMs / totalMs, 1), 0) : 0
+  timer.hidden = false
+  timer.textContent = formatQuizTimer(remainingMs)
+  timer.style.setProperty('--quiz-timer-progress', `${timerProgress * 100}%`)
+  timer.classList.remove('quiz-timer--countup')
+  timer.classList.toggle('quiz-timer--warning', remainingMs <= 120000)
+
+  if (remainingMs > 0 || !allowExpire) return
+
+  quizState.completed = true
+  quizState.showResumePrompt = false
+  quizState.missingQuestionIds = []
+  saveQuizState()
+  clearQuizTimerInterval()
+  renderQuizQuestion()
+}
+
+function startQuizTimer() {
+  clearQuizTimerInterval()
+  updateQuizTimerDisplay()
+
+  if (quizState.completed || (!quizState.timeLimitMinutes && !quizState.timerStartedAt)) return
+
+  quizTimerInterval = setInterval(() => {
+    updateQuizTimerDisplay({ allowExpire: true })
+  }, 1000)
+}
+
+function hideQuizTimer() {
+  const modal = ensureQuizModal()
+  const timer = modal.querySelector('#quiz-timer')
+  if (timer) {
+    timer.textContent = ''
+    timer.hidden = true
+    timer.style.removeProperty('--quiz-timer-progress')
+    timer.classList.remove('quiz-timer--countup', 'quiz-timer--warning')
+  }
+  clearQuizTimerInterval()
 }
 
 function shuffleArray(array) {
@@ -2064,7 +2176,8 @@ function getQuizSources(topicLabel) {
       mcqs: source.mcqs || [],
       quizSize: source.quizSize || raw.quizSize || null,
       shuffleQuestions: source.shuffleQuestions ?? raw.shuffleQuestions ?? false,
-      shuffleOptions: source.shuffleOptions ?? raw.shuffleOptions ?? false
+      shuffleOptions: source.shuffleOptions ?? raw.shuffleOptions ?? false,
+      timeLimitMinutes: source.timeLimitMinutes || raw.timeLimitMinutes || null
     })).filter((source) => source.mcqs.length)
   }
 
@@ -2075,7 +2188,8 @@ function getQuizSources(topicLabel) {
       mcqs: raw,
       quizSize: raw.quizSize || null,
       shuffleQuestions: raw.shuffleQuestions || false,
-      shuffleOptions: raw.shuffleOptions || false
+      shuffleOptions: raw.shuffleOptions || false,
+      timeLimitMinutes: raw.timeLimitMinutes || null
     }]
   }
 
@@ -2086,7 +2200,8 @@ function getQuizSources(topicLabel) {
     mcqs: raw.mcqs || [],
     quizSize: raw.quizSize || null,
     shuffleQuestions: raw.shuffleQuestions || false,
-    shuffleOptions: raw.shuffleOptions || false
+    shuffleOptions: raw.shuffleOptions || false,
+    timeLimitMinutes: raw.timeLimitMinutes || null
   }].filter((source) => source.mcqs.length)
 }
 
@@ -2178,6 +2293,21 @@ function initializeQuiz(topicLabel, { sourceId = 'current', useSaved = false, fr
   quizState.showResumePrompt = false
   quizState.missingQuestionIds = savedState?.missingQuestionIds || []
   quizState.lectureUrls = getTopicData(topicLabel)?.lectureUrls || []
+  quizState.timeLimitMinutes = config.timeLimitMinutes || null
+  quizState.timerEndsAt = null
+  quizState.timerStartedAt = null
+
+  if (quizState.timeLimitMinutes && !completed) {
+    const savedTimerEndsAt = savedState?.timerEndsAt ? new Date(savedState.timerEndsAt).getTime() : NaN
+    quizState.timerEndsAt = savedState && Number.isFinite(savedTimerEndsAt)
+      ? savedState.timerEndsAt
+      : new Date(Date.now() + quizState.timeLimitMinutes * 60000).toISOString()
+  } else if (!completed) {
+    const savedTimerStartedAt = savedState?.timerStartedAt ? new Date(savedState.timerStartedAt).getTime() : NaN
+    quizState.timerStartedAt = savedState && Number.isFinite(savedTimerStartedAt)
+      ? savedState.timerStartedAt
+      : new Date().toISOString()
+  }
 
   if (savedState && !fresh && !savedState.completed && useSaved) {
     quizState.showResumePrompt = true
@@ -2311,6 +2441,9 @@ function renderQuizMeta() {
   if (title) title.textContent = quizState.topicLabel || 'Quiz'
   if (progressCount) progressCount.textContent = `${answeredCount}/${total}`
   if (fill) fill.style.width = `${percent}%`
+  const progress = modal.querySelector('.quiz-progress')
+  if (progress) progress.style.setProperty('--quiz-progress-percent', `${percent}%`)
+  updateQuizTimerDisplay()
 
   if (quizState.showResumePrompt) {
     if (meta) meta.textContent = `${quizState.sourceLabel} - resume your previous attempt or start over.`
@@ -2468,6 +2601,21 @@ function renderResumePrompt() {
   `
 }
 
+function renderSourceProgress(sourceProgress) {
+  if (!sourceProgress) return ''
+
+  return `
+    <span class="quiz-source-option__resume-row">
+      <span class="quiz-source-option__resume">Resume</span>
+      <span class="quiz-source-option__takeover">Take over</span>
+      <span class="quiz-source-option__progress" aria-label="${sourceProgress.answeredCount} of ${sourceProgress.total} questions answered">
+        <span style="width: ${sourceProgress.percent}%"></span>
+      </span>
+      <span class="quiz-source-option__count">${sourceProgress.answeredCount}/${sourceProgress.total}</span>
+    </span>
+  `
+}
+
 function renderQuizSourcePicker(topicLabel, event = null) {
   const sources = getQuizSources(topicLabel)
   const modal = ensureQuizModal()
@@ -2478,6 +2626,11 @@ function renderQuizSourcePicker(topicLabel, event = null) {
   const body = modal.querySelector('#quiz-body')
   const actions = modal.querySelector('.quiz-modal__actions')
   const panel = modal.querySelector('.quiz-modal__panel')
+  const sourcesWithProgress = sources.map((source) => ({
+    ...source,
+    savedProgress: getSavedQuizProgress(topicLabel, source)
+  }))
+  const firstSavedProgress = sourcesWithProgress.find((source) => source.savedProgress)?.savedProgress || null
 
   if (event && event.clientX && event.clientY && panel) {
     const rect = panel.getBoundingClientRect()
@@ -2490,16 +2643,27 @@ function renderQuizSourcePicker(topicLabel, event = null) {
 
   if (title) title.textContent = topicLabel
   if (meta) meta.textContent = 'Choose an MCQ source.'
-  if (fill) fill.style.width = '0%'
-  if (progressCount) progressCount.textContent = '0/0'
+  if (fill) fill.style.width = `${firstSavedProgress?.percent || 0}%`
+  if (progressCount) progressCount.textContent = firstSavedProgress
+    ? `${firstSavedProgress.answeredCount}/${firstSavedProgress.total}`
+    : '0/0'
+  const progress = modal.querySelector('.quiz-progress')
+  if (progress) progress.style.setProperty('--quiz-progress-percent', `${firstSavedProgress?.percent || 0}%`)
+  hideQuizTimer()
   body.innerHTML = `
     <article class="quiz-card quiz-source-picker">
-      ${sources.map((source) => `
-        <button class="quiz-source-option" type="button" data-quiz-source="${source.id}" data-quiz-topic="${escapeHtml(topicLabel)}">
-          <strong>${source.label}</strong>
-          <span>${source.mcqs.length} questions${source.description ? ` - ${source.description}` : ''}</span>
+      ${sourcesWithProgress.map((source) => {
+        const isVipPastExam = source.id === 'nutr-quiz-1-2-cleaned-bank'
+        return `
+        <button class="quiz-source-option${isVipPastExam ? ' quiz-source-option--vip' : ''}" type="button" data-quiz-source="${source.id}" data-quiz-topic="${escapeHtml(topicLabel)}" ${isVipPastExam ? 'dir="rtl"' : ''}>
+          ${isVipPastExam ? '<img class="quiz-source-option__icon" src="/assets/past-exams-vip-icon.png" alt="" />' : ''}
+          <span class="quiz-source-option__content">
+            <strong>${source.label}</strong>
+            ${isVipPastExam ? '<span>15 min timer</span>' : `<span>${source.mcqs.length} questions${source.description ? ` - ${source.description}` : ''}</span>`}
+            ${renderSourceProgress(source.savedProgress)}
+          </span>
         </button>
-      `).join('')}
+      `}).join('')}
     </article>
   `
   actions.innerHTML = '<button class="quiz-action quiz-action--primary" type="button" data-quiz-close>Close</button>'
@@ -2540,12 +2704,14 @@ function openQuiz(topicLabel, sourceId = 'current', event = null) {
   } else {
     renderQuizQuestion()
   }
+  startQuizTimer()
 }
 
 function closeQuiz() {
   const modal = ensureQuizModal()
   modal.setAttribute('aria-hidden', 'true')
   document.body.classList.remove('panel-open')
+  clearQuizTimerInterval()
 }
 
 function ensurePdfPreviewModal() {
@@ -2692,6 +2858,7 @@ function handleQuizClick(event) {
     clearSavedQuizState(topicLabel, sourceId)
     initializeQuiz(topicLabel, { sourceId, fresh: true })
     renderQuizQuestion()
+    startQuizTimer()
     return
   }
 
@@ -2701,6 +2868,7 @@ function handleQuizClick(event) {
     clearSavedQuizState(topicLabel, sourceId)
     initializeQuiz(topicLabel, { sourceId, fresh: true })
     renderQuizQuestion()
+    startQuizTimer()
     return
   }
 
@@ -2719,6 +2887,7 @@ function handleQuizClick(event) {
     quizState.missingQuestionIds = []
     saveQuizState()
     renderQuizQuestion()
+    updateQuizTimerDisplay()
     return
   }
 
@@ -2728,7 +2897,13 @@ function handleQuizClick(event) {
     quizState.completed = false
     quizState.missingQuestionIds = []
     clearSavedQuizState(quizState.topicLabel, quizState.sourceId)
+    quizState.timerEndsAt = quizState.timeLimitMinutes
+      ? new Date(Date.now() + quizState.timeLimitMinutes * 60000).toISOString()
+      : null
+    quizState.timerStartedAt = quizState.timeLimitMinutes ? null : new Date().toISOString()
+    saveQuizState()
     renderQuizQuestion()
+    startQuizTimer()
     return
   }
 
@@ -2986,7 +3161,8 @@ function render401ExamSchedule() {
           <time datetime="${exam.date}">${escapeHtml(exam.time)}</time>
           ${exam.meta ? `<span class="exam-card__meta">${escapeHtml(exam.meta)}</span>` : ''}
           <button class="exam-card__quiz-action" type="button" data-quiz-topic="NUT Quiz">
-            Past Exams (52 Qs)
+            <img class="exam-card__quiz-icon" src="/assets/past-exams-vip-icon.png" alt="" />
+            <span>PAST EXAMS</span>
           </button>
         </div>
       `

@@ -39,6 +39,8 @@ Production repo is `E:\website\app`; `E:\website` is only the parent folder. At 
 
 Start website edits by checking branch and `git status`. GitHub Pages deploys from `main` only. Do not push or deploy unless Ahmed explicitly asks. If the worktree is dirty, inspect and explain the dirty files before editing. For narrow live pushes from a dirty repo, use a clean temporary worktree from `origin/main`.
 
+When Ahmed says `NT`, `notion task`, or asks to check website improvement tasks, directly inspect the Notion `Website Improvement Tasks` database before planning or editing. Use the Notion task rows as the active source of truth for website improvement priorities, then reconcile them with the current repo state.
+
 For browser verification, use Codex's in-app browser that Ahmed already has open. Do not use the installed Chrome, Edge, or other machine browsers unless Ahmed explicitly asks for that.
 
 Whenever local website changes are completed, include the relevant page link at the end of the final response and clearly state whether the changes are local-only or live.
