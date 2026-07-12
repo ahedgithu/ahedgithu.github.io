@@ -1,6 +1,12 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>
+    window.SUPABASE_CONFIG = {
+      url: '%VITE_SUPABASE_URL%',
+      anonKey: '%VITE_SUPABASE_ANON_KEY%'
+    }
+  </script>
   <script defer src="/src/analytics.js?v=20260620-ga4"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,45 +16,143 @@
   <meta property="og:description" content="Track clinical semester coverage, lecture resources, and practical tools with Ahmed Sayed." />
   <meta property="og:type" content="website" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="manifest" href="/manifest.webmanifest" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&display=swap" rel="stylesheet" />
   <meta name="theme-color" content="#315f72" />
-  <link rel="stylesheet" href="/src/style.css?v=20260708-past-exams-v4" />
+  <link rel="stylesheet" href="/src/style.css?v=20260712-stabilization-v1" />
 </head>
 <body>
-  <main>
-    <section class="section-selector" id="section-selector" aria-labelledby="section-selector-title">
-      <div class="section-selector__inner">
-        <p class="eyebrow">Clinical hub</p>
-        <h1 id="section-selector-title">Choose your section</h1>
-        <div class="section-selector__grid" aria-label="Website sections">
-          <button class="section-choice section-choice--primary" type="button" data-select-section="401">
-            <span>401</span>
-            <strong>MED 401 hub</strong>
-            <small>Tracker, news, schedule, work</small>
+  <header class="site-header" aria-label="Main navigation">
+    <button class="site-nav__back" type="button" data-select-section="selector" aria-label="Back to main page">
+      Back to main page
+    </button>
+    <div class="tracker-actions">
+      <div class="student-sync" id="student-sync">
+        <button class="student-sync__button" id="student-sync-button" type="button" aria-expanded="false" aria-controls="student-sync-menu" data-student-sync-toggle>
+          <span class="student-sync__dot" aria-hidden="true"></span>
+          <svg class="student-sync__user-icon" viewBox="0 0 24 24" aria-hidden="true" width="16" height="16" style="display: none; fill: currentColor;"><circle cx="12" cy="8" r="3.5"/><path d="M5.5 20c.5-4 2.7-6 6.5-6s6 2 6.5 6"/></svg>
+          <img class="student-sync__avatar" id="student-sync-avatar" alt="" hidden>
+          <span class="student-sync__initials" id="student-sync-initials" aria-hidden="true" hidden></span>
+          <span id="student-sync-label">Login</span>
+        </button>
+        <div class="student-sync__menu" id="student-sync-menu" hidden>
+          <div class="student-sync__identity">
+            <strong id="student-sync-email">Google sync is off</strong>
+            <p id="student-sync-status">Sign in to keep progress across devices.</p>
+          </div>
+          <button class="student-sync__compact student-sync__compact--google" type="button" data-student-sync-login aria-label="Sign in with Google">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285f4" d="M21.6 12.2c0-.7-.1-1.4-.2-2H12v3.9h5.4a4.6 4.6 0 0 1-2 3v2.5h3.2c1.9-1.8 3-4.3 3-7.4Z"/><path fill="#34a853" d="M12 22c2.7 0 5-.9 6.6-2.4l-3.2-2.5c-.9.6-2 1-3.4 1a5.8 5.8 0 0 1-5.5-4H3.2v2.6A10 10 0 0 0 12 22Z"/><path fill="#fbbc05" d="M6.5 14.1a6 6 0 0 1 0-4.2V7.3H3.2a10 10 0 0 0 0 9.4l3.3-2.6Z"/><path fill="#ea4335" d="M12 5.9c1.6 0 3 .5 4.1 1.6l3.1-3A10 10 0 0 0 3.2 7.3l3.3 2.6a5.8 5.8 0 0 1 5.5-4Z"/></svg>
+            <span>Google</span>
           </button>
-          <button class="section-choice" type="button" data-select-section="402">
-            <span>402</span>
-            <strong>MED 402 hub</strong>
-            <small>Covered Weekly Reports topics</small>
+          <button class="student-sync__compact student-sync__compact--logout" type="button" data-student-sync-logout aria-label="Sign out of Google">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 5H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h4M14 8l4 4-4 4M18 12H9"/></svg>
+            <span>Sign out</span>
           </button>
-          <button class="section-choice" type="button" data-select-section="tools">
-            <span>Tools</span>
-            <strong>History Taking Tool</strong>
-            <small>Open the OSCE history workflow directly</small>
+          <button class="student-sync__compact student-sync__compact--anon" type="button" id="leaderboard-anon-toggle" aria-label="Toggle anonymous mode on leaderboard">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19M1 1l22 22"/><path d="M14.12 14.12a3 3 0 1 1-4.24-4.24"/></svg>
+            <span id="leaderboard-anon-label">Go anonymous</span>
+          </button>
+          <button class="student-sync__compact student-sync__compact--admin" type="button" data-admin-login-open aria-label="Switch to admin mode">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5.5 20c.5-4 2.7-6 6.5-6s6 2 6.5 6"/></svg>
+            <span>Admin</span>
           </button>
         </div>
       </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section-selector" id="section-selector" aria-labelledby="section-selector-title">
+      <div class="section-selector__header">
+        <p class="eyebrow">Clinical Hub</p>
+        <h1 id="section-selector-title">Choose your section</h1>
+      </div>
+
+      <section class="home-review-marquee" aria-label="Student reviews">
+        <div class="home-review-marquee__track">
+          <img src="/assets/reviews/review1.jpg" class="home-review-screenshot" alt="Student review screenshot" />
+          <img src="/assets/reviews/review2.jpg" class="home-review-screenshot" alt="Student review screenshot" />
+          <img src="/assets/reviews/review3.jpg" class="home-review-screenshot" alt="Student review screenshot" />
+          <img src="/assets/reviews/review4.jpg" class="home-review-screenshot" alt="Student review screenshot" />
+          <img src="/assets/reviews/review5.jpg" class="home-review-screenshot" alt="Student review screenshot" />
+          <img src="/assets/reviews/review6.png" class="home-review-screenshot" alt="Student review screenshot" />
+          <img src="/assets/reviews/review7.png" class="home-review-screenshot" alt="Student review screenshot" />
+          <img src="/assets/reviews/review8.png" class="home-review-screenshot" alt="Student review screenshot" />
+          <img src="/assets/reviews/review1.jpg" class="home-review-screenshot" alt="" aria-hidden="true" />
+          <img src="/assets/reviews/review2.jpg" class="home-review-screenshot" alt="" aria-hidden="true" />
+          <img src="/assets/reviews/review3.jpg" class="home-review-screenshot" alt="" aria-hidden="true" />
+          <img src="/assets/reviews/review4.jpg" class="home-review-screenshot" alt="" aria-hidden="true" />
+          <img src="/assets/reviews/review5.jpg" class="home-review-screenshot" alt="" aria-hidden="true" />
+          <img src="/assets/reviews/review6.png" class="home-review-screenshot" alt="" aria-hidden="true" />
+          <img src="/assets/reviews/review7.png" class="home-review-screenshot" alt="" aria-hidden="true" />
+          <img src="/assets/reviews/review8.png" class="home-review-screenshot" alt="" aria-hidden="true" />
+        </div>
+      </section>
+
+      <div class="section-selector__grid" aria-label="Website sections">
+        <button class="section-choice section-choice--primary" type="button" data-select-section="401">
+          <span>401</span>
+        </button>
+        <button class="section-choice" type="button" data-select-section="402">
+          <span>402</span>
+        </button>
+        <button class="section-choice" type="button" data-select-section="tools">
+          <span>History taking</span>
+        </button>
+      </div>
+
+      <footer class="section-selector__footer">
+        <div class="site-footer__inner">
+          <p class="site-footer__brand">MUST Hub</p>
+          <p class="site-footer__desc">Made to help students track lectures, schedules, resources, and clinical tools.</p>
+          <div class="site-footer__links">
+            <span>Built by Ahmed Sayed</span>
+            <span class="site-footer__divider">·</span>
+            <button type="button" class="site-footer__link-btn" data-select-section="work">Work with me</button>
+            <span class="site-footer__divider">·</span>
+            <a href="https://wa.me/201030469634?text=Hi%20Ahmed%2C%20I%20have%20feedback%20about%20MUST%20Hub." class="site-footer__link" target="_blank" rel="noopener noreferrer">Feedback</a>
+          </div>
+          <div class="site-footer__socials" aria-label="Ahmed social media">
+            <a href="https://www.youtube.com/@MediFuntomy" class="site-footer__social-link site-footer__social-link--youtube" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="5.5" width="19" height="13" rx="4" fill="#ff0033"/><path d="M10 9.1v5.8l5.2-2.9L10 9.1z" fill="#fff"/></svg>
+              <span class="sr-only">YouTube</span>
+            </a>
+            <a href="https://www.instagram.com/ahmed_badwi_c/?hl=ar" class="site-footer__social-link site-footer__social-link--instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="selector-instagram-gradient" x1="4" y1="21" x2="20" y2="3" gradientUnits="userSpaceOnUse"><stop stop-color="#feda75"/><stop offset="0.28" stop-color="#fa7e1e"/><stop offset="0.5" stop-color="#d62976"/><stop offset="0.72" stop-color="#962fbf"/><stop offset="1" stop-color="#4f5bd5"/></linearGradient></defs><rect x="3" y="3" width="18" height="18" rx="5" fill="url(#selector-instagram-gradient)"/><rect x="7.4" y="7.4" width="9.2" height="9.2" rx="3" fill="none" stroke="#fff" stroke-width="1.8"/><circle cx="12" cy="12" r="2.3" fill="none" stroke="#fff" stroke-width="1.8"/><circle cx="16.7" cy="7.7" r="1.1" fill="#fff"/></svg>
+              <span class="sr-only">Instagram</span>
+            </a>
+            <a href="https://www.tiktok.com/@ahed_gtr" class="site-footer__social-link site-footer__social-link--tiktok" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.7 4.2h2.3c.2 1.7 1.2 3 3.1 3.5v2.5c-1.3-.1-2.4-.5-3.3-1.2v5.9c0 3.1-2 5.1-5 5.1-2.8 0-4.7-1.8-4.7-4.3 0-2.6 2-4.4 4.9-4.4.3 0 .6 0 .9.1v2.6c-.3-.1-.6-.1-.9-.1-1.2 0-2 .7-2 1.7s.8 1.8 1.9 1.8c1.3 0 2.1-.8 2.1-2.5V4.2h.7z" fill="#25f4ee"/><path d="M15.7 5.2H18c.2 1.7 1.2 3 3.1 3.5v2.5c-1.3-.1-2.4-.5-3.3-1.2v5.9c0 3.1-2 5.1-5 5.1-2.8 0-4.7-1.8-4.7-4.3 0-2.6 2-4.4 4.9-4.4.3 0 .6 0 .9.1v2.6c-.3-.1-.6-.1-.9-.1-1.2 0-2 .7-2 1.7s.8 1.8 1.9 1.8c1.3 0 2.1-.8 2.1-2.5V5.2h.7z" fill="#fe2c55"/><path d="M15.2 4.7h2.3c.2 1.7 1.2 3 3.1 3.5v2.5c-1.3-.1-2.4-.5-3.3-1.2v5.9c0 3.1-2 5.1-5 5.1-2.8 0-4.7-1.8-4.7-4.3 0-2.6 2-4.4 4.9-4.4.3 0 .6 0 .9.1v2.6c-.3-.1-.6-.1-.9-.1-1.2 0-2 .7-2 1.7s.8 1.8 1.9 1.8c1.3 0 2.1-.8 2.1-2.5V4.7h.7z" fill="#fff"/></svg>
+              <span class="sr-only">TikTok</span>
+            </a>
+          </div>
+        </div>
+      </footer>
     </section>
 
     <section class="tracker-home" id="tracker" aria-labelledby="tracker-title">
-      <button class="section-switcher" type="button" data-select-section="selector">Switch section</button>
-      <div class="section-heading">
-        <h1 id="tracker-title">401</h1>
+      <div class="tracker-admin-toolbar" id="tracker-admin-toolbar" hidden>
+        <span><strong>Admin mode</strong><small id="tracker-admin-email"></small></span>
+        <span class="tracker-admin-toolbar__subject" id="tracker-admin-subject">Choose a subject</span>
+        <button type="button" id="tracker-admin-save-order" disabled>Save arrangement</button>
+        <button type="button" id="tracker-admin-sign-out">Student view</button>
       </div>
+      <h1 class="sr-only" id="tracker-title">401</h1>
 
       <div class="semester-timeline" aria-label="Semester exam timeline">
+        <div class="global-progress" id="global-progress" aria-label="Section progress">
+          <div class="global-progress__metrics">
+            <div class="global-progress__metric">
+              <div class="global-progress__metric-labels">
+                <span>MCQ progress</span>
+                <strong id="global-mcqs-percent">0%</strong>
+              </div>
+              <div class="global-progress__bar" aria-hidden="true">
+                <div class="global-progress__bar-fill global-progress__bar-fill--mcq" id="global-mcqs-fill" style="width: 0%;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="exam-schedule" aria-label="401 subject exam dates">
           <div class="exam-schedule__cards" id="exam-schedule-cards" aria-label="401 subject exam dates">
             <div class="exam-card exam-card--quiz exam-card--has-action" data-code="NUT">
@@ -149,8 +253,6 @@
     </section>
 
     <section class="updates-hero hub-section" id="news" aria-labelledby="news-title">
-      <button class="section-switcher" type="button" data-select-section="selector">Switch section</button>
-
       <div class="section-heading">
         <p class="eyebrow">Class board</p>
         <h1 id="news-title">MED 401 news</h1>
@@ -222,58 +324,6 @@
         </dl>
       </article>
 
-      <article class="update-panel update-panel--primary update-panel--wide" data-news-id="nutrition-quiz-2026-07-08" data-course="Nutrition" data-date="2026-07-08" data-priority="1">
-        <div class="assignment-progress assignment-progress--top assignment-progress--quiz" dir="rtl" data-deadline-progress data-progress-mode="remaining" data-deadline-locale="ar" data-start-date="2026-07-01" data-due-date="2026-07-08" data-due-label="8 July 2026">
-          <div class="assignment-progress__top">
-            <strong data-deadline-days>8 July 2026</strong>
-          </div>
-          <div class="assignment-progress__bar" aria-hidden="true">
-            <span data-deadline-fill></span>
-          </div>
-        </div>
-        <div class="update-panel__top">
-          <p class="card__kicker">Nutrition</p><span class="news-tag news-tag--exam">Exam</span>
-          <span class="status-pill status-pill--exam">8/7</span>
-        </div>
-        <h2 dir="rtl">تأكيد كويز Nutrition</h2>
-        <div class="arabic-news" dir="rtl">
-          <p>
-            كويز <span dir="ltr">Nutrition</span> اتحدد رسميًا يوم <strong>8 July 2026</strong>.
-          </p>
-          <p>
-            الكويز على <strong><span dir="ltr">Vitamins</span>، <span dir="ltr">Food-borne Diseases</span>، <span dir="ltr">Tetanus & Rabies</span>، <span dir="ltr">Obesity</span>، وأول نصف من <span dir="ltr">IDA</span></strong>، ودرجته <strong>10 marks</strong>.
-          </p>
-        </div>
-        <div class="assignment-progress assignment-progress--quiz" dir="rtl" data-deadline-progress data-progress-mode="remaining" data-deadline-locale="ar" data-start-date="2026-07-01" data-due-date="2026-07-08" data-due-label="8 July 2026" hidden style="display: none;">
-          <div class="assignment-progress__top">
-            <span>الوقت المتبقي للكويز</span>
-            <strong data-deadline-days>8 July 2026</strong>
-          </div>
-          <div class="assignment-progress__bar" aria-hidden="true">
-            <span data-deadline-fill></span>
-          </div>
-          <small data-deadline-caption>يتحدث تلقائيًا.</small>
-        </div>
-        <dl class="update-facts">
-          <div>
-            <dt>التاريخ</dt>
-            <dd>8 July 2026</dd>
-          </div>
-          <div>
-            <dt>المادة</dt>
-            <dd>Nutrition</dd>
-          </div>
-          <div>
-            <dt>المقرر</dt>
-            <dd><span dir="ltr">Vitamins</span>، <span dir="ltr">Food-borne Diseases</span>، <span dir="ltr">Tetanus & Rabies</span>، <span dir="ltr">Obesity</span>، وأول نصف من <span dir="ltr">IDA</span></dd>
-          </div>
-          <div>
-            <dt>الدرجة</dt>
-            <dd>10 marks</dd>
-          </div>
-        </dl>
-      </article>
-
       <article class="update-panel update-panel--primary update-panel--wide" data-course="SUR401-1" data-date="2026-06-25" data-priority="1" data-persistent="true">
         <div class="update-panel__top">
           <p class="card__kicker">SUR401-1</p><span class="news-tag news-tag--schedule">Schedule</span>
@@ -307,29 +357,6 @@
         <a class="news-action" href="https://academy.incision.care/" target="_blank" rel="noopener noreferrer">
           Open Incision Academy
         </a>
-      </article>
-
-      <article class="update-panel update-panel--compact" data-course="Anaesthesia" data-date="2026-06-16" data-persistent="true">
-        <div class="update-panel__top">
-          <p class="card__kicker">Anaesthesia</p><span class="news-tag news-tag--resource">Resource</span>
-          <span class="status-pill status-pill--open">Jun 16</span>
-        </div>
-        <h2>Anaesthesia assessment</h2>
-        <div class="arabic-news" dir="rtl">
-          <p>
-            مفيش <span dir="ltr">Anaesthesia quiz</span> منفصل. درجات الكويز داخلة مع امتحان الـ <span dir="ltr">final</span>.
-          </p>
-        </div>
-        <dl class="update-facts">
-          <div>
-            <dt>Total</dt>
-            <dd>50 marks</dd>
-          </div>
-          <div>
-            <dt>Exam</dt>
-            <dd>Final Exam only</dd>
-          </div>
-        </dl>
       </article>
 
       <article class="update-panel update-panel--primary" data-course="LAB401" data-date="2026-09-05">
@@ -420,7 +447,6 @@
       </div>
     </section>
     <section class="schedule-page hub-section" id="schedule" aria-labelledby="schedule-title">
-      <button class="section-switcher" type="button" data-select-section="selector">Switch section</button>
       <h1 class="sr-only" id="schedule-title">401 schedule</h1>
 
 
@@ -439,12 +465,68 @@
 
     </section>
 
+    <section class="leaderboard-section hub-section" id="leaderboard" aria-labelledby="leaderboard-title">
+      <div class="section-heading">
+        <p class="eyebrow">Class ranking</p>
+        <h1 id="leaderboard-title">🏆 Leaderboard</h1>
+      </div>
+
+      <!-- Loading skeleton -->
+      <div class="leaderboard__loading" id="leaderboard-loading" hidden>
+        <div class="leaderboard__skeleton"></div>
+        <div class="leaderboard__skeleton"></div>
+        <div class="leaderboard__skeleton"></div>
+      </div>
+
+      <!-- Not signed in state -->
+      <div class="leaderboard__empty" id="leaderboard-not-signed-in" hidden>
+        <div class="leaderboard__empty-icon">🔒</div>
+        <p>Sign in with Google to see the leaderboard and track your rank.</p>
+      </div>
+
+      <!-- No data state -->
+      <div class="leaderboard__empty" id="leaderboard-no-data" hidden>
+        <div class="leaderboard__empty-icon">🏆</div>
+        <p>No one's on the board yet — start studying to claim #1!</p>
+      </div>
+
+      <div class="leaderboard__empty" id="leaderboard-error" hidden>
+        <div class="leaderboard__empty-icon">!</div>
+        <p>We could not load the leaderboard. Check your connection and try again.</p>
+        <button class="button button--secondary" type="button" data-leaderboard-retry>Try again</button>
+      </div>
+
+      <!-- Leaderboard content -->
+      <div class="leaderboard__content" id="leaderboard-content" hidden>
+        <!-- Podium: top 3 -->
+        <div class="leaderboard__podium" id="leaderboard-podium"></div>
+
+        <!-- Ranked list (4th onwards) -->
+        <div class="leaderboard__list" id="leaderboard-list"></div>
+
+        <!-- Your rank pinned at bottom -->
+        <div class="leaderboard__your-rank" id="leaderboard-your-rank" hidden>
+          <div class="leaderboard__your-rank-inner">
+            <span class="leaderboard__your-rank-pos" id="leaderboard-your-rank-pos"></span>
+            <img class="leaderboard__your-rank-avatar" id="leaderboard-your-rank-avatar" alt="" hidden>
+            <span class="leaderboard__your-rank-initials" id="leaderboard-your-rank-initials" hidden></span>
+            <div class="leaderboard__your-rank-info">
+              <strong id="leaderboard-your-rank-name"></strong>
+              <small id="leaderboard-your-rank-breakdown"></small>
+            </div>
+            <span class="leaderboard__your-rank-score" id="leaderboard-your-rank-score"></span>
+          </div>
+        </div>
+
+        <p class="leaderboard__updated" id="leaderboard-updated"></p>
+      </div>
+    </section>
+
 
 
 
 
     <section class="history-page-section hub-section" id="history" aria-label="History Taking Tool">
-      <button class="section-switcher section-switcher--history" type="button" data-select-section="selector">Switch section</button>
       <div class="app" id="history-app">
           <header class="hero">
             <div>
@@ -734,7 +816,6 @@
     </section>
 
     <section class="work-page-section hub-section" id="work" aria-label="Work with Ahmed Sayed">
-      <button class="section-switcher" type="button" data-select-section="selector">Switch section</button>
       <div class="container">
 
         <!-- HERO -->
@@ -970,6 +1051,24 @@
 
   </main>
 
+  <div class="admin-login-modal" id="admin-login-modal" hidden>
+    <button class="admin-login-modal__backdrop" type="button" data-admin-login-close aria-label="Close admin login"></button>
+    <section class="admin-login-card" role="dialog" aria-modal="true" aria-labelledby="admin-login-title">
+      <button class="admin-login-card__close" type="button" data-admin-login-close aria-label="Close admin login">×</button>
+      <p class="eyebrow">Tracker administration</p>
+      <h2 id="admin-login-title">Admin login</h2>
+      <p>Use the registered tracker-admin email and password.</p>
+      <form class="admin-login-form" id="tracker-admin-login-form">
+        <label for="tracker-admin-email-input">Email</label>
+        <input id="tracker-admin-email-input" name="email" type="email" autocomplete="username" required>
+        <label for="tracker-admin-password-input">Password</label>
+        <input id="tracker-admin-password-input" name="password" type="password" autocomplete="current-password" required>
+        <p class="admin-login-status" id="tracker-admin-login-status" aria-live="polite"></p>
+        <button class="button button--primary" type="submit">Sign in as admin</button>
+      </form>
+    </section>
+  </div>
+
   <div class="bottom-nav-wrap">
     <nav class="bottom-nav" aria-label="Bottom navigation">
       <a class="active" href="#tracker" data-section-nav="tracker" aria-label="Tracker">
@@ -984,7 +1083,10 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="4"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>
         <span>Schedule</span>
       </a>
-      <button class="bottom-nav__switch" type="button" data-select-section="selector" aria-label="Switch section">401</button>
+      <a href="#leaderboard" data-section-nav="leaderboard" aria-label="Leaderboard">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+        <span>Board</span>
+      </a>
     </nav>
   </div>
 
@@ -992,11 +1094,12 @@
   <script type="importmap">
     {
       "imports": {
-        "canvas-confetti": "https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.module.mjs"
+        "canvas-confetti": "https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/confetti.module.mjs",
+        "@supabase/supabase-js": "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.110.1/+esm"
       }
     }
   </script>
-  <script type="module" src="/src/main.js?v=20260708-past-exams-v4"></script>
-  <script defer src="/pwa.js?v=20260701-pwa"></script>
+  <script type="module" src="/src/main.js?v=20260712-stabilization-v1"></script>
+  <script defer src="/pwa.js?v=20260712-pwa-cleanup-v1"></script>
 </body>
 </html>

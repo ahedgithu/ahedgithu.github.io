@@ -1,4 +1,30 @@
-﻿import confetti from 'canvas-confetti'
+import confetti from 'canvas-confetti'
+
+import { calculatePercent, calculateQuizProgress } from './progress.js'
+
+import {
+  deleteNewsCard,
+  deleteUserQuizProgress,
+  fetchAdminProfile,
+  fetchNewsCards,
+  fetchTrackerTopicRows,
+  fetchUserQuizProgressRows,
+  fetchUserTopicProgressRows,
+  fetchLeaderboard,
+  fetchUserPreference,
+  upsertUserPreference,
+  getCurrentUser,
+  isSupabaseConfigured,
+  onAuthStateChange,
+  signInAdmin,
+  signInWithGoogle,
+  signOutUser,
+  updateNewsCardOrder,
+  upsertNewsCard,
+  upsertTrackerTopics,
+  upsertUserQuizProgress,
+  upsertUserTopicProgress
+} from './supabaseClient.js'
 
 let subjects = [
   {
@@ -8,15 +34,21 @@ let subjects = [
     examNote: 'Midterm: Wed Jul 22, 2026, 2:30-3:30.',
     topics: [
       {
-        label: 'Liver Introduction',
+        label: 'Liver',
         state: 'taken',
         art: 0,
+        coverageUnits: 4,
         midtermScope: true,
         midtermScopeNote: 'SUR 401-1 scope: Liver. Source: Dr. Abu Alata PDFs and lecture recordings.',
-        lectureUrls: [
-          { label: 'Lecture', url: 'https://docs.google.com/presentation/d/12BIYR9r2h_fwkUQpXQI0xOyPy-lSI9D_/edit?usp=drivesdk&ouid=109054155258701630059&rtpof=true&sd=true' }
+        note: 'Consolidates Liver Introduction; Liver Trauma and Infections; Liver Tumors; and Cirrhosis, portal hypertension and hepatic vascular disease.',
+        progressAliases: ['Liver Introduction', 'Liver Trauma and Infections', 'Liver Tumors', 'Cirrhosis, portal hypertension and hepatic vascular disease'],
+        driveSelector: [
+          { label: 'Liver Introduction', source: 'Dr. Abu Alata PDFs and lecture recordings.', url: 'https://docs.google.com/presentation/d/12BIYR9r2h_fwkUQpXQI0xOyPy-lSI9D_/edit?usp=drivesdk&ouid=109054155258701630059&rtpof=true&sd=true', recordUrl: 'https://drive.google.com/file/d/1ukIDlUnzzpsyCOola5-TiyWJy7e2QELO/view?usp=drivesdk' },
+          { label: 'Liver Trauma and Infections', source: 'Dr. Abu Alata PDFs and lecture recordings. Includes amoebic hepatitis and abscess.', url: 'https://docs.google.com/presentation/d/1yjIUZolwSkC9DLnvTGCWBsxtPMuqalgY/edit?usp=drivesdk&ouid=109054155258701630059&rtpof=true&sd=true', recordUrl: 'https://drive.google.com/file/d/1mhHDVMOU6lPAar5xesF0eLKtNUJDwVR9/view?usp=drivesdk' },
+          { label: 'Liver Tumors', source: 'Tuesday report 30 Jun, taught by Dr. Abu Alata.', url: '' },
+          { label: 'Cirrhosis, portal hypertension and hepatic vascular disease', source: 'Tuesday report: cirrhosis, portal hypertension, varices, transplantation, and hepatic vascular disease.', url: 'https://docs.google.com/presentation/d/1Y8AQJlpl-XINpxVDyeexUBjpxfAsDJrV/edit?usp=drivesdk&ouid=109054155258701630059&rtpof=true&sd=true', recordUrl: 'https://drive.google.com/file/d/1t1i2zjXOYw9jaSdIRYn1GvBOrsToq30u/view?usp=drivesdk' }
         ],
-        audioUrl: 'https://drive.google.com/file/d/1ukIDlUnzzpsyCOola5-TiyWJy7e2QELO/view?usp=drivesdk'
+        expandableTopics: true
       },
       {
         label: 'Esophagus topics',
@@ -33,46 +65,15 @@ let subjects = [
         audioUrl: 'https://drive.google.com/file/d/1vt23RUJTWuT_1ZRUHGm4gvWJKW1sxUyI/view?usp=drivesdk'
       },
       {
-        label: 'Liver Trauma and Infections',
-        state: 'taken',
-        art: 3,
-        midtermScope: true,
-        midtermScopeNote: 'SUR 401-1 scope: Liver. Source: Dr. Abu Alata PDFs and lecture recordings.',
-        note: 'Hepatobiliary surgery coverage includes amoebic hepatitis and abscess.',
-        lectureUrls: [
-          { label: 'Lecture', url: 'https://docs.google.com/presentation/d/1yjIUZolwSkC9DLnvTGCWBsxtPMuqalgY/edit?usp=drivesdk&ouid=109054155258701630059&rtpof=true&sd=true' }
-        ],
-        audioUrl: 'https://drive.google.com/file/d/1mhHDVMOU6lPAar5xesF0eLKtNUJDwVR9/view?usp=drivesdk'
-      },
-      {
-        label: 'Liver Tumors',
-        state: 'taken',
-        art: 8,
-        midtermScope: true,
-        midtermScopeNote: 'SUR 401-1 scope: Liver. Source: Dr. Abu Alata PDFs and lecture recordings.',
-        updatedAt: '2026-06-30',
-        updateBatch: 'tuesday-report-2026-06-30',
-        note: 'Tuesday report 30 Jun: Liver Tumors, taught by Dr. Abu Alata. Covers benign liver lesions, hepatocellular carcinoma, metastatic nodules, risk factors, diagnosis, and treatment options.'
-      },
-      {
-        label: 'Cirrhosis, portal hypertension and hepatic vascular disease',
-        state: 'taken',
-        art: 8,
-        note: 'Tuesday report: cirrhosis, portal hypertension, esophageal varices, liver transplantation, Budd-Chiari syndrome, portal vein thrombosis, and splenic vein thrombosis.',
-        lectureUrls: [
-          { label: 'Lecture', url: 'https://docs.google.com/presentation/d/1Y8AQJlpl-XINpxVDyeexUBjpxfAsDJrV/edit?usp=drivesdk&ouid=109054155258701630059&rtpof=true&sd=true' }
-        ],
-        audioUrl: 'https://drive.google.com/file/d/1t1i2zjXOYw9jaSdIRYn1GvBOrsToq30u/view?usp=drivesdk'
-      },
-      {
         label: 'Tongue',
+        state: 'remaining',
         art: 2,
         midtermScope: true,
         midtermScopeNote: 'SUR 401-1 scope: Tongue. Source: Dr. Abu Alata PDFs and lecture recordings.'
       },
       { label: 'Salivary glands', state: 'remaining', art: 13 },
       {
-        label: 'Stomach anatomy, physiology, histology and peptic ulcers',
+        label: 'Stomach',
         state: 'taken',
         art: 6,
         midtermScope: true,
@@ -80,6 +81,15 @@ let subjects = [
         updatedAt: '2026-06-28',
         updateBatch: 'sunday-report-2026-06-28',
         note: 'Sunday report 28 Jun: anatomy, physiology and histology of the stomach; acute and chronic peptic ulcer; chronic gastric ulcer, taught by Dr. Hisham Ahmed.',
+        progressAliases: ['Stomach anatomy, physiology, histology and peptic ulcers'],
+        mcqTopicKey: 'Stomach anatomy, physiology, histology and peptic ulcers',
+        expandableTopics: true,
+        driveSelector: [
+          { label: 'Stomach anatomy', source: "SUR 401-1 scope. Source: Dr. Hisham's book and lecture recording.", url: '', recordUrl: 'https://drive.google.com/file/d/19U-2vhMabUKGYhF_reeNy2NDovYvN0wl/view?usp=drivesdk' },
+          { label: 'Stomach physiology', source: "SUR 401-1 scope. Source: Dr. Hisham's book and lecture recording.", url: '', recordUrl: 'https://drive.google.com/file/d/19U-2vhMabUKGYhF_reeNy2NDovYvN0wl/view?usp=drivesdk' },
+          { label: 'Stomach histology', source: "SUR 401-1 scope. Source: Dr. Hisham's book and lecture recording.", url: '', recordUrl: 'https://drive.google.com/file/d/19U-2vhMabUKGYhF_reeNy2NDovYvN0wl/view?usp=drivesdk' },
+          { label: 'Peptic ulcers', source: 'Sunday report 28 Jun: acute and chronic peptic ulcer, including chronic gastric ulcer, taught by Dr. Hisham Ahmed.', url: '', recordUrl: 'https://drive.google.com/file/d/19U-2vhMabUKGYhF_reeNy2NDovYvN0wl/view?usp=drivesdk', quizKey: 'Stomach anatomy, physiology, histology and peptic ulcers' }
+        ],
         audioUrl: 'https://drive.google.com/file/d/19U-2vhMabUKGYhF_reeNy2NDovYvN0wl/view?usp=drivesdk'
       },
       { label: 'Pancreas', state: 'remaining', art: 4 },
@@ -750,6 +760,22 @@ const quizState = {
   timerStartedAt: null
 }
 let quizTimerInterval = null
+const studentProgressState = {
+  user: null,
+  ready: false,
+  loading: false,
+  topicRows: new Map(),
+  quizRows: new Map(),
+  lastError: ''
+}
+const trackerAdminState = {
+  profile: null,
+  enabled: false,
+  saving: false,
+  dirtyCollections: new Set(),
+  draggingKey: ''
+}
+const expandedTopicBreakdowns = new Set()
 
 const coveredStates = new Set(['taken', 'partial'])
 const stateLabels = {
@@ -776,16 +802,6 @@ const subjectExamNotes = {
 }
 
 const midtermExamSchedule = [
-  {
-    code: 'NUT Quiz',
-    subjectCode: 'NUT',
-    subjectName: 'Nutrition',
-    date: '2026-07-08',
-    dayLabel: 'Wed',
-    time: '8/7',
-    meta: '10 MARKS',
-    type: 'quiz'
-  },
   {
     code: 'SUR 401-1',
     subjectCode: 'SUR-1',
@@ -903,18 +919,41 @@ const substanceOtherField = document.getElementById('substance-other-field')
 const newsFeed = document.getElementById('news-feed')
 const newsCourseFilter = document.getElementById('news-course-filter')
 const newsDateFilter = document.getElementById('news-date-filter')
+const newsAdminToolbar = document.getElementById('news-admin-toolbar')
+const newsAdminStatus = document.getElementById('news-admin-status')
+const newsAdminModal = document.getElementById('news-admin-modal')
+const newsAdminForm = document.getElementById('news-admin-form')
+const newsAdminModalTitle = document.getElementById('news-admin-modal-title')
+const newsAdminFormStatus = document.getElementById('news-admin-form-status')
 const scheduleTodayTitle = document.getElementById('schedule-today-title')
 const scheduleTodaySummary = document.getElementById('schedule-today-summary')
 const scheduleNextCard = document.getElementById('schedule-next-card')
 const scheduleTodayList = document.getElementById('schedule-today-list')
 const scheduleCalendarGrid = document.getElementById('schedule-calendar-grid')
 const scheduleList = document.getElementById('schedule-list')
-const sectionSelector = document.getElementById('section-selector')
 const trackerTitle = document.getElementById('tracker-title')
 const newsTitle = document.getElementById('news-title')
 const classRepsGrid = document.querySelector('.class-reps__grid')
 const scheduleTitle = document.getElementById('schedule-title')
-const bottomNavSwitch = document.querySelector('.bottom-nav__switch')
+const studentSync = document.getElementById('student-sync')
+const studentSyncButton = document.getElementById('student-sync-button')
+const studentSyncMenu = document.getElementById('student-sync-menu')
+const studentSyncLabel = document.getElementById('student-sync-label')
+const studentSyncAvatar = document.getElementById('student-sync-avatar')
+const studentSyncInitials = document.getElementById('student-sync-initials')
+const studentSyncStatus = document.getElementById('student-sync-status')
+const studentSyncEmail = document.getElementById('student-sync-email')
+const trackerAdminToolbar = document.getElementById('tracker-admin-toolbar')
+const trackerAdminEmail = document.getElementById('tracker-admin-email')
+const trackerAdminSubject = document.getElementById('tracker-admin-subject')
+const trackerAdminSaveOrder = document.getElementById('tracker-admin-save-order')
+const trackerAdminSignOut = document.getElementById('tracker-admin-sign-out')
+const adminLoginModal = document.getElementById('admin-login-modal')
+const adminLoginForm = document.getElementById('tracker-admin-login-form')
+const adminLoginEmail = document.getElementById('tracker-admin-email-input')
+const adminLoginPassword = document.getElementById('tracker-admin-password-input')
+const adminLoginStatus = document.getElementById('tracker-admin-login-status')
+const trackerAdminEditPanel = document.getElementById('tracker-admin-edit-panel')
 
 const initialParams = new URLSearchParams(window.location.search)
 subjects = subjects.map((subject) => ({
@@ -930,6 +969,11 @@ subjects402.forEach((subject) => {
 let activeAcademicSection = '401'
 let activeSiteMode = 'selector'
 let activeAcademicSectionData = academicSections[activeAcademicSection]
+const newsCardsState = {
+  rowsBySection: new Map(),
+  remoteSections: new Set(),
+  loadingSections: new Set()
+}
 subjects = activeAcademicSectionData.subjects
 const initialSubject = subjects.find((subject) => subject.code === initialParams.get('subject'))
 let activeSubjectCode = initialParams.get('tracker') === '1' && initialSubject ? initialSubject.code : null
@@ -940,13 +984,835 @@ function getAcademicSection(sectionId = activeAcademicSection) {
   return academicSections[sectionId] || academicSections['401']
 }
 
+function isValidRemoteTopicState(state) {
+  return ['taken', 'partial', 'announced', 'remaining'].includes(state)
+}
+
+function makeRemoteTrackerTopic(row) {
+  const topic = {
+    label: row.topic_label,
+    state: isValidRemoteTopicState(row.state) ? row.state : 'remaining',
+    stopNote: row.stop_note || '',
+    displayOrder: row.display_order !== null && row.display_order !== undefined && Number.isFinite(Number(row.display_order))
+      ? Number(row.display_order)
+      : null,
+    updateBatch: row.updated_at ? 'remote-admin' : undefined,
+    updatedAt: row.updated_at ? row.updated_at.slice(0, 10) : undefined,
+    createdAt: row.created_at || undefined
+  }
+
+  if (row.drive_url) {
+    topic.lectureUrls = [{
+      label: 'Drive',
+      url: row.drive_url,
+      type: 'lecture'
+    }]
+    topic.driveUrl = row.drive_url
+  }
+
+    if (row.audio_url) topic.audioUrl = row.audio_url
+
+  return topic
+}
+
+function applyTrackerTopicRows(rows) {
+  if (!Array.isArray(rows) || !rows.length) return false
+
+  let changed = false
+
+  rows.forEach((row) => {
+    const section = getAcademicSection(row.section)
+    const subject = section.subjects.find((item) => item.code === row.subject_code)
+    if (!subject) return
+
+    const collection = row.track === 'clinical' ? subject.clinicalTopics : subject.topics
+    if (!collection) return
+
+    const consolidatedTopic = collection.find((item) => item.progressAliases?.includes(row.topic_label))
+    if (consolidatedTopic) return
+
+    const existingTopic = collection.find((item) => item.label === row.topic_label)
+    if (!existingTopic) {
+      collection.push({ ...makeRemoteTrackerTopic(row), isNewRemote: true })
+      changed = true
+      return
+    }
+
+    if (isValidRemoteTopicState(row.state) && existingTopic.state !== row.state) {
+      existingTopic.state = row.state
+      changed = true
+    }
+
+    const nextStopNote = row.stop_note || ''
+    if ((existingTopic.stopNote || '') !== nextStopNote) {
+      existingTopic.stopNote = nextStopNote
+      changed = true
+    }
+
+    if (Object.prototype.hasOwnProperty.call(row, 'drive_url')) {
+      const nextDriveUrl = row.drive_url || ''
+      if ((existingTopic.driveUrl || '') !== nextDriveUrl) {
+        existingTopic.driveUrl = nextDriveUrl
+        existingTopic.lectureUrls = nextDriveUrl ? [{ label: 'Drive', url: nextDriveUrl, type: 'lecture' }] : []
+        changed = true
+      }
+    }
+
+    if (Object.prototype.hasOwnProperty.call(row, 'audio_url')) {
+      const nextAudioUrl = row.audio_url || ''
+      if ((existingTopic.audioUrl || '') !== nextAudioUrl) {
+        existingTopic.audioUrl = nextAudioUrl
+        changed = true
+      }
+    }
+
+    if (row.display_order !== null && row.display_order !== undefined) {
+      const nextDisplayOrder = Number(row.display_order)
+      if (Number.isFinite(nextDisplayOrder) && existingTopic.displayOrder !== nextDisplayOrder) {
+        existingTopic.displayOrder = nextDisplayOrder
+        changed = true
+      }
+    }
+
+    if (row.updated_at) {
+      existingTopic.updatedAt = row.updated_at.slice(0, 10)
+      existingTopic.updateBatch = 'remote-admin'
+    }
+    existingTopic.createdAt = row.created_at || undefined
+  })
+
+  Object.values(academicSections).forEach(section => {
+    section.subjects.forEach(subject => {
+      ;[subject.topics, subject.clinicalTopics].forEach(collection => {
+        if (!Array.isArray(collection)) return
+        const originalPositions = new Map(collection.map((topic, index) => [topic, index]))
+        collection.sort((a, b) => {
+          const aOrder = Number.isFinite(a.displayOrder) ? a.displayOrder : Number.MAX_SAFE_INTEGER
+          const bOrder = Number.isFinite(b.displayOrder) ? b.displayOrder : Number.MAX_SAFE_INTEGER
+          return aOrder - bOrder || originalPositions.get(a) - originalPositions.get(b)
+        })
+      })
+    })
+  })
+
+  return changed
+}
+
+function refreshTrackerAfterRemoteUpdate() {
+  updateMiniDashboard()
+  renderSubjects()
+  if (activeSubjectCode) setActiveSubject(activeSubjectCode, 'open')
+}
+
+let remoteTrackerRefreshPromise = null
+
+function refreshRemoteTrackerData() {
+  if (!isSupabaseConfigured()) return Promise.resolve()
+  if (remoteTrackerRefreshPromise) return remoteTrackerRefreshPromise
+
+  remoteTrackerRefreshPromise = fetchTrackerTopicRows()
+    .then((rows) => {
+      if (applyTrackerTopicRows(rows)) refreshTrackerAfterRemoteUpdate()
+    })
+    .catch((error) => {
+      console.warn('Remote tracker data unavailable; using local fallback.', error)
+    })
+    .finally(() => {
+      remoteTrackerRefreshPromise = null
+    })
+
+  return remoteTrackerRefreshPromise
+}
+
+function isTrackerAdmin() {
+  return Boolean(trackerAdminState.profile && trackerAdminState.enabled)
+}
+
+function hasTrackerAdminAccess() {
+  return Boolean(trackerAdminState.profile)
+}
+
+function getAdminCollectionKey(subjectCode = activeSubjectCode, track = activeSubjectTrack) {
+  return `${activeAcademicSection}::${subjectCode || ''}::${track}`
+}
+
+function getAdminTopicKey(subject, topic, track = activeSubjectTrack) {
+  return `${activeAcademicSection}::${subject.code}::${track}::${topic.label}`
+}
+
+function getAdminTopicContext(subjectCode, track, topicLabel) {
+  const subject = subjects.find(item => item.code === subjectCode)
+  const collection = track === 'clinical' ? getClinicalTopics(subject || {}) : subject?.topics
+  const topic = collection?.find(item => item.label === topicLabel)
+  return subject && topic ? { subject, topic, collection, track } : null
+}
+
+function makeAdminTopicPayload(subject, topic, track = activeSubjectTrack, overrides = {}) {
+  return {
+    section: activeAcademicSection,
+    subject_code: subject.code,
+    subject_name: subject.name,
+    track,
+    topic_label: topic.label,
+    state: topic.state || 'remaining',
+    stop_note: topic.stopNote || null,
+    drive_url: topic.driveUrl || topic.lectureUrls?.[0]?.url || null,
+    audio_url: topic.audioUrl || null,
+    display_order: Number.isFinite(topic.displayOrder) ? topic.displayOrder : null,
+    ...overrides
+  }
+}
+
+function setAdminLoginStatus(message, tone = 'neutral') {
+  if (!adminLoginStatus) return
+  adminLoginStatus.textContent = message
+  adminLoginStatus.dataset.tone = tone
+}
+
+function openAdminLogin() {
+  setStudentSyncMenu(false)
+  if (hasTrackerAdminAccess()) {
+    trackerAdminState.enabled = !trackerAdminState.enabled
+    closeAdminEditor()
+    renderTrackerAdminUi()
+    renderSubjects()
+    if (activeSubjectCode) setActiveSubject(activeSubjectCode, 'open')
+    if (newsCardsState.remoteSections.has(activeAcademicSection)) {
+      replaceNewsFeedWithRemoteRows()
+      renderNewsFilters()
+    }
+    showGlobalToast(trackerAdminState.enabled ? 'Admin mode on.' : 'Student view on.')
+    return
+  }
+  adminLoginModal.hidden = false
+  document.body.classList.add('admin-modal-open')
+  setAdminLoginStatus('')
+  requestAnimationFrame(() => adminLoginEmail?.focus())
+}
+
+function closeAdminLogin() {
+  if (!adminLoginModal) return
+  adminLoginModal.hidden = true
+  document.body.classList.remove('admin-modal-open')
+  if (adminLoginPassword) adminLoginPassword.value = ''
+}
+
+function closeAdminEditor() {
+  if (!trackerAdminEditPanel) return
+  trackerAdminEditPanel.classList.remove('is-open')
+  window.setTimeout(() => {
+    trackerAdminEditPanel.hidden = true
+    trackerAdminEditPanel.innerHTML = ''
+  }, 260)
+}
+
+function renderTrackerAdminUi() {
+  const enabled = isTrackerAdmin()
+  const adminSwitch = document.querySelector('[data-admin-login-open]')
+  document.body.classList.toggle('tracker-admin-mode', enabled)
+  adminSwitch?.classList.toggle('is-active', enabled)
+  if (adminSwitch) {
+    adminSwitch.setAttribute('aria-label', enabled ? 'Switch to student view' : 'Switch to admin mode')
+    const label = adminSwitch.querySelector('span')
+    if (label) label.textContent = enabled ? 'Student' : 'Admin'
+  }
+  if (trackerAdminToolbar) trackerAdminToolbar.hidden = !enabled
+  if (trackerAdminEmail) trackerAdminEmail.textContent = enabled ? studentProgressState.user?.email || '' : ''
+  if (trackerAdminSubject) {
+    trackerAdminSubject.textContent = activeSubjectCode
+      ? `${activeSubjectCode} · ${activeSubjectTrack === 'clinical' ? 'Clinical' : 'Theoretical'}`
+      : 'Choose a subject'
+  }
+  const dirty = trackerAdminState.dirtyCollections.has(getAdminCollectionKey())
+  if (trackerAdminSaveOrder) {
+    trackerAdminSaveOrder.disabled = !enabled || !dirty || trackerAdminState.saving
+    trackerAdminSaveOrder.textContent = trackerAdminState.saving && dirty ? 'Saving...' : 'Save arrangement'
+  }
+  renderNewsAdminToolbar()
+}
+
+async function refreshTrackerAdminProfile(user) {
+  if (!user) {
+    trackerAdminState.profile = null
+    trackerAdminState.enabled = false
+    trackerAdminState.dirtyCollections.clear()
+    closeAdminEditor()
+    renderTrackerAdminUi()
+    return
+  }
+  try {
+    trackerAdminState.profile = await fetchAdminProfile()
+    if (!trackerAdminState.profile) trackerAdminState.enabled = false
+  } catch (error) {
+    trackerAdminState.profile = null
+    console.warn('Admin profile check failed.', error)
+  }
+  renderTrackerAdminUi()
+  if (newsCardsState.remoteSections.has(activeAcademicSection)) {
+    replaceNewsFeedWithRemoteRows()
+    renderNewsFilters()
+  } else {
+    await refreshRemoteNewsCards(activeAcademicSection)
+  }
+  renderSubjects()
+  if (activeSubjectCode) setActiveSubject(activeSubjectCode, 'open')
+}
+
+function openAdminTopicEditor(subjectCode, track, topicLabel) {
+  if (!isTrackerAdmin() || !trackerAdminEditPanel) return
+  const context = getAdminTopicContext(subjectCode, track, topicLabel)
+  if (!context) return
+  const { subject, topic } = context
+  const states = ['remaining', 'announced', 'partial', 'taken']
+  trackerAdminEditPanel.innerHTML = `
+    <div class="admin-edit-panel__inner">
+      <div class="admin-edit-panel__header">
+        <div class="admin-edit-panel__title-row">
+          <span class="admin-edit-panel__subject">${escapeHtml(subject.code)} / ${escapeHtml(track)}</span>
+          <button class="admin-edit-close" type="button" data-admin-editor-close aria-label="Close">×</button>
+        </div>
+        <h2 class="admin-edit-panel__title">${escapeHtml(topic.label)}</h2>
+        <p class="admin-edit-panel__subject-name">${escapeHtml(subject.name)}</p>
+      </div>
+      <form class="admin-edit-form" data-tracker-admin-edit-form data-subject-code="${escapeHtml(subject.code)}" data-track="${escapeHtml(track)}" data-topic-label="${escapeHtml(topic.label)}">
+        <div class="admin-edit-states">
+          ${states.map(state => `
+            <label class="admin-state-option admin-state-option--${state}${topic.state === state ? ' is-selected' : ''}">
+              <input type="radio" name="admin-state" value="${state}" ${topic.state === state ? 'checked' : ''}>
+              <span>${state[0].toUpperCase() + state.slice(1)}</span>
+            </label>
+          `).join('')}
+        </div>
+        <label class="admin-edit-label">Where did we stop / notes
+          <textarea class="admin-edit-textarea" name="stop_note" rows="4" placeholder="Optional note">${escapeHtml(topic.stopNote || '')}</textarea>
+        </label>
+        <div class="admin-edit-grid">
+          <label class="admin-edit-label">Google Drive Link
+            <input class="admin-edit-input" type="url" name="drive_url" value="${escapeHtml(topic.driveUrl || topic.lectureUrls?.[0]?.url || '')}" placeholder="https://drive.google.com/...">
+          </label>
+          <label class="admin-edit-label">Lecture Record Link
+            <input class="admin-edit-input" type="url" name="audio_url" value="${escapeHtml(topic.audioUrl || '')}" placeholder="https://drive.google.com/...">
+          </label>
+        </div>
+        <button class="admin-save-btn" type="submit">Save topic</button>
+      </form>
+    </div>`
+  trackerAdminEditPanel.hidden = false
+  requestAnimationFrame(() => trackerAdminEditPanel.classList.add('is-open'))
+}
+
+async function saveAdminTopicForm(form) {
+  const context = getAdminTopicContext(form.dataset.subjectCode, form.dataset.track, form.dataset.topicLabel)
+  if (!context || trackerAdminState.saving) return
+  const { subject, topic, track } = context
+  const submit = form.querySelector('[type="submit"]')
+  const nextState = form.querySelector('input[name="admin-state"]:checked')?.value || topic.state || 'remaining'
+  const stopNote = form.querySelector('[name="stop_note"]').value.trim()
+  const driveUrl = form.querySelector('[name="drive_url"]').value.trim()
+  const audioUrl = form.querySelector('[name="audio_url"]').value.trim()
+  trackerAdminState.saving = true
+  if (submit) { submit.disabled = true; submit.textContent = 'Saving...' }
+  try {
+    const rows = await upsertTrackerTopics([makeAdminTopicPayload(subject, topic, track, {
+      state: nextState,
+      stop_note: stopNote || null,
+      drive_url: driveUrl || null,
+      audio_url: audioUrl || null
+    })])
+    applyTrackerTopicRows(rows)
+    closeAdminEditor()
+    refreshTrackerAfterRemoteUpdate()
+  } catch (error) {
+    if (submit) { submit.disabled = false; submit.textContent = 'Save topic' }
+    window.alert(`Topic was not saved: ${error.message}`)
+  } finally {
+    trackerAdminState.saving = false
+    renderTrackerAdminUi()
+  }
+}
+
+function moveAdminTopic(subjectCode, track, topicLabel, direction) {
+  const context = getAdminTopicContext(subjectCode, track, topicLabel)
+  if (!context) return
+  const { collection } = context
+  const index = collection.findIndex(item => item.label === topicLabel)
+  const nextIndex = direction === 'up' ? index - 1 : index + 1
+  if (index < 0 || nextIndex < 0 || nextIndex >= collection.length) return
+  ;[collection[index], collection[nextIndex]] = [collection[nextIndex], collection[index]]
+  collection.forEach((topic, topicIndex) => { topic.displayOrder = (topicIndex + 1) * 10 })
+  trackerAdminState.dirtyCollections.add(getAdminCollectionKey(subjectCode, track))
+  renderSubjects()
+  setActiveSubject(subjectCode, 'open')
+  renderTrackerAdminUi()
+}
+
+async function saveAdminArrangement() {
+  if (!isTrackerAdmin() || trackerAdminState.saving || !activeSubjectCode) return
+  const subject = subjects.find(item => item.code === activeSubjectCode)
+  const collection = activeSubjectTrack === 'clinical' ? getClinicalTopics(subject) : subject?.topics
+  if (!subject || !collection) return
+  trackerAdminState.saving = true
+  renderTrackerAdminUi()
+  try {
+    const payload = collection.map((topic, index) => makeAdminTopicPayload(subject, topic, activeSubjectTrack, { display_order: (index + 1) * 10 }))
+    const rows = await upsertTrackerTopics(payload)
+    applyTrackerTopicRows(rows)
+    trackerAdminState.dirtyCollections.delete(getAdminCollectionKey())
+    refreshTrackerAfterRemoteUpdate()
+  } catch (error) {
+    window.alert(`Arrangement was not saved: ${error.message}`)
+  } finally {
+    trackerAdminState.saving = false
+    renderTrackerAdminUi()
+  }
+}
+
+function getStudentDisplayName() {
+  const metadata = studentProgressState.user?.user_metadata || {}
+  return metadata.full_name || metadata.name || studentProgressState.user?.email || 'Student'
+}
+
+function getLocalTopicCompletionState(subjectCode, topicLabel, section = activeAcademicSection) {
+  const emptyState = { studied: false, mcqs: false }
+  const currentSection = activeAcademicSection
+  const storageKey = `${TOPIC_COMPLETION_STORAGE_PREFIX}::${section}::${encodeURIComponent(subjectCode)}::${encodeURIComponent(topicLabel)}`
+
+  try {
+    const savedRaw = localStorage.getItem(storageKey)
+      || (section === '401' ? localStorage.getItem(getLegacyTopicCompletionKey(subjectCode, topicLabel)) : null)
+    const savedState = JSON.parse(savedRaw || '{}')
+    return {
+      ...emptyState,
+      studied: !!savedState.studied,
+      mcqs: !!savedState.mcqs
+    }
+  } catch {
+    if (section === currentSection) localStorage.removeItem(getTopicCompletionKey(subjectCode, topicLabel))
+    return emptyState
+  }
+}
+
+function getLocalQuizState(topicLabel, sourceId = 'current', section = activeAcademicSection) {
+  const storageKey = `${QUIZ_STORAGE_PREFIX}::${section}::${encodeURIComponent(topicLabel)}::${encodeURIComponent(sourceId)}`
+
+  try {
+    const savedRaw = localStorage.getItem(storageKey)
+      || (section === '401' ? localStorage.getItem(getLegacyQuizStorageKey(topicLabel, sourceId)) : null)
+    return JSON.parse(savedRaw || 'null')
+  } catch {
+    if (section === activeAcademicSection) localStorage.removeItem(getQuizStorageKey(topicLabel, sourceId))
+    return null
+  }
+}
+
+function getQuizProgressStatsFromPayload(payload) {
+  const answers = payload?.answers || {}
+  const totalQuestions = payload?.totalQuestions || payload?.order?.length || 0
+  const answeredCount = Object.keys(answers).length
+  const wrongQuestionIds = Array.isArray(payload?.wrongQuestionIds) ? payload.wrongQuestionIds : []
+
+  return {
+    totalQuestions,
+    answeredCount,
+    score: Number.isFinite(payload?.score) ? payload.score : null,
+    wrongQuestionIds
+  }
+}
+
+function renderStudentSyncUi() {
+  if (!studentSync) return
+
+  const signedIn = !!studentProgressState.user
+  studentSync.classList.toggle('is-signed-in', signedIn)
+  studentSync.classList.toggle('is-loading', studentProgressState.loading)
+  studentSyncButton?.classList.toggle('is-login', !signedIn)
+
+  if (studentSyncLabel) {
+    studentSyncLabel.textContent = signedIn ? '' : 'Login'
+    if (signedIn) studentSyncLabel.setAttribute('hidden', '')
+    else studentSyncLabel.removeAttribute('hidden')
+  }
+
+  if (studentSyncAvatar) {
+    const avatarUrl = signedIn ? getSafeExternalUrl(studentProgressState.user?.user_metadata?.avatar_url || studentProgressState.user?.user_metadata?.picture || '') : ''
+    studentSyncAvatar.src = avatarUrl
+    studentSyncAvatar.hidden = !avatarUrl
+    studentSyncAvatar.alt = avatarUrl ? `${getStudentDisplayName()} profile` : ''
+    studentSyncButton?.setAttribute('aria-label', signedIn ? `Open ${getStudentDisplayName()} profile menu` : 'Login')
+    if (studentSyncInitials) {
+      studentSyncInitials.textContent = signedIn && !avatarUrl
+        ? getStudentDisplayName().split(/\s+/).filter(Boolean).slice(0, 2).map((part) => part[0]).join('').toUpperCase()
+        : ''
+      studentSyncInitials.hidden = !signedIn || !!avatarUrl
+    }
+  }
+
+  if (studentSyncEmail) {
+    studentSyncEmail.textContent = signedIn ? getStudentDisplayName() : 'Google sync is off'
+  }
+
+  const anonBtn = document.getElementById('leaderboard-anon-toggle')
+  if (anonBtn) {
+    anonBtn.style.display = signedIn ? '' : 'none'
+  }
+  if (signedIn) {
+    renderAnonToggleUi()
+  }
+
+  if (studentSyncStatus) {
+    if (!isSupabaseConfigured()) {
+      studentSyncStatus.hidden = false
+      studentSyncStatus.textContent = 'Sync unavailable.'
+    } else if (studentProgressState.loading) {
+      studentSyncStatus.hidden = false
+      studentSyncStatus.textContent = 'Loading your saved progress...'
+    } else if (studentProgressState.lastError) {
+      studentSyncStatus.hidden = false
+      studentSyncStatus.textContent = 'Sync needs retry. Local progress is still saved.'
+    } else if (signedIn) {
+      studentSyncStatus.textContent = ''
+      studentSyncStatus.hidden = true
+    } else {
+      studentSyncStatus.hidden = false
+      studentSyncStatus.textContent = 'Sign in to keep MCQ progress across devices.'
+    }
+  }
+}
+
+const leaderboardState = {
+  loading: false,
+  error: '',
+  rows: [],
+  preferences: { anonymous: true },
+  lastFetched: 0
+}
+
+function renderAnonToggleUi() {
+  const btn = document.getElementById('leaderboard-anon-toggle')
+  const label = document.getElementById('leaderboard-anon-label')
+  if (!btn || !label) return
+
+  const isAnon = !!leaderboardState.preferences.anonymous
+  btn.classList.toggle('is-anon', isAnon)
+  label.textContent = isAnon ? 'Show my name' : 'Go anonymous'
+}
+
+function showGlobalToast(text) {
+  const toast = document.getElementById('toast')
+  if (!toast) return
+  toast.textContent = text
+  toast.classList.add('show')
+  setTimeout(() => toast.classList.remove('show'), 1600)
+}
+
+async function fetchAndRenderLeaderboard(force = false) {
+  if (leaderboardState.loading) return
+
+  const now = Date.now()
+  if (!force && leaderboardState.rows.length > 0 && (now - leaderboardState.lastFetched < 60000)) {
+    renderLeaderboardHtml()
+    return
+  }
+
+  const loadingEl = document.getElementById('leaderboard-loading')
+  const notSignedInEl = document.getElementById('leaderboard-not-signed-in')
+  const noDataEl = document.getElementById('leaderboard-no-data')
+  const errorEl = document.getElementById('leaderboard-error')
+  const contentEl = document.getElementById('leaderboard-content')
+
+  if (loadingEl) loadingEl.hidden = false
+  if (notSignedInEl) notSignedInEl.hidden = true
+  if (noDataEl) noDataEl.hidden = true
+  if (errorEl) errorEl.hidden = true
+  if (contentEl) contentEl.hidden = true
+
+  if (!studentProgressState.user) {
+    if (loadingEl) loadingEl.hidden = true
+    if (notSignedInEl) notSignedInEl.hidden = false
+    return
+  }
+
+  leaderboardState.loading = true
+  try {
+    const rows = await fetchLeaderboard(activeAcademicSection)
+    leaderboardState.rows = rows
+    leaderboardState.lastFetched = now
+    renderLeaderboardHtml()
+  } catch (err) {
+    console.error('Leaderboard fetch failed:', err)
+    if (loadingEl) loadingEl.hidden = true
+    if (errorEl) errorEl.hidden = false
+    showGlobalToast('Failed to load leaderboard.')
+  } finally {
+    leaderboardState.loading = false
+  }
+}
+
+function renderLeaderboardHtml() {
+  const loadingEl = document.getElementById('leaderboard-loading')
+  const notSignedInEl = document.getElementById('leaderboard-not-signed-in')
+  const noDataEl = document.getElementById('leaderboard-no-data')
+  const errorEl = document.getElementById('leaderboard-error')
+  const contentEl = document.getElementById('leaderboard-content')
+  const podiumEl = document.getElementById('leaderboard-podium')
+  const listEl = document.getElementById('leaderboard-list')
+  const yourRankEl = document.getElementById('leaderboard-your-rank')
+  const updatedEl = document.getElementById('leaderboard-updated')
+
+  if (loadingEl) loadingEl.hidden = true
+  if (notSignedInEl) notSignedInEl.hidden = true
+  if (errorEl) errorEl.hidden = true
+
+  const rows = leaderboardState.rows || []
+  if (rows.length === 0) {
+    if (noDataEl) noDataEl.hidden = false
+    if (contentEl) contentEl.hidden = true
+    return
+  }
+
+  if (noDataEl) noDataEl.hidden = true
+  if (contentEl) contentEl.hidden = false
+
+  const top3 = rows.slice(0, 3)
+  const rest = rows.slice(3)
+
+  if (podiumEl) {
+    podiumEl.innerHTML = ''
+    const medalConfig = [
+      { rank: 2, key: 'silver', medal: '🥈' },
+      { rank: 1, key: 'gold', medal: '🥇' },
+      { rank: 3, key: 'bronze', medal: '🥉' }
+    ]
+
+    medalConfig.forEach(({ rank, key, medal }) => {
+      const entry = top3[rank - 1]
+      if (!entry) return
+
+      const isMe = studentProgressState.user && entry.user_id === studentProgressState.user.id
+      const isAnon = entry.anonymous
+      const displayName = isAnon
+        ? (isMe ? 'You (Anon)' : 'Anonymous Student')
+        : (entry.display_name || 'Student')
+
+      const avatarUrl = isAnon ? '' : entry.avatar_url
+      const initials = displayName.split(/\s+/).filter(Boolean).slice(0, 2).map((part) => part[0]).join('').toUpperCase() || 'S'
+
+      const avatarHtml = avatarUrl
+        ? `<img class="leaderboard__podium-avatar" src="${getSafeExternalUrl(avatarUrl)}" alt="">`
+        : `<span class="leaderboard__podium-initials">${isAnon ? '🕵️' : initials}</span>`
+
+      const card = document.createElement('div')
+      card.className = `leaderboard__podium-card leaderboard__podium-card--${key}`
+      card.innerHTML = `
+        <span class="leaderboard__podium-medal">${medal}</span>
+        ${avatarHtml}
+        <span class="leaderboard__podium-name">${escapeHtml(displayName)}</span>
+        <span class="leaderboard__podium-score">${entry.total_score} pts</span>
+      `
+      podiumEl.appendChild(card)
+    })
+  }
+
+  if (listEl) {
+    listEl.innerHTML = ''
+    rest.forEach((entry, idx) => {
+      const rank = idx + 4
+      const isMe = studentProgressState.user && entry.user_id === studentProgressState.user.id
+      const isAnon = entry.anonymous
+      const displayName = isAnon
+        ? (isMe ? 'You (Anon)' : 'Anonymous Student')
+        : (entry.display_name || 'Student')
+
+      const avatarUrl = isAnon ? '' : entry.avatar_url
+      const initials = displayName.split(/\s+/).filter(Boolean).slice(0, 2).map((part) => part[0]).join('').toUpperCase() || 'S'
+
+      const avatarHtml = avatarUrl
+        ? `<img class="leaderboard__row-avatar" src="${getSafeExternalUrl(avatarUrl)}" alt="">`
+        : `<span class="leaderboard__row-initials">${isAnon ? '🕵️' : initials}</span>`
+
+      const row = document.createElement('div')
+      row.className = 'leaderboard__row'
+      row.innerHTML = `
+        <span class="leaderboard__row-rank">${rank}</span>
+        ${avatarHtml}
+        <span class="leaderboard__row-name">${escapeHtml(displayName)}</span>
+        <span class="leaderboard__row-score">${entry.total_score} pts</span>
+      `
+      listEl.appendChild(row)
+    })
+  }
+
+  if (yourRankEl) {
+    const myIndex = rows.findIndex((r) => studentProgressState.user && r.user_id === studentProgressState.user.id)
+    if (myIndex !== -1) {
+      yourRankEl.hidden = false
+      const myEntry = rows[myIndex]
+      const rank = myIndex + 1
+      const isAnon = myEntry.anonymous
+      const displayName = isAnon
+        ? 'You (Anonymous)'
+        : (myEntry.display_name || 'Student')
+
+      const avatarUrl = isAnon ? '' : myEntry.avatar_url
+      const initials = displayName.split(/\s+/).filter(Boolean).slice(0, 2).map((part) => part[0]).join('').toUpperCase() || 'S'
+
+      const avatarContainer = document.getElementById('leaderboard-your-rank-avatar')
+      const initialsContainer = document.getElementById('leaderboard-your-rank-initials')
+
+      document.getElementById('leaderboard-your-rank-pos').textContent = `#${rank}`
+      if (avatarUrl) {
+        if (avatarContainer) {
+          avatarContainer.src = getSafeExternalUrl(avatarUrl)
+          avatarContainer.hidden = false
+        }
+        if (initialsContainer) initialsContainer.hidden = true
+      } else {
+        if (avatarContainer) avatarContainer.hidden = true
+        if (initialsContainer) {
+          initialsContainer.textContent = isAnon ? '🕵️' : initials
+          initialsContainer.hidden = false
+        }
+      }
+
+      document.getElementById('leaderboard-your-rank-name').textContent = displayName
+      document.getElementById('leaderboard-your-rank-breakdown').textContent =
+        `${myEntry.mcqs_count} MCQ topics · ${myEntry.quizzes_completed} quizzes · ${myEntry.correct_answers} correct`
+      document.getElementById('leaderboard-your-rank-score').textContent = `${myEntry.total_score} pts`
+    } else {
+      yourRankEl.hidden = true
+    }
+  }
+
+  if (updatedEl) {
+    const timeStr = new Date(leaderboardState.lastFetched).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })
+    updatedEl.textContent = `Scores update automatically · Last updated at ${timeStr}`
+  }
+}
+
+function setStudentSyncMenu(open) {
+  if (!studentSync || !studentSyncMenu || !studentSyncButton) return
+  studentSync.classList.toggle('is-open', open)
+  studentSyncMenu.hidden = !open
+  studentSyncButton.setAttribute('aria-expanded', String(open))
+}
+
+async function syncLocalProgressToCloud(section = activeAcademicSection) {
+  if (!studentProgressState.user) return
+
+  const sectionSubjects = getAcademicSection(section).subjects || []
+  for (const subject of sectionSubjects) {
+    const topicGroups = [subject.topics || [], subject.clinicalTopics || []]
+    for (const topic of topicGroups.flat()) {
+      const key = getTopicProgressRecordKey(section, subject.code, topic.label)
+      if (studentProgressState.topicRows.has(key)) continue
+      const localState = getLocalTopicCompletionState(subject.code, topic.label, section)
+      if (!localState.studied && !localState.mcqs) continue
+
+      studentProgressState.topicRows.set(key, localState)
+      await upsertUserTopicProgress({
+        user_id: studentProgressState.user.id,
+        section,
+        subject_code: subject.code,
+        topic_label: topic.label,
+        studied: localState.studied,
+        mcqs: localState.mcqs
+      })
+    }
+  }
+
+  const quizPrefix = `${QUIZ_STORAGE_PREFIX}::${section}::`
+  for (let index = 0; index < localStorage.length; index += 1) {
+    const storageKey = localStorage.key(index)
+    if (!storageKey?.startsWith(quizPrefix)) continue
+    const [, , encodedTopicLabel, encodedSourceId] = storageKey.split('::')
+    const topicLabel = decodeURIComponent(encodedTopicLabel || '')
+    const sourceId = decodeURIComponent(encodedSourceId || 'current')
+    if (!topicLabel) continue
+    const key = getQuizProgressRecordKey(section, topicLabel, sourceId)
+    if (studentProgressState.quizRows.has(key)) continue
+
+    const payload = getLocalQuizState(topicLabel, sourceId, section)
+    if (!payload) continue
+    const stats = getQuizProgressStatsFromPayload(payload)
+    studentProgressState.quizRows.set(key, payload)
+    await upsertUserQuizProgress({
+      user_id: studentProgressState.user.id,
+      section,
+      topic_label: topicLabel,
+      source_id: sourceId,
+      source_label: payload.sourceLabel || '',
+      progress: payload,
+      completed: !!payload.completed,
+      score: stats.score,
+      total_questions: stats.totalQuestions,
+      answered_count: stats.answeredCount,
+      wrong_question_ids: stats.wrongQuestionIds,
+      completed_at: payload.completed ? new Date().toISOString() : null
+    })
+  }
+}
+
+async function loadStudentProgress(section = activeAcademicSection) {
+  if (!studentProgressState.user || !isSupabaseConfigured()) {
+    studentProgressState.ready = false
+    renderStudentSyncUi()
+    return
+  }
+
+  studentProgressState.loading = true
+  studentProgressState.lastError = ''
+  renderStudentSyncUi()
+
+  try {
+    const [topicRows, quizRows, pref] = await Promise.all([
+      fetchUserTopicProgressRows(section),
+      fetchUserQuizProgressRows(section),
+      fetchUserPreference().catch(() => null)
+    ])
+
+    leaderboardState.preferences = pref || { anonymous: true }
+    renderAnonToggleUi()
+
+    ;[...studentProgressState.topicRows.keys()]
+      .filter((key) => key.startsWith(`${section}::`))
+      .forEach((key) => studentProgressState.topicRows.delete(key))
+    ;[...studentProgressState.quizRows.keys()]
+      .filter((key) => key.startsWith(`${section}::`))
+      .forEach((key) => studentProgressState.quizRows.delete(key))
+
+    topicRows.forEach((row) => {
+      studentProgressState.topicRows.set(
+        getTopicProgressRecordKey(row.section, row.subject_code, row.topic_label),
+        row
+      )
+    })
+
+    quizRows.forEach((row) => {
+      studentProgressState.quizRows.set(
+        getQuizProgressRecordKey(row.section, row.topic_label, row.source_id),
+        row.progress || row
+      )
+    })
+
+    await syncLocalProgressToCloud(section)
+    studentProgressState.ready = true
+    refreshTrackerFilters()
+    updateGlobalProgress()
+  } catch (error) {
+    studentProgressState.lastError = error.message
+    console.warn('Student progress sync failed.', error)
+  } finally {
+    studentProgressState.loading = false
+    renderStudentSyncUi()
+  }
+}
+
 function getInitialSiteMode() {
   const hash = window.location.hash.replace('#', '')
   if (initialParams.get('section') === '402') return '402'
   if (initialParams.get('section') === '401') return '401'
   if (initialParams.get('section') === 'tools' || hash === 'history') return 'tools'
   if (initialParams.get('section') === 'work' || hash === 'work') return 'work'
-  if (hash || initialParams.get('tracker') === '1') return '401'
   return 'selector'
 }
 
@@ -968,9 +1834,9 @@ function updateAcademicSectionUi() {
   if (examScheduleCards) {
     examScheduleCards.setAttribute('aria-label', `${activeAcademicSectionData.title} subject exam dates`)
   }
-  if (bottomNavSwitch) bottomNavSwitch.textContent = activeAcademicSectionData.title
 
   updateMiniDashboard()
+  updateGlobalProgress()
 }
 
 function getActiveSectionQuizStats() {
@@ -1157,17 +2023,27 @@ function syncModeToBody() {
   document.body.dataset.academicSection = activeAcademicSection
 }
 
+function updateSiteHistory(url, historyMode = 'push') {
+  if (historyMode === 'none') return
+  const method = historyMode === 'replace' ? 'replaceState' : 'pushState'
+  window.history[method]({ siteMode: activeSiteMode }, '', url)
+}
+
 function showAcademicSection(sectionId, options = {}) {
   activeAcademicSection = sectionId === '402' ? '402' : '401'
   activeSiteMode = activeAcademicSection
   updateAcademicSectionUi()
-  resetActiveSubjectForSection(options.subjectCode || initialParams.get('subject') || '')
+  const currentParams = new URLSearchParams(window.location.search)
+  resetActiveSubjectForSection(options.subjectCode || currentParams.get('subject') || '')
   syncModeToBody()
   refreshTrackerFilters()
   renderSemesterTimeline()
   render401ExamSchedule()
   renderSchedulePage()
   renderNewsFilters()
+  refreshRemoteNewsCards(activeAcademicSection)
+  refreshRemoteTrackerData()
+  loadStudentProgress(activeAcademicSection)
 
   try {
     localStorage.setItem('selectedAcademicSection', activeAcademicSection)
@@ -1179,17 +2055,11 @@ function showAcademicSection(sectionId, options = {}) {
   const url = new URL(window.location.href)
   url.searchParams.set('section', activeAcademicSection)
   if (!url.hash) url.hash = targetHash
-  window.history.replaceState({}, '', url)
+  updateSiteHistory(url, options.historyMode || 'push')
   const targetSection = document.getElementById(targetHash.replace('#', '')) || document.getElementById('tracker')
   if (targetSection && options.scroll !== false) {
     targetSection.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' })
   }
-}
-
-function showSelector() {
-  activeSiteMode = 'selector'
-  syncModeToBody()
-  window.history.replaceState({}, '', window.location.pathname)
 }
 
 function showToolsSection(options = {}) {
@@ -1203,7 +2073,7 @@ function showToolsSection(options = {}) {
   const url = new URL(window.location.href)
   url.searchParams.set('section', 'tools')
   url.hash = 'history'
-  window.history.replaceState({}, '', url)
+  updateSiteHistory(url, options.historyMode || 'push')
   const historyRoot = document.getElementById('history')
   if (historyRoot && options.scroll !== false) {
     historyRoot.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' })
@@ -1221,16 +2091,32 @@ function showWorkSection(options = {}) {
   const url = new URL(window.location.href)
   url.searchParams.set('section', 'work')
   url.hash = 'work'
-  window.history.replaceState({}, '', url)
+  updateSiteHistory(url, options.historyMode || 'push')
   const workRoot = document.getElementById('work')
   if (workRoot && options.scroll !== false) {
     workRoot.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' })
   }
 }
 
+function showSelector(options = {}) {
+  activeSiteMode = 'selector'
+  syncModeToBody()
+
+  const url = new URL(window.location.href)
+  url.searchParams.delete('section')
+  url.searchParams.delete('subject')
+  url.searchParams.delete('tracker')
+  url.hash = ''
+  updateSiteHistory(`${url.pathname}${url.search}`, options.historyMode || 'push')
+  if (options.scroll !== false) {
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+    requestAnimationFrame(() => window.scrollTo({ top: 0, left: 0, behavior: 'auto' }))
+  }
+}
+
 function selectSiteSection(sectionId, options = {}) {
   if (sectionId === 'selector') {
-    showSelector()
+    showSelector(options)
   } else if (sectionId === 'tools') {
     showToolsSection(options)
   } else if (sectionId === 'work') {
@@ -1242,16 +2128,30 @@ function selectSiteSection(sectionId, options = {}) {
 
 function handleLegacyHashRoute() {
   const hash = window.location.hash.replace('#', '')
-  if (activeSiteMode === 'selector' && ['tracker', 'news', 'schedule', 'work'].includes(hash)) {
-    if (hash === 'work') {
-      showWorkSection({ scroll: false })
-    } else {
-      showAcademicSection('401', { hash: `#${hash}`, scroll: false })
-    }
-  } else if (hash === 'history' && activeSiteMode !== 'tools') {
-    showToolsSection({ scroll: false })
+  if (hash === 'history' && activeSiteMode !== 'tools') {
+    showToolsSection({ scroll: false, historyMode: 'replace' })
   } else if (hash === 'work' && activeSiteMode !== 'work') {
-    showWorkSection({ scroll: false })
+    showWorkSection({ scroll: false, historyMode: 'replace' })
+  }
+}
+
+function restoreSiteModeFromLocation() {
+  const params = new URLSearchParams(window.location.search)
+  const hash = window.location.hash.replace('#', '')
+  const section = params.get('section')
+  if (section === '401' || section === '402') {
+    showAcademicSection(section, {
+      subjectCode: params.get('subject') || '',
+      hash: hash ? `#${hash}` : '#tracker',
+      scroll: false,
+      historyMode: 'none'
+    })
+  } else if (section === 'tools' || hash === 'history') {
+    showToolsSection({ scroll: false, historyMode: 'none' })
+  } else if (section === 'work' || hash === 'work') {
+    showWorkSection({ scroll: false, historyMode: 'none' })
+  } else {
+    showSelector({ scroll: false, historyMode: 'none' })
   }
 }
 
@@ -1342,21 +2242,80 @@ function getTopicCompletionKey(subjectCode, topicLabel) {
   return `${TOPIC_COMPLETION_STORAGE_PREFIX}::${activeAcademicSection}::${encodeURIComponent(subjectCode)}::${encodeURIComponent(topicLabel)}`
 }
 
+function hasCompletedQuizProgress(topic) {
+  const topicLabels = new Set([topic.label, topic.mcqTopicKey].filter(Boolean))
+  for (const [key, payload] of studentProgressState.quizRows) {
+    if (!key.startsWith(`${activeAcademicSection}::`) || !payload?.completed) continue
+    if ([...topicLabels].some((label) => key.includes(`::${label}::`))) return true
+  }
+
+  for (const label of topicLabels) {
+    const sectionPrefix = `${QUIZ_STORAGE_PREFIX}::${activeAcademicSection}::${encodeURIComponent(label)}::`
+    for (let index = 0; index < localStorage.length; index += 1) {
+      const key = localStorage.key(index)
+      if (!key?.startsWith(sectionPrefix)) continue
+      try {
+        if (JSON.parse(localStorage.getItem(key) || 'null')?.completed) return true
+      } catch {
+        // Ignore malformed historical quiz progress.
+      }
+    }
+  }
+  return false
+}
+
+function updateGlobalProgress() {
+  const mcqsPercent = document.getElementById('global-mcqs-percent')
+  const mcqsFill = document.getElementById('global-mcqs-fill')
+  if (!mcqsPercent || !mcqsFill) return
+
+  const total = subjects.reduce((sum, s) => sum + (s.topics?.length || 0) + (s.clinicalTopics?.length || 0), 0)
+  const mcqs = subjects.reduce((sum, s) => sum + (s.topics?.filter(t => getTopicCompletionState(s.code, t.label).mcqs || hasCompletedQuizProgress(t)).length || 0) + (s.clinicalTopics?.filter(t => getTopicCompletionState(s.code, t.label).mcqs || hasCompletedQuizProgress(t)).length || 0), 0)
+
+  const mcqsValue = calculatePercent(mcqs, total)
+
+  mcqsPercent.textContent = `${mcqsValue}%`
+  mcqsFill.style.width = `${mcqsValue}%`
+}
+
 function getLegacyTopicCompletionKey(subjectCode, topicLabel) {
   return `${LEGACY_TOPIC_COMPLETION_STORAGE_PREFIX}${encodeURIComponent(subjectCode)}::${encodeURIComponent(topicLabel)}`
 }
 
+function getTopicProgressRecordKey(section, subjectCode, topicLabel) {
+  return `${section}::${subjectCode}::${topicLabel}`
+}
+
+function getQuizProgressRecordKey(section, topicLabel, sourceId = 'current') {
+  return `${section}::${topicLabel}::${sourceId || 'current'}`
+}
+
 function getTopicCompletionState(subjectCode, topicLabel) {
   const emptyState = { studied: false, mcqs: false }
+  const cloudState = studentProgressState.topicRows.get(getTopicProgressRecordKey(activeAcademicSection, subjectCode, topicLabel))
+  if (studentProgressState.user && cloudState) {
+    return {
+      ...emptyState,
+      studied: !!cloudState.studied,
+      mcqs: !!cloudState.mcqs
+    }
+  }
 
   try {
     const savedRaw = localStorage.getItem(getTopicCompletionKey(subjectCode, topicLabel))
       || (activeAcademicSection === '401' ? localStorage.getItem(getLegacyTopicCompletionKey(subjectCode, topicLabel)) : null)
+    const subject = subjects.find((item) => item.code === subjectCode)
+    const topic = [...(subject?.topics || []), ...(subject?.clinicalTopics || [])].find((item) => item.label === topicLabel)
+    const aliasStates = (topic?.progressAliases || []).map((alias) => {
+      const aliasCloudState = studentProgressState.topicRows.get(getTopicProgressRecordKey(activeAcademicSection, subjectCode, alias))
+      if (studentProgressState.user && aliasCloudState) return aliasCloudState
+      return getLocalTopicCompletionState(subjectCode, alias)
+    })
     const savedState = JSON.parse(savedRaw || '{}')
     return {
       ...emptyState,
-      studied: !!savedState.studied,
-      mcqs: !!savedState.mcqs
+      studied: !!savedState.studied || aliasStates.some((state) => state.studied),
+      mcqs: !!savedState.mcqs || aliasStates.some((state) => state.mcqs)
     }
   } catch {
     localStorage.removeItem(getTopicCompletionKey(subjectCode, topicLabel))
@@ -1369,20 +2328,34 @@ function saveTopicCompletionState(subjectCode, topicLabel, state) {
     studied: !!state.studied,
     mcqs: !!state.mcqs
   }
+  const recordKey = getTopicProgressRecordKey(activeAcademicSection, subjectCode, topicLabel)
+  studentProgressState.topicRows.set(recordKey, normalizedState)
 
   try {
     localStorage.setItem(getTopicCompletionKey(subjectCode, topicLabel), JSON.stringify(normalizedState))
   } catch {
     // Local checklist controls should not break topic rendering if storage is blocked.
   }
+
+  if (studentProgressState.user) {
+    upsertUserTopicProgress({
+      user_id: studentProgressState.user.id,
+      section: activeAcademicSection,
+      subject_code: subjectCode,
+      topic_label: topicLabel,
+      studied: normalizedState.studied,
+      mcqs: normalizedState.mcqs
+    }).catch((error) => {
+      studentProgressState.lastError = error.message
+      renderStudentSyncUi()
+      console.warn('Topic progress cloud sync failed.', error)
+    })
+  }
 }
 
 function renderTopicCompletionControls(subject, topic) {
   const state = getTopicCompletionState(subject.code, topic.label)
-  const controls = [
-    { key: 'studied', label: 'Studied' },
-    { key: 'mcqs', label: 'MCQs' }
-  ]
+  const controls = [{ key: 'studied', label: 'Completed' }]
 
   return `
     <fieldset class="topic-completion" aria-label="${escapeHtml(topic.label)} progress">
@@ -1414,39 +2387,34 @@ function getNextUniversityWeekStart(date) {
   return nextWeekStart
 }
 
-function isWeeklyTopicUpdateEligible(topic, today = new Date()) {
-  if (!topic.updatedAt) return false
-  const updatedDate = getLocalDate(topic.updatedAt)
-  const updatedTime = updatedDate.getTime()
-  if (!Number.isFinite(updatedTime)) return false
+function getUniversityWeekStart(date = new Date()) {
+  const dateStart = startOfDay(date)
+  const daysSinceWeekStart = (7 + dateStart.getDay() - UNIVERSITY_WEEK_START_DAY) % 7
+  dateStart.setDate(dateStart.getDate() - daysSinceWeekStart)
+  return dateStart
+}
 
-  const todayStart = startOfDay(today)
-  return updatedDate <= todayStart && todayStart < getNextUniversityWeekStart(updatedDate)
+function isCurrentWeekDate(value, today = new Date()) {
+  if (!value) return false
+  const candidate = new Date(value)
+  if (!Number.isFinite(candidate.getTime())) return false
+  const weekStart = getUniversityWeekStart(today)
+  const nextWeekStart = new Date(weekStart)
+  nextWeekStart.setDate(weekStart.getDate() + 7)
+  return candidate >= weekStart && candidate < nextWeekStart
+}
+
+function isWeeklyTopicUpdateEligible(topic, today = new Date()) {
+  return !!topic.createdAt && isCurrentWeekDate(topic.createdAt, today)
 }
 
 function getUnreadTopicUpdates(subject) {
-  const seenUpdates = getSeenTopicUpdates()
-  return subject.topics.filter((topic) => {
-    const updateId = getTopicUpdateId(subject, topic)
-    return updateId && isWeeklyTopicUpdateEligible(topic) && !seenUpdates.has(updateId)
-  })
+  return [...(subject.topics || []), ...(subject.clinicalTopics || [])]
+    .filter((topic) => isWeeklyTopicUpdateEligible(topic))
 }
 
 function markSubjectUpdatesSeen(subject) {
-  const updateIds = subject.topics.map((topic) => getTopicUpdateId(subject, topic)).filter(Boolean)
-  if (!updateIds.length) return false
-
-  const seenUpdates = getSeenTopicUpdates()
-  let changed = false
-  updateIds.forEach((updateId) => {
-    if (!seenUpdates.has(updateId)) {
-      seenUpdates.add(updateId)
-      changed = true
-    }
-  })
-
-  if (changed) saveSeenTopicUpdates(seenUpdates)
-  return changed
+  return false
 }
 
 function escapeHtml(value) {
@@ -1629,37 +2597,187 @@ function renderResourceItem(item) {
   `
 }
 
+function renderTopicActionIcon(type) {
+  if (type === 'drive') {
+    return `<img class="topic-action-card__image" src="${DRIVE_ICON_URL}" alt="" loading="lazy">`
+  }
+
+  if (type === 'mcq') {
+    return `
+      <svg class="topic-action-card__svg" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M7 3h7l4 4v14H7z"></path>
+        <path d="M14 3v5h5"></path>
+        <path d="M10 12h5"></path>
+        <path d="M10 16h4"></path>
+      </svg>
+    `
+  }
+
+  return `
+    <svg class="topic-action-card__svg" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3Z"></path>
+      <path d="M19 11a7 7 0 0 1-14 0"></path>
+      <path d="M12 18v3"></path>
+      <path d="M8 21h8"></path>
+      <path d="M4 10v2"></path>
+      <path d="M20 10v2"></path>
+    </svg>
+  `
+}
+
+function renderTopicActionChevron() {
+  return `
+    <svg class="topic-action-card__chevron" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="m9 5 7 7-7 7"></path>
+    </svg>
+  `
+}
+
+function renderTopicActionContent(type, label, statusText = '') {
+  return `
+    <span class="topic-action-card__icon">
+      ${renderTopicActionIcon(type)}
+    </span>
+    <span class="topic-action-card__text">
+      <span class="topic-action-card__label">${escapeHtml(label)}</span>
+      ${statusText ? `<span class="topic-action-card__status">${escapeHtml(statusText)}</span>` : ''}
+    </span>
+    ${renderTopicActionChevron()}
+  `
+}
+
+function renderDriveActionCard(resources, topic) {
+  if (topic.expandableTopics) {
+    return `
+      <button class="topic-action-card topic-action-card--drive" type="button" data-toggle-topic-breakdown>
+        ${renderTopicActionContent('drive', 'Topics', 'View all')}
+      </button>
+    `
+  }
+
+  const driveResources = resources.flatMap((item) => {
+    if (item.type === 'drive-group') return item.items
+    if (item.url && isDriveUrl(item.url)) return [item]
+    return []
+  })
+  const label = 'Drive'
+
+  if (!driveResources.length) {
+    return `
+      <span class="topic-action-card topic-action-card--drive topic-action-card--disabled" aria-disabled="true">
+        ${renderTopicActionContent('drive', label, 'Pending')}
+      </span>
+    `
+  }
+
+  if (driveResources.length > 1) {
+    const links = driveResources.map((item) => `
+      <a href="${item.url}" target="_blank" rel="noopener noreferrer" title="${escapeHtml(item.label || label)}">
+        ${escapeHtml(item.label || getCompactResourceLabel(item))}
+      </a>
+    `).join('')
+
+    return `
+      <details class="topic-action-menu">
+        <summary class="topic-action-card topic-action-card--drive" aria-label="Open Drive resources">
+          ${renderTopicActionContent('drive', label)}
+        </summary>
+        <span class="topic-action-menu__links">
+          ${links}
+        </span>
+      </details>
+    `
+  }
+
+  const driveItem = driveResources[0]
+  return `
+    <a class="topic-action-card topic-action-card--drive" href="${driveItem.url}" target="_blank" rel="noopener noreferrer" aria-label="Open ${escapeHtml(driveItem.label || 'Drive resources')}" title="${escapeHtml(driveItem.label || label)}">
+      ${renderTopicActionContent('drive', label)}
+    </a>
+  `
+}
+
+function renderMcqActionCard(quizTopicKey, quizCount) {
+  const label = quizCount ? `MCQs (${quizCount})` : 'MCQs'
+
+  if (!quizCount) {
+    return `
+      <span class="topic-action-card topic-action-card--mcq topic-action-card--disabled" aria-disabled="true">
+        ${renderTopicActionContent('mcq', label, 'Pending')}
+      </span>
+    `
+  }
+
+  return `
+    <button class="topic-action-card topic-action-card--mcq" type="button" data-quiz-topic="${escapeHtml(quizTopicKey)}">
+      ${renderTopicActionContent('mcq', label)}
+    </button>
+  `
+}
+
+function renderLectureRecordActionCard(topic) {
+  if (!topic.audioUrl) {
+    return `
+      <span class="topic-action-card topic-action-card--audio topic-action-card--disabled" aria-disabled="true">
+        ${renderTopicActionContent('audio', 'Lecture record', 'Pending')}
+      </span>
+    `
+  }
+
+  return `
+    <a class="topic-action-card topic-action-card--audio" href="${topic.audioUrl}" target="_blank" rel="noopener noreferrer" aria-label="Open lecture record in Google Drive">
+      ${renderTopicActionContent('audio', 'Lecture record')}
+    </a>
+  `
+}
+
 function renderResourceLinks(topic) {
   const quizTopicKey = topic.mcqTopicKey || topic.label
   const quizSources = getQuizSources(quizTopicKey)
   const quizCount = quizSources.reduce((total, source) => total + source.mcqs.length, 0)
-  const quizButton = quizCount ? `
-    <button class="topic-resource topic-resource--quiz" type="button" data-quiz-topic="${escapeHtml(quizTopicKey)}">
-      MCQs (${quizCount})
-    </button>
-  ` : ''
-
-  if (!coveredStates.has(topic.state)) {
-    return quizButton ? `
-      <div class="topic-resources" aria-label="Topic resources">
-        ${quizButton}
-      </div>
-    ` : ''
-  }
-
   const resources = getResourceItems(topic)
-  const links = resources.map(renderResourceItem).join('')
-
-  const pendingLecture = topic.lectureUrls?.length ? '' : '<span class="topic-resource topic-resource--pending">Lecture pending</span>'
-  const pendingAudio = topic.audioUrl ? '' : '<span class="topic-resource topic-resource--pending">Lecture record pending</span>'
 
   return `
-    <div class="topic-resources" aria-label="Topic resources">
-      ${links}
-      ${quizButton}
-      ${pendingLecture}
-      ${pendingAudio}
+    <div class="topic-action-row" aria-label="Topic resources">
+      ${renderDriveActionCard(resources, topic)}
+      ${renderMcqActionCard(quizTopicKey, quizCount)}
+      ${renderLectureRecordActionCard(topic)}
     </div>
+  `
+}
+
+function getTopicBreakdownKey(subjectCode, topicLabel) {
+  return `${activeAcademicSection}::${subjectCode}::${topicLabel}`
+}
+
+function renderTopicBreakdown(subject, topic) {
+  if (!topic.expandableTopics || !topic.driveSelector?.length) return ''
+  const isExpanded = expandedTopicBreakdowns.has(getTopicBreakdownKey(subject.code, topic.label))
+  const items = topic.driveSelector.map((item) => {
+    const quizKey = item.quizKey || item.label
+    const quizSources = getQuizSources(quizKey)
+    const quizCount = quizSources.reduce((total, source) => total + source.mcqs.length, 0)
+    return `
+      <article class="topic-breakdown__item">
+        <div class="topic-breakdown__copy">
+          <strong>${escapeHtml(item.label)}</strong>
+          <p>${escapeHtml(item.source)}</p>
+        </div>
+        <div class="topic-breakdown__actions">
+          ${item.url
+            ? `<a href="${item.url}" target="_blank" rel="noopener noreferrer">Drive</a>`
+            : '<span class="topic-breakdown__pending">Drive pending</span>'}
+          ${item.recordUrl ? `<a href="${item.recordUrl}" target="_blank" rel="noopener noreferrer">Record</a>` : ''}
+          ${quizCount ? `<button type="button" data-quiz-topic="${escapeHtml(quizKey)}">MCQs (${quizCount})</button>` : ''}
+        </div>
+      </article>
+    `
+  }).join('')
+
+  return `
+    <section class="topic-breakdown" ${isExpanded ? '' : 'hidden'} aria-label="${escapeHtml(topic.label)} topics">
+      ${items}
+    </section>
   `
 }
 
@@ -1673,30 +2791,7 @@ function updateTrackerUrl(subjectCode) {
 }
 
 function sortTopicsForDisplay(subject, topics, collection = subject.topics) {
-  const { status } = getTrackerFilters()
-
-  if (status !== 'all') {
-    return [...topics].sort((a, b) => {
-      return collection.indexOf(a) - collection.indexOf(b)
-    })
-  }
-
-  const priority = {
-    'taken': 0,
-    'partial': 0,
-    'taken-in-university': 0,
-    'announced': 1,
-    'lecture-pending': 2,
-    'remaining': 3
-  }
-
   return [...topics].sort((a, b) => {
-    const pA = priority[a.state] ?? 3
-    const pB = priority[b.state] ?? 3
-
-    if (pA !== pB) {
-      return pA - pB
-    }
     return collection.indexOf(a) - collection.indexOf(b)
   })
 }
@@ -1754,36 +2849,40 @@ function renderTopicBadges(topic) {
 }
 
 function renderTopicCard(subject, topic, index, collection = subject.topics) {
-  const art = Number.isFinite(topic.art) ? topic.art : index % 16
-  const tileX = art % 4
-  const tileY = Math.floor(art / 4)
   const topicPosition = collection.indexOf(topic)
   const displayNum = String((topicPosition >= 0 ? topicPosition : index) + 1).padStart(2, '0')
-  const midtermScopeConfirmed = isTopicMidtermScopeConfirmed(topic)
-  const midtermNote = midtermScopeConfirmed && topic.midtermScopeNote ? `<span class="topic-item__midterm-note">${topic.midtermScopeNote}</span>` : ''
-  const roundMeta = [topic.roundDate, topic.room].filter(Boolean).join(' - ')
-  const hasRecentUpdate = isRecentTopicUpdate(topic)
-  const newBadge = hasRecentUpdate ? `
-    <span class="topic-item__new" aria-label="Newly updated topic">
-      <span class="topic-item__new-pulse" aria-hidden="true"></span>
-      New
+  const topicState = ['taken', 'partial', 'announced', 'remaining', 'taken-in-university'].includes(topic.state)
+    ? topic.state
+    : 'remaining'
+  const track = collection === subject.clinicalTopics ? 'clinical' : 'theoretical'
+  const breakdownKey = getTopicBreakdownKey(subject.code, topic.label)
+  const breakdownExpanded = expandedTopicBreakdowns.has(breakdownKey)
+  const adminControls = isTrackerAdmin() ? `
+    <span class="tracker-admin-topic-controls" aria-label="Admin controls for ${escapeHtml(topic.label)}">
+      <button type="button" data-admin-move="up" aria-label="Move ${escapeHtml(topic.label)} up" ${topicPosition <= 0 ? 'disabled' : ''}>↑</button>
+      <button type="button" data-admin-move="down" aria-label="Move ${escapeHtml(topic.label)} down" ${topicPosition >= collection.length - 1 ? 'disabled' : ''}>↓</button>
+      <button type="button" data-admin-edit-topic aria-label="Edit ${escapeHtml(topic.label)}">Edit</button>
     </span>
   ` : ''
-  const badges = renderTopicBadges(topic)
 
   return `
-    <li class="topic-item topic-item--${topic.state}${hasRecentUpdate ? ' topic-item--has-new' : ''}" style="--delay: ${getFastStaggerDelay(index)}; --tile-x: ${tileX}; --tile-y: ${tileY};">
-      ${newBadge}
-      <span class="topic-item__image" aria-hidden="true"></span>
+    <li class="topic-item topic-item--${topicState}${topic.expandableTopics ? ' topic-item--expandable' : ''}${breakdownExpanded ? ' is-breakdown-expanded' : ''}${isTrackerAdmin() ? ' tracker-admin-topic' : ''}"
+      style="--delay: ${getFastStaggerDelay(index)};"
+      data-admin-subject="${escapeHtml(subject.code)}"
+      data-admin-track="${track}"
+      data-admin-topic="${escapeHtml(topic.label)}"
+      ${topic.expandableTopics ? `data-topic-breakdown-card aria-expanded="${breakdownExpanded}"` : ''}
+      ${isTrackerAdmin() ? 'draggable="true"' : ''}>
       <span class="topic-item__index">${displayNum}</span>
       <span class="topic-item__body">
-        <span class="topic-item__label">${topic.label}</span>
-        ${badges}
-        ${midtermNote}
-        ${roundMeta ? `<span class="topic-item__note">${escapeHtml(roundMeta)}</span>` : ''}
+        <span class="topic-item__heading">
+          <span class="topic-item__label">${escapeHtml(topic.label)}</span>
+          ${renderTopicCompletionControls(subject, topic)}
+        </span>
         ${renderResourceLinks(topic)}
-        ${renderTopicCompletionControls(subject, topic)}
+        ${renderTopicBreakdown(subject, topic)}
       </span>
+      ${adminControls}
     </li>
   `
 }
@@ -1795,45 +2894,17 @@ function renderTopicCards(subject, topics = getFilteredTopics(subject), options 
 
   const collection = options.collection || subject.topics
   const sortedTopics = sortTopicsForDisplay(subject, topics, collection)
-  const takenStates = new Set(['taken', 'partial', 'taken-in-university'])
-  const takenGroup = sortedTopics.filter(t => takenStates.has(t.state))
-  const upcomingGroup = sortedTopics.filter(t => !takenStates.has(t.state))
-
   let globalIndex = 0
+  let previousSection = null
 
-  function renderGroup(groupTopics, groupTitle) {
-    if (!groupTopics.length) return ''
-
-    let groupHtml = renderTopicGroupHeading(groupTitle, globalIndex)
-    const hasSections = groupTopics.some((t) => t.section)
-
-    if (!hasSections) {
-      groupHtml += groupTopics.map((topic) => renderTopicCard(subject, topic, globalIndex++, collection)).join('')
-    } else {
-      const sections = groupTopics.reduce((collection, topic) => {
-        const title = topic.section || 'Topics'
-        const section = collection.find((item) => item.title === title)
-
-        if (section) {
-          section.topics.push(topic)
-        } else {
-          collection.push({ title, topics: [topic] })
-        }
-        return collection
-      }, [])
-
-      groupHtml += sections.map((section) => {
-        const headingDelay = getFastStaggerDelay(globalIndex)
-        const sectionTitleMarkup = `<li class="topic-section-subheading" style="--delay: ${headingDelay}">${section.title}</li>`
-        const topicMarkup = section.topics.map((topic) => renderTopicCard(subject, topic, globalIndex++, collection)).join('')
-        return sectionTitleMarkup + topicMarkup
-      }).join('')
-    }
-
-    return groupHtml
-  }
-
-  return renderGroup(takenGroup, 'Taken in University') + renderGroup(upcomingGroup, 'Upcoming / Remaining')
+  return sortedTopics.map((topic) => {
+    const sectionTitle = topic.section || ''
+    const sectionMarkup = sectionTitle && sectionTitle !== previousSection
+      ? `<li class="topic-section-subheading" style="--delay: ${getFastStaggerDelay(globalIndex)}">${sectionTitle}</li>`
+      : ''
+    previousSection = sectionTitle
+    return sectionMarkup + renderTopicCard(subject, topic, globalIndex++, collection)
+  }).join('')
 }
 
 function renderSubjectTrackTabs(subject) {
@@ -1963,7 +3034,12 @@ function getSubjectTrackCount(subject) {
 function bindSubjectTrackTabs(root = document) {
   root.querySelectorAll('[data-subject-track]').forEach((button) => {
     button.addEventListener('click', () => {
-      activeSubjectTrack = button.dataset.subjectTrack || 'theoretical'
+      const nextTrack = button.dataset.subjectTrack || 'theoretical'
+      if (nextTrack !== activeSubjectTrack && trackerAdminState.dirtyCollections.has(getAdminCollectionKey())) {
+        window.alert('Save this arrangement before switching topic sections.')
+        return
+      }
+      activeSubjectTrack = nextTrack
       const code = button.dataset.code || activeSubjectCode
       if (code) setActiveSubject(code, 'open')
     })
@@ -2014,7 +3090,15 @@ function getLegacyQuizStorageKey(topicLabel, sourceId = quizState.sourceId || 'c
   return `${LEGACY_QUIZ_STORAGE_PREFIX}${encodeURIComponent(topicLabel)}::${encodeURIComponent(sourceId)}`
 }
 
+function normalizeSavedQuizState(savedState) {
+  if (!savedState) return null
+  return savedState.progress || savedState
+}
+
 function getSavedQuizState(topicLabel, sourceId = 'current') {
+  const cloudState = studentProgressState.quizRows.get(getQuizProgressRecordKey(activeAcademicSection, topicLabel, sourceId))
+  if (studentProgressState.user && cloudState) return normalizeSavedQuizState(cloudState)
+
   try {
     const savedRaw = localStorage.getItem(getQuizStorageKey(topicLabel, sourceId))
       || (activeAcademicSection === '401' ? localStorage.getItem(getLegacyQuizStorageKey(topicLabel, sourceId)) : null)
@@ -2025,10 +3109,16 @@ function getSavedQuizState(topicLabel, sourceId = 'current') {
   }
 }
 
-function saveQuizState() {
+function buildQuizProgressPayload() {
   if (!quizState.topicLabel) return
+  const questions = getCurrentQuiz()
+  const totalQuestions = questions.length
+  const answeredCount = Object.keys(quizState.answers || {}).length
+  const wrongQuestionIds = questions
+    .filter((question) => quizState.answers[question.id] !== undefined && quizState.answers[question.id] !== question.correctOptionId)
+    .map((question) => question.id)
 
-  const payload = {
+  return {
     topicLabel: quizState.topicLabel,
     sourceId: quizState.sourceId,
     sourceLabel: quizState.sourceLabel,
@@ -2040,14 +3130,62 @@ function saveQuizState() {
     missingQuestionIds: quizState.missingQuestionIds || [],
     timeLimitMinutes: quizState.timeLimitMinutes || null,
     timerEndsAt: quizState.timerEndsAt || null,
-    timerStartedAt: quizState.timerStartedAt || null
+    timerStartedAt: quizState.timerStartedAt || null,
+    score: quizState.completed ? getQuizScore() : null,
+    totalQuestions,
+    answeredCount,
+    wrongQuestionIds,
+    savedAt: new Date().toISOString()
   }
+}
+
+function saveQuizState() {
+  const payload = buildQuizProgressPayload()
+  if (!payload) return
 
   localStorage.setItem(getQuizStorageKey(quizState.topicLabel), JSON.stringify(payload))
+  studentProgressState.quizRows.set(getQuizProgressRecordKey(activeAcademicSection, quizState.topicLabel, quizState.sourceId), payload)
+  updateGlobalProgress()
+
+  if (studentProgressState.user) {
+    upsertUserQuizProgress({
+      user_id: studentProgressState.user.id,
+      section: activeAcademicSection,
+      topic_label: quizState.topicLabel,
+      source_id: quizState.sourceId || 'current',
+      source_label: quizState.sourceLabel,
+      progress: payload,
+      completed: !!quizState.completed,
+      score: payload.score,
+      total_questions: payload.totalQuestions,
+      answered_count: payload.answeredCount,
+      wrong_question_ids: payload.wrongQuestionIds,
+      completed_at: quizState.completed ? new Date().toISOString() : null
+    }).catch((error) => {
+      studentProgressState.lastError = error.message
+      renderStudentSyncUi()
+      console.warn('MCQ progress cloud sync failed.', error)
+    })
+  }
 }
 
 function clearSavedQuizState(topicLabel, sourceId = quizState.sourceId || 'current') {
   localStorage.removeItem(getQuizStorageKey(topicLabel, sourceId))
+  studentProgressState.quizRows.delete(getQuizProgressRecordKey(activeAcademicSection, topicLabel, sourceId))
+  updateGlobalProgress()
+
+  if (studentProgressState.user) {
+    deleteUserQuizProgress({
+      user_id: studentProgressState.user.id,
+      section: activeAcademicSection,
+      topic_label: topicLabel,
+      source_id: sourceId || 'current'
+    }).catch((error) => {
+      studentProgressState.lastError = error.message
+      renderStudentSyncUi()
+      console.warn('MCQ progress cloud delete failed.', error)
+    })
+  }
 }
 
 function getSavedQuizProgress(topicLabel, source) {
@@ -2333,12 +3471,10 @@ function getQuizScore() {
 
 function getQuizProgressStats() {
   const quiz = getCurrentQuiz()
-  const answeredCount = quiz.filter((question) => quizState.answers[question.id] !== undefined).length
-  const total = quiz.length
-  const remainingCount = Math.max(total - answeredCount, 0)
-  const percent = total ? Math.round((answeredCount / total) * 100) : 0
-
-  return { answeredCount, remainingCount, percent, total }
+  return calculateQuizProgress(
+    quiz.map((question) => question.id),
+    Object.keys(quizState.answers)
+  )
 }
 
 function getPerformanceLabel(score, total) {
@@ -2790,9 +3926,24 @@ function handleQuizClick(event) {
     const topicLabel = topicCompletionInput.dataset.topicLabel
     const completionKey = topicCompletionInput.dataset.topicCompletion
     const state = getTopicCompletionState(subjectCode, topicLabel)
-    state[completionKey] = topicCompletionInput.checked
+    state[completionKey] = !state[completionKey]
 
     saveTopicCompletionState(subjectCode, topicLabel, state)
+    setActiveSubject(subjectCode, 'open')
+    updateGlobalProgress()
+    return
+  }
+
+  const breakdownCard = event.target.closest('[data-topic-breakdown-card]')
+  const breakdownToggle = event.target.closest('[data-toggle-topic-breakdown]')
+  const clickedInteractiveChild = event.target.closest('a, button, input, label, select, textarea')
+  if (breakdownCard && (breakdownToggle || !clickedInteractiveChild)) {
+    event.preventDefault()
+    const subjectCode = breakdownCard.dataset.adminSubject
+    const topicLabel = breakdownCard.dataset.adminTopic
+    const key = getTopicBreakdownKey(subjectCode, topicLabel)
+    if (expandedTopicBreakdowns.has(key)) expandedTopicBreakdowns.delete(key)
+    else expandedTopicBreakdowns.add(key)
     setActiveSubject(subjectCode, 'open')
     return
   }
@@ -2952,13 +4103,12 @@ function renderSubjects() {
     const expandedClass = isExpanded ? ' expanded' : ''
     const unreadUpdateCount = getUnreadTopicUpdates(subject).length
     const updateNotice = unreadUpdateCount ? `
-      <span class="subject-button__updates" aria-label="${unreadUpdateCount} unread topic updates">
+      <span class="subject-button__updates" aria-label="New topic added this university week">
         <span class="subject-button__updates-pulse" aria-hidden="true"></span>
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M18 16v-5a6 6 0 0 0-12 0v5l-2 2h16l-2-2Z"></path>
           <path d="M10 21h4"></path>
         </svg>
-        <b>${unreadUpdateCount}</b>
       </span>
     ` : ''
 
@@ -3010,6 +4160,10 @@ function clearSubjectDetail() {
 function setActiveSubject(code, mobileMode = 'toggle') {
   const subject = subjects.find((item) => item.code === code) || subjects[0]
   const subjectChanged = activeSubjectCode !== subject.code
+  if (subjectChanged && trackerAdminState.dirtyCollections.has(getAdminCollectionKey())) {
+    window.alert('Save this arrangement before switching subjects.')
+    return
+  }
   if (subjectChanged) activeSubjectTrack = 'theoretical'
   updateTrackerUrl(subject.code)
 
@@ -3029,6 +4183,7 @@ function setActiveSubject(code, mobileMode = 'toggle') {
     } else {
       renderSubjects()
     }
+    renderTrackerAdminUi()
     return
   }
 
@@ -3073,6 +4228,7 @@ function setActiveSubject(code, mobileMode = 'toggle') {
 
   topicList.innerHTML = renderSubjectTrackList(subject)
   replayTrackerMotion(topicList, '.topic-section-heading, .topic-section-subheading, .topic-item')
+  renderTrackerAdminUi()
 }
 
 function getTodayLabel() {
@@ -3152,21 +4308,7 @@ function render401ExamSchedule() {
     const isNext = nextExam?.code === exam.code
     const isDone = exam.daysUntil < 0
     const statusLabel = isNext ? getExamCountdownText(exam.daysUntil) : isDone ? 'Completed' : 'Upcoming'
-    const stateClass = `${isNext ? ' exam-card--next' : ''}${isDone ? ' exam-card--done' : ''}${exam.type ? ` exam-card--${exam.type}` : ''}`
-
-    if (exam.type === 'quiz') {
-      return `
-        <div class="exam-card exam-card--has-action${stateClass}" data-code="${exam.subjectCode}">
-          <strong>${escapeHtml(exam.code)}</strong>
-          <time datetime="${exam.date}">${escapeHtml(exam.time)}</time>
-          ${exam.meta ? `<span class="exam-card__meta">${escapeHtml(exam.meta)}</span>` : ''}
-          <button class="exam-card__quiz-action" type="button" data-quiz-topic="NUT Quiz">
-            <img class="exam-card__quiz-icon" src="/assets/past-exams-vip-icon.png" alt="" />
-            <span>PAST EXAMS</span>
-          </button>
-        </div>
-      `
-    }
+    const stateClass = `${isNext ? ' exam-card--next' : ''}${isDone ? ' exam-card--done' : ''}`
 
     return `
       <button class="exam-card${stateClass}" type="button" data-code="${exam.subjectCode}" aria-label="Open ${escapeHtml(exam.subjectName)} tracker">
@@ -3296,7 +4438,6 @@ function renderAssignmentProgress() {
     const startDate = getLocalDate(progress.dataset.startDate)
     const dueDate = getLocalDate(progress.dataset.dueDate)
     const dueLabel = progress.dataset.dueLabel || formatExamDate(progress.dataset.dueDate)
-    const isArabic = progress.dataset.deadlineLocale === 'ar'
     const today = new Date()
     const fill = progress.querySelector('[data-assignment-fill], [data-deadline-fill]')
     const daysLabel = progress.querySelector('[data-assignment-days], [data-deadline-days]')
@@ -3312,15 +4453,7 @@ function renderAssignmentProgress() {
     if (fill) fill.style.width = `${displayPercent}%`
 
     if (daysLabel) {
-      if (isArabic && daysLeft > 1) {
-        daysLabel.textContent = `${daysLeft} Ø£ÙŠØ§Ù… Ù…ØªØ¨Ù‚ÙŠØ©`
-      } else if (isArabic && daysLeft === 1) {
-        daysLabel.textContent = 'ÙŠÙˆÙ… ÙˆØ§Ø­Ø¯ Ù…ØªØ¨Ù‚'
-      } else if (isArabic && daysLeft === 0) {
-        daysLabel.textContent = 'Ø§Ù„Ù…ÙˆØ¹Ø¯ Ø§Ù„ÙŠÙˆÙ…'
-      } else if (isArabic) {
-        daysLabel.textContent = 'Ø§Ù†ØªÙ‡Ù‰ Ø§Ù„Ù…ÙˆØ¹Ø¯'
-      } else if (daysLeft > 1) {
+      if (daysLeft > 1) {
         daysLabel.textContent = `${daysLeft} days left`
       } else if (daysLeft === 1) {
         daysLabel.textContent = '1 day left'
@@ -3332,9 +4465,7 @@ function renderAssignmentProgress() {
     }
 
     if (caption) {
-      caption.textContent = isArabic
-        ? `Ø§Ù„Ù…ÙˆØ¹Ø¯ ${dueLabel} - Ù…ØªØ¨Ù‚ÙŠ ${Math.round(displayPercent)}% Ù…Ù† Ø§Ù„ÙˆÙ‚Øª.`
-        : `Due ${dueLabel} - ${Math.round(percent)}% of the window has passed.`
+      caption.textContent = `Due ${dueLabel} - ${Math.round(percent)}% of the window has passed.`
     }
   })
 }
@@ -3892,22 +5023,20 @@ function renderNewsNavBadge(cards = []) {
     link.classList.remove('site-nav__link--has-news')
   })
 
-  const seenCards = getNewsSeenCards()
   const unreadCount = cards.filter((card) => {
     const cardSection = card.dataset.section || '401'
-    return cardSection === activeAcademicSection && !isNewsCardExpired(card) && !seenCards.has(getNewsCardId(card))
+    return cardSection === activeAcademicSection && card.dataset.published === 'true' && isCurrentWeekDate(card.dataset.createdAt) && !isNewsCardExpired(card)
   }).length
   if (!unreadCount) return
 
   newsNavLinks.forEach((link) => {
     link.classList.add('site-nav__link--has-news')
     link.insertAdjacentHTML('beforeend', `
-      <span class="site-nav__badge" aria-label="${unreadCount} new news update${unreadCount === 1 ? '' : 's'}">
+      <span class="site-nav__badge" aria-label="New news published this university week">
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M18 16v-5a6 6 0 0 0-12 0v5l-2 2h16l-2-2Z"></path>
           <path d="M10 21h4"></path>
         </svg>
-        <b>${unreadCount}</b>
       </span>
     `)
   })
@@ -3927,6 +5056,7 @@ function markNewsCardsSeen(cards = []) {
 }
 
 function ensureSectionNewsCard() {
+  if (newsCardsState.remoteSections.has(activeAcademicSection)) return
   if (!newsFeed || activeAcademicSection !== '402') return
   if (newsFeed.querySelector('[data-news-id="402-tracker-launch"]')) return
 
@@ -3954,10 +5084,197 @@ function ensureSectionNewsCard() {
   newsFeed.prepend(card)
 }
 
+function getNewsRows(section = activeAcademicSection) {
+  return newsCardsState.rowsBySection.get(section) || []
+}
+
+function isNewsAdminForSection(section = activeAcademicSection) {
+  return isTrackerAdmin() && String(trackerAdminState.profile?.allowed_section || '') === String(section)
+}
+
+function getSafeExternalUrl(value = '') {
+  if (!value) return ''
+  try {
+    const url = new URL(value)
+    return ['http:', 'https:'].includes(url.protocol) ? url.toString() : ''
+  } catch {
+    return ''
+  }
+}
+
+function getNewsTagClass(tag = '') {
+  const normalized = tag.toLowerCase()
+  if (normalized.includes('exam')) return 'exam'
+  if (normalized.includes('schedule')) return 'schedule'
+  if (normalized.includes('resource') || normalized.includes('tracker')) return 'resource'
+  return 'assignment'
+}
+
+function renderNewsAdminToolbar() {
+  if (newsAdminToolbar) newsAdminToolbar.hidden = !isNewsAdminForSection()
+}
+
+function renderRemoteNewsCard(row) {
+  const card = document.createElement('article')
+  const pinned = row.card_group === 'pinned'
+  card.className = `update-panel${pinned ? ' update-panel--primary' : ''}${row.is_wide ? ' update-panel--wide' : ''}${row.published ? '' : ' news-card--draft'}`
+  card.dataset.newsId = row.id
+  card.dataset.section = row.section
+  card.dataset.course = row.course || 'all'
+  card.dataset.date = row.card_date || ''
+  card.dataset.group = row.card_group || 'regular'
+  card.dataset.persistent = String(pinned)
+  card.dataset.order = String(row.display_order ?? 0)
+  card.dataset.published = String(Boolean(row.published))
+  card.dataset.createdAt = row.created_at || ''
+  card.dir = row.text_direction === 'rtl' ? 'rtl' : 'ltr'
+
+  const facts = Array.isArray(row.facts) ? row.facts.filter((fact) => fact?.label && fact?.value) : []
+  const paragraphs = String(row.body || '').split(/\n{2,}/).filter(Boolean)
+  const groupRows = getNewsRows(row.section).filter((item) => item.card_group === row.card_group)
+  const groupIndex = groupRows.findIndex((item) => item.id === row.id)
+  const body = paragraphs.map((paragraph) => `<p>${escapeHtml(paragraph).replace(/\n/g, '<br>')}</p>`).join('')
+  const factsHtml = facts.length ? `<dl class="update-facts${facts.length === 3 ? ' update-facts--three' : ''}">${facts.map((fact) => `<div><dt>${escapeHtml(fact.label)}</dt><dd>${escapeHtml(fact.value)}</dd></div>`).join('')}</dl>` : ''
+  const safeActionUrl = getSafeExternalUrl(row.action_url)
+  const action = safeActionUrl && row.action_label ? `<a class="news-action" href="${escapeHtml(safeActionUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(row.action_label)}</a>` : ''
+  const deadline = row.deadline_start && row.deadline_due ? `<div class="assignment-progress assignment-progress--top" data-deadline-progress data-progress-mode="remaining" data-start-date="${escapeHtml(row.deadline_start)}" data-due-date="${escapeHtml(row.deadline_due)}" data-due-label="${escapeHtml(row.deadline_label || row.deadline_due)}"><div class="assignment-progress__top"><strong data-deadline-days>${escapeHtml(row.deadline_label || row.deadline_due)}</strong></div><div class="assignment-progress__bar" aria-hidden="true"><span data-deadline-fill></span></div></div>` : ''
+  const adminControls = isNewsAdminForSection(row.section) ? `<div class="news-admin-card-controls"><button type="button" data-news-move="up" aria-label="Move up" ${groupIndex <= 0 ? 'disabled' : ''}>↑</button><button type="button" data-news-move="down" aria-label="Move down" ${groupIndex >= groupRows.length - 1 ? 'disabled' : ''}>↓</button><button type="button" data-news-toggle-pin>${pinned ? 'Unpin' : 'Pin'}</button><button type="button" data-news-toggle-publish>${row.published ? 'Unpublish' : 'Publish'}</button><button type="button" data-news-edit>Edit</button><button type="button" data-news-delete>Delete</button></div>` : ''
+
+  card.innerHTML = `${adminControls}${deadline}<div class="update-panel__top"><p class="card__kicker">${escapeHtml(row.kicker || row.course || '')}</p>${row.tag ? `<span class="news-tag news-tag--${getNewsTagClass(row.tag)}">${escapeHtml(row.tag)}</span>` : ''}${row.badge ? `<span class="status-pill status-pill--open">${escapeHtml(row.badge)}</span>` : ''}</div><h2>${escapeHtml(row.title)}</h2><div class="news-card__body">${body}</div>${factsHtml}${action}`
+  return card
+}
+
+function replaceNewsFeedWithRemoteRows() {
+  if (!newsFeed || !newsCardsState.remoteSections.has(activeAcademicSection)) return
+  newsFeed.querySelectorAll('.update-panel, .news-group, [data-news-empty]').forEach((item) => item.remove())
+  getNewsRows().forEach((row) => newsFeed.append(renderRemoteNewsCard(row)))
+}
+
+async function refreshRemoteNewsCards(section = activeAcademicSection) {
+  if (!newsFeed || !isSupabaseConfigured() || newsCardsState.loadingSections.has(section)) return
+  newsCardsState.loadingSections.add(section)
+  try {
+    const rows = await fetchNewsCards(section)
+    if (rows.length || newsCardsState.remoteSections.has(section)) {
+      newsCardsState.rowsBySection.set(section, rows)
+      newsCardsState.remoteSections.add(section)
+      if (section === activeAcademicSection) {
+        replaceNewsFeedWithRemoteRows()
+        renderNewsFilters()
+        renderAssignmentProgress()
+      }
+    }
+  } catch (error) {
+    console.warn('Remote news data unavailable; using static fallback.', error)
+    if (newsAdminStatus && isNewsAdminForSection(section)) newsAdminStatus.textContent = `News sync unavailable: ${error.message}`
+  } finally {
+    newsCardsState.loadingSections.delete(section)
+  }
+}
+
+function parseNewsFacts(value = '') {
+  return String(value).split('\n').map((line) => {
+    const separator = line.indexOf('|')
+    if (separator < 0) return null
+    const label = line.slice(0, separator).trim()
+    const factValue = line.slice(separator + 1).trim()
+    return label && factValue ? { label, factValue } : null
+  }).filter(Boolean)
+}
+
+function getNewsFormRow(form) {
+  const data = new FormData(form)
+  const id = String(data.get('id') || '').trim()
+  const title = String(data.get('title') || '').trim()
+  const body = String(data.get('body') || '').trim()
+  const actionUrl = String(data.get('action_url') || '').trim()
+  if (!title || !body) throw new Error('Title and body are required.')
+  if (actionUrl && !getSafeExternalUrl(actionUrl)) throw new Error('Action URL must start with http:// or https://.')
+  const group = data.get('card_group') === 'regular' ? 'regular' : 'pinned'
+  const existing = getNewsRows().find((row) => row.id === id)
+  const groupRows = getNewsRows().filter((row) => row.card_group === group)
+  return {
+    id: id || `news-${Date.now().toString(36)}`,
+    section: activeAcademicSection,
+    title,
+    body,
+    text_direction: data.get('text_direction') === 'rtl' ? 'rtl' : 'ltr',
+    course: String(data.get('course') || 'all').trim() || 'all',
+    card_date: data.get('card_date') || null,
+    kicker: String(data.get('kicker') || '').trim(),
+    tag: String(data.get('tag') || '').trim(),
+    badge: String(data.get('badge') || '').trim(),
+    deadline_start: data.get('deadline_start') || null,
+    deadline_due: data.get('deadline_due') || null,
+    deadline_label: String(data.get('deadline_label') || '').trim(),
+    facts: parseNewsFacts(data.get('facts')),
+    action_label: String(data.get('action_label') || '').trim(),
+    action_url: actionUrl,
+    card_group: group,
+    display_order: existing?.card_group === group ? existing.display_order : ((groupRows.at(-1)?.display_order || 0) + 10),
+    is_wide: data.get('is_wide') === 'on',
+    published: data.get('published') === 'on'
+  }
+}
+
+function openNewsAdminEditor(row = null) {
+  if (!newsAdminModal || !newsAdminForm || !isNewsAdminForSection()) return
+  newsAdminForm.reset()
+  newsAdminForm.elements.published.checked = row ? Boolean(row.published) : true
+  newsAdminForm.elements.card_group.value = row?.card_group || 'pinned'
+  newsAdminForm.elements.text_direction.value = row?.text_direction || 'ltr'
+  if (row) {
+    Object.entries(row).forEach(([key, value]) => {
+      const field = newsAdminForm.elements.namedItem(key)
+      if (!field || ['facts', 'published', 'is_wide'].includes(key)) return
+      field.value = value ?? ''
+    })
+    newsAdminForm.elements.facts.value = (row.facts || []).map((fact) => `${fact.label} | ${fact.value}`).join('\n')
+    newsAdminForm.elements.is_wide.checked = Boolean(row.is_wide)
+  }
+  newsAdminModalTitle.textContent = row ? 'Edit news card' : 'Add news card'
+  newsAdminFormStatus.textContent = ''
+  newsAdminModal.hidden = false
+  document.body.classList.add('admin-modal-open')
+}
+
+function closeNewsAdminEditor() {
+  if (!newsAdminModal) return
+  newsAdminModal.hidden = true
+  document.body.classList.remove('admin-modal-open')
+}
+
+async function saveNewsAdminForm(form) {
+  const submit = form.querySelector('[type="submit"]')
+  if (submit) submit.disabled = true
+  newsAdminFormStatus.textContent = 'Saving...'
+  try {
+    await upsertNewsCard(getNewsFormRow(form))
+    closeNewsAdminEditor()
+    await refreshRemoteNewsCards(activeAcademicSection)
+    newsAdminStatus.textContent = 'News card saved.'
+  } catch (error) {
+    newsAdminFormStatus.textContent = error.message
+  } finally {
+    if (submit) submit.disabled = false
+  }
+}
+
+async function moveNewsCard(row, direction) {
+  const groupRows = getNewsRows().filter((item) => item.card_group === row.card_group)
+  const index = groupRows.findIndex((item) => item.id === row.id)
+  const targetIndex = direction === 'up' ? index - 1 : index + 1
+  if (index < 0 || targetIndex < 0 || targetIndex >= groupRows.length) return
+  const target = groupRows[targetIndex]
+  await updateNewsCardOrder([{ id: row.id, section: row.section, display_order: target.display_order }, { id: target.id, section: target.section, display_order: row.display_order }])
+  await refreshRemoteNewsCards(row.section)
+}
+
 function renderNewsFilters() {
   if (!newsFeed) return
 
   ensureSectionNewsCard()
+  renderNewsAdminToolbar()
   const course = newsCourseFilter?.value || 'all'
   const order = newsDateFilter?.value || 'newest'
   const now = new Date()
@@ -3970,7 +5287,7 @@ function renderNewsFilters() {
   if (!pinnedContainer) {
     pinnedContainer = document.createElement('div')
     pinnedContainer.className = 'news-group news-group--pinned'
-    pinnedContainer.innerHTML = '<h3 class="news-group-title">ðŸ“Œ Pinned & Important</h3><div class="news-group-list"></div>'
+    pinnedContainer.innerHTML = '<h3 class="news-group-title">Pinned & Important</h3><div class="news-group-list"></div>'
     newsFeed.append(pinnedContainer)
   }
   const pinnedList = pinnedContainer.querySelector('.news-group-list')
@@ -4006,6 +5323,11 @@ function renderNewsFilters() {
 
   cards
     .sort((a, b) => {
+      if (newsCardsState.remoteSections.has(activeAcademicSection)) {
+        const groupDifference = (a.dataset.group === 'pinned' ? 0 : 1) - (b.dataset.group === 'pinned' ? 0 : 1)
+        if (groupDifference) return groupDifference
+        return Number(a.dataset.order || 0) - Number(b.dataset.order || 0)
+      }
       const priorityDifference = Number(b.dataset.priority || 0) - Number(a.dataset.priority || 0)
       if (priorityDifference) return priorityDifference
       const difference = new Date(a.dataset.date || 0) - new Date(b.dataset.date || 0)
@@ -4014,7 +5336,8 @@ function renderNewsFilters() {
     .forEach((card) => {
       const cardSection = card.dataset.section || '401'
       const expired = isNewsCardExpired(card, now)
-      const isHidden = cardSection !== activeAcademicSection || expired || (course !== 'all' && card.dataset.course !== course)
+      const unpublished = card.dataset.published === 'false' && !isNewsAdminForSection(cardSection)
+      const isHidden = cardSection !== activeAcademicSection || expired || unpublished || (course !== 'all' && card.dataset.course !== course)
 
       card.hidden = isHidden
       if (isHidden) return
@@ -4026,7 +5349,7 @@ function renderNewsFilters() {
         card.classList.add('update-panel--new-flash')
       }
 
-      const isPinned = Number(card.dataset.priority || 0) > 0 || card.dataset.persistent === 'true' || card.classList.contains('update-panel--primary')
+      const isPinned = card.dataset.group ? card.dataset.group === 'pinned' : Number(card.dataset.priority || 0) > 0 || card.dataset.persistent === 'true' || card.classList.contains('update-panel--primary')
 
       if (isPinned) {
         pinnedList.append(card)
@@ -4056,30 +5379,206 @@ function renderNewsFilters() {
   }
 }
 
+function initStudentSync() {
+  if (!studentSync || !isSupabaseConfigured()) {
+    renderStudentSyncUi()
+    return
+  }
+
+  getCurrentUser()
+    .then((user) => {
+      studentProgressState.user = user
+      renderStudentSyncUi()
+      if (user) loadStudentProgress(activeAcademicSection)
+      else updateGlobalProgress()
+      refreshTrackerAdminProfile(user)
+    })
+    .catch((error) => {
+      studentProgressState.lastError = error.message
+      renderStudentSyncUi()
+    })
+
+  onAuthStateChange((user) => {
+    studentProgressState.user = user
+    studentProgressState.topicRows.clear()
+    studentProgressState.quizRows.clear()
+    studentProgressState.ready = false
+    studentProgressState.lastError = ''
+    renderStudentSyncUi()
+    refreshTrackerAdminProfile(user)
+
+    if (user) {
+      loadStudentProgress(activeAcademicSection)
+    } else {
+      updateGlobalProgress()
+    }
+  })
+}
+
 if (subjectList) {
   const initialMode = getInitialSiteMode()
   updateAcademicSectionUi()
   syncModeToBody()
   if (initialMode === '402') {
-    selectSiteSection('402', { scroll: false, hash: window.location.hash || '#tracker' })
+    selectSiteSection('402', { scroll: false, hash: window.location.hash || '#tracker', historyMode: 'replace' })
   } else if (initialMode === '401') {
-    selectSiteSection('401', { scroll: false, hash: window.location.hash || '#tracker' })
+    selectSiteSection('401', { scroll: false, hash: window.location.hash || '#tracker', historyMode: 'replace' })
   } else if (initialMode === 'tools') {
-    showToolsSection({ scroll: false })
+    showToolsSection({ scroll: false, historyMode: 'replace' })
   } else if (initialMode === 'work') {
-    showWorkSection({ scroll: false })
+    showWorkSection({ scroll: false, historyMode: 'replace' })
   } else {
-    showSelector()
-    renderSubjects()
-    clearSubjectDetail()
-    renderSemesterTimeline()
-    render401ExamSchedule()
-    renderSchedulePage()
+    showSelector({ scroll: false, historyMode: 'replace' })
   }
   window.setInterval(render401ExamSchedule, 3600000)
+  refreshRemoteTrackerData()
+  initStudentSync()
+  renderTrackerAdminUi()
+  if (initialParams.get('admin') === 'login') openAdminLogin()
 }
 
 document.addEventListener('click', (event) => {
+  const syncToggle = event.target.closest('[data-student-sync-toggle]')
+  if (syncToggle) {
+    event.preventDefault()
+    setStudentSyncMenu(!studentSync?.classList.contains('is-open'))
+    return
+  }
+
+  if (event.target.closest('[data-student-sync-login]')) {
+    event.preventDefault()
+    studentProgressState.lastError = ''
+    renderStudentSyncUi()
+    signInWithGoogle({ redirectTo: window.location.href }).catch((error) => {
+      studentProgressState.lastError = error.message
+      renderStudentSyncUi()
+    })
+    return
+  }
+
+  if (event.target.closest('[data-student-sync-logout]')) {
+    event.preventDefault()
+    signOutUser().catch((error) => {
+      studentProgressState.lastError = error.message
+      renderStudentSyncUi()
+    })
+    setStudentSyncMenu(false)
+    return
+  }
+
+  const anonToggle = event.target.closest('#leaderboard-anon-toggle')
+  if (anonToggle) {
+    event.preventDefault()
+    if (!studentProgressState.user) return
+    const currentAnon = !leaderboardState.preferences.anonymous
+    leaderboardState.preferences.anonymous = currentAnon
+    renderAnonToggleUi()
+    upsertUserPreference({
+      user_id: studentProgressState.user.id,
+      anonymous: currentAnon
+    }).then(() => {
+      fetchAndRenderLeaderboard(true)
+    }).catch((err) => {
+      showGlobalToast('Failed to update: ' + err.message)
+    })
+    return
+  }
+
+  if (event.target.closest('[data-leaderboard-retry]')) {
+    event.preventDefault()
+    fetchAndRenderLeaderboard(true)
+    return
+  }
+
+  if (event.target.closest('[data-admin-login-open]')) {
+    event.preventDefault()
+    openAdminLogin()
+    return
+  }
+
+  if (event.target.closest('[data-admin-login-close]')) {
+    closeAdminLogin()
+    return
+  }
+
+  if (event.target === adminLoginModal) {
+    closeAdminLogin()
+    return
+  }
+
+  if (event.target.closest('[data-admin-editor-close]')) {
+    closeAdminEditor()
+    return
+  }
+
+  if (event.target.closest('[data-news-admin-add]')) {
+    openNewsAdminEditor()
+    return
+  }
+
+  if (event.target.closest('[data-news-admin-close]') || event.target === newsAdminModal) {
+    closeNewsAdminEditor()
+    return
+  }
+
+  const newsCard = event.target.closest('.update-panel[data-news-id]')
+  const newsRow = newsCard ? getNewsRows().find((row) => row.id === newsCard.dataset.newsId) : null
+  if (newsRow && event.target.closest('[data-news-edit]')) {
+    openNewsAdminEditor(newsRow)
+    return
+  }
+  if (newsRow && event.target.closest('[data-news-delete]')) {
+    if (!window.confirm(`Delete “${newsRow.title}”? This cannot be undone.`)) return
+    newsAdminStatus.textContent = 'Deleting...'
+    deleteNewsCard(newsRow.id, newsRow.section)
+      .then(() => refreshRemoteNewsCards(newsRow.section))
+      .then(() => { newsAdminStatus.textContent = 'News card deleted.' })
+      .catch((error) => { newsAdminStatus.textContent = error.message })
+    return
+  }
+  if (newsRow && event.target.closest('[data-news-toggle-pin]')) {
+    const nextGroup = newsRow.card_group === 'pinned' ? 'regular' : 'pinned'
+    const groupRows = getNewsRows().filter((row) => row.card_group === nextGroup)
+    upsertNewsCard({ ...newsRow, card_group: nextGroup, display_order: (groupRows.at(-1)?.display_order || 0) + 10 })
+      .then(() => refreshRemoteNewsCards(newsRow.section))
+      .catch((error) => { newsAdminStatus.textContent = error.message })
+    return
+  }
+  if (newsRow && event.target.closest('[data-news-toggle-publish]')) {
+    upsertNewsCard({ ...newsRow, published: !newsRow.published })
+      .then(() => refreshRemoteNewsCards(newsRow.section))
+      .catch((error) => { newsAdminStatus.textContent = error.message })
+    return
+  }
+  const newsMoveButton = event.target.closest('[data-news-move]')
+  if (newsRow && newsMoveButton) {
+    moveNewsCard(newsRow, newsMoveButton.dataset.newsMove)
+      .catch((error) => { newsAdminStatus.textContent = error.message })
+    return
+  }
+
+  const adminEditButton = event.target.closest('[data-admin-edit-topic]')
+  if (adminEditButton) {
+    event.preventDefault()
+    event.stopPropagation()
+    const card = adminEditButton.closest('[data-admin-topic]')
+    if (card) openAdminTopicEditor(card.dataset.adminSubject, card.dataset.adminTrack, card.dataset.adminTopic)
+    return
+  }
+
+  const adminMoveButton = event.target.closest('[data-admin-move]')
+  if (adminMoveButton) {
+    event.preventDefault()
+    event.stopPropagation()
+    const card = adminMoveButton.closest('[data-admin-topic]')
+    if (card) moveAdminTopic(card.dataset.adminSubject, card.dataset.adminTrack, card.dataset.adminTopic, adminMoveButton.dataset.adminMove)
+    return
+  }
+
+  if (studentSync?.classList.contains('is-open') && !event.target.closest('#student-sync')) {
+    setStudentSyncMenu(false)
+  }
+
   const sectionButton = event.target.closest('[data-select-section]')
   if (sectionButton) {
     event.preventDefault()
@@ -4090,7 +5589,121 @@ document.addEventListener('click', (event) => {
   handleQuizClick(event)
 })
 
+adminLoginForm?.addEventListener('submit', async (event) => {
+  event.preventDefault()
+  setAdminLoginStatus('Signing in...')
+  const submit = adminLoginForm.querySelector('[type="submit"]')
+  if (submit) submit.disabled = true
+  try {
+    const { user } = await signInAdmin(adminLoginEmail.value.trim(), adminLoginPassword.value)
+    studentProgressState.user = user
+    const profile = await fetchAdminProfile()
+    if (!profile) {
+      await signOutUser()
+      throw new Error('This account is not registered as a tracker admin.')
+    }
+    trackerAdminState.profile = profile
+    trackerAdminState.enabled = true
+    closeAdminLogin()
+    renderTrackerAdminUi()
+    await refreshRemoteNewsCards(activeAcademicSection)
+    renderSubjects()
+    if (activeSubjectCode) setActiveSubject(activeSubjectCode, 'open')
+  } catch (error) {
+    setAdminLoginStatus(error.message, 'error')
+  } finally {
+    if (submit) submit.disabled = false
+  }
+})
+
+trackerAdminEditPanel?.addEventListener('change', (event) => {
+  if (!event.target.matches('input[name="admin-state"]')) return
+  trackerAdminEditPanel.querySelectorAll('.admin-state-option').forEach(option => option.classList.remove('is-selected'))
+  event.target.closest('.admin-state-option')?.classList.add('is-selected')
+})
+
+trackerAdminEditPanel?.addEventListener('submit', (event) => {
+  const form = event.target.closest('[data-tracker-admin-edit-form]')
+  if (!form) return
+  event.preventDefault()
+  saveAdminTopicForm(form)
+})
+
+newsAdminForm?.addEventListener('submit', (event) => {
+  event.preventDefault()
+  saveNewsAdminForm(newsAdminForm)
+})
+
+trackerAdminSaveOrder?.addEventListener('click', saveAdminArrangement)
+trackerAdminSignOut?.addEventListener('click', () => {
+  if (trackerAdminState.dirtyCollections.size) {
+    window.alert('Save the topic arrangement before signing out.')
+    return
+  }
+  trackerAdminState.enabled = false
+  closeAdminEditor()
+  renderTrackerAdminUi()
+  renderSubjects()
+  if (activeSubjectCode) setActiveSubject(activeSubjectCode, 'open')
+  showGlobalToast('Student view on.')
+})
+
+document.addEventListener('dragstart', (event) => {
+  const card = event.target.closest('.tracker-admin-topic[data-admin-topic]')
+  if (!card || !isTrackerAdmin()) return
+  trackerAdminState.draggingKey = `${card.dataset.adminSubject}::${card.dataset.adminTrack}::${card.dataset.adminTopic}`
+  card.classList.add('admin-topic--dragging')
+  event.dataTransfer?.setData('text/plain', trackerAdminState.draggingKey)
+})
+
+document.addEventListener('dragover', (event) => {
+  const card = event.target.closest('.tracker-admin-topic[data-admin-topic]')
+  if (!card || !trackerAdminState.draggingKey) return
+  event.preventDefault()
+  document.querySelectorAll('.admin-topic--drag-over').forEach(item => item.classList.remove('admin-topic--drag-over'))
+  card.classList.add('admin-topic--drag-over')
+})
+
+document.addEventListener('drop', (event) => {
+  const target = event.target.closest('.tracker-admin-topic[data-admin-topic]')
+  if (!target || !trackerAdminState.draggingKey) return
+  event.preventDefault()
+  const [sourceSubject, sourceTrack, ...sourceLabelParts] = trackerAdminState.draggingKey.split('::')
+  const sourceLabel = sourceLabelParts.join('::')
+  if (sourceSubject !== target.dataset.adminSubject || sourceTrack !== target.dataset.adminTrack) return
+  const context = getAdminTopicContext(sourceSubject, sourceTrack, sourceLabel)
+  if (!context) return
+  const fromIndex = context.collection.findIndex(item => item.label === sourceLabel)
+  const toIndex = context.collection.findIndex(item => item.label === target.dataset.adminTopic)
+  if (fromIndex >= 0 && toIndex >= 0 && fromIndex !== toIndex) {
+    const [moved] = context.collection.splice(fromIndex, 1)
+    context.collection.splice(toIndex, 0, moved)
+    context.collection.forEach((topic, index) => { topic.displayOrder = (index + 1) * 10 })
+    trackerAdminState.dirtyCollections.add(getAdminCollectionKey(sourceSubject, sourceTrack))
+    renderSubjects()
+    setActiveSubject(sourceSubject, 'open')
+  }
+})
+
+document.addEventListener('dragend', () => {
+  trackerAdminState.draggingKey = ''
+  document.querySelectorAll('.admin-topic--dragging, .admin-topic--drag-over').forEach(item => item.classList.remove('admin-topic--dragging', 'admin-topic--drag-over'))
+})
+
+window.addEventListener('beforeunload', (event) => {
+  if (!trackerAdminState.dirtyCollections.size) return
+  event.preventDefault()
+  event.returnValue = ''
+})
+
 window.addEventListener('hashchange', handleLegacyHashRoute)
+window.addEventListener('popstate', restoreSiteModeFromLocation)
+window.addEventListener('focus', () => {
+  if (activeSiteMode === '401' || activeSiteMode === '402') refreshRemoteTrackerData()
+})
+document.addEventListener('visibilitychange', () => {
+  if (!document.hidden && (activeSiteMode === '401' || activeSiteMode === '402')) refreshRemoteTrackerData()
+})
 
 
 function refreshTrackerFilters() {
@@ -4842,6 +6455,9 @@ function initBottomSectionNav() {
     navLinks.forEach((link) => {
       link.classList.toggle('active', link.dataset.sectionNav === id)
     })
+    if (id === 'leaderboard') {
+      fetchAndRenderLeaderboard()
+    }
   }
 
   const sectionIds = new Set(sections.map((section) => section.id))
@@ -4914,62 +6530,5 @@ function initBottomSectionNav() {
   sections.forEach((section) => observer.observe(section))
 }
 
-function createElementRipple(target, event) {
-  if (!target) return
-  target.classList.add('ripple-host')
-
-  const rect = target.getBoundingClientRect()
-  const size = Math.max(rect.width, rect.height) * 1.85
-  const x = Number.isFinite(event?.clientX) ? event.clientX - rect.left : rect.width / 2
-  const y = Number.isFinite(event?.clientY) ? event.clientY - rect.top : rect.height / 2
-
-  const ripple = document.createElement('span')
-  ripple.className = 'apple-ripple'
-  ripple.style.setProperty('--ripple-x', `${x}px`)
-  ripple.style.setProperty('--ripple-y', `${y}px`)
-  ripple.style.setProperty('--ripple-size', `${size}px`)
-
-  target.appendChild(ripple)
-  ripple.addEventListener('animationend', () => ripple.remove(), { once: true })
-}
-
-function createAppleRipple(event) {
-  if (event.button !== 0 && event.button !== undefined) return
-  if (!event.isPrimary) return
-  if (event.target.closest('.quiz-modal')) return
-
-  const target = event.target.closest([
-    'button',
-    'a',
-    '.exam-card',
-    '.exam-card__quiz-action',
-    '.subject-button',
-    '.topic-resource',
-    '.topic-item',
-    '.quiz-card',
-    '.quiz-source-option',
-    '.quiz-choice',
-    '.quiz-action',
-    '.update-panel',
-    '.class-rep',
-    '.schedule-card',
-    '.history-panel',
-    '.history-summary',
-    '.sidebar',
-    '.main-panel',
-    '.preview',
-    '.system-btn',
-    '.step-btn',
-    '.chip',
-    '.service-card',
-    '.agent-service',
-    '.booking-panel'
-  ].join(','))
-
-  if (!target || target.disabled || target.matches(':disabled') || target.closest('[aria-disabled="true"]')) return
-  createElementRipple(target, event)
-}
-
 initFullHistoryTool()
 initBottomSectionNav()
-// The global glow ripple was removed; native hover/focus/active states remain.
