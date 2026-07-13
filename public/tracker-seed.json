@@ -4,11 +4,13 @@
     "subject_code": "SUR-1",
     "subject_name": "Surgery 1",
     "track": "theoretical",
-    "topic_label": "Liver Introduction",
+    "topic_label": "Liver",
     "state": "taken",
     "stop_note": null,
-    "drive_url": "https://docs.google.com/presentation/d/12BIYR9r2h_fwkUQpXQI0xOyPy-lSI9D_/edit?usp=drivesdk&ouid=109054155258701630059&rtpof=true&sd=true",
-    "audio_url": "https://drive.google.com/file/d/1ukIDlUnzzpsyCOola5-TiyWJy7e2QELO/view?usp=drivesdk"
+    "drive_url": null,
+    "audio_url": null,
+    "midterm_scope": true,
+    "midterm_scope_note": "SUR 401-1 scope: Liver. Source: Dr. Abu Alata PDFs and lecture recordings."
   },
   {
     "section": "401",
@@ -19,40 +21,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": "https://drive.google.com/file/d/1-iY3KOVw6vUWm_7k--A9lWFJnuGxYqoo/view?usp=drivesdk",
-    "audio_url": "https://drive.google.com/file/d/1vt23RUJTWuT_1ZRUHGm4gvWJKW1sxUyI/view?usp=drivesdk"
-  },
-  {
-    "section": "401",
-    "subject_code": "SUR-1",
-    "subject_name": "Surgery 1",
-    "track": "theoretical",
-    "topic_label": "Liver Trauma and Infections",
-    "state": "taken",
-    "stop_note": null,
-    "drive_url": "https://docs.google.com/presentation/d/1yjIUZolwSkC9DLnvTGCWBsxtPMuqalgY/edit?usp=drivesdk&ouid=109054155258701630059&rtpof=true&sd=true",
-    "audio_url": "https://drive.google.com/file/d/1mhHDVMOU6lPAar5xesF0eLKtNUJDwVR9/view?usp=drivesdk"
-  },
-  {
-    "section": "401",
-    "subject_code": "SUR-1",
-    "subject_name": "Surgery 1",
-    "track": "theoretical",
-    "topic_label": "Liver Tumors",
-    "state": "taken",
-    "stop_note": null,
-    "drive_url": null,
-    "audio_url": null
-  },
-  {
-    "section": "401",
-    "subject_code": "SUR-1",
-    "subject_name": "Surgery 1",
-    "track": "theoretical",
-    "topic_label": "Cirrhosis, portal hypertension and hepatic vascular disease",
-    "state": "taken",
-    "stop_note": null,
-    "drive_url": "https://docs.google.com/presentation/d/1Y8AQJlpl-XINpxVDyeexUBjpxfAsDJrV/edit?usp=drivesdk&ouid=109054155258701630059&rtpof=true&sd=true",
-    "audio_url": "https://drive.google.com/file/d/1t1i2zjXOYw9jaSdIRYn1GvBOrsToq30u/view?usp=drivesdk"
+    "audio_url": "https://drive.google.com/file/d/1vt23RUJTWuT_1ZRUHGm4gvWJKW1sxUyI/view?usp=drivesdk",
+    "midterm_scope": true,
+    "midterm_scope_note": "SUR 401-1 scope: Esophagus. Source: Dr. Hisham's book and lecture recordings."
   },
   {
     "section": "401",
@@ -63,7 +34,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": true,
+    "midterm_scope_note": "SUR 401-1 scope: Tongue. Source: Dr. Abu Alata PDFs and lecture recordings."
   },
   {
     "section": "401",
@@ -74,18 +47,22 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
     "subject_code": "SUR-1",
     "subject_name": "Surgery 1",
     "track": "theoretical",
-    "topic_label": "Stomach anatomy, physiology, histology and peptic ulcers",
+    "topic_label": "Stomach",
     "state": "taken",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": "https://drive.google.com/file/d/19U-2vhMabUKGYhF_reeNy2NDovYvN0wl/view?usp=drivesdk"
+    "audio_url": "https://drive.google.com/file/d/19U-2vhMabUKGYhF_reeNy2NDovYvN0wl/view?usp=drivesdk",
+    "midterm_scope": true,
+    "midterm_scope_note": "SUR 401-1 scope: Stomach. Source: Dr. Hisham's book and lecture recordings."
   },
   {
     "section": "401",
@@ -96,7 +73,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -107,7 +86,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -118,7 +99,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -129,7 +112,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -139,8 +124,10 @@
     "topic_label": "Spleen",
     "state": "remaining",
     "stop_note": null,
-    "drive_url": null,
-    "audio_url": null
+    "drive_url": "https://docs.google.com/presentation/d/1GfFE2goGP1WRw5D14YqQHW9ptEuJkBMz/edit?usp=drivesdk",
+    "audio_url": "https://drive.google.com/file/d/1_o-r7uaXAHQW8EEGixSW91tBPnpcjEDv/view?usp=drivesdk",
+    "midterm_scope": true,
+    "midterm_scope_note": "SUR 401-1 scope: Spleen. Source: Spring 2026 midterm curriculum, Dr. Abu Alata PDFs and lecture recordings."
   },
   {
     "section": "401",
@@ -151,7 +138,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": "https://drive.google.com/file/d/1mpckOjHYl__72iCCGy4jXU7EJfzgzKlX/view?usp=drivesdk"
+    "audio_url": "https://drive.google.com/file/d/1mpckOjHYl__72iCCGy4jXU7EJfzgzKlX/view?usp=drivesdk",
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -161,8 +150,10 @@
     "topic_label": "Chest trauma / trauma up to sternal fractures",
     "state": "taken",
     "stop_note": null,
-    "drive_url": "https://drive.google.com/file/d/18BP11uNEJk5eq6GKSAtj_mBEMN59l8U",
-    "audio_url": null
+    "drive_url": "https://docs.google.com/presentation/d/1wF1XfNhzOsjS7cX8t6-xyEi92dQShVB-/edit?usp=drivesdk",
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -172,8 +163,10 @@
     "topic_label": "Cardiothoracic Trauma Part 1",
     "state": "taken",
     "stop_note": null,
-    "drive_url": "https://docs.google.com/presentation/d/18BP11uNEJk5eq6GKSAtj_mBEMN59l8U_/edit?usp=drivesdk&ouid=118432020364493231826&rtpof=true&sd=true",
-    "audio_url": "https://drive.google.com/file/d/10m1QAEj6AhRE1cD8_zK1jbpejunbeRMX/view?usp=drivesdk"
+    "drive_url": "https://docs.google.com/presentation/d/1wF1XfNhzOsjS7cX8t6-xyEi92dQShVB-/edit?usp=drivesdk",
+    "audio_url": "https://drive.google.com/file/d/10m1QAEj6AhRE1cD8_zK1jbpejunbeRMX/view?usp=drivesdk",
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -184,7 +177,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": "https://docs.google.com/presentation/d/17kjMBNHhun5-76h7saPBwGnZVV4rG588/edit?usp=drivesdk&ouid=109054155258701630059&rtpof=true&sd=true",
-    "audio_url": "https://drive.google.com/file/d/1JdFbfB1xuLD-WSCnXs7jgBAA1KoSJ1Rj/view?usp=drivesdk"
+    "audio_url": "https://drive.google.com/file/d/1JdFbfB1xuLD-WSCnXs7jgBAA1KoSJ1Rj/view?usp=drivesdk",
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -195,7 +190,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": "https://docs.google.com/presentation/d/17kjMBNHhun5-76h7saPBwGnZVV4rG588/edit?usp=drivesdk&ouid=109054155258701630059&rtpof=true&sd=true",
-    "audio_url": "https://drive.google.com/file/d/1JdFbfB1xuLD-WSCnXs7jgBAA1KoSJ1Rj/view?usp=drivesdk"
+    "audio_url": "https://drive.google.com/file/d/1JdFbfB1xuLD-WSCnXs7jgBAA1KoSJ1Rj/view?usp=drivesdk",
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -206,7 +203,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": "https://docs.google.com/presentation/d/17kjMBNHhun5-76h7saPBwGnZVV4rG588/edit?usp=drivesdk&ouid=109054155258701630059&rtpof=true&sd=true",
-    "audio_url": "https://drive.google.com/file/d/1JdFbfB1xuLD-WSCnXs7jgBAA1KoSJ1Rj/view?usp=drivesdk"
+    "audio_url": "https://drive.google.com/file/d/1JdFbfB1xuLD-WSCnXs7jgBAA1KoSJ1Rj/view?usp=drivesdk",
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -217,7 +216,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": "https://drive.google.com/file/d/1WlMpLSuqu3GBmoMLwRtxEOsUl2D8EsVK/view?usp=drivesdk",
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -228,7 +229,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": "https://drive.google.com/file/d/1JCS1ZR8BiLL2sGVi-0B6UBExsstVOZEP/view?usp=drivesdk"
+    "audio_url": "https://drive.google.com/file/d/1JCS1ZR8BiLL2sGVi-0B6UBExsstVOZEP/view?usp=drivesdk",
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -239,7 +242,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": "https://docs.google.com/presentation/d/1p7aTSiqNJZa-R63z-pcqjAGhHTTNehrf/edit?usp=drivesdk&ouid=109054155258701630059&rtpof=true&sd=true",
-    "audio_url": "https://drive.google.com/file/d/1RIQ-z7QWxEY2QNgMXpE-GCYwYwDM-I7l/view?usp=drivesdk"
+    "audio_url": "https://drive.google.com/file/d/1RIQ-z7QWxEY2QNgMXpE-GCYwYwDM-I7l/view?usp=drivesdk",
+    "midterm_scope": true,
+    "midterm_scope_note": "MED 401-1 scope: Diseases of the Esophagus. Source: Spring 2026 midterm curriculum and Dr. Hisham Samy lecture recordings."
   },
   {
     "section": "401",
@@ -250,7 +255,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": "https://drive.google.com/file/d/1LQ-zgjWNlzGar7OgfX1WhBxkqvsTIAhQ/view?usp=drivesdk",
-    "audio_url": "https://drive.google.com/file/d/1pCiruJJQ6rB84pyxeGy_NUY5QMUzDJVi/view?usp=drivesdk"
+    "audio_url": "https://drive.google.com/file/d/1pCiruJJQ6rB84pyxeGy_NUY5QMUzDJVi/view?usp=drivesdk",
+    "midterm_scope": true,
+    "midterm_scope_note": "MED 401-1 scope: Acute viral hepatitis and investigation of liver diseases. Source: Spring 2026 midterm curriculum."
   },
   {
     "section": "401",
@@ -261,7 +268,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": "https://drive.google.com/drive/folders/1545uWPrXXOM9JjruxJVRzh2joO5IFDlt",
-    "audio_url": "https://drive.google.com/file/d/10wtq_v-0BOgOysXSgb1qxAFoOkbW8ix0/view?usp=drivesdk"
+    "audio_url": "https://drive.google.com/file/d/10wtq_v-0BOgOysXSgb1qxAFoOkbW8ix0/view?usp=drivesdk",
+    "midterm_scope": true,
+    "midterm_scope_note": "MED 401-1 scope: NAFLD/NASH, autoimmune hepatitis, and chronic viral hepatitis. Source: Spring 2026 midterm curriculum."
   },
   {
     "section": "401",
@@ -272,7 +281,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -283,7 +294,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": "https://drive.google.com/file/d/10G1Kk8lgpPk7_N6NDp0xqdTiZZKFz0yR/view?usp=drivesdk",
+    "midterm_scope": true,
+    "midterm_scope_note": "MED 401-1 scope: Diseases of the Small Intestine. Source: Spring 2026 midterm curriculum."
   },
   {
     "section": "401",
@@ -294,7 +307,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": "https://drive.google.com/file/d/17KyoPZaodfoIqTQtEzn21cTxNQOpA9ks/view?usp=drivesdk",
+    "midterm_scope": true,
+    "midterm_scope_note": "MED 401-1 scope: Liver cirrhosis and portal hypertension. Source: Spring 2026 midterm curriculum."
   },
   {
     "section": "401",
@@ -305,7 +320,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -316,7 +333,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": "https://drive.google.com/file/d/14TjxXXk2ITCHuao-ayMIwT4z1yjbNFuh/view?usp=drivesdk",
-    "audio_url": "https://drive.google.com/file/d/1Jw6R2QaYMQ9PerWxCAU_0vMfReSneE1o/view?usp=drivesdk"
+    "audio_url": "https://drive.google.com/file/d/1Jw6R2QaYMQ9PerWxCAU_0vMfReSneE1o/view?usp=drivesdk",
+    "midterm_scope": true,
+    "midterm_scope_note": "MED 401-1 scope: Diseases of the Pancreas. Source: Spring 2026 midterm curriculum and Dr. Hisham Samy lecture recordings."
   },
   {
     "section": "401",
@@ -327,7 +346,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -338,7 +359,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": "https://drive.google.com/drive/folders/1545uWPrXXOM9JjruxJVRzh2joO5IFDlt",
-    "audio_url": "https://drive.google.com/file/d/10wtq_v-0BOgOysXSgb1qxAFoOkbW8ix0/view?usp=drivesdk"
+    "audio_url": "https://drive.google.com/file/d/10wtq_v-0BOgOysXSgb1qxAFoOkbW8ix0/view?usp=drivesdk",
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -349,7 +372,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -360,7 +385,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -371,7 +398,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -382,7 +411,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -393,7 +424,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -404,7 +437,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -415,7 +450,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -426,7 +463,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -437,7 +476,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": "https://docs.google.com/presentation/d/1yZxhWUh5KDgQp_Z_Le10RL_JmdooXpwb/edit?usp=drivesdk&ouid=109054155258701630059&rtpof=true&sd=true",
-    "audio_url": "https://drive.google.com/file/d/1G7x3QDKNsrxEZXdm-iQBAEeQzijaul2K/view?usp=drivesdk"
+    "audio_url": "https://drive.google.com/file/d/1G7x3QDKNsrxEZXdm-iQBAEeQzijaul2K/view?usp=drivesdk",
+    "midterm_scope": true,
+    "midterm_scope_note": "MED 401-2 Cardiology scope: Rheumatic Fever only. Infective endocarditis is not listed in the Spring 2026 midterm curriculum."
   },
   {
     "section": "401",
@@ -448,7 +489,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -459,7 +502,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": "https://docs.google.com/presentation/d/1yZxhWUh5KDgQp_Z_Le10RL_JmdooXpwb/edit?usp=drivesdk&ouid=109054155258701630059&rtpof=true&sd=true",
-    "audio_url": "https://drive.google.com/file/d/1iA7K5sZ3xXEcHJLey6JUr9WmHFrxlCFS/view?usp=drivesdk"
+    "audio_url": "https://drive.google.com/file/d/1iA7K5sZ3xXEcHJLey6JUr9WmHFrxlCFS/view?usp=drivesdk",
+    "midterm_scope": true,
+    "midterm_scope_note": "MED 401-2 Cardiology scope: Mitral valve diseases. Source: Spring 2026 midterm curriculum."
   },
   {
     "section": "401",
@@ -470,7 +515,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": true,
+    "midterm_scope_note": "MED 401-2 Cardiology scope: Aortic valve diseases. Source: Spring 2026 midterm curriculum."
   },
   {
     "section": "401",
@@ -481,7 +528,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -492,7 +541,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -503,7 +554,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -514,7 +567,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -525,7 +580,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -536,7 +593,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -547,7 +606,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -558,7 +619,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": "https://drive.google.com/file/d/1lCYbFrQVM23IHF-qxs0DItq6wHIjwxxP/view?usp=drivesdk",
-    "audio_url": "https://drive.google.com/file/d/1ryTmHHfCBcIzK0AXKgYYxqSKvvbMHAZk/view?usp=drivesdk"
+    "audio_url": "https://drive.google.com/file/d/1ryTmHHfCBcIzK0AXKgYYxqSKvvbMHAZk/view?usp=drivesdk",
+    "midterm_scope": true,
+    "midterm_scope_note": "MED 401-2 Cardiology scope: Systemic Hypertension. Source: Spring 2026 midterm curriculum."
   },
   {
     "section": "401",
@@ -568,8 +631,10 @@
     "topic_label": "Pulmonary Embolism",
     "state": "taken",
     "stop_note": null,
-    "drive_url": "https://drive.google.com/file/d/1N4XIY296nvaftsjrXUEbYUaGH2-UJBT0",
-    "audio_url": "https://drive.google.com/file/d/15PxmYb9SjFLIoabrFFI0XfBqFVaRhjUO/view?usp=drivesdk"
+    "drive_url": "https://docs.google.com/presentation/d/1TicuEg59UwuZYaZ4OPBiD6vOfDupF8za/edit?usp=drivesdk",
+    "audio_url": "https://drive.google.com/file/d/15PxmYb9SjFLIoabrFFI0XfBqFVaRhjUO/view?usp=drivesdk",
+    "midterm_scope": true,
+    "midterm_scope_note": "MED 401-2 Cardiology scope: Pulmonary Embolism. Source: Spring 2026 midterm curriculum."
   },
   {
     "section": "401",
@@ -580,7 +645,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": "https://drive.google.com/file/d/1SX1PStcEfLVwTwYt_WfjesGwkieI2Pfd/view?usp=drivesdk",
-    "audio_url": "https://drive.google.com/file/d/14YTH3onMolGkFXHzRSyG_ejnZv9ryGG5/view?usp=drivesdk"
+    "audio_url": "https://drive.google.com/file/d/14YTH3onMolGkFXHzRSyG_ejnZv9ryGG5/view?usp=drivesdk",
+    "midterm_scope": true,
+    "midterm_scope_note": "MED 401-2 Chest scope: cough, sputum, hemoptysis, and dyspnea."
   },
   {
     "section": "401",
@@ -591,7 +658,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": "https://drive.google.com/file/d/1k5IlWjpjnwEeKt4UmcD-zdBNtqiyr0S2/view?usp=drivesdk",
-    "audio_url": "https://drive.google.com/file/d/1O83lsWK2zc1e7u6Yljwtd5ZFM2llnrFA/view?usp=drivesdk"
+    "audio_url": "https://drive.google.com/file/d/1O83lsWK2zc1e7u6Yljwtd5ZFM2llnrFA/view?usp=drivesdk",
+    "midterm_scope": true,
+    "midterm_scope_note": "MED 401-2 Chest scope: PFTs, lung volumes, capacities, flow rates, diffusion, and obstructive vs restrictive clinical applications."
   },
   {
     "section": "401",
@@ -602,7 +671,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": "https://drive.google.com/file/d/133Ae9Po7wzSJBOf-GqANHRBHmPBufviI/view?usp=drivesdk",
-    "audio_url": null
+    "audio_url": "https://drive.google.com/file/d/1w1y-MVBWAmFr78kVW7CGHADsw-CmFsBK/view?usp=drivesdk",
+    "midterm_scope": true,
+    "midterm_scope_note": "MED 401-2 Chest scope: airway and small-airway diseases, subglottic stenosis, vocal cord dysfunction, and bronchial asthma including severity assessment, stepwise treatment, biological treatment, and ACO/ACOS. Genetic treatment is excluded."
   },
   {
     "section": "401",
@@ -613,7 +684,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": "https://drive.google.com/drive/folders/1KYLyxp67TVvPqmcnl33siqUB5SSbbwYF",
-    "audio_url": "https://drive.google.com/file/d/1QpUB6w-BoBRmhutzUwzUUi9kbf_L_Q0p/view?usp=drivesdk"
+    "audio_url": "https://drive.google.com/file/d/1QpUB6w-BoBRmhutzUwzUUi9kbf_L_Q0p/view?usp=drivesdk",
+    "midterm_scope": true,
+    "midterm_scope_note": "MED 401-2 Chest scope: only ACO/ACOS is included from the COPD and overlaps section. COPD is excluded, and genetic treatment for asthma is excluded."
   },
   {
     "section": "401",
@@ -624,7 +697,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -635,7 +710,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -646,7 +723,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -657,7 +736,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -668,7 +749,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -679,7 +762,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -690,7 +775,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -701,7 +788,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -712,7 +801,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -723,7 +814,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -734,7 +827,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": "https://drive.google.com/file/d/1D3qbb6zibbkzstmNeipmEoNPlnF7BN2q/view?usp=drivesdk",
-    "audio_url": "https://drive.google.com/file/d/1qH7bGw0mqGQzaf8lzszR72PRFUAnNCG6/view?usp=drivesdk"
+    "audio_url": "https://drive.google.com/file/d/1qH7bGw0mqGQzaf8lzszR72PRFUAnNCG6/view?usp=drivesdk",
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -744,8 +839,10 @@
     "topic_label": "Hemolytic anemia",
     "state": "taken",
     "stop_note": null,
-    "drive_url": "https://drive.google.com/file/d/1j1_ViyVc0eF2J-0qkTmg6vbO9V5EvIzp",
-    "audio_url": "https://drive.google.com/file/d/1RkBUYZutIOLulGwOrUAny3tAupTZe7Ki/view?usp=drivesdk"
+    "drive_url": "https://drive.google.com/file/d/1gVZZDhS-d6oiNbk7WDhgG_v1kX_5_2Nm/view?usp=drivesdk",
+    "audio_url": "https://drive.google.com/file/d/1RkBUYZutIOLulGwOrUAny3tAupTZe7Ki/view?usp=drivesdk",
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -756,7 +853,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": "https://drive.google.com/file/d/1zcQyZdfM-y6qqo5AhaeZtORqEkUFIQJJ/view?usp=drivesdk",
-    "audio_url": "https://drive.google.com/file/d/1UuxB_UA6w7NKqgPerO6yadsKbpdNcNle/view?usp=drivesdk"
+    "audio_url": "https://drive.google.com/file/d/1UuxB_UA6w7NKqgPerO6yadsKbpdNcNle/view?usp=drivesdk",
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -767,7 +866,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": "https://drive.google.com/file/d/1hPJX5OwPkKD59GqU5BuElPYo9vy8Kc4Y/view?usp=drivesdk",
-    "audio_url": "https://drive.google.com/file/d/1PS3CFen5xTgFj5UhiGmZHFxVr2DNEdSL/view?usp=drivesdk"
+    "audio_url": "https://drive.google.com/file/d/1PS3CFen5xTgFj5UhiGmZHFxVr2DNEdSL/view?usp=drivesdk",
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -778,7 +879,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": "https://drive.google.com/file/d/1IgrJBTBINWlx0k58TiCCxWUt-u_XUJ1G/view?usp=drivesdk",
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -789,7 +892,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -800,7 +905,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -811,7 +918,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -822,7 +931,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -833,7 +944,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -844,7 +957,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -855,7 +970,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -866,7 +983,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -877,7 +996,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": "https://drive.google.com/file/d/1rCjJqBqu8wOWIW0SMHoGjvyXSCIniwsR/view?usp=drivesdk",
-    "audio_url": "https://drive.google.com/file/d/1twQvgbaRxLMP2vBRu4dVV7nU6zmMHUFV/view?usp=drivesdk"
+    "audio_url": "https://drive.google.com/file/d/1twQvgbaRxLMP2vBRu4dVV7nU6zmMHUFV/view?usp=drivesdk",
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -888,7 +1009,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": "https://drive.google.com/file/d/1q5b51GzxLYXT-iOOLfA1M1KnigeJTE1b/view?usp=drivesdk",
-    "audio_url": "https://drive.google.com/file/d/1Lr0LftsOc_-uhH2X82uqzJ0eSkUWgSDz/view?usp=drivesdk"
+    "audio_url": "https://drive.google.com/file/d/1Lr0LftsOc_-uhH2X82uqzJ0eSkUWgSDz/view?usp=drivesdk",
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -899,7 +1022,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": "https://drive.google.com/file/d/1KB6lV5bwjB2AjkZja2IGy4HGQnYoFi9c/view?usp=drivesdk",
-    "audio_url": "https://drive.google.com/file/d/1jFCfRCkClJyvgSfNnLIGHNQd0Kg1Le5O/view?usp=drivesdk"
+    "audio_url": "https://drive.google.com/file/d/1jFCfRCkClJyvgSfNnLIGHNQd0Kg1Le5O/view?usp=drivesdk",
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -910,7 +1035,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -921,7 +1048,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -932,7 +1061,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -942,8 +1073,10 @@
     "topic_label": "Iron deficiency anemia",
     "state": "partial",
     "stop_note": null,
-    "drive_url": "https://drive.google.com/file/d/1AGNjjX1lUoTE56keCrC57Wt-Esq87Gr_/view?usp=drivesdk",
-    "audio_url": null
+    "drive_url": "https://drive.google.com/file/d/1RcDNwFl91CVAErQ5IyY0cX--mJTGOhZV/view?usp=drivesdk",
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -954,7 +1087,9 @@
     "state": "partial",
     "stop_note": null,
     "drive_url": "https://drive.google.com/file/d/1_LAXxkYF-i3nnTrSIOCUv0q6qAAPGlKl/view?usp=drivesdk",
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -965,7 +1100,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -976,7 +1113,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": "https://drive.google.com/file/d/154Sxxn2R_Y-6l2i3pvhFtWP_Roi_GR0Q/view?usp=drivesdk",
-    "audio_url": "https://drive.google.com/file/d/122BV8-mfoCWNXt979EaO2ZkMGbGuHpm5/view?usp=drivesdk"
+    "audio_url": "https://drive.google.com/file/d/122BV8-mfoCWNXt979EaO2ZkMGbGuHpm5/view?usp=drivesdk",
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -987,7 +1126,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": "https://drive.google.com/file/d/1RkmsX-_jlL3klayg5fvPwk6gk-LYPYHA/view?usp=drivesdk",
-    "audio_url": "https://drive.google.com/file/d/168l5PhCSMGsl3GWyVeFpDiw8WEWaJlmC/view?usp=drivesdk"
+    "audio_url": "https://drive.google.com/file/d/168l5PhCSMGsl3GWyVeFpDiw8WEWaJlmC/view?usp=drivesdk",
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -998,7 +1139,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -1009,7 +1152,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -1020,7 +1165,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": "https://drive.google.com/file/d/1wu3gyA28ynSIPuHvqMAvqCmCPIp5zIzp/view?usp=drivesdk",
-    "audio_url": null
+    "audio_url": "https://drive.google.com/file/d/12gVSpb0WPGpSicqCYBXZBxipQttFp7Q1/view?usp=drivesdk",
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -1031,7 +1178,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -1042,7 +1191,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -1053,7 +1204,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": "https://drive.google.com/file/d/1V5Shpas5pvITeqRW3U6hQs1iN6qZGJcv/view?usp=drivesdk",
-    "audio_url": "https://drive.google.com/file/d/1sFabKs8xoweV_eSqkB_D7YVXufv28rLt/view?usp=drivesdk"
+    "audio_url": "https://drive.google.com/file/d/1sFabKs8xoweV_eSqkB_D7YVXufv28rLt/view?usp=drivesdk",
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -1064,7 +1217,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": "https://drive.google.com/file/d/1ICi7ExmMJ3zhXnp-dfh0rlHo0cEYub0E/view?usp=drivesdk",
-    "audio_url": "https://drive.google.com/file/d/1o1biv_U_2DBaIVnJPvbN5UXlmPfSkGlq/view?usp=drivesdk"
+    "audio_url": "https://drive.google.com/file/d/1o1biv_U_2DBaIVnJPvbN5UXlmPfSkGlq/view?usp=drivesdk",
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -1075,7 +1230,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -1086,7 +1243,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -1097,7 +1256,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -1108,7 +1269,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "401",
@@ -1119,7 +1282,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "402",
@@ -1129,8 +1294,10 @@
     "topic_label": "Thyroid",
     "state": "taken",
     "stop_note": null,
-    "drive_url": null,
-    "audio_url": null
+    "drive_url": "https://docs.google.com/presentation/d/1fpmXmkNcEH_HBg8n-R3eD0-9wp_D4er7/edit?usp=drivesdk",
+    "audio_url": null,
+    "midterm_scope": true,
+    "midterm_scope_note": "SUR402-1 midterm scope. Source: Midterm exams curriculum 402."
   },
   {
     "section": "402",
@@ -1140,8 +1307,10 @@
     "topic_label": "Parathyroid",
     "state": "taken",
     "stop_note": null,
-    "drive_url": null,
-    "audio_url": null
+    "drive_url": "https://docs.google.com/presentation/d/1LlqKUnMnJXLDfb2oOlhxP6HLi3Qm0p7o/edit?usp=drivesdk",
+    "audio_url": null,
+    "midterm_scope": true,
+    "midterm_scope_note": "SUR402-1 midterm scope. Source: Midterm exams curriculum 402."
   },
   {
     "section": "402",
@@ -1151,8 +1320,10 @@
     "topic_label": "Breast / Fibroadenoma",
     "state": "taken",
     "stop_note": null,
-    "drive_url": null,
-    "audio_url": null
+    "drive_url": "https://docs.google.com/presentation/d/1s-6fayQ9x05HinNwyX0o_Fr3rxA-q-pl/edit?usp=drivesdk",
+    "audio_url": null,
+    "midterm_scope": true,
+    "midterm_scope_note": "SUR402-1 midterm scope: Breast. Source: Midterm exams curriculum 402."
   },
   {
     "section": "402",
@@ -1162,8 +1333,10 @@
     "topic_label": "Breast tumor & cancer",
     "state": "taken",
     "stop_note": null,
-    "drive_url": null,
-    "audio_url": null
+    "drive_url": "https://docs.google.com/presentation/d/1EQXEsMqAkUa9_ai37kp-QuKJ9rSeoLuc/edit?usp=drivesdk",
+    "audio_url": null,
+    "midterm_scope": true,
+    "midterm_scope_note": "SUR402-1 midterm scope: Breast. Source: Midterm exams curriculum 402."
   },
   {
     "section": "402",
@@ -1174,7 +1347,9 @@
     "state": "partial",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": true,
+    "midterm_scope_note": "SUR402-1 midterm scope: all hernia including abdominal and inguino-scrotal hernia. Source: Midterm exams curriculum 402."
   },
   {
     "section": "402",
@@ -1185,7 +1360,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "402",
@@ -1196,7 +1373,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "402",
@@ -1207,7 +1386,9 @@
     "state": "announced",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "402",
@@ -1218,7 +1399,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "402",
@@ -1229,7 +1412,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "402",
@@ -1240,7 +1425,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": true,
+    "midterm_scope_note": "MED402-1 endocrinology midterm scope. Source: Midterm exams curriculum 402."
   },
   {
     "section": "402",
@@ -1251,7 +1438,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": true,
+    "midterm_scope_note": "MED402-1 geriatrics midterm scope. Source: Midterm exams curriculum 402."
   },
   {
     "section": "402",
@@ -1262,7 +1451,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": true,
+    "midterm_scope_note": "MED402-1 geriatrics midterm scope. Source: Midterm exams curriculum 402."
   },
   {
     "section": "402",
@@ -1273,7 +1464,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": true,
+    "midterm_scope_note": "MED402-1 endocrinology midterm scope. Source: Midterm exams curriculum 402."
   },
   {
     "section": "402",
@@ -1284,7 +1477,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": true,
+    "midterm_scope_note": "MED402-1 geriatrics midterm scope. Source: Midterm exams curriculum 402."
   },
   {
     "section": "402",
@@ -1295,7 +1490,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": true,
+    "midterm_scope_note": "MED402-1 endocrinology midterm scope: DM. Source: Midterm exams curriculum 402."
   },
   {
     "section": "402",
@@ -1306,7 +1503,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": true,
+    "midterm_scope_note": "MED402-1 endocrinology midterm scope: DM. Source: Midterm exams curriculum 402."
   },
   {
     "section": "402",
@@ -1317,7 +1516,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": true,
+    "midterm_scope_note": "MED402-1 endocrinology midterm scope: DM. Source: Midterm exams curriculum 402."
   },
   {
     "section": "402",
@@ -1328,7 +1529,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": true,
+    "midterm_scope_note": "MED402-1 geriatrics midterm scope. Source: Midterm exams curriculum 402."
   },
   {
     "section": "402",
@@ -1339,7 +1542,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": true,
+    "midterm_scope_note": "MED402-1 endocrinology midterm scope. Source: Midterm exams curriculum 402."
   },
   {
     "section": "402",
@@ -1350,7 +1555,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": true,
+    "midterm_scope_note": "MED402-1 endocrinology midterm scope. Source: Midterm exams curriculum 402."
   },
   {
     "section": "402",
@@ -1361,7 +1568,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": true,
+    "midterm_scope_note": "MED402-1 endocrinology midterm scope. Source: Midterm exams curriculum 402."
   },
   {
     "section": "402",
@@ -1372,7 +1581,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": true,
+    "midterm_scope_note": "MED402-2 neurology midterm scope starts from page 1. Source: Midterm exams curriculum 402."
   },
   {
     "section": "402",
@@ -1383,7 +1594,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": true,
+    "midterm_scope_note": "MED402-2 psychiatry midterm scope. Source: Midterm exams curriculum 402."
   },
   {
     "section": "402",
@@ -1394,7 +1607,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": true,
+    "midterm_scope_note": "MED402-2 neurology midterm scope. Source: Midterm exams curriculum 402."
   },
   {
     "section": "402",
@@ -1405,7 +1620,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": true,
+    "midterm_scope_note": "MED402-2 psychiatry midterm scope. Source: Midterm exams curriculum 402."
   },
   {
     "section": "402",
@@ -1416,7 +1633,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": true,
+    "midterm_scope_note": "MED402-2 neurology midterm scope. Source: Midterm exams curriculum 402."
   },
   {
     "section": "402",
@@ -1427,7 +1646,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": true,
+    "midterm_scope_note": "MED402-2 psychiatry midterm scope. Source: Midterm exams curriculum 402."
   },
   {
     "section": "402",
@@ -1438,7 +1659,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": true,
+    "midterm_scope_note": "MED402-2 psychiatry midterm scope. Source: Midterm exams curriculum 402."
   },
   {
     "section": "402",
@@ -1449,7 +1672,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": true,
+    "midterm_scope_note": "MED402-2 neurology page 1-69 scope. Source: Midterm exams curriculum 402."
   },
   {
     "section": "402",
@@ -1460,7 +1685,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": true,
+    "midterm_scope_note": "MED402-2 neurology page 1-69 scope. Source: Midterm exams curriculum 402."
   },
   {
     "section": "402",
@@ -1471,7 +1698,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": true,
+    "midterm_scope_note": "GYNA402 midterm scope. 2026 book pages 12-16."
   },
   {
     "section": "402",
@@ -1482,7 +1711,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": true,
+    "midterm_scope_note": "GYNA402 midterm scope. 2026 book pages 19-25."
   },
   {
     "section": "402",
@@ -1493,7 +1724,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": true,
+    "midterm_scope_note": "GYNA402 midterm scope. 2026 book pages 25-29."
   },
   {
     "section": "402",
@@ -1504,7 +1737,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": true,
+    "midterm_scope_note": "GYNA402 midterm scope. 2026 book pages 25-29."
   },
   {
     "section": "402",
@@ -1515,7 +1750,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": true,
+    "midterm_scope_note": "GYNA402 midterm scope. 2026 book pages 34-36."
   },
   {
     "section": "402",
@@ -1526,7 +1763,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": true,
+    "midterm_scope_note": "GYNA402 midterm scope. 2026 book pages 30-33. Malignant GTD is not included."
   },
   {
     "section": "402",
@@ -1537,7 +1776,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": true,
+    "midterm_scope_note": "OBS rounds midterm scope. 2026 book pages 147-149, 1-13."
   },
   {
     "section": "402",
@@ -1548,7 +1789,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": true,
+    "midterm_scope_note": "GYNA402 midterm scope. 2026 book pages 92-96."
   },
   {
     "section": "402",
@@ -1559,7 +1802,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "402",
@@ -1570,7 +1815,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": true,
+    "midterm_scope_note": "GYNA402 midterm scope. 2026 book pages 17-18."
   },
   {
     "section": "402",
@@ -1581,7 +1828,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": true,
+    "midterm_scope_note": "GYNA402 midterm scope. 2026 book page 30."
   },
   {
     "section": "402",
@@ -1592,7 +1841,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": true,
+    "midterm_scope_note": "GYNA402 midterm scope. 2026 book pages 35-41."
   },
   {
     "section": "402",
@@ -1603,7 +1854,9 @@
     "state": "remaining",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": true,
+    "midterm_scope_note": "GYNA rounds midterm scope. 2026 book pages 61-67."
   },
   {
     "section": "402",
@@ -1614,7 +1867,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": true,
+    "midterm_scope_note": "PED402 midterm scope. Source: Midterm exams curriculum 402 and PED402 notes."
   },
   {
     "section": "402",
@@ -1625,7 +1880,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": true,
+    "midterm_scope_note": "PED402 midterm scope. Source: Midterm exams curriculum 402 and PED402 notes."
   },
   {
     "section": "402",
@@ -1636,7 +1893,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": true,
+    "midterm_scope_note": "PED402 midterm scope: Cardiology. Source: Midterm exams curriculum 402 and PED402 notes."
   },
   {
     "section": "402",
@@ -1647,7 +1906,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": true,
+    "midterm_scope_note": "PED402 midterm scope: Cardiology. Source: Midterm exams curriculum 402 and PED402 notes."
   },
   {
     "section": "402",
@@ -1658,7 +1919,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": true,
+    "midterm_scope_note": "PED402 midterm scope: Cardiology. Source: Midterm exams curriculum 402 and PED402 notes."
   },
   {
     "section": "402",
@@ -1669,7 +1932,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": true,
+    "midterm_scope_note": "PED402 midterm scope: Cardiology. Source: Midterm exams curriculum 402 and PED402 notes."
   },
   {
     "section": "402",
@@ -1680,7 +1945,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": true,
+    "midterm_scope_note": "PED402 midterm scope: Cardiology. Source: Midterm exams curriculum 402 and PED402 notes."
   },
   {
     "section": "402",
@@ -1691,7 +1958,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "402",
@@ -1702,7 +1971,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "402",
@@ -1713,7 +1984,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "402",
@@ -1724,7 +1997,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "402",
@@ -1735,7 +2010,9 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   },
   {
     "section": "402",
@@ -1746,6 +2023,8 @@
     "state": "taken",
     "stop_note": null,
     "drive_url": null,
-    "audio_url": null
+    "audio_url": null,
+    "midterm_scope": false,
+    "midterm_scope_note": null
   }
 ]

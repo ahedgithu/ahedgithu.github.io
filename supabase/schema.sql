@@ -22,6 +22,8 @@ create table if not exists public.tracker_topics (
   drive_url text,
   audio_url text,
   display_order integer,
+  midterm_scope boolean not null default false,
+  midterm_scope_note text,
   created_at timestamptz,
   updated_at timestamptz not null default now(),
   updated_by uuid references auth.users(id),
@@ -36,6 +38,12 @@ add column if not exists audio_url text;
 
 alter table public.tracker_topics
 add column if not exists display_order integer;
+
+alter table public.tracker_topics
+add column if not exists midterm_scope boolean not null default false;
+
+alter table public.tracker_topics
+add column if not exists midterm_scope_note text;
 
 alter table public.tracker_topics
 add column if not exists created_at timestamptz;
@@ -63,7 +71,9 @@ begin
       new.state,
       new.stop_note,
       new.drive_url,
-      new.audio_url
+      new.audio_url,
+      new.midterm_scope,
+      new.midterm_scope_note
     ) is distinct from row(
       old.section,
       old.subject_code,
@@ -73,7 +83,9 @@ begin
       old.state,
       old.stop_note,
       old.drive_url,
-      old.audio_url
+      old.audio_url,
+      old.midterm_scope,
+      old.midterm_scope_note
     )
   then
     new.updated_at = now();

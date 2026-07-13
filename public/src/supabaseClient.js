@@ -2,6 +2,7 @@ import { createClient } from '@supabase/supabase-js'
 
 let supabaseClient = null
 let trackerTopicsIncludeOptionalColumns = true
+let trackerTopicsIncludeMidtermColumns = true
 let trackerTopicsIncludeCreatedAt = true
 
 export function getSupabaseConfig() {
@@ -48,7 +49,12 @@ export function getSupabaseClient() {
 
 function isMissingOptionalColumnError(error) {
   const message = `${error?.message || ''} ${error?.details || ''} ${error?.hint || ''}`
-  return /drive_url|audio_url|display_order|schema cache|column/i.test(message)
+  return /drive_url|audio_url|display_order/i.test(message) && /schema cache|column/i.test(message)
+}
+
+function isMissingMidtermColumnError(error) {
+  const message = `${error?.message || ''} ${error?.details || ''} ${error?.hint || ''}`
+  return /midterm_scope|midterm_scope_note/i.test(message) && /schema cache|column/i.test(message)
 }
 
 function isMissingCreatedAtError(error) {
@@ -61,13 +67,19 @@ function stripOptionalColumns(row) {
   return basicRow
 }
 
+function stripMidtermColumns(row) {
+  const { midterm_scope, midterm_scope_note, ...basicRow } = row
+  return basicRow
+}
+
 export async function fetchTrackerTopicRows() {
   const supabase = getSupabaseClient()
   if (!supabase) return []
 
   const optionalFields = trackerTopicsIncludeOptionalColumns ? ', drive_url, audio_url, display_order' : ''
+  const midtermFields = trackerTopicsIncludeMidtermColumns ? ', midterm_scope, midterm_scope_note' : ''
   const createdAtField = trackerTopicsIncludeCreatedAt ? ', created_at' : ''
-  const selectFields = `section, subject_code, subject_name, track, topic_label, state, stop_note${optionalFields}${createdAtField}, updated_at`
+  const selectFields = `section, subject_code, subject_name, track, topic_label, state, stop_note${optionalFields}${midtermFields}${createdAtField}, updated_at`
 
   const { data, error } = await supabase
     .from('tracker_topics')
@@ -77,6 +89,10 @@ export async function fetchTrackerTopicRows() {
     .order('display_order', { ascending: true, nullsFirst: false })
     .order('topic_label', { ascending: true })
 
+  if (error && trackerTopicsIncludeMidtermColumns && isMissingMidtermColumnError(error)) {
+    trackerTopicsIncludeMidtermColumns = false
+    return fetchTrackerTopicRows()
+  }
   if (error && trackerTopicsIncludeOptionalColumns && isMissingOptionalColumnError(error)) {
     trackerTopicsIncludeOptionalColumns = false
     return fetchTrackerTopicRows()
@@ -172,10 +188,12 @@ export async function upsertTrackerTopics(rows, options = {}) {
   const supabase = getSupabaseClient()
   if (!supabase) throw new Error('Supabase is not configured.')
 
-  const payloadRows = trackerTopicsIncludeOptionalColumns ? rows : rows.map(stripOptionalColumns)
+  let payloadRows = trackerTopicsIncludeMidtermColumns ? rows : rows.map(stripMidtermColumns)
+  payloadRows = trackerTopicsIncludeOptionalColumns ? payloadRows : payloadRows.map(stripOptionalColumns)
   const optionalFields = trackerTopicsIncludeOptionalColumns ? ', drive_url, audio_url, display_order' : ''
+  const midtermFields = trackerTopicsIncludeMidtermColumns ? ', midterm_scope, midterm_scope_note' : ''
   const createdAtField = trackerTopicsIncludeCreatedAt ? ', created_at' : ''
-  const selectFields = `section, subject_code, subject_name, track, topic_label, state, stop_note${optionalFields}${createdAtField}, updated_at`
+  const selectFields = `section, subject_code, subject_name, track, topic_label, state, stop_note${optionalFields}${midtermFields}${createdAtField}, updated_at`
 
   const { data, error } = await supabase
     .from('tracker_topics')
@@ -187,6 +205,10 @@ export async function upsertTrackerTopics(rows, options = {}) {
 
   console.log('[Supabase] upsert raw response — data:', data, '| error:', error)
 
+  if (error && trackerTopicsIncludeMidtermColumns && isMissingMidtermColumnError(error)) {
+    trackerTopicsIncludeMidtermColumns = false
+    return upsertTrackerTopics(rows, options)
+  }
   if (error && trackerTopicsIncludeOptionalColumns && isMissingOptionalColumnError(error)) {
     trackerTopicsIncludeOptionalColumns = false
     return upsertTrackerTopics(rows, options)

@@ -105,7 +105,11 @@ let subjects = [
         state: 'remaining',
         art: 12,
         midtermScope: true,
-        midtermScopeNote: 'SUR 401-1 scope: Spleen. Source: Dr. Abu Alata PDFs and lecture recordings.'
+        midtermScopeNote: 'SUR 401-1 scope: Spleen. Source: Spring 2026 midterm curriculum, Dr. Abu Alata PDFs and lecture recordings.',
+        lectureUrls: [
+          { label: 'Lecture slides', url: 'https://docs.google.com/presentation/d/1GfFE2goGP1WRw5D14YqQHW9ptEuJkBMz/edit?usp=drivesdk' }
+        ],
+        audioUrl: 'https://drive.google.com/file/d/1_o-r7uaXAHQW8EEGixSW91tBPnpcjEDv/view?usp=drivesdk'
       }
     ],
     clinicalTopics: [
@@ -129,7 +133,7 @@ let subjects = [
         art: 10,
         note: 'Sunday report 21 Jun: taught by Dr. Mohand Mostafa.',
         lectureUrls: [
-          { label: 'Lecture', url: 'https://drive.google.com/file/d/18BP11uNEJk5eq6GKSAtj_mBEMN59l8U' }
+          { label: 'Lecture', url: 'https://docs.google.com/presentation/d/1wF1XfNhzOsjS7cX8t6-xyEi92dQShVB-/edit?usp=drivesdk' }
         ]
       },
       {
@@ -137,7 +141,7 @@ let subjects = [
         state: 'taken',
         art: 10,
         lectureUrls: [
-          { label: 'Lecture slides', url: 'https://docs.google.com/presentation/d/18BP11uNEJk5eq6GKSAtj_mBEMN59l8U_/edit?usp=drivesdk&ouid=118432020364493231826&rtpof=true&sd=true' },
+          { label: 'Lecture slides', url: 'https://docs.google.com/presentation/d/1wF1XfNhzOsjS7cX8t6-xyEi92dQShVB-/edit?usp=drivesdk' },
           { label: 'SharePoint recording', url: 'https://mustedueg-my.sharepoint.com/:v:/g/personal/200022569_must_edu_eg/IQB3Dc4y6O42QJ6eMAnau4B-AV_P59BYY7lhONBTlEb4YAs' }
         ],
         audioUrl: 'https://drive.google.com/file/d/10m1QAEj6AhRE1cD8_zK1jbpejunbeRMX/view?usp=drivesdk'
@@ -178,7 +182,7 @@ let subjects = [
         ],
         audioUrl: 'https://drive.google.com/file/d/1JdFbfB1xuLD-WSCnXs7jgBAA1KoSJ1Rj/view?usp=drivesdk'
       },
-      { label: 'Empyema', state: 'remaining', art: 10 }
+      { label: 'Empyema', state: 'remaining', art: 10, audioUrl: 'https://drive.google.com/file/d/1WlMpLSuqu3GBmoMLwRtxEOsUl2D8EsVK/view?usp=drivesdk' }
     ],
     clinicalTopics: [
       {
@@ -199,6 +203,8 @@ let subjects = [
         label: "GERD, Barrett's Esophagus, Esophageal Motility Disorders",
         state: 'taken',
         art: 1,
+        midtermScope: true,
+        midtermScopeNote: 'MED 401-1 scope: Diseases of the Esophagus. Source: Spring 2026 midterm curriculum and Dr. Hisham Samy lecture recordings.',
         updatedAt: '2026-06-28',
         updateBatch: 'sunday-report-2026-06-28',
         note: 'Sunday report 28 Jun: Disease of the Esophagus, taught by Dr. Hisham Samy. Covers anatomy of the esophagus, physiology of the esophagus, physiology of swallowing, and physiology of GERD.',
@@ -211,6 +217,8 @@ let subjects = [
         label: 'Investigation of Acute Hepatitis',
         state: 'taken',
         art: 5,
+        midtermScope: true,
+        midtermScopeNote: 'MED 401-1 scope: Acute viral hepatitis and investigation of liver diseases. Source: Spring 2026 midterm curriculum.',
         lectureUrls: [
           { label: 'Lecture', url: 'https://drive.google.com/file/d/1LQ-zgjWNlzGar7OgfX1WhBxkqvsTIAhQ/view?usp=drivesdk' }
         ],
@@ -220,6 +228,8 @@ let subjects = [
         label: 'Chronic viral and non-viral hepatitis',
         state: 'taken',
         art: 5,
+        midtermScope: true,
+        midtermScopeNote: 'MED 401-1 scope: NAFLD/NASH, autoimmune hepatitis, and chronic viral hepatitis. Source: Spring 2026 midterm curriculum.',
         note: 'Sunday report 21 Jun: Autoimmune Hepatitis (AIH) taught by Dr. Omar Heikal. Also covers PBC, PSC, MASLD.',
         lectureUrls: [
           { label: 'Lecture folder', url: 'https://drive.google.com/drive/folders/1545uWPrXXOM9JjruxJVRzh2joO5IFDlt' },
@@ -228,13 +238,15 @@ let subjects = [
         audioUrl: 'https://drive.google.com/file/d/10wtq_v-0BOgOysXSgb1qxAFoOkbW8ix0/view?usp=drivesdk'
       },
       { label: 'Diseases of Stomach: PUD, H. pylori, non-ulcer dyspepsia', state: 'remaining', art: 6 },
-      { label: 'Small intestine: diarrhea, malabsorption, celiac, Whipple', state: 'remaining', art: 7 },
-      { label: 'Cirrhosis complications: portal hypertension, ascites', state: 'remaining', art: 8 },
+      { label: 'Small intestine: diarrhea, malabsorption, celiac, Whipple', state: 'remaining', art: 7, midtermScope: true, midtermScopeNote: 'MED 401-1 scope: Diseases of the Small Intestine. Source: Spring 2026 midterm curriculum.', audioUrl: 'https://drive.google.com/file/d/10G1Kk8lgpPk7_N6NDp0xqdTiZZKFz0yR/view?usp=drivesdk' },
+      { label: 'Cirrhosis complications: portal hypertension, ascites', state: 'remaining', art: 8, midtermScope: true, midtermScopeNote: 'MED 401-1 scope: Liver cirrhosis and portal hypertension. Source: Spring 2026 midterm curriculum.', audioUrl: 'https://drive.google.com/file/d/17KyoPZaodfoIqTQtEzn21cTxNQOpA9ks/view?usp=drivesdk' },
       { label: 'SBP, Hepatic Encephalopathy, Hepatorenal Syndrome', state: 'remaining', art: 8 },
       {
         label: 'Diseases of the Pancreas',
         state: 'taken',
         art: 4,
+        midtermScope: true,
+        midtermScopeNote: 'MED 401-1 scope: Diseases of the Pancreas. Source: Spring 2026 midterm curriculum and Dr. Hisham Samy lecture recordings.',
         lectureUrls: [
           { label: 'Lecture', url: 'https://drive.google.com/file/d/14TjxXXk2ITCHuao-ayMIwT4z1yjbNFuh/view?usp=drivesdk' }
         ],
@@ -274,6 +286,8 @@ let subjects = [
         state: 'taken',
         art: 9,
         section: 'Cardio',
+        midtermScope: true,
+        midtermScopeNote: 'MED 401-2 Cardiology scope: Rheumatic Fever only. Infective endocarditis is not listed in the Spring 2026 midterm curriculum.',
         lectureUrls: [
           { label: 'Lecture', url: 'https://docs.google.com/presentation/d/1yZxhWUh5KDgQp_Z_Le10RL_JmdooXpwb/edit?usp=drivesdk&ouid=109054155258701630059&rtpof=true&sd=true' }
         ],
@@ -285,6 +299,8 @@ let subjects = [
         state: 'taken',
         art: 9,
         section: 'Cardio',
+        midtermScope: true,
+        midtermScopeNote: 'MED 401-2 Cardiology scope: Mitral valve diseases. Source: Spring 2026 midterm curriculum.',
         updatedAt: '2026-06-28',
         updateBatch: 'sunday-report-2026-06-28',
         note: 'Sunday report 28 Jun: Mitral Valve Diseases, taught by Dr. Nashwa El Hagrasy. Covers symptoms, diagnostics, clinical evaluation, mitral stenosis, mitral regurgitation, and mitral valve prolapse.',
@@ -293,7 +309,7 @@ let subjects = [
         ],
         audioUrl: 'https://drive.google.com/file/d/1iA7K5sZ3xXEcHJLey6JUr9WmHFrxlCFS/view?usp=drivesdk'
       },
-      { label: 'Aortic valve diseases', state: 'remaining', art: 9, section: 'Cardio' },
+      { label: 'Aortic valve diseases', state: 'remaining', art: 9, section: 'Cardio', midtermScope: true, midtermScopeNote: 'MED 401-2 Cardiology scope: Aortic valve diseases. Source: Spring 2026 midterm curriculum.' },
       { label: 'Pericardial diseases', state: 'remaining', art: 9, section: 'Cardio' },
       { label: 'ECG', state: 'remaining', art: 9, section: 'Cardio' },
       { label: 'Arrhythmia I', state: 'remaining', art: 9, section: 'Cardio' },
@@ -306,6 +322,8 @@ let subjects = [
         state: 'taken',
         art: 9,
         section: 'Cardio',
+        midtermScope: true,
+        midtermScopeNote: 'MED 401-2 Cardiology scope: Systemic Hypertension. Source: Spring 2026 midterm curriculum.',
         lectureUrls: [
           { label: 'Lecture', url: 'https://drive.google.com/file/d/1lCYbFrQVM23IHF-qxs0DItq6wHIjwxxP/view?usp=drivesdk' }
         ],
@@ -316,9 +334,11 @@ let subjects = [
         state: 'taken',
         art: 10,
         section: 'Cardio',
+        midtermScope: true,
+        midtermScopeNote: 'MED 401-2 Cardiology scope: Pulmonary Embolism. Source: Spring 2026 midterm curriculum.',
         note: 'Sunday report 21 Jun: taught by Dr. Ibrahim Abdelhamid.',
         lectureUrls: [
-          { label: 'Lecture', url: 'https://drive.google.com/file/d/1N4XIY296nvaftsjrXUEbYUaGH2-UJBT0' }
+          { label: 'Lecture', url: 'https://docs.google.com/presentation/d/1TicuEg59UwuZYaZ4OPBiD6vOfDupF8za/edit?usp=drivesdk' }
         ],
         audioUrl: 'https://drive.google.com/file/d/15PxmYb9SjFLIoabrFFI0XfBqFVaRhjUO/view?usp=drivesdk'
       },
@@ -354,11 +374,12 @@ let subjects = [
         art: 10,
         section: 'Chest',
         midtermScope: true,
-        midtermScopeNote: 'MED 401-2 Chest scope: airway diseases, small airway diseases, subglottic stenosis, vocal cord dysfunction, and bronchial asthma basics.',
+        midtermScopeNote: 'MED 401-2 Chest scope: airway and small-airway diseases, subglottic stenosis, vocal cord dysfunction, and bronchial asthma including severity assessment, stepwise treatment, biological treatment, and ACO/ACOS. Genetic treatment is excluded.',
         note: 'Tuesday report: diseases of upper and lower airways and bronchial asthma part 1.',
         lectureUrls: [
           { label: 'Lecture', url: 'https://drive.google.com/file/d/133Ae9Po7wzSJBOf-GqANHRBHmPBufviI/view?usp=drivesdk' }
-        ]
+        ],
+        audioUrl: 'https://drive.google.com/file/d/1w1y-MVBWAmFr78kVW7CGHADsw-CmFsBK/view?usp=drivesdk'
       },
       {
         label: 'Chronic Bronchitis and COPD',
@@ -366,7 +387,7 @@ let subjects = [
         art: 10,
         section: 'Chest',
         midtermScope: true,
-        midtermScopeNote: 'MED 401-2 Chest scope: chronic bronchitis is included; COPD is excluded.',
+        midtermScopeNote: 'MED 401-2 Chest scope: only ACO/ACOS is included from the COPD and overlaps section. COPD is excluded, and genetic treatment for asthma is excluded.',
         updatedAt: '2026-06-30',
         updateBatch: 'tuesday-report-2026-06-30',
         note: 'Tuesday report 30 Jun: COPD, taught by Dr. Serageldin Ali Sadek. Covers chronic bronchitis, emphysema, spirometry, CT chest, risk factors, airflow limitation, and management.',
@@ -408,7 +429,7 @@ let subjects = [
         art: 12,
         note: 'Sunday report 21 Jun: taught by Dr. Manal Mahmoud.',
         lectureUrls: [
-          { label: 'Lecture', url: 'https://drive.google.com/file/d/1j1_ViyVc0eF2J-0qkTmg6vbO9V5EvIzp' }
+          { label: 'Lecture', url: 'https://drive.google.com/file/d/1gVZZDhS-d6oiNbk7WDhgG_v1kX_5_2Nm/view?usp=drivesdk' }
         ],
         audioUrl: 'https://drive.google.com/file/d/1RkBUYZutIOLulGwOrUAny3tAupTZe7Ki/view?usp=drivesdk'
       },
@@ -434,7 +455,7 @@ let subjects = [
         ],
         audioUrl: 'https://drive.google.com/file/d/1PS3CFen5xTgFj5UhiGmZHFxVr2DNEdSL/view?usp=drivesdk'
       },
-      { label: 'Polycythemia vera and essential thrombocytosis', state: 'remaining', art: 12 },
+      { label: 'Polycythemia vera and essential thrombocytosis', state: 'remaining', art: 12, audioUrl: 'https://drive.google.com/file/d/1IgrJBTBINWlx0k58TiCCxWUt-u_XUJ1G/view?usp=drivesdk' },
       { label: 'WBC Diseases: Neutropenia and Leukocytosis', state: 'remaining', art: 12 },
       { label: 'Malignancy Pathophysiology and Lymphoma', state: 'remaining', art: 12 },
       { label: 'Acute Leukemias: AML and ALL', state: 'remaining', art: 12 },
@@ -501,7 +522,7 @@ let subjects = [
         updateBatch: 'wednesday-report-2026-07-01',
         note: 'Wednesday report 1 Jul: first half of iron deficiency anemia, taught by Dr. Hanan Samah.',
         lectureUrls: [
-          { label: 'Iron deficiency anemia lecture', url: 'https://drive.google.com/file/d/1AGNjjX1lUoTE56keCrC57Wt-Esq87Gr_/view?usp=drivesdk' }
+          { label: 'Iron deficiency anemia lecture', url: 'https://drive.google.com/file/d/1RcDNwFl91CVAErQ5IyY0cX--mJTGOhZV/view?usp=drivesdk' }
         ],
         pdfUrls: [
           { label: 'Compact preview', title: 'Iron deficiency anemia compact preview', url: '/assets/nut-compact/iron-deficiency-anemia-compact.pdf', preview: true, download: true }
@@ -565,7 +586,8 @@ let subjects = [
         lectureUrls: [
           { label: 'DM lecture', url: 'https://drive.google.com/file/d/1wu3gyA28ynSIPuHvqMAvqCmCPIp5zIzp/view?usp=drivesdk' },
           { label: 'Lipid lecture', url: 'https://drive.google.com/file/d/15At9wbM85dRi_4Cbx9AZ76vRuHTiAL_L/view?usp=drivesdk' }
-        ]
+        ],
+        audioUrl: 'https://drive.google.com/file/d/12gVSpb0WPGpSicqCYBXZBxipQttFp7Q1/view?usp=drivesdk'
       },
       { label: 'WBCs and leukemia', state: 'remaining', art: 12 },
       { label: 'Microbiology', state: 'remaining', art: 14 }
@@ -620,10 +642,10 @@ const subjects402 = [
     totalCount: 5,
     examNote: 'Midterm: Wed Jul 22, 2026, 11:30-12:30.',
     topics: [
-      { label: 'Thyroid', state: 'taken', art: 0, midtermScope: true, midtermScopeNote: 'SUR402-1 midterm scope. Source: Midterm exams curriculum 402.', note: 'Covered Week 1-3, completed by Week 3. Source: Weekly Reports.', mcqTopicKey: '402::SUR402-1::Thyroid' },
-      { label: 'Parathyroid', state: 'taken', art: 1, midtermScope: true, midtermScopeNote: 'SUR402-1 midterm scope. Source: Midterm exams curriculum 402.', note: 'Covered Week 3. Source: Weekly Reports.', mcqTopicKey: '402::SUR402-1::Parathyroid' },
-      { label: 'Breast / Fibroadenoma', state: 'taken', art: 2, midtermScope: true, midtermScopeNote: 'SUR402-1 midterm scope: Breast. Source: Midterm exams curriculum 402.', note: 'Covered Week 4. Source: Weekly Reports.', mcqTopicKey: '402::SUR402-1::Breast Fibroadenoma' },
-      { label: 'Breast tumor & cancer', state: 'taken', art: 3, midtermScope: true, midtermScopeNote: 'SUR402-1 midterm scope: Breast. Source: Midterm exams curriculum 402.', note: 'Covered Week 5. Source: Weekly Reports.', mcqTopicKey: '402::SUR402-1::Breast tumor cancer' },
+      { label: 'Thyroid', state: 'taken', art: 0, midtermScope: true, midtermScopeNote: 'SUR402-1 midterm scope. Source: Midterm exams curriculum 402.', note: 'Covered Week 1-3, completed by Week 3. Source: Weekly Reports.', lectureUrls: [{ label: 'Thyroid 2026', url: 'https://docs.google.com/presentation/d/1fpmXmkNcEH_HBg8n-R3eD0-9wp_D4er7/edit?usp=drivesdk' }], mcqTopicKey: '402::SUR402-1::Thyroid' },
+      { label: 'Parathyroid', state: 'taken', art: 1, midtermScope: true, midtermScopeNote: 'SUR402-1 midterm scope. Source: Midterm exams curriculum 402.', note: 'Covered Week 3. Source: Weekly Reports.', lectureUrls: [{ label: 'Parathyroid', url: 'https://docs.google.com/presentation/d/1LlqKUnMnJXLDfb2oOlhxP6HLi3Qm0p7o/edit?usp=drivesdk' }], mcqTopicKey: '402::SUR402-1::Parathyroid' },
+      { label: 'Breast / Fibroadenoma', state: 'taken', art: 2, midtermScope: true, midtermScopeNote: 'SUR402-1 midterm scope: Breast. Source: Midterm exams curriculum 402.', note: 'Covered Week 4. Source: Weekly Reports.', lectureUrls: [{ label: 'Breast diseases', url: 'https://docs.google.com/presentation/d/1s-6fayQ9x05HinNwyX0o_Fr3rxA-q-pl/edit?usp=drivesdk' }], mcqTopicKey: '402::SUR402-1::Breast Fibroadenoma' },
+      { label: 'Breast tumor & cancer', state: 'taken', art: 3, midtermScope: true, midtermScopeNote: 'SUR402-1 midterm scope: Breast. Source: Midterm exams curriculum 402.', note: 'Covered Week 5. Source: Weekly Reports.', lectureUrls: [{ label: 'Breast cancer', url: 'https://docs.google.com/presentation/d/1EQXEsMqAkUa9_ai37kp-QuKJ9rSeoLuc/edit?usp=drivesdk' }], mcqTopicKey: '402::SUR402-1::Breast tumor cancer' },
       { label: 'Hernia', state: 'partial', art: 4, midtermScope: true, midtermScopeNote: 'SUR402-1 midterm scope: all hernia including abdominal and inguino-scrotal hernia. Source: Midterm exams curriculum 402.', note: 'Started Week 6 and reached the start of umbilical hernia; not complete. Source: Weekly Reports.', mcqTopicKey: '402::SUR402-1::Hernia' }
     ]
   },
@@ -993,6 +1015,8 @@ function makeRemoteTrackerTopic(row) {
     label: row.topic_label,
     state: isValidRemoteTopicState(row.state) ? row.state : 'remaining',
     stopNote: row.stop_note || '',
+    midtermScope: Boolean(row.midterm_scope),
+    midtermScopeNote: row.midterm_scope_note || '',
     displayOrder: row.display_order !== null && row.display_order !== undefined && Number.isFinite(Number(row.display_order))
       ? Number(row.display_order)
       : null,
@@ -1062,6 +1086,22 @@ function applyTrackerTopicRows(rows) {
       const nextAudioUrl = row.audio_url || ''
       if ((existingTopic.audioUrl || '') !== nextAudioUrl) {
         existingTopic.audioUrl = nextAudioUrl
+        changed = true
+      }
+    }
+
+    if (Object.prototype.hasOwnProperty.call(row, 'midterm_scope')) {
+      const nextMidtermScope = Boolean(row.midterm_scope)
+      if (Boolean(existingTopic.midtermScope) !== nextMidtermScope) {
+        existingTopic.midtermScope = nextMidtermScope
+        changed = true
+      }
+    }
+
+    if (Object.prototype.hasOwnProperty.call(row, 'midterm_scope_note')) {
+      const nextMidtermScopeNote = row.midterm_scope_note || ''
+      if ((existingTopic.midtermScopeNote || '') !== nextMidtermScopeNote) {
+        existingTopic.midtermScopeNote = nextMidtermScopeNote
         changed = true
       }
     }
@@ -1159,6 +1199,8 @@ function makeAdminTopicPayload(subject, topic, track = activeSubjectTrack, overr
     drive_url: topic.driveUrl || topic.lectureUrls?.[0]?.url || null,
     audio_url: topic.audioUrl || null,
     display_order: Number.isFinite(topic.displayOrder) ? topic.displayOrder : null,
+    midterm_scope: Boolean(topic.midtermScope),
+    midterm_scope_note: topic.midtermScopeNote || null,
     ...overrides
   }
 }
@@ -1181,6 +1223,7 @@ function openAdminLogin() {
       replaceNewsFeedWithRemoteRows()
       renderNewsFilters()
     }
+
     showGlobalToast(trackerAdminState.enabled ? 'Admin mode on.' : 'Student view on.')
     return
   }
@@ -1286,6 +1329,10 @@ function openAdminTopicEditor(subjectCode, track, topicLabel) {
         <label class="admin-edit-label">Where did we stop / notes
           <textarea class="admin-edit-textarea" name="stop_note" rows="4" placeholder="Optional note">${escapeHtml(topic.stopNote || '')}</textarea>
         </label>
+        <label class="admin-edit-label">
+          <span><input type="checkbox" name="midterm_scope" ${topic.midtermScope ? 'checked' : ''}> Included in midterm scope</span>
+          <textarea class="admin-edit-textarea" name="midterm_scope_note" rows="3" placeholder="Optional midterm scope note">${escapeHtml(topic.midtermScopeNote || '')}</textarea>
+        </label>
         <div class="admin-edit-grid">
           <label class="admin-edit-label">Google Drive Link
             <input class="admin-edit-input" type="url" name="drive_url" value="${escapeHtml(topic.driveUrl || topic.lectureUrls?.[0]?.url || '')}" placeholder="https://drive.google.com/...">
@@ -1310,6 +1357,8 @@ async function saveAdminTopicForm(form) {
   const stopNote = form.querySelector('[name="stop_note"]').value.trim()
   const driveUrl = form.querySelector('[name="drive_url"]').value.trim()
   const audioUrl = form.querySelector('[name="audio_url"]').value.trim()
+  const midtermScope = form.querySelector('[name="midterm_scope"]').checked
+  const midtermScopeNote = form.querySelector('[name="midterm_scope_note"]').value.trim()
   trackerAdminState.saving = true
   if (submit) { submit.disabled = true; submit.textContent = 'Saving...' }
   try {
@@ -1317,7 +1366,9 @@ async function saveAdminTopicForm(form) {
       state: nextState,
       stop_note: stopNote || null,
       drive_url: driveUrl || null,
-      audio_url: audioUrl || null
+      audio_url: audioUrl || null,
+      midterm_scope: midtermScope,
+      midterm_scope_note: midtermScopeNote || null
     })])
     applyTrackerTopicRows(rows)
     closeAdminEditor()
@@ -2625,47 +2676,35 @@ function renderTopicActionIcon(type) {
   `
 }
 
-function renderTopicActionChevron() {
-  return `
-    <svg class="topic-action-card__chevron" viewBox="0 0 24 24" aria-hidden="true">
-      <path d="m9 5 7 7-7 7"></path>
-    </svg>
-  `
-}
-
-function renderTopicActionContent(type, label, statusText = '') {
+function renderTopicActionContent(type) {
   return `
     <span class="topic-action-card__icon">
       ${renderTopicActionIcon(type)}
     </span>
-    <span class="topic-action-card__text">
-      <span class="topic-action-card__label">${escapeHtml(label)}</span>
-      ${statusText ? `<span class="topic-action-card__status">${escapeHtml(statusText)}</span>` : ''}
-    </span>
-    ${renderTopicActionChevron()}
   `
 }
 
-function renderDriveActionCard(resources, topic) {
+function renderDriveActionCard(resources, topic, breakdownExpanded = false) {
   if (topic.expandableTopics) {
+    const actionLabel = breakdownExpanded ? 'Hide topic resources' : 'Show topic resources'
     return `
-      <button class="topic-action-card topic-action-card--drive" type="button" data-toggle-topic-breakdown>
-        ${renderTopicActionContent('drive', 'Topics', 'View all')}
+      <button class="topic-action-card topic-action-card--drive" type="button" data-toggle-topic-breakdown aria-expanded="${breakdownExpanded}" aria-label="${actionLabel}" title="${actionLabel}">
+        ${renderTopicActionContent('drive')}
       </button>
     `
   }
 
   const driveResources = resources.flatMap((item) => {
     if (item.type === 'drive-group') return item.items
-    if (item.url && isDriveUrl(item.url)) return [item]
+    if (item.type !== 'audio' && item.url && isDriveUrl(item.url)) return [item]
     return []
   })
-  const label = 'Drive'
+  const label = 'Lecture slides and files'
 
   if (!driveResources.length) {
     return `
-      <span class="topic-action-card topic-action-card--drive topic-action-card--disabled" aria-disabled="true">
-        ${renderTopicActionContent('drive', label, 'Pending')}
+      <span class="topic-action-card topic-action-card--drive topic-action-card--disabled" aria-disabled="true" aria-label="${label}: Not uploaded yet" title="${label}: Not uploaded yet">
+        ${renderTopicActionContent('drive')}
       </span>
     `
   }
@@ -2679,8 +2718,8 @@ function renderDriveActionCard(resources, topic) {
 
     return `
       <details class="topic-action-menu">
-        <summary class="topic-action-card topic-action-card--drive" aria-label="Open Drive resources">
-          ${renderTopicActionContent('drive', label)}
+        <summary class="topic-action-card topic-action-card--drive" aria-label="Open ${label}" title="${label}">
+          ${renderTopicActionContent('drive')}
         </summary>
         <span class="topic-action-menu__links">
           ${links}
@@ -2691,8 +2730,8 @@ function renderDriveActionCard(resources, topic) {
 
   const driveItem = driveResources[0]
   return `
-    <a class="topic-action-card topic-action-card--drive" href="${driveItem.url}" target="_blank" rel="noopener noreferrer" aria-label="Open ${escapeHtml(driveItem.label || 'Drive resources')}" title="${escapeHtml(driveItem.label || label)}">
-      ${renderTopicActionContent('drive', label)}
+    <a class="topic-action-card topic-action-card--drive" href="${driveItem.url}" target="_blank" rel="noopener noreferrer" aria-label="Open ${escapeHtml(driveItem.label || label)}" title="${escapeHtml(driveItem.label || label)}">
+      ${renderTopicActionContent('drive')}
     </a>
   `
 }
@@ -2702,15 +2741,15 @@ function renderMcqActionCard(quizTopicKey, quizCount) {
 
   if (!quizCount) {
     return `
-      <span class="topic-action-card topic-action-card--mcq topic-action-card--disabled" aria-disabled="true">
-        ${renderTopicActionContent('mcq', label, 'Pending')}
+      <span class="topic-action-card topic-action-card--mcq topic-action-card--disabled" aria-disabled="true" aria-label="MCQs: Not uploaded yet" title="MCQs: Not uploaded yet">
+        ${renderTopicActionContent('mcq')}
       </span>
     `
   }
 
   return `
-    <button class="topic-action-card topic-action-card--mcq" type="button" data-quiz-topic="${escapeHtml(quizTopicKey)}">
-      ${renderTopicActionContent('mcq', label)}
+    <button class="topic-action-card topic-action-card--mcq" type="button" data-quiz-topic="${escapeHtml(quizTopicKey)}" aria-label="Open ${escapeHtml(label)}" title="${escapeHtml(label)}">
+      ${renderTopicActionContent('mcq')}
     </button>
   `
 }
@@ -2718,20 +2757,20 @@ function renderMcqActionCard(quizTopicKey, quizCount) {
 function renderLectureRecordActionCard(topic) {
   if (!topic.audioUrl) {
     return `
-      <span class="topic-action-card topic-action-card--audio topic-action-card--disabled" aria-disabled="true">
-        ${renderTopicActionContent('audio', 'Lecture record', 'Pending')}
+      <span class="topic-action-card topic-action-card--audio topic-action-card--disabled" aria-disabled="true" aria-label="Lecture recording: Not uploaded yet" title="Lecture recording: Not uploaded yet">
+        ${renderTopicActionContent('audio')}
       </span>
     `
   }
 
   return `
-    <a class="topic-action-card topic-action-card--audio" href="${topic.audioUrl}" target="_blank" rel="noopener noreferrer" aria-label="Open lecture record in Google Drive">
-      ${renderTopicActionContent('audio', 'Lecture record')}
+    <a class="topic-action-card topic-action-card--audio" href="${topic.audioUrl}" target="_blank" rel="noopener noreferrer" aria-label="Open lecture recording in Google Drive" title="Lecture recording">
+      ${renderTopicActionContent('audio')}
     </a>
   `
 }
 
-function renderResourceLinks(topic) {
+function renderResourceLinks(topic, breakdownExpanded = false) {
   const quizTopicKey = topic.mcqTopicKey || topic.label
   const quizSources = getQuizSources(quizTopicKey)
   const quizCount = quizSources.reduce((total, source) => total + source.mcqs.length, 0)
@@ -2739,7 +2778,7 @@ function renderResourceLinks(topic) {
 
   return `
     <div class="topic-action-row" aria-label="Topic resources">
-      ${renderDriveActionCard(resources, topic)}
+      ${renderDriveActionCard(resources, topic, breakdownExpanded)}
       ${renderMcqActionCard(quizTopicKey, quizCount)}
       ${renderLectureRecordActionCard(topic)}
     </div>
@@ -2748,6 +2787,26 @@ function renderResourceLinks(topic) {
 
 function getTopicBreakdownKey(subjectCode, topicLabel) {
   return `${activeAcademicSection}::${subjectCode}::${topicLabel}`
+}
+
+function renderTopicBreakdownAction({ type, label, url = '', quizKey = '', available = false }) {
+  const content = `
+    <span class="topic-breakdown-action__icon">${renderTopicActionIcon(type)}</span>
+    <span class="topic-breakdown-action__text">
+      <strong>${escapeHtml(label)}</strong>
+      ${available ? '' : '<small>Not uploaded yet</small>'}
+    </span>
+  `
+
+  if (!available) {
+    return `<span class="topic-breakdown-action topic-breakdown-action--${type} topic-breakdown-action--unavailable" aria-disabled="true">${content}</span>`
+  }
+
+  if (type === 'mcq') {
+    return `<button class="topic-breakdown-action topic-breakdown-action--mcq" type="button" data-quiz-topic="${escapeHtml(quizKey)}">${content}</button>`
+  }
+
+  return `<a class="topic-breakdown-action topic-breakdown-action--${type}" href="${url}" target="_blank" rel="noopener noreferrer">${content}</a>`
 }
 
 function renderTopicBreakdown(subject, topic) {
@@ -2763,12 +2822,10 @@ function renderTopicBreakdown(subject, topic) {
           <strong>${escapeHtml(item.label)}</strong>
           <p>${escapeHtml(item.source)}</p>
         </div>
-        <div class="topic-breakdown__actions">
-          ${item.url
-            ? `<a href="${item.url}" target="_blank" rel="noopener noreferrer">Drive</a>`
-            : '<span class="topic-breakdown__pending">Drive pending</span>'}
-          ${item.recordUrl ? `<a href="${item.recordUrl}" target="_blank" rel="noopener noreferrer">Record</a>` : ''}
-          ${quizCount ? `<button type="button" data-quiz-topic="${escapeHtml(quizKey)}">MCQs (${quizCount})</button>` : ''}
+        <div class="topic-breakdown__actions" aria-label="${escapeHtml(item.label)} resources">
+          ${renderTopicBreakdownAction({ type: 'drive', label: 'Lecture slides', url: item.url, available: Boolean(item.url) })}
+          ${renderTopicBreakdownAction({ type: 'audio', label: 'Lecture recording', url: item.recordUrl, available: Boolean(item.recordUrl) })}
+          ${renderTopicBreakdownAction({ type: 'mcq', label: quizCount ? `MCQs (${quizCount})` : 'MCQs', quizKey, available: quizCount > 0 })}
         </div>
       </article>
     `
@@ -2877,11 +2934,12 @@ function renderTopicCard(subject, topic, index, collection = subject.topics) {
       <span class="topic-item__body">
         <span class="topic-item__heading">
           <span class="topic-item__label">${escapeHtml(topic.label)}</span>
-          ${renderTopicCompletionControls(subject, topic)}
         </span>
-        ${renderResourceLinks(topic)}
+        ${topic.midtermScope && topic.midtermScopeNote ? `<span class="topic-item__midterm-note">${escapeHtml(topic.midtermScopeNote)}</span>` : ''}
+        ${renderResourceLinks(topic, breakdownExpanded)}
         ${renderTopicBreakdown(subject, topic)}
       </span>
+      ${renderTopicCompletionControls(subject, topic)}
       ${adminControls}
     </li>
   `
@@ -3942,9 +4000,21 @@ function handleQuizClick(event) {
     const subjectCode = breakdownCard.dataset.adminSubject
     const topicLabel = breakdownCard.dataset.adminTopic
     const key = getTopicBreakdownKey(subjectCode, topicLabel)
-    if (expandedTopicBreakdowns.has(key)) expandedTopicBreakdowns.delete(key)
-    else expandedTopicBreakdowns.add(key)
-    setActiveSubject(subjectCode, 'open')
+    const shouldExpand = !expandedTopicBreakdowns.has(key)
+    if (shouldExpand) expandedTopicBreakdowns.add(key)
+    else expandedTopicBreakdowns.delete(key)
+
+    breakdownCard.classList.toggle('is-breakdown-expanded', shouldExpand)
+    breakdownCard.setAttribute('aria-expanded', String(shouldExpand))
+    const breakdown = breakdownCard.querySelector('.topic-breakdown')
+    if (breakdown) breakdown.hidden = !shouldExpand
+    const toggle = breakdownToggle || breakdownCard.querySelector('[data-toggle-topic-breakdown]')
+    if (toggle) {
+      const actionLabel = shouldExpand ? 'Hide topic resources' : 'Show topic resources'
+      toggle.setAttribute('aria-expanded', String(shouldExpand))
+      toggle.setAttribute('aria-label', actionLabel)
+      toggle.setAttribute('title', actionLabel)
+    }
     return
   }
 

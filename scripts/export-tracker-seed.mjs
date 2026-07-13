@@ -56,7 +56,9 @@ function toRows(section, subjects) {
         state: topic.state || 'remaining',
         stop_note: topic.stopNote || null,
         drive_url: driveUrl,
-        audio_url: topic.audioUrl || null
+        audio_url: topic.audioUrl || null,
+        midterm_scope: Boolean(topic.midtermScope),
+        midterm_scope_note: topic.midtermScopeNote || null
       }
     })
 
@@ -71,7 +73,9 @@ function toRows(section, subjects) {
         state: topic.state || 'remaining',
         stop_note: topic.stopNote || null,
         drive_url: driveUrl,
-        audio_url: topic.audioUrl || null
+        audio_url: topic.audioUrl || null,
+        midterm_scope: Boolean(topic.midtermScope),
+        midterm_scope_note: topic.midtermScopeNote || null
       }
     })
 

@@ -19,7 +19,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&display=swap" rel="stylesheet" />
   <meta name="theme-color" content="#315f72" />
-  <link rel="stylesheet" href="/src/style.css?v=20260712-stabilization-v1" />
+  <link rel="stylesheet" href="/src/style.css?v=20260713-boxless-topic-controls-v2" />
 </head>
 <body>
   <header class="site-header" aria-label="Main navigation">
@@ -74,7 +74,7 @@
           <img src="/assets/reviews/review2.jpg" class="home-review-screenshot" alt="Student review screenshot" />
           <img src="/assets/reviews/review3.jpg" class="home-review-screenshot" alt="Student review screenshot" />
           <img src="/assets/reviews/review4.jpg" class="home-review-screenshot" alt="Student review screenshot" />
-          <img src="/assets/reviews/review5.jpg" class="home-review-screenshot" alt="Student review screenshot" />
+          <img src="/assets/reviews/review5.jpg" class="home-review-screenshot home-review-screenshot--fit" alt="Student review screenshot" />
           <img src="/assets/reviews/review6.png" class="home-review-screenshot" alt="Student review screenshot" />
           <img src="/assets/reviews/review7.png" class="home-review-screenshot" alt="Student review screenshot" />
           <img src="/assets/reviews/review8.png" class="home-review-screenshot" alt="Student review screenshot" />
@@ -82,7 +82,7 @@
           <img src="/assets/reviews/review2.jpg" class="home-review-screenshot" alt="" aria-hidden="true" />
           <img src="/assets/reviews/review3.jpg" class="home-review-screenshot" alt="" aria-hidden="true" />
           <img src="/assets/reviews/review4.jpg" class="home-review-screenshot" alt="" aria-hidden="true" />
-          <img src="/assets/reviews/review5.jpg" class="home-review-screenshot" alt="" aria-hidden="true" />
+          <img src="/assets/reviews/review5.jpg" class="home-review-screenshot home-review-screenshot--fit" alt="" aria-hidden="true" />
           <img src="/assets/reviews/review6.png" class="home-review-screenshot" alt="" aria-hidden="true" />
           <img src="/assets/reviews/review7.png" class="home-review-screenshot" alt="" aria-hidden="true" />
           <img src="/assets/reviews/review8.png" class="home-review-screenshot" alt="" aria-hidden="true" />
@@ -1051,6 +1051,8 @@
 
   </main>
 
+  <aside class="admin-edit-panel" id="tracker-admin-edit-panel" aria-label="Edit tracker topic" hidden></aside>
+
   <div class="admin-login-modal" id="admin-login-modal" hidden>
     <button class="admin-login-modal__backdrop" type="button" data-admin-login-close aria-label="Close admin login"></button>
     <section class="admin-login-card" role="dialog" aria-modal="true" aria-labelledby="admin-login-title">
@@ -1099,7 +1101,7 @@
       }
     }
   </script>
-  <script type="module" src="/src/main.js?v=20260712-stabilization-v1"></script>
+  <script type="module" src="/src/main.js?v=20260713-approved-drive-audit-v1"></script>
   <script defer src="/pwa.js?v=20260712-pwa-cleanup-v1"></script>
 </body>
 </html>
