@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>
+    window.SUPABASE_CONFIG = {
+      url: '%VITE_SUPABASE_URL%',
+      anonKey: '%VITE_SUPABASE_ANON_KEY%'
+    }
+  </script>
   <script defer src="/src/analytics.js?v=20260620-ga4"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,13 +16,13 @@
   <meta property="og:description" content="Check today's MED 401 lectures, clinical rounds, and the next scheduled university item." />
   <meta property="og:type" content="website" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="manifest" href="/manifest.webmanifest" />
   <meta name="theme-color" content="#315f72" />
-  <link rel="stylesheet" href="/src/style.css?v=20260705-mobile-tracker-polish" />
+  <link rel="stylesheet" href="/src/style.css?v=20260712-stabilization-v1" />
   <script type="importmap">
     {
       "imports": {
-        "canvas-confetti": "https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.module.mjs"
+        "canvas-confetti": "https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.module.mjs",
+        "@supabase/supabase-js": "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.110.1/+esm"
       }
     }
   </script>
@@ -73,7 +79,7 @@
     </nav>
   </div>
 
-  <script type="module" src="/src/main.js?v=20260705-mobile-tracker-polish"></script>
-  <script defer src="/pwa.js?v=20260701-pwa"></script>
+  <script type="module" src="/src/main.js?v=20260712-stabilization-v1"></script>
+  <script defer src="/pwa.js?v=20260712-pwa-cleanup-v1"></script>
 </body>
 </html>
