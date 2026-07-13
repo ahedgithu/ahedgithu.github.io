@@ -6,6 +6,7 @@ import test from 'node:test'
 import { calculatePercent, calculateQuizProgress } from '../src/progress.js'
 
 const read = (path) => readFileSync(new URL(`../${path}`, import.meta.url), 'utf8')
+const readBytes = (path) => readFileSync(new URL(`../${path}`, import.meta.url))
 
 test('application modules are valid and mirrored', () => {
   const moduleFiles = [
@@ -136,7 +137,12 @@ test('section selector is centered and the wide review remains fully visible', (
   assert.match(style, /\.home-review-screenshot\s*\{[\s\S]*?aspect-ratio:\s*1\.9\s*\/\s*1;[\s\S]*?object-fit:\s*cover;/s)
   assert.match(style, /\.home-review-screenshot--fit\s*\{[^}]*object-fit:\s*contain;[^}]*object-position:\s*left center;/s)
   assert.equal((html.match(/review5\.jpg" class="home-review-screenshot home-review-screenshot--fit"/g) || []).length, 2)
-  assert.match(html, /style\.css\?v=20260713-boxless-topic-controls-v2/)
+  assert.match(html, /style\.css\?v=20260713-footer-dedupe-v3/)
+  assert.match(style, /body\[data-site-mode="selector"\] > main > \.site-footer/)
+
+  for (const file of ['review1.jpg', 'review2.jpg', 'review3.jpg', 'review4.jpg', 'review5.jpg', 'review6.png', 'review7.png', 'review8.png']) {
+    assert.deepEqual(readBytes(`assets/reviews/${file}`), readBytes(`public/assets/reviews/${file}`), `${file} deployment mirror is out of sync`)
+  }
 })
 
 test('topic completion control is enlarged and attached to the card corner', () => {

@@ -9747,6 +9747,7 @@ body[data-site-mode="work"] #work {
   width: 100%;
 }
 
+body[data-site-mode="selector"] > main > .site-footer,
 body[data-site-mode="tools"] .site-footer {
   display: none !important;
 }
