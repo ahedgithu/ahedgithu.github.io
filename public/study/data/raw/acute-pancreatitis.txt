@@ -1,0 +1,319 @@
+# Acute & Chronic Pancreatitis
+
+Source: Diseases of the Pancreas — newly extracted lecture text
+
+## PANCREAS ANATOMY
+
+### PANCREAS ANATOMY
+
+- The pancreas is an elongated, tapered organ located across the back of the abdomen, behind the stomach.
+- The right side of the organ (called the head) is the widest part of the organ and lies in the curve of the duodenum (the first section of the small intestine).
+- The tapered left side extends slightly upward (called the body of the pancreas) and ends near the spleen (called the tail).
+- The pancreas is made up of two types of tissue:
+- Exocrine tissue: The exocrine tissue secretes digestive enzymes. These are secreted into a network of ducts that join the main pancreatic duct, which runs the length of the pancreas.
+- Endocrine tissue: The endocrine tissue, which consists of the islets of Langerhans, secretes hormones into the bloodstream.
+- The pancreas has digestive and hormonal functions:
+- The enzymes secreted by the exocrine tissue in the pancreas help break down carbohydrates, fats, and proteins in the duodenum.
+- These enzymes travel down the pancreatic duct into the bile duct in an inactive form.
+- When they enter the duodenum, they are activated.
+- The exocrine tissue also secretes bicarbonate to neutralize stomach acid in the duodenum.
+- The hormones secreted by the endocrine tissue in the pancreas are insulin, glucagon (which regulate the level of glucose in the blood), somatostatin (which prevents the release of the other two hormones), and many others.
+
+## WHAT IS PANCREATITIS?
+
+### WHAT IS PANCREATITIS?
+
+- Pancreatitis is an inflammatory process in which pancreatic enzymes autodigest the gland.
+- Normally, digestive enzymes do not become active until they reach the small intestine, where they begin digesting food.
+- But if these enzymes become active inside the pancreas, they start "digesting" the pancreas itself.
+- The gland can sometimes heal without any impairment of function or any morphologic changes.
+- This process is known as acute pancreatitis.
+- It can recur intermittently, contributing to the functional and morphologic loss of the gland.
+- Recurrent attacks are referred to as chronic pancreatitis.
+- Acute pancreatitis occurs suddenly and lasts for a short period of time and usually resolves.
+- Chronic pancreatitis does not resolve itself and results in a slow destruction of the pancreas.
+
+## ACUTE PANCREATITIS / TYPES
+
+### ACUTE PANCREATITIS
+
+- Acute inflammation resulting from intrapancreatic activation of digestive enzymes.
+
+### TYPES
+
+- Acute edematous pancreatitis: The pancreatic inflammation and disease is mild & self limited in most patients with peripancreatic fat necrosis but sparing acinar cells.
+- Haemorrhagic or necrotizing pancreatitis: The inflammation m.b (may be) extensive & progressing to coagulation necrosis of the gland & the surrounding tissues.
+- About 80,000 cases occur in the United States each year; some 20 percent of them are severe.
+- Acute pancreatitis occurs more often in men than women.
+
+## ACUTE PANCREATITIS — CAUSES
+
+### CAUSES
+
+A) Common (90% of cases)
+
+B) Rare
+
+- Gallstones
+- Alcohol
+- Idiopathic
+- Post ERCP
+- Post surgical (abdominal and cardiopulmonary bypass)
+- Trauma
+- Drugs (azathioprine, thiazide diuretics)
+- Metabolic (Ca, TG)
+- Pancreas divisum
+- Hereditary
+- Renal failure
+- Organ transplantation (kidney, liver)
+- Infection (mumps, coxsackie virus)
+- Sphincter of Oddi dysfunction
+- Severe hypothermia
+- Petrochemical exposure
+
+## ACUTE — CLINICAL FEATURES / D.D.
+
+### CLINICAL FEATURES
+
+- Abdominal pain: Severe constant upper abdominal pain may radiate to back, usually build up over 15-60 mins.
+- N & V (Nausea & Vomiting).
+- Marked epigastric tenderness.
+- N.B. In the early stages and in contrast to perforated P.U. (Peptic Ulcer), guarding and rebound tenderness are absent because the inflammation is retro peritoneal.
+- Bowel sounds become quiet or absent as paralytic ileus develops.
+- In severe cases the patient becomes hypoxic and develops hypovolemic shock with oliguria.
+- Discoloration of the flanks (Grey Turner’s sign) or the periumbilical region (Cullen’s sign) are features of Hgic (Hemorrhagic) pancreatitis.
+- Note on slide: Grey-Turner's sign involves haemorrhage appearing in both flanks. It is due to extensive retro-peritoneal bleeding and typically occurs in haemorrhagic pancreatitis.
+
+### D.D (Differential Diagnosis)
+
+- Perforated viscus
+- M.I. (Myocardial Infarction)
+- Acute cholecystitis
+
+## ACUTE — COMPLICATIONS
+
+### COMPLICATIONS
+
+(A) Systemic
+
+(B) Pancreatic
+
+(C) GIT
+
+- SIRS: Increased vascular permeability d.t. (due to) Cytokine, Kinin release, PAF, Paralytic ileus, vomiting & RF (Renal Failure).
+- Hypoxia: ARDS d.t. microthrombi in pulm. vs. (pulmonary vessels).
+- Hyperglycaemia: Disruption of islets of Langerhans.
+- Hypocalcaemia: Sequestration of Ca in fat necrosis.
+- Hypoalbuminaemia: Increased capillary permeability.
+- Abscess: Infection of necrotic pancreatic tissue.
+- Pancreatic ascites or pleural effusion: Disruption of pancreatic ducts.
+- Pseudocyst: Disruption of pancreatic ducts.
+- UGI bleeding: Gastric or duodenal erosions.
+- Variceal hge (hemorrhage): Splenic or PVT (Portal Vein Thrombosis).
+- Duodenal obstruction: Compression by pancreatic mass.
+- Obstructive jaundice: Compression of CBD (Common Bile Duct).
+
+## ACUTE — DIAGNOSIS / LABS / IMAGING
+
+### ACUTE PANCREATITIS - DIAGNOSIS
+
+Diagnosis is based on: Increased S. (Serum) amylase or lipase + U/S or C.T evidence of pancreatic swelling
+
+- History
+- Physical exam
+- Lab Studies
+- During acute attacks, the blood contains at least three times more amylase and lipase than usual. Amylase and lipase are digestive enzymes formed in the pancreas.
+- Changes may also occur in blood levels of glucose, calcium, magnesium, sodium, potassium, and bicarbonate. After the pancreas improves, these levels usually return to normal.
+- Serum amylase (×3 times normal):
+- M.b. (May be) normal after 24-48 hours of onset. So check lipase or urinary amylase : creatinine ratio.
+- Persistent elevation = suggests pseudocyst formation.
+- Peritoneal amylase is present in pancreatic ascites.
+- U/S (Ultrasound):
+- Confirms diagnosis.
+- May also show: gallstones, pseudocyst, biliary obstruction.
+- C.T (CT Scan): Define viability of the pancreas.
+- Hyperglycemia and Ca.
+- S.bili (Serum bilirubin), ALT, AST, alk. ph (Alkaline phosphatase): are transiently elevated.
+- Serial assessment of CRP.
+
+### LAB STUDIES & IMAGING DETAILS
+
+- A complete blood count (CBC) demonstrates leukocytosis (WBC >12,000) with the differential being shifted towards the segmented polymorphs.
+- If blood transfusion is necessary, as in cases of hemorrhagic pancreatitis, obtain type and crossmatch.
+- Measure blood glucose level because it may be elevated from B-cell (beta cell) injury in the pancreas.
+- Obtain measurements for BUN, creatine (Cr), and electrolytes (Na, K, Cl, CO2, P, Mg); a great disturbance in the electrolyte balance is usually found, secondary to third spacing of fluids.
+- Measure amylase levels, preferably the Amylase P (Pancreatic amylase), which is more specific to pancreatic pathology. Levels more than 3 times higher than normal strongly suggest the diagnosis of acute pancreatitis.
+- Lipase levels also are elevated and remain high for 12 days. In patients with chronic pancreatitis (usually caused by alcohol abuse), lipase may be elevated in the presence of a normal serum amylase level.
+
+### IMAGING STUDIES
+
+- Ultrasound: Can be used as a screening test. If overlying gas shadows secondary to bowel distention are present, it may not be specific.
+- CT scan: CT scan is the most reliable imaging modality in the diagnosis of acute pancreatitis.
+
+## ACUTE — GLASGOW / RANSON
+
+### Glasgow Criteria
+
+- Severity and prognosis worsen as the number of these factors increases. More than three implies severe disease.
+
+### RANSON SCALE
+
+Present on admission:
+
+Developing during the first 48 hours:
+
+- Ranson developed a series of different criteria for the severity of acute pancreatitis.
+- Answer each question regarding the patient, then add up the total score for prognosis:
+- If answer is no: 0 point.
+- If answer is yes: 1 point.
+- Older than 55 years
+- WBC higher than 16,000 per mcL
+- Blood glucose higher than 200 mg/dL
+- Serum lactate dehydrogenase (LDH) more than 350 IU/L
+- SGOT (aspartate aminotransferase [AST]) greater than 250 IU/L
+- Hematocrit fall more than 10%
+- BUN increase more than 8 mg/dL
+- Serum calcium less than 8 mg/dL
+- Arterial oxygen saturation less than 60 mm Hg
+- Base deficit higher than 4 mEq/L
+- Estimated fluid sequestration higher than 600 mL
+
+### RANSON SCORE & MORTALITY
+
+- A Ranson score of 0–2 has a minimal mortality rate.
+- A Ranson score of 3–5 has a 10%–20% mortality rate.
+- A Ranson score higher than 5 has a mortality rate of more than 50% and is associated with more systemic complications.
+
+## MANAGEMENT OF ACUTE PANCREATITIS
+
+### MANAGEMENT OF ACUTE PANCREATITIS
+
+- NPO (Nothing by mouth. Give parenteral nutrition).
+- Analgesic as pethidine.
+- Correction of hypovolemia by normal saline and or colloids.
+- CVP & urinary catheter to monitor shocked Patients.
+- O2 for hypoxia.
+- ARDS may require ventilatory support.
+- Insulin for hyperglycemia.
+- IV Ca if tetany occur.
+- Nasogastric aspiration for paralytic ileus.
+- Prophylaxis of thromboembolism: low dose S.C heparin.
+- Patients who present with cholangitis or jaundice in ass. (association) with severe acute Pancreatitis $\rightarrow$ urgent ERCP to remove stone & drain biliary system.
+- Prophylactic Abs (Antibiotics).
+
+### Treatment of Complications
+
+- Necrotizing pancreatitis or pancreatic abscess $\rightarrow$ urgent surgical debridement of the pancreas.
+- Pancreatic pseudocysts $\rightarrow$ drainage into stomach or duodenum.
+- Pancreatic ascites is an indication for distal pancreatectomy.
+
+## CHRONIC — DEFINITION / CLASSIFICATION / CAUSES
+
+### DEFINITION
+
+Chronic inflammatory disease ccc by (characterized by) fibrosis & destruction of exocrine pancreatic tissue. D.M (Diabetes Mellitus) occurs in advanced cases bec. (because) the islets of Langerhans are involved.
+
+### CLASSIFICATION
+
+- Obstructive C P (Chronic Pancreatitis)
+- Calcific C P
+
+### CAUSES OF CHRONIC PANCREATITIS
+
+- Toxic-Metabolic: Alcohol, Tobacco, Ca, CRF (Chronic Renal Failure).
+- Idiopathic: Tropical, early/late onset types.
+- Genetic: Hereditary Pancreatitis.
+- Autoimmune: Isolated or as part of multi-organ problem.
+- Recurrent and severe acute pancreatitis.
+- Obstructive: Ductal adenocarcinoma, Pancreas divisum, IPMN, Sphincter of Oddi dysfunction.
+
+## CHRONIC — CLINICAL FEATURES / COMPLICATIONS
+
+### CLINICAL FEATURES
+
+- Abdominal pain:
+- In 50% occurs as episodes of acute pancreatitis.
+- In 35% occurs as slowly progressive chronic pain without acute exacerbation.
+- Pain may be relieved by leaning forwards or worsened by drinking alcohol.
+- Diarrhea & steatorrhea (malabsorption).
+- Wt. (Weight) loss d.t. (due to): Anorexia, Avoidance of food (d.t. PP/postprandial pain), Malabsorption, D.M.
+- D.M. (in 30% of pts).
+- Epigastric tenderness.
+
+### COMPLICATIONS OF CHRONIC PANCREATITIS
+
+- Pseudocysts and pancreatic ascites, which occur in both acute and chronic pancreatitis.
+- Extrahepatic obstructive jaundice due to a benign stricture of the CBD as it passes through the diseased pancreas.
+- Duodenal stenosis.
+- Portal or splenic vein thrombosis leading to segmental portal hypertension and gastric varices.
+- Peptic ulcer.
+
+## CHRONIC — INVESTIGATIONS / FUNCTION TESTS
+
+### Tests to establish diagnosis
+
+- U/S
+- C.T scan: May show atrophy, calcification, ductal dilatation.
+- Abd. X-ray: May show calcification.
+- MRCP if non-invasive tests are –ve (negative).
+- Endoscopic U/S (EUS)
+
+### Tests of pancreatic function
+
+- Collection of pure pancreatic juice after secretin injection.
+- Pancreolauryl or PABA test: pancreatic esterases cleave fluorescein dilaurate after oral ingestion. Fluorescein is absorbed & quantified in urine.
+- Faecal pancreatic chymotrypsin or elastase.
+- Oral glucose tolerance test (OGTT).
+- Stool fat (72 hrs collection): Normal 10 gm/d. Advanced insufficiency m.b. (may be) 30-40gm/d.
+
+### Tests of anatomy prior to surgery
+
+- MRCP
+
+## MANAGEMENT OF CHRONIC PANCREATITIS
+
+### MANAGEMENT OF CHRONIC PANCREATITIS
+
+- Stop alcohol & tobacco.
+- Pain relief:
+- NSAIDs, opiate (tramadol).
+- Pancreatic enzymes $\rightarrow$ suppress pancreatic secretions: Tab or capsule 2000 unit or 10,000-12,000 lipase units / meal.
+- Endoscopic stenting of main pancreatic duct.
+- Surgical: partial pancreatic resection, pancreatico-jejunostomy.
+- Steatorrhea:
+- Oral fat restriction.
+- Oral pancreatic enzyme supplements + proton pump inhibitor (PPI) to optimize duodenal pH for pancreatic enzyme activity.
+- D.M: CHO (Carbohydrate) restriction & insulin therapy.
+- Management of complications: Surgical or endoscopic therapy for Pseudocyst, pancreatic ascites, and CBD or duodenal stricture.
+
+## EXOCRINE PANCREATIC INSUFFICIENCY
+
+### METHODS
+
+- For the introduction of secretin while preserving exocrine pancreatic function, the amount of secretion is increased, and the content of bicarbonate rises. In response to input of pancreozymin, the content of enzymes is increased.
+- In severe exocrine insufficiency, the pathological changes of the test are observed in 85-90% of cases.
+- The research of activity in feces of elastase-1.
+- Breathing tests:
+- During exogenous failure, the production of lipase is reduced or it is absent, and therefore the triglycerides are split to a lesser extent and constitute less of $^{13}\text{CO}2$.
+- Amylase respiratory AP the corn-starch test: the total concentration AP at the end of the 4-o'clock research is less than 10%, indicating the presence of deficiency of pancreatic amylase.
+- Protein breathing with $^{13}\text{C}$-noticed egg white: in patients with chronic pancreatitis, the total concentration of $^{13}\text{CO}2$ through 6 hours is 2-3 times lower than in healthy persons, indicating a decrease in activity of trypsin.
+- Koprogram (Coprology): High content of muscular fibers, undigested fiber, and neutral fat.
+
+### STANDARD OF NONINVASIVE DIAGNOSIS OF CHRONIC PANCREATITIS
+
+- |Degrees of severity of external secretory of pancreatic insufficiency|Activity of fecal pancreatic elastase-1|
+- |Mild|150–200 mg / g|
+- |Moderate|100–150 mg / g|
+- |Severe|Less than 100 mg / g|
+
+## CHRONIC — ADVANCED IMAGING FINDINGS
+
+### ULTRASOUND & ADVANCED IMAGING FINDINGS
+
+- Ultrasound Investigation - Chronic Pancreatitis: Shows calcificates in the head of pancreas, Virsungov’s (Wirsung) duct, pseudocyst of pancreas, increase of the head of pancreas, and spleen (splenic) vein.
+- Ultrasound Investigation - Chronic Calcified Pancreatitis: Shows Wirsungolithiasis and dilated Virsungov’s duct.
+- Plain X-ray of abdomen: Showing calcific pancreatitis.
+- Endoscopic Ultrasound (EUS): Overcomes some visualization problems and is probably more sensitive and specific. It routinely detects abnormalities in patients with chronic pancreatitis with high sensitivity, but the specificity and reproducibility require further study. An EUS image can demonstrate a dilated pancreatic duct in advanced chronic pancreatitis.
+- CT Scan: Has a sensitivity of up to 90% and specificity of the same order. It will detect variation in ductal diameter, ectatic side branches, changes in the parenchyma, calcification, and complications such as pseudocyst formation.
+- Endoscopic Retrograde Cholangiopancreatography (ERCP): Reveals impaired patency of the main and secondary ducts. "Chain of lakes" is a classic symptom of chronic pancreatitis (areas of alternating constriction and expansion of Wirsung ducts). Segmental or total obstruction of the ductal system is also possible.
+- Biopsy of pancreas.

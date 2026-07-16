@@ -7,10 +7,11 @@ This is a Vite-powered static MED 401 website. Top-level pages live at the repo 
 ## Build, Test, and Development Commands
 
 - `npm run dev` starts the local Vite server, usually at `http://127.0.0.1:5173/`.
+- `npm test` runs the lightweight source, progress, Supabase safety, and deployment checks.
 - `npm run build` creates the production build in `dist/`; run this before any public push.
 - `npm run preview` serves the production build locally for final checks.
 
-There is no dedicated test script in `package.json`; use build plus browser verification for changes.
+Run `npm test` and `npm run build` for routine validation. Run browser verification only when Ahmed asks for testing and confirms using the in-app browser.
 
 ## Coding Style & Naming Conventions
 
@@ -41,6 +42,21 @@ Start website edits by checking branch and `git status`. GitHub Pages deploys fr
 
 When Ahmed says `NT`, `notion task`, or asks to check website improvement tasks, directly inspect the Notion `Website Improvement Tasks` database before planning or editing. Use the Notion task rows as the active source of truth for website improvement priorities, then reconcile them with the current repo state.
 
-For browser verification, use Codex's in-app browser that Ahmed already has open. Do not use the installed Chrome, Edge, or other machine browsers unless Ahmed explicitly asks for that.
+For browser verification, test only when Ahmed asks for testing and confirms using Codex's in-app browser that he already has open. Do not use the installed Chrome, Edge, or other machine browsers unless Ahmed explicitly asks for that.
 
 Whenever local website changes are completed, include the relevant page link at the end of the final response and clearly state whether the changes are local-only or live.
+
+Before the final response for a meaningful completed task, automatically save session continuity to `Agent-Codex` without waiting for Ahmed to type `ss`. A meaningful task includes repository or configuration edits, Supabase or other external-system writes, commits/pushes/deployments, major completed audits or decision-complete plans, and substantial blocked work with reusable findings. Create a dated handoff under `Agent-Codex/handoffs/`, then update `Agent-Codex/working-context.md` so that handoff is the first resume pointer. Record the branch and dirty state, completed work, validation, remaining issues, and whether anything was pushed, deployed, or changed live. Do not auto-save simple questions, status reads, tiny checks, casual conversation, secrets, or private study information.
+
+## graphify
+
+This project has a knowledge graph at graphify-out/ with god nodes, community structure, and cross-file relationships.
+
+When the user types `/graphify`, use the installed graphify skill or instructions before doing anything else.
+
+Rules:
+- For codebase questions, first run `graphify query "<question>"` when graphify-out/graph.json exists. Use `graphify path "<A>" "<B>"` for relationships and `graphify explain "<concept>"` for focused concepts. These return a scoped subgraph, usually much smaller than GRAPH_REPORT.md or raw grep output.
+- Dirty graphify-out/ files are expected after hooks or incremental updates; dirty graph files are not a reason to skip graphify. Only skip graphify if the task is about stale or incorrect graph output, or the user explicitly says not to use it.
+- If graphify-out/wiki/index.md exists, use it for broad navigation instead of raw source browsing.
+- Read graphify-out/GRAPH_REPORT.md only for broad architecture review or when query/path/explain do not surface enough context.
+- After modifying code, run `graphify update .` to keep the graph current (AST-only, no API cost).

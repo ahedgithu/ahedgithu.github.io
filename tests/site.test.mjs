@@ -2,6 +2,7 @@ import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
 import { readFileSync } from 'node:fs'
 import test from 'node:test'
+import vm from 'node:vm'
 
 import { calculatePercent, calculateQuizProgress } from '../src/progress.js'
 
@@ -14,6 +15,7 @@ test('application modules are valid and mirrored', () => {
     'src/admin.js',
     'src/analytics.js',
     'src/mcqs.js',
+    'src/sur1-kellawi-mcqs.js',
     'src/progress.js',
     'src/supabaseClient.js'
   ]
@@ -22,7 +24,7 @@ test('application modules are valid and mirrored', () => {
     execFileSync(process.execPath, ['--check', file], { cwd: new URL('..', import.meta.url) })
   }
 
-  const mirroredFiles = ['main.js', 'admin.js', 'analytics.js', 'mcqs.js', 'progress.js', 'style.css', 'supabaseClient.js']
+  const mirroredFiles = ['main.js', 'admin.js', 'analytics.js', 'mcqs.js', 'sur1-kellawi-mcqs.js', 'progress.js', 'style.css', 'supabaseClient.js']
   for (const file of mirroredFiles) {
     assert.equal(read(`src/${file}`), read(`public/src/${file}`), `${file} mirror is out of sync`)
   }
@@ -35,6 +37,117 @@ test('application modules are valid and mirrored', () => {
   for (const id of ['admin-login-modal', 'tracker-admin-login-form', 'tracker-admin-email-input', 'tracker-admin-password-input', 'tracker-admin-login-status', 'tracker-admin-edit-panel']) {
     assert.match(index, new RegExp(`id=["']${id}["']`), `${id} is missing from the admin login UI`)
   }
+})
+
+test('SUR 401-1 Kellawi MCQ bank is complete and wired', () => {
+  const context = { window: { mcqQuizzes: {} } }
+  vm.runInNewContext(read('src/sur1-kellawi-mcqs.js'), context)
+
+  const quiz = context.window.mcqQuizzes['SUR 401-1 MCQs']
+  assert.equal(quiz.alwaysShowSourcePicker, true)
+  assert.equal(quiz.sources.length, 1)
+  assert.equal(quiz.sources[0].label, 'Kellawi MCQs')
+  assert.equal(quiz.sources[0].mcqs.length, 1187)
+
+  const collection = quiz.sources[0].collection
+  assert.deepEqual(
+    Array.from(collection.groups, (group) => [group.label, group.questionCount, group.parts.length]),
+    [
+      ['Spleen', 207, 6],
+      ['Stomach', 302, 8],
+      ['Tongue', 91, 3],
+      ['Esophagus', 205, 6],
+      ['Liver', 382, 10]
+    ]
+  )
+  assert.deepEqual(
+    Array.from(collection.groups, (group) => Array.from(group.parts, (part) => part.mcqs.length)),
+    [
+      [35, 35, 35, 34, 34, 34],
+      [38, 38, 38, 38, 38, 38, 37, 37],
+      [31, 30, 30],
+      [35, 34, 34, 34, 34, 34],
+      [39, 39, 38, 38, 38, 38, 38, 38, 38, 38]
+    ]
+  )
+
+  const parts = Array.from(collection.groups, (group) => Array.from(group.parts)).flat()
+  const partQuestions = parts.flatMap((part) => Array.from(part.mcqs))
+  assert.equal(parts.length, 33)
+  assert.equal(partQuestions.length, 1187)
+  assert.equal(new Set(partQuestions.map((question) => question.id)).size, 1187)
+  assert.ok(parts.every((part) => part.mcqs.length >= 30 && part.mcqs.length <= 39))
+  assert.deepEqual(Array.from(collection.mixedSizes, (mode) => mode.size), [20, 30, 50])
+  assert.equal(collection.wrongReviewId, 'kellawi-wrong-review')
+  assert.equal(quiz.sources[0].mcqs.filter((question) => question.source).length, 1186)
+  assert.equal(new Set(quiz.sources[0].mcqs.filter((question) => question.organ === 'Liver').map((question) => question.section)).size, 29)
+  assert.ok(quiz.sources[0].mcqs.every((question) => question.organ && question.originalNumber && question.section))
+
+  const mainSource = read('src/main.js')
+  for (const helper of [
+    'renderQuizCollectionPicker',
+    'renderQuizPartPicker',
+    'renderMixedPracticePicker',
+    'createWrongReviewQuizConfig',
+    'getCollectionProgressSummary'
+  ]) {
+    assert.match(mainSource, new RegExp(`function ${helper}\\s*\\(`), `${helper} is missing`)
+  }
+  assert.match(mainSource, /quiz-source-option--kellawi/)
+  assert.match(mainSource, /\/assets\/mohamed-kellawi-avatar\.jpg/)
+  assert.match(mainSource, /data-quiz-resume-direct/)
+  assert.match(mainSource, /data-quiz-part-start-over/)
+  assert.match(mainSource, /resumeDirectly/)
+  assert.match(mainSource, /restartTimer/)
+  assert.match(mainSource, /promptOnSaved/)
+  assert.doesNotMatch(mainSource, /Take over/)
+  assert.match(mainSource, /Ready\? Let’s solve it organ by organ\./)
+  assert.match(mainSource, /1,187 questions · 5 organs · 33 short parts/)
+  assert.ok(readBytes('public/assets/mohamed-kellawi-avatar.jpg').length > 0)
+
+  const index = read('index.html')
+  assert.match(index, /data-quiz-topic=["']SUR 401-1 MCQs["']/)
+  assert.match(index, /sur1-kellawi-mcqs\.js/)
+})
+
+test('quiz timer is a native responsive robot with answer moods', () => {
+  const mainSource = read('src/main.js')
+  const style = read('src/style.css')
+
+  for (const robotPart of [
+    'quiz-robot__antenna',
+    'quiz-robot__head',
+    'quiz-robot__face',
+    'quiz-robot__eyes',
+    'quiz-robot__time',
+    'quiz-robot__mouth',
+    'quiz-robot__body',
+    'quiz-robot__arm',
+    'quiz-robot__foot'
+  ]) {
+    assert.match(mainSource, new RegExp(robotPart), `${robotPart} is missing from the robot timer`)
+  }
+
+  assert.match(mainSource, /function triggerQuizRobotMood\s*\(/)
+  assert.match(mainSource, /function updateQuizRobotCompactMode\s*\(/)
+  assert.match(mainSource, /function pauseQuizCountupTimer\s*\(/)
+  assert.match(mainSource, /timerElapsedMs/)
+  assert.match(mainSource, /QUIZ_STICKY_OFFSET/)
+  assert.match(mainSource, /triggerQuizRobotMood\('happy'\)/)
+  assert.match(mainSource, /triggerQuizRobotMood\('sad'\)/)
+  assert.match(mainSource, /role="timer"/)
+  assert.match(mainSource, /Elapsed quiz time/)
+  assert.match(mainSource, /Quiz time remaining/)
+  assert.match(style, /@keyframes quiz-robot-idle/)
+  assert.match(style, /@keyframes quiz-robot-blink/)
+  assert.match(style, /@keyframes quiz-robot-happy/)
+  assert.match(style, /@keyframes quiz-robot-sad/)
+  assert.match(style, /\.quiz-timer--warning \.quiz-robot__antenna/)
+  assert.match(style, /\.quiz-timer--compact/)
+  assert.match(style, /\.quiz-timer--compact \.quiz-robot__body\s*\{[^}]*display:\s*none;/s)
+  assert.match(style, /scroll-padding-top:\s*76px/)
+  assert.match(style, /\.quiz-part-option__restart-button/)
+  assert.match(style, /@media \(prefers-reduced-motion: reduce\)[\s\S]*?\.quiz-timer/)
 })
 
 test('quiz and global progress calculations are correct', () => {
@@ -137,7 +250,7 @@ test('section selector is centered and the wide review remains fully visible', (
   assert.match(style, /\.home-review-screenshot\s*\{[\s\S]*?aspect-ratio:\s*1\.9\s*\/\s*1;[\s\S]*?object-fit:\s*cover;/s)
   assert.match(style, /\.home-review-screenshot--fit\s*\{[^}]*object-fit:\s*contain;[^}]*object-position:\s*left center;/s)
   assert.equal((html.match(/review5\.jpg" class="home-review-screenshot home-review-screenshot--fit"/g) || []).length, 2)
-  assert.match(html, /style\.css\?v=20260713-footer-dedupe-v3/)
+  assert.match(html, /style\.css\?v=20260716-kellawi-mobile-v5/)
   assert.match(style, /body\[data-site-mode="selector"\] > main > \.site-footer/)
 
   for (const file of ['review1.jpg', 'review2.jpg', 'review3.jpg', 'review4.jpg', 'review5.jpg', 'review6.png', 'review7.png', 'review8.png']) {

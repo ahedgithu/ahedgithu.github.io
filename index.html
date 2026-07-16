@@ -19,7 +19,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&display=swap" rel="stylesheet" />
   <meta name="theme-color" content="#315f72" />
-  <link rel="stylesheet" href="/src/style.css?v=20260713-footer-dedupe-v3" />
+  <link rel="stylesheet" href="/src/style.css?v=20260716-kellawi-mobile-v5" />
 </head>
 <body>
   <header class="site-header" aria-label="Main navigation">
@@ -164,10 +164,21 @@
                 <span>PAST EXAMS</span>
               </button>
             </div>
-            <article class="exam-card">
+            <article class="exam-card exam-card--has-action" data-code="SUR-1">
+              <button class="exam-card__tracker-action" type="button" aria-label="Open Surgery 1 tracker"></button>
               <strong>SUR 401-1</strong>
               <time datetime="2026-07-22T14:30">22/7</time>
               <em>2:30-3:30</em>
+              <button class="exam-card__quiz-action" type="button" data-quiz-topic="SUR 401-1 MCQs" aria-label="Open MCQs for Surgery 1">
+                <svg class="exam-card__quiz-icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <rect x="4" y="3" width="16" height="18" rx="3"></rect>
+                  <path d="m8 9 1.5 1.5L12 8"></path>
+                  <path d="M14 9h3"></path>
+                  <path d="m8 15 1.5 1.5L12 14"></path>
+                  <path d="M14 15h3"></path>
+                </svg>
+                <span>MCQs</span>
+              </button>
             </article>
             <article class="exam-card">
               <strong>MED 401-2</strong>
@@ -1093,6 +1104,7 @@
   </div>
 
   <script defer src="/src/mcqs.js?v=20260708-past-exams-v4"></script>
+  <script defer src="/src/sur1-kellawi-mcqs.js?v=20260716-kellawi-mobile-v5"></script>
   <script type="importmap">
     {
       "imports": {
@@ -1101,7 +1113,7 @@
       }
     }
   </script>
-  <script type="module" src="/src/main.js?v=20260713-approved-drive-audit-v1"></script>
+  <script type="module" src="/src/main.js?v=20260716-kellawi-mobile-v5"></script>
   <script defer src="/pwa.js?v=20260712-pwa-cleanup-v1"></script>
 </body>
 </html>

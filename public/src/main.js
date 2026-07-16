@@ -247,6 +247,7 @@ let subjects = [
         art: 4,
         midtermScope: true,
         midtermScopeNote: 'MED 401-1 scope: Diseases of the Pancreas. Source: Spring 2026 midterm curriculum and Dr. Hisham Samy lecture recordings.',
+        studyUrl: '/study/index.html#/topic/acute-pancreatitis',
         lectureUrls: [
           { label: 'Lecture', url: 'https://drive.google.com/file/d/14TjxXXk2ITCHuao-ayMIwT4z1yjbNFuh/view?usp=drivesdk' }
         ],
@@ -753,6 +754,8 @@ const subjects402 = [
 
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 const mobileQuery = window.matchMedia('(max-width: 860px)')
+const quizRobotCompactQuery = window.matchMedia('(max-width: 640px)')
+const QUIZ_STICKY_OFFSET = 68
 const QUIZ_STORAGE_PREFIX = 'quizState'
 const LEGACY_QUIZ_STORAGE_PREFIX = 'mcq-progress-'
 const TOPIC_COMPLETION_STORAGE_PREFIX = 'topicCompletion'
@@ -770,18 +773,28 @@ const mcqQuizzesBySection = {
   '401': mcqQuizzes,
   '402': window.mcqQuizzes402 || {}
 }
+const dynamicQuizConfigs = new Map()
 const quizState = {
   topicLabel: null,
   sourceId: 'current',
   sourceLabel: 'Current MCQs',
+  parentSourceId: null,
+  groupId: null,
+  groupLabel: '',
+  partIndex: null,
+  partCount: null,
+  mode: 'standard',
   index: 0,
   answers: {},
   missingQuestionIds: [],
+  masteredQuestionIds: [],
   timeLimitMinutes: null,
   timerEndsAt: null,
-  timerStartedAt: null
+  timerStartedAt: null,
+  timerElapsedMs: 0
 }
 let quizTimerInterval = null
+let quizRobotMoodTimeout = null
 const studentProgressState = {
   user: null,
   ready: false,
@@ -830,7 +843,9 @@ const midtermExamSchedule = [
     subjectName: 'Surgery 1',
     date: '2026-07-22',
     dayLabel: 'Wed',
-    time: '2:30-3:30'
+    time: '2:30-3:30',
+    quizTopicKey: 'SUR 401-1 MCQs',
+    quizActionLabel: 'MCQs'
   },
   {
     code: 'MED 401-2',
@@ -2664,6 +2679,15 @@ function renderTopicActionIcon(type) {
     `
   }
 
+  if (type === 'study') {
+    return `
+      <svg class="topic-action-card__svg" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M4 5.5A3.5 3.5 0 0 1 7.5 2H11v17H7.5A3.5 3.5 0 0 0 4 22V5.5Z"></path>
+        <path d="M20 5.5A3.5 3.5 0 0 0 16.5 2H13v17h3.5A3.5 3.5 0 0 1 20 22V5.5Z"></path>
+      </svg>
+    `
+  }
+
   return `
     <svg class="topic-action-card__svg" viewBox="0 0 24 24" aria-hidden="true">
       <path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3Z"></path>
@@ -2770,6 +2794,16 @@ function renderLectureRecordActionCard(topic) {
   `
 }
 
+function renderStudyActionCard(topic) {
+  if (!topic.studyUrl) return ''
+
+  return `
+    <a class="topic-action-card topic-action-card--study" href="${escapeHtml(topic.studyUrl)}" aria-label="Study ${escapeHtml(topic.label)} with explanation cards" title="Study explanation cards">
+      ${renderTopicActionContent('study')}
+    </a>
+  `
+}
+
 function renderResourceLinks(topic, breakdownExpanded = false) {
   const quizTopicKey = topic.mcqTopicKey || topic.label
   const quizSources = getQuizSources(quizTopicKey)
@@ -2777,10 +2811,11 @@ function renderResourceLinks(topic, breakdownExpanded = false) {
   const resources = getResourceItems(topic)
 
   return `
-    <div class="topic-action-row" aria-label="Topic resources">
+    <div class="topic-action-row${topic.studyUrl ? ' topic-action-row--has-study' : ''}" aria-label="Topic resources">
       ${renderDriveActionCard(resources, topic, breakdownExpanded)}
       ${renderMcqActionCard(quizTopicKey, quizCount)}
       ${renderLectureRecordActionCard(topic)}
+      ${renderStudyActionCard(topic)}
     </div>
   `
 }
@@ -3114,7 +3149,7 @@ function ensureQuizModal() {
   modal.setAttribute('aria-hidden', 'true')
   modal.innerHTML = `
     <div class="quiz-modal__backdrop" data-quiz-close></div>
-    <section class="quiz-modal__panel" role="dialog" aria-modal="true" aria-label="MCQ quiz">
+    <section class="quiz-modal__panel" role="dialog" aria-modal="true" aria-labelledby="quiz-title">
       <div class="quiz-progress" aria-label="Quiz progress">
         <div class="quiz-progress__stats">
           <strong id="quiz-progress-count">0/0</strong>
@@ -3124,8 +3159,28 @@ function ensureQuizModal() {
         </div>
       </div>
       <div class="quiz-modal__top">
-        <span class="quiz-timer" id="quiz-timer" hidden aria-label="Quiz timer"></span>
+        <span class="quiz-timer" id="quiz-timer" hidden role="timer" aria-label="Quiz timer" data-mood="neutral">
+          <span class="quiz-robot__antenna" aria-hidden="true"><span></span></span>
+          <span class="quiz-robot__head" aria-hidden="true">
+            <span class="quiz-robot__face">
+              <span class="quiz-robot__eyes"><i></i><i></i></span>
+              <span class="quiz-robot__time" id="quiz-timer-value">0:00</span>
+              <span class="quiz-robot__mouth"></span>
+            </span>
+          </span>
+          <span class="quiz-robot__body" aria-hidden="true">
+            <span class="quiz-robot__arm quiz-robot__arm--left"></span>
+            <span class="quiz-robot__arm quiz-robot__arm--right"></span>
+            <span class="quiz-robot__chest-light"></span>
+            <span class="quiz-robot__foot quiz-robot__foot--left"></span>
+            <span class="quiz-robot__foot quiz-robot__foot--right"></span>
+          </span>
+        </span>
         <button class="icon-button" type="button" data-quiz-close aria-label="Close quiz">X</button>
+      </div>
+      <div class="quiz-modal__heading">
+        <h2 id="quiz-title">MCQs</h2>
+        <p class="quiz-modal__meta" id="quiz-meta">Choose a quiz.</p>
       </div>
       <div class="quiz-modal__body" id="quiz-body"></div>
       <div class="quiz-modal__actions">
@@ -3137,6 +3192,13 @@ function ensureQuizModal() {
     </section>
   `
   document.body.appendChild(modal)
+  const panel = modal.querySelector('.quiz-modal__panel')
+  if (panel) panel.addEventListener('scroll', updateQuizRobotCompactMode, { passive: true })
+  if (typeof quizRobotCompactQuery.addEventListener === 'function') {
+    quizRobotCompactQuery.addEventListener('change', updateQuizRobotCompactMode)
+  } else {
+    quizRobotCompactQuery.addListener(updateQuizRobotCompactMode)
+  }
   return modal
 }
 
@@ -3186,9 +3248,11 @@ function buildQuizProgressPayload() {
     order: quizState.order,
     questionOptionOrder: quizState.questionOptionOrder,
     missingQuestionIds: quizState.missingQuestionIds || [],
+    masteredQuestionIds: quizState.masteredQuestionIds || [],
     timeLimitMinutes: quizState.timeLimitMinutes || null,
     timerEndsAt: quizState.timerEndsAt || null,
     timerStartedAt: quizState.timerStartedAt || null,
+    timerElapsedMs: getQuizTimerElapsedMs(),
     score: quizState.completed ? getQuizScore() : null,
     totalQuestions,
     answeredCount,
@@ -3246,19 +3310,70 @@ function clearSavedQuizState(topicLabel, sourceId = quizState.sourceId || 'curre
   }
 }
 
-function getSavedQuizProgress(topicLabel, source) {
+function getSavedQuizStatus(topicLabel, source) {
   const savedState = getSavedQuizState(topicLabel, source.id)
-  if (!savedState || savedState.completed) return null
+  if (!savedState) return null
 
   const total = savedState.order?.length || source.quizSize || source.mcqs.length
   const answeredCount = Object.keys(savedState.answers || {}).length
-  if (!total || !answeredCount) return null
+  if (!total) return null
 
   return {
+    completed: !!savedState.completed,
+    score: Number.isFinite(savedState.score) ? savedState.score : null,
+    wrongCount: Array.isArray(savedState.wrongQuestionIds) ? savedState.wrongQuestionIds.length : 0,
     answeredCount: Math.min(answeredCount, total),
     percent: Math.min(Math.round((answeredCount / total) * 100), 100),
-    total
+    total,
+    savedAt: savedState.savedAt || ''
   }
+}
+
+function getSavedQuizProgress(topicLabel, source) {
+  const status = getSavedQuizStatus(topicLabel, source)
+  return status && !status.completed && status.answeredCount ? status : null
+}
+
+function getCollectionParts(source) {
+  return source?.collection?.groups?.flatMap((group) => group.parts || []) || []
+}
+
+function getCollectionProgressSummary(topicLabel, source) {
+  const parts = getCollectionParts(source)
+  if (!parts.length) return null
+
+  let completedParts = 0
+  let inProgressParts = 0
+  let answeredCount = 0
+  let total = 0
+
+  parts.forEach((part) => {
+    const status = getSavedQuizStatus(topicLabel, part)
+    total += part.mcqs.length
+    if (!status) return
+    answeredCount += status.completed ? status.total : status.answeredCount
+    if (status.completed) completedParts += 1
+    else if (status.answeredCount) inProgressParts += 1
+  })
+
+  if (!completedParts && !inProgressParts) return null
+
+  return {
+    completed: completedParts === parts.length,
+    completedParts,
+    inProgressParts,
+    partCount: parts.length,
+    answeredCount,
+    total,
+    percent: total ? Math.round((answeredCount / total) * 100) : 0
+  }
+}
+
+function getLatestCollectionAttempt(topicLabel, source) {
+  return getCollectionParts(source)
+    .map((part) => ({ part, status: getSavedQuizStatus(topicLabel, part) }))
+    .filter(({ status }) => status && !status.completed && status.answeredCount)
+    .sort((a, b) => new Date(b.status.savedAt || 0) - new Date(a.status.savedAt || 0))[0] || null
 }
 
 function formatQuizTimer(ms) {
@@ -3275,8 +3390,16 @@ function getQuizTimerRemainingMs() {
 }
 
 function getQuizTimerElapsedMs() {
-  if (!quizState.timerStartedAt) return 0
-  return Date.now() - new Date(quizState.timerStartedAt).getTime()
+  const savedElapsedMs = Number.isFinite(quizState.timerElapsedMs) ? quizState.timerElapsedMs : 0
+  if (!quizState.timerStartedAt) return savedElapsedMs
+  const currentSessionMs = Date.now() - new Date(quizState.timerStartedAt).getTime()
+  return savedElapsedMs + Math.max(currentSessionMs, 0)
+}
+
+function pauseQuizCountupTimer() {
+  if (quizState.timeLimitMinutes || !quizState.timerStartedAt) return
+  quizState.timerElapsedMs = getQuizTimerElapsedMs()
+  quizState.timerStartedAt = null
 }
 
 function clearQuizTimerInterval() {
@@ -3285,37 +3408,81 @@ function clearQuizTimerInterval() {
   quizTimerInterval = null
 }
 
+function clearQuizRobotMoodTimeout() {
+  if (!quizRobotMoodTimeout) return
+  clearTimeout(quizRobotMoodTimeout)
+  quizRobotMoodTimeout = null
+}
+
+function resetQuizRobotMood(timer = document.getElementById('quiz-timer')) {
+  clearQuizRobotMoodTimeout()
+  if (timer) timer.dataset.mood = 'neutral'
+}
+
+function updateQuizRobotCompactMode() {
+  const modal = document.getElementById('quiz-modal')
+  const panel = modal?.querySelector('.quiz-modal__panel')
+  const timer = modal?.querySelector('#quiz-timer')
+  if (!panel || !timer) return
+
+  const compact = quizRobotCompactQuery.matches || panel.scrollTop > 64
+  timer.classList.toggle('quiz-timer--compact', compact)
+}
+
+function triggerQuizRobotMood(mood, duration = 950) {
+  const timer = document.getElementById('quiz-timer')
+  if (!timer || timer.hidden) return
+
+  resetQuizRobotMood(timer)
+  timer.dataset.mood = mood
+  quizRobotMoodTimeout = setTimeout(() => {
+    timer.dataset.mood = 'neutral'
+    quizRobotMoodTimeout = null
+  }, duration)
+}
+
+function setQuizTimerText(timer, value, label) {
+  const timerValue = timer.querySelector('#quiz-timer-value')
+  if (timerValue) timerValue.textContent = value
+  timer.setAttribute('aria-label', `${label} ${value}`)
+}
+
 function updateQuizTimerDisplay({ allowExpire = false } = {}) {
   const modal = ensureQuizModal()
   const timer = modal.querySelector('#quiz-timer')
   if (!timer) return
 
   if (quizState.completed || (!quizState.timeLimitMinutes && !quizState.timerStartedAt)) {
-    timer.textContent = ''
+    setQuizTimerText(timer, '', 'Quiz timer')
     timer.hidden = true
     timer.style.removeProperty('--quiz-timer-progress')
     timer.classList.remove('quiz-timer--countup', 'quiz-timer--warning')
+    resetQuizRobotMood(timer)
     clearQuizTimerInterval()
     return
   }
 
   if (!quizState.timeLimitMinutes) {
+    const elapsedTime = formatQuizTimer(getQuizTimerElapsedMs())
     timer.hidden = false
-    timer.textContent = formatQuizTimer(getQuizTimerElapsedMs())
+    setQuizTimerText(timer, elapsedTime, 'Elapsed quiz time')
     timer.style.setProperty('--quiz-timer-progress', '100%')
     timer.classList.add('quiz-timer--countup')
     timer.classList.remove('quiz-timer--warning')
+    updateQuizRobotCompactMode()
     return
   }
 
   const remainingMs = getQuizTimerRemainingMs()
   const totalMs = quizState.timeLimitMinutes * 60000
   const timerProgress = totalMs ? Math.max(Math.min(remainingMs / totalMs, 1), 0) : 0
+  const remainingTime = formatQuizTimer(remainingMs)
   timer.hidden = false
-  timer.textContent = formatQuizTimer(remainingMs)
+  setQuizTimerText(timer, remainingTime, 'Quiz time remaining')
   timer.style.setProperty('--quiz-timer-progress', `${timerProgress * 100}%`)
   timer.classList.remove('quiz-timer--countup')
   timer.classList.toggle('quiz-timer--warning', remainingMs <= 120000)
+  updateQuizRobotCompactMode()
 
   if (remainingMs > 0 || !allowExpire) return
 
@@ -3329,6 +3496,7 @@ function updateQuizTimerDisplay({ allowExpire = false } = {}) {
 
 function startQuizTimer() {
   clearQuizTimerInterval()
+  resetQuizRobotMood()
   updateQuizTimerDisplay()
 
   if (quizState.completed || (!quizState.timeLimitMinutes && !quizState.timerStartedAt)) return
@@ -3342,10 +3510,11 @@ function hideQuizTimer() {
   const modal = ensureQuizModal()
   const timer = modal.querySelector('#quiz-timer')
   if (timer) {
-    timer.textContent = ''
+    setQuizTimerText(timer, '', 'Quiz timer')
     timer.hidden = true
     timer.style.removeProperty('--quiz-timer-progress')
     timer.classList.remove('quiz-timer--countup', 'quiz-timer--warning')
+    resetQuizRobotMood(timer)
   }
   clearQuizTimerInterval()
 }
@@ -3373,8 +3542,15 @@ function getQuizSources(topicLabel) {
       quizSize: source.quizSize || raw.quizSize || null,
       shuffleQuestions: source.shuffleQuestions ?? raw.shuffleQuestions ?? false,
       shuffleOptions: source.shuffleOptions ?? raw.shuffleOptions ?? false,
-      timeLimitMinutes: source.timeLimitMinutes || raw.timeLimitMinutes || null
-    })).filter((source) => source.mcqs.length)
+      timeLimitMinutes: source.timeLimitMinutes || raw.timeLimitMinutes || null,
+      collection: source.collection || null,
+      parentSourceId: source.parentSourceId || null,
+      groupId: source.groupId || null,
+      groupLabel: source.groupLabel || '',
+      partIndex: Number.isInteger(source.partIndex) ? source.partIndex : null,
+      partCount: Number.isInteger(source.partCount) ? source.partCount : null,
+      mode: source.mode || 'standard'
+    })).filter((source) => source.mcqs.length || source.collection)
   }
 
   if (Array.isArray(raw)) {
@@ -3403,7 +3579,31 @@ function getQuizSources(topicLabel) {
 
 function getQuizConfig(topicLabel, sourceId = 'current') {
   const sources = getQuizSources(topicLabel)
-  return sources.find((source) => source.id === sourceId) || sources[0] || null
+  const dynamicConfig = dynamicQuizConfigs.get(`${topicLabel}::${sourceId}`)
+  if (dynamicConfig) return dynamicConfig
+
+  const directSource = sources.find((source) => source.id === sourceId)
+  if (directSource) return directSource
+
+  const nestedPart = sources
+    .flatMap((source) => getCollectionParts(source))
+    .find((part) => part.id === sourceId)
+
+  return nestedPart || sources[0] || null
+}
+
+function getQuizSource(topicLabel, sourceId) {
+  return getQuizSources(topicLabel).find((source) => source.id === sourceId) || null
+}
+
+function registerDynamicQuizConfig(topicLabel, config) {
+  dynamicQuizConfigs.set(`${topicLabel}::${config.id}`, config)
+  return config
+}
+
+function shouldShowQuizSourcePicker(topicLabel) {
+  const sectionQuizzes = mcqQuizzesBySection[activeAcademicSection] || {}
+  return Boolean(sectionQuizzes[topicLabel]?.alwaysShowSourcePicker)
 }
 
 function normalizeQuestion(question, index) {
@@ -3426,7 +3626,10 @@ function normalizeQuestion(question, index) {
     options,
     correctOptionId,
     explanation: question.explanation || '',
+    source: question.source || '',
     section: question.section || '',
+    organ: question.organ || '',
+    originalNumber: question.originalNumber || null,
     topicTags: question.topicTags || []
   }
 }
@@ -3439,7 +3642,13 @@ function getTopicData(topicLabel) {
   return subjects.flatMap((subject) => subject.topics).find((topic) => (topic.mcqTopicKey || topic.label) === topicLabel || topic.label === topicLabel)
 }
 
-function initializeQuiz(topicLabel, { sourceId = 'current', useSaved = false, fresh = false } = {}) {
+function initializeQuiz(topicLabel, {
+  sourceId = 'current',
+  useSaved = false,
+  fresh = false,
+  shuffleQuestionsOverride = null,
+  promptOnSaved = true
+} = {}) {
   const config = getQuizConfig(topicLabel, sourceId)
   if (!config || !config.mcqs.length) return false
 
@@ -3449,17 +3658,22 @@ function initializeQuiz(topicLabel, { sourceId = 'current', useSaved = false, fr
   let index = 0
   let answers = {}
   let completed = false
+  let masteredQuestionIds = []
 
   const savedState = useSaved ? getSavedQuizState(topicLabel, config.id) : null
-  if (savedState && !fresh) {
+  if (savedState && !fresh && config.mode === 'wrong-review') {
+    order = normalizedQuestions.map((question) => question.id)
+    masteredQuestionIds = savedState.masteredQuestionIds || []
+  } else if (savedState && !fresh) {
     order = savedState.order || order
     questionOptionOrder = savedState.questionOptionOrder || {}
     answers = savedState.answers || {}
     index = Number.isInteger(savedState.index) ? savedState.index : 0
     completed = !!savedState.completed
+    masteredQuestionIds = savedState.masteredQuestionIds || []
   } else {
     let questionPool = [...normalizedQuestions]
-    if (config.shuffleQuestions) {
+    if (shuffleQuestionsOverride ?? config.shuffleQuestions) {
       questionPool = shuffleArray(questionPool)
     }
     if (config.quizSize && config.quizSize < questionPool.length) {
@@ -3480,6 +3694,12 @@ function initializeQuiz(topicLabel, { sourceId = 'current', useSaved = false, fr
   quizState.topicLabel = topicLabel
   quizState.sourceId = config.id
   quizState.sourceLabel = config.label
+  quizState.parentSourceId = config.parentSourceId || null
+  quizState.groupId = config.groupId || null
+  quizState.groupLabel = config.groupLabel || ''
+  quizState.partIndex = Number.isInteger(config.partIndex) ? config.partIndex : null
+  quizState.partCount = Number.isInteger(config.partCount) ? config.partCount : null
+  quizState.mode = config.mode || 'standard'
   quizState.index = Math.min(index, Math.max(0, questions.length - 1))
   quizState.answers = answers
   quizState.completed = completed
@@ -3488,10 +3708,12 @@ function initializeQuiz(topicLabel, { sourceId = 'current', useSaved = false, fr
   quizState.questions = questions
   quizState.showResumePrompt = false
   quizState.missingQuestionIds = savedState?.missingQuestionIds || []
+  quizState.masteredQuestionIds = masteredQuestionIds
   quizState.lectureUrls = getTopicData(topicLabel)?.lectureUrls || []
   quizState.timeLimitMinutes = config.timeLimitMinutes || null
   quizState.timerEndsAt = null
   quizState.timerStartedAt = null
+  quizState.timerElapsedMs = 0
 
   if (quizState.timeLimitMinutes && !completed) {
     const savedTimerEndsAt = savedState?.timerEndsAt ? new Date(savedState.timerEndsAt).getTime() : NaN
@@ -3499,14 +3721,16 @@ function initializeQuiz(topicLabel, { sourceId = 'current', useSaved = false, fr
       ? savedState.timerEndsAt
       : new Date(Date.now() + quizState.timeLimitMinutes * 60000).toISOString()
   } else if (!completed) {
-    const savedTimerStartedAt = savedState?.timerStartedAt ? new Date(savedState.timerStartedAt).getTime() : NaN
-    quizState.timerStartedAt = savedState && Number.isFinite(savedTimerStartedAt)
-      ? savedState.timerStartedAt
-      : new Date().toISOString()
+    const savedElapsedMs = Number(savedState?.timerElapsedMs)
+    quizState.timerElapsedMs = savedState && Number.isFinite(savedElapsedMs)
+      ? Math.max(savedElapsedMs, 0)
+      : 0
+    quizState.timerStartedAt = new Date().toISOString()
   }
 
-  if (savedState && !fresh && !savedState.completed && useSaved) {
+  if (savedState && !fresh && !savedState.completed && useSaved && promptOnSaved && config.mode !== 'wrong-review') {
     quizState.showResumePrompt = true
+    pauseQuizCountupTimer()
   }
 
   return true
@@ -3555,6 +3779,78 @@ function getMissedQuestions() {
   return getCurrentQuiz().filter((question) => !quizState.answers[question.id])
 }
 
+function getCurrentWrongQuestionIds() {
+  return getCurrentQuiz()
+    .filter((question) => quizState.answers[question.id] !== undefined && quizState.answers[question.id] !== question.correctOptionId)
+    .map((question) => question.id)
+}
+
+function getCollectionWrongQuestionIds(topicLabel, source) {
+  const wrongIds = new Set()
+  const trackSource = (config) => {
+    const state = getSavedQuizState(topicLabel, config.id)
+    ;(state?.wrongQuestionIds || []).forEach((questionId) => wrongIds.add(questionId))
+  }
+
+  getCollectionParts(source).forEach(trackSource)
+  ;(source.collection?.mixedSizes || []).forEach((mode) => {
+    trackSource({ id: `${source.id}-mixed-${mode.size}` })
+  })
+
+  const reviewId = source.collection?.wrongReviewId
+  const reviewState = reviewId ? getSavedQuizState(topicLabel, reviewId) : null
+  ;(reviewState?.masteredQuestionIds || []).forEach((questionId) => wrongIds.delete(questionId))
+
+  return source.mcqs.filter((question) => wrongIds.has(question.id)).map((question) => question.id)
+}
+
+function createMixedQuizConfig(topicLabel, source, mode) {
+  return registerDynamicQuizConfig(topicLabel, {
+    id: `${source.id}-mixed-${mode.size}`,
+    label: mode.label,
+    description: mode.description,
+    parentSourceId: source.id,
+    mode: 'mixed',
+    mcqs: source.mcqs,
+    quizSize: mode.size,
+    shuffleQuestions: true,
+    shuffleOptions: false,
+    timeLimitMinutes: null
+  })
+}
+
+function createWrongReviewQuizConfig(topicLabel, source) {
+  const wrongIds = new Set(getCollectionWrongQuestionIds(topicLabel, source))
+  const questions = source.mcqs.filter((question) => wrongIds.has(question.id))
+  return registerDynamicQuizConfig(topicLabel, {
+    id: source.collection?.wrongReviewId || `${source.id}-wrong-review`,
+    label: 'Review Wrong Answers',
+    description: 'Questions previously answered incorrectly.',
+    parentSourceId: source.id,
+    mode: 'wrong-review',
+    mcqs: questions,
+    shuffleQuestions: false,
+    shuffleOptions: false,
+    timeLimitMinutes: null
+  })
+}
+
+function getCurrentCollectionSource() {
+  if (!quizState.topicLabel || !quizState.parentSourceId) return null
+  return getQuizSource(quizState.topicLabel, quizState.parentSourceId)
+}
+
+function getCurrentCollectionGroup() {
+  const source = getCurrentCollectionSource()
+  return source?.collection?.groups?.find((group) => group.id === quizState.groupId) || null
+}
+
+function getNextCollectionPart() {
+  const group = getCurrentCollectionGroup()
+  if (!group || !Number.isInteger(quizState.partIndex)) return null
+  return group.parts[quizState.partIndex + 1] || null
+}
+
 function scrollToQuizQuestion(questionId) {
   const modal = ensureQuizModal()
   const questionCard = modal.querySelector(`[data-quiz-card="${CSS.escape(questionId)}"]`)
@@ -3565,7 +3861,7 @@ function scrollToQuizQuestion(questionId) {
     const panelRect = panel.getBoundingClientRect()
     const questionRect = questionCard.getBoundingClientRect()
     panel.scrollTo({
-      top: Math.max(panel.scrollTop + questionRect.top - panelRect.top - 72, 0),
+      top: Math.max(panel.scrollTop + questionRect.top - panelRect.top - QUIZ_STICKY_OFFSET, 0),
       behavior: prefersReducedMotion ? 'auto' : 'smooth'
     })
   } else {
@@ -3591,7 +3887,7 @@ function scrollToNextQuizQuestion(answeredQuestionId) {
     const panelRect = panel.getBoundingClientRect()
     const questionRect = questionCard.getBoundingClientRect()
     panel.scrollTo({
-      top: Math.max(panel.scrollTop + questionRect.top - panelRect.top - 22, 0),
+      top: Math.max(panel.scrollTop + questionRect.top - panelRect.top - QUIZ_STICKY_OFFSET, 0),
       behavior: prefersReducedMotion ? 'auto' : 'smooth'
     })
   }, 450)
@@ -3608,10 +3904,19 @@ function renderQuizActions() {
   }
 
   if (quizState.completed) {
+    const collectionSource = getCurrentCollectionSource()
+    const nextPart = getNextCollectionPart()
+    const wrongReviewCount = collectionSource
+      ? getCollectionWrongQuestionIds(quizState.topicLabel, collectionSource).length
+      : 0
+
     actions.innerHTML = `
+      ${quizState.groupId ? '<button class="quiz-action" type="button" data-quiz-back-group>Back to organ</button>' : ''}
+      ${collectionSource && !quizState.groupId ? '<button class="quiz-action" type="button" data-quiz-back-collection>Back to Kellawi</button>' : ''}
+      ${wrongReviewCount && quizState.mode !== 'wrong-review' ? `<button class="quiz-action" type="button" data-quiz-review-wrong>Wrong answers (${wrongReviewCount})</button>` : ''}
       <button class="quiz-action" type="button" data-quiz-retake>Retake quiz</button>
-      <button class="quiz-action" type="button" data-quiz-reset>Reset</button>
-      <button class="quiz-action quiz-action--primary" type="button" data-quiz-close>Close</button>
+      ${nextPart ? '<button class="quiz-action quiz-action--primary" type="button" data-quiz-next-part>Next part</button>' : ''}
+      <button class="quiz-action${nextPart ? '' : ' quiz-action--primary'}" type="button" data-quiz-close>Close</button>
     `
     return
   }
@@ -3632,7 +3937,11 @@ function renderQuizMeta() {
   const score = getQuizScore()
   const { answeredCount, percent, total } = getQuizProgressStats()
 
-  if (title) title.textContent = quizState.topicLabel || 'Quiz'
+  if (title) {
+    title.textContent = quizState.parentSourceId
+      ? quizState.sourceLabel
+      : (quizState.topicLabel || 'Quiz')
+  }
   if (progressCount) progressCount.textContent = `${answeredCount}/${total}`
   if (fill) fill.style.width = `${percent}%`
   const progress = modal.querySelector('.quiz-progress')
@@ -3646,15 +3955,19 @@ function renderQuizMeta() {
 
   if (quizState.completed) {
     const scorePercent = quiz.length ? Math.round((score / quiz.length) * 100) : 0
-    if (meta) meta.textContent = `${quizState.sourceLabel} - final score ${score} / ${quiz.length} (${scorePercent}%)`
+    if (meta) {
+      const location = quizState.groupLabel ? `Kellawi MCQs · ${quizState.groupLabel}` : 'Kellawi MCQs'
+      meta.textContent = `${quizState.parentSourceId ? location + ' · ' : ''}Final score ${score} / ${quiz.length} (${scorePercent}%)`
+    }
     return
   }
 
   const missedCount = quizState.missingQuestionIds?.length || 0
   if (meta) {
+    const location = quizState.groupLabel ? `Kellawi MCQs · ${quizState.groupLabel} · ` : ''
     meta.textContent = missedCount
-      ? `${quizState.sourceLabel} - ${missedCount} unanswered question${missedCount === 1 ? '' : 's'}`
-      : `${quizState.sourceLabel} - ${answeredCount} / ${quiz.length} answered`
+      ? `${location}${missedCount} unanswered question${missedCount === 1 ? '' : 's'}`
+      : `${location}${answeredCount} / ${quiz.length} answered`
   }
 }
 
@@ -3713,6 +4026,7 @@ function renderQuizQuestion() {
 
     return `
       <article class="quiz-card quiz-question-card${missed ? ' quiz-question-card--missed' : ''}" data-quiz-card="${escapeHtml(question.id)}">
+        ${question.section ? `<p class="quiz-question__section">${escapeHtml(question.section)}</p>` : ''}
         <p class="quiz-question"><strong>Q${questionIndex + 1}.</strong> ${escapeHtml(question.question)}</p>
         ${missed ? '<p class="quiz-missed-note">Answer this question before submitting.</p>' : ''}
         <div class="quiz-choices">${choices}</div>
@@ -3720,6 +4034,7 @@ function renderQuizQuestion() {
           <div class="quiz-explanation">
             <strong>${selectedOptionId === question.correctOptionId ? 'Correct.' : 'Correct answer: ' + escapeHtml(correctOption?.text || '')}</strong>
             <p>${escapeHtml(question.explanation)}</p>
+            ${question.source ? `<p class="quiz-explanation__source">${escapeHtml(question.source)}</p>` : ''}
           </div>
         ` : ''}
       </article>
@@ -3798,10 +4113,35 @@ function renderResumePrompt() {
 function renderSourceProgress(sourceProgress) {
   if (!sourceProgress) return ''
 
+  if (sourceProgress.partCount) {
+    return `
+      <span class="quiz-source-option__resume-row quiz-source-option__resume-row--collection">
+        <span class="quiz-source-option__resume${sourceProgress.completed ? ' quiz-source-option__resume--complete' : ''}">
+          ${sourceProgress.completed ? 'Completed' : 'In progress'}
+        </span>
+        <span class="quiz-source-option__progress" aria-label="${sourceProgress.answeredCount} of ${sourceProgress.total} questions completed">
+          <span style="width: ${sourceProgress.percent}%"></span>
+        </span>
+        <span class="quiz-source-option__count">${sourceProgress.completedParts}/${sourceProgress.partCount} parts</span>
+      </span>
+    `
+  }
+
+  if (sourceProgress.completed) {
+    return `
+      <span class="quiz-source-option__resume-row quiz-source-option__resume-row--complete">
+        <span class="quiz-source-option__resume quiz-source-option__resume--complete">Completed</span>
+        <span class="quiz-source-option__progress" aria-label="Quiz completed">
+          <span style="width: 100%"></span>
+        </span>
+        <span class="quiz-source-option__count">${sourceProgress.score ?? sourceProgress.answeredCount}/${sourceProgress.total}</span>
+      </span>
+    `
+  }
+
   return `
     <span class="quiz-source-option__resume-row">
       <span class="quiz-source-option__resume">Resume</span>
-      <span class="quiz-source-option__takeover">Take over</span>
       <span class="quiz-source-option__progress" aria-label="${sourceProgress.answeredCount} of ${sourceProgress.total} questions answered">
         <span style="width: ${sourceProgress.percent}%"></span>
       </span>
@@ -3822,7 +4162,9 @@ function renderQuizSourcePicker(topicLabel, event = null) {
   const panel = modal.querySelector('.quiz-modal__panel')
   const sourcesWithProgress = sources.map((source) => ({
     ...source,
-    savedProgress: getSavedQuizProgress(topicLabel, source)
+    savedProgress: source.collection
+      ? getCollectionProgressSummary(topicLabel, source)
+      : getSavedQuizProgress(topicLabel, source)
   }))
   const firstSavedProgress = sourcesWithProgress.find((source) => source.savedProgress)?.savedProgress || null
 
@@ -3848,12 +4190,26 @@ function renderQuizSourcePicker(topicLabel, event = null) {
     <article class="quiz-card quiz-source-picker">
       ${sourcesWithProgress.map((source) => {
         const isVipPastExam = source.id === 'nutr-quiz-1-2-cleaned-bank'
+        const isKellawiCollection = source.id === 'kellawi-surgical-git-master-bank'
+        const resumesDirectly = Boolean(source.savedProgress && !source.collection)
         return `
-        <button class="quiz-source-option${isVipPastExam ? ' quiz-source-option--vip' : ''}" type="button" data-quiz-source="${source.id}" data-quiz-topic="${escapeHtml(topicLabel)}" ${isVipPastExam ? 'dir="rtl"' : ''}>
+        <button class="quiz-source-option${isVipPastExam ? ' quiz-source-option--vip' : ''}${isKellawiCollection ? ' quiz-source-option--kellawi' : ''}" type="button" data-quiz-source="${source.id}" data-quiz-topic="${escapeHtml(topicLabel)}" ${resumesDirectly ? 'data-quiz-resume-direct' : ''} ${isVipPastExam ? 'dir="rtl"' : ''}>
           ${isVipPastExam ? '<img class="quiz-source-option__icon" src="/assets/past-exams-vip-icon.png" alt="" />' : ''}
+          ${isKellawiCollection ? `
+            <span class="quiz-source-option__kellawi-mascot" aria-hidden="true">
+              <span class="quiz-source-option__kellawi-avatar">
+                <img src="/assets/mohamed-kellawi-avatar.jpg" alt="" />
+              </span>
+              <span class="quiz-source-option__thought">Ready? Let’s solve it organ by organ.</span>
+            </span>
+          ` : ''}
           <span class="quiz-source-option__content">
             <strong>${source.label}</strong>
-            ${isVipPastExam ? '<span>15 min timer</span>' : `<span>${source.mcqs.length} questions${source.description ? ` - ${source.description}` : ''}</span>`}
+            ${isVipPastExam
+              ? '<span>15 min timer</span>'
+              : isKellawiCollection
+                ? '<span>1,187 questions · 5 organs · 33 short parts</span>'
+                : `<span>${source.mcqs.length} questions${source.description ? ` - ${source.description}` : ''}</span>`}
             ${renderSourceProgress(source.savedProgress)}
           </span>
         </button>
@@ -3865,17 +4221,321 @@ function renderQuizSourcePicker(topicLabel, event = null) {
   document.body.classList.add('panel-open')
 }
 
+function prepareQuizPicker({ titleText, metaText, progress = null, event = null }) {
+  const modal = ensureQuizModal()
+  const title = modal.querySelector('#quiz-title')
+  const meta = modal.querySelector('#quiz-meta')
+  const fill = modal.querySelector('#quiz-progress-fill')
+  const progressCount = modal.querySelector('#quiz-progress-count')
+  const body = modal.querySelector('#quiz-body')
+  const actions = modal.querySelector('.quiz-modal__actions')
+  const panel = modal.querySelector('.quiz-modal__panel')
 
-function openQuiz(topicLabel, sourceId = 'current', event = null) {
+  if (event && event.clientX && event.clientY && panel) {
+    const rect = panel.getBoundingClientRect()
+    panel.style.transformOrigin = `${event.clientX - rect.left}px ${event.clientY - rect.top}px`
+  } else if (panel) {
+    panel.style.transformOrigin = 'center center'
+  }
+
+  if (title) title.textContent = titleText
+  if (meta) meta.textContent = metaText
+  if (fill) fill.style.width = `${progress?.percent || 0}%`
+  if (progressCount) {
+    progressCount.textContent = progress
+      ? `${progress.answeredCount}/${progress.total}`
+      : '0/0'
+  }
+  const progressBar = modal.querySelector('.quiz-progress')
+  if (progressBar) progressBar.style.setProperty('--quiz-progress-percent', `${progress?.percent || 0}%`)
+
+  hideQuizTimer()
+  actions.innerHTML = '<button class="quiz-action quiz-action--primary" type="button" data-quiz-close>Close</button>'
+  modal.setAttribute('aria-hidden', 'false')
+  document.body.classList.add('panel-open')
+
+  return { modal, body, actions, panel }
+}
+
+function getGroupProgressSummary(topicLabel, group) {
+  let completedParts = 0
+  let inProgressParts = 0
+  let answeredCount = 0
+  let total = 0
+
+  group.parts.forEach((part) => {
+    const status = getSavedQuizStatus(topicLabel, part)
+    total += part.mcqs.length
+    if (!status) return
+    answeredCount += status.completed ? status.total : status.answeredCount
+    if (status.completed) completedParts += 1
+    else if (status.answeredCount) inProgressParts += 1
+  })
+
+  return {
+    completed: completedParts === group.parts.length,
+    completedParts,
+    inProgressParts,
+    partCount: group.parts.length,
+    answeredCount,
+    total,
+    percent: total ? Math.round((answeredCount / total) * 100) : 0
+  }
+}
+
+function renderCollectionCardStatus(summary) {
+  const stateLabel = summary.completed
+    ? 'Completed'
+    : summary.inProgressParts
+      ? 'In progress'
+      : 'Not started'
+
+  return `
+    <span class="quiz-collection-option__status">
+      <span>${stateLabel}</span>
+      <strong>${summary.completedParts}/${summary.partCount} parts</strong>
+    </span>
+    <span class="quiz-collection-option__bar" aria-hidden="true">
+      <span style="width: ${summary.percent}%"></span>
+    </span>
+  `
+}
+
+function renderQuizCollectionPicker(topicLabel, sourceId, event = null) {
+  const source = getQuizSource(topicLabel, sourceId)
+  if (!source?.collection) return
+
+  const collectionProgress = getCollectionProgressSummary(topicLabel, source)
+  const latestAttempt = getLatestCollectionAttempt(topicLabel, source)
+  const wrongCount = getCollectionWrongQuestionIds(topicLabel, source).length
+  const { body } = prepareQuizPicker({
+    titleText: source.label,
+    metaText: 'Choose an organ or a revision mode.',
+    progress: collectionProgress,
+    event
+  })
+
+  const continueCard = latestAttempt ? `
+    <button class="quiz-collection-option quiz-collection-option--continue" type="button"
+      data-quiz-continue-source="${escapeHtml(latestAttempt.part.id)}"
+      data-quiz-topic="${escapeHtml(topicLabel)}">
+      <span class="quiz-collection-option__eyebrow">Continue</span>
+      <strong>${escapeHtml(latestAttempt.part.groupLabel)} · ${escapeHtml(latestAttempt.part.label)}</strong>
+      <span>${latestAttempt.status.answeredCount}/${latestAttempt.status.total} answered</span>
+      <span class="quiz-collection-option__bar" aria-hidden="true">
+        <span style="width: ${latestAttempt.status.percent}%"></span>
+      </span>
+    </button>
+  ` : ''
+
+  const organCards = source.collection.groups.map((group) => {
+    const summary = getGroupProgressSummary(topicLabel, group)
+    return `
+      <button class="quiz-collection-option" type="button"
+        data-quiz-group="${escapeHtml(group.id)}"
+        data-quiz-collection-source="${escapeHtml(source.id)}"
+        data-quiz-topic="${escapeHtml(topicLabel)}">
+        <span class="quiz-collection-option__eyebrow">Organ bank</span>
+        <strong>${escapeHtml(group.label)}</strong>
+        <span>${group.questionCount} questions · ${group.parts.length} parts</span>
+        ${renderCollectionCardStatus(summary)}
+      </button>
+    `
+  }).join('')
+
+  body.innerHTML = `
+    <article class="quiz-card quiz-collection-picker">
+      <div class="quiz-picker-breadcrumb">
+        <button type="button" data-quiz-picker-back-source data-quiz-topic="${escapeHtml(topicLabel)}">MCQ sources</button>
+        <span aria-hidden="true">›</span>
+        <strong>${escapeHtml(source.label)}</strong>
+      </div>
+      ${continueCard}
+      <div class="quiz-collection-grid">
+        ${organCards}
+        <button class="quiz-collection-option quiz-collection-option--mixed" type="button"
+          data-quiz-mixed-menu
+          data-quiz-collection-source="${escapeHtml(source.id)}"
+          data-quiz-topic="${escapeHtml(topicLabel)}">
+          <span class="quiz-collection-option__eyebrow">Revision mode</span>
+          <strong>Mixed Practice</strong>
+          <span>Quick 20 · Standard 30 · Exam 50</span>
+        </button>
+        <button class="quiz-collection-option quiz-collection-option--wrong" type="button"
+          data-quiz-wrong-review
+          data-quiz-collection-source="${escapeHtml(source.id)}"
+          data-quiz-topic="${escapeHtml(topicLabel)}"
+          ${wrongCount ? '' : 'disabled'}>
+          <span class="quiz-collection-option__eyebrow">Focused review</span>
+          <strong>Review Wrong Answers</strong>
+          <span>${wrongCount ? `${wrongCount} question${wrongCount === 1 ? '' : 's'} to review` : 'No wrong answers saved yet'}</span>
+        </button>
+      </div>
+    </article>
+  `
+}
+
+function renderPartResumeActions(topicLabel, part, status) {
+  return `
+    <span class="quiz-part-option__saved-footer">
+      <span class="quiz-part-option__saved-actions">
+        <button class="quiz-part-option__resume-button" type="button"
+          data-quiz-part="${escapeHtml(part.id)}"
+          data-quiz-topic="${escapeHtml(topicLabel)}"
+          data-quiz-resume-direct>Resume</button>
+        <button class="quiz-part-option__restart-button" type="button"
+          data-quiz-part-start-over="${escapeHtml(part.id)}"
+          data-quiz-topic="${escapeHtml(topicLabel)}">Start over</button>
+      </span>
+      <span class="quiz-source-option__progress" aria-label="${status.answeredCount} of ${status.total} questions answered">
+        <span style="width: ${status.percent}%"></span>
+      </span>
+      <span class="quiz-source-option__count">${status.answeredCount}/${status.total}</span>
+    </span>
+  `
+}
+
+function renderQuizPartPicker(topicLabel, sourceId, groupId, event = null) {
+  const source = getQuizSource(topicLabel, sourceId)
+  const group = source?.collection?.groups?.find((item) => item.id === groupId)
+  if (!source || !group) return
+
+  const progress = getGroupProgressSummary(topicLabel, group)
+  const { body } = prepareQuizPicker({
+    titleText: group.label,
+    metaText: `${group.questionCount} questions · ${group.parts.length} short parts`,
+    progress,
+    event
+  })
+
+  const partCards = group.parts.map((part) => {
+    const status = getSavedQuizStatus(topicLabel, part)
+    const resumesDirectly = Boolean(status && !status.completed && status.answeredCount)
+    const cardContent = `
+      <span class="quiz-collection-option__eyebrow">${escapeHtml(part.range)}</span>
+      <strong>${escapeHtml(part.label)}</strong>
+      <span>${part.mcqs.length} questions</span>
+      <small>${escapeHtml(part.description)}</small>
+    `
+
+    if (resumesDirectly) {
+      return `
+        <article class="quiz-part-option quiz-part-option--saved">
+          ${cardContent}
+          ${renderPartResumeActions(topicLabel, part, status)}
+        </article>
+      `
+    }
+
+    return `
+      <button class="quiz-part-option${status?.completed ? ' quiz-part-option--complete' : ''}" type="button"
+        data-quiz-part="${escapeHtml(part.id)}"
+        data-quiz-topic="${escapeHtml(topicLabel)}">
+        ${cardContent}
+        ${renderSourceProgress(status)}
+      </button>
+    `
+  }).join('')
+
+  body.innerHTML = `
+    <article class="quiz-card quiz-parts-picker">
+      <div class="quiz-picker-breadcrumb">
+        <button type="button" data-quiz-back-collection
+          data-quiz-topic="${escapeHtml(topicLabel)}"
+          data-quiz-collection-source="${escapeHtml(source.id)}">${escapeHtml(source.label)}</button>
+        <span aria-hidden="true">›</span>
+        <strong>${escapeHtml(group.label)}</strong>
+      </div>
+      <label class="quiz-picker-toggle">
+        <input type="checkbox" data-quiz-shuffle-toggle>
+        <span>Shuffle questions when starting a new part</span>
+      </label>
+      <div class="quiz-parts-grid">
+        ${partCards}
+      </div>
+    </article>
+  `
+}
+
+function renderMixedPracticePicker(topicLabel, sourceId, event = null) {
+  const source = getQuizSource(topicLabel, sourceId)
+  if (!source?.collection) return
+
+  const { body } = prepareQuizPicker({
+    titleText: 'Mixed Practice',
+    metaText: 'Random questions from all five organs.',
+    event
+  })
+
+  body.innerHTML = `
+    <article class="quiz-card quiz-parts-picker">
+      <div class="quiz-picker-breadcrumb">
+        <button type="button" data-quiz-back-collection
+          data-quiz-topic="${escapeHtml(topicLabel)}"
+          data-quiz-collection-source="${escapeHtml(source.id)}">${escapeHtml(source.label)}</button>
+        <span aria-hidden="true">›</span>
+        <strong>Mixed Practice</strong>
+      </div>
+      <div class="quiz-parts-grid">
+        ${source.collection.mixedSizes.map((mode) => {
+          const config = createMixedQuizConfig(topicLabel, source, mode)
+          const status = getSavedQuizStatus(topicLabel, config)
+          const resumesDirectly = Boolean(status && !status.completed && status.answeredCount)
+          return `
+            <button class="quiz-part-option${status?.completed ? ' quiz-part-option--complete' : ''}" type="button"
+              data-quiz-mixed-size="${mode.size}"
+              data-quiz-topic="${escapeHtml(topicLabel)}"
+              data-quiz-collection-source="${escapeHtml(source.id)}"
+              ${resumesDirectly ? 'data-quiz-resume-direct' : ''}>
+              <span class="quiz-collection-option__eyebrow">Random session</span>
+              <strong>${escapeHtml(mode.label)}</strong>
+              <span>${mode.size} questions</span>
+              <small>${escapeHtml(mode.description)}</small>
+              ${renderSourceProgress(status)}
+            </button>
+          `
+        }).join('')}
+      </div>
+    </article>
+  `
+}
+
+
+function openQuiz(topicLabel, sourceId = 'current', event = null, launchOptions = {}) {
   const config = getQuizConfig(topicLabel, sourceId)
   if (!config || !config.mcqs.length) return
 
   const savedState = getSavedQuizState(topicLabel, config.id)
   const useSaved = Boolean(savedState)
-  initializeQuiz(topicLabel, { sourceId: config.id, useSaved, fresh: false })
+  const resumeDirectly = Boolean(launchOptions.resumeDirectly && savedState && !savedState.completed)
+  initializeQuiz(topicLabel, {
+    sourceId: config.id,
+    useSaved,
+    fresh: false,
+    shuffleQuestionsOverride: useSaved ? null : (launchOptions.shuffleQuestionsOverride ?? null),
+    promptOnSaved: !resumeDirectly
+  })
+
+  if (launchOptions.restartTimer && !quizState.completed) {
+    quizState.timerElapsedMs = 0
+    quizState.timerEndsAt = quizState.timeLimitMinutes
+      ? new Date(Date.now() + quizState.timeLimitMinutes * 60000).toISOString()
+      : null
+    quizState.timerStartedAt = quizState.timeLimitMinutes ? null : new Date().toISOString()
+  }
 
   const modal = ensureQuizModal()
   const panel = modal.querySelector('.quiz-modal__panel')
+  let resumedQuestion = null
+
+  if (panel && !resumeDirectly) panel.scrollTop = 0
+
+  if (resumeDirectly) {
+    resumedQuestion = getFirstUnansweredQuestion()
+    if (resumedQuestion) {
+      quizState.index = getCurrentQuiz().findIndex((question) => question.id === resumedQuestion.id)
+    }
+  }
 
   if (event && event.clientX && event.clientY && panel) {
     const rect = panel.getBoundingClientRect()
@@ -3898,14 +4558,34 @@ function openQuiz(topicLabel, sourceId = 'current', event = null) {
   } else {
     renderQuizQuestion()
   }
-  startQuizTimer()
+  if (quizState.showResumePrompt) {
+    hideQuizTimer()
+  } else {
+    startQuizTimer()
+  }
+  updateQuizRobotCompactMode()
+
+  if (resumeDirectly) {
+    setTimeout(() => {
+      if (resumedQuestion) {
+        scrollToQuizQuestion(resumedQuestion.id)
+        return
+      }
+      if (panel) panel.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' })
+    }, 80)
+  }
 }
 
 function closeQuiz() {
   const modal = ensureQuizModal()
+  if (quizState.topicLabel && !quizState.completed && !quizState.showResumePrompt) {
+    pauseQuizCountupTimer()
+    saveQuizState()
+  }
   modal.setAttribute('aria-hidden', 'true')
   document.body.classList.remove('panel-open')
   clearQuizTimerInterval()
+  resetQuizRobotMood()
 }
 
 function ensurePdfPreviewModal() {
@@ -4033,17 +4713,122 @@ function handleQuizClick(event) {
     return
   }
 
+  const sourcePickerBack = event.target.closest('[data-quiz-picker-back-source]')
+  if (sourcePickerBack) {
+    renderQuizSourcePicker(sourcePickerBack.dataset.quizTopic, event)
+    return
+  }
+
+  const collectionBack = event.target.closest('[data-quiz-back-collection]')
+  if (collectionBack) {
+    const topicLabel = collectionBack.dataset.quizTopic || quizState.topicLabel
+    const sourceId = collectionBack.dataset.quizCollectionSource || quizState.parentSourceId
+    renderQuizCollectionPicker(topicLabel, sourceId, event)
+    return
+  }
+
+  const groupButton = event.target.closest('[data-quiz-group]')
+  if (groupButton) {
+    renderQuizPartPicker(
+      groupButton.dataset.quizTopic,
+      groupButton.dataset.quizCollectionSource,
+      groupButton.dataset.quizGroup,
+      event
+    )
+    return
+  }
+
+  const partStartOverButton = event.target.closest('[data-quiz-part-start-over]')
+  if (partStartOverButton) {
+    const topicLabel = partStartOverButton.dataset.quizTopic
+    const sourceId = partStartOverButton.dataset.quizPartStartOver
+    const modal = ensureQuizModal()
+    const shuffleToggle = modal.querySelector('[data-quiz-shuffle-toggle]')
+    clearSavedQuizState(topicLabel, sourceId)
+    openQuiz(topicLabel, sourceId, event, {
+      shuffleQuestionsOverride: Boolean(shuffleToggle?.checked),
+      restartTimer: true
+    })
+    return
+  }
+
+  const partButton = event.target.closest('[data-quiz-part]')
+  if (partButton) {
+    const modal = ensureQuizModal()
+    const shuffleToggle = modal.querySelector('[data-quiz-shuffle-toggle]')
+    openQuiz(partButton.dataset.quizTopic, partButton.dataset.quizPart, event, {
+      shuffleQuestionsOverride: Boolean(shuffleToggle?.checked),
+      resumeDirectly: partButton.hasAttribute('data-quiz-resume-direct')
+    })
+    return
+  }
+
+  const continueButton = event.target.closest('[data-quiz-continue-source]')
+  if (continueButton) {
+    openQuiz(continueButton.dataset.quizTopic, continueButton.dataset.quizContinueSource, event, {
+      resumeDirectly: true
+    })
+    return
+  }
+
+  const mixedMenuButton = event.target.closest('[data-quiz-mixed-menu]')
+  if (mixedMenuButton) {
+    renderMixedPracticePicker(
+      mixedMenuButton.dataset.quizTopic,
+      mixedMenuButton.dataset.quizCollectionSource,
+      event
+    )
+    return
+  }
+
+  const mixedSizeButton = event.target.closest('[data-quiz-mixed-size]')
+  if (mixedSizeButton) {
+    const topicLabel = mixedSizeButton.dataset.quizTopic
+    const source = getQuizSource(topicLabel, mixedSizeButton.dataset.quizCollectionSource)
+    const mode = source?.collection?.mixedSizes?.find((item) => item.size === Number(mixedSizeButton.dataset.quizMixedSize))
+    if (source && mode) {
+      const config = createMixedQuizConfig(topicLabel, source, mode)
+      openQuiz(topicLabel, config.id, event, {
+        resumeDirectly: mixedSizeButton.hasAttribute('data-quiz-resume-direct')
+      })
+    }
+    return
+  }
+
+  const wrongReviewButton = event.target.closest('[data-quiz-wrong-review]')
+  if (wrongReviewButton) {
+    const topicLabel = wrongReviewButton.dataset.quizTopic || quizState.topicLabel
+    const sourceId = wrongReviewButton.dataset.quizCollectionSource || quizState.parentSourceId
+    const source = getQuizSource(topicLabel, sourceId)
+    if (!source) return
+    const config = createWrongReviewQuizConfig(topicLabel, source)
+    if (config.mcqs.length) openQuiz(topicLabel, config.id, event)
+    else renderQuizCollectionPicker(topicLabel, source.id, event)
+    return
+  }
+
   const sourceButton = event.target.closest('[data-quiz-source]')
   if (sourceButton) {
-    openQuiz(sourceButton.dataset.quizTopic, sourceButton.dataset.quizSource, event)
+    const topicLabel = sourceButton.dataset.quizTopic
+    const source = getQuizConfig(topicLabel, sourceButton.dataset.quizSource)
+    if (source?.collection) renderQuizCollectionPicker(topicLabel, source.id, event)
+    else {
+      openQuiz(topicLabel, sourceButton.dataset.quizSource, event, {
+        resumeDirectly: sourceButton.hasAttribute('data-quiz-resume-direct')
+      })
+    }
     return
   }
 
   const openButton = event.target.closest('[data-quiz-topic]')
   if (openButton) {
-    const sources = getQuizSources(openButton.dataset.quizTopic)
-    if (sources.length > 1) renderQuizSourcePicker(openButton.dataset.quizTopic, event)
-    else openQuiz(openButton.dataset.quizTopic, sources[0]?.id || 'current', event)
+    const topicLabel = openButton.dataset.quizTopic
+    const sources = getQuizSources(topicLabel)
+    if (sources.length > 1 || shouldShowQuizSourcePicker(topicLabel)) {
+      renderQuizSourcePicker(topicLabel, event)
+    } else {
+      openQuiz(topicLabel, sources[0]?.id || 'current', event)
+    }
     return
   }
 
@@ -4054,12 +4839,16 @@ function handleQuizClick(event) {
 
   if (event.target.closest('[data-quiz-resume]')) {
     quizState.showResumePrompt = false
+    if (!quizState.timeLimitMinutes && !quizState.timerStartedAt) {
+      quizState.timerStartedAt = new Date().toISOString()
+    }
     const targetQuestion = getFirstUnansweredQuestion()
     if (targetQuestion) {
       quizState.index = getCurrentQuiz().findIndex((question) => question.id === targetQuestion.id)
       saveQuizState()
     }
     renderQuizQuestion()
+    startQuizTimer()
     setTimeout(() => {
       if (targetQuestion) {
         scrollToQuizQuestion(targetQuestion.id)
@@ -4084,12 +4873,36 @@ function handleQuizClick(event) {
   }
 
   if (event.target.closest('[data-quiz-retake]')) {
+    if (quizState.mode === 'wrong-review') {
+      const source = getCurrentCollectionSource()
+      if (source) {
+        const config = createWrongReviewQuizConfig(quizState.topicLabel, source)
+        if (config.mcqs.length) openQuiz(quizState.topicLabel, config.id, event, { restartTimer: true })
+        else renderQuizCollectionPicker(quizState.topicLabel, source.id, event)
+      }
+      return
+    }
+
     const topicLabel = quizState.topicLabel
     const sourceId = quizState.sourceId
     clearSavedQuizState(topicLabel, sourceId)
     initializeQuiz(topicLabel, { sourceId, fresh: true })
     renderQuizQuestion()
     startQuizTimer()
+    return
+  }
+
+  if (event.target.closest('[data-quiz-next-part]')) {
+    const nextPart = getNextCollectionPart()
+    if (nextPart) openQuiz(quizState.topicLabel, nextPart.id, event)
+    return
+  }
+
+  if (event.target.closest('[data-quiz-back-group]')) {
+    const source = getCurrentCollectionSource()
+    if (source && quizState.groupId) {
+      renderQuizPartPicker(quizState.topicLabel, source.id, quizState.groupId, event)
+    }
     return
   }
 
@@ -4113,6 +4926,21 @@ function handleQuizClick(event) {
   }
 
   if (event.target.closest('[data-quiz-reset]')) {
+    if (quizState.mode === 'wrong-review') {
+      quizState.answers = {}
+      quizState.index = 0
+      quizState.completed = false
+      quizState.missingQuestionIds = []
+      saveQuizState()
+      const source = getCurrentCollectionSource()
+      if (source) {
+        const config = createWrongReviewQuizConfig(quizState.topicLabel, source)
+        if (config.mcqs.length) openQuiz(quizState.topicLabel, config.id, event, { restartTimer: true })
+        else renderQuizCollectionPicker(quizState.topicLabel, source.id, event)
+      }
+      return
+    }
+
     quizState.answers = {}
     quizState.index = 0
     quizState.completed = false
@@ -4122,6 +4950,7 @@ function handleQuizClick(event) {
       ? new Date(Date.now() + quizState.timeLimitMinutes * 60000).toISOString()
       : null
     quizState.timerStartedAt = quizState.timeLimitMinutes ? null : new Date().toISOString()
+    quizState.timerElapsedMs = 0
     saveQuizState()
     renderQuizQuestion()
     startQuizTimer()
@@ -4141,8 +4970,15 @@ function handleQuizClick(event) {
     renderQuizQuestion()
 
     if (question.correctOptionId === selectedOptionId) {
+      if (quizState.mode === 'wrong-review' && !quizState.masteredQuestionIds.includes(question.id)) {
+        quizState.masteredQuestionIds.push(question.id)
+        saveQuizState()
+      }
       triggerCorrectAnswerCelebration()
+      triggerQuizRobotMood('happy')
       scrollToNextQuizQuestion(question.id)
+    } else {
+      triggerQuizRobotMood('sad')
     }
   }
 }
@@ -4379,15 +5215,37 @@ function render401ExamSchedule() {
     const isDone = exam.daysUntil < 0
     const statusLabel = isNext ? getExamCountdownText(exam.daysUntil) : isDone ? 'Completed' : 'Upcoming'
     const stateClass = `${isNext ? ' exam-card--next' : ''}${isDone ? ' exam-card--done' : ''}`
+    const cardContent = `
+      <strong>${escapeHtml(exam.code)}</strong>
+      <time datetime="${exam.date}T14:30">${formatShortDate(exam.date)}</time>
+      <em>${escapeHtml(exam.time)}</em>
+      ${exam.meta ? `<span class="exam-card__meta">${escapeHtml(exam.meta)}</span>` : ''}
+      <small>${escapeHtml(statusLabel)}</small>
+    `
+
+    if (!exam.quizTopicKey) {
+      return `
+        <button class="exam-card${stateClass}" type="button" data-code="${exam.subjectCode}" aria-label="Open ${escapeHtml(exam.subjectName)} tracker">
+          ${cardContent}
+        </button>
+      `
+    }
 
     return `
-      <button class="exam-card${stateClass}" type="button" data-code="${exam.subjectCode}" aria-label="Open ${escapeHtml(exam.subjectName)} tracker">
-        <strong>${escapeHtml(exam.code)}</strong>
-        <time datetime="${exam.date}T14:30">${formatShortDate(exam.date)}</time>
-        <em>${escapeHtml(exam.time)}</em>
-        ${exam.meta ? `<span class="exam-card__meta">${escapeHtml(exam.meta)}</span>` : ''}
-        <small>${escapeHtml(statusLabel)}</small>
-      </button>
+      <article class="exam-card exam-card--has-action${stateClass}" data-code="${exam.subjectCode}">
+        <button class="exam-card__tracker-action" type="button" aria-label="Open ${escapeHtml(exam.subjectName)} tracker"></button>
+        ${cardContent}
+        <button class="exam-card__quiz-action" type="button" data-quiz-topic="${escapeHtml(exam.quizTopicKey)}" aria-label="Open ${escapeHtml(exam.quizActionLabel || 'MCQs')} for ${escapeHtml(exam.subjectName)}">
+          <svg class="exam-card__quiz-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="4" y="3" width="16" height="18" rx="3"></rect>
+            <path d="m8 9 1.5 1.5L12 8"></path>
+            <path d="M14 9h3"></path>
+            <path d="m8 15 1.5 1.5L12 14"></path>
+            <path d="M14 15h3"></path>
+          </svg>
+          <span>${escapeHtml(exam.quizActionLabel || 'MCQs')}</span>
+        </button>
+      </article>
     `
   }).join('')
 
