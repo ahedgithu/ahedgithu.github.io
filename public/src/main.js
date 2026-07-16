@@ -1550,7 +1550,9 @@ const leaderboardState = {
   error: '',
   rows: [],
   preferences: { anonymous: true },
-  lastFetched: 0
+  lastFetched: 0,
+  section: '',
+  requestId: 0
 }
 
 function renderAnonToggleUi() {
@@ -1561,6 +1563,26 @@ function renderAnonToggleUi() {
   const isAnon = !!leaderboardState.preferences.anonymous
   btn.classList.toggle('is-anon', isAnon)
   label.textContent = isAnon ? 'Show my name' : 'Go anonymous'
+}
+
+function isLeaderboardActive() {
+  const navLink = document.querySelector('[data-section-nav="leaderboard"]')
+  return activeSiteMode === activeAcademicSection
+    && (window.location.hash === '#leaderboard' || navLink?.classList.contains('active'))
+}
+
+function invalidateLeaderboard(section = activeAcademicSection) {
+  leaderboardState.loading = false
+  leaderboardState.error = ''
+  leaderboardState.rows = []
+  leaderboardState.lastFetched = 0
+  leaderboardState.section = section
+  leaderboardState.requestId += 1
+}
+
+function refreshLeaderboardIfActive(force = false) {
+  if (!isLeaderboardActive()) return Promise.resolve()
+  return fetchAndRenderLeaderboard(force)
 }
 
 function showGlobalToast(text) {
@@ -1574,8 +1596,14 @@ function showGlobalToast(text) {
 async function fetchAndRenderLeaderboard(force = false) {
   if (leaderboardState.loading) return
 
+  const requestedSection = activeAcademicSection
   const now = Date.now()
-  if (!force && leaderboardState.rows.length > 0 && (now - leaderboardState.lastFetched < 60000)) {
+  if (
+    !force
+    && leaderboardState.section === requestedSection
+    && leaderboardState.rows.length > 0
+    && (now - leaderboardState.lastFetched < 60000)
+  ) {
     renderLeaderboardHtml()
     return
   }
@@ -1599,18 +1627,26 @@ async function fetchAndRenderLeaderboard(force = false) {
   }
 
   leaderboardState.loading = true
+  const requestId = ++leaderboardState.requestId
   try {
-    const rows = await fetchLeaderboard(activeAcademicSection)
+    const rows = await fetchLeaderboard(requestedSection)
+    if (requestId !== leaderboardState.requestId || requestedSection !== activeAcademicSection) return
     leaderboardState.rows = rows
-    leaderboardState.lastFetched = now
+    leaderboardState.section = requestedSection
+    leaderboardState.lastFetched = Date.now()
+    leaderboardState.error = ''
     renderLeaderboardHtml()
   } catch (err) {
+    if (requestId !== leaderboardState.requestId || requestedSection !== activeAcademicSection) return
     console.error('Leaderboard fetch failed:', err)
+    leaderboardState.error = err.message || 'Failed to load leaderboard.'
     if (loadingEl) loadingEl.hidden = true
     if (errorEl) errorEl.hidden = false
     showGlobalToast('Failed to load leaderboard.')
   } finally {
-    leaderboardState.loading = false
+    if (requestId === leaderboardState.requestId) {
+      leaderboardState.loading = false
+    }
   }
 }
 
@@ -1864,6 +1900,7 @@ async function loadStudentProgress(section = activeAcademicSection) {
     studentProgressState.ready = true
     refreshTrackerFilters()
     updateGlobalProgress()
+    await refreshLeaderboardIfActive(true)
   } catch (error) {
     studentProgressState.lastError = error.message
     console.warn('Student progress sync failed.', error)
@@ -2096,7 +2133,11 @@ function updateSiteHistory(url, historyMode = 'push') {
 }
 
 function showAcademicSection(sectionId, options = {}) {
-  activeAcademicSection = sectionId === '402' ? '402' : '401'
+  const nextAcademicSection = sectionId === '402' ? '402' : '401'
+  if (nextAcademicSection !== activeAcademicSection) {
+    invalidateLeaderboard(nextAcademicSection)
+  }
+  activeAcademicSection = nextAcademicSection
   activeSiteMode = activeAcademicSection
   updateAcademicSectionUi()
   const currentParams = new URLSearchParams(window.location.search)
@@ -3283,11 +3324,16 @@ function saveQuizState() {
       answered_count: payload.answeredCount,
       wrong_question_ids: payload.wrongQuestionIds,
       completed_at: quizState.completed ? new Date().toISOString() : null
-    }).catch((error) => {
-      studentProgressState.lastError = error.message
-      renderStudentSyncUi()
-      console.warn('MCQ progress cloud sync failed.', error)
     })
+      .then(() => {
+        leaderboardState.lastFetched = 0
+        return refreshLeaderboardIfActive(true)
+      })
+      .catch((error) => {
+        studentProgressState.lastError = error.message
+        renderStudentSyncUi()
+        console.warn('MCQ progress cloud sync failed.', error)
+      })
   }
 }
 
@@ -3302,11 +3348,16 @@ function clearSavedQuizState(topicLabel, sourceId = quizState.sourceId || 'curre
       section: activeAcademicSection,
       topic_label: topicLabel,
       source_id: sourceId || 'current'
-    }).catch((error) => {
-      studentProgressState.lastError = error.message
-      renderStudentSyncUi()
-      console.warn('MCQ progress cloud delete failed.', error)
     })
+      .then(() => {
+        leaderboardState.lastFetched = 0
+        return refreshLeaderboardIfActive(true)
+      })
+      .catch((error) => {
+        studentProgressState.lastError = error.message
+        renderStudentSyncUi()
+        console.warn('MCQ progress cloud delete failed.', error)
+      })
   }
 }
 
@@ -6318,7 +6369,10 @@ function initStudentSync() {
       studentProgressState.user = user
       renderStudentSyncUi()
       if (user) loadStudentProgress(activeAcademicSection)
-      else updateGlobalProgress()
+      else {
+        updateGlobalProgress()
+        refreshLeaderboardIfActive(true)
+      }
       refreshTrackerAdminProfile(user)
     })
     .catch((error) => {
@@ -6339,6 +6393,7 @@ function initStudentSync() {
       loadStudentProgress(activeAcademicSection)
     } else {
       updateGlobalProgress()
+      refreshLeaderboardIfActive(true)
     }
   })
 }
@@ -6398,15 +6453,18 @@ document.addEventListener('click', (event) => {
   if (anonToggle) {
     event.preventDefault()
     if (!studentProgressState.user) return
-    const currentAnon = !leaderboardState.preferences.anonymous
-    leaderboardState.preferences.anonymous = currentAnon
+    const previousAnon = !!leaderboardState.preferences.anonymous
+    const nextAnon = !previousAnon
+    leaderboardState.preferences.anonymous = nextAnon
     renderAnonToggleUi()
     upsertUserPreference({
       user_id: studentProgressState.user.id,
-      anonymous: currentAnon
+      anonymous: nextAnon
     }).then(() => {
       fetchAndRenderLeaderboard(true)
     }).catch((err) => {
+      leaderboardState.preferences.anonymous = previousAnon
+      renderAnonToggleUi()
       showGlobalToast('Failed to update: ' + err.message)
     })
     return

@@ -32,6 +32,11 @@ test('application modules are valid and mirrored', () => {
   const mainSource = read('src/main.js')
   assert.match(mainSource, /function updateGlobalProgress\s*\(/)
   assert.match(mainSource, /function initStudentSync\s*\(/)
+  assert.match(mainSource, /function refreshLeaderboardIfActive\s*\(/)
+  assert.match(mainSource, /leaderboardState\.section === requestedSection/)
+  assert.match(mainSource, /await refreshLeaderboardIfActive\(true\)/)
+  assert.match(mainSource, /requestId !== leaderboardState\.requestId \|\| requestedSection !== activeAcademicSection/)
+  assert.match(read('src/style.css'), /\.leaderboard__loading\[hidden\]\s*\{\s*display:\s*none\s*!important;/)
 
   const index = read('index.html')
   for (const id of ['admin-login-modal', 'tracker-admin-login-form', 'tracker-admin-email-input', 'tracker-admin-password-input', 'tracker-admin-login-status', 'tracker-admin-edit-panel']) {
@@ -250,7 +255,8 @@ test('section selector is centered and the wide review remains fully visible', (
   assert.match(style, /\.home-review-screenshot\s*\{[\s\S]*?aspect-ratio:\s*1\.9\s*\/\s*1;[\s\S]*?object-fit:\s*cover;/s)
   assert.match(style, /\.home-review-screenshot--fit\s*\{[^}]*object-fit:\s*contain;[^}]*object-position:\s*left center;/s)
   assert.equal((html.match(/review5\.jpg" class="home-review-screenshot home-review-screenshot--fit"/g) || []).length, 2)
-  assert.match(html, /style\.css\?v=20260716-kellawi-mobile-v5/)
+  assert.match(html, /style\.css\?v=20260716-leaderboard-v1/)
+  assert.match(html, /main\.js\?v=20260716-leaderboard-v1/)
   assert.match(style, /body\[data-site-mode="selector"\] > main > \.site-footer/)
 
   for (const file of ['review1.jpg', 'review2.jpg', 'review3.jpg', 'review4.jpg', 'review5.jpg', 'review6.png', 'review7.png', 'review8.png']) {

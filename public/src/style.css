@@ -10958,6 +10958,10 @@ body[data-site-mode="tools"] .site-footer {
   gap: 12px;
 }
 
+.leaderboard__loading[hidden] {
+  display: none !important;
+}
+
 .leaderboard__skeleton {
   height: 64px;
   border-radius: var(--radius);
