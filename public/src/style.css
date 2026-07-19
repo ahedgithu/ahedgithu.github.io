@@ -11921,7 +11921,8 @@ body[data-site-mode="402"] .tracker-home {
 }
 
 .site-header .site-nav__back,
-.site-header .student-sync__button {
+.site-header .student-sync__button,
+.site-header .tracker-anonymous-control {
   border: 0;
   background: transparent;
   box-shadow: none;

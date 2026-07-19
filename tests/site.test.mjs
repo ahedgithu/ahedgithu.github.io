@@ -374,6 +374,7 @@ test('Google login is mandatory and the academic section is account-bound', () =
   assert.match(style, /body\[data-auth-state="signed-out"\] \[data-auth-panel="signed-out"\]/)
   assert.match(style, /body\[data-auth-state="needs-section"\] \[data-auth-panel="needs-section"\]/)
   assert.match(style, /\.admin-login-modal\s*\{[^}]*z-index:\s*10020;/s)
+  assert.match(style, /\.site-header \.tracker-anonymous-control\s*\{[\s\S]*?pointer-events:\s*auto;/)
 
   assert.match(supabaseClient, /select\('anonymous, selected_section, updated_at'\)/)
   assert.match(supabaseClient, /export async function updateUserPreference\s*\(/)
@@ -394,7 +395,7 @@ test('Google login is mandatory and the academic section is account-bound', () =
   assert.match(mainSource, /\$\{QUIZ_STORAGE_PREFIX\}::\$\{getProgressStorageOwnerId\(\)\}::\$\{section\}/)
   assert.match(mainSource, /\$\{TOPIC_COMPLETION_STORAGE_PREFIX\}::\$\{getProgressStorageOwnerId\(\)\}::\$\{section\}/)
   assert.match(schedule, /window\.location\.replace\('\/#schedule'\)/)
-  assert.match(html, /style\.css\?v=20260719-auth-logo-v3/)
+  assert.match(html, /style\.css\?v=20260719-sur402-name-toggle-v2/)
   assert.match(html, /main\.js\?v=20260719-sur402-name-toggle-v1/)
 })
 
@@ -452,7 +453,7 @@ test('section selector is centered and the wide review remains fully visible', (
   assert.match(style, /\.home-review-screenshot\s*\{[\s\S]*?aspect-ratio:\s*1\.9\s*\/\s*1;[\s\S]*?object-fit:\s*cover;/s)
   assert.match(style, /\.home-review-screenshot--fit\s*\{[^}]*object-fit:\s*contain;[^}]*object-position:\s*left center;/s)
   assert.equal((html.match(/review5\.jpg" class="home-review-screenshot home-review-screenshot--fit"/g) || []).length, 2)
-  assert.match(html, /style\.css\?v=20260719-auth-logo-v3/)
+  assert.match(html, /style\.css\?v=20260719-sur402-name-toggle-v2/)
   assert.match(html, /main\.js\?v=20260719-sur402-name-toggle-v1/)
   assert.match(style, /body\[data-site-mode="selector"\] > main > \.site-footer/)
 
