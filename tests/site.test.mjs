@@ -19,6 +19,8 @@ test('application modules are valid and mirrored', () => {
     'src/sur1-past-exam-mcqs.js',
     'src/sur1-matching-questions.js',
     'src/sur402-past-exam-mcqs.js',
+    'src/sur402-textbook-mcqs.js',
+    'src/sur402-amr-beshry-mcqs.js',
     'src/progress.js',
     'src/supabaseClient.js'
   ]
@@ -27,7 +29,7 @@ test('application modules are valid and mirrored', () => {
     execFileSync(process.execPath, ['--check', file], { cwd: new URL('..', import.meta.url) })
   }
 
-  const mirroredFiles = ['main.js', 'admin.js', 'analytics.js', 'mcqs.js', 'sur1-kellawi-mcqs.js', 'sur1-past-exam-mcqs.js', 'sur1-matching-questions.js', 'sur402-past-exam-mcqs.js', 'progress.js', 'style.css', 'supabaseClient.js']
+  const mirroredFiles = ['main.js', 'admin.js', 'analytics.js', 'mcqs.js', 'sur1-kellawi-mcqs.js', 'sur1-past-exam-mcqs.js', 'sur1-matching-questions.js', 'sur402-past-exam-mcqs.js', 'sur402-textbook-mcqs.js', 'sur402-amr-beshry-mcqs.js', 'progress.js', 'style.css', 'supabaseClient.js']
   for (const file of mirroredFiles) {
     assert.equal(read(`src/${file}`), read(`public/src/${file}`), `${file} mirror is out of sync`)
   }
@@ -154,6 +156,64 @@ test('SUR 402-1 topic-organized past-exam MCQs are complete and wired', () => {
   const mainSource = read('src/main.js')
   assert.match(html, /sur402-past-exam-mcqs\.js\?v=20260719-sur402-past-exams-v1/)
   assert.match(mainSource, /code:\s*'SUR 402-1'[\s\S]{0,220}quizTopicKey:\s*'SUR 402-1 MCQs'/)
+})
+
+test('SUR 402-1 textbook MCQs appear beside the past-exam source', () => {
+  const context = { window: { mcqQuizzes402: {} } }
+  vm.runInNewContext(read('src/sur402-past-exam-mcqs.js'), context)
+  vm.runInNewContext(read('src/sur402-textbook-mcqs.js'), context)
+
+  const quiz = context.window.mcqQuizzes402['SUR 402-1 MCQs']
+  assert.equal(quiz.alwaysShowSourcePicker, true)
+  assert.equal(quiz.sources.length, 2)
+  assert.deepEqual(Array.from(quiz.sources, (source) => source.label), [
+    'Past Exam MCQs - Topic Organized',
+    'Textbook MCQs - PreTest & Lange'
+  ])
+
+  const source = quiz.sources[1]
+  assert.equal(source.id, 'sur402-textbook-pretest-lange')
+  assert.equal(source.mcqs.length, 69)
+  assert.equal(new Set(source.mcqs.map((question) => question.id)).size, 69)
+  assert.ok(source.mcqs.every((question) => question.choices.length >= 2))
+  assert.ok(source.mcqs.every((question) => Number.isInteger(question.answerIndex) && question.choices[question.answerIndex]))
+  assert.ok(source.mcqs.every((question) => question.source && question.explanation))
+  assert.deepEqual(
+    Array.from(source.collection.groups, (group) => [group.label, group.questionCount]),
+    [['Breast', 21], ['Thyroid & Parathyroid', 13], ['Other Endocrine', 9], ['Carcinoid', 5], ['Lange Hernia', 21]]
+  )
+  assert.deepEqual(Array.from(source.collection.mixedSizes, (mode) => mode.size), [20, 30, 50])
+  assert.equal(source.collection.wrongReviewId, 'sur402-textbook-wrong-review')
+
+  const html = read('index.html')
+  assert.match(html, /sur402-textbook-mcqs\.js\?v=20260719-sur402-textbooks-v1/)
+})
+
+test('SUR 402-1 Amr Mohsen and Ahmed El-Beshry bank is complete and wired as a third source', () => {
+  const context = { window: { mcqQuizzes402: {} } }
+  vm.runInNewContext(read('src/sur402-past-exam-mcqs.js'), context)
+  vm.runInNewContext(read('src/sur402-textbook-mcqs.js'), context)
+  vm.runInNewContext(read('src/sur402-amr-beshry-mcqs.js'), context)
+
+  const quiz = context.window.mcqQuizzes402['SUR 402-1 MCQs']
+  assert.equal(quiz.sources.length, 3)
+  const source = quiz.sources[2]
+  assert.equal(source.id, 'sur402-amr-mohsen-ahmed-beshry')
+  assert.equal(source.label, 'Amr Mohsen & Ahmed El-Beshry MCQs')
+  assert.equal(source.mcqs.length, 83)
+  assert.equal(new Set(source.mcqs.map((question) => question.id)).size, 83)
+  assert.ok(source.mcqs.every((question) => question.choices.length >= 4))
+  assert.ok(source.mcqs.every((question) => Number.isInteger(question.answerIndex) && question.choices[question.answerIndex]))
+  assert.ok(source.mcqs.every((question) => question.question && question.source && question.explanation))
+  assert.deepEqual(
+    Array.from(source.collection.groups, (group) => [group.label, group.questionCount]),
+    [['Breast', 26], ['Abdominal Wall & Hernia', 21], ['Thyroid & MEN', 24], ['Parathyroid', 4], ['Adrenal', 8]]
+  )
+  assert.deepEqual(Array.from(source.collection.mixedSizes, (mode) => mode.size), [20, 30, 50])
+  assert.equal(source.collection.wrongReviewId, 'sur402-amr-beshry-wrong-review')
+
+  const html = read('index.html')
+  assert.match(html, /sur402-amr-beshry-mcqs\.js\?v=20260719-sur402-amr-beshry-v1/)
 })
 
 test('SUR 401-1 past-exam bank is answer-safe, grouped, and wired', () => {
