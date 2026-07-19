@@ -18,6 +18,7 @@ test('application modules are valid and mirrored', () => {
     'src/sur1-kellawi-mcqs.js',
     'src/sur1-past-exam-mcqs.js',
     'src/sur1-matching-questions.js',
+    'src/sur402-past-exam-mcqs.js',
     'src/progress.js',
     'src/supabaseClient.js'
   ]
@@ -26,7 +27,7 @@ test('application modules are valid and mirrored', () => {
     execFileSync(process.execPath, ['--check', file], { cwd: new URL('..', import.meta.url) })
   }
 
-  const mirroredFiles = ['main.js', 'admin.js', 'analytics.js', 'mcqs.js', 'sur1-kellawi-mcqs.js', 'sur1-past-exam-mcqs.js', 'sur1-matching-questions.js', 'progress.js', 'style.css', 'supabaseClient.js']
+  const mirroredFiles = ['main.js', 'admin.js', 'analytics.js', 'mcqs.js', 'sur1-kellawi-mcqs.js', 'sur1-past-exam-mcqs.js', 'sur1-matching-questions.js', 'sur402-past-exam-mcqs.js', 'progress.js', 'style.css', 'supabaseClient.js']
   for (const file of mirroredFiles) {
     assert.equal(read(`src/${file}`), read(`public/src/${file}`), `${file} mirror is out of sync`)
   }
@@ -115,6 +116,44 @@ test('SUR 401-1 Kellawi MCQ bank is complete and wired', () => {
   const index = read('index.html')
   assert.match(index, /data-quiz-topic=["']SUR 401-1 MCQs["']/)
   assert.match(index, /sur1-kellawi-mcqs\.js/)
+})
+
+test('SUR 402-1 topic-organized past-exam MCQs are complete and wired', () => {
+  const context = { window: { mcqQuizzes402: {} } }
+  vm.runInNewContext(read('src/sur402-past-exam-mcqs.js'), context)
+
+  const quiz = context.window.mcqQuizzes402['SUR 402-1 MCQs']
+  assert.equal(quiz.alwaysShowSourcePicker, true)
+  assert.equal(quiz.sources.length, 1)
+
+  const source = quiz.sources[0]
+  assert.equal(source.id, 'sur402-topic-organized-past-exams')
+  assert.equal(source.mcqs.length, 295)
+  assert.equal(new Set(source.mcqs.map((question) => question.id)).size, 295)
+  assert.ok(source.mcqs.every((question) => question.choices.length >= 2))
+  assert.ok(source.mcqs.every((question) => question.answerIndex >= 0 && question.answerIndex < question.choices.length))
+  assert.ok(source.mcqs.every((question) => question.source && question.explanation))
+
+  assert.deepEqual(
+    Array.from(source.collection.groups, (group) => [group.label, group.questionCount, group.parts.length]),
+    [
+      ['Breast', 139, 5],
+      ['Hernia', 54, 2],
+      ['Thyroid', 46, 2],
+      ['Parathyroid', 56, 2]
+    ]
+  )
+  assert.deepEqual(
+    Array.from(source.collection.groups, (group) => Array.from(group.parts, (part) => part.mcqs.length)),
+    [[28, 28, 28, 28, 27], [27, 27], [23, 23], [28, 28]]
+  )
+  assert.deepEqual(Array.from(source.collection.mixedSizes, (mode) => mode.size), [20, 30, 50])
+  assert.equal(source.collection.wrongReviewId, 'sur402-past-exams-wrong-review')
+
+  const html = read('index.html')
+  const mainSource = read('src/main.js')
+  assert.match(html, /sur402-past-exam-mcqs\.js\?v=20260719-sur402-past-exams-v1/)
+  assert.match(mainSource, /code:\s*'SUR 402-1'[\s\S]{0,220}quizTopicKey:\s*'SUR 402-1 MCQs'/)
 })
 
 test('SUR 401-1 past-exam bank is answer-safe, grouped, and wired', () => {
@@ -337,9 +376,15 @@ test('Google login is mandatory and the academic section is account-bound', () =
   assert.match(style, /\.admin-login-modal\s*\{[^}]*z-index:\s*10020;/s)
 
   assert.match(supabaseClient, /select\('anonymous, selected_section, updated_at'\)/)
+  assert.match(supabaseClient, /export async function updateUserPreference\s*\(/)
+  assert.match(supabaseClient, /\.update\(\{ \.\.\.changes, updated_at: new Date\(\)\.toISOString\(\) \}\)/)
+  assert.match(supabaseClient, /\.eq\('user_id', userId\)/)
   assert.match(supabaseClient, /persistSession:\s*true/)
   assert.match(mainSource, /async function handleStudentAuthUser\s*\(/)
   assert.match(mainSource, /async function saveSelectedSection\s*\(/)
+  assert.match(mainSource, /async function toggleLeaderboardAnonymousMode\s*\(/)
+  assert.match(mainSource, /await updateUserPreference\([\s\S]*?\{ anonymous: nextAnon \}/)
+  assert.match(mainSource, /button\.disabled = true[\s\S]*?button\.disabled = false/)
   assert.match(mainSource, /selected_section:\s*section/)
   assert.match(mainSource, /studentProgressState\.selectedSection \|\| activeAcademicSection/)
   assert.doesNotMatch(mainSource, /localStorage\.setItem\('selectedAcademicSection'/)
@@ -350,7 +395,7 @@ test('Google login is mandatory and the academic section is account-bound', () =
   assert.match(mainSource, /\$\{TOPIC_COMPLETION_STORAGE_PREFIX\}::\$\{getProgressStorageOwnerId\(\)\}::\$\{section\}/)
   assert.match(schedule, /window\.location\.replace\('\/#schedule'\)/)
   assert.match(html, /style\.css\?v=20260719-auth-logo-v3/)
-  assert.match(html, /main\.js\?v=20260719-auth-logo-v3/)
+  assert.match(html, /main\.js\?v=20260719-sur402-name-toggle-v1/)
 })
 
 test('topic actions are accessible boxless premium icons and legacy PWA state is cleaned up', () => {
@@ -408,7 +453,7 @@ test('section selector is centered and the wide review remains fully visible', (
   assert.match(style, /\.home-review-screenshot--fit\s*\{[^}]*object-fit:\s*contain;[^}]*object-position:\s*left center;/s)
   assert.equal((html.match(/review5\.jpg" class="home-review-screenshot home-review-screenshot--fit"/g) || []).length, 2)
   assert.match(html, /style\.css\?v=20260719-auth-logo-v3/)
-  assert.match(html, /main\.js\?v=20260719-auth-logo-v3/)
+  assert.match(html, /main\.js\?v=20260719-sur402-name-toggle-v1/)
   assert.match(style, /body\[data-site-mode="selector"\] > main > \.site-footer/)
 
   for (const file of ['review1.jpg', 'review2.jpg', 'review3.jpg', 'review4.jpg', 'review5.jpg', 'review6.png', 'review7.png', 'review8.png']) {

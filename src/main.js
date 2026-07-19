@@ -12,6 +12,7 @@ import {
   fetchUserTopicProgressRows,
   fetchLeaderboard,
   fetchUserPreference,
+  updateUserPreference,
   upsertUserPreference,
   getCurrentUser,
   isSupabaseConfigured,
@@ -889,7 +890,7 @@ const courseSchedule = [
 ]
 
 const midtermExamSchedule402 = [
-  { code: 'SUR 402-1', subjectCode: 'SUR402-1', subjectName: 'Surgery 402-1', date: '2026-07-22', dayLabel: 'Wed', time: '11:30-12:30' },
+  { code: 'SUR 402-1', subjectCode: 'SUR402-1', subjectName: 'Surgery 402-1', date: '2026-07-22', dayLabel: 'Wed', time: '11:30-12:30', quizTopicKey: 'SUR 402-1 MCQs', quizActionLabel: 'MCQs' },
   { code: 'MED 402-1', subjectCode: 'MED402-1', subjectName: 'Medicine 402-1', date: '2026-07-25', dayLabel: 'Sat', time: '11:30-12:30' },
   { code: 'MED 402-2', subjectCode: 'MED402-2', subjectName: 'Medicine 402-2', date: '2026-07-29', dayLabel: 'Wed', time: '11:30-12:30' },
   { code: 'GYN 402', subjectCode: 'GYNA402', subjectName: 'Gynecology & Obstetrics 402', date: '2026-08-01', dayLabel: 'Sat', time: '11:30-12:30' }
@@ -1614,7 +1615,35 @@ function renderAnonToggleUi() {
 
   const isAnon = !!leaderboardState.preferences.anonymous
   btn.classList.toggle('is-anon', isAnon)
+  btn.setAttribute('aria-pressed', String(!isAnon))
   label.textContent = isAnon ? 'Show my name' : 'Go anonymous'
+}
+
+async function toggleLeaderboardAnonymousMode(button) {
+  if (!studentProgressState.user || button.disabled) return
+
+  const previousPreference = { ...leaderboardState.preferences }
+  const nextAnon = !previousPreference.anonymous
+  leaderboardState.preferences = { ...previousPreference, anonymous: nextAnon }
+  button.disabled = true
+  renderAnonToggleUi()
+
+  try {
+    leaderboardState.preferences = await updateUserPreference(
+      studentProgressState.user.id,
+      { anonymous: nextAnon }
+    )
+    renderAnonToggleUi()
+    await fetchAndRenderLeaderboard(true)
+    showGlobalToast(nextAnon ? 'Your name is hidden.' : 'Your name is now visible.')
+  } catch (error) {
+    leaderboardState.preferences = previousPreference
+    renderAnonToggleUi()
+    showGlobalToast('Name visibility was not changed. Please try again.')
+    console.error('Name visibility update failed:', error)
+  } finally {
+    button.disabled = false
+  }
 }
 
 function isLeaderboardActive() {
@@ -6652,21 +6681,7 @@ document.addEventListener('click', (event) => {
   const anonToggle = event.target.closest('#leaderboard-anon-toggle')
   if (anonToggle) {
     event.preventDefault()
-    if (!studentProgressState.user) return
-    const previousAnon = !!leaderboardState.preferences.anonymous
-    const nextAnon = !previousAnon
-    leaderboardState.preferences.anonymous = nextAnon
-    renderAnonToggleUi()
-    upsertUserPreference({
-      user_id: studentProgressState.user.id,
-      anonymous: nextAnon
-    }).then(() => {
-      fetchAndRenderLeaderboard(true)
-    }).catch((err) => {
-      leaderboardState.preferences.anonymous = previousAnon
-      renderAnonToggleUi()
-      showGlobalToast('Failed to update: ' + err.message)
-    })
+    toggleLeaderboardAnonymousMode(anonToggle)
     return
   }
 

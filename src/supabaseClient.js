@@ -358,6 +358,21 @@ export async function upsertUserPreference(row) {
   return data
 }
 
+export async function updateUserPreference(userId, changes) {
+  const supabase = getSupabaseClient()
+  if (!supabase) throw new Error('Supabase is not configured.')
+
+  const { data, error } = await supabase
+    .from('user_preferences')
+    .update({ ...changes, updated_at: new Date().toISOString() })
+    .eq('user_id', userId)
+    .select('anonymous, selected_section, updated_at')
+    .single()
+
+  if (error) throw error
+  return data
+}
+
 export async function signInWithGoogle(options = {}) {
   const supabase = getSupabaseClient()
   if (!supabase) throw new Error('Supabase is not configured.')
