@@ -16,6 +16,8 @@ test('application modules are valid and mirrored', () => {
     'src/analytics.js',
     'src/mcqs.js',
     'src/sur1-kellawi-mcqs.js',
+    'src/sur1-past-exam-mcqs.js',
+    'src/sur1-matching-questions.js',
     'src/progress.js',
     'src/supabaseClient.js'
   ]
@@ -24,7 +26,7 @@ test('application modules are valid and mirrored', () => {
     execFileSync(process.execPath, ['--check', file], { cwd: new URL('..', import.meta.url) })
   }
 
-  const mirroredFiles = ['main.js', 'admin.js', 'analytics.js', 'mcqs.js', 'sur1-kellawi-mcqs.js', 'progress.js', 'style.css', 'supabaseClient.js']
+  const mirroredFiles = ['main.js', 'admin.js', 'analytics.js', 'mcqs.js', 'sur1-kellawi-mcqs.js', 'sur1-past-exam-mcqs.js', 'sur1-matching-questions.js', 'progress.js', 'style.css', 'supabaseClient.js']
   for (const file of mirroredFiles) {
     assert.equal(read(`src/${file}`), read(`public/src/${file}`), `${file} mirror is out of sync`)
   }
@@ -115,6 +117,104 @@ test('SUR 401-1 Kellawi MCQ bank is complete and wired', () => {
   assert.match(index, /sur1-kellawi-mcqs\.js/)
 })
 
+test('SUR 401-1 past-exam bank is answer-safe, grouped, and wired', () => {
+  const context = { window: { mcqQuizzes: {} } }
+  vm.runInNewContext(read('src/sur1-kellawi-mcqs.js'), context)
+  vm.runInNewContext(read('src/sur1-past-exam-mcqs.js'), context)
+
+  const quiz = context.window.mcqQuizzes['SUR 401-1 MCQs']
+  assert.equal(quiz.alwaysShowSourcePicker, true)
+  assert.equal(quiz.sources.length, 2)
+
+  const source = quiz.sources.find((item) => item.id === 'past-exams-esophagus-stomach')
+  assert.ok(source, 'past-exam source is missing')
+  assert.equal(source.label, 'Past Exam MCQs - Esophagus & Stomach')
+  assert.equal(source.mcqs.length, 549)
+  assert.equal(new Set(source.mcqs.map((question) => question.id)).size, 549)
+  assert.ok(source.mcqs.every((question) => question.choices.length >= 2))
+  assert.ok(source.mcqs.every((question) => Number.isInteger(question.answerIndex) && question.choices[question.answerIndex]))
+  assert.ok(source.mcqs.every((question) => question.source && question.section && question.originalId))
+
+  const collection = source.collection
+  assert.deepEqual(
+    Array.from(collection.groups, (group) => [group.label, group.questionCount, group.parts.length]),
+    [
+      ['Esophagus', 221, 7],
+      ['Stomach & Duodenum', 212, 6],
+      ['Mixed General Surgery', 116, 3]
+    ]
+  )
+  assert.deepEqual(
+    Array.from(collection.groups, (group) => Array.from(group.parts, (part) => part.mcqs.length)),
+    [
+      [32, 32, 32, 32, 31, 31, 31],
+      [36, 36, 35, 35, 35, 35],
+      [39, 39, 38]
+    ]
+  )
+
+  const parts = Array.from(collection.groups, (group) => Array.from(group.parts)).flat()
+  const partQuestions = parts.flatMap((part) => Array.from(part.mcqs))
+  assert.equal(parts.length, 16)
+  assert.equal(partQuestions.length, 549)
+  assert.equal(new Set(partQuestions.map((question) => question.id)).size, 549)
+  assert.ok(parts.every((part) => part.mcqs.length >= 30 && part.mcqs.length <= 39))
+  assert.deepEqual(Array.from(collection.mixedSizes, (mode) => mode.size), [20, 30, 50])
+  assert.equal(collection.wrongReviewId, 'sur1-past-exams-wrong-review')
+  assert.match(read('src/sur1-past-exam-mcqs.js'), /Held for review \(6\)/)
+
+  const mainSource = read('src/main.js')
+  assert.match(mainSource, /groupNoun/)
+  assert.match(mainSource, /groupEyebrow/)
+  assert.match(mainSource, /mixedMeta/)
+  assert.doesNotMatch(mainSource, /Back to Kellawi/)
+
+  const index = read('index.html')
+  assert.match(index, /sur1-past-exam-mcqs\.js/)
+})
+
+test('SUR 401-1 matching bank preserves every set, organ, answer, and source', () => {
+  const context = { window: { mcqQuizzes: {} } }
+  vm.runInNewContext(read('src/sur1-kellawi-mcqs.js'), context)
+  vm.runInNewContext(read('src/sur1-past-exam-mcqs.js'), context)
+  vm.runInNewContext(read('src/sur1-matching-questions.js'), context)
+
+  const quiz = context.window.mcqQuizzes['SUR 401-1 MCQs']
+  assert.equal(quiz.alwaysShowSourcePicker, true)
+  assert.equal(quiz.sources.length, 3)
+
+  const source = quiz.sources.find((item) => item.id === 'matching-liver-spleen-tongue-stomach-esophagus')
+  assert.ok(source, 'matching source is missing')
+  assert.equal(source.mcqs.length, 82)
+  assert.equal(new Set(source.mcqs.map((question) => question.id)).size, 82)
+  assert.ok(source.mcqs.every((question) => question.questionType === 'matching'))
+  assert.ok(source.mcqs.every((question) => question.choices.length >= 5))
+  assert.ok(source.mcqs.every((question) => Number.isInteger(question.answerIndex) && question.choices[question.answerIndex]))
+  assert.ok(source.mcqs.every((question) => question.explanation && question.source && question.section && question.matchingSet))
+
+  const collection = source.collection
+  assert.deepEqual(
+    Array.from(collection.groups, (group) => [group.label, group.questionCount, group.parts.length]),
+    [
+      ['Liver', 21, 4],
+      ['Spleen', 5, 1],
+      ['Tongue', 10, 2],
+      ['Stomach', 30, 4],
+      ['Esophagus', 16, 3]
+    ]
+  )
+  const parts = Array.from(collection.groups, (group) => Array.from(group.parts)).flat()
+  const partQuestions = parts.flatMap((part) => Array.from(part.mcqs))
+  assert.equal(parts.length, 14)
+  assert.equal(partQuestions.length, 82)
+  assert.equal(new Set(partQuestions.map((question) => question.id)).size, 82)
+  assert.deepEqual(Array.from(collection.mixedSizes, (mode) => mode.size), [20, 30, 50])
+  assert.equal(collection.wrongReviewId, 'sur1-matching-wrong-review')
+
+  const index = read('index.html')
+  assert.match(index, /sur1-matching-questions\.js/)
+})
+
 test('quiz timer is a native responsive robot with answer moods', () => {
   const mainSource = read('src/main.js')
   const style = read('src/style.css')
@@ -199,6 +299,58 @@ test('Supabase public configuration and local RLS rules protect sensitive access
   assert.match(leaderboardMigration, /CASE WHEN u\.id = \(SELECT auth\.uid\(\)\) THEN u\.id ELSE NULL END/i)
   assert.match(leaderboardMigration, /REVOKE ALL ON FUNCTION public\.get_leaderboard\(TEXT\) FROM PUBLIC, anon/i)
   assert.match(leaderboardMigration, /GRANT EXECUTE ON FUNCTION public\.get_leaderboard\(TEXT\) TO authenticated/i)
+
+  const sectionMigration = read('supabase/migrations/20260719154530_add_user_selected_section.sql')
+  assert.match(sectionMigration, /ADD COLUMN IF NOT EXISTS selected_section TEXT/i)
+  assert.match(sectionMigration, /selected_section IN \('401', '402'\)/i)
+})
+
+test('Google login is mandatory and the academic section is account-bound', () => {
+  const html = read('index.html')
+  const style = read('src/style.css')
+  const mainSource = read('src/main.js')
+  const supabaseClient = read('src/supabaseClient.js')
+  const schedule = read('schedule.html')
+
+  assert.match(html, /<body data-auth-state="checking">/)
+  assert.match(html, /id="auth-gate"/)
+  assert.match(html, /<div class="auth-gate__brand">\s*<img src="\/assets\/must-university-logo\.png" alt="Misr University for Science and Technology"/)
+  assert.ok(readBytes('public/assets/must-university-logo.png').length > 200_000)
+  assert.match(html, /data-auth-login/)
+  assert.match(html, /class="auth-gate__admin"[^>]*data-admin-login-open/)
+  assert.match(html, /class="home-review-marquee auth-gate__reviews"/)
+  assert.equal((html.match(/<section class="home-review-marquee\b/g) || []).length, 1)
+  assert.doesNotMatch(html, /<section class="section-selector"[\s\S]*?<section class="home-review-marquee"/)
+  assert.match(html, /data-auth-section="401"/)
+  assert.match(html, /data-auth-section="402"/)
+  assert.match(html, /data-student-switch-section/)
+  assert.match(html, /id="student-sync-avatar"/)
+  assert.match(html, /class="tracker-anonymous-control"[^>]*id="leaderboard-anon-toggle"/)
+  assert.doesNotMatch(html, /data-student-sync-login/)
+  assert.doesNotMatch(html, /id="student-sync-label"/)
+  assert.match(style, /\.auth-gate\s*\{[^}]*display:\s*grid;[^}]*place-items:\s*center;/s)
+  assert.match(style, /\.auth-gate__brand img\s*\{[^}]*object-fit:\s*contain;/s)
+  assert.doesNotMatch(style, /\n\+\s*\n\s*\.auth-gate/)
+  assert.match(style, /body\[data-auth-state\]:not\(\[data-auth-state="ready"\]\) > :not\(\.auth-gate\):not\(\.admin-login-modal\):not\(script\)/)
+  assert.match(style, /body\[data-auth-state="signed-out"\] \[data-auth-panel="signed-out"\]/)
+  assert.match(style, /body\[data-auth-state="needs-section"\] \[data-auth-panel="needs-section"\]/)
+  assert.match(style, /\.admin-login-modal\s*\{[^}]*z-index:\s*10020;/s)
+
+  assert.match(supabaseClient, /select\('anonymous, selected_section, updated_at'\)/)
+  assert.match(supabaseClient, /persistSession:\s*true/)
+  assert.match(mainSource, /async function handleStudentAuthUser\s*\(/)
+  assert.match(mainSource, /async function saveSelectedSection\s*\(/)
+  assert.match(mainSource, /selected_section:\s*section/)
+  assert.match(mainSource, /studentProgressState\.selectedSection \|\| activeAcademicSection/)
+  assert.doesNotMatch(mainSource, /localStorage\.setItem\('selectedAcademicSection'/)
+
+  assert.match(mainSource, /LOCAL_PROGRESS_OWNER_KEY = 'mustHubLocalProgressOwner'/)
+  assert.match(mainSource, /function claimAndMigrateLocalProgress\s*\(/)
+  assert.match(mainSource, /\$\{QUIZ_STORAGE_PREFIX\}::\$\{getProgressStorageOwnerId\(\)\}::\$\{section\}/)
+  assert.match(mainSource, /\$\{TOPIC_COMPLETION_STORAGE_PREFIX\}::\$\{getProgressStorageOwnerId\(\)\}::\$\{section\}/)
+  assert.match(schedule, /window\.location\.replace\('\/#schedule'\)/)
+  assert.match(html, /style\.css\?v=20260719-auth-logo-v3/)
+  assert.match(html, /main\.js\?v=20260719-auth-logo-v3/)
 })
 
 test('topic actions are accessible boxless premium icons and legacy PWA state is cleaned up', () => {
@@ -255,8 +407,8 @@ test('section selector is centered and the wide review remains fully visible', (
   assert.match(style, /\.home-review-screenshot\s*\{[\s\S]*?aspect-ratio:\s*1\.9\s*\/\s*1;[\s\S]*?object-fit:\s*cover;/s)
   assert.match(style, /\.home-review-screenshot--fit\s*\{[^}]*object-fit:\s*contain;[^}]*object-position:\s*left center;/s)
   assert.equal((html.match(/review5\.jpg" class="home-review-screenshot home-review-screenshot--fit"/g) || []).length, 2)
-  assert.match(html, /style\.css\?v=20260716-leaderboard-v1/)
-  assert.match(html, /main\.js\?v=20260716-leaderboard-v1/)
+  assert.match(html, /style\.css\?v=20260719-auth-logo-v3/)
+  assert.match(html, /main\.js\?v=20260719-auth-logo-v3/)
   assert.match(style, /body\[data-site-mode="selector"\] > main > \.site-footer/)
 
   for (const file of ['review1.jpg', 'review2.jpg', 'review3.jpg', 'review4.jpg', 'review5.jpg', 'review6.png', 'review7.png', 'review8.png']) {

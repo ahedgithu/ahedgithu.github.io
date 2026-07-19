@@ -19,65 +19,63 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&display=swap" rel="stylesheet" />
   <meta name="theme-color" content="#315f72" />
-  <link rel="stylesheet" href="/src/style.css?v=20260716-leaderboard-v1" />
+  <link rel="stylesheet" href="/src/style.css?v=20260719-auth-logo-v3" />
 </head>
-<body>
-  <header class="site-header" aria-label="Main navigation">
-    <button class="site-nav__back" type="button" data-select-section="selector" aria-label="Back to main page">
-      Back to main page
-    </button>
-    <div class="tracker-actions">
-      <div class="student-sync" id="student-sync">
-        <button class="student-sync__button" id="student-sync-button" type="button" aria-expanded="false" aria-controls="student-sync-menu" data-student-sync-toggle>
-          <span class="student-sync__dot" aria-hidden="true"></span>
-          <svg class="student-sync__user-icon" viewBox="0 0 24 24" aria-hidden="true" width="16" height="16" style="display: none; fill: currentColor;"><circle cx="12" cy="8" r="3.5"/><path d="M5.5 20c.5-4 2.7-6 6.5-6s6 2 6.5 6"/></svg>
-          <img class="student-sync__avatar" id="student-sync-avatar" alt="" hidden>
-          <span class="student-sync__initials" id="student-sync-initials" aria-hidden="true" hidden></span>
-          <span id="student-sync-label">Login</span>
-        </button>
-        <div class="student-sync__menu" id="student-sync-menu" hidden>
-          <div class="student-sync__identity">
-            <strong id="student-sync-email">Google sync is off</strong>
-            <p id="student-sync-status">Sign in to keep progress across devices.</p>
-          </div>
-          <button class="student-sync__compact student-sync__compact--google" type="button" data-student-sync-login aria-label="Sign in with Google">
+<body data-auth-state="checking">
+  <section class="auth-gate" id="auth-gate" aria-live="polite" aria-busy="true">
+    <div class="auth-gate__layout">
+      <div class="auth-gate__card">
+      <div class="auth-gate__brand">
+        <img src="/assets/must-university-logo.png" alt="Misr University for Science and Technology" width="1280" height="1280" />
+      </div>
+
+      <div class="auth-gate__panel" data-auth-panel="checking">
+        <span class="auth-gate__spinner" aria-hidden="true"></span>
+        <p class="eyebrow">MUST Hub</p>
+        <h1>Checking your account</h1>
+        <p>Restoring your secure Google session...</p>
+      </div>
+
+      <div class="auth-gate__panel" data-auth-panel="signed-out">
+        <p class="eyebrow">MUST Hub</p>
+        <h1>Sign in to continue</h1>
+        <p>Your section and study progress stay connected to your Google account.</p>
+        <div class="auth-gate__actions">
+          <button class="auth-gate__google" type="button" data-auth-login>
             <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285f4" d="M21.6 12.2c0-.7-.1-1.4-.2-2H12v3.9h5.4a4.6 4.6 0 0 1-2 3v2.5h3.2c1.9-1.8 3-4.3 3-7.4Z"/><path fill="#34a853" d="M12 22c2.7 0 5-.9 6.6-2.4l-3.2-2.5c-.9.6-2 1-3.4 1a5.8 5.8 0 0 1-5.5-4H3.2v2.6A10 10 0 0 0 12 22Z"/><path fill="#fbbc05" d="M6.5 14.1a6 6 0 0 1 0-4.2V7.3H3.2a10 10 0 0 0 0 9.4l3.3-2.6Z"/><path fill="#ea4335" d="M12 5.9c1.6 0 3 .5 4.1 1.6l3.1-3A10 10 0 0 0 3.2 7.3l3.3 2.6a5.8 5.8 0 0 1 5.5-4Z"/></svg>
-            <span>Google</span>
+            <span>Continue with Google</span>
           </button>
-          <button class="student-sync__compact student-sync__compact--logout" type="button" data-student-sync-logout aria-label="Sign out of Google">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 5H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h4M14 8l4 4-4 4M18 12H9"/></svg>
-            <span>Sign out</span>
-          </button>
-          <button class="student-sync__compact student-sync__compact--anon" type="button" id="leaderboard-anon-toggle" aria-label="Toggle anonymous mode on leaderboard">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19M1 1l22 22"/><path d="M14.12 14.12a3 3 0 1 1-4.24-4.24"/></svg>
-            <span id="leaderboard-anon-label">Go anonymous</span>
-          </button>
-          <button class="student-sync__compact student-sync__compact--admin" type="button" data-admin-login-open aria-label="Switch to admin mode">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5.5 20c.5-4 2.7-6 6.5-6s6 2 6.5 6"/></svg>
-            <span>Admin</span>
+          <button class="auth-gate__admin" type="button" data-admin-login-open>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 5 6v5c0 4.6 2.8 8.4 7 10 4.2-1.6 7-5.4 7-10V6l-7-3Z"/><path d="M9 12.5 11 14l4-4"/></svg>
+            <span>Admin login</span>
           </button>
         </div>
       </div>
-    </div>
-  </header>
 
-  <main>
-    <section class="section-selector" id="section-selector" aria-labelledby="section-selector-title">
-      <div class="section-selector__header">
-        <p class="eyebrow">Clinical Hub</p>
-        <h1 id="section-selector-title">Choose your section</h1>
+      <div class="auth-gate__panel" data-auth-panel="needs-section">
+        <p class="eyebrow">One last step</p>
+        <h1 id="auth-section-title">Choose your section</h1>
+        <p id="auth-section-copy">We will save this choice to your account and open it automatically next time.</p>
+        <div class="auth-gate__sections" aria-labelledby="auth-section-title">
+          <button type="button" data-auth-section="401"><strong>401</strong><span>Clinical semester 401</span></button>
+          <button type="button" data-auth-section="402"><strong>402</strong><span>Clinical semester 402</span></button>
+        </div>
+        <button class="auth-gate__cancel" type="button" data-auth-section-cancel hidden>Cancel</button>
       </div>
 
-      <section class="home-review-marquee" aria-label="Student reviews">
+      <p class="auth-gate__status" id="auth-gate-status" role="alert" hidden></p>
+      </div>
+
+      <section class="home-review-marquee auth-gate__reviews" aria-label="Student WhatsApp reviews">
         <div class="home-review-marquee__track">
-          <img src="/assets/reviews/review1.jpg" class="home-review-screenshot" alt="Student review screenshot" />
-          <img src="/assets/reviews/review2.jpg" class="home-review-screenshot" alt="Student review screenshot" />
-          <img src="/assets/reviews/review3.jpg" class="home-review-screenshot" alt="Student review screenshot" />
-          <img src="/assets/reviews/review4.jpg" class="home-review-screenshot" alt="Student review screenshot" />
-          <img src="/assets/reviews/review5.jpg" class="home-review-screenshot home-review-screenshot--fit" alt="Student review screenshot" />
-          <img src="/assets/reviews/review6.png" class="home-review-screenshot" alt="Student review screenshot" />
-          <img src="/assets/reviews/review7.png" class="home-review-screenshot" alt="Student review screenshot" />
-          <img src="/assets/reviews/review8.png" class="home-review-screenshot" alt="Student review screenshot" />
+          <img src="/assets/reviews/review1.jpg" class="home-review-screenshot" alt="Student WhatsApp review screenshot" />
+          <img src="/assets/reviews/review2.jpg" class="home-review-screenshot" alt="Student WhatsApp review screenshot" />
+          <img src="/assets/reviews/review3.jpg" class="home-review-screenshot" alt="Student WhatsApp review screenshot" />
+          <img src="/assets/reviews/review4.jpg" class="home-review-screenshot" alt="Student WhatsApp review screenshot" />
+          <img src="/assets/reviews/review5.jpg" class="home-review-screenshot home-review-screenshot--fit" alt="Student WhatsApp review screenshot" />
+          <img src="/assets/reviews/review6.png" class="home-review-screenshot" alt="Student WhatsApp review screenshot" />
+          <img src="/assets/reviews/review7.png" class="home-review-screenshot" alt="Student WhatsApp review screenshot" />
+          <img src="/assets/reviews/review8.png" class="home-review-screenshot" alt="Student WhatsApp review screenshot" />
           <img src="/assets/reviews/review1.jpg" class="home-review-screenshot" alt="" aria-hidden="true" />
           <img src="/assets/reviews/review2.jpg" class="home-review-screenshot" alt="" aria-hidden="true" />
           <img src="/assets/reviews/review3.jpg" class="home-review-screenshot" alt="" aria-hidden="true" />
@@ -88,6 +86,48 @@
           <img src="/assets/reviews/review8.png" class="home-review-screenshot" alt="" aria-hidden="true" />
         </div>
       </section>
+    </div>
+  </section>
+
+  <header class="site-header" aria-label="Main navigation">
+    <button class="site-nav__back" type="button" data-select-section="selector" aria-label="Back to main page">
+      Back to main page
+    </button>
+    <div class="tracker-actions">
+      <div class="student-sync" id="student-sync">
+        <button class="student-sync__button" id="student-sync-button" type="button" aria-expanded="false" aria-controls="student-sync-menu" data-student-sync-toggle>
+          <img class="student-sync__avatar" id="student-sync-avatar" alt="" hidden>
+          <span class="student-sync__initials" id="student-sync-initials" aria-hidden="true" hidden></span>
+          <span class="sr-only">Open Google profile menu</span>
+        </button>
+        <div class="student-sync__menu" id="student-sync-menu" hidden>
+          <div class="student-sync__identity">
+            <strong id="student-sync-email">Google sync is off</strong>
+            <p id="student-sync-status">Sign in to keep progress across devices.</p>
+          </div>
+          <button class="student-sync__compact student-sync__compact--logout" type="button" data-student-sync-logout aria-label="Sign out of Google">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 5H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h4M14 8l4 4-4 4M18 12H9"/></svg>
+            <span>Sign out</span>
+          </button>
+          <button class="student-sync__compact student-sync__compact--section" type="button" data-student-switch-section aria-label="Switch academic section">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h11l-3-3M17 17H6l3 3M18 7l-3 3M6 17l3-3"/></svg>
+            <span>Switch section</span>
+          </button>
+        </div>
+      </div>
+      <button class="tracker-anonymous-control" type="button" id="leaderboard-anon-toggle" aria-label="Toggle anonymous mode on leaderboard">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19M1 1l22 22"/><path d="M14.12 14.12a3 3 0 1 1-4.24-4.24"/></svg>
+        <span id="leaderboard-anon-label">Go anonymous</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="section-selector" id="section-selector" aria-labelledby="section-selector-title">
+      <div class="section-selector__header">
+        <p class="eyebrow">Clinical Hub</p>
+        <h1 id="section-selector-title">Choose your section</h1>
+      </div>
 
       <div class="section-selector__grid" aria-label="Website sections">
         <button class="section-choice section-choice--primary" type="button" data-select-section="401">
@@ -1105,6 +1145,8 @@
 
   <script defer src="/src/mcqs.js?v=20260708-past-exams-v4"></script>
   <script defer src="/src/sur1-kellawi-mcqs.js?v=20260716-kellawi-mobile-v5"></script>
+  <script defer src="/src/sur1-past-exam-mcqs.js?v=20260719-sur1-past-exams-v1"></script>
+  <script defer src="/src/sur1-matching-questions.js?v=20260719-sur1-matching-v1"></script>
   <script type="importmap">
     {
       "imports": {
@@ -1113,7 +1155,7 @@
       }
     }
   </script>
-  <script type="module" src="/src/main.js?v=20260716-leaderboard-v1"></script>
+  <script type="module" src="/src/main.js?v=20260719-auth-logo-v3"></script>
   <script defer src="/pwa.js?v=20260712-pwa-cleanup-v1"></script>
 </body>
 </html>

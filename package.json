@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "build:sur1-past-exams": "node scripts/build-sur1-past-exam-mcqs.mjs",
+    "build:sur1-matching": "node scripts/build-sur1-matching-questions.mjs",
     "export:tracker-seed": "node scripts/export-tracker-seed.mjs",
     "test": "node --test tests/*.test.mjs",
     "build": "vite build",

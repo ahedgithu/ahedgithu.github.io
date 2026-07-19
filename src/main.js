@@ -760,6 +760,7 @@ const QUIZ_STORAGE_PREFIX = 'quizState'
 const LEGACY_QUIZ_STORAGE_PREFIX = 'mcq-progress-'
 const TOPIC_COMPLETION_STORAGE_PREFIX = 'topicCompletion'
 const LEGACY_TOPIC_COMPLETION_STORAGE_PREFIX = 'med401-topic-progress-v1::'
+const LOCAL_PROGRESS_OWNER_KEY = 'mustHubLocalProgressOwner'
 const TOPIC_UPDATE_STORAGE_KEY_PREFIX = 'tracker-seen-topic-updates-v1'
 let TOPIC_UPDATE_STORAGE_KEY = `${TOPIC_UPDATE_STORAGE_KEY_PREFIX}::401`
 const UNIVERSITY_WEEK_START_DAY = 0 // Sunday
@@ -799,6 +800,9 @@ const studentProgressState = {
   user: null,
   ready: false,
   loading: false,
+  authRequestId: 0,
+  selectedSection: '',
+  sectionSelectionMode: 'onboarding',
   topicRows: new Map(),
   quizRows: new Map(),
   lastError: ''
@@ -975,11 +979,15 @@ const scheduleTitle = document.getElementById('schedule-title')
 const studentSync = document.getElementById('student-sync')
 const studentSyncButton = document.getElementById('student-sync-button')
 const studentSyncMenu = document.getElementById('student-sync-menu')
-const studentSyncLabel = document.getElementById('student-sync-label')
 const studentSyncAvatar = document.getElementById('student-sync-avatar')
 const studentSyncInitials = document.getElementById('student-sync-initials')
 const studentSyncStatus = document.getElementById('student-sync-status')
 const studentSyncEmail = document.getElementById('student-sync-email')
+const authGate = document.getElementById('auth-gate')
+const authGateStatus = document.getElementById('auth-gate-status')
+const authSectionTitle = document.getElementById('auth-section-title')
+const authSectionCopy = document.getElementById('auth-section-copy')
+const authSectionCancel = document.querySelector('[data-auth-section-cancel]')
 const trackerAdminToolbar = document.getElementById('tracker-admin-toolbar')
 const trackerAdminEmail = document.getElementById('tracker-admin-email')
 const trackerAdminSubject = document.getElementById('tracker-admin-subject')
@@ -993,6 +1001,7 @@ const adminLoginStatus = document.getElementById('tracker-admin-login-status')
 const trackerAdminEditPanel = document.getElementById('tracker-admin-edit-panel')
 
 const initialParams = new URLSearchParams(window.location.search)
+let initialAdminLoginHandled = false
 subjects = subjects.map((subject) => ({
   ...subject,
   clinicalTopics: Array.isArray(subject.clinicalTopics) ? subject.clinicalTopics : []
@@ -1266,7 +1275,7 @@ function closeAdminEditor() {
 
 function renderTrackerAdminUi() {
   const enabled = isTrackerAdmin()
-  const adminSwitch = document.querySelector('[data-admin-login-open]')
+  const adminSwitch = document.querySelector('[data-tracker-admin-toggle]')
   document.body.classList.toggle('tracker-admin-mode', enabled)
   adminSwitch?.classList.toggle('is-active', enabled)
   if (adminSwitch) {
@@ -1438,14 +1447,58 @@ function getStudentDisplayName() {
   return metadata.full_name || metadata.name || studentProgressState.user?.email || 'Student'
 }
 
+function getProgressStorageOwnerId() {
+  return studentProgressState.user?.id || ''
+}
+
+function canUseLegacyLocalProgress() {
+  const userId = getProgressStorageOwnerId()
+  if (!userId) return false
+  try {
+    return localStorage.getItem(LOCAL_PROGRESS_OWNER_KEY) === userId
+  } catch {
+    return false
+  }
+}
+
+function claimAndMigrateLocalProgress(userId) {
+  if (!userId) return
+  try {
+    const existingOwner = localStorage.getItem(LOCAL_PROGRESS_OWNER_KEY)
+    if (existingOwner && existingOwner !== userId) return
+    if (!existingOwner) localStorage.setItem(LOCAL_PROGRESS_OWNER_KEY, userId)
+
+    const keys = Array.from({ length: localStorage.length }, (_, index) => localStorage.key(index)).filter(Boolean)
+    keys.forEach((storageKey) => {
+      const match = storageKey.match(/^(topicCompletion|quizState)::(401|402)::(.+)$/)
+      if (!match) return
+      const scopedKey = `${match[1]}::${userId}::${match[2]}::${match[3]}`
+      if (localStorage.getItem(scopedKey) === null) {
+        localStorage.setItem(scopedKey, localStorage.getItem(storageKey))
+      }
+    })
+  } catch {
+    // Cloud progress remains available when browser storage is blocked.
+  }
+}
+
+function getUnscopedTopicCompletionKey(subjectCode, topicLabel, section = activeAcademicSection) {
+  return `${TOPIC_COMPLETION_STORAGE_PREFIX}::${section}::${encodeURIComponent(subjectCode)}::${encodeURIComponent(topicLabel)}`
+}
+
+function getUnscopedQuizStorageKey(topicLabel, sourceId = 'current', section = activeAcademicSection) {
+  return `${QUIZ_STORAGE_PREFIX}::${section}::${encodeURIComponent(topicLabel)}::${encodeURIComponent(sourceId)}`
+}
+
 function getLocalTopicCompletionState(subjectCode, topicLabel, section = activeAcademicSection) {
   const emptyState = { studied: false, mcqs: false }
   const currentSection = activeAcademicSection
-  const storageKey = `${TOPIC_COMPLETION_STORAGE_PREFIX}::${section}::${encodeURIComponent(subjectCode)}::${encodeURIComponent(topicLabel)}`
+  const storageKey = getTopicCompletionKey(subjectCode, topicLabel, section)
 
   try {
     const savedRaw = localStorage.getItem(storageKey)
-      || (section === '401' ? localStorage.getItem(getLegacyTopicCompletionKey(subjectCode, topicLabel)) : null)
+      || (canUseLegacyLocalProgress() ? localStorage.getItem(getUnscopedTopicCompletionKey(subjectCode, topicLabel, section)) : null)
+      || (canUseLegacyLocalProgress() && section === '401' ? localStorage.getItem(getLegacyTopicCompletionKey(subjectCode, topicLabel)) : null)
     const savedState = JSON.parse(savedRaw || '{}')
     return {
       ...emptyState,
@@ -1459,11 +1512,12 @@ function getLocalTopicCompletionState(subjectCode, topicLabel, section = activeA
 }
 
 function getLocalQuizState(topicLabel, sourceId = 'current', section = activeAcademicSection) {
-  const storageKey = `${QUIZ_STORAGE_PREFIX}::${section}::${encodeURIComponent(topicLabel)}::${encodeURIComponent(sourceId)}`
+  const storageKey = getQuizStorageKey(topicLabel, sourceId, section)
 
   try {
     const savedRaw = localStorage.getItem(storageKey)
-      || (section === '401' ? localStorage.getItem(getLegacyQuizStorageKey(topicLabel, sourceId)) : null)
+      || (canUseLegacyLocalProgress() ? localStorage.getItem(getUnscopedQuizStorageKey(topicLabel, sourceId, section)) : null)
+      || (canUseLegacyLocalProgress() && section === '401' ? localStorage.getItem(getLegacyQuizStorageKey(topicLabel, sourceId)) : null)
     return JSON.parse(savedRaw || 'null')
   } catch {
     if (section === activeAcademicSection) localStorage.removeItem(getQuizStorageKey(topicLabel, sourceId))
@@ -1491,13 +1545,11 @@ function renderStudentSyncUi() {
   const signedIn = !!studentProgressState.user
   studentSync.classList.toggle('is-signed-in', signedIn)
   studentSync.classList.toggle('is-loading', studentProgressState.loading)
-  studentSyncButton?.classList.toggle('is-login', !signedIn)
-
-  if (studentSyncLabel) {
-    studentSyncLabel.textContent = signedIn ? '' : 'Login'
-    if (signedIn) studentSyncLabel.setAttribute('hidden', '')
-    else studentSyncLabel.removeAttribute('hidden')
-  }
+  if (studentSyncButton) studentSyncButton.hidden = !signedIn
+  const logoutButton = studentSync.querySelector('[data-student-sync-logout]')
+  const switchSectionButton = studentSync.querySelector('[data-student-switch-section]')
+  if (logoutButton) logoutButton.hidden = !signedIn
+  if (switchSectionButton) switchSectionButton.hidden = !signedIn
 
   if (studentSyncAvatar) {
     const avatarUrl = signedIn ? getSafeExternalUrl(studentProgressState.user?.user_metadata?.avatar_url || studentProgressState.user?.user_metadata?.picture || '') : ''
@@ -1540,7 +1592,7 @@ function renderStudentSyncUi() {
       studentSyncStatus.hidden = true
     } else {
       studentSyncStatus.hidden = false
-      studentSyncStatus.textContent = 'Sign in to keep MCQ progress across devices.'
+      studentSyncStatus.textContent = 'Google login is required to use MUST Hub.'
     }
   }
 }
@@ -1822,11 +1874,12 @@ async function syncLocalProgressToCloud(section = activeAcademicSection) {
     }
   }
 
-  const quizPrefix = `${QUIZ_STORAGE_PREFIX}::${section}::`
+  const userId = getProgressStorageOwnerId()
+  const quizPrefix = `${QUIZ_STORAGE_PREFIX}::${userId}::${section}::`
   for (let index = 0; index < localStorage.length; index += 1) {
     const storageKey = localStorage.key(index)
     if (!storageKey?.startsWith(quizPrefix)) continue
-    const [, , encodedTopicLabel, encodedSourceId] = storageKey.split('::')
+    const [, , , encodedTopicLabel, encodedSourceId] = storageKey.split('::')
     const topicLabel = decodeURIComponent(encodedTopicLabel || '')
     const sourceId = decodeURIComponent(encodedSourceId || 'current')
     if (!topicLabel) continue
@@ -2152,12 +2205,6 @@ function showAcademicSection(sectionId, options = {}) {
   refreshRemoteTrackerData()
   loadStudentProgress(activeAcademicSection)
 
-  try {
-    localStorage.setItem('selectedAcademicSection', activeAcademicSection)
-  } catch {
-    // Section choice should not depend on browser storage.
-  }
-
   const targetHash = options.hash || window.location.hash || '#tracker'
   const url = new URL(window.location.href)
   url.searchParams.set('section', activeAcademicSection)
@@ -2172,11 +2219,6 @@ function showAcademicSection(sectionId, options = {}) {
 function showToolsSection(options = {}) {
   activeSiteMode = 'tools'
   syncModeToBody()
-  try {
-    localStorage.setItem('selectedAcademicSection', 'tools')
-  } catch {
-    // Section choice should not depend on browser storage.
-  }
   const url = new URL(window.location.href)
   url.searchParams.set('section', 'tools')
   url.hash = 'history'
@@ -2190,11 +2232,6 @@ function showToolsSection(options = {}) {
 function showWorkSection(options = {}) {
   activeSiteMode = 'work'
   syncModeToBody()
-  try {
-    localStorage.setItem('selectedAcademicSection', 'work')
-  } catch {
-    // Section choice should not depend on browser storage.
-  }
   const url = new URL(window.location.href)
   url.searchParams.set('section', 'work')
   url.hash = 'work'
@@ -2234,6 +2271,7 @@ function selectSiteSection(sectionId, options = {}) {
 }
 
 function handleLegacyHashRoute() {
+  if (document.body.dataset.authState !== 'ready') return
   const hash = window.location.hash.replace('#', '')
   if (hash === 'history' && activeSiteMode !== 'tools') {
     showToolsSection({ scroll: false, historyMode: 'replace' })
@@ -2243,11 +2281,12 @@ function handleLegacyHashRoute() {
 }
 
 function restoreSiteModeFromLocation() {
+  if (document.body.dataset.authState !== 'ready') return
   const params = new URLSearchParams(window.location.search)
   const hash = window.location.hash.replace('#', '')
   const section = params.get('section')
   if (section === '401' || section === '402') {
-    showAcademicSection(section, {
+    showAcademicSection(studentProgressState.selectedSection || activeAcademicSection, {
       subjectCode: params.get('subject') || '',
       hash: hash ? `#${hash}` : '#tracker',
       scroll: false,
@@ -2345,8 +2384,8 @@ function saveSeenTopicUpdates(seenUpdates) {
   }
 }
 
-function getTopicCompletionKey(subjectCode, topicLabel) {
-  return `${TOPIC_COMPLETION_STORAGE_PREFIX}::${activeAcademicSection}::${encodeURIComponent(subjectCode)}::${encodeURIComponent(topicLabel)}`
+function getTopicCompletionKey(subjectCode, topicLabel, section = activeAcademicSection) {
+  return `${TOPIC_COMPLETION_STORAGE_PREFIX}::${getProgressStorageOwnerId()}::${section}::${encodeURIComponent(subjectCode)}::${encodeURIComponent(topicLabel)}`
 }
 
 function hasCompletedQuizProgress(topic) {
@@ -2357,7 +2396,7 @@ function hasCompletedQuizProgress(topic) {
   }
 
   for (const label of topicLabels) {
-    const sectionPrefix = `${QUIZ_STORAGE_PREFIX}::${activeAcademicSection}::${encodeURIComponent(label)}::`
+    const sectionPrefix = `${QUIZ_STORAGE_PREFIX}::${getProgressStorageOwnerId()}::${activeAcademicSection}::${encodeURIComponent(label)}::`
     for (let index = 0; index < localStorage.length; index += 1) {
       const key = localStorage.key(index)
       if (!key?.startsWith(sectionPrefix)) continue
@@ -2410,7 +2449,8 @@ function getTopicCompletionState(subjectCode, topicLabel) {
 
   try {
     const savedRaw = localStorage.getItem(getTopicCompletionKey(subjectCode, topicLabel))
-      || (activeAcademicSection === '401' ? localStorage.getItem(getLegacyTopicCompletionKey(subjectCode, topicLabel)) : null)
+      || (canUseLegacyLocalProgress() ? localStorage.getItem(getUnscopedTopicCompletionKey(subjectCode, topicLabel)) : null)
+      || (canUseLegacyLocalProgress() && activeAcademicSection === '401' ? localStorage.getItem(getLegacyTopicCompletionKey(subjectCode, topicLabel)) : null)
     const subject = subjects.find((item) => item.code === subjectCode)
     const topic = [...(subject?.topics || []), ...(subject?.clinicalTopics || [])].find((item) => item.label === topicLabel)
     const aliasStates = (topic?.progressAliases || []).map((alias) => {
@@ -3243,8 +3283,8 @@ function ensureQuizModal() {
   return modal
 }
 
-function getQuizStorageKey(topicLabel, sourceId = quizState.sourceId || 'current') {
-  return `${QUIZ_STORAGE_PREFIX}::${activeAcademicSection}::${encodeURIComponent(topicLabel)}::${encodeURIComponent(sourceId)}`
+function getQuizStorageKey(topicLabel, sourceId = quizState.sourceId || 'current', section = activeAcademicSection) {
+  return `${QUIZ_STORAGE_PREFIX}::${getProgressStorageOwnerId()}::${section}::${encodeURIComponent(topicLabel)}::${encodeURIComponent(sourceId)}`
 }
 
 function getLegacyQuizStorageKey(topicLabel, sourceId = quizState.sourceId || 'current') {
@@ -3262,7 +3302,8 @@ function getSavedQuizState(topicLabel, sourceId = 'current') {
 
   try {
     const savedRaw = localStorage.getItem(getQuizStorageKey(topicLabel, sourceId))
-      || (activeAcademicSection === '401' ? localStorage.getItem(getLegacyQuizStorageKey(topicLabel, sourceId)) : null)
+      || (canUseLegacyLocalProgress() ? localStorage.getItem(getUnscopedQuizStorageKey(topicLabel, sourceId)) : null)
+      || (canUseLegacyLocalProgress() && activeAcademicSection === '401' ? localStorage.getItem(getLegacyQuizStorageKey(topicLabel, sourceId)) : null)
     return JSON.parse(savedRaw || 'null')
   } catch {
     localStorage.removeItem(getQuizStorageKey(topicLabel, sourceId))
@@ -3957,13 +3998,15 @@ function renderQuizActions() {
   if (quizState.completed) {
     const collectionSource = getCurrentCollectionSource()
     const nextPart = getNextCollectionPart()
+    const groupNoun = collectionSource?.collection?.groupNoun || 'organ'
+    const collectionLabel = collectionSource?.label || 'collection'
     const wrongReviewCount = collectionSource
       ? getCollectionWrongQuestionIds(quizState.topicLabel, collectionSource).length
       : 0
 
     actions.innerHTML = `
-      ${quizState.groupId ? '<button class="quiz-action" type="button" data-quiz-back-group>Back to organ</button>' : ''}
-      ${collectionSource && !quizState.groupId ? '<button class="quiz-action" type="button" data-quiz-back-collection>Back to Kellawi</button>' : ''}
+      ${quizState.groupId ? `<button class="quiz-action" type="button" data-quiz-back-group>Back to ${escapeHtml(groupNoun)}</button>` : ''}
+      ${collectionSource && !quizState.groupId ? `<button class="quiz-action" type="button" data-quiz-back-collection>Back to ${escapeHtml(collectionLabel)}</button>` : ''}
       ${wrongReviewCount && quizState.mode !== 'wrong-review' ? `<button class="quiz-action" type="button" data-quiz-review-wrong>Wrong answers (${wrongReviewCount})</button>` : ''}
       <button class="quiz-action" type="button" data-quiz-retake>Retake quiz</button>
       ${nextPart ? '<button class="quiz-action quiz-action--primary" type="button" data-quiz-next-part>Next part</button>' : ''}
@@ -3987,6 +4030,11 @@ function renderQuizMeta() {
   const quiz = getCurrentQuiz()
   const score = getQuizScore()
   const { answeredCount, percent, total } = getQuizProgressStats()
+  const collectionSource = getCurrentCollectionSource()
+  const collectionLabel = collectionSource?.label || 'MCQs'
+  const collectionLocation = quizState.groupLabel
+    ? `${collectionLabel} · ${quizState.groupLabel}`
+    : collectionLabel
 
   if (title) {
     title.textContent = quizState.parentSourceId
@@ -4007,15 +4055,14 @@ function renderQuizMeta() {
   if (quizState.completed) {
     const scorePercent = quiz.length ? Math.round((score / quiz.length) * 100) : 0
     if (meta) {
-      const location = quizState.groupLabel ? `Kellawi MCQs · ${quizState.groupLabel}` : 'Kellawi MCQs'
-      meta.textContent = `${quizState.parentSourceId ? location + ' · ' : ''}Final score ${score} / ${quiz.length} (${scorePercent}%)`
+      meta.textContent = `${quizState.parentSourceId ? collectionLocation + ' · ' : ''}Final score ${score} / ${quiz.length} (${scorePercent}%)`
     }
     return
   }
 
   const missedCount = quizState.missingQuestionIds?.length || 0
   if (meta) {
-    const location = quizState.groupLabel ? `Kellawi MCQs · ${quizState.groupLabel} · ` : ''
+    const location = quizState.parentSourceId ? `${collectionLocation} · ` : ''
     meta.textContent = missedCount
       ? `${location}${missedCount} unanswered question${missedCount === 1 ? '' : 's'}`
       : `${location}${answeredCount} / ${quiz.length} answered`
@@ -4359,9 +4406,11 @@ function renderQuizCollectionPicker(topicLabel, sourceId, event = null) {
   const collectionProgress = getCollectionProgressSummary(topicLabel, source)
   const latestAttempt = getLatestCollectionAttempt(topicLabel, source)
   const wrongCount = getCollectionWrongQuestionIds(topicLabel, source).length
+  const collectionPrompt = source.collection.prompt || 'Choose an organ or a revision mode.'
+  const groupEyebrow = source.collection.groupEyebrow || 'Organ bank'
   const { body } = prepareQuizPicker({
     titleText: source.label,
-    metaText: 'Choose an organ or a revision mode.',
+    metaText: collectionPrompt,
     progress: collectionProgress,
     event
   })
@@ -4386,7 +4435,7 @@ function renderQuizCollectionPicker(topicLabel, sourceId, event = null) {
         data-quiz-group="${escapeHtml(group.id)}"
         data-quiz-collection-source="${escapeHtml(source.id)}"
         data-quiz-topic="${escapeHtml(topicLabel)}">
-        <span class="quiz-collection-option__eyebrow">Organ bank</span>
+        <span class="quiz-collection-option__eyebrow">${escapeHtml(groupEyebrow)}</span>
         <strong>${escapeHtml(group.label)}</strong>
         <span>${group.questionCount} questions · ${group.parts.length} parts</span>
         ${renderCollectionCardStatus(summary)}
@@ -4514,7 +4563,7 @@ function renderMixedPracticePicker(topicLabel, sourceId, event = null) {
 
   const { body } = prepareQuizPicker({
     titleText: 'Mixed Practice',
-    metaText: 'Random questions from all five organs.',
+    metaText: source.collection.mixedMeta || 'Random questions from all five organs.',
     event
   })
 
@@ -6358,69 +6407,222 @@ function renderNewsFilters() {
   }
 }
 
+function setAuthGateState(state, message = '') {
+  document.body.dataset.authState = state
+  if (authGate) authGate.setAttribute('aria-busy', String(state === 'checking'))
+  if (authGateStatus) {
+    authGateStatus.textContent = message
+    authGateStatus.hidden = !message
+  }
+}
+
+function setSectionSelectionMode(mode = 'onboarding') {
+  studentProgressState.sectionSelectionMode = mode
+  const switching = mode === 'switch'
+  if (authSectionTitle) authSectionTitle.textContent = switching ? 'Switch your section' : 'Choose your section'
+  if (authSectionCopy) {
+    authSectionCopy.textContent = switching
+      ? 'Your new choice will be saved to your Google account.'
+      : 'We will save this choice to your account and open it automatically next time.'
+  }
+  if (authSectionCancel) authSectionCancel.hidden = !switching
+}
+
+function isSavedAcademicSection(section) {
+  return section === '401' || section === '402'
+}
+
+function routeAuthenticatedUser(section, options = {}) {
+  const preserveDestination = options.preserveDestination !== false
+  const hash = preserveDestination ? window.location.hash : ''
+  if (hash === '#history') {
+    showToolsSection({ scroll: false, historyMode: 'replace' })
+  } else if (hash === '#work') {
+    showWorkSection({ scroll: false, historyMode: 'replace' })
+  } else {
+    const safeHash = ['#tracker', '#news', '#schedule', '#leaderboard'].includes(hash) ? hash : '#tracker'
+    showAcademicSection(section, {
+      subjectCode: preserveDestination ? initialParams.get('subject') || '' : '',
+      hash: safeHash,
+      scroll: false,
+      historyMode: 'replace'
+    })
+  }
+  setAuthGateState('ready')
+  if (initialParams.get('admin') === 'login' && !initialAdminLoginHandled) {
+    initialAdminLoginHandled = true
+    openAdminLogin()
+  }
+}
+
+function clearAuthenticatedProgressState() {
+  studentProgressState.topicRows.clear()
+  studentProgressState.quizRows.clear()
+  studentProgressState.ready = false
+  studentProgressState.loading = false
+  studentProgressState.selectedSection = ''
+  leaderboardState.preferences = { anonymous: true, selected_section: null }
+  invalidateLeaderboard()
+}
+
+async function handleStudentAuthUser(user) {
+  const requestId = ++studentProgressState.authRequestId
+  studentProgressState.user = user
+  studentProgressState.lastError = ''
+  clearAuthenticatedProgressState()
+  renderStudentSyncUi()
+
+  if (!user) {
+    setStudentSyncMenu(false)
+    setAuthGateState('signed-out')
+    updateGlobalProgress()
+    refreshTrackerAdminProfile(null)
+    return
+  }
+
+  setAuthGateState('checking')
+  claimAndMigrateLocalProgress(user.id)
+
+  try {
+    const preference = await fetchUserPreference()
+    if (requestId !== studentProgressState.authRequestId) return
+
+    leaderboardState.preferences = preference || { anonymous: true, selected_section: null }
+    const selectedSection = preference?.selected_section || ''
+    refreshTrackerAdminProfile(user)
+
+    if (!isSavedAcademicSection(selectedSection)) {
+      setSectionSelectionMode('onboarding')
+      setAuthGateState('needs-section')
+      return
+    }
+
+    studentProgressState.selectedSection = selectedSection
+    routeAuthenticatedUser(selectedSection)
+  } catch (error) {
+    if (requestId !== studentProgressState.authRequestId) return
+    studentProgressState.lastError = error.message
+    setSectionSelectionMode('onboarding')
+    setAuthGateState('needs-section', 'We could not load your saved section. Choose it again to finish account setup.')
+    renderStudentSyncUi()
+  }
+}
+
+async function saveSelectedSection(section, options = {}) {
+  if (!studentProgressState.user || !isSavedAcademicSection(section)) return false
+
+  const sectionButtons = [...document.querySelectorAll('[data-auth-section]')]
+  sectionButtons.forEach((button) => { button.disabled = true })
+  if (options.showGate !== false) setAuthGateState('checking')
+
+  try {
+    const preference = await upsertUserPreference({
+      user_id: studentProgressState.user.id,
+      anonymous: leaderboardState.preferences.anonymous !== false,
+      selected_section: section
+    })
+    leaderboardState.preferences = preference
+    studentProgressState.selectedSection = section
+    studentProgressState.lastError = ''
+    routeAuthenticatedUser(section, { preserveDestination: options.preserveDestination === true })
+    setStudentSyncMenu(false)
+    return true
+  } catch (error) {
+    studentProgressState.lastError = error.message
+    if (options.showGate === false) {
+      showGlobalToast('Section was not changed. Please try again.')
+    } else {
+      setAuthGateState('needs-section', 'Your section was not saved. Check your connection and try again.')
+    }
+    renderStudentSyncUi()
+    return false
+  } finally {
+    sectionButtons.forEach((button) => { button.disabled = false })
+  }
+}
+
+async function requestSiteSection(sectionId, options = {}) {
+  if (!isSavedAcademicSection(sectionId)) {
+    selectSiteSection(sectionId, options)
+    return
+  }
+
+  if (sectionId === studentProgressState.selectedSection) {
+    selectSiteSection(sectionId, options)
+    return
+  }
+
+  const confirmed = window.confirm(`Switch your saved section to ${sectionId}?`)
+  if (!confirmed) return
+  await saveSelectedSection(sectionId, { showGate: false, preserveDestination: false })
+}
+
+function openSectionSwitcher() {
+  if (!studentProgressState.user) return
+  setSectionSelectionMode('switch')
+  setAuthGateState('needs-section')
+  setStudentSyncMenu(false)
+}
+
+function cancelSectionSwitcher() {
+  if (studentProgressState.sectionSelectionMode !== 'switch') return
+  setAuthGateState('ready')
+}
+
 function initStudentSync() {
   if (!studentSync || !isSupabaseConfigured()) {
     renderStudentSyncUi()
+    setAuthGateState('signed-out', 'Google login is temporarily unavailable.')
     return
   }
 
   getCurrentUser()
-    .then((user) => {
-      studentProgressState.user = user
-      renderStudentSyncUi()
-      if (user) loadStudentProgress(activeAcademicSection)
-      else {
-        updateGlobalProgress()
-        refreshLeaderboardIfActive(true)
-      }
-      refreshTrackerAdminProfile(user)
-    })
+    .then(handleStudentAuthUser)
     .catch((error) => {
       studentProgressState.lastError = error.message
       renderStudentSyncUi()
+      setAuthGateState('signed-out', 'We could not check your Google session. Please try again.')
     })
 
   onAuthStateChange((user) => {
-    studentProgressState.user = user
-    studentProgressState.topicRows.clear()
-    studentProgressState.quizRows.clear()
-    studentProgressState.ready = false
-    studentProgressState.lastError = ''
-    renderStudentSyncUi()
-    refreshTrackerAdminProfile(user)
-
-    if (user) {
-      loadStudentProgress(activeAcademicSection)
-    } else {
-      updateGlobalProgress()
-      refreshLeaderboardIfActive(true)
-    }
+    handleStudentAuthUser(user)
   })
 }
 
 if (subjectList) {
-  const initialMode = getInitialSiteMode()
   updateAcademicSectionUi()
   syncModeToBody()
-  if (initialMode === '402') {
-    selectSiteSection('402', { scroll: false, hash: window.location.hash || '#tracker', historyMode: 'replace' })
-  } else if (initialMode === '401') {
-    selectSiteSection('401', { scroll: false, hash: window.location.hash || '#tracker', historyMode: 'replace' })
-  } else if (initialMode === 'tools') {
-    showToolsSection({ scroll: false, historyMode: 'replace' })
-  } else if (initialMode === 'work') {
-    showWorkSection({ scroll: false, historyMode: 'replace' })
-  } else {
-    showSelector({ scroll: false, historyMode: 'replace' })
-  }
+  showSelector({ scroll: false, historyMode: 'none' })
   window.setInterval(render401ExamSchedule, 3600000)
-  refreshRemoteTrackerData()
   initStudentSync()
   renderTrackerAdminUi()
-  if (initialParams.get('admin') === 'login') openAdminLogin()
 }
 
 document.addEventListener('click', (event) => {
+  if (event.target.closest('[data-auth-login]')) {
+    event.preventDefault()
+    studentProgressState.lastError = ''
+    setAuthGateState('checking')
+    signInWithGoogle({ redirectTo: window.location.href }).catch((error) => {
+      studentProgressState.lastError = error.message
+      setAuthGateState('signed-out', 'Google sign-in did not start. Please try again.')
+    })
+    return
+  }
+
+  const authSectionButton = event.target.closest('[data-auth-section]')
+  if (authSectionButton) {
+    event.preventDefault()
+    saveSelectedSection(authSectionButton.dataset.authSection, { preserveDestination: false })
+    return
+  }
+
+  if (event.target.closest('[data-auth-section-cancel]')) {
+    event.preventDefault()
+    cancelSectionSwitcher()
+    return
+  }
+
   const syncToggle = event.target.closest('[data-student-sync-toggle]')
   if (syncToggle) {
     event.preventDefault()
@@ -6428,24 +6630,22 @@ document.addEventListener('click', (event) => {
     return
   }
 
-  if (event.target.closest('[data-student-sync-login]')) {
-    event.preventDefault()
-    studentProgressState.lastError = ''
-    renderStudentSyncUi()
-    signInWithGoogle({ redirectTo: window.location.href }).catch((error) => {
-      studentProgressState.lastError = error.message
-      renderStudentSyncUi()
-    })
-    return
-  }
-
   if (event.target.closest('[data-student-sync-logout]')) {
     event.preventDefault()
+    setAuthGateState('checking')
     signOutUser().catch((error) => {
       studentProgressState.lastError = error.message
       renderStudentSyncUi()
+      setAuthGateState('ready')
+      showGlobalToast('Sign out failed. Please try again.')
     })
     setStudentSyncMenu(false)
+    return
+  }
+
+  if (event.target.closest('[data-student-switch-section]')) {
+    event.preventDefault()
+    openSectionSwitcher()
     return
   }
 
@@ -6568,7 +6768,7 @@ document.addEventListener('click', (event) => {
   const sectionButton = event.target.closest('[data-select-section]')
   if (sectionButton) {
     event.preventDefault()
-    selectSiteSection(sectionButton.dataset.selectSection)
+    requestSiteSection(sectionButton.dataset.selectSection)
     return
   }
 

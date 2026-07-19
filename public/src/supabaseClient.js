@@ -337,7 +337,7 @@ export async function fetchUserPreference() {
 
   const { data, error } = await supabase
     .from('user_preferences')
-    .select('anonymous, updated_at')
+    .select('anonymous, selected_section, updated_at')
     .maybeSingle()
 
   if (error) throw error
@@ -351,7 +351,7 @@ export async function upsertUserPreference(row) {
   const { data, error } = await supabase
     .from('user_preferences')
     .upsert(row, { onConflict: 'user_id' })
-    .select('anonymous, updated_at')
+    .select('anonymous, selected_section, updated_at')
     .single()
 
   if (error) throw error
