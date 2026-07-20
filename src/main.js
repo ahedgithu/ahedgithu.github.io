@@ -107,6 +107,7 @@ let subjects = [
         art: 12,
         midtermScope: true,
         midtermScopeNote: 'SUR 401-1 scope: Spleen. Source: Spring 2026 midterm curriculum, Dr. Abu Alata PDFs and lecture recordings.',
+        mcqTopicKey: 'Spleen',
         lectureUrls: [
           { label: 'Lecture slides', url: 'https://docs.google.com/presentation/d/1GfFE2goGP1WRw5D14YqQHW9ptEuJkBMz/edit?usp=drivesdk' }
         ],
