@@ -6,7 +6,7 @@
 
   const newSource = {
   "id": "stomach-duodenum-master-compilation",
-  "label": "Stomach & Duodenum Master Compilation",
+  "label": "M.ragab comprehensive repeated MCQS from past exams",
   "description": "97 questions - Master compilation with verified answers & detailed explanations",
   "shuffleQuestions": false,
   "shuffleOptions": false,
