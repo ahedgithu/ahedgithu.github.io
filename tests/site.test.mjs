@@ -57,7 +57,7 @@ test('SUR 401-1 Kellawi MCQ bank is complete and wired', () => {
   assert.equal(quiz.alwaysShowSourcePicker, true)
   assert.equal(quiz.sources.length, 1)
   assert.equal(quiz.sources[0].label, 'Kellawi MCQs')
-  assert.equal(quiz.sources[0].mcqs.length, 1187)
+  assert.equal(quiz.sources[0].mcqs.length, 1064)
 
   const collection = quiz.sources[0].collection
   assert.deepEqual(
@@ -66,7 +66,7 @@ test('SUR 401-1 Kellawi MCQ bank is complete and wired', () => {
       ['Spleen', 207, 6],
       ['Stomach', 302, 8],
       ['Tongue', 91, 3],
-      ['Esophagus', 205, 6],
+      ['Esophagus', 82, 3],
       ['Liver', 382, 10]
     ]
   )
@@ -76,20 +76,20 @@ test('SUR 401-1 Kellawi MCQ bank is complete and wired', () => {
       [35, 35, 35, 34, 34, 34],
       [38, 38, 38, 38, 38, 38, 37, 37],
       [31, 30, 30],
-      [35, 34, 34, 34, 34, 34],
+      [30, 30, 22],
       [39, 39, 38, 38, 38, 38, 38, 38, 38, 38]
     ]
   )
 
   const parts = Array.from(collection.groups, (group) => Array.from(group.parts)).flat()
   const partQuestions = parts.flatMap((part) => Array.from(part.mcqs))
-  assert.equal(parts.length, 33)
-  assert.equal(partQuestions.length, 1187)
-  assert.equal(new Set(partQuestions.map((question) => question.id)).size, 1187)
-  assert.ok(parts.every((part) => part.mcqs.length >= 30 && part.mcqs.length <= 39))
+  assert.equal(parts.length, 30)
+  assert.equal(partQuestions.length, 1064)
+  assert.equal(new Set(partQuestions.map((question) => question.id)).size, 1064)
+  assert.ok(parts.every((part) => part.mcqs.length >= 22 && part.mcqs.length <= 39))
   assert.deepEqual(Array.from(collection.mixedSizes, (mode) => mode.size), [20, 30, 50])
   assert.equal(collection.wrongReviewId, 'kellawi-wrong-review')
-  assert.equal(quiz.sources[0].mcqs.filter((question) => question.source).length, 1186)
+  assert.equal(quiz.sources[0].mcqs.filter((question) => question.source).length, 1063)
   assert.equal(new Set(quiz.sources[0].mcqs.filter((question) => question.organ === 'Liver').map((question) => question.section)).size, 29)
   assert.ok(quiz.sources[0].mcqs.every((question) => question.organ && question.originalNumber && question.section))
 
@@ -112,7 +112,7 @@ test('SUR 401-1 Kellawi MCQ bank is complete and wired', () => {
   assert.match(mainSource, /promptOnSaved/)
   assert.doesNotMatch(mainSource, /Take over/)
   assert.match(mainSource, /Ready\? Let’s solve it organ by organ\./)
-  assert.match(mainSource, /1,187 questions · 5 organs · 33 short parts/)
+  assert.match(mainSource, /1,064 questions · 5 organs · 30 short parts/)
   assert.ok(readBytes('public/assets/mohamed-kellawi-avatar.jpg').length > 0)
 
   const index = read('index.html')

@@ -4336,7 +4336,7 @@ function renderQuizSourcePicker(topicLabel, event = null) {
             ${isVipPastExam
               ? '<span>15 min timer</span>'
               : isKellawiCollection
-                ? '<span>1,187 questions · 5 organs · 33 short parts</span>'
+                ? '<span>1,064 questions · 5 organs · 30 short parts</span>'
                 : `<span>${source.mcqs.length} questions${source.description ? ` - ${source.description}` : ''}</span>`}
             ${renderSourceProgress(source.savedProgress)}
           </span>

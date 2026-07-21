@@ -1,5 +1,5 @@
 // Generated from Combined_Surgical_GIT_MCQs_Without_Matching.docx.
-// Source coverage: 1,187 questions; matching sections excluded in the supplied document.
+// Source coverage: 1,064 questions; matching sections excluded in the supplied document.
 (() => {
   const quizzes = window.mcqQuizzes || (window.mcqQuizzes = {})
   quizzes["SUR 401-1 MCQs"] = {
@@ -8,7 +8,7 @@
     {
       "id": "kellawi-surgical-git-master-bank",
       "label": "Kellawi MCQs",
-      "description": "1,187 Surgical GIT questions organized into five organs and 33 short parts.",
+      "description": "1,064 Surgical GIT questions organized into five organs and 30 short parts.",
       "shuffleQuestions": false,
       "shuffleOptions": false,
       "mcqs": [
@@ -9619,1338 +9619,10 @@
           "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf, page 64, question 103; page 76, section \"Answers 103\"",
           "section": "Section 4: Reconstructive Surgery of the Tongue"
         },
-        {
+                {
           "id": "kellawi-esophagus-001",
           "organ": "Esophagus",
           "originalNumber": 1,
-          "question": "What type of epithelium normally lines the esophagus?",
-          "choices": [
-            "Columnar epithelium",
-            "Non-keratinized stratified squamous epithelium",
-            "Ciliated pseudostratified columnar epithelium",
-            "Transitional epithelium"
-          ],
-          "answerIndex": 1,
-          "explanation": "The esophagus is lined by non-keratinized stratified squamous epithelium, which can change to columnar in Barrett's esophagus.",
-          "source": "Saito MCQ GIT.pdf,",
-          "section": "Section 1: Anatomy and Physiology of the Esophagus"
-        },
-        {
-          "id": "kellawi-esophagus-002",
-          "organ": "Esophagus",
-          "originalNumber": 2,
-          "question": "At what vertebral level does the esophagus begin?",
-          "choices": [
-            "4th cervical vertebra",
-            "6th cervical vertebra",
-            "1st thoracic vertebra",
-            "10th thoracic vertebra"
-          ],
-          "answerIndex": 1,
-          "explanation": "The esophagus begins at the level of the 6th cervical vertebra. (The option stating it begins at the 4th is marked false in the source).",
-          "source": "3-Zatoona.pdf,,",
-          "section": "Section 1: Anatomy and Physiology of the Esophagus"
-        },
-        {
-          "id": "kellawi-esophagus-003",
-          "organ": "Esophagus",
-          "originalNumber": 3,
-          "question": "At what approximate distance from the incisor teeth does the esophagus pass through the diaphragm?",
-          "choices": [
-            "15 cm",
-            "25 cm",
-            "30 cm",
-            "40 cm"
-          ],
-          "answerIndex": 3,
-          "explanation": "The source notes that stating it passes the diaphragm at 25 cm is false (the esophagus itself is about 25 cm long), and indicates the diaphragmatic constriction is at 40 cm.",
-          "source": "3-Zatoona.pdf,, Bailey & Love MCQs.pdf,",
-          "section": "Section 1: Anatomy and Physiology of the Esophagus"
-        },
-        {
-          "id": "kellawi-esophagus-004",
-          "organ": "Esophagus",
-          "originalNumber": 4,
-          "question": "Which structure forms the upper esophageal sphincter?",
-          "choices": [
-            "Cardio-esophageal muscle",
-            "Intrinsic muscle of the distal esophagus",
-            "Crico-pharyngeus muscle",
-            "Sling fibers of the cardia"
-          ],
-          "answerIndex": 2,
-          "explanation": "The upper sphincter is formed by the crico-pharyngeus muscle.",
-          "source": "3-Zatoona.pdf,,",
-          "section": "Section 1: Anatomy and Physiology of the Esophagus"
-        },
-        {
-          "id": "kellawi-esophagus-005",
-          "organ": "Esophagus",
-          "originalNumber": 5,
-          "question": "Which of the following is an accurate anatomical relation of the esophagus?",
-          "choices": [
-            "It is anterior to the arch of the aorta.",
-            "It is posterior to the left atrium.",
-            "It is narrowed by the right main bronchus.",
-            "It is located entirely in the anterior mediastinum."
-          ],
-          "answerIndex": 1,
-          "explanation": "The esophagus is located posterior to the left atrium. It is narrowed by the left (not right) main bronchus.",
-          "source": "3-Zatoona.pdf,,",
-          "section": "Section 1: Anatomy and Physiology of the Esophagus"
-        },
-        {
-          "id": "kellawi-esophagus-006",
-          "organ": "Esophagus",
-          "originalNumber": 6,
-          "question": "What type of muscle comprises the upper third of the esophagus?",
-          "choices": [
-            "Smooth muscle only",
-            "Striated muscle",
-            "A completely random mix of smooth and skeletal muscle",
-            "Fibroareolar tissue only"
-          ],
-          "answerIndex": 1,
-          "explanation": "The musculature of the upper third of the esophagus is striated, while the distal two-thirds is smooth muscle.",
-          "source": "Saito MCQ GIT.pdf,",
-          "section": "Section 1: Anatomy and Physiology of the Esophagus"
-        },
-        {
-          "id": "kellawi-esophagus-007",
-          "organ": "Esophagus",
-          "originalNumber": 7,
-          "question": "Which of the following is true regarding the lower esophageal sphincter (LES)?",
-          "choices": [
-            "It is an anatomical sphincter with thickened circular muscle.",
-            "It is formed by striated external sphincter muscle fibers.",
-            "It is a physiological zone of high pressure.",
-            "It relaxes forcefully during resting periods."
-          ],
-          "answerIndex": 2,
-          "explanation": "The LES is a physiological rather than anatomical sphincter, forming a high-pressure zone (10-25 mmHg) to prevent reflux.",
-          "source": "Bailey & Love MCQs.pdf,, Saito MCQ GIT.pdf,",
-          "section": "Section 1: Anatomy and Physiology of the Esophagus"
-        },
-        {
-          "id": "kellawi-esophagus-008",
-          "organ": "Esophagus",
-          "originalNumber": 8,
-          "question": "Which dietary component is known to INCREASE the pressure of the lower esophageal sphincter?",
-          "choices": [
-            "High-fat meal",
-            "Chocolate",
-            "Peppermint",
-            "High-protein diet"
-          ],
-          "answerIndex": 3,
-          "explanation": "A high-protein diet increases LES pressure, whereas fat, chocolate, and peppermint produce a decrease in LES pressure.",
-          "source": "4- zatona 1 GIT.pdf,",
-          "section": "Section 1: Anatomy and Physiology of the Esophagus"
-        },
-        {
-          "id": "kellawi-esophagus-009",
-          "organ": "Esophagus",
-          "originalNumber": 9,
-          "question": "Is the serosa the strongest layer of the esophagus?",
-          "choices": [
-            "Yes, it prevents spontaneous ruptures.",
-            "Yes, it is composed of thick connective tissue.",
-            "No, the esophagus is lined by columnar epithelium.",
-            "No, the statement that the serosa is the strongest layer is false."
-          ],
-          "answerIndex": 3,
-          "explanation": "The provided exam identifies the statement \"The serosa of the esophagus is the strongest layer\" as false.",
-          "source": "3-Zatoona.pdf,,",
-          "section": "Section 1: Anatomy and Physiology of the Esophagus"
-        },
-        {
-          "id": "kellawi-esophagus-010",
-          "organ": "Esophagus",
-          "originalNumber": 10,
-          "question": "Which artery supplies the lower part of the esophagus?",
-          "choices": [
-            "Right gastric artery",
-            "Splenic artery",
-            "Left gastric artery",
-            "Common hepatic artery"
-          ],
-          "answerIndex": 2,
-          "explanation": "The left gastric artery supplies the lower part of the esophagus.",
-          "source": "3-Zatoona.pdf,,",
-          "section": "Section 1: Anatomy and Physiology of the Esophagus"
-        },
-        {
-          "id": "kellawi-esophagus-011",
-          "organ": "Esophagus",
-          "originalNumber": 11,
-          "question": "What is the gold standard investigation for measuring gastroesophageal reflux?",
-          "choices": [
-            "Esophagoscopy",
-            "Barium swallow",
-            "Chest CT scan",
-            "Ambulatory 24-hours pH monitoring"
-          ],
-          "answerIndex": 3,
-          "explanation": "Ambulatory 24-hours pH monitoring is the gold standard for diagnosing and quantifying acid reflux.",
-          "source": "3-Zatoona.pdf,,",
-          "section": "Section 2: Gastroesophageal Reflux Disease (GERD) & Hiatal Hernia"
-        },
-        {
-          "id": "kellawi-esophagus-012",
-          "organ": "Esophagus",
-          "originalNumber": 12,
-          "question": "Which of the following is an atypical (extra-esophageal) symptom of GERD?",
-          "choices": [
-            "Heartburn",
-            "Water brash",
-            "Recurrent unexplained teeth caries",
-            "Regurgitation"
-          ],
-          "answerIndex": 2,
-          "explanation": "Unexplained teeth caries, angina-like pain, and respiratory issues are atypical signs of GERD, whereas heartburn and water brash are typical.",
-          "source": "3-Zatoona.pdf,,",
-          "section": "Section 2: Gastroesophageal Reflux Disease (GERD) & Hiatal Hernia"
-        },
-        {
-          "id": "kellawi-esophagus-013",
-          "organ": "Esophagus",
-          "originalNumber": 13,
-          "question": "The presence of dysphagia in a patient with a long history of GERD most likely suggests:",
-          "choices": [
-            "Healing of the esophageal mucosa",
-            "Development of a stricture or motility disorder",
-            "A normal physiological variation",
-            "Esophageal varices"
-          ],
-          "answerIndex": 1,
-          "explanation": "If GERD is associated with dysphagia, it suggests the development of a peptic stricture or a motility disorder.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf,, 3-Zatoona.pdf,",
-          "section": "Section 2: Gastroesophageal Reflux Disease (GERD) & Hiatal Hernia"
-        },
-        {
-          "id": "kellawi-esophagus-014",
-          "organ": "Esophagus",
-          "originalNumber": 14,
-          "question": "A patient with long-standing GERD undergoes a barium study showing an irregular, ulcerated area in the lower third of the esophagus with mucosal disruption. What is the most likely diagnosis?",
-          "choices": [
-            "Sliding hiatal hernia",
-            "Adenocarcinoma arising in Barrett's esophagus",
-            "Benign peptic stricture",
-            "Squamous cell carcinoma"
-          ],
-          "answerIndex": 1,
-          "explanation": "An irregular ulcerated lesion in the lower esophagus in a patient with chronic GERD indicates adenocarcinoma on top of Barrett's esophagus.",
-          "source": "3-Zatoona.pdf,, LANG Q & A IN SURGERY 5TH EDITION.pdf,",
-          "section": "Section 2: Gastroesophageal Reflux Disease (GERD) & Hiatal Hernia"
-        },
-        {
-          "id": "kellawi-esophagus-015",
-          "organ": "Esophagus",
-          "originalNumber": 15,
-          "question": "What specific histological change characterizes Barrett's esophagus?",
-          "choices": [
-            "Hyperplasia of the squamous epithelium",
-            "Metaplasia of the lower esophageal mucosa into a columnar type",
-            "Anaplasia of submucosal glands",
-            "Severe dysplasia of the upper esophageal sphincter"
-          ],
-          "answerIndex": 1,
-          "explanation": "Barrett's esophagus is a metaplastic disorder where specialized columnar epithelium replaces the normal squamous epithelium of the lower esophagus.",
-          "source": "3-Zatoona.pdf,,,",
-          "section": "Section 2: Gastroesophageal Reflux Disease (GERD) & Hiatal Hernia"
-        },
-        {
-          "id": "kellawi-esophagus-016",
-          "organ": "Esophagus",
-          "originalNumber": 16,
-          "question": "Which of the following statements about a sliding hiatal hernia is TRUE?",
-          "choices": [
-            "The gastroesophageal junction remains below the diaphragm.",
-            "The cardia is displaced into the posterior mediastinum.",
-            "Strangulation of the stomach is a common and early complication.",
-            "It requires immediate surgical intervention in all cases."
-          ],
-          "answerIndex": 1,
-          "explanation": "In a sliding hiatal hernia, the GE junction and cardia slide upward into the posterior mediastinum.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf,,",
-          "section": "Section 2: Gastroesophageal Reflux Disease (GERD) & Hiatal Hernia"
-        },
-        {
-          "id": "kellawi-esophagus-017",
-          "organ": "Esophagus",
-          "originalNumber": 17,
-          "question": "What is a recognized dangerous complication of a paraesophageal (rolling) hiatal hernia?",
-          "choices": [
-            "Inevitable severe reflux esophagitis",
-            "Gastric volvulus and strangulation",
-            "Direct progression to squamous cell carcinoma",
-            "Development of esophageal varices"
-          ],
-          "answerIndex": 1,
-          "explanation": "Paraesophageal hernias are prone to volvulus, strangulation of the stomach, and bleeding. The GE junction usually remains below the diaphragm, so reflux is not inevitable.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf,,",
-          "section": "Section 2: Gastroesophageal Reflux Disease (GERD) & Hiatal Hernia"
-        },
-        {
-          "id": "kellawi-esophagus-018",
-          "organ": "Esophagus",
-          "originalNumber": 18,
-          "question": "What is the most common long-term complication following a Nissen's fundoplication?",
-          "choices": [
-            "Heartburn",
-            "Esophageal varices",
-            "Severe hematemesis",
-            "Gas bloat and flatulence"
-          ],
-          "answerIndex": 3,
-          "explanation": "Gas bloat syndrome and flatulence are recognized long-term complications of Nissen's fundoplication.",
-          "source": "3-Zatoona.pdf,,",
-          "section": "Section 2: Gastroesophageal Reflux Disease (GERD) & Hiatal Hernia"
-        },
-        {
-          "id": "kellawi-esophagus-019",
-          "organ": "Esophagus",
-          "originalNumber": 19,
-          "question": "Which of the following medications can physiologically decrease the resting pressure of the LES, potentially worsening GERD?",
-          "choices": [
-            "Calcium channel blockers",
-            "Proton pump inhibitors",
-            "Antacids",
-            "Metoclopramide"
-          ],
-          "answerIndex": 0,
-          "explanation": "Calcium channel blockers, along with diazepam and theophylline, decrease LES pressure.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf,",
-          "section": "Section 2: Gastroesophageal Reflux Disease (GERD) & Hiatal Hernia"
-        },
-        {
-          "id": "kellawi-esophagus-020",
-          "organ": "Esophagus",
-          "originalNumber": 20,
-          "question": "Which of the following is considered an indication for anti-reflux surgery?",
-          "choices": [
-            "First episode of mild heartburn",
-            "Asymptomatic sliding hiatal hernia",
-            "Failure of medical therapy or poor patient compliance",
-            "Absence of any stricture"
-          ],
-          "answerIndex": 2,
-          "explanation": "Indications for anti-reflux surgery include failed medical therapy, poor compliance, and complications like stricture.",
-          "source": "4- zatona 1 GIT.pdf,,",
-          "section": "Section 2: Gastroesophageal Reflux Disease (GERD) & Hiatal Hernia"
-        },
-        {
-          "id": "kellawi-esophagus-021",
-          "organ": "Esophagus",
-          "originalNumber": 21,
-          "question": "Which symptom presentation is classically described as \"paradoxical\" in the early stages of achalasia?",
-          "choices": [
-            "Dysphagia to solids more than to liquids",
-            "Dysphagia to liquids more than to solids",
-            "Massive painless hematemesis",
-            "Severe retrosternal pain radiating to the jaw"
-          ],
-          "answerIndex": 1,
-          "explanation": "Dysphagia in esophageal achalasia is often paradoxical, being more pronounced for liquids than for solids in the early stages.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf,, 4- zatona 1 GIT.pdf,",
-          "section": "Section 3: Achalasia & Motility Disorders"
-        },
-        {
-          "id": "kellawi-esophagus-022",
-          "organ": "Esophagus",
-          "originalNumber": 22,
-          "question": "Typical manometric findings in a patient with achalasia of the cardia show:",
-          "choices": [
-            "Low LES pressure with normal relaxation",
-            "High LES pressure with no relaxation upon swallowing",
-            "Increased amplitude of peristaltic waves in the esophageal body",
-            "Normal sphincter pressure with simultaneous contractions"
-          ],
-          "answerIndex": 1,
-          "explanation": "Achalasia is characterized by high LES pressure, failure of the sphincter to relax with swallowing, and absent/weak peristalsis.",
-          "source": "3-Zatoona.pdf,,,",
-          "section": "Section 3: Achalasia & Motility Disorders"
-        },
-        {
-          "id": "kellawi-esophagus-023",
-          "organ": "Esophagus",
-          "originalNumber": 23,
-          "question": "What is the classic radiologic appearance of achalasia on a barium swallow?",
-          "choices": [
-            "Apple-core lesion",
-            "String sign of Kantor",
-            "Bird's beak appearance",
-            "Corkscrew esophagus"
-          ],
-          "answerIndex": 2,
-          "explanation": "Achalasia presents with a smooth, tapering \"bird's beak\" appearance at the lower end of the esophagus.",
-          "source": "4- zatona 1 GIT.pdf,,",
-          "section": "Section 3: Achalasia & Motility Disorders"
-        },
-        {
-          "id": "kellawi-esophagus-024",
-          "organ": "Esophagus",
-          "originalNumber": 24,
-          "question": "The medical and surgical treatments for cardiac achalasia include all of the following EXCEPT:",
-          "choices": [
-            "Esophageal cardiomyotomy (Heller myotomy)",
-            "Trunkal vagotomy",
-            "Injection of botulinum toxins",
-            "Repeated sessions of esophageal dilatation"
-          ],
-          "answerIndex": 1,
-          "explanation": "Trunkal vagotomy is an operation for peptic ulcer disease and is not a treatment for achalasia.",
-          "source": "3-Zatoona.pdf,,,",
-          "section": "Section 3: Achalasia & Motility Disorders"
-        },
-        {
-          "id": "kellawi-esophagus-025",
-          "organ": "Esophagus",
-          "originalNumber": 25,
-          "question": "A barium swallow reveals a \"corkscrew\" esophagus in a patient with severe episodic chest pain. What is the most likely diagnosis?",
-          "choices": [
-            "Achalasia",
-            "Diffuse esophageal spasm",
-            "Plummer-Vinson syndrome",
-            "Esophageal carcinoma"
-          ],
-          "answerIndex": 1,
-          "explanation": "A corkscrew appearance on barium swallow is highly suggestive of diffuse esophageal spasm (DES).",
-          "source": "4- zatona 1 GIT.pdf,, LANG Q & A IN SURGERY 5TH EDITION.pdf,",
-          "section": "Section 3: Achalasia & Motility Disorders"
-        },
-        {
-          "id": "kellawi-esophagus-026",
-          "organ": "Esophagus",
-          "originalNumber": 26,
-          "question": "The etiology of achalasia is presumed to involve the degeneration of ganglion cells in which specific structure?",
-          "choices": [
-            "Meissner's plexus",
-            "Auerbach's plexus",
-            "The celiac ganglion",
-            "Submucosal glands"
-          ],
-          "answerIndex": 1,
-          "explanation": "Achalasia is presumed to be caused by the degeneration of vagal fibers and ganglion cells within Auerbach's plexus.",
-          "source": "Saito MCQ GIT.pdf,",
-          "section": "Section 3: Achalasia & Motility Disorders"
-        },
-        {
-          "id": "kellawi-esophagus-027",
-          "organ": "Esophagus",
-          "originalNumber": 27,
-          "question": "Patients with long-standing achalasia have an increased risk of developing which secondary condition?",
-          "choices": [
-            "Mallory-Weiss tears",
-            "Esophageal varices",
-            "Carcinoma of the esophagus",
-            "Sliding hiatal hernia"
-          ],
-          "answerIndex": 2,
-          "explanation": "Achalasia carries an increased incidence (5-10%) of esophageal carcinoma, usually occurring after 20 years of the disease.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf,, Saito MCQ GIT.pdf,",
-          "section": "Section 3: Achalasia & Motility Disorders"
-        },
-        {
-          "id": "kellawi-esophagus-028",
-          "organ": "Esophagus",
-          "originalNumber": 28,
-          "question": "Which of the following interventions relies on chemical denervation to treat achalasia?",
-          "choices": [
-            "Endoscopic pneumatic dilatation",
-            "Injection of botulinum toxins in the muscle of the cardia",
-            "Laparoscopic fundoplication",
-            "Trans-hiatal esophagectomy"
-          ],
-          "answerIndex": 1,
-          "explanation": "Botulinum toxin injection provides temporary relief by chemically relaxing the LES muscle.",
-          "source": "3-Zatoona.pdf,,,",
-          "section": "Section 3: Achalasia & Motility Disorders"
-        },
-        {
-          "id": "kellawi-esophagus-029",
-          "organ": "Esophagus",
-          "originalNumber": 29,
-          "question": "What is the most common benign neoplasm of the esophagus?",
-          "choices": [
-            "Adenoma",
-            "Papilloma",
-            "Leiomyoma",
-            "Hemangioma"
-          ],
-          "answerIndex": 2,
-          "explanation": "Leiomyoma is the most common benign tumor encountered in the esophagus.",
-          "source": "3-Zatoona.pdf,, LANG Q & A IN SURGERY 5TH EDITION.pdf,",
-          "section": "Section 4: Esophageal Carcinoma & Benign Tumors"
-        },
-        {
-          "id": "kellawi-esophagus-030",
-          "organ": "Esophagus",
-          "originalNumber": 30,
-          "question": "The most significant risk factor for the development of adenocarcinoma of the esophagus is:",
-          "choices": [
-            "Alcohol abuse",
-            "Smoking",
-            "Barrett's esophagus",
-            "Achalasia"
-          ],
-          "answerIndex": 2,
-          "explanation": "Barrett's esophagus is an intestinal metaplasia that directly predisposes the patient to esophageal adenocarcinoma.",
-          "source": "4- zatona 1 GIT.pdf,,",
-          "section": "Section 4: Esophageal Carcinoma & Benign Tumors"
-        },
-        {
-          "id": "kellawi-esophagus-031",
-          "organ": "Esophagus",
-          "originalNumber": 31,
-          "question": "In which anatomical section of the esophagus is squamous cell carcinoma most commonly found?",
-          "choices": [
-            "Upper third",
-            "Middle third",
-            "Lower third",
-            "Gastroesophageal junction"
-          ],
-          "answerIndex": 1,
-          "explanation": "Squamous cell carcinoma is most common in the middle and upper thirds, whereas adenocarcinoma predominates in the lower third.",
-          "source": "4- zatona 1 GIT.pdf,",
-          "section": "Section 4: Esophageal Carcinoma & Benign Tumors"
-        },
-        {
-          "id": "kellawi-esophagus-032",
-          "organ": "Esophagus",
-          "originalNumber": 32,
-          "question": "Which of the following is a TRUE statement regarding the clinical presentation of esophageal carcinoma?",
-          "choices": [
-            "Vomiting is an early presenting symptom.",
-            "Dysphagia initially occurs with fluids, then progresses to solid food.",
-            "Loss of weight occurs early in the course of the disease.",
-            "The disease is more common in females than males."
-          ],
-          "answerIndex": 2,
-          "explanation": "Loss of weight and progressive dysphagia (initially to solids, then fluids) are early signs. Vomiting is not an early symptom. It is also more common in males.",
-          "source": "3-Zatoona.pdf,,",
-          "section": "Section 4: Esophageal Carcinoma & Benign Tumors"
-        },
-        {
-          "id": "kellawi-esophagus-033",
-          "organ": "Esophagus",
-          "originalNumber": 33,
-          "question": "Which of the following is an accepted PALLIATIVE treatment for inoperable esophageal carcinoma?",
-          "choices": [
-            "Radical esophagectomy",
-            "Ivor Lewis operation",
-            "Traction esophageal tube (stent)",
-            "Nissen fundoplication"
-          ],
-          "answerIndex": 2,
-          "explanation": "Palliative treatments include esophageal stenting (traction tube), radiotherapy for bone pain, and painkillers. Radical esophagectomy is a curative procedure.",
-          "source": "3-Zatoona.pdf,,,",
-          "section": "Section 4: Esophageal Carcinoma & Benign Tumors"
-        },
-        {
-          "id": "kellawi-esophagus-034",
-          "organ": "Esophagus",
-          "originalNumber": 34,
-          "question": "A 64-year-old male presents with rapidly progressive dysphagia and marked weight loss. A chest X-ray reveals multiple focal lesions indicating metastases. What is the best treatment from the options below?",
-          "choices": [
-            "Esophageal stenting",
-            "Trans-hiatal esophagectomy",
-            "Laparoscopic fundoplication",
-            "Repeated balloon dilatation"
-          ],
-          "answerIndex": 0,
-          "explanation": "In advanced, metastatic esophageal cancer, esophageal stenting provides the best palliative relief for dysphagia.",
-          "source": "3-Zatoona.pdf,,,",
-          "section": "Section 4: Esophageal Carcinoma & Benign Tumors"
-        },
-        {
-          "id": "kellawi-esophagus-035",
-          "organ": "Esophagus",
-          "originalNumber": 35,
-          "question": "Which imaging modality provides the most accurate information regarding the T stage (depth of wall invasion) of an esophageal carcinoma?",
-          "choices": [
-            "Computed tomography (CT)",
-            "Positron emission tomography (PET)",
-            "Magnetic resonance imaging (MRI)",
-            "Endoscopic ultrasound (EUS)"
-          ],
-          "answerIndex": 3,
-          "explanation": "Endoscopic ultrasound (EUS) is the most accurate modality for determining the depth of tumor invasion (T stage) in the esophageal wall.",
-          "source": "Pretest MCQ.pdf,,",
-          "section": "Section 4: Esophageal Carcinoma & Benign Tumors"
-        },
-        {
-          "id": "kellawi-esophagus-036",
-          "organ": "Esophagus",
-          "originalNumber": 36,
-          "question": "Which condition is considered a predisposing factor specifically for squamous cell carcinoma of the esophagus?",
-          "choices": [
-            "Corrosive stricture",
-            "Barrett's esophagus",
-            "Sliding hiatal hernia",
-            "H. pylori gastritis"
-          ],
-          "answerIndex": 0,
-          "explanation": "Corrosive strictures, along with smoking and achalasia, predispose to squamous cell carcinoma.",
-          "source": "4- zatona 1 GIT.pdf,, Saito MCQ GIT.pdf,",
-          "section": "Section 4: Esophageal Carcinoma & Benign Tumors"
-        },
-        {
-          "id": "kellawi-esophagus-037",
-          "organ": "Esophagus",
-          "originalNumber": 37,
-          "question": "For early carcinoma localized strictly to the lower third of the esophagus, the best hope for cure is:",
-          "choices": [
-            "Oesophagectomy and gastric pull-up",
-            "Endoscopic stenting",
-            "Gastrostomy",
-            "Radiotherapy alone"
-          ],
-          "answerIndex": 0,
-          "explanation": "Radical surgery (esophagectomy and reconstruction like gastric pull-up) offers the best hope for cure in early resectable cases.",
-          "source": "3-Zatoona.pdf,, Saito MCQ GIT.pdf,",
-          "section": "Section 4: Esophageal Carcinoma & Benign Tumors"
-        },
-        {
-          "id": "kellawi-esophagus-038",
-          "organ": "Esophagus",
-          "originalNumber": 38,
-          "question": "A 50-year-old man presents with excruciating chest pain following an episode of violent vomiting. Subcutaneous emphysema is noted in the neck, and X-rays show a left pleural effusion. What is the diagnosis?",
-          "choices": [
-            "Mallory-Weiss tear",
-            "Spontaneous rupture of the esophagus (Boerhaave's syndrome)",
-            "Perforated duodenal ulcer",
-            "Spontaneous pneumothorax"
-          ],
-          "answerIndex": 1,
-          "explanation": "Boerhaave's syndrome is a full-thickness spontaneous rupture of the esophagus (usually after heavy vomiting), presenting with chest pain, emphysema, and effusion.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf,",
-          "section": "Section 5: Esophageal Trauma, Perforation & Corrosive Injury"
-        },
-        {
-          "id": "kellawi-esophagus-039",
-          "organ": "Esophagus",
-          "originalNumber": 39,
-          "question": "What is the most common anatomical site for a spontaneous esophageal rupture (Boerhaave's syndrome)?",
-          "choices": [
-            "Upper third, right side",
-            "Middle third, posterior wall",
-            "Lower third, left posterolateral region",
-            "Gastroesophageal junction, anterior wall"
-          ],
-          "answerIndex": 2,
-          "explanation": "In 90% of cases of Boerhaave's syndrome, the tear occurs in the left posterolateral region of the lower third of the esophagus.",
-          "source": "4- zatona 1 GIT.pdf,",
-          "section": "Section 5: Esophageal Trauma, Perforation & Corrosive Injury"
-        },
-        {
-          "id": "kellawi-esophagus-040",
-          "organ": "Esophagus",
-          "originalNumber": 40,
-          "question": "A 20-year-old woman ingests a strongly alkaline drain-cleaning fluid. Which of the following is TRUE regarding her immediate management?",
-          "choices": [
-            "Acidic solutions should be given to neutralize the alkali.",
-            "Emetics should be administered to clear the stomach.",
-            "Gastric lavage should be aggressively performed.",
-            "Endotracheal tube intubation may be required in case of stridor or suffocation."
-          ],
-          "answerIndex": 3,
-          "explanation": "Emetics, gastric lavage, and neutralizing agents are contraindicated as they cause further damage or exothermic reactions. The airway must be secured if compromised.",
-          "source": "3-Zatoona.pdf,,, Saito MCQ GIT.pdf,",
-          "section": "Section 5: Esophageal Trauma, Perforation & Corrosive Injury"
-        },
-        {
-          "id": "kellawi-esophagus-041",
-          "organ": "Esophagus",
-          "originalNumber": 41,
-          "question": "Which type of tissue necrosis is classically caused by the ingestion of alkaline corrosive agents?",
-          "choices": [
-            "Coagulative necrosis",
-            "Liquefactive necrosis",
-            "Caseous necrosis",
-            "Fat necrosis"
-          ],
-          "answerIndex": 1,
-          "explanation": "Alkali ingestion causes liquefactive necrosis which penetrates deeply, whereas acid causes coagulative necrosis with eschar formation.",
-          "source": "4- zatona 1 GIT.pdf,",
-          "section": "Section 5: Esophageal Trauma, Perforation & Corrosive Injury"
-        },
-        {
-          "id": "kellawi-esophagus-042",
-          "organ": "Esophagus",
-          "originalNumber": 42,
-          "question": "A 50-year-old man presents with hematemesis following repeated vomiting after heavy alcohol intake. Endoscopy reveals a linear mucosal tear in the lower esophagus. What is the diagnosis?",
-          "choices": [
-            "Ruptured esophageal varices",
-            "Boerhaave's syndrome",
-            "Mallory-Weiss syndrome",
-            "Reflux esophagitis"
-          ],
-          "answerIndex": 2,
-          "explanation": "A linear mucosal tear at the gastroesophageal junction following repeated vomiting is diagnostic of Mallory-Weiss syndrome.",
-          "source": "4- zatona 1 GIT.pdf,,",
-          "section": "Section 5: Esophageal Trauma, Perforation & Corrosive Injury"
-        },
-        {
-          "id": "kellawi-esophagus-043",
-          "organ": "Esophagus",
-          "originalNumber": 43,
-          "question": "What is the primary definitive treatment for a patient diagnosed with Boerhaave's syndrome within 24 hours of rupture?",
-          "choices": [
-            "Endoscopic stent placement",
-            "Intravenous antibiotics and conservative observation",
-            "Resuscitation and emergency surgery (repair of the tear)",
-            "Insertion of a Sengstaken-Blakemore tube"
-          ],
-          "answerIndex": 2,
-          "explanation": "Spontaneous rupture of the esophagus is a surgical emergency. The best outcome is achieved with early surgery (<24 hours) to repair the tear.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf,,",
-          "section": "Section 5: Esophageal Trauma, Perforation & Corrosive Injury"
-        },
-        {
-          "id": "kellawi-esophagus-044",
-          "organ": "Esophagus",
-          "originalNumber": 44,
-          "question": "Which contrast agent should be used INITIALLY when evaluating a suspected esophageal perforation?",
-          "choices": [
-            "Thin barium sulfate",
-            "Thick barium paste",
-            "Water-soluble contrast (e.g., Gastrografin)",
-            "Intravenous iodine contrast"
-          ],
-          "answerIndex": 2,
-          "explanation": "Water-soluble contrast should be used first to locate the leak, as barium leaking into the mediastinum can cause severe mediastinitis.",
-          "source": "Bailey & Love MCQs.pdf,, Pretest MCQ.pdf,",
-          "section": "Section 5: Esophageal Trauma, Perforation & Corrosive Injury"
-        },
-        {
-          "id": "kellawi-esophagus-045",
-          "organ": "Esophagus",
-          "originalNumber": 45,
-          "question": "Esophageal perforation is most often due to:",
-          "choices": [
-            "Swallowed foreign bodies",
-            "Persistent vomiting",
-            "Iatrogenic instrumentation (e.g., endoscopy)",
-            "Malignant ulceration"
-          ],
-          "answerIndex": 2,
-          "explanation": "The most common cause of esophageal perforation is iatrogenic instrumentation during endoscopy or stricture dilatation.",
-          "source": "3-Zatoona.pdf,, Saito MCQ GIT.pdf,",
-          "section": "Section 5: Esophageal Trauma, Perforation & Corrosive Injury"
-        },
-        {
-          "id": "kellawi-esophagus-046",
-          "organ": "Esophagus",
-          "originalNumber": 46,
-          "question": "Which of the following statements about post-corrosive esophageal strictures is true?",
-          "choices": [
-            "The main symptom is heartburn.",
-            "Endoscopic dilatation is effective but may cause perforation.",
-            "Primary treatment is always surgical colon bypass.",
-            "Strictures always follow superficial first-degree burns."
-          ],
-          "answerIndex": 1,
-          "explanation": "Endoscopic dilatation is an effective primary treatment for post-corrosive strictures but carries a significant risk of esophageal perforation.",
-          "source": "3-Zatoona.pdf,,",
-          "section": "Section 5: Esophageal Trauma, Perforation & Corrosive Injury"
-        },
-        {
-          "id": "kellawi-esophagus-047",
-          "organ": "Esophagus",
-          "originalNumber": 47,
-          "question": "A 19-year-old female swallowed potash 6 months ago and now has a 2cm stricture in the middle third of her esophagus. What is the most appropriate initial management?",
-          "choices": [
-            "Esophageal stenting",
-            "Trans-hiatal esophagectomy",
-            "Repeated sessions of esophageal dilatation",
-            "Injection of botulinum toxin"
-          ],
-          "answerIndex": 2,
-          "explanation": "Short benign strictures post-corrosive ingestion are initially managed by repeated sessions of esophageal dilatation.",
-          "source": "3-Zatoona.pdf,,,",
-          "section": "Section 5: Esophageal Trauma, Perforation & Corrosive Injury"
-        },
-        {
-          "id": "kellawi-esophagus-048",
-          "organ": "Esophagus",
-          "originalNumber": 48,
-          "question": "Which of the following is true concerning Zenker's diverticulum?",
-          "choices": [
-            "It is a traction diverticulum.",
-            "It is a congenital lesion.",
-            "Dysphagia is the most common symptom.",
-            "It arises from the anterior wall of the esophagus."
-          ],
-          "answerIndex": 2,
-          "explanation": "Zenker's diverticulum is an acquired pulsion diverticulum that presents most commonly with dysphagia, regurgitation, and halitosis.",
-          "source": "4- zatona 1 GIT.pdf,",
-          "section": "Section 6: Diverticula, Rings, and Webs"
-        },
-        {
-          "id": "kellawi-esophagus-049",
-          "organ": "Esophagus",
-          "originalNumber": 49,
-          "question": "Where does a Zenker's diverticulum anatomically originate?",
-          "choices": [
-            "Between the superior and middle pharyngeal constrictors",
-            "Between the lower border of the inferior constrictor and the crico-pharyngeus muscle",
-            "Below the crico-pharyngeus muscle laterally",
-            "At the level of the aortic arch"
-          ],
-          "answerIndex": 1,
-          "explanation": "Zenker's diverticulum develops in a weak area called Killian's triangle, located between the thyropharyngeus (inferior constrictor) and cricopharyngeus muscles.",
-          "source": "4- zatona 1 GIT.pdf,, LANG Q & A IN SURGERY 5TH EDITION.pdf,",
-          "section": "Section 6: Diverticula, Rings, and Webs"
-        },
-        {
-          "id": "kellawi-esophagus-050",
-          "organ": "Esophagus",
-          "originalNumber": 50,
-          "question": "A 63-year-old woman presents with dysphagia, iron deficiency anemia, and an upper esophageal web. What is the diagnosis?",
-          "choices": [
-            "Schatzki's ring",
-            "Plummer-Vinson syndrome",
-            "Barrett's esophagus",
-            "Scleroderma"
-          ],
-          "answerIndex": 1,
-          "explanation": "The triad of dysphagia, iron deficiency anemia, and a cervical esophageal web is characteristic of Plummer-Vinson (Kelly-Paterson) syndrome.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf,,",
-          "section": "Section 6: Diverticula, Rings, and Webs"
-        },
-        {
-          "id": "kellawi-esophagus-051",
-          "organ": "Esophagus",
-          "originalNumber": 51,
-          "question": "What is the recommended treatment for a symptomatic Schatzki's ring?",
-          "choices": [
-            "Esophagectomy",
-            "Endoscopic dilatation",
-            "Heller myotomy",
-            "Botulinum toxin injection"
-          ],
-          "answerIndex": 1,
-          "explanation": "A Schatzki's ring (a thin, benign, lower esophageal web/ring) is effectively treated by endoscopic dilatation.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf,",
-          "section": "Section 6: Diverticula, Rings, and Webs"
-        },
-        {
-          "id": "kellawi-esophagus-052",
-          "organ": "Esophagus",
-          "originalNumber": 52,
-          "question": "An epiphrenic diverticulum is typically associated with which of the following conditions?",
-          "choices": [
-            "Iron deficiency anemia",
-            "Tuberculosis lymphadenitis",
-            "Esophageal motility disorders (e.g., achalasia, diffuse esophageal spasm)",
-            "Ingestion of corrosive substances"
-          ],
-          "answerIndex": 2,
-          "explanation": "Epiphrenic diverticula are pulsion diverticula located near the diaphragm, frequently associated with motility disorders like achalasia or diffuse esophageal spasm.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf,,",
-          "section": "Section 6: Diverticula, Rings, and Webs"
-        },
-        {
-          "id": "kellawi-esophagus-053",
-          "organ": "Esophagus",
-          "originalNumber": 53,
-          "question": "Dysphagia associated with gurgling sounds in the neck and halitosis is most characteristic of:",
-          "choices": [
-            "Esophageal carcinoma",
-            "Zenker's diverticulum",
-            "Peptic stricture",
-            "Achalasia"
-          ],
-          "answerIndex": 1,
-          "explanation": "Regurgitation of undigested food, halitosis, and gurgling noises in the neck are classic signs of a pharyngeal pouch (Zenker's diverticulum).",
-          "source": "3-Zatoona.pdf,, Saito MCQ GIT.pdf,",
-          "section": "Section 6: Diverticula, Rings, and Webs"
-        },
-        {
-          "id": "kellawi-esophagus-054",
-          "organ": "Esophagus",
-          "originalNumber": 54,
-          "question": "Which of the following is considered the first-choice endoscopic treatment for bleeding esophageal varices?",
-          "choices": [
-            "Injection sclerotherapy",
-            "Sengstaken-Blakemore tube placement",
-            "Endoscopic band ligation",
-            "Laser photocoagulation"
-          ],
-          "answerIndex": 2,
-          "explanation": "Endoscopic band ligation is as effective as sclerotherapy but has fewer complications (like ulceration) and requires fewer sessions, making it the preferred first choice.",
-          "source": "Saito MCQ GIT.pdf,,",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-055",
-          "organ": "Esophagus",
-          "originalNumber": 55,
-          "question": "A 42-year-old patient with cirrhosis and bleeding esophageal varices fails endoscopic therapy and vasopressin. What is the next most appropriate step in management?",
-          "choices": [
-            "Emergency total gastrectomy",
-            "Transjugular intrahepatic portosystemic shunt (TIPS)",
-            "Trunkal vagotomy",
-            "Subtotal colectomy"
-          ],
-          "answerIndex": 1,
-          "explanation": "For variceal bleeding refractory to endoscopic and pharmacological therapy, a TIPS procedure is the intervention of choice to decompress the portal system.",
-          "source": "hepatobiliary-gamd gdan.pdf,, LANG Q & A IN SURGERY 5TH EDITION.pdf,",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-056",
-          "organ": "Esophagus",
-          "originalNumber": 56,
-          "question": "What is a known severe complication of using a Sengstaken-Blakemore tube for variceal tamponade?",
-          "choices": [
-            "Esophageal perforation or asphyxiation",
-            "Spontaneous pneumothorax",
-            "Gastric outlet obstruction",
-            "Small bowel infarction"
-          ],
-          "answerIndex": 0,
-          "explanation": "Complications of balloon tamponade include esophageal ulceration, perforation, aspiration, and airway obstruction (asphyxiation).",
-          "source": "hepatobiliary-gamd gdan.pdf,, LANG Q & A IN SURGERY 5TH EDITION.pdf,",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-057",
-          "organ": "Esophagus",
-          "originalNumber": 57,
-          "question": "What is the approximate length of the intra-abdominal part of the esophagus?",
-          "choices": [
-            "1 cm",
-            "4 cm",
-            "10 cm",
-            "15 cm"
-          ],
-          "answerIndex": 1,
-          "explanation": "The intra-abdominal part of the esophagus is about 4 cm in length.",
-          "source": "3-Zatoona.pdf, Page 30.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-058",
-          "organ": "Esophagus",
-          "originalNumber": 58,
-          "question": "Which mediastinal compartment does the thoracic esophagus primarily occupy?",
-          "choices": [
-            "Anterior mediastinum",
-            "Middle mediastinum",
-            "Posterior mediastinum",
-            "Superior mediastinum only"
-          ],
-          "answerIndex": 2,
-          "explanation": "The esophagus occupies the posterior mediastinum.",
-          "source": "3-Zatoona.pdf, Page 30.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-059",
-          "organ": "Esophagus",
-          "originalNumber": 59,
-          "question": "The type of dysphagia classically seen in Plummer-Vinson syndrome is associated with which of the following findings?",
-          "choices": [
-            "A lower esophageal mucosal ring",
-            "An upper esophageal web and iron deficiency anemia",
-            "Absent peristalsis in the esophageal body",
-            "A Zenker's diverticulum"
-          ],
-          "answerIndex": 1,
-          "explanation": "Plummer-Vinson syndrome is characterized by an upper esophageal web, atrophic oral mucosa, spoon-shaped brittle nails (koilonychia), and iron deficiency anemia.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 121.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-060",
-          "organ": "Esophagus",
-          "originalNumber": 60,
-          "question": "Which of the following is considered the worst palliative procedure for inoperable esophageal carcinoma because it does not relieve the inability to swallow saliva?",
-          "choices": [
-            "Endoscopic stenting",
-            "Laser therapy",
-            "Gastrostomy",
-            "Radiotherapy"
-          ],
-          "answerIndex": 2,
-          "explanation": "Gastrostomy is considered the worst palliative procedure because it does not relieve the patient from the inability to swallow their own saliva, unlike stenting.",
-          "source": "Saito MCQ GIT.pdf, Page 137.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-061",
-          "organ": "Esophagus",
-          "originalNumber": 61,
-          "question": "What is the main symptom of Achalasia in its early stages?",
-          "choices": [
-            "Rapidly progressive dysphagia to solids",
-            "Severe retrosternal chest pain",
-            "Long-standing, slowly progressive, painless dysphagia more to fluids than solids",
-            "Massive hematemesis"
-          ],
-          "answerIndex": 2,
-          "explanation": "The main symptom of Achalasia is long-standing, slowly progressive, painless dysphagia which may be more to fluids than solids initially.",
-          "source": "Saito MCQ GIT.pdf, Page 147.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-062",
-          "organ": "Esophagus",
-          "originalNumber": 62,
-          "question": "Which of the following is true regarding a sliding hiatal hernia?",
-          "choices": [
-            "The gastroesophageal junction remains below the diaphragm.",
-            "It is commonly asymptomatic.",
-            "Strangulation of the stomach is a frequent complication.",
-            "Surgery is strictly indicated upon diagnosis."
-          ],
-          "answerIndex": 1,
-          "explanation": "Sliding hiatal hernia is commonly asymptomatic. Surgical interference is only necessary for severe symptomatic GERD or complications.",
-          "source": "Saito MCQ GIT.pdf, Page 147.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-063",
-          "organ": "Esophagus",
-          "originalNumber": 63,
-          "question": "Which of the following is a recognized complication of using a Sengstaken-Blakemore tube for variceal bleeding?",
-          "choices": [
-            "Gastritis",
-            "Esophageal ulceration or perforation",
-            "Splenic rupture",
-            "Mallory-Weiss tear"
-          ],
-          "answerIndex": 1,
-          "explanation": "Complications of balloon tamponade include aspiration of nasopharyngeal secretions, and esophageal ulceration or perforation.",
-          "source": "5- Zatona 2 Hepa.pdf, Page 10.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-064",
-          "organ": "Esophagus",
-          "originalNumber": 64,
-          "question": "The antireflux mechanisms at the lower esophagus include all the following EXCEPT:",
-          "choices": [
-            "A high pressure zone in the lower esophagus",
-            "A thickened circular muscle layer in the lower esophagus forming an anatomical sphincter",
-            "The presence of a part of the esophagus inside the abdomen",
-            "Diaphragmatic crura that are snugly fitting around the esophagus"
-          ],
-          "answerIndex": 1,
-          "explanation": "There is no anatomical sphincter in the lower esophagus, so the circular muscles are not thickened. The cardia acts as a physiological sphincter.",
-          "source": "Saito MCQ GIT.pdf, Page 135.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-065",
-          "organ": "Esophagus",
-          "originalNumber": 65,
-          "question": "The most diagnostic test for gastroesophageal reflux disease (GERD) is:",
-          "choices": [
-            "Barium swallow",
-            "Esophagoscopy",
-            "Esophageal manometry",
-            "24-hour pH monitoring"
-          ],
-          "answerIndex": 3,
-          "explanation": "The 24-hour pH study is the investigation of choice and the most diagnostic test for GERD, correlating symptoms with reflux episodes.",
-          "source": "Saito MCQ GIT.pdf, Page 137.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-066",
-          "organ": "Esophagus",
-          "originalNumber": 66,
-          "question": "A 50-year-old male presents with dysphagia and heartburn. Endoscopy reveals columnar epithelium in the lower esophagus. Which statement is TRUE?",
-          "choices": [
-            "Adenocarcinoma is less common in this condition.",
-            "Most patients do not have associated gastroesophageal reflux.",
-            "The condition is called Barrett's esophagus and treatment is aimed at preventing esophagitis.",
-            "Strictures that form are always malignant."
-          ],
-          "answerIndex": 2,
-          "explanation": "The condition is Barrett's esophagus (columnar metaplasia). Treatment is aimed at preventing esophagitis, as it carries an increased risk for adenocarcinoma.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 105, 120.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-067",
-          "organ": "Esophagus",
-          "originalNumber": 67,
-          "question": "In a patient with achalasia, manometry classically demonstrates:",
-          "choices": [
-            "Decreased lower esophageal sphincter (LES) pressure",
-            "Increased upper and lower esophageal sphincter pressure",
-            "Failure of the LES to relax and absent or weak simultaneous contractions in the esophageal body",
-            "Normal primary peristalsis"
-          ],
-          "answerIndex": 2,
-          "explanation": "Manometric studies in achalasia show weak or absent peristaltic waves in the body of the esophagus and failure of relaxation of the cardia (LES) in response to swallowing.",
-          "source": "Saito MCQ GIT.pdf, Page 141.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-068",
-          "organ": "Esophagus",
-          "originalNumber": 68,
-          "question": "What is the most common cause of esophageal perforation?",
-          "choices": [
-            "Reflux esophagitis",
-            "Swallowed foreign bodies",
-            "Persistent vomiting",
-            "Iatrogenic instrumentation (e.g., endoscopy)"
-          ],
-          "answerIndex": 3,
-          "explanation": "Instrumental (iatrogenic) injury is the most common cause of perforation, representing 65% of cases.",
-          "source": "Saito MCQ GIT.pdf, Page 136.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-069",
-          "organ": "Esophagus",
-          "originalNumber": 69,
-          "question": "A 64-year-old woman presents with severe upper abdominal pain and an air-fluid level in the left posterior mediastinum indicating an incarcerated paraesophageal hernia. What is the next step?",
-          "choices": [
-            "Insertion of a weighted bougie",
-            "Elevation of the head of the bed",
-            "Laparotomy and vagotomy",
-            "Surgery, reduction of the gastric volvulus, and repair of the hernia"
-          ],
-          "answerIndex": 3,
-          "explanation": "Paraesophageal hernias are prone to obstruction, bleeding, and volvulus. Surgical repair is indicated to prevent catastrophic complications.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 102, 117.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-070",
-          "organ": "Esophagus",
-          "originalNumber": 70,
-          "question": "Which contrast material should be used for the initial esophagogram if a thoracic esophageal perforation is suspected?",
-          "choices": [
-            "Thin barium",
-            "Thick barium paste",
-            "Water-soluble contrast (e.g., Gastrografin)",
-            "Intravenous iodine"
-          ],
-          "answerIndex": 2,
-          "explanation": "A study using water-soluble contrast (Gastrografin) is typically ordered initially because of concerns for severe mediastinitis if barium leaks into the mediastinum.",
-          "source": "Pretest MCQ.pdf, Page 1176.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-071",
-          "organ": "Esophagus",
-          "originalNumber": 71,
-          "question": "Which procedure selectively denervates the parietal cell mass with a low incidence of side effects, preserving the vagal supply to the antrum?",
-          "choices": [
-            "Truncal vagotomy",
-            "Billroth I procedure",
-            "Highly selective vagotomy (Parietal cell vagotomy)",
-            "Laparoscopic Nissen fundoplication"
-          ],
-          "answerIndex": 2,
-          "explanation": "Highly selective vagotomy selectively denervates the parietal cell mass, avoiding the necessity of a drainage procedure, and has low side effects.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 115.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-072",
-          "organ": "Esophagus",
-          "originalNumber": 72,
-          "question": "Which of the following is considered an indication for surgery in patients with gastroesophageal reflux disease (GERD)?",
-          "choices": [
-            "The presence of an asymptomatic sliding hiatal hernia",
-            "Atypical symptoms such as respiratory, pharyngeal, and dental issues",
-            "The first episode of heartburn",
-            "Pregnancy-induced reflux"
-          ],
-          "answerIndex": 1,
-          "explanation": "Indications for surgery in GERD include failure of medical treatment, severe complications, non-compliance, and atypical symptoms (respiratory, pharyngeal, dental).",
-          "source": "Saito MCQ GIT.pdf, Page 144.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-073",
-          "organ": "Esophagus",
-          "originalNumber": 73,
-          "question": "A 38-year-old man attempts suicide by ingesting drain cleaner fluid. Which of the following is TRUE regarding his management?",
-          "choices": [
-            "Copious neutralizing (acid) solutions should be given.",
-            "Emetics should be administered.",
-            "Stricture formation is inevitable.",
-            "Fluid and solid foods can usually be started several days after the injury."
-          ],
-          "answerIndex": 3,
-          "explanation": "Emetics and neutralizing agents are contraindicated as they worsen damage. Oral feeding is avoided initially but can be started after several days if safe.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 108, 123.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-074",
-          "organ": "Esophagus",
-          "originalNumber": 74,
-          "question": "A 69-year-old man has acute upper gastrointestinal hemorrhage following a bout of repeated vomiting after heavy alcohol intake. Gastroscopy reveals linear mucosal tears at the GE junction. What is the diagnosis?",
-          "choices": [
-            "Reflux esophagitis with ulceration",
-            "Barrett's esophagus",
-            "Carcinoma of the esophagus",
-            "Mallory-Weiss tear"
-          ],
-          "answerIndex": 3,
-          "explanation": "Mallory-Weiss syndrome is characterized by acute UGI hemorrhage due to arterial bleeding from linear mucosal tears at the GE junction following repeated vomiting.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 106, 120.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-075",
-          "organ": "Esophagus",
-          "originalNumber": 75,
-          "question": "Which of the following conditions is considered a predisposing factor for squamous cell carcinoma of the esophagus, but NOT for adenocarcinoma?",
-          "choices": [
-            "Barrett's esophagus",
-            "Corrosive stricture of the esophagus",
-            "Sliding hiatal hernia",
-            "Gastroesophageal reflux disease"
-          ],
-          "answerIndex": 1,
-          "explanation": "Corrosive strictures, achalasia, and smoking/alcohol predispose to squamous cell carcinoma. Barrett's esophagus and GERD predispose to adenocarcinoma.",
-          "source": "Saito MCQ GIT.pdf, Page 146.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-076",
-          "organ": "Esophagus",
-          "originalNumber": 76,
-          "question": "In the surgical treatment of esophageal carcinoma, why is radical en bloc resection (esophagectomy) indicated for early stages?",
-          "choices": [
-            "It is the only hope for a cure.",
-            "It completely eliminates the need for chemotherapy.",
-            "It prevents the development of Barrett's esophagus.",
-            "It guarantees zero operative mortality."
-          ],
-          "answerIndex": 0,
-          "explanation": "Radical surgery is the only hope for cure in patients with early, resectable esophageal carcinomas in good general condition.",
-          "source": "Saito MCQ GIT.pdf, Page 148, 153.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-077",
-          "organ": "Esophagus",
-          "originalNumber": 77,
-          "question": "What is the anatomical location of the normal narrowing site where the esophagus crosses the diaphragm?",
-          "choices": [
-            "15 cm from the incisor teeth",
-            "25 cm from the incisor teeth",
-            "40 cm from the incisor teeth",
-            "50 cm from the incisor teeth"
-          ],
-          "answerIndex": 2,
-          "explanation": "The diaphragmatic constriction (esophageal hiatus) is located at approximately 40 cm from the incisor teeth.",
-          "source": "3-Zatoona.pdf, Page 37; Bailey & Love MCQs.pdf, Page 580.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-078",
-          "organ": "Esophagus",
-          "originalNumber": 78,
-          "question": "Dysphagia to liquids more than solids from the onset is highly characteristic of:",
-          "choices": [
-            "Achalasia of the cardia",
-            "Sliding hiatus hernia",
-            "Carcinoma of the esophagus",
-            "Foreign body in the esophagus"
-          ],
-          "answerIndex": 0,
-          "explanation": "The main symptom of Achalasia is long-standing, slowly progressive, painless dysphagia which may be more to fluids than solids.",
-          "source": "Saito MCQ GIT.pdf, Page 134.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-079",
-          "organ": "Esophagus",
-          "originalNumber": 79,
-          "question": "Which of the following statements about diffuse esophageal spasm (DES) is TRUE?",
-          "choices": [
-            "A barium swallow will always show a completely normal esophagus.",
-            "It is characterized by weak, low-amplitude peristalsis.",
-            "The main symptom is often retrosternal chest pain rather than just dysphagia.",
-            "Treatment is exclusively surgical."
-          ],
-          "answerIndex": 2,
-          "explanation": "In diffuse esophageal spasm, the main symptom is retrosternal pain (which can simulate coronary artery disease) rather than dysphagia. Barium swallow shows a \"corkscrew\" esophagus.",
-          "source": "Saito MCQ GIT.pdf, Page 153.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-080",
-          "organ": "Esophagus",
-          "originalNumber": 80,
-          "question": "Regarding the epithelial lining of the esophagus, which statement is true?",
-          "choices": [
-            "It is lined entirely by ciliated columnar epithelium.",
-            "It is lined by keratinized stratified squamous epithelium.",
-            "It is lined by non-keratinized stratified squamous epithelium, which changes to columnar at the cardia.",
-            "The upper third is columnar and the lower two-thirds are squamous."
-          ],
-          "answerIndex": 2,
-          "explanation": "The esophagus is lined by non-keratinized stratified squamous epithelium along its length. At the cardia, it changes to columnar epithelium.",
-          "source": "Saito MCQ GIT.pdf, Page 154.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-081",
-          "organ": "Esophagus",
-          "originalNumber": 81,
-          "question": "Which of the following factors is known to physiologically DECREASE the resting pressure of the lower esophageal sphincter (LES), thereby promoting reflux?",
-          "choices": [
-            "Gastrin",
-            "A high-protein diet",
-            "Cholinergic agents (e.g., bethanechol)",
-            "Glucagon and secretin"
-          ],
-          "answerIndex": 3,
-          "explanation": "Glucagon, secretin, anticholinergic agents, fatty foods, chocolate, and alcohol decrease LES resting pressure. Gastrin and a high-protein diet increase it.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 122.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-082",
-          "organ": "Esophagus",
-          "originalNumber": 82,
-          "question": "The Heller myotomy is the standard surgical treatment for which esophageal condition?",
-          "choices": [
-            "Gastroesophageal reflux disease",
-            "Achalasia of the cardia",
-            "Barrett's esophagus",
-            "Mallory-Weiss tear"
-          ],
-          "answerIndex": 1,
-          "explanation": "Cardiomyotomy (Heller's operation) is the most reliable method of treatment for achalasia, involving longitudinal division of the muscle fibers of the lower esophagus.",
-          "source": "Saito MCQ GIT.pdf, Page 136, 152.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-083",
-          "organ": "Esophagus",
-          "originalNumber": 83,
-          "question": "A 1-month-old infant presents with excessive frothy salivation, choking, and cyanosis after feeding. The inability to pass a nasogastric tube into the stomach confirms the diagnosis. What is the most common form of this anomaly?",
-          "choices": [
-            "Esophageal atresia without a connection to the trachea",
-            "Esophageal atresia with a fistula connecting the trachea to the distal esophageal segment (Type",
-            "C) Tracheoesophageal fistula without esophageal atresia (H-type)",
-            "Esophageal atresia with a fistula to the proximal segment"
-          ],
-          "answerIndex": 1,
-          "explanation": "The most common anomaly is proximal blind esophageal atresia with a distal tracheoesophageal fistula (Type C).",
-          "source": "Saito MCQ GIT.pdf, Page 151; LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 306.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-084",
-          "organ": "Esophagus",
-          "originalNumber": 84,
           "question": "In a patient presenting with spontaneous rupture of the esophagus (Boerhaave's syndrome), where is the tear most frequently located?",
           "choices": [
             "Upper third of the esophagus, anteriorly",
@@ -10959,462 +9631,46 @@
             "At the exact level of the cricopharyngeus muscle"
           ],
           "answerIndex": 2,
-          "explanation": "Spontaneous rupture of the esophagus usually occurs in the lower third on the left posterolateral wall, often following heavy food/alcohol intake and violent vomiting.",
-          "source": "4- zatona 1 GIT.pdf, Page 1; LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 121.",
-          "section": "Section 7: Esophageal Varices"
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 1).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
         },
         {
-          "id": "kellawi-esophagus-085",
+          "id": "kellawi-esophagus-002",
           "organ": "Esophagus",
-          "originalNumber": 85,
-          "question": "A 65-year-old male is diagnosed with a Zenker's diverticulum. This diverticulum protrudes through a weakness between which two muscles?",
+          "originalNumber": 2,
+          "question": "What is the most common cause of esophageal perforation?",
           "choices": [
-            "The superior and middle pharyngeal constrictors",
-            "The thyropharyngeus (inferior constrictor) and the cricopharyngeus muscles",
-            "The cricopharyngeus and the upper esophageal circular muscles",
-            "The sternocleidomastoid and the omohyoid muscles"
-          ],
-          "answerIndex": 1,
-          "explanation": "Zenker's diverticulum occurs in Killian's triangle, which is a weakness between the lower border of the inferior constrictor (thyropharyngeus) and the cricopharyngeus muscles.",
-          "source": "4- zatona 1 GIT.pdf, Page 1; كحك العيد.pdf, Page 78.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-086",
-          "organ": "Esophagus",
-          "originalNumber": 86,
-          "question": "Which of the following is an INCORRECT statement regarding the blood supply and drainage of the esophagus?",
-          "choices": [
-            "The esophagus has a poor, segmental blood supply, accounting for the high incidence of anastomotic leaks.",
-            "The left gastric artery supplies the lower part of the esophagus.",
-            "The lower esophagus is a site of portosystemic venous anastomosis.",
-            "The venous drainage of the upper esophagus empties directly into the inferior vena cava."
+            "Reflux esophagitis",
+            "Swallowed foreign bodies",
+            "Persistent vomiting",
+            "Iatrogenic instrumentation (e.g., endoscopy)"
           ],
           "answerIndex": 3,
-          "explanation": "The venous drainage of the upper esophagus does not empty into the IVC. The poor segmental supply contributes to anastomotic leaks, and the lower end is a site for portosystemic anastomosis.",
-          "source": "Saito MCQ GIT.pdf, Page 141, 154; 3-Zatoona.pdf, Page 8.",
-          "section": "Section 7: Esophageal Varices"
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 2).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
         },
         {
-          "id": "kellawi-esophagus-087",
+          "id": "kellawi-esophagus-003",
           "organ": "Esophagus",
-          "originalNumber": 87,
-          "question": "An 80-year-old woman arrives complaining of vomiting and severe retrosternal pain. A nasogastric tube is inserted with immediate clinical improvement. A chest X-ray shows the tube looped in her left chest. What is the diagnosis?",
+          "originalNumber": 3,
+          "question": "Which of the following is considered the worst palliative procedure for inoperable esophageal carcinoma because it does not relieve the inability to swallow saliva?",
           "choices": [
-            "Achalasia",
-            "Perforated esophagus",
-            "Gastric volvulus secondary to a paraesophageal hernia",
-            "Sliding hiatal hernia"
+            "Endoscopic stenting",
+            "Laser therapy",
+            "Gastrostomy",
+            "Radiotherapy"
           ],
           "answerIndex": 2,
-          "explanation": "The presence of the nasogastric tube looped in the chest with severe retrosternal pain relieved by decompression indicates a gastric volvulus inside an intrathoracic stomach (associated with paraesophageal hernia).",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 86, 95.",
-          "section": "Section 7: Esophageal Varices"
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 3).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
         },
         {
-          "id": "kellawi-esophagus-088",
+          "id": "kellawi-esophagus-004",
           "organ": "Esophagus",
-          "originalNumber": 88,
-          "question": "Which of the following symptoms is considered an \"atypical\" presentation of gastroesophageal reflux disease (GERD)?",
-          "choices": [
-            "Heartburn",
-            "Regurgitation",
-            "Water brash",
-            "Recurrent unexplained teeth caries"
-          ],
-          "answerIndex": 3,
-          "explanation": "Heartburn, regurgitation, and water brash are typical symptoms. Atypical symptoms include recurrent unexplained teeth caries, chronic cough, and angina-like chest pain.",
-          "source": "3-Zatoona.pdf, Page 12; 4- zatona 1 GIT.pdf, Page 2.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-089",
-          "organ": "Esophagus",
-          "originalNumber": 89,
-          "question": "A 55-year-old male with long-standing GERD undergoes endoscopy, which reveals a smooth, tapering stricture at the lower end of the esophagus with no mucosal disruption or overhanging edges. What is the most likely diagnosis?",
-          "choices": [
-            "Adenocarcinoma",
-            "Benign peptic stricture",
-            "Squamous cell carcinoma",
-            "Achalasia"
-          ],
-          "answerIndex": 1,
-          "explanation": "A smooth, tapering stricture at the lower esophagus in a patient with chronic GERD is characteristic of a benign peptic stricture. Malignancy typically shows an irregular, ulcerated area with overhanging edges.",
-          "source": "4- zatona 1 GIT.pdf, Page 8; 3-Zatoona.pdf, Page 18.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-090",
-          "organ": "Esophagus",
-          "originalNumber": 90,
-          "question": "Which operation involves the total radical esophagectomy with gastric pull-up or colon transposition for middle or lower third esophageal cancers?",
-          "choices": [
-            "Heller's operation",
-            "Nissen fundoplication",
-            "Ivor Lewis operation",
-            "Ramstedt's operation"
-          ],
-          "answerIndex": 2,
-          "explanation": "The Ivor Lewis operation (total radical esophagectomy) is used as a curative surgical option for carcinomas of the middle and lower thirds of the esophagus.",
-          "source": "3-Zatoona.pdf, Page 10; 3-Zatoona.pdf, Page 46.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-091",
-          "organ": "Esophagus",
-          "originalNumber": 91,
-          "question": "A 46-year-old man presents with dysphagia of recent onset. Biopsy of a lower-third esophageal lesion shows adenocarcinoma. His metastatic workup is negative, and he is in excellent medical condition. What is the best treatment?",
-          "choices": [
-            "Insertion of an esophageal stent",
-            "Radiation therapy alone",
-            "Chemotherapy alone",
-            "Surgical resection of the esophagus"
-          ],
-          "answerIndex": 3,
-          "explanation": "In a healthy patient with a non-metastatic, resectable adenocarcinoma of the lower esophagus, surgical resection provides the best hope for a cure.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 108, 123.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-092",
-          "organ": "Esophagus",
-          "originalNumber": 92,
-          "question": "What is the gold standard imaging or measurement tool to confirm the diagnosis and quantify the severity of Gastroesophageal Reflux Disease (GERD)?",
-          "choices": [
-            "Barium swallow",
-            "Ambulatory 24-hour pH monitoring",
-            "Computed tomography (CT) scan",
-            "Endoscopic ultrasound"
-          ],
-          "answerIndex": 1,
-          "explanation": "Ambulatory 24-hour pH monitoring is the gold standard for measuring and diagnosing gastroesophageal acid reflux.",
-          "source": "3-Zatoona.pdf, Page 9.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-093",
-          "organ": "Esophagus",
-          "originalNumber": 93,
-          "question": "Endoscopic ultrasound (EUS) is primarily used in the management of esophageal carcinoma to:",
-          "choices": [
-            "Determine the exact length of the esophagus.",
-            "Dilate benign strictures.",
-            "Accurately determine the T stage (depth of wall invasion) and assess regional lymph nodes.",
-            "Neutralize acidic refluxate."
-          ],
-          "answerIndex": 2,
-          "explanation": "EUS is highly accurate for determining the depth of tumor invasion (T staging) and evaluating local mediastinal lymph nodes in esophageal carcinoma.",
-          "source": "Pretest MCQ.pdf, Page 1106.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-094",
-          "organ": "Esophagus",
-          "originalNumber": 94,
-          "question": "Which histological change is the defining hallmark of Barrett's esophagus?",
-          "choices": [
-            "Hyperplasia of the submucosal glands",
-            "Atrophy of the muscularis propria",
-            "Metaplasia of the normal squamous epithelium to specialized columnar epithelium",
-            "Severe dysplasia of the cricopharyngeus muscle"
-          ],
-          "answerIndex": 2,
-          "explanation": "Barrett's esophagus is an intestinal metaplasia where the normal stratified squamous epithelium of the lower esophagus is replaced by columnar mucosa.",
-          "source": "3-Zatoona.pdf, Page 26; LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 120.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-095",
-          "organ": "Esophagus",
-          "originalNumber": 95,
-          "question": "Which of the following is TRUE concerning the use of pneumatic balloon dilatation in the treatment of achalasia?",
-          "choices": [
-            "It is contraindicated and has a near 100% perforation rate.",
-            "It aims to disrupt the muscular layers of the lower esophageal sphincter (LES).",
-            "It selectively denervates the vagus nerve.",
-            "It is only effective for diffuse esophageal spasm."
-          ],
-          "answerIndex": 1,
-          "explanation": "Pneumatic dilatation is a first-line therapy for achalasia that forcefully dilates and disrupts the muscular layers of the LES to relieve the functional obstruction.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 112, 124.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-096",
-          "organ": "Esophagus",
-          "originalNumber": 96,
-          "question": "The \"bird's beak\" or \"parrot's beak\" appearance on a barium swallow is the classic radiologic sign for which disease?",
-          "choices": [
-            "Boerhaave's syndrome",
-            "Sliding hiatal hernia",
-            "Cardiac achalasia",
-            "Peptic stricture"
-          ],
-          "answerIndex": 2,
-          "explanation": "A smooth, tapering \"bird's beak\" deformity at the lower esophagus on barium swallow is the classic presentation of cardiac achalasia.",
-          "source": "4- zatona 1 GIT.pdf, Page 12; كحك العيد.pdf, Page 73.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-097",
-          "organ": "Esophagus",
-          "originalNumber": 97,
-          "question": "In a patient presenting with Plummer-Vinson syndrome, all of the following are expected findings EXCEPT:",
-          "choices": [
-            "Iron deficiency anemia",
-            "An upper esophageal web",
-            "Koilonychia (spoon-shaped brittle nails)",
-            "A sliding hiatal hernia"
-          ],
-          "answerIndex": 3,
-          "explanation": "Plummer-Vinson syndrome is characterized by an upper esophageal web, atrophic oral mucosa, iron deficiency anemia, and koilonychia. It is not typically associated with a hiatal hernia.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 121.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-098",
-          "organ": "Esophagus",
-          "originalNumber": 98,
-          "question": "A patient swallowed a large coin that is now lodged in the esophagus. Where is the MOST LIKELY anatomical site for this foreign body to become impacted?",
-          "choices": [
-            "At the gastroesophageal junction",
-            "At the level of the cricopharyngeus muscle (upper esophageal sphincter)",
-            "At the diaphragmatic hiatus",
-            "Mid-esophagus at the level of the azygos vein"
-          ],
-          "answerIndex": 1,
-          "explanation": "The narrowest part of the esophagus is the cricopharyngeal sphincter (15 cm from the incisors), making it the most common site for ingested foreign bodies to become impacted.",
-          "source": "Saito MCQ GIT.pdf, Page 136.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-099",
-          "organ": "Esophagus",
-          "originalNumber": 99,
-          "question": "Which of the following statements about paraesophageal (rolling) hiatal hernia is FALSE?",
-          "choices": [
-            "The gastroesophageal junction remains in its normal anatomical position below the diaphragm.",
-            "It accounts for the majority (85%) of all hiatal hernias.",
-            "It can be complicated by gastric volvulus and strangulation.",
-            "The fundus of the stomach herniates upward into the chest."
-          ],
-          "answerIndex": 1,
-          "explanation": "Paraesophageal hernias represent only about 10-15% of hiatal hernias. Sliding hernias are the most common, accounting for 85%.",
-          "source": "3-Zatoona.pdf, Page 30; LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 120.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-100",
-          "organ": "Esophagus",
-          "originalNumber": 100,
-          "question": "The long-term complication of \"gas bloat syndrome\" and flatulence is most commonly associated with which surgical procedure?",
-          "choices": [
-            "Trans-hiatal esophagectomy",
-            "Heller cardiomyotomy",
-            "Nissen's fundoplication",
-            "Endoscopic band ligation"
-          ],
-          "answerIndex": 2,
-          "explanation": "Nissen's fundoplication involves a 360-degree wrap around the LES, which can lead to gas bloat syndrome (inability to belch) and flatulence as long-term complications.",
-          "source": "3-Zatoona.pdf, Page 38.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-101",
-          "organ": "Esophagus",
-          "originalNumber": 101,
-          "question": "A 20-year-old male is presented with severe dysphagia after drinking concentrated sulfuric acid 6 months ago. Barium study shows multiple long segments of esophageal strictures. What is the most appropriate initial management approach if endoscopic dilatation fails or is unfeasible due to the length?",
-          "choices": [
-            "Repeated blind nasogastric tube insertions",
-            "Injection of botulinum toxin",
-            "Trans-hiatal esophagectomy and colon transposition (bypass)",
-            "Nissen fundoplication"
-          ],
-          "answerIndex": 2,
-          "explanation": "For multiple, long segment post-corrosive strictures that are refractory to dilatation, a colonic bypass (colon transposition) is the preferred surgical option.",
-          "source": "3-Zatoona.pdf, Page 22; 3-Zatoona.pdf, Page 46.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-102",
-          "organ": "Esophagus",
-          "originalNumber": 102,
-          "question": "In the medical management of esophageal varices, which pharmacologic agent is commonly infused intravenously to rapidly lower portal pressure during an acute bleeding episode?",
-          "choices": [
-            "Calcium channel blockers",
-            "Pitressin (Vasopressin) or Octreotide",
-            "Proton pump inhibitors",
-            "Diazepam"
-          ],
-          "answerIndex": 1,
-          "explanation": "Intravenous pitressin (vasopressin) or somatostatin analogs like octreotide are used initially to cause splanchnic vasoconstriction and lower portal pressure during acute variceal bleeding.",
-          "source": "5- Zatona 2 Hepa.pdf, Page 20; hepatobiliary-gamd gdan.pdf, Page 20.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-103",
-          "organ": "Esophagus",
-          "originalNumber": 103,
-          "question": "A patient undergoes a barium swallow which reveals a \"corkscrew\" appearance of the esophagus. This radiologic sign is pathognomonic for:",
-          "choices": [
-            "Cardiac achalasia",
-            "Diffuse esophageal spasm",
-            "Benign stricture",
-            "Esophageal candidiasis"
-          ],
-          "answerIndex": 1,
-          "explanation": "The \"corkscrew esophagus\" appearance on a barium swallow is indicative of diffuse esophageal spasm, representing uncoordinated, simultaneous contractions.",
-          "source": "4- zatona 1 GIT.pdf, Page 12; كحك العيد.pdf, Page 73.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-104",
-          "organ": "Esophagus",
-          "originalNumber": 104,
-          "question": "A 42-year-old patient with cirrhosis presents with bleeding esophageal varices. Endoscopic band ligation successfully stops the bleeding. To prevent recurrence, which class of medication is typically prescribed long-term?",
-          "choices": [
-            "Alpha-adrenergic agonists",
-            "Beta-blockers (e.g., propranolol)",
-            "Antacids",
-            "Steroids"
-          ],
-          "answerIndex": 1,
-          "explanation": "Non-selective beta-blockers (like propranolol) are used long-term to reduce portal pressure and prevent recurrent variceal bleeding.",
-          "source": "كحك العيد.pdf, Page 90.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-105",
-          "organ": "Esophagus",
-          "originalNumber": 105,
-          "question": "What type of epithelium lines the upper third of the normal adult esophagus?",
-          "choices": [
-            "Ciliated pseudostratified columnar epithelium",
-            "Simple columnar epithelium",
-            "Non-keratinized stratified squamous epithelium",
-            "Transitional epithelium"
-          ],
-          "answerIndex": 2,
-          "explanation": "The entire normal human esophagus is lined by non-keratinized stratified squamous epithelium, regardless of the third.",
-          "source": "Saito MCQ GIT.pdf, Page 154.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-106",
-          "organ": "Esophagus",
-          "originalNumber": 106,
-          "question": "The musculature of the esophagus is unique because:",
-          "choices": [
-            "It consists solely of smooth muscle throughout its length.",
-            "It consists solely of skeletal muscle throughout its length.",
-            "The upper third is striated (skeletal) muscle, while the distal two-thirds contain smooth muscle.",
-            "The outer layer is smooth muscle and the inner layer is striated muscle."
-          ],
-          "answerIndex": 2,
-          "explanation": "The musculature of the upper third of the esophagus is striated, while the middle and lower thirds gradually transition to involuntary smooth muscle.",
-          "source": "Saito MCQ GIT.pdf, Page 141.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-107",
-          "organ": "Esophagus",
-          "originalNumber": 107,
-          "question": "Which of the following is considered an EARLY symptom of esophageal carcinoma?",
-          "choices": [
-            "Copious vomiting of bile",
-            "Massive painless hematemesis",
-            "Progressive dysphagia to solids",
-            "A completely silent abdomen"
-          ],
-          "answerIndex": 2,
-          "explanation": "Progressive dysphagia (initially to solid foods, then liquids) is the main and earliest symptom of esophageal carcinoma. Vomiting is not an early symptom.",
-          "source": "3-Zatoona.pdf, Page 18; Saito MCQ GIT.pdf, Page 138.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-108",
-          "organ": "Esophagus",
-          "originalNumber": 108,
-          "question": "In cases of corrosive esophageal injury, which of the following interventions is strictly CONTRAINDICATED in the acute phase?",
-          "choices": [
-            "Securing the airway with endotracheal intubation",
-            "Administering broad-spectrum antibiotics",
-            "Performing gastric lavage and administering emetics",
-            "Performing a gentle contrast swallow to assess for perforation"
-          ],
-          "answerIndex": 2,
-          "explanation": "Gastric lavage, emetics, and neutralizing agents are strictly contraindicated because they can cause a second pass of the corrosive agent or an exothermic reaction, worsening the burn and increasing perforation risk.",
-          "source": "3-Zatoona.pdf, Page 15; LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 108.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-109",
-          "organ": "Esophagus",
-          "originalNumber": 109,
-          "question": "Which of the following accurately describes the relationship of the esophagus to the left atrium?",
-          "choices": [
-            "The esophagus is located anterior to the left atrium.",
-            "The esophagus is located posterior to the left atrium.",
-            "The esophagus runs laterally to the right of the left atrium.",
-            "The esophagus pierces the left atrium."
-          ],
-          "answerIndex": 1,
-          "explanation": "Anatomically, the esophagus lies immediately posterior to the left atrium. Enlargement of the left atrium can indent the esophagus.",
-          "source": "3-Zatoona.pdf, Page 38.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-110",
-          "organ": "Esophagus",
-          "originalNumber": 110,
-          "question": "A patient presents with a history of long-standing reflux esophagitis. Endoscopy shows a short, 2 cm segment of narrowing above the gastroesophageal junction with normal mucosa above and columnar mucosa below. This finding is most consistent with:",
-          "choices": [
-            "A malignant stricture",
-            "A benign peptic stricture associated with Barrett's esophagus",
-            "Achalasia of the cardia",
-            "A Schatzki's ring"
-          ],
-          "answerIndex": 1,
-          "explanation": "A stricture located higher than usual (above the GE junction) with columnar epithelium (Barrett's) below it is characteristic of a benign peptic stricture complicating long-standing GERD.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 105.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-111",
-          "organ": "Esophagus",
-          "originalNumber": 111,
-          "question": "Which of the following represents the preferred initial diagnostic step for a patient presenting with an acute, massive upper gastrointestinal hemorrhage suspected to be from esophageal varices?",
-          "choices": [
-            "Barium swallow",
-            "Urgent upper gastrointestinal endoscopy",
-            "Computed tomography (CT) scan of the abdomen",
-            "Exploratory laparotomy"
-          ],
-          "answerIndex": 1,
-          "explanation": "Urgent upper GI endoscopy is the first step in locating the source of massive hematemesis and allows for immediate therapeutic intervention (like band ligation).",
-          "source": "Saito MCQ GIT.pdf, Page 179.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-112",
-          "organ": "Esophagus",
-          "originalNumber": 112,
-          "question": "Which operation is classically indicated for a patient with severe, recurrent gastroesophageal reflux disease who has failed maximal medical therapy and has a documented sliding hiatal hernia?",
-          "choices": [
-            "Ivor Lewis operation",
-            "Heller myotomy",
-            "Laparoscopic Nissen fundoplication",
-            "Subtotal gastrectomy"
-          ],
-          "answerIndex": 2,
-          "explanation": "Laparoscopic Nissen fundoplication is the surgical treatment of choice for medically refractory GERD and sliding hiatal hernia.",
-          "source": "3-Zatoona.pdf, Page 40; LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 123.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-113",
-          "organ": "Esophagus",
-          "originalNumber": 113,
+          "originalNumber": 4,
           "question": "A patient complains of intermittent, severe chest pain that mimics angina pectoris. Coronary artery disease is ruled out. Esophageal manometry reveals high-amplitude, prolonged, simultaneous contractions in the esophageal body with normal LES relaxation. What is the diagnosis?",
           "choices": [
             "Achalasia",
@@ -11423,302 +9679,302 @@
             "Esophageal web"
           ],
           "answerIndex": 1,
-          "explanation": "High-amplitude, simultaneous, prolonged contractions with normal LES relaxation are the hallmark manometric findings of diffuse esophageal spasm (DES).",
-          "source": "Pretest MCQ.pdf, Page 1163, 1177.",
-          "section": "Section 7: Esophageal Varices"
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 4).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
         },
         {
-          "id": "kellawi-esophagus-114",
+          "id": "kellawi-esophagus-005",
           "organ": "Esophagus",
-          "originalNumber": 114,
+          "originalNumber": 5,
+          "question": "What is the most common benign neoplasm of the esophagus?",
+          "choices": [
+            "Adenoma",
+            "Papilloma",
+            "Leiomyoma",
+            "Hemangioma"
+          ],
+          "answerIndex": 2,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 5).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-006",
+          "organ": "Esophagus",
+          "originalNumber": 6,
+          "question": "A 20-year-old woman ingests a strongly alkaline drain-cleaning fluid. Which of the following is TRUE regarding her immediate management?",
+          "choices": [
+            "Acidic solutions should be given to neutralize the alkali.",
+            "Emetics should be administered to clear the stomach.",
+            "Gastric lavage should be aggressively performed.",
+            "Endotracheal tube intubation may be required in case of stridor or suffocation."
+          ],
+          "answerIndex": 3,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 6).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-007",
+          "organ": "Esophagus",
+          "originalNumber": 7,
+          "question": "Which operation involves the total radical esophagectomy with gastric pull-up or colon transposition for middle or lower third esophageal cancers?",
+          "choices": [
+            "Heller's operation",
+            "Nissen fundoplication",
+            "Ivor Lewis operation",
+            "Ramstedt's operation"
+          ],
+          "answerIndex": 2,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 7).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-008",
+          "organ": "Esophagus",
+          "originalNumber": 8,
+          "question": "Regarding the epithelial lining of the esophagus, which statement is true?",
+          "choices": [
+            "It is lined entirely by ciliated columnar epithelium.",
+            "It is lined by keratinized stratified squamous epithelium.",
+            "It is lined by non-keratinized stratified squamous epithelium, which changes to columnar at the cardia.",
+            "The upper third is columnar and the lower two-thirds are squamous."
+          ],
+          "answerIndex": 2,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 8).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-009",
+          "organ": "Esophagus",
+          "originalNumber": 9,
+          "question": "What is the gold standard imaging or measurement tool to confirm the diagnosis and quantify the severity of Gastroesophageal Reflux Disease (GERD)?",
+          "choices": [
+            "Barium swallow",
+            "Ambulatory 24-hour pH monitoring",
+            "Computed tomography (CT) scan",
+            "Endoscopic ultrasound"
+          ],
+          "answerIndex": 1,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 9).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-010",
+          "organ": "Esophagus",
+          "originalNumber": 10,
           "question": "Which of the following is considered an extra-esophageal (atypical) manifestation of gastroesophageal reflux disease (GERD)?",
           "choices": [
-            "Odynophagia",
+            "Heartburn",
             "Water brash",
             "Chronic cough or recurrent asthma-like attacks",
             "Progressive dysphagia to solids"
           ],
           "answerIndex": 2,
-          "explanation": "Atypical or extra-esophageal symptoms of GERD include chronic cough, asthma-like symptoms, hoarseness, and unexplained dental caries due to micro-aspiration of acid.",
-          "source": "Saito MCQ GIT.pdf, Page 144, 154.",
-          "section": "Section 7: Esophageal Varices"
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 10).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
         },
         {
-          "id": "kellawi-esophagus-115",
+          "id": "kellawi-esophagus-011",
           "organ": "Esophagus",
-          "originalNumber": 115,
-          "question": "The resting pressure of the normal lower esophageal sphincter (LES) is approximately:",
+          "originalNumber": 11,
+          "question": "Dysphagia to liquids more than solids from the onset is highly characteristic of:",
           "choices": [
-            "0 - 5 mmHg",
-            "10 - 25 mmHg",
-            "40 - 60 mmHg",
-            "80 - 100 mmHg"
-          ],
-          "answerIndex": 1,
-          "explanation": "The normal resting pressure of the physiological lower esophageal sphincter is typically between 10 and 25 mmHg.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 122.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-116",
-          "organ": "Esophagus",
-          "originalNumber": 116,
-          "question": "In the management of esophageal carcinoma, a trans-hiatal esophagectomy refers to a surgical approach that:",
-          "choices": [
-            "Utilizes a right thoracotomy and a laparotomy.",
-            "Uses a cervical incision and a laparotomy, avoiding a thoracotomy.",
-            "Relies solely on an endoscopic approach.",
-            "Requires a median sternotomy."
-          ],
-          "answerIndex": 1,
-          "explanation": "A trans-hiatal esophagectomy (Orringer's approach) involves a laparotomy and a cervical incision to mobilize and remove the esophagus without opening the chest (no thoracotomy).",
-          "source": "Saito MCQ GIT.pdf, Page 145.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-117",
-          "organ": "Esophagus",
-          "originalNumber": 117,
-          "question": "A 60-year-old male with long-standing GERD undergoes an endoscopy. Biopsies of the lower esophagus reveal high-grade dysplasia within a segment of Barrett's esophagus. What is the recommended management?",
-          "choices": [
-            "Reassurance and continuation of antacids",
-            "Prophylactic esophagectomy",
-            "Heller myotomy",
-            "Monthly barium swallows"
-          ],
-          "answerIndex": 1,
-          "explanation": "High-grade dysplasia in Barrett's esophagus has a very high risk (40-50%) of progressing to adenocarcinoma, and prophylactic esophagectomy is typically recommended in fit patients.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 109, 124.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-118",
-          "organ": "Esophagus",
-          "originalNumber": 118,
-          "question": "Following a difficult balloon dilatation for achalasia, a patient develops sudden severe chest pain, tachycardia, and subcutaneous emphysema in the neck. What is the most likely complication?",
-          "choices": [
-            "Acute myocardial infarction",
-            "Spontaneous pneumothorax",
-            "Iatrogenic esophageal perforation",
-            "Massive variceal bleed"
-          ],
-          "answerIndex": 2,
-          "explanation": "Severe chest pain, tachycardia, and subcutaneous emphysema following endoscopic instrumentation or dilatation are classic signs of an iatrogenic esophageal perforation.",
-          "source": "3-Zatoona.pdf, Page 31.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-119",
-          "organ": "Esophagus",
-          "originalNumber": 119,
-          "question": "What is the definitive diagnostic procedure of choice to confirm the presence of esophageal varices and assess their risk of bleeding?",
-          "choices": [
-            "Barium swallow",
-            "Upper gastrointestinal endoscopy",
-            "Abdominal ultrasound",
-            "24-hour pH monitoring"
-          ],
-          "answerIndex": 1,
-          "explanation": "Upper GI endoscopy allows for direct visualization of the varices, assessment of their size and red wale markings (risk of bleeding), and therapeutic intervention if necessary.",
-          "source": "hepatobiliary-gamd gdan.pdf, Page 20; 5- Zatona 2 Hepa.pdf, Page 128.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-120",
-          "organ": "Esophagus",
-          "originalNumber": 120,
-          "question": "Which of the following best describes the pathogenesis of a Zenker's diverticulum?",
-          "choices": [
-            "It is a traction diverticulum caused by inflamed mediastinal lymph nodes.",
-            "It is a congenital anomaly present from birth.",
-            "It is a pulsion diverticulum resulting from high intraluminal pressure due to cricopharyngeal incoordination.",
-            "It is a true diverticulum containing all layers of the esophageal wall."
-          ],
-          "answerIndex": 2,
-          "explanation": "Zenker's diverticulum is an acquired pulsion diverticulum. It forms due to high intraluminal pressure pushing mucosa through Killian's triangle, secondary to cricopharyngeal muscle incoordination.",
-          "source": "Pretest MCQ.pdf, Page 1182.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-121",
-          "organ": "Esophagus",
-          "originalNumber": 121,
-          "question": "A 55-year-old patient complains of regurgitation of undigested food eaten several days ago, severe halitosis, and a swelling in the left side of the neck that gurgles upon palpation. The most likely diagnosis is:",
-          "choices": [
-            "Branchial cleft cyst",
-            "Zenker's diverticulum",
-            "Esophageal carcinoma",
-            "Achalasia"
-          ],
-          "answerIndex": 1,
-          "explanation": "Regurgitation of old undigested food, halitosis, and a palpable, gurgling neck mass are the classic hallmarks of a pharyngeal pouch (Zenker's diverticulum).",
-          "source": "4- zatona 1 GIT.pdf, Page 3; Saito MCQ GIT.pdf, Page 143.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-122",
-          "organ": "Esophagus",
-          "originalNumber": 122,
-          "question": "During surgical repair of a Zenker's diverticulum, which crucial step must be performed to prevent recurrence?",
-          "choices": [
-            "Highly selective vagotomy",
-            "Cricopharyngeal myotomy",
-            "Nissen fundoplication",
-            "Total esophagectomy"
-          ],
-          "answerIndex": 1,
-          "explanation": "A cricopharyngeal myotomy (division of the cricopharyngeus muscle) addresses the underlying high-pressure dysfunction and is essential to treat the condition and prevent recurrence.",
-          "source": "Pretest MCQ.pdf, Page 1182.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-123",
-          "organ": "Esophagus",
-          "originalNumber": 123,
-          "question": "Which of the following is considered an expected normal finding in the esophagus on an upper GI endoscopy?",
-          "choices": [
-            "A sharply demarcated Z-line where squamous mucosa meets columnar mucosa.",
-            "A 5 cm segment of columnar epithelium above the diaphragmatic hiatus.",
-            "Prominent, tortuous submucosal veins.",
-            "A deep mucosal ulceration at the cardia."
+            "Achalasia of the cardia",
+            "Sliding hiatus hernia",
+            "Carcinoma of the esophagus",
+            "Foreign body in the esophagus"
           ],
           "answerIndex": 0,
-          "explanation": "The Z-line (squamocolumnar junction) is a normal finding where the pale pink squamous epithelium of the esophagus meets the redder columnar epithelium of the stomach.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 105.",
-          "section": "Section 7: Esophageal Varices"
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 11).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
         },
         {
-          "id": "kellawi-esophagus-124",
+          "id": "kellawi-esophagus-012",
           "organ": "Esophagus",
-          "originalNumber": 124,
-          "question": "A patient ingested a strong alkali corrosive 24 hours ago. They are stable, but complain of dysphagia and odynophagia. What is the most appropriate imaging study to evaluate the extent of the damage safely?",
+          "originalNumber": 12,
+          "question": "Which operation is classically indicated for a patient with severe, recurrent gastroesophageal reflux disease who has failed maximal medical therapy and has a documented sliding hiatal hernia?",
           "choices": [
-            "Gastrografin swallow",
-            "Barium swallow",
-            "Upper endoscopy performed carefully within 24-48 hours",
-            "Rigid esophagoscopy"
+            "Ivor Lewis operation",
+            "Heller myotomy",
+            "Laparoscopic Nissen fundoplication",
+            "Subtotal gastrectomy"
           ],
           "answerIndex": 2,
-          "explanation": "A careful early upper flexible endoscopy (within 24-48 hours) is recommended to accurately grade the severity of the corrosive burn without passing beyond severe circumferential burns.",
-          "source": "Saito MCQ GIT.pdf, Page 140, 146.",
-          "section": "Section 7: Esophageal Varices"
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 12).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
         },
         {
-          "id": "kellawi-esophagus-125",
+          "id": "kellawi-esophagus-013",
           "organ": "Esophagus",
-          "originalNumber": 125,
-          "question": "The incidence of adenocarcinoma of the esophagus is rising rapidly in Western countries. This rise is most closely linked to an increasing prevalence of which condition?",
+          "originalNumber": 13,
+          "question": "Which imaging modality provides the most accurate information regarding the T stage (depth of wall invasion) of an esophageal carcinoma?",
           "choices": [
-            "Chronic alcohol abuse",
-            "Heavy smoking",
-            "Gastroesophageal reflux disease (GERD) and Barrett's esophagus",
-            "Corrosive strictures"
+            "Computed tomography (CT)",
+            "Positron emission tomography (PET)",
+            "Magnetic resonance imaging (MRI)",
+            "Endoscopic ultrasound (EUS)"
+          ],
+          "answerIndex": 3,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 13).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-014",
+          "organ": "Esophagus",
+          "originalNumber": 14,
+          "question": "A 19-year-old female swallowed potash 6 months ago and now has a 2cm stricture in the middle third of her esophagus. What is the most appropriate initial management?",
+          "choices": [
+            "Esophageal stenting",
+            "Trans-hiatal esophagectomy",
+            "Repeated sessions of esophageal dilatation",
+            "Injection of botulinum toxin"
           ],
           "answerIndex": 2,
-          "explanation": "The rising incidence of esophageal adenocarcinoma in the West is directly correlated with the increasing prevalence of GERD and its complication, Barrett's esophagus.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 120.",
-          "section": "Section 7: Esophageal Varices"
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 14).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
         },
         {
-          "id": "kellawi-esophagus-126",
+          "id": "kellawi-esophagus-015",
           "organ": "Esophagus",
-          "originalNumber": 126,
-          "question": "A \"traction\" diverticulum of the esophagus is typically located in the:",
+          "originalNumber": 15,
+          "question": "A 63-year-old woman presents with dysphagia, iron deficiency anemia, and an upper esophageal web. What is the diagnosis?",
           "choices": [
-            "Cervical region (pharyngoesophageal)",
-            "Mid-esophagus (parabronchial region)",
-            "Epiphrenic region (just above the diaphragm)",
-            "Intra-abdominal esophagus"
+            "Schatzki's ring",
+            "Plummer-Vinson syndrome",
+            "Barrett's esophagus",
+            "Scleroderma"
           ],
           "answerIndex": 1,
-          "explanation": "Traction diverticula are usually located in the mid-esophagus near the carina, resulting from external pulling forces due to inflammatory contraction (like tuberculosis) of adjacent parabronchial mediastinal lymph nodes.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 123.",
-          "section": "Section 7: Esophageal Varices"
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 15).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
         },
         {
-          "id": "kellawi-esophagus-127",
+          "id": "kellawi-esophagus-016",
           "organ": "Esophagus",
-          "originalNumber": 127,
-          "question": "In a patient with achalasia, what is the underlying pathophysiology believed to be responsible for the motility disorder?",
+          "originalNumber": 16,
+          "question": "A 50-year-old man presents with hematemesis following repeated vomiting after heavy alcohol intake. Endoscopy reveals a linear mucosal tear in the lower esophagus. What is the diagnosis?",
           "choices": [
-            "Hypertrophy of the cricopharyngeus muscle",
-            "Acid-induced ulceration of the mucosa",
-            "Degeneration of ganglion cells within Auerbach's (myenteric) plexus",
-            "Congenital absence of the esophagus"
+            "Ruptured esophageal varices",
+            "Boerhaave's syndrome",
+            "Mallory-Weiss syndrome",
+            "Reflux esophagitis"
           ],
           "answerIndex": 2,
-          "explanation": "The pathophysiology of achalasia involves the degeneration of vagal fibers and the absence/degeneration of ganglion cells in Auerbach's myenteric plexus of the esophageal wall.",
-          "source": "Saito MCQ GIT.pdf, Page 143.",
-          "section": "Section 7: Esophageal Varices"
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 16).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
         },
         {
-          "id": "kellawi-esophagus-128",
+          "id": "kellawi-esophagus-017",
           "organ": "Esophagus",
-          "originalNumber": 128,
-          "question": "Which of the following therapeutic modalities provides the most durable, long-term relief for a young, fit patient with achalasia?",
+          "originalNumber": 17,
+          "question": "At what approximate distance from the incisor teeth does the esophagus pass through the diaphragm?",
           "choices": [
-            "Sublingual nitrates before meals",
-            "Botulinum toxin injection into the LES",
-            "Laparoscopic Heller myotomy with a partial fundoplication",
-            "Repeated endoscopic balloon dilatations every 6 months"
+            "15 cm",
+            "25 cm",
+            "40 cm",
+            "50 cm"
           ],
           "answerIndex": 2,
-          "explanation": "Laparoscopic Heller myotomy combined with a partial fundoplication provides the most reliable, durable, and definitive surgical treatment for fit patients with achalasia.",
-          "source": "Pretest MCQ.pdf, Page 1186; LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 124.",
-          "section": "Section 7: Esophageal Varices"
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 17).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
         },
         {
-          "id": "kellawi-esophagus-129",
+          "id": "kellawi-esophagus-018",
           "organ": "Esophagus",
-          "originalNumber": 129,
-          "question": "A 50-year-old male with chronic GERD is found to have a 3 cm Barrett's esophagus without dysplasia on screening endoscopy. What is the recommended follow-up for this specific finding?",
+          "originalNumber": 18,
+          "question": "The musculature of the esophagus is unique because:",
           "choices": [
-            "Immediate prophylactic esophagectomy",
-            "Periodic endoscopic surveillance with biopsies",
-            "Radiofrequency ablation of the entire esophagus",
-            "Discontinuation of all acid-suppression therapy"
+            "It consists solely of smooth muscle throughout its length.",
+            "It consists solely of skeletal muscle throughout its length.",
+            "The upper third is striated (skeletal) muscle, while the distal two-thirds contain smooth muscle.",
+            "The outer layer is smooth muscle and the inner layer is striated muscle."
+          ],
+          "answerIndex": 2,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 18).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-019",
+          "organ": "Esophagus",
+          "originalNumber": 19,
+          "question": "Which of the following accurately describes the relationship of the esophagus to the left atrium?",
+          "choices": [
+            "The esophagus is located anterior to the left atrium.",
+            "The esophagus is located posterior to the left atrium.",
+            "The esophagus runs laterally to the right of the left atrium.",
+            "The esophagus pierces the left atrium."
           ],
           "answerIndex": 1,
-          "explanation": "Patients with Barrett's esophagus without dysplasia require life-long regular endoscopic surveillance with multiple biopsies to monitor for the potential development of dysplasia or adenocarcinoma.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 124.",
-          "section": "Section 7: Esophageal Varices"
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 19).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
         },
         {
-          "id": "kellawi-esophagus-130",
+          "id": "kellawi-esophagus-020",
           "organ": "Esophagus",
-          "originalNumber": 130,
-          "question": "When staging esophageal cancer, what is the role of Positron Emission Tomography (PET)?",
+          "originalNumber": 20,
+          "question": "The long-term complication of \"gas bloat syndrome\" and flatulence is most commonly associated with which surgical procedure?",
           "choices": [
-            "To precisely measure the depth of mucosal invasion (T-stage)",
-            "To guide endoscopic balloon dilatation",
-            "To detect distant occult metastatic disease (M-stage)",
-            "To determine the exact location of the squamocolumnar junction"
+            "Trans-hiatal esophagectomy",
+            "Heller cardiomyotomy",
+            "Nissen's fundoplication",
+            "Endoscopic band ligation"
           ],
           "answerIndex": 2,
-          "explanation": "While EUS is best for T-staging, PET scanning is highly reliable and primarily used to detect distant metastatic disease that might preclude curative surgical resection.",
-          "source": "Pretest MCQ.pdf, Page 1106.",
-          "section": "Section 7: Esophageal Varices"
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 20).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
         },
         {
-          "id": "kellawi-esophagus-131",
+          "id": "kellawi-esophagus-021",
           "organ": "Esophagus",
-          "originalNumber": 131,
-          "question": "An elderly patient presents with a history of regurgitating undigested food and weight loss. A barium swallow reveals a markedly dilated esophagus tapering to a smooth \"bird's beak\" appearance at the diaphragm. A chest X-ray might show:",
+          "originalNumber": 21,
+          "question": "Which of the following factors is known to physiologically DECREASE the resting pressure of the lower esophageal sphincter (LES), thereby promoting reflux?",
           "choices": [
-            "A large pneumothorax",
-            "Widening of the mediastinum with an air-fluid level and absence of a gastric air bubble",
-            "Free air under the diaphragm",
-            "Multiple calcified mediastinal lymph nodes"
+            "Gastrin",
+            "A high-protein diet",
+            "Cholinergic agents (e.g., bethanechol)",
+            "Glucagon and secretin"
           ],
-          "answerIndex": 1,
-          "explanation": "In severe, long-standing achalasia, a chest X-ray can show a widened mediastinum due to the massively dilated, fluid-filled esophagus, an air-fluid level in the chest, and the characteristic absence of the normal gastric air bubble.",
-          "source": "3-Zatoona.pdf, Page 12.",
-          "section": "Section 7: Esophageal Varices"
+          "answerIndex": 3,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 21).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
         },
         {
-          "id": "kellawi-esophagus-132",
+          "id": "kellawi-esophagus-022",
           "organ": "Esophagus",
-          "originalNumber": 132,
+          "originalNumber": 22,
+          "question": "The \"bird's beak\" or \"parrot's beak\" appearance on a barium swallow is the classic radiologic sign for which disease?",
+          "choices": [
+            "Boerhaave's syndrome",
+            "Sliding hiatal hernia",
+            "Cardiac achalasia",
+            "Peptic stricture"
+          ],
+          "answerIndex": 2,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 22).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-023",
+          "organ": "Esophagus",
+          "originalNumber": 23,
           "question": "Which of the following is considered an ABSOLUTE indication for surgical intervention in a patient with a paraesophageal (rolling) hiatal hernia?",
           "choices": [
             "The patient is completely asymptomatic.",
@@ -11727,14 +9983,78 @@
             "A small, 1 cm herniation of the cardia."
           ],
           "answerIndex": 1,
-          "explanation": "A paraesophageal hernia complicated by a gastric volvulus, obstruction, strangulation, or severe bleeding is a surgical emergency requiring immediate repair.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 121.",
-          "section": "Section 7: Esophageal Varices"
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 23).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
         },
         {
-          "id": "kellawi-esophagus-133",
+          "id": "kellawi-esophagus-024",
           "organ": "Esophagus",
-          "originalNumber": 133,
+          "originalNumber": 24,
+          "question": "Which contrast agent should be used INITIALLY when evaluating a suspected esophageal perforation?",
+          "choices": [
+            "Thin barium sulfate",
+            "Thick barium paste",
+            "Water-soluble contrast (e.g., Gastrografin)",
+            "Intravenous iodine contrast"
+          ],
+          "answerIndex": 2,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 24).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-025",
+          "organ": "Esophagus",
+          "originalNumber": 25,
+          "question": "What is the recommended treatment for a symptomatic Schatzki's ring?",
+          "choices": [
+            "Esophagectomy",
+            "Endoscopic dilatation",
+            "Heller myotomy",
+            "Botulinum toxin injection"
+          ],
+          "answerIndex": 1,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 25).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-026",
+          "organ": "Esophagus",
+          "originalNumber": 26,
+          "question": "An epiphrenic diverticulum is typically associated with which of the following conditions?",
+          "choices": [
+            "Iron deficiency anemia",
+            "Tuberculosis lymphadenitis",
+            "Esophageal motility disorders (e.g., achalasia, diffuse esophageal spasm)",
+            "Ingestion of corrosive substances"
+          ],
+          "answerIndex": 2,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 26).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-027",
+          "organ": "Esophagus",
+          "originalNumber": 27,
+          "question": "Which of the following is considered the first-choice endoscopic treatment for bleeding esophageal varices?",
+          "choices": [
+            "Injection sclerotherapy",
+            "Sengstaken-Blakemore tube placement",
+            "Endoscopic band ligation",
+            "Laser photocoagulation"
+          ],
+          "answerIndex": 2,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 27).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-028",
+          "organ": "Esophagus",
+          "originalNumber": 28,
           "question": "In patients with severe, bleeding esophageal varices who are refractory to endoscopic therapy and pharmacotherapy, what is the preferred minimally invasive shunt procedure?",
           "choices": [
             "Transjugular Intrahepatic Portosystemic Shunt (TIPS)",
@@ -11743,766 +10063,62 @@
             "Distal splenorenal shunt (Warren shunt)"
           ],
           "answerIndex": 0,
-          "explanation": "TIPS is the preferred, minimally invasive radiological procedure to decompress the portal system in patients with refractory bleeding esophageal varices who fail endoscopic and medical management.",
-          "source": "hepatobiliary-gamd gdan.pdf, Page 20; 5- Zatona 2 Hepa.pdf, Page 128.",
-          "section": "Section 7: Esophageal Varices"
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 28).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
         },
         {
-          "id": "kellawi-esophagus-134",
+          "id": "kellawi-esophagus-029",
           "organ": "Esophagus",
-          "originalNumber": 134,
-          "question": "Which of the following best describes the classical presentation of a Mallory-Weiss tear?",
+          "originalNumber": 29,
+          "question": "A 1-month-old infant presents with excessive frothy salivation, choking, and cyanosis after feeding. The inability to pass a nasogastric tube into the stomach confirms the diagnosis. What is the most common form of this anomaly?",
           "choices": [
-            "Painless, dark, tarry stools (melena) only",
-            "Repeated retching or vomiting followed by the vomiting of bright red blood",
-            "Progressive dysphagia ending in absolute inability to swallow liquids",
-            "Severe retrosternal chest pain with subcutaneous emphysema"
+            "Esophageal atresia without a connection to the trachea",
+            "Esophageal atresia with a fistula connecting the trachea to the distal esophageal segment (Type C)",
+            "Tracheoesophageal fistula without esophageal atresia (H-type)",
+            "Esophageal atresia with a fistula to the proximal segment"
           ],
           "answerIndex": 1,
-          "explanation": "A Mallory-Weiss tear typically presents as hematemesis (vomiting bright red blood) that occurs immediately following an initial bout of forceful, non-bloody vomiting or retching.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 120.",
-          "section": "Section 7: Esophageal Varices"
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 29).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
         },
         {
-          "id": "kellawi-esophagus-135",
+          "id": "kellawi-esophagus-030",
           "organ": "Esophagus",
-          "originalNumber": 135,
-          "question": "What is the definitive treatment for an early, small (e.g., T1N0M0) squamous cell carcinoma strictly localized to the middle third of the esophagus in a surgically fit patient?",
+          "originalNumber": 30,
+          "question": "A 65-year-old male is diagnosed with a Zenker's diverticulum. This diverticulum protrudes through a weakness between which two muscles?",
           "choices": [
-            "Esophageal stenting",
-            "Radical esophagectomy with lymph node dissection",
-            "Endoscopic botulinum toxin injection",
-            "Only palliative pain management"
+            "The superior and middle pharyngeal constrictors",
+            "The thyropharyngeus (inferior constrictor) and the cricopharyngeus muscles",
+            "The cricopharyngeus and the upper esophageal circular muscles",
+            "The sternocleidomastoid and the omohyoid muscles"
           ],
           "answerIndex": 1,
-          "explanation": "Radical surgical resection (esophagectomy) with adequate margins and lymphadenectomy is the treatment of choice aiming for a cure in early, localized esophageal carcinomas in fit patients.",
-          "source": "3-Zatoona.pdf, Page 14.",
-          "section": "Section 7: Esophageal Varices"
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 30).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
         },
         {
-          "id": "kellawi-esophagus-136",
+          "id": "kellawi-esophagus-031",
           "organ": "Esophagus",
-          "originalNumber": 136,
-          "question": "Which imaging modality is most accurate for determining the depth of invasion (T-stage) of an esophageal carcinoma?",
+          "originalNumber": 31,
+          "question": "Which of the following is true regarding the lower esophageal sphincter (LES)?",
           "choices": [
-            "Barium swallow",
-            "Computed tomography (CT) scan",
-            "Endoscopic ultrasound (EUS)",
-            "Bronchoscopy"
+            "It is an anatomical sphincter with thickened circular muscle.",
+            "It is formed by striated external sphincter muscle fibers.",
+            "It is a physiological zone of high pressure.",
+            "It relaxes forcefully during resting periods."
           ],
           "answerIndex": 2,
-          "explanation": "Endoscopic ultrasound (EUS) provides the most accurate T staging for esophageal carcinoma, being 84% accurate for T1 lesions and up to 95% accurate for T4 lesions.",
-          "source": "Pretest MCQ.pdf, Page 944.",
-          "section": "Section 7: Esophageal Varices"
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 31).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
         },
         {
-          "id": "kellawi-esophagus-137",
+          "id": "kellawi-esophagus-032",
           "organ": "Esophagus",
-          "originalNumber": 137,
-          "question": "When an endoscopic ultrasound (EUS) is performed to evaluate an esophageal carcinoma, when should the mucosal biopsy be taken?",
-          "choices": [
-            "Before the ultrasound is performed",
-            "After the ultrasound is performed",
-            "Simultaneously using a dual-lumen scope",
-            "A biopsy is strictly contraindicated"
-          ],
-          "answerIndex": 1,
-          "explanation": "The biopsy should be done after the ultrasound is completed so that the biopsy defect does not distort the EUS images.",
-          "source": "Bailey & Love MCQs.pdf, Page 426.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-138",
-          "organ": "Esophagus",
-          "originalNumber": 138,
-          "question": "A contrast study is ordered for a suspected thoracic esophageal perforation. Which contrast medium should be used initially?",
-          "choices": [
-            "Thin barium sulfate",
-            "Water-soluble contrast (e.g., Gastrografin)",
-            "Thick barium paste",
-            "Intravenous gadolinium"
-          ],
-          "answerIndex": 1,
-          "explanation": "A water-soluble contrast like Gastrografin is used initially because barium leaking into the chest causes severe mediastinitis.",
-          "source": "Pretest MCQ.pdf, Page 964.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-139",
-          "organ": "Esophagus",
-          "originalNumber": 139,
-          "question": "Why is a standard Barium swallow considered a poor initial investigation for evaluating simple Gastroesophageal Reflux Disease (GERD)?",
-          "choices": [
-            "It cannot demonstrate a hiatal hernia.",
-            "It frequently causes esophageal perforation.",
-            "It cannot reliably quantify acid reflux or allow for mucosal biopsy.",
-            "It only visualizes the upper third of the esophagus."
-          ],
-          "answerIndex": 2,
-          "explanation": "A barium swallow is not ideal for evaluating GERD; upper endoscopy (OGD) is preferred because it can assess the mucosa, identify Barrett's esophagus, and allow for a biopsy. 24-hour pH monitoring is used to quantify the reflux.",
-          "source": "Bailey & Love MCQs.pdf, Page 426.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-140",
-          "organ": "Esophagus",
-          "originalNumber": 140,
-          "question": "In a patient with a suspected cervical esophageal carcinoma, what specific investigation is highly useful to rule out tumor growth into the airway?",
-          "choices": [
-            "Bronchoscopy",
-            "Positron emission tomography (PET)",
-            "24-hour pH monitoring",
-            "Esophageal manometry"
-          ],
-          "answerIndex": 0,
-          "explanation": "Bronchoscopy is useful in patients with a cough or cervical esophageal carcinoma to rule out a tracheoesophageal fistula or tumor growth into the trachea.",
-          "source": "Pretest MCQ.pdf, Page 944.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-141",
-          "organ": "Esophagus",
-          "originalNumber": 141,
-          "question": "A barium swallow reveals a \"rat tail\" appearance at the lower end of the esophagus. This radiologic sign is most typically associated with:",
-          "choices": [
-            "Achalasia of the cardia",
-            "Carcinoma of the esophagus",
-            "Boerhaave's syndrome",
-            "Diffuse esophageal spasm"
-          ],
-          "answerIndex": 1,
-          "explanation": "In the provided matching questions, a \"rat tail\" appearance on a barium swallow corresponds to carcinoma of the esophagus, whereas a \"bird's beak\" corresponds to achalasia.",
-          "source": "4- zatona 1 GIT.pdf, Page 64 / 153.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-142",
-          "organ": "Esophagus",
-          "originalNumber": 142,
-          "question": "Which specific diagnostic test is considered the \"gold standard\" for diagnosing and quantifying the severity of acid reflux?",
-          "choices": [
-            "Esophageal manometry",
-            "Barium swallow",
-            "24-hour ambulatory pH monitoring",
-            "Endoscopic ultrasound"
-          ],
-          "answerIndex": 2,
-          "explanation": "24-hour ambulatory pH monitoring is the gold standard for diagnosing and quantifying acid reflux.",
-          "source": "4- zatona 1 GIT.pdf, Page 11 / 232.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-143",
-          "organ": "Esophagus",
-          "originalNumber": 143,
-          "question": "During the evaluation of a patient with dysphagia, what is the primary role of esophageal manometry?",
-          "choices": [
-            "To definitively diagnose a malignant stricture",
-            "To quantify the exact volume of acid reflux",
-            "To evaluate the resting pressure of the LES and effectiveness of peristalsis",
-            "To measure the depth of tumor invasion"
-          ],
-          "answerIndex": 2,
-          "explanation": "Manometry evaluates the lower esophageal sphincter (LES) resting pressure and the effectiveness and coordination of esophageal peristalsis.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 622.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-144",
-          "organ": "Esophagus",
-          "originalNumber": 144,
-          "question": "What finding on a plain chest X-ray is virtually pathognomonic for a spontaneous rupture of the esophagus (Boerhaave's syndrome) following violent vomiting?",
-          "choices": [
-            "Air under the right hemidiaphragm",
-            "Massive cardiomegaly",
-            "Air in the mediastinum (pneumomediastinum) or hydropneumothorax",
-            "Multiple calcified mediastinal lymph nodes"
-          ],
-          "answerIndex": 2,
-          "explanation": "The presence of air in the mediastinum (pneumomediastinum) and/or a hydropneumothorax (usually on the left side) after violent vomiting is pathognomonic for Boerhaave's syndrome.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 612; Pretest MCQ.pdf, Page 967.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-145",
-          "organ": "Esophagus",
-          "originalNumber": 145,
-          "question": "In a patient with advanced esophageal cancer, which imaging study is specifically indicated to detect distant occult metastatic disease (M-stage) before attempting curative surgery?",
-          "choices": [
-            "Endoscopic ultrasound (EUS)",
-            "Positron emission tomography (PET) scan",
-            "Barium swallow",
-            "Esophageal manometry"
-          ],
-          "answerIndex": 1,
-          "explanation": "A PET scan is highly reliable and equal to or better than CT for detecting distant metastatic disease that might preclude curative surgical resection.",
-          "source": "Pretest MCQ.pdf, Page 944.",
-          "section": "Section 7: Esophageal Varices"
-        },
-        {
-          "id": "kellawi-esophagus-146",
-          "organ": "Esophagus",
-          "originalNumber": 146,
-          "question": "What is the approximate 5-year survival rate for patients with early, resectable carcinoma of the lower esophagus in the United States?",
-          "choices": [
-            "Less than 5%",
-            "15% to 25%",
-            "50% to 75%",
-            "Greater than 90%"
-          ],
-          "answerIndex": 1,
-          "explanation": "The 5-year survival rates for carcinoma of the lower esophagus in the US vary between 15% and 25%, despite curative surgical attempts.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 616.",
-          "section": "Section 12: Esophageal Carcinoma & Tumors"
-        },
-        {
-          "id": "kellawi-esophagus-147",
-          "organ": "Esophagus",
-          "originalNumber": 147,
-          "question": "Which cell type comprises esophageal leiomyomas?",
-          "choices": [
-            "Metaplastic columnar cells",
-            "Spindle cells",
-            "Striated skeletal muscle cells",
-            "Squamous epithelial cells"
-          ],
-          "answerIndex": 1,
-          "explanation": "Leiomyomas, the most common benign tumors of the esophagus, are composed of spindle cells and grow slowly.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 614.",
-          "section": "Section 12: Esophageal Carcinoma & Tumors"
-        },
-        {
-          "id": "kellawi-esophagus-148",
-          "organ": "Esophagus",
-          "originalNumber": 148,
-          "question": "Do esophageal leiomyomas represent the majority of all leiomyomas found in the alimentary tract?",
-          "choices": [
-            "Yes, over 90% are found in the esophagus.",
-            "Yes, about 50% are found in the esophagus.",
-            "No, less than 10% of alimentary tract leiomyomas are found in the esophagus.",
-            "Unclear in the provided source."
-          ],
-          "answerIndex": 2,
-          "explanation": "Less than 10% of all alimentary tract leiomyomas are actually found in the esophagus.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 613-614.",
-          "section": "Section 12: Esophageal Carcinoma & Tumors"
-        },
-        {
-          "id": "kellawi-esophagus-149",
-          "organ": "Esophagus",
-          "originalNumber": 149,
-          "question": "Which form of esophageal carcinoma is most likely to be found in a patient with a long history of untreated achalasia?",
-          "choices": [
-            "Adenocarcinoma",
-            "Squamous cell carcinoma",
-            "Leiomyosarcoma",
-            "Gastrointestinal stromal tumor (GIST)"
-          ],
-          "answerIndex": 1,
-          "explanation": "Achalasia predisposes the patient to the development of squamous cell carcinoma, occurring about 7 times more frequently than in the general population.",
-          "source": "Pretest MCQ.pdf, Page 970; Bailey & Love MCQs.pdf, Page 438.",
-          "section": "Section 12: Esophageal Carcinoma & Tumors"
-        },
-        {
-          "id": "kellawi-esophagus-150",
-          "organ": "Esophagus",
-          "originalNumber": 150,
-          "question": "What is the preferred, minimally invasive surgical approach for the enucleation of a leiomyoma located in the upper two-thirds of the esophagus?",
-          "choices": [
-            "Median sternotomy",
-            "Laparoscopic trans-hiatal approach",
-            "Video-assisted thoracoscopic surgery (VATS)",
-            "Endoscopic mucosal resection"
-          ],
-          "answerIndex": 2,
-          "explanation": "Treatment is usually done through video-assisted thoracoscopic surgery (VATS), which is the preferred approach for enucleation of an upper two-thirds leiomyoma.",
-          "source": "Saito MCQ GIT.pdf, Page 144.",
-          "section": "Section 12: Esophageal Carcinoma & Tumors"
-        },
-        {
-          "id": "kellawi-esophagus-151",
-          "organ": "Esophagus",
-          "originalNumber": 151,
-          "question": "Which of the following statements about esophageal squamous cell carcinoma is TRUE regarding its sensitivity to radiation?",
-          "choices": [
-            "It is completely radio-resistant.",
-            "It is less sensitive to radiation than adenocarcinoma.",
-            "It is usually more sensitive to radiation than adenocarcinoma.",
-            "Radiation causes it to rapidly mutate into a sarcoma."
-          ],
-          "answerIndex": 2,
-          "explanation": "Usually, squamous cell carcinoma of the esophagus is more sensitive to radiation therapy than adenocarcinoma.",
-          "source": "Saito MCQ GIT.pdf, Page 138.",
-          "section": "Section 12: Esophageal Carcinoma & Tumors"
-        },
-        {
-          "id": "kellawi-esophagus-152",
-          "organ": "Esophagus",
-          "originalNumber": 152,
-          "question": "A patient with long-standing Gastroesophageal Reflux Disease (GERD) is found to have Barrett's esophagus. How much does this condition increase their risk of developing esophageal adenocarcinoma?",
-          "choices": [
-            "2 times",
-            "5 times",
-            "20 to 50 times (or roughly 25 times)",
-            "It does not increase the risk."
-          ],
-          "answerIndex": 2,
-          "explanation": "Barrett's esophagus increases the cancer risk 20-50-fold (or about 25 times that of the general population depending on the specific source text).",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 608; Bailey & Love MCQs.pdf, Page 428.",
-          "section": "Section 12: Esophageal Carcinoma & Tumors"
-        },
-        {
-          "id": "kellawi-esophagus-153",
-          "organ": "Esophagus",
-          "originalNumber": 153,
-          "question": "Which clinical finding upon physical examination is suggestive of an advanced post-cricoid carcinoma extending anteriorly?",
-          "choices": [
-            "A palpable left supraclavicular lymph node (Virchow's node)",
-            "Loss of the normal \"laryngeal click\" when moving the larynx side to side",
-            "Massive subcutaneous emphysema",
-            "A pulsatile mass in the left neck"
-          ],
-          "answerIndex": 1,
-          "explanation": "In post-cricoid carcinoma, bulging of the thyroid cartilage and trachea occurs. The alae of the thyroid cartilage spread outwards, resulting in the loss of the normal laryngeal click.",
-          "source": "Saito MCQ GIT.pdf, Page 145.",
-          "section": "Section 12: Esophageal Carcinoma & Tumors"
-        },
-        {
-          "id": "kellawi-esophagus-154",
-          "organ": "Esophagus",
-          "originalNumber": 154,
-          "question": "What is the definition of an early \"carcinoma in situ\" regarding GI mucosal lesions?",
-          "choices": [
-            "Malignant cells extending into the muscularis propria",
-            "Malignant cells that have reached the regional lymph nodes",
-            "Malignant cells present in the mucosal layer only",
-            "A benign hyperplastic polyp"
-          ],
-          "answerIndex": 2,
-          "explanation": "Carcinoma in situ refers to the presence of malignant cells strictly confined within the mucosal layer only.",
-          "source": "Pretest MCQ.pdf, Page 943.",
-          "section": "Section 12: Esophageal Carcinoma & Tumors"
-        },
-        {
-          "id": "kellawi-esophagus-155",
-          "organ": "Esophagus",
-          "originalNumber": 155,
-          "question": "Why is taking an endoscopic biopsy of an esophageal leiomyoma generally NOT recommended if enucleation is planned?",
-          "choices": [
-            "The tumor is too hard to cut with biopsy forceps.",
-            "It can cause severe bleeding and subsequent stricture or mucosal scarring, making enucleation difficult.",
-            "It frequently causes immediate malignant transformation.",
-            "The biopsy always misses the tumor cells."
-          ],
-          "answerIndex": 1,
-          "explanation": "There is no need for confirming the diagnosis by biopsy prior to surgery due to the risk of bleeding and stricture/scar formation, which complicates the enucleation process.",
-          "source": "Saito MCQ GIT.pdf, Page 144.",
-          "section": "Section 12: Esophageal Carcinoma & Tumors"
-        },
-        {
-          "id": "kellawi-esophagus-156",
-          "organ": "Esophagus",
-          "originalNumber": 156,
-          "question": "A 79-year-old male presents with dysphagia, weight loss, choking, and a gurgling noise in his neck. A mass is sometimes palpable. Where is the anatomical origin of the most likely pathology?",
-          "choices": [
-            "The anterior wall of the mid-esophagus",
-            "Between the lower pharyngeal constrictor (thyropharyngeus) and the cricopharyngeus muscle",
-            "Just above the diaphragmatic hiatus on the left side",
-            "Below the gastroesophageal junction"
-          ],
-          "answerIndex": 1,
-          "explanation": "The patient has a Zenker's (pharyngoesophageal) diverticulum, which originates between the lower pharyngeal constrictor and the cricopharyngeus muscles (Killian's triangle).",
-          "source": "Pretest MCQ.pdf, Page 968.",
-          "section": "Section 13: Esophageal Diverticula & Rings"
-        },
-        {
-          "id": "kellawi-esophagus-157",
-          "organ": "Esophagus",
-          "originalNumber": 157,
-          "question": "An epiphrenic diverticulum is typically located within what distance from the cardia?",
-          "choices": [
-            "2 cm",
-            "10 cm",
-            "20 cm",
-            "30 cm"
-          ],
-          "answerIndex": 1,
-          "explanation": "An epiphrenic diverticulum is a pulsion diverticulum located within 10 cm of the cardia.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 603.",
-          "section": "Section 13: Esophageal Diverticula & Rings"
-        },
-        {
-          "id": "kellawi-esophagus-158",
-          "organ": "Esophagus",
-          "originalNumber": 158,
-          "question": "Traction diverticula of the esophagus are most commonly caused by:",
-          "choices": [
-            "High intraluminal pressure from a distal stricture",
-            "Inflammatory contraction around adjacent mediastinal lymph nodes (e.g., from tuberculosis)",
-            "Congenital absence of the muscularis propria",
-            "Forceful repeated vomiting"
-          ],
-          "answerIndex": 1,
-          "explanation": "A traction diverticulum is usually caused by inflammatory pulling or contraction around mediastinal nodes (such as in tuberculosis) and is rarely of any symptomatic consequence.",
-          "source": "Pretest MCQ.pdf, Page 948; LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 603.",
-          "section": "Section 13: Esophageal Diverticula & Rings"
-        },
-        {
-          "id": "kellawi-esophagus-159",
-          "organ": "Esophagus",
-          "originalNumber": 159,
-          "question": "Are asymptomatic epiphrenic diverticula generally treated with surgical resection?",
-          "choices": [
-            "Yes, to prevent inevitable malignant degeneration.",
-            "Yes, to prevent spontaneous rupture.",
-            "No, they should not be treated surgically unless symptoms are clearly related to them.",
-            "No, they are treated exclusively with botulinum toxin."
-          ],
-          "answerIndex": 2,
-          "explanation": "An epiphrenic diverticulum is commonly asymptomatic and should not be treated surgically unless symptoms are clearly related to it.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 603.",
-          "section": "Section 13: Esophageal Diverticula & Rings"
-        },
-        {
-          "id": "kellawi-esophagus-160",
-          "organ": "Esophagus",
-          "originalNumber": 160,
-          "question": "A lower esophageal ring (Schatzki's ring) is most commonly found in which demographic?",
-          "choices": [
-            "Young females with iron deficiency",
-            "Men aged 65 or greater",
-            "Infants born with congenital atresia",
-            "Patients with severe corrosive strictures"
-          ],
-          "answerIndex": 1,
-          "explanation": "A Schatzki's ring is a thin, circumferential scar in the lower esophagus, more common in men 65 years of age or older.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 610.",
-          "section": "Section 13: Esophageal Diverticula & Rings"
-        },
-        {
-          "id": "kellawi-esophagus-161",
-          "organ": "Esophagus",
-          "originalNumber": 161,
-          "question": "What size threshold generally dictates whether a symptomatic Zenker's diverticulum requires excision (diverticulectomy) rather than just a myotomy?",
-          "choices": [
-            "> 0.5 cm",
-            "> 2 cm",
-            "> 5 cm",
-            "> 10 cm"
-          ],
-          "answerIndex": 1,
-          "explanation": "If the diverticulum is greater than 2 cm, it should be resected. Small asymptomatic ones require no treatment, and smaller symptomatic ones may only need myotomy.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 603.",
-          "section": "Section 13: Esophageal Diverticula & Rings"
-        },
-        {
-          "id": "kellawi-esophagus-162",
-          "organ": "Esophagus",
-          "originalNumber": 162,
-          "question": "Which clinical sign alerts the physician to the possible diagnosis of Plummer-Vinson syndrome rather than a standard peptic stricture?",
-          "choices": [
-            "Severe retrosternal chest pain",
-            "Spoon-shaped brittle nails (koilonychia) and iron deficiency anemia",
-            "Palpable supraclavicular lymph nodes",
-            "Projectile bilious vomiting"
-          ],
-          "answerIndex": 1,
-          "explanation": "Plummer-Vinson syndrome is characterized by an upper esophageal web, dysphagia, atrophic oral mucosa, iron deficiency anemia, and koilonychia.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 605.",
-          "section": "Section 13: Esophageal Diverticula & Rings"
-        },
-        {
-          "id": "kellawi-esophagus-163",
-          "organ": "Esophagus",
-          "originalNumber": 163,
-          "question": "During endoscopy for a suspected Zenker's diverticulum, why must the scope be advanced with extreme caution?",
-          "choices": [
-            "The scope interferes with continuous pH monitoring.",
-            "The diverticulum is highly prone to massive arterial bleeding.",
-            "The blind pouch is thin-walled and easily perforated.",
-            "The pouch contains highly acidic fluid that damages the scope."
-          ],
-          "answerIndex": 2,
-          "explanation": "Esophagoscopy should be performed cautiously because the blind pouch of a Zenker's diverticulum is easily perforated.",
-          "source": "Pretest MCQ.pdf, Page 968.",
-          "section": "Section 13: Esophageal Diverticula & Rings"
-        },
-        {
-          "id": "kellawi-esophagus-164",
-          "organ": "Esophagus",
-          "originalNumber": 164,
-          "question": "Is a Zenker's diverticulum classified as a true diverticulum (containing all muscular layers)?",
-          "choices": [
-            "Yes, it contains mucosa, submucosa, and full muscularis propria.",
-            "No, it is a false (pulsion) diverticulum consisting only of mucosa and submucosa protruding through a muscle defect.",
-            "Yes, it is a congenital true diverticulum.",
-            "Unclear in the provided source."
-          ],
-          "answerIndex": 1,
-          "explanation": "It is a pulsion diverticulum where mucosa herniates through a weakness in the muscle (Killian's triangle), making it a false diverticulum.",
-          "source": "4- zatona 1 GIT.pdf, Page 49 / 120.",
-          "section": "Section 13: Esophageal Diverticula & Rings"
-        },
-        {
-          "id": "kellawi-esophagus-165",
-          "organ": "Esophagus",
-          "originalNumber": 165,
-          "question": "What is the usual treatment for a symptomatic Schatzki's ring?",
-          "choices": [
-            "Total esophagectomy",
-            "Laparoscopic Nissen fundoplication alone",
-            "Endoscopic dilatation",
-            "Botulinum toxin injection"
-          ],
-          "answerIndex": 2,
-          "explanation": "Endoscopic dilatation is the usual and highly successful treatment for a Schatzki's ring.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 610.",
-          "section": "Section 13: Esophageal Diverticula & Rings"
-        },
-        {
-          "id": "kellawi-esophagus-166",
-          "organ": "Esophagus",
-          "originalNumber": 166,
-          "question": "A 4-year-old child ingested a strong alkaline drain cleaner 1 hour ago. What is the appropriate initial management step regarding the ingested chemical?",
-          "choices": [
-            "Administer a weak acid to neutralize the alkali.",
-            "Induce vomiting immediately.",
-            "Administer large volumes of water to flush the esophagus.",
-            "Avoid oral intake, emetics, and neutralizing agents; secure the airway and observe closely."
-          ],
-          "answerIndex": 3,
-          "explanation": "Emetics and neutralizing agents are contraindicated (they cause re-exposure or exothermic burns). Dilution is also not recommended as it may induce vomiting. The patient should be kept NPO and monitored.",
-          "source": "Pretest MCQ.pdf, Page 966.",
-          "section": "Section 14: Esophageal Trauma & Corrosive Injury"
-        },
-        {
-          "id": "kellawi-esophagus-167",
-          "organ": "Esophagus",
-          "originalNumber": 167,
-          "question": "What pathophysiological process differentiates an esophageal burn caused by lye (alkali) from one caused by acid?",
-          "choices": [
-            "Alkali causes coagulative necrosis; acid causes liquefactive necrosis.",
-            "Alkali causes liquefactive necrosis; acid causes coagulative necrosis with eschar formation.",
-            "Alkali causes caseous necrosis; acid causes fat necrosis.",
-            "Both cause identical thermal burns."
-          ],
-          "answerIndex": 1,
-          "explanation": "Caustic alkali ingestion results in liquefactive necrosis (which penetrates deeply), while acid ingestion causes coagulation necrosis with eschar formation.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 619.",
-          "section": "Section 14: Esophageal Trauma & Corrosive Injury"
-        },
-        {
-          "id": "kellawi-esophagus-168",
-          "organ": "Esophagus",
-          "originalNumber": 168,
-          "question": "A patient diagnosed with a 24-hour-old thoracic esophageal perforation (with systemic sepsis) requires surgery. What is the standard operative approach?",
-          "choices": [
-            "Laparotomy and partial gastrectomy",
-            "Cervical esophagostomy only",
-            "Thoracotomy, primary repair of the defect, and wide mediastinal drainage",
-            "Insertion of a Sengstaken-Blakemore tube"
-          ],
-          "answerIndex": 2,
-          "explanation": "For thoracic leaks associated with systemic signs, patients should undergo prompt surgical therapy via thoracotomy, repair of the perforation, and mediastinal drainage.",
-          "source": "Pretest MCQ.pdf, Page 967.",
-          "section": "Section 14: Esophageal Trauma & Corrosive Injury"
-        },
-        {
-          "id": "kellawi-esophagus-169",
-          "organ": "Esophagus",
-          "originalNumber": 169,
-          "question": "In Mallory-Weiss syndrome, what percentage of the mucosal tears are located entirely within the stomach rather than crossing the GE junction?",
-          "choices": [
-            "5%",
-            "25%",
-            "50%",
-            "90%"
-          ],
-          "answerIndex": 3,
-          "explanation": "In Mallory-Weiss syndrome, in 90 percent of cases, the tear (a vertical split) actually occurs in the stomach just below the junction.",
-          "source": "Bailey & Love MCQs.pdf, Page 427.",
-          "section": "Section 14: Esophageal Trauma & Corrosive Injury"
-        },
-        {
-          "id": "kellawi-esophagus-170",
-          "organ": "Esophagus",
-          "originalNumber": 170,
-          "question": "What is the most common cause of esophageal perforation?",
-          "choices": [
-            "Spontaneous rupture (Boerhaave's)",
-            "Corrosive stricture dilatation or endoscopic instrumentation (Iatrogenic)",
-            "Foreign body ingestion",
-            "Penetrating trauma"
-          ],
-          "answerIndex": 1,
-          "explanation": "Instrumental (iatrogenic) injury is the most common cause of perforation (representing 65% of cases), typically during endoscopy or dilatation.",
-          "source": "Saito MCQ GIT.pdf, Page 136.",
-          "section": "Section 14: Esophageal Trauma & Corrosive Injury"
-        },
-        {
-          "id": "kellawi-esophagus-171",
-          "organ": "Esophagus",
-          "originalNumber": 171,
-          "question": "A \"spit fistula\" (cervical pharyngostomy) and gastrostomy are surgical options typically reserved for which specific scenario?",
-          "choices": [
-            "Early spontaneous rupture in a healthy patient",
-            "Patients with a late diagnosis of esophageal perforation where primary repair is no longer safe",
-            "Benign peptic strictures",
-            "Schatzki's ring"
-          ],
-          "answerIndex": 1,
-          "explanation": "Esophageal exclusion or proximal diversion (spit fistula) are typically reserved for patients in whom a late diagnosis of esophageal perforation was made and tissues are too friable for repair.",
-          "source": "Pretest MCQ.pdf, Page 964.",
-          "section": "Section 14: Esophageal Trauma & Corrosive Injury"
-        },
-        {
-          "id": "kellawi-esophagus-172",
-          "organ": "Esophagus",
-          "originalNumber": 172,
-          "question": "Following ingestion of a corrosive substance, which grade of burn injuries is most likely to result in stricture formation?",
-          "choices": [
-            "Grade 1 (superficial) injuries only",
-            "Grades 2 and 3 (deep) burns",
-            "No corrosive burns cause strictures",
-            "Only acid burns cause strictures"
-          ],
-          "answerIndex": 1,
-          "explanation": "Deep burns (Grade 2 and 3) usually cause strictures, while superficial (Grade 1) injuries heal without stricture formation.",
-          "source": "Saito MCQ GIT.pdf, Page 142.",
-          "section": "Section 14: Esophageal Trauma & Corrosive Injury"
-        },
-        {
-          "id": "kellawi-esophagus-173",
-          "organ": "Esophagus",
-          "originalNumber": 173,
-          "question": "In a patient with Boerhaave's syndrome, where does the esophageal tear typically occur?",
-          "choices": [
-            "Anterior wall of the cervical esophagus",
-            "Right lateral wall of the mid-esophagus",
-            "Left posterolateral wall of the lower third of the esophagus",
-            "Anterior wall of the gastric fundus"
-          ],
-          "answerIndex": 2,
-          "explanation": "The tear is usually located above the diaphragm and is longitudinal on the left posterolateral wall.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 612.",
-          "section": "Section 14: Esophageal Trauma & Corrosive Injury"
-        },
-        {
-          "id": "kellawi-esophagus-174",
-          "organ": "Esophagus",
-          "originalNumber": 174,
-          "question": "A patient with a small, localized cervical esophageal perforation following endoscopy is clinically stable. What is the standard management?",
-          "choices": [
-            "Immediate total esophagectomy",
-            "Conservative management (antibiotics, NPO, and observation)",
-            "Trans-hiatal esophagectomy",
-            "Laparotomy and gastric pull-up"
-          ],
-          "answerIndex": 1,
-          "explanation": "Cervical esophageal perforations, as well as small iatrogenic perforations in a clean esophagus, are almost always treated conservatively.",
-          "source": "Bailey & Love MCQs.pdf, Page 427.",
-          "section": "Section 14: Esophageal Trauma & Corrosive Injury"
-        },
-        {
-          "id": "kellawi-esophagus-175",
-          "organ": "Esophagus",
-          "originalNumber": 175,
-          "question": "Which of the following is a classic clinical presentation of a Dieulafoy lesion?",
-          "choices": [
-            "Progressive dysphagia to solids",
-            "Massive, painless, recurrent hematemesis",
-            "Severe retrosternal pain radiating to the back",
-            "Chronic iron deficiency anemia without overt bleeding"
-          ],
-          "answerIndex": 1,
-          "explanation": "A Dieulafoy lesion presents as sudden onset of massive, painless, recurrent hematemesis caused by a large submucosal artery protruding through a small mucosal defect.",
-          "source": "Pretest MCQ.pdf, Page 927 / 952.",
-          "section": "Section 14: Esophageal Trauma & Corrosive Injury"
-        },
-        {
-          "id": "kellawi-esophagus-176",
-          "organ": "Esophagus",
-          "originalNumber": 176,
-          "question": "In a paraesophageal (Type 4) hiatal hernia, what is the anatomical position of the gastroesophageal (GE) junction?",
-          "choices": [
-            "It slides upward into the posterior mediastinum.",
-            "It remains in its normal position below the diaphragm.",
-            "It migrates into the anterior mediastinum.",
-            "It is completely destroyed."
-          ],
-          "answerIndex": 1,
-          "explanation": "In the classic paraesophageal \"rolling\" hernia, the GE junction remains below the hiatus, allowing the stomach fundus to migrate upward alongside the esophagus.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 609.",
-          "section": "Section 15: GERD, Hiatal Hernia & Motility Disorders"
-        },
-        {
-          "id": "kellawi-esophagus-177",
-          "organ": "Esophagus",
-          "originalNumber": 177,
-          "question": "Manometry in a patient complaining of severe episodic chest pain reveals prolonged, high-amplitude contractions with normal LES relaxation. What is the diagnosis?",
-          "choices": [
-            "Achalasia",
-            "Scleroderma",
-            "Diffuse esophageal spasm (DES)",
-            "Peptic stricture"
-          ],
-          "answerIndex": 2,
-          "explanation": "The finding of prolonged high-amplitude contractions in the body of the esophagus with normal LES relaxation is diagnostic of diffuse esophageal spasm.",
-          "source": "Pretest MCQ.pdf, Page 965.",
-          "section": "Section 15: GERD, Hiatal Hernia & Motility Disorders"
-        },
-        {
-          "id": "kellawi-esophagus-178",
-          "organ": "Esophagus",
-          "originalNumber": 178,
-          "question": "A sliding hiatal hernia is associated with an increased risk of which of the following conditions?",
-          "choices": [
-            "Gastric volvulus",
-            "Gastroesophageal reflux disease (GERD)",
-            "Squamous cell carcinoma",
-            "Diffuse esophageal spasm"
-          ],
-          "answerIndex": 1,
-          "explanation": "Reflux esophagitis (GERD) is more likely to occur with a sliding hernia, as the displacement of the GE junction compromises the antireflux mechanism.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 606.",
-          "section": "Section 15: GERD, Hiatal Hernia & Motility Disorders"
-        },
-        {
-          "id": "kellawi-esophagus-179",
-          "organ": "Esophagus",
-          "originalNumber": 179,
-          "question": "What is the most common surgical procedure performed for medically refractory GERD?",
-          "choices": [
-            "Heller myotomy",
-            "Nissen fundoplication",
-            "Toupet fundoplication",
-            "Ivor Lewis operation"
-          ],
-          "answerIndex": 1,
-          "explanation": "Nissen fundoplication ($360^{\\circ}$ gastric wrap) is the most common operation performed for severe, refractory GERD.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 622.",
-          "section": "Section 15: GERD, Hiatal Hernia & Motility Disorders"
-        },
-        {
-          "id": "kellawi-esophagus-180",
-          "organ": "Esophagus",
-          "originalNumber": 180,
-          "question": "Which of the following pharmacological agents increases the resting pressure of the lower esophageal sphincter (LES)?",
-          "choices": [
-            "Atropine",
-            "Glucagon",
-            "Metoclopramide ($\\alpha$-adrenergic agent/prokinetic)",
-            "Diazepam"
-          ],
-          "answerIndex": 2,
-          "explanation": "Cholinergic agents and $\\alpha$-adrenergic agents like metoclopramide increase LES pressure, while glucagon, diazepam, and atropine decrease it.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 614.",
-          "section": "Section 15: GERD, Hiatal Hernia & Motility Disorders"
-        },
-        {
-          "id": "kellawi-esophagus-181",
-          "organ": "Esophagus",
-          "originalNumber": 181,
+          "originalNumber": 32,
           "question": "Which of the following diets or dietary components DECREASES lower esophageal sphincter pressure, worsening GERD?",
           "choices": [
             "High-protein diet",
@@ -12511,382 +10127,46 @@
             "Water"
           ],
           "answerIndex": 2,
-          "explanation": "A fat meal, chocolate, and peppermint produce a decrease in LES pressure, worsening reflux. A high-protein diet increases LES pressure.",
-          "source": "Bailey & Love MCQs.pdf, Page 459 / 134.",
-          "section": "Section 15: GERD, Hiatal Hernia & Motility Disorders"
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 32).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
         },
         {
-          "id": "kellawi-esophagus-182",
+          "id": "kellawi-esophagus-033",
           "organ": "Esophagus",
-          "originalNumber": 182,
-          "question": "Are partial fundoplications (like Toupet or Dor) ever used in the surgical management of esophageal disorders?",
+          "originalNumber": 33,
+          "question": "Which artery supplies the lower part of the esophagus?",
           "choices": [
-            "No, they have been entirely abandoned.",
-            "Yes, they are often performed in conjunction with a Heller myotomy for achalasia to prevent postoperative reflux.",
-            "Yes, they are the standard treatment for esophageal cancer.",
-            "Yes, they are used to treat Zenker's diverticulum."
-          ],
-          "answerIndex": 1,
-          "explanation": "Partial fundoplications (anterior Dor or posterior Toupet) are often performed alongside a Heller myotomy to prevent reflux without causing obstruction in the aperistaltic esophagus.",
-          "source": "Pretest MCQ.pdf, Page 969.",
-          "section": "Section 15: GERD, Hiatal Hernia & Motility Disorders"
-        },
-        {
-          "id": "kellawi-esophagus-183",
-          "organ": "Esophagus",
-          "originalNumber": 183,
-          "question": "The \"gas bloat syndrome,\" characterized by an inability to belch and excessive flatulence, is a known complication of which procedure?",
-          "choices": [
-            "Trans-hiatal esophagectomy",
-            "Nissen's fundoplication",
-            "Endoscopic dilatation",
-            "Sengstaken-Blakemore tube insertion"
-          ],
-          "answerIndex": 1,
-          "explanation": "Gas bloat syndrome is the most common long-term complication of a complete 360-degree wrap (Nissen's fundoplication).",
-          "source": "3-Zatoona.pdf, Page 38 / 92.",
-          "section": "Section 15: GERD, Hiatal Hernia & Motility Disorders"
-        },
-        {
-          "id": "kellawi-esophagus-184",
-          "organ": "Esophagus",
-          "originalNumber": 184,
-          "question": "Does the presence of a sliding hiatal hernia always require surgical repair?",
-          "choices": [
-            "Yes, due to the high risk of strangulation.",
-            "Yes, to prevent Barrett's esophagus.",
-            "No, the overwhelming majority are totally asymptomatic and do not require surgery.",
-            "No, they are treated with antibiotics."
+            "Right gastric artery",
+            "Splenic artery",
+            "Left gastric artery",
+            "Common hepatic artery"
           ],
           "answerIndex": 2,
-          "explanation": "The overwhelming majority of sliding hiatal hernias are totally asymptomatic and should only be surgically repaired if associated with severe, documented, refractory GERD.",
-          "source": "Pretest MCQ.pdf, Page 941.",
-          "section": "Section 15: GERD, Hiatal Hernia & Motility Disorders"
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 33).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
         },
         {
-          "id": "kellawi-esophagus-185",
+          "id": "kellawi-esophagus-034",
           "organ": "Esophagus",
-          "originalNumber": 185,
-          "question": "Which symptom differentiates the dysphagia of achalasia from that of an early esophageal carcinoma?",
+          "originalNumber": 34,
+          "question": "What specific histological change characterizes Barrett's esophagus?",
           "choices": [
-            "Achalasia causes dysphagia to solids only.",
-            "Carcinoma causes paradoxical dysphagia (liquids more than solids).",
-            "Achalasia often causes paradoxical dysphagia (more pronounced for liquids than solids initially), whereas carcinoma starts with solids.",
-            "There is no difference; they present identically."
-          ],
-          "answerIndex": 2,
-          "explanation": "In early achalasia, dysphagia is described as paradoxical (more pronounced for liquids). In carcinoma, dysphagia for solids is noted initially, later progressing to liquids.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 604 & 611.",
-          "section": "Section 15: GERD, Hiatal Hernia & Motility Disorders"
-        },
-        {
-          "id": "kellawi-esophagus-186",
-          "organ": "Esophagus",
-          "originalNumber": 186,
-          "question": "The normal adult esophagus has three natural anatomical constrictions. At what distance from the incisor teeth is the diaphragmatic constriction located?",
-          "choices": [
-            "15 cm",
-            "25 cm",
-            "40 cm",
-            "50 cm"
-          ],
-          "answerIndex": 2,
-          "explanation": "The constrictions are at 15 cm (cricopharyngeal), 25 cm (aortic/bronchial), and 40 cm (diaphragmatic) from the incisors.",
-          "source": "Bailey & Love MCQs.pdf, Page 425.",
-          "section": "Section 16: Esophageal Anatomy & Congenital Anomalies"
-        },
-        {
-          "id": "kellawi-esophagus-187",
-          "organ": "Esophagus",
-          "originalNumber": 187,
-          "question": "What is the approximate anatomical length of the normal adult esophagus?",
-          "choices": [
-            "10 cm",
-            "15 cm",
-            "25 cm",
-            "40 cm"
-          ],
-          "answerIndex": 2,
-          "explanation": "The esophagus itself is approximately 25 cm long.",
-          "source": "Bailey & Love MCQs.pdf, Page 425.",
-          "section": "Section 16: Esophageal Anatomy & Congenital Anomalies"
-        },
-        {
-          "id": "kellawi-esophagus-188",
-          "organ": "Esophagus",
-          "originalNumber": 188,
-          "question": "Which structure lies immediately posterior to the esophagus in the superior mediastinum?",
-          "choices": [
-            "Trachea",
-            "Aortic arch",
-            "Left atrium",
-            "Descending aorta and vertebral column"
-          ],
-          "answerIndex": 3,
-          "explanation": "The esophagus is a posterior mediastinal structure. The descending aorta loops backward and lies posterior to it, along with the vertebral column.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 613.",
-          "section": "Section 16: Esophageal Anatomy & Congenital Anomalies"
-        },
-        {
-          "id": "kellawi-esophagus-189",
-          "organ": "Esophagus",
-          "originalNumber": 189,
-          "question": "The most common congenital tracheoesophageal anomaly in a newborn is:",
-          "choices": [
-            "Esophageal atresia without a fistula",
-            "Tracheoesophageal fistula without atresia (H-type)",
-            "Proximal esophageal atresia with a fistula connecting the distal esophagus to the trachea",
-            "Distal esophageal atresia with a proximal fistula"
-          ],
-          "answerIndex": 2,
-          "explanation": "Type C (proximal blind pouch with distal tracheoesophageal fistula) is the most common form of this anomaly.",
-          "source": "Saito MCQ GIT.pdf, Page 151; Pretest MCQ.pdf, Page 981.",
-          "section": "Section 16: Esophageal Anatomy & Congenital Anomalies"
-        },
-        {
-          "id": "kellawi-esophagus-190",
-          "organ": "Esophagus",
-          "originalNumber": 190,
-          "question": "A newborn with suspected esophageal atresia presents with frothy salivation and choking on the first feed. If an associated distal tracheoesophageal fistula is present, what finding will be seen on an abdominal X-ray?",
-          "choices": [
-            "A completely gasless abdomen",
-            "Gas present in the stomach and intestines",
-            "Free air under the diaphragm",
-            "A massive pneumoperitoneum"
+            "Hyperplasia of the squamous epithelium",
+            "Metaplasia of the lower esophageal mucosa into a columnar type",
+            "Anaplasia of submucosal glands",
+            "Severe dysplasia of the upper esophageal sphincter"
           ],
           "answerIndex": 1,
-          "explanation": "If gas is present in the gastrointestinal tract in a patient with esophageal atresia, it confirms the presence of a distal tracheoesophageal fistula allowing air from the trachea into the stomach.",
-          "source": "Pretest MCQ.pdf, Page 981.",
-          "section": "Section 16: Esophageal Anatomy & Congenital Anomalies"
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 34).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
         },
         {
-          "id": "kellawi-esophagus-191",
+          "id": "kellawi-esophagus-035",
           "organ": "Esophagus",
-          "originalNumber": 191,
-          "question": "Are congenital esophageal duplication cysts highly prone to malignant degeneration?",
-          "choices": [
-            "Yes, they must be removed immediately.",
-            "No, malignant degeneration is rare.",
-            "Yes, they frequently turn into squamous cell carcinoma.",
-            "Unclear in the provided source."
-          ],
-          "answerIndex": 1,
-          "explanation": "Congenital esophageal duplication cysts rarely undergo malignant degeneration. They are typically asymptomatic but can be removed via thoracoscopy if they cause compressive symptoms.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 633.",
-          "section": "Section 16: Esophageal Anatomy & Congenital Anomalies"
-        },
-        {
-          "id": "kellawi-esophagus-192",
-          "organ": "Esophagus",
-          "originalNumber": 192,
-          "question": "Which vascular anomaly can encircle the trachea and esophagus, causing compressive symptoms like dysphagia?",
-          "choices": [
-            "Aortoenteric fistula",
-            "Double aortic arch",
-            "Superior vena cava syndrome",
-            "Patent ductus arteriosus"
-          ],
-          "answerIndex": 1,
-          "explanation": "Vascular rings (like a double aortic arch or right aortic arch with left ligamentum arteriosum) are congenital anomalies that encircle the esophagus and trachea, causing compression.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 633.",
-          "section": "Section 16: Esophageal Anatomy & Congenital Anomalies"
-        },
-        {
-          "id": "kellawi-esophagus-193",
-          "organ": "Esophagus",
-          "originalNumber": 193,
-          "question": "Which of the following correctly describes the epithelial lining of the esophagus?",
-          "choices": [
-            "The upper third is columnar, the rest is squamous.",
-            "The entire length is lined by non-keratinized stratified squamous epithelium.",
-            "The entire length is lined by ciliated columnar epithelium.",
-            "It is completely devoid of an epithelial layer."
-          ],
-          "answerIndex": 1,
-          "explanation": "The esophagus is lined throughout its length by non-keratinized stratified squamous epithelium. At the cardia, it transitions to columnar epithelium.",
-          "source": "Bailey & Love MCQs.pdf, Page 425; Saito MCQ GIT.pdf, Page 154.",
-          "section": "Section 16: Esophageal Anatomy & Congenital Anomalies"
-        },
-        {
-          "id": "kellawi-esophagus-194",
-          "organ": "Esophagus",
-          "originalNumber": 194,
-          "question": "What type of muscle tissue comprises the lower two-thirds of the esophageal wall?",
-          "choices": [
-            "Purely striated (skeletal) muscle",
-            "Purely smooth muscle",
-            "A completely random mix of both",
-            "Cartilaginous rings"
-          ],
-          "answerIndex": 1,
-          "explanation": "The upper third is striated muscle, which transitions to involuntary smooth muscle in the distal two-thirds.",
-          "source": "Saito MCQ GIT.pdf, Page 141.",
-          "section": "Section 16: Esophageal Anatomy & Congenital Anomalies"
-        },
-        {
-          "id": "kellawi-esophagus-195",
-          "organ": "Esophagus",
-          "originalNumber": 195,
-          "question": "The left atrium of the heart lies in what anatomical relation to the esophagus?",
-          "choices": [
-            "Superior",
-            "Posterior",
-            "Anterior",
-            "Lateral"
-          ],
-          "answerIndex": 2,
-          "explanation": "The left atrium lies immediately anterior to the esophagus, which is why an enlarged left atrium can indent or compress the esophagus.",
-          "source": "3-Zatoona.pdf, Page 38 / 131; Bailey & Love MCQs.pdf, Page 461. (Note: The esophagus is posterior to the left atrium).",
-          "section": "Section 16: Esophageal Anatomy & Congenital Anomalies"
-        },
-        {
-          "id": "kellawi-esophagus-196",
-          "organ": "Esophagus",
-          "originalNumber": 196,
-          "question": "Which surgical procedure is the curative treatment of choice for early, resectable squamous cell carcinoma of the middle third of the esophagus?",
-          "choices": [
-            "Endoscopic stent placement",
-            "Heller myotomy",
-            "Ivor-Lewis operation (total radical esophagectomy)",
-            "Nissen fundoplication"
-          ],
-          "answerIndex": 2,
-          "explanation": "The Ivor-Lewis operation (radical esophagectomy with reconstruction) is the surgical treatment of choice aiming for cure in middle and lower third esophageal carcinomas.",
-          "source": "3-Zatoona.pdf, Page 10 / 46.",
-          "section": "Section 17: Surgical Interventions & Palliative Care"
-        },
-        {
-          "id": "kellawi-esophagus-197",
-          "organ": "Esophagus",
-          "originalNumber": 197,
-          "question": "During a Trans-hiatal esophagectomy (Orringer's approach), which anatomical cavity is purposefully NOT opened?",
-          "choices": [
-            "The abdomen",
-            "The cervical region",
-            "The thoracic cavity (chest)",
-            "The pelvic cavity"
-          ],
-          "answerIndex": 2,
-          "explanation": "A trans-hiatal esophagectomy utilizes a cervical incision and a laparotomy to mobilize the esophagus, completely avoiding a thoracotomy to reduce morbidity.",
-          "source": "Saito MCQ GIT.pdf, Page 145.",
-          "section": "Section 17: Surgical Interventions & Palliative Care"
-        },
-        {
-          "id": "kellawi-esophagus-198",
-          "organ": "Esophagus",
-          "originalNumber": 198,
-          "question": "A patient with advanced, inoperable esophageal cancer and severe dysphagia requires palliation. What is the most effective and simplest treatment to restore swallowing?",
-          "choices": [
-            "Feeding gastrostomy",
-            "Endoscopic placement of an expanding metal stent",
-            "Total esophagectomy",
-            "Radical radiotherapy"
-          ],
-          "answerIndex": 1,
-          "explanation": "Endoscopic stent placement is the simplest and best palliative treatment to physically open the lumen and allow the patient to swallow their own saliva and food.",
-          "source": "Saito MCQ GIT.pdf, Page 138.",
-          "section": "Section 17: Surgical Interventions & Palliative Care"
-        },
-        {
-          "id": "kellawi-esophagus-199",
-          "organ": "Esophagus",
-          "originalNumber": 199,
-          "question": "Why is a feeding gastrostomy considered a poor palliative option for obstructive esophageal cancer?",
-          "choices": [
-            "It rapidly spreads the tumor.",
-            "It does not relieve the patient's inability to swallow their own saliva.",
-            "It causes immediate massive bleeding.",
-            "It completely paralyzes the stomach."
-          ],
-          "answerIndex": 1,
-          "explanation": "Gastrostomy provides nutrition but fails to address the distressing symptom of being unable to swallow saliva, making it a poor choice for quality-of-life palliation.",
-          "source": "Saito MCQ GIT.pdf, Page 137.",
-          "section": "Section 17: Surgical Interventions & Palliative Care"
-        },
-        {
-          "id": "kellawi-esophagus-200",
-          "organ": "Esophagus",
-          "originalNumber": 200,
-          "question": "What is the standard surgical treatment for severe achalasia that has failed endoscopic pneumatic dilatation?",
-          "choices": [
-            "Subtotal gastrectomy",
-            "Laparoscopic Heller myotomy with a partial fundoplication",
-            "Total esophagectomy",
-            "Ivor-Lewis procedure"
-          ],
-          "answerIndex": 1,
-          "explanation": "A Heller myotomy (division of the LES muscle fibers) combined with a partial fundoplication (to prevent reflux) is the standard surgical therapy for achalasia.",
-          "source": "Pretest MCQ.pdf, Page 969; LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 628.",
-          "section": "Section 17: Surgical Interventions & Palliative Care"
-        },
-        {
-          "id": "kellawi-esophagus-201",
-          "organ": "Esophagus",
-          "originalNumber": 201,
-          "question": "When performing a radical esophagectomy for a tumor in the lower third, what is the recommended proximal safety margin for resection?",
-          "choices": [
-            "1 cm",
-            "2 cm",
-            "5 cm",
-            "10 cm"
-          ],
-          "answerIndex": 2,
-          "explanation": "The ideal operation is to resect the lesion with an adequate safety margin (5 cm proximal and 10 cm distal) to ensure clearance.",
-          "source": "Saito MCQ GIT.pdf, Page 140.",
-          "section": "Section 17: Surgical Interventions & Palliative Care"
-        },
-        {
-          "id": "kellawi-esophagus-202",
-          "organ": "Esophagus",
-          "originalNumber": 202,
-          "question": "What is the surgical treatment of choice for a Dieulafoy lesion in the proximal stomach near the GE junction that fails to stop bleeding with endoscopic therapy?",
-          "choices": [
-            "Total gastrectomy",
-            "Pancreaticoduodenectomy",
-            "Wedge resection of the lesion",
-            "Heller myotomy"
-          ],
-          "answerIndex": 2,
-          "explanation": "If endoscopic hemostasis fails for a Dieulafoy lesion, surgery involving a gastrotomy and simple ligation or wedge resection of the lesion is adequate. Acid-reducing procedures are not necessary.",
-          "source": "Pretest MCQ.pdf, Page 952.",
-          "section": "Section 17: Surgical Interventions & Palliative Care"
-        },
-        {
-          "id": "kellawi-esophagus-203",
-          "organ": "Esophagus",
-          "originalNumber": 203,
-          "question": "In patients with severe, bleeding esophageal varices who are refractory to medical therapy and sclerotherapy, what is the best non-surgical shunt procedure?",
-          "choices": [
-            "Portocaval anastomosis",
-            "Distal splenorenal shunt",
-            "Transjugular Intrahepatic Portosystemic Shunt (TIPS)",
-            "Heller myotomy"
-          ],
-          "answerIndex": 2,
-          "explanation": "TIPS is the preferred radiological, minimally invasive procedure to decompress the portal system when endoscopic and medical management fail.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 692.",
-          "section": "Section 17: Surgical Interventions & Palliative Care"
-        },
-        {
-          "id": "kellawi-esophagus-204",
-          "organ": "Esophagus",
-          "originalNumber": 204,
-          "question": "What tissue can be used as a myocutaneous flap rolled into a tube to replace a localized segment of the cervical esophagus?",
-          "choices": [
-            "Rectus abdominis",
-            "Pectoralis major",
-            "Latissimus dorsi",
-            "Gluteus maximus"
-          ],
-          "answerIndex": 1,
-          "explanation": "A Pectoralis major myocutaneous flap can be rolled upon itself with the epidermal surface facing inward to line the lumen and replace a segment of the cervical esophagus.",
-          "source": "Saito MCQ GIT.pdf, Page 145.",
-          "section": "Section 17: Surgical Interventions & Palliative Care"
-        },
-        {
-          "id": "kellawi-esophagus-205",
-          "organ": "Esophagus",
-          "originalNumber": 205,
+          "originalNumber": 35,
           "question": "If a patient with long-standing GERD is diagnosed with high-grade dysplasia on biopsies of their Barrett's esophagus, what is the definitive recommended treatment?",
           "choices": [
             "Long-term observation",
@@ -12895,11 +10175,763 @@
             "Heller myotomy"
           ],
           "answerIndex": 2,
-          "explanation": "High-grade dysplasia in Barrett's esophagus has a 40-50% chance of progressing to adenocarcinoma, and prophylactic esophagectomy is widely recommended.",
-          "source": "LANG Q & A IN SURGERY 5TH EDITION.pdf, Page 629.",
-          "section": "Section 17: Surgical Interventions & Palliative Care"
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 35).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
         },
         {
+          "id": "kellawi-esophagus-036",
+          "organ": "Esophagus",
+          "originalNumber": 36,
+          "question": "In a paraesophageal (Type 4) hiatal hernia, what is the anatomical position of the gastroesophageal (GE) junction?",
+          "choices": [
+            "It slides upward into the posterior mediastinum.",
+            "It remains in its normal position below the diaphragm.",
+            "It migrates into the anterior mediastinum.",
+            "It is completely destroyed."
+          ],
+          "answerIndex": 1,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 36).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-037",
+          "organ": "Esophagus",
+          "originalNumber": 37,
+          "question": "Which of the following is true regarding a sliding hiatal hernia?",
+          "choices": [
+            "The gastroesophageal junction remains below the diaphragm.",
+            "It is commonly asymptomatic.",
+            "Strangulation of the stomach is a frequent complication.",
+            "Surgery is strictly indicated upon diagnosis."
+          ],
+          "answerIndex": 1,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 37).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-038",
+          "organ": "Esophagus",
+          "originalNumber": 38,
+          "question": "In a patient with achalasia, manometry classically demonstrates:",
+          "choices": [
+            "Decreased lower esophageal sphincter (LES) pressure",
+            "Increased upper and lower esophageal sphincter pressure",
+            "Failure of the LES to relax and absent or weak simultaneous contractions in the esophageal body",
+            "Normal primary peristalsis"
+          ],
+          "answerIndex": 2,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 38).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-039",
+          "organ": "Esophagus",
+          "originalNumber": 39,
+          "question": "What is the standard surgical treatment for severe achalasia that has failed endoscopic pneumatic dilatation?",
+          "choices": [
+            "Subtotal gastrectomy",
+            "Laparoscopic Heller myotomy with a partial fundoplication",
+            "Total esophagectomy",
+            "Ivor-Lewis procedure"
+          ],
+          "answerIndex": 1,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 39).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-040",
+          "organ": "Esophagus",
+          "originalNumber": 40,
+          "question": "In a patient with achalasia, what is the underlying pathophysiology believed to be responsible for the motility disorder?",
+          "choices": [
+            "Hypertrophy of the cricopharyngeus muscle",
+            "Acid-induced ulceration of the mucosa",
+            "Degeneration of ganglion cells within Auerbach's (myenteric) plexus",
+            "Congenital absence of the esophagus"
+          ],
+          "answerIndex": 2,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 40).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-041",
+          "organ": "Esophagus",
+          "originalNumber": 41,
+          "question": "Which form of esophageal carcinoma is most likely to be found in a patient with a long history of untreated achalasia?",
+          "choices": [
+            "Adenocarcinoma",
+            "Squamous cell carcinoma",
+            "Leiomyosarcoma",
+            "Gastrointestinal stromal tumor (GIST)"
+          ],
+          "answerIndex": 1,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 41).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-042",
+          "organ": "Esophagus",
+          "originalNumber": 42,
+          "question": "Which of the following is considered an EARLY symptom of esophageal carcinoma?",
+          "choices": [
+            "Copious vomiting of bile",
+            "Massive painless hematemesis",
+            "Progressive dysphagia to solids",
+            "A completely silent abdomen"
+          ],
+          "answerIndex": 2,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 42).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-043",
+          "organ": "Esophagus",
+          "originalNumber": 43,
+          "question": "Which of the following conditions is considered a predisposing factor for squamous cell carcinoma of the esophagus, but NOT for adenocarcinoma?",
+          "choices": [
+            "Barrett's esophagus",
+            "Corrosive stricture of the esophagus",
+            "Sliding hiatal hernia",
+            "Gastroesophageal reflux disease"
+          ],
+          "answerIndex": 1,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 43).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-044",
+          "organ": "Esophagus",
+          "originalNumber": 44,
+          "question": "What pathophysiological process differentiates an esophageal burn caused by lye (alkali) from one caused by acid?",
+          "choices": [
+            "Alkali causes coagulative necrosis; acid causes liquefactive necrosis.",
+            "Alkali causes liquefactive necrosis; acid causes coagulative necrosis with eschar formation.",
+            "Alkali causes caseous necrosis; acid causes fat necrosis.",
+            "Both cause identical thermal burns."
+          ],
+          "answerIndex": 1,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 44).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-045",
+          "organ": "Esophagus",
+          "originalNumber": 45,
+          "question": "Dysphagia associated with gurgling sounds in the neck and halitosis is most characteristic of:",
+          "choices": [
+            "Esophageal carcinoma",
+            "Zenker's diverticulum",
+            "Peptic stricture",
+            "Achalasia"
+          ],
+          "answerIndex": 1,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 45).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-046",
+          "organ": "Esophagus",
+          "originalNumber": 46,
+          "question": "Which of the following best describes the pathogenesis of a Zenker's diverticulum?",
+          "choices": [
+            "It is a traction diverticulum caused by inflamed mediastinal lymph nodes.",
+            "It is a congenital anomaly present from birth.",
+            "It is a pulsion diverticulum resulting from high intraluminal pressure due to cricopharyngeal incoordination.",
+            "It is a true diverticulum containing all layers of the esophageal wall."
+          ],
+          "answerIndex": 2,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 46).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-047",
+          "organ": "Esophagus",
+          "originalNumber": 47,
+          "question": "What is a known severe complication of using a Sengstaken-Blakemore tube for variceal tamponade?",
+          "choices": [
+            "Spontaneous pneumothorax",
+            "Gastric outlet obstruction",
+            "Esophageal ulceration or perforation",
+            "Small bowel infarction"
+          ],
+          "answerIndex": 2,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 47).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-048",
+          "organ": "Esophagus",
+          "originalNumber": 48,
+          "question": "What is the approximate anatomical length of the normal adult esophagus?",
+          "choices": [
+            "10 cm",
+            "15 cm",
+            "25 cm",
+            "40 cm"
+          ],
+          "answerIndex": 2,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 48).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-049",
+          "organ": "Esophagus",
+          "originalNumber": 49,
+          "question": "A 42-year-old patient with cirrhosis presents with bleeding esophageal varices. Endoscopic band ligation successfully stops the bleeding. To prevent recurrence, which class of medication is typically prescribed long-term?",
+          "choices": [
+            "Alpha-adrenergic agonists",
+            "Beta-blockers (e.g., propranolol)",
+            "Antacids",
+            "Steroids"
+          ],
+          "answerIndex": 1,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 49).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-050",
+          "organ": "Esophagus",
+          "originalNumber": 50,
+          "question": "In the management of esophageal carcinoma, a trans-hiatal esophagectomy refers to a surgical approach that:",
+          "choices": [
+            "Utilizes a right thoracotomy and a laparotomy.",
+            "Uses a cervical incision and a laparotomy, avoiding a thoracotomy.",
+            "Relies solely on an endoscopic approach.",
+            "Requires a median sternotomy."
+          ],
+          "answerIndex": 1,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 50).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-051",
+          "organ": "Esophagus",
+          "originalNumber": 51,
+          "question": "Traction diverticula of the esophagus are most commonly caused by:",
+          "choices": [
+            "High intraluminal pressure from a distal stricture",
+            "Inflammatory contraction around adjacent mediastinal lymph nodes (e.g., from tuberculosis)",
+            "Congenital absence of the muscularis propria",
+            "Forceful repeated vomiting"
+          ],
+          "answerIndex": 1,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 51).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-052",
+          "organ": "Esophagus",
+          "originalNumber": 52,
+          "question": "The most significant risk factor for the development of adenocarcinoma of the esophagus is:",
+          "choices": [
+            "Alcohol abuse",
+            "Smoking",
+            "Barrett's esophagus",
+            "Achalasia"
+          ],
+          "answerIndex": 2,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 52).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-053",
+          "organ": "Esophagus",
+          "originalNumber": 53,
+          "question": "Which of the following is a classic clinical presentation of a Dieulafoy lesion?",
+          "choices": [
+            "Progressive dysphagia to solids",
+            "Massive, painless, recurrent hematemesis",
+            "Severe retrosternal pain radiating to the back",
+            "Chronic iron deficiency anemia without overt bleeding"
+          ],
+          "answerIndex": 1,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 53).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-054",
+          "organ": "Esophagus",
+          "originalNumber": 54,
+          "question": "At what vertebral level does the esophagus begin?",
+          "choices": [
+            "4th cervical vertebra",
+            "6th cervical vertebra",
+            "1st thoracic vertebra",
+            "10th thoracic vertebra"
+          ],
+          "answerIndex": 1,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 54).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-055",
+          "organ": "Esophagus",
+          "originalNumber": 55,
+          "question": "Which structure forms the upper esophageal sphincter?",
+          "choices": [
+            "Cardio-esophageal muscle",
+            "Intrinsic muscle of the distal esophagus",
+            "Crico-pharyngeus muscle",
+            "Sling fibers of the cardia"
+          ],
+          "answerIndex": 2,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 55).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-056",
+          "organ": "Esophagus",
+          "originalNumber": 56,
+          "question": "Is the serosa the strongest layer of the esophagus?",
+          "choices": [
+            "Yes, it prevents spontaneous ruptures.",
+            "Yes, it is composed of thick connective tissue.",
+            "No, the esophagus is lined by columnar epithelium.",
+            "No, the statement that the serosa is the strongest layer is false."
+          ],
+          "answerIndex": 3,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 56).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-057",
+          "organ": "Esophagus",
+          "originalNumber": 57,
+          "question": "The presence of dysphagia in a patient with a long history of GERD most likely suggests:",
+          "choices": [
+            "Healing of the esophageal mucosa",
+            "Development of a stricture or motility disorder",
+            "A normal physiological variation",
+            "Esophageal varices"
+          ],
+          "answerIndex": 1,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 57).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-058",
+          "organ": "Esophagus",
+          "originalNumber": 58,
+          "question": "A patient with long-standing GERD undergoes a barium study showing an irregular, ulcerated area in the lower third of the esophagus with mucosal disruption. What is the most likely diagnosis?",
+          "choices": [
+            "Sliding hiatal hernia",
+            "Adenocarcinoma arising in Barrett's esophagus",
+            "Benign peptic stricture",
+            "Squamous cell carcinoma"
+          ],
+          "answerIndex": 1,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 58).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-059",
+          "organ": "Esophagus",
+          "originalNumber": 59,
+          "question": "The medical and surgical treatments for cardiac achalasia include all of the following EXCEPT:",
+          "choices": [
+            "Esophageal cardiomyotomy (Heller myotomy)",
+            "Trunkal vagotomy",
+            "Injection of botulinum toxins",
+            "Repeated sessions of esophageal dilatation"
+          ],
+          "answerIndex": 1,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 59).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-060",
+          "organ": "Esophagus",
+          "originalNumber": 60,
+          "question": "Which of the following interventions relies on chemical denervation to treat achalasia?",
+          "choices": [
+            "Endoscopic pneumatic dilatation",
+            "Injection of botulinum toxins in the muscle of the cardia",
+            "Laparoscopic fundoplication",
+            "Trans-hiatal esophagectomy"
+          ],
+          "answerIndex": 1,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 60).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-061",
+          "organ": "Esophagus",
+          "originalNumber": 61,
+          "question": "Which of the following is TRUE concerning the use of pneumatic balloon dilatation in the treatment of achalasia?",
+          "choices": [
+            "It is contraindicated and has a near 100% perforation rate.",
+            "It aims to disrupt the muscular layers of the lower esophageal sphincter (LES).",
+            "It selectively denervates the vagus nerve.",
+            "It is only effective for diffuse esophageal spasm."
+          ],
+          "answerIndex": 1,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 61).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-062",
+          "organ": "Esophagus",
+          "originalNumber": 62,
+          "question": "In which anatomical section of the esophagus is squamous cell carcinoma most commonly found?",
+          "choices": [
+            "Upper third",
+            "Middle third",
+            "Lower third",
+            "Gastroesophageal junction"
+          ],
+          "answerIndex": 1,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 62).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-063",
+          "organ": "Esophagus",
+          "originalNumber": 63,
+          "question": "Which mediastinal compartment does the thoracic esophagus primarily occupy?",
+          "choices": [
+            "Anterior mediastinum",
+            "Middle mediastinum",
+            "Posterior mediastinum",
+            "Superior mediastinum only"
+          ],
+          "answerIndex": 2,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 63).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-064",
+          "organ": "Esophagus",
+          "originalNumber": 64,
+          "question": "In the surgical treatment of esophageal carcinoma, why is radical en bloc resection (esophagectomy) indicated for early stages?",
+          "choices": [
+            "It is the only hope for a cure.",
+            "It completely eliminates the need for chemotherapy.",
+            "It prevents the development of Barrett's esophagus.",
+            "It guarantees zero operative mortality."
+          ],
+          "answerIndex": 0,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 64).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-065",
+          "organ": "Esophagus",
+          "originalNumber": 65,
+          "question": "Which procedure selectively denervates the parietal cell mass with a low incidence of side effects, preserving the vagal supply to the antrum?",
+          "choices": [
+            "Truncal vagotomy",
+            "Billroth I procedure",
+            "Highly selective vagotomy (Parietal cell vagotomy)",
+            "Laparoscopic Nissen fundoplication"
+          ],
+          "answerIndex": 2,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 65).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-066",
+          "organ": "Esophagus",
+          "originalNumber": 66,
+          "question": "A 55-year-old male with long-standing GERD undergoes endoscopy, which reveals a smooth, tapering stricture at the lower end of the esophagus with no mucosal disruption or overhanging edges. What is the most likely diagnosis?",
+          "choices": [
+            "Adenocarcinoma",
+            "Benign peptic stricture",
+            "Squamous cell carcinoma",
+            "Achalasia"
+          ],
+          "answerIndex": 1,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 66).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-067",
+          "organ": "Esophagus",
+          "originalNumber": 67,
+          "question": "When staging esophageal cancer, what is the role of Positron Emission Tomography (PET)?",
+          "choices": [
+            "To precisely measure the depth of mucosal invasion (T-stage)",
+            "To guide endoscopic balloon dilatation",
+            "To detect distant occult metastatic disease (M-stage)",
+            "To determine the exact location of the squamocolumnar junction"
+          ],
+          "answerIndex": 2,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 67).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-068",
+          "organ": "Esophagus",
+          "originalNumber": 68,
+          "question": "Which clinical finding upon physical examination is suggestive of an advanced postcricoid carcinoma extending anteriorly?",
+          "choices": [
+            "A palpable left supraclavicular lymph node (Virchow's node)",
+            "Loss of the normal \"laryngeal click\" when moving the larynx side to side",
+            "Massive subcutaneous emphysema",
+            "A pulsatile mass in the left neck"
+          ],
+          "answerIndex": 1,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 68).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-069",
+          "organ": "Esophagus",
+          "originalNumber": 69,
+          "question": "What is the definition of an early \"carcinoma in situ\" regarding GI mucosal lesions?",
+          "choices": [
+            "Malignant cells extending into the muscularis propria",
+            "Malignant cells that have reached the regional lymph nodes",
+            "Malignant cells present in the mucosal layer only",
+            "A benign hyperplastic polyp"
+          ],
+          "answerIndex": 2,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 69).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-070",
+          "organ": "Esophagus",
+          "originalNumber": 70,
+          "question": "Which of the following statements about esophageal squamous cell carcinoma is TRUE regarding its sensitivity to radiation?",
+          "choices": [
+            "It is completely radio-resistant.",
+            "It is less sensitive to radiation than adenocarcinoma.",
+            "It is usually more sensitive to radiation than adenocarcinoma.",
+            "Radiation causes it to rapidly mutate into a sarcoma."
+          ],
+          "answerIndex": 2,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 70).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-071",
+          "organ": "Esophagus",
+          "originalNumber": 71,
+          "question": "What tissue can be used as a myocutaneous flap rolled into a tube to replace a localized segment of the cervical esophagus?",
+          "choices": [
+            "Rectus abdominis",
+            "Pectoralis major",
+            "Latissimus dorsi",
+            "Gluteus maximus"
+          ],
+          "answerIndex": 1,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 71).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-072",
+          "organ": "Esophagus",
+          "originalNumber": 72,
+          "question": "What is the approximate 5-year survival rate for patients with early, resectable carcinoma of the lower esophagus in the United States?",
+          "choices": [
+            "Less than 5%",
+            "15% to 25%",
+            "50% to 75%",
+            "Greater than 90%"
+          ],
+          "answerIndex": 1,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 72).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-073",
+          "organ": "Esophagus",
+          "originalNumber": 73,
+          "question": "In a patient with a suspected cervical esophageal carcinoma, what specific investigation is highly useful to rule out tumor growth into the airway?",
+          "choices": [
+            "Bronchoscopy",
+            "Positron emission tomography (PET)",
+            "24-hour pH monitoring",
+            "Esophageal manometry"
+          ],
+          "answerIndex": 0,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 73).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-074",
+          "organ": "Esophagus",
+          "originalNumber": 74,
+          "question": "Are congenital esophageal duplication cysts highly prone to malignant degeneration?",
+          "choices": [
+            "Yes, they must be removed immediately.",
+            "No, malignant degeneration is rare.",
+            "Yes, they frequently turn into squamous cell carcinoma.",
+            "Unclear in the provided source."
+          ],
+          "answerIndex": 1,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 74).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-075",
+          "organ": "Esophagus",
+          "originalNumber": 75,
+          "question": "Which vascular anomaly can encircle the trachea and esophagus, causing compressive symptoms like dysphagia?",
+          "choices": [
+            "Aortoenteric fistula",
+            "Double aortic arch",
+            "Superior vena cava syndrome",
+            "Patent ductus arteriosus"
+          ],
+          "answerIndex": 1,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 75).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-076",
+          "organ": "Esophagus",
+          "originalNumber": 76,
+          "question": "When performing a radical esophagectomy for a tumor in the lower third, what is the recommended proximal safety margin for resection?",
+          "choices": [
+            "1 cm",
+            "2 cm",
+            "5 cm",
+            "10 cm"
+          ],
+          "answerIndex": 2,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 76).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-077",
+          "organ": "Esophagus",
+          "originalNumber": 77,
+          "question": "Which parasitic infection is known to cause a secondary achalasia-like destruction of esophageal ganglion cells?",
+          "choices": [
+            "Schistosomiasis",
+            "Chagas disease",
+            "Malaria",
+            "Leishmaniasis"
+          ],
+          "answerIndex": 1,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 77).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-078",
+          "organ": "Esophagus",
+          "originalNumber": 78,
+          "question": "In Mallory-Weiss syndrome, what percentage of the mucosal tears are located entirely within the stomach rather than crossing the GE junction?",
+          "choices": [
+            "5%",
+            "25%",
+            "50%",
+            "90%"
+          ],
+          "answerIndex": 3,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 78).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-079",
+          "organ": "Esophagus",
+          "originalNumber": 79,
+          "question": "A patient with long-standing Gastroesophageal Reflux Disease (GERD) is found to have Barrett's esophagus. How much does this condition increase their risk of developing esophageal adenocarcinoma?",
+          "choices": [
+            "2 times",
+            "5 times",
+            "20 to 50 times",
+            "It does not increase the risk."
+          ],
+          "answerIndex": 2,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 79).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-080",
+          "organ": "Esophagus",
+          "originalNumber": 80,
+          "question": "Which anatomical structure forms an oblique angle of insertion of the esophagus into the stomach, acting as an anti-reflux mechanism?",
+          "choices": [
+            "Angle of His",
+            "Angle of Treitz",
+            "Costophrenic angle",
+            "Calot's triangle"
+          ],
+          "answerIndex": 0,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 80).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-081",
+          "organ": "Esophagus",
+          "originalNumber": 81,
+          "question": "Which of the following surgical procedures is a posterior 180-degree partial fundoplication often performed in conjunction with a Heller myotomy to prevent postoperative reflux?",
+          "choices": [
+            "Nissen procedure",
+            "Toupet procedure",
+            "Belsey Mark IV",
+            "Dor procedure"
+          ],
+          "answerIndex": 1,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 81).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+        {
+          "id": "kellawi-esophagus-082",
+          "organ": "Esophagus",
+          "originalNumber": 82,
+          "question": "What is the endoscopic landmark called where the pale pink squamous epithelium of the esophagus meets the redder columnar epithelium of the stomach?",
+          "choices": [
+            "Angle of His",
+            "Z-line",
+            "Ligament of Treitz",
+            "Plica circularis"
+          ],
+          "answerIndex": 1,
+          "explanation": "Source: update kel esoph/esophagus clean.md (Question 82).",
+          "source": "update kel esoph/esophagus clean.md",
+          "section": "The Esophagus"
+        },
+{
           "id": "kellawi-liver-001",
           "organ": "Liver",
           "originalNumber": 1,
@@ -19056,12 +17088,9 @@
     "id": "esophagus",
     "label": "Esophagus",
     "sizes": [
-      35,
-      34,
-      34,
-      34,
-      34,
-      34
+      30,
+      30,
+      22
     ]
   },
   {
