@@ -5,6 +5,7 @@ let trackerTopicsIncludeOptionalColumns = true
 let trackerTopicsIncludeMidtermColumns = true
 let trackerTopicsIncludeCreatedAt = true
 let userPreferencesIncludeNickname = true
+let userPreferencesIncludeAvatar = true
 
 export function getSupabaseConfig() {
   const windowConfig = window.SUPABASE_CONFIG || {}
@@ -68,6 +69,11 @@ function isMissingUserPreferenceNicknameError(error) {
   return /nickname/i.test(message) && /user_preferences|schema cache|column/i.test(message)
 }
 
+function isMissingUserPreferenceAvatarError(error) {
+  const message = `${error?.message || ''} ${error?.details || ''} ${error?.hint || ''}`
+  return /avatar_id/i.test(message) && /user_preferences|schema cache|column/i.test(message)
+}
+
 function stripOptionalColumns(row) {
   const { drive_url, audio_url, display_order, ...basicRow } = row
   return basicRow
@@ -81,6 +87,27 @@ function stripMidtermColumns(row) {
 function stripUserPreferenceNickname(row) {
   const { nickname, ...basicRow } = row
   return basicRow
+}
+
+function stripUserPreferenceAvatar(row) {
+  const { avatar_id, ...basicRow } = row
+  return basicRow
+}
+
+function getUserPreferenceSelectFields() {
+  return [
+    'anonymous',
+    'selected_section',
+    ...(userPreferencesIncludeNickname ? ['nickname'] : []),
+    ...(userPreferencesIncludeAvatar ? ['avatar_id'] : []),
+    'updated_at'
+  ].join(', ')
+}
+
+function stripUnsupportedUserPreferenceFields(row) {
+  let payload = userPreferencesIncludeNickname ? row : stripUserPreferenceNickname(row)
+  payload = userPreferencesIncludeAvatar ? payload : stripUserPreferenceAvatar(payload)
+  return payload
 }
 
 export async function fetchTrackerTopicRows() {
@@ -342,13 +369,25 @@ export async function fetchLeaderboard(section = '401') {
   return data || []
 }
 
+export async function fetchRecentMcqActivity(section = '401', limit = 8) {
+  const supabase = getSupabaseClient()
+  if (!supabase) return []
+
+  const { data, error } = await supabase
+    .rpc('get_recent_mcq_activity', {
+      p_section: section,
+      p_limit: Math.max(1, Math.min(Number(limit) || 8, 12))
+    })
+
+  if (error) throw error
+  return data || []
+}
+
 export async function fetchUserPreference() {
   const supabase = getSupabaseClient()
   if (!supabase) return null
 
-  const selectFields = userPreferencesIncludeNickname
-    ? 'anonymous, selected_section, nickname, updated_at'
-    : 'anonymous, selected_section, updated_at'
+  const selectFields = getUserPreferenceSelectFields()
 
   const { data, error } = await supabase
     .from('user_preferences')
@@ -357,6 +396,10 @@ export async function fetchUserPreference() {
 
   if (error && userPreferencesIncludeNickname && isMissingUserPreferenceNicknameError(error)) {
     userPreferencesIncludeNickname = false
+    return fetchUserPreference()
+  }
+  if (error && userPreferencesIncludeAvatar && isMissingUserPreferenceAvatarError(error)) {
+    userPreferencesIncludeAvatar = false
     return fetchUserPreference()
   }
 
@@ -368,10 +411,8 @@ export async function upsertUserPreference(row) {
   const supabase = getSupabaseClient()
   if (!supabase) throw new Error('Supabase is not configured.')
 
-  const payload = userPreferencesIncludeNickname ? row : stripUserPreferenceNickname(row)
-  const selectFields = userPreferencesIncludeNickname
-    ? 'anonymous, selected_section, nickname, updated_at'
-    : 'anonymous, selected_section, updated_at'
+  const payload = stripUnsupportedUserPreferenceFields(row)
+  const selectFields = getUserPreferenceSelectFields()
 
   const { data, error } = await supabase
     .from('user_preferences')
@@ -383,6 +424,10 @@ export async function upsertUserPreference(row) {
     userPreferencesIncludeNickname = false
     return upsertUserPreference(row)
   }
+  if (error && userPreferencesIncludeAvatar && isMissingUserPreferenceAvatarError(error)) {
+    userPreferencesIncludeAvatar = false
+    return upsertUserPreference(row)
+  }
 
   if (error) throw error
   return data
@@ -392,13 +437,11 @@ export async function updateUserPreference(userId, changes) {
   const supabase = getSupabaseClient()
   if (!supabase) throw new Error('Supabase is not configured.')
 
-  const payload = userPreferencesIncludeNickname ? changes : stripUserPreferenceNickname(changes)
+  const payload = stripUnsupportedUserPreferenceFields(changes)
   if (!Object.keys(payload).length) {
-    throw new Error('Nickname support is not enabled yet.')
+    throw new Error('This profile preference is not enabled for cloud sync yet.')
   }
-  const selectFields = userPreferencesIncludeNickname
-    ? 'anonymous, selected_section, nickname, updated_at'
-    : 'anonymous, selected_section, updated_at'
+  const selectFields = getUserPreferenceSelectFields()
 
   const { data, error } = await supabase
     .from('user_preferences')
@@ -409,6 +452,10 @@ export async function updateUserPreference(userId, changes) {
 
   if (error && userPreferencesIncludeNickname && isMissingUserPreferenceNicknameError(error)) {
     userPreferencesIncludeNickname = false
+    return updateUserPreference(userId, changes)
+  }
+  if (error && userPreferencesIncludeAvatar && isMissingUserPreferenceAvatarError(error)) {
+    userPreferencesIncludeAvatar = false
     return updateUserPreference(userId, changes)
   }
 

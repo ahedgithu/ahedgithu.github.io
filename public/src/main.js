@@ -11,6 +11,7 @@ import {
   fetchUserQuizProgressRows,
   fetchUserTopicProgressRows,
   fetchLeaderboard,
+  fetchRecentMcqActivity,
   fetchUserPreference,
   updateUserPreference,
   upsertUserPreference,
@@ -764,6 +765,17 @@ const TOPIC_COMPLETION_STORAGE_PREFIX = 'topicCompletion'
 const LEGACY_TOPIC_COMPLETION_STORAGE_PREFIX = 'med401-topic-progress-v1::'
 const LOCAL_PROGRESS_OWNER_KEY = 'mustHubLocalProgressOwner'
 const SEEN_TROPHIES_STORAGE_PREFIX = 'seenProfileTrophies'
+const PROFILE_AVATAR_STORAGE_PREFIX = 'profileAvatar'
+const PROFILE_AVATARS = [
+  { id: 'pulse', label: 'Pulse', position: '0% 0%' },
+  { id: 'scholar', label: 'Scholar', position: '33.333% 0%' },
+  { id: 'rounds', label: 'Rounds', position: '66.667% 0%' },
+  { id: 'cardio', label: 'Cardio', position: '100% 0%' },
+  { id: 'calm', label: 'Calm', position: '0% 100%' },
+  { id: 'scope', label: 'Scope', position: '33.333% 100%' },
+  { id: 'notes', label: 'Notes', position: '66.667% 100%' },
+  { id: 'anatomy', label: 'Anatomy', position: '100% 100%' }
+]
 const TOPIC_UPDATE_STORAGE_KEY_PREFIX = 'tracker-seen-topic-updates-v1'
 let TOPIC_UPDATE_STORAGE_KEY = `${TOPIC_UPDATE_STORAGE_KEY_PREFIX}::401`
 const UNIVERSITY_WEEK_START_DAY = 0 // Sunday
@@ -1335,6 +1347,10 @@ async function refreshTrackerAdminProfile(user) {
   }
   renderTrackerAdminUi()
   renderStudentSyncUi()
+  if (isStandaloneProfilePage) {
+    renderProfileSection()
+    return
+  }
   if (newsCardsState.remoteSections.has(activeAcademicSection)) {
     replaceNewsFeedWithRemoteRows()
     renderNewsFilters()
@@ -1468,7 +1484,7 @@ function getStudentDisplayName() {
 }
 
 function getDefaultUserPreferences() {
-  return { anonymous: true, selected_section: null, nickname: '' }
+  return { anonymous: true, selected_section: null, nickname: '', avatar_id: '' }
 }
 
 function getStudentNickname() {
@@ -1490,6 +1506,58 @@ function getPrivateProfileDisplayName() {
 
 function getProgressStorageOwnerId() {
   return studentProgressState.user?.id || ''
+}
+
+function getProfileAvatarById(avatarId) {
+  return PROFILE_AVATARS.find((avatar) => avatar.id === avatarId) || null
+}
+
+function getDefaultProfileAvatarId(ownerId = getProgressStorageOwnerId()) {
+  const seed = String(ownerId || getStudentDisplayName())
+  const hash = [...seed].reduce((total, character) => total + character.charCodeAt(0), 0)
+  return PROFILE_AVATARS[hash % PROFILE_AVATARS.length].id
+}
+
+function getProfileAvatarStorageKey() {
+  return `${PROFILE_AVATAR_STORAGE_PREFIX}::${getProgressStorageOwnerId()}`
+}
+
+function getLocalProfileAvatarId() {
+  try {
+    const avatarId = localStorage.getItem(getProfileAvatarStorageKey()) || ''
+    return getProfileAvatarById(avatarId) ? avatarId : ''
+  } catch {
+    return ''
+  }
+}
+
+function saveLocalProfileAvatarId(avatarId) {
+  try {
+    localStorage.setItem(getProfileAvatarStorageKey(), avatarId)
+  } catch {
+    // The cloud preference remains the durable source when local storage is unavailable.
+  }
+}
+
+function getStudentAvatarId() {
+  const cloudAvatarId = String(leaderboardState.preferences?.avatar_id || '')
+  if (getProfileAvatarById(cloudAvatarId)) return cloudAvatarId
+  return getLocalProfileAvatarId() || getDefaultProfileAvatarId()
+}
+
+function getProfileAvatarClass(avatarId) {
+  const validAvatarId = getProfileAvatarById(avatarId)?.id || getDefaultProfileAvatarId()
+  return `student-avatar--${validAvatarId}`
+}
+
+function getProfileAvatarMarkup(avatarId, className = '', label = 'Selected profile') {
+  return `<span class="student-avatar ${getProfileAvatarClass(avatarId)} ${className}" role="img" aria-label="${escapeHtml(label)} avatar"></span>`
+}
+
+function getLeaderboardAvatarId(entry, fallbackIndex = 0) {
+  const avatarId = String(entry?.avatar_id || '')
+  if (getProfileAvatarById(avatarId)) return avatarId
+  return PROFILE_AVATARS[Math.abs(fallbackIndex) % PROFILE_AVATARS.length].id
 }
 
 function canUseLegacyLocalProgress() {
@@ -1653,14 +1721,132 @@ const leaderboardState = {
   requestId: 0
 }
 
+const liveActivityState = {
+  loading: false,
+  rows: [],
+  lastFetched: 0,
+  section: '',
+  timer: null,
+  unavailable: false
+}
+
+function formatActivityTime(value) {
+  const timestamp = new Date(value || 0).getTime()
+  if (!timestamp) return 'just now'
+  const elapsedMinutes = Math.max(0, Math.floor((Date.now() - timestamp) / 60000))
+  if (elapsedMinutes < 1) return 'now'
+  if (elapsedMinutes === 1) return '1 min'
+  return `${Math.min(elapsedMinutes, 59)} min`
+}
+
+function getActivityDescription(row) {
+  const topic = String(row.topic_label || row.source_label || 'MCQs').trim()
+  if (row.completed) return `finished ${topic}`
+  const answered = Math.max(0, Number(row.answered_count) || 0)
+  const total = Math.max(answered, Number(row.total_questions) || 0)
+  return total ? `${answered}/${total} in ${topic}` : `practising ${topic}`
+}
+
+function renderLiveActivityContainer(container, limit) {
+  if (!container) return
+  const rows = liveActivityState.rows.slice(0, limit)
+  if (!rows.length) {
+    container.hidden = true
+    container.innerHTML = ''
+    return
+  }
+
+  container.hidden = false
+  container.innerHTML = `
+    <span class="study-pulse__label">
+      <i aria-hidden="true"></i>
+      Study pulse
+    </span>
+    <div class="study-pulse__rail">
+      ${rows.map((row, index) => {
+        const name = String(row.display_name || 'Student')
+        const avatarId = getLeaderboardAvatarId(row, index)
+        const rank = Math.max(1, Number(row.rank) || index + 1)
+        return `
+          <article class="study-pulse__event">
+            ${getProfileAvatarMarkup(avatarId, 'study-pulse__avatar', name)}
+            <span class="study-pulse__copy">
+              <strong>${escapeHtml(name)}</strong>
+              <small>${escapeHtml(getActivityDescription(row))}</small>
+            </span>
+            <span class="study-pulse__rank" aria-label="Rank ${rank}">#${rank}</span>
+            <time datetime="${escapeHtml(row.updated_at || '')}">${formatActivityTime(row.updated_at)}</time>
+          </article>
+        `
+      }).join('')}
+    </div>
+  `
+}
+
+function renderLiveActivity() {
+  renderLiveActivityContainer(document.getElementById('tracker-live-activity'), 6)
+  renderLiveActivityContainer(document.getElementById('quiz-live-activity'), 3)
+}
+
+async function fetchAndRenderLiveActivity(force = false) {
+  if (!studentProgressState.user || liveActivityState.loading || liveActivityState.unavailable) {
+    renderLiveActivity()
+    return
+  }
+  const now = Date.now()
+  if (
+    !force
+    && liveActivityState.section === activeAcademicSection
+    && now - liveActivityState.lastFetched < 20000
+  ) {
+    renderLiveActivity()
+    return
+  }
+
+  liveActivityState.loading = true
+  try {
+    liveActivityState.rows = await fetchRecentMcqActivity(activeAcademicSection, 8)
+    liveActivityState.section = activeAcademicSection
+    liveActivityState.lastFetched = Date.now()
+    renderLiveActivity()
+  } catch (error) {
+    liveActivityState.rows = []
+    liveActivityState.unavailable = true
+    renderLiveActivity()
+    console.info('Study pulse will appear after its database update is enabled.', error)
+  } finally {
+    liveActivityState.loading = false
+  }
+}
+
+function initLiveActivity() {
+  renderLiveActivity()
+  if (liveActivityState.timer) return
+  liveActivityState.timer = window.setInterval(() => {
+    if (document.visibilityState === 'visible') fetchAndRenderLiveActivity()
+  }, 20000)
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') fetchAndRenderLiveActivity(true)
+  })
+}
+
 function renderAnonToggleUi() {
   const btn = document.getElementById('leaderboard-anon-toggle')
   const label = document.getElementById('leaderboard-anon-label')
   if (!btn || !label) return
 
   const isAnon = !!leaderboardState.preferences.anonymous
+  const nickname = getStudentNickname()
   btn.classList.toggle('is-anon', isAnon)
+  btn.classList.toggle('is-public', !isAnon)
   btn.setAttribute('aria-pressed', String(!isAnon))
+  if (isStandaloneProfilePage) {
+    label.textContent = isAnon
+      ? (nickname ? 'Show nickname publicly' : 'Add a public nickname')
+      : 'Appear anonymously'
+    btn.setAttribute('aria-label', label.textContent)
+    return
+  }
   label.textContent = isAnon ? 'Show my name' : 'Go anonymous'
 }
 
@@ -1668,6 +1854,11 @@ async function toggleLeaderboardAnonymousMode(button) {
   if (!studentProgressState.user || button.disabled) return
 
   const previousPreference = { ...leaderboardState.preferences }
+  if (isStandaloneProfilePage && previousPreference.anonymous && !getStudentNickname()) {
+    openProfileNicknameEditor()
+    showGlobalToast('Add a nickname before making your identity public.')
+    return
+  }
   const nextAnon = !previousPreference.anonymous
   leaderboardState.preferences = { ...previousPreference, anonymous: nextAnon }
   button.disabled = true
@@ -1723,6 +1914,43 @@ async function saveProfileNickname(rawValue) {
   }
 }
 
+async function saveProfileAvatar(rawAvatarId, button) {
+  if (!studentProgressState.user || button?.disabled) return false
+  const avatar = getProfileAvatarById(rawAvatarId)
+  if (!avatar) return false
+
+  const previousPreference = { ...leaderboardState.preferences }
+  const help = document.getElementById('profile-avatar-help')
+  saveLocalProfileAvatarId(avatar.id)
+  leaderboardState.preferences = { ...previousPreference, avatar_id: avatar.id }
+  if (button) button.disabled = true
+  if (help) help.textContent = 'Saving your avatar...'
+  renderProfileSection()
+
+  try {
+    leaderboardState.preferences = await updateUserPreference(studentProgressState.user.id, {
+      avatar_id: avatar.id
+    })
+    saveLocalProfileAvatarId(avatar.id)
+    invalidateLeaderboard(activeAcademicSection)
+    await fetchAndRenderLeaderboard(true)
+    renderStudentSyncUi()
+    renderProfileSection()
+    if (help) help.textContent = 'Your avatar is saved and will appear on the leaderboard.'
+    showGlobalToast(`${avatar.label} avatar selected.`)
+    return true
+  } catch (error) {
+    leaderboardState.preferences = { ...previousPreference, avatar_id: avatar.id }
+    renderProfileSection()
+    if (help) help.textContent = 'Saved on this device. Cloud sync will start after the avatar update is enabled.'
+    showGlobalToast(`${avatar.label} avatar saved on this device.`)
+    console.warn('Avatar cloud sync is not available yet.', error)
+    return true
+  } finally {
+    if (button) button.disabled = false
+  }
+}
+
 function openProfileSection(options = {}) {
   if (!studentProgressState.user) return
   setStudentSyncMenu(false)
@@ -1762,6 +1990,13 @@ function isLeaderboardActive() {
     && (window.location.hash === '#leaderboard' || navLink?.classList.contains('active'))
 }
 
+function isLeaderboardNearViewport() {
+  const section = document.getElementById('leaderboard')
+  if (!section) return false
+  const bounds = section.getBoundingClientRect()
+  return bounds.top < window.innerHeight + 240 && bounds.bottom > -240
+}
+
 function invalidateLeaderboard(section = activeAcademicSection) {
   leaderboardState.loading = false
   leaderboardState.error = ''
@@ -1772,8 +2007,25 @@ function invalidateLeaderboard(section = activeAcademicSection) {
 }
 
 function refreshLeaderboardIfActive(force = false) {
-  if (!isLeaderboardActive()) return Promise.resolve()
+  if (!isLeaderboardActive() && !isLeaderboardNearViewport()) return Promise.resolve()
   return fetchAndRenderLeaderboard(force)
+}
+
+function initLeaderboardVisibilityLoading() {
+  const section = document.getElementById('leaderboard')
+  if (!section) return
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      if (entries.some((entry) => entry.isIntersecting)) fetchAndRenderLeaderboard()
+    }, { rootMargin: '240px 0px', threshold: 0.01 })
+    observer.observe(section)
+    return
+  }
+
+  window.addEventListener('scroll', () => {
+    if (isLeaderboardNearViewport()) fetchAndRenderLeaderboard()
+  }, { passive: true })
 }
 
 function getCurrentLeaderboardEntry() {
@@ -1892,12 +2144,8 @@ function renderLeaderboardHtml() {
         ? (isMe ? 'You (Anon)' : 'Anonymous Student')
         : (entry.display_name || 'Student')
 
-      const avatarUrl = isAnon ? '' : entry.avatar_url
-      const initials = displayName.split(/\s+/).filter(Boolean).slice(0, 2).map((part) => part[0]).join('').toUpperCase() || 'S'
-
-      const avatarHtml = avatarUrl
-        ? `<img class="leaderboard__podium-avatar" src="${getSafeExternalUrl(avatarUrl)}" alt="">`
-        : `<span class="leaderboard__podium-initials">${isAnon ? '🕵️' : initials}</span>`
+      const avatarId = getLeaderboardAvatarId(entry, rank - 1)
+      const avatarHtml = getProfileAvatarMarkup(avatarId, 'leaderboard__podium-avatar', displayName)
 
       const card = document.createElement('div')
       card.className = `leaderboard__podium-card leaderboard__podium-card--${key}`
@@ -1921,12 +2169,8 @@ function renderLeaderboardHtml() {
         ? (isMe ? 'You (Anon)' : 'Anonymous Student')
         : (entry.display_name || 'Student')
 
-      const avatarUrl = isAnon ? '' : entry.avatar_url
-      const initials = displayName.split(/\s+/).filter(Boolean).slice(0, 2).map((part) => part[0]).join('').toUpperCase() || 'S'
-
-      const avatarHtml = avatarUrl
-        ? `<img class="leaderboard__row-avatar" src="${getSafeExternalUrl(avatarUrl)}" alt="">`
-        : `<span class="leaderboard__row-initials">${isAnon ? '🕵️' : initials}</span>`
+      const avatarId = getLeaderboardAvatarId(entry, idx + 3)
+      const avatarHtml = getProfileAvatarMarkup(avatarId, 'leaderboard__row-avatar', displayName)
 
       const row = document.createElement('div')
       row.className = 'leaderboard__row'
@@ -1951,25 +2195,19 @@ function renderLeaderboardHtml() {
         ? 'You (Anonymous)'
         : (myEntry.display_name || 'Student')
 
-      const avatarUrl = isAnon ? '' : myEntry.avatar_url
-      const initials = displayName.split(/\s+/).filter(Boolean).slice(0, 2).map((part) => part[0]).join('').toUpperCase() || 'S'
+      const avatarId = getProfileAvatarById(myEntry.avatar_id) ? myEntry.avatar_id : getStudentAvatarId()
 
       const avatarContainer = document.getElementById('leaderboard-your-rank-avatar')
       const initialsContainer = document.getElementById('leaderboard-your-rank-initials')
 
       document.getElementById('leaderboard-your-rank-pos').textContent = `#${rank}`
-      if (avatarUrl) {
-        if (avatarContainer) {
-          avatarContainer.src = getSafeExternalUrl(avatarUrl)
-          avatarContainer.hidden = false
-        }
-        if (initialsContainer) initialsContainer.hidden = true
-      } else {
-        if (avatarContainer) avatarContainer.hidden = true
-        if (initialsContainer) {
-          initialsContainer.textContent = isAnon ? '🕵️' : initials
-          initialsContainer.hidden = false
-        }
+      if (avatarContainer) avatarContainer.hidden = true
+      if (initialsContainer) {
+        initialsContainer.className = `leaderboard__your-rank-initials student-avatar ${getProfileAvatarClass(avatarId)}`
+        initialsContainer.textContent = ''
+        initialsContainer.setAttribute('role', 'img')
+        initialsContainer.setAttribute('aria-label', `${displayName} avatar`)
+        initialsContainer.hidden = false
       }
 
       document.getElementById('leaderboard-your-rank-name').textContent = displayName
@@ -2099,6 +2337,7 @@ async function loadStudentProgress(section = activeAcademicSection) {
     refreshTrackerFilters()
     updateGlobalProgress()
     await refreshLeaderboardIfActive(true)
+    await fetchAndRenderLiveActivity(true)
   } catch (error) {
     studentProgressState.lastError = error.message
     console.warn('Student progress sync failed.', error)
@@ -2698,16 +2937,43 @@ function getStudentProfileStats() {
   }
 }
 
-function createTrophy(id, title, description, icon, unlocked, current, target) {
+const PROFILE_LEVEL_THRESHOLDS = [0, 50, 100, 250, 500, 1000, 2000, 3500, 5000]
+const PROFILE_TROPHY_CATEGORIES = ['Getting started', 'Mastery', 'Completion', 'Accuracy', 'Coverage', 'Review']
+
+function getProfileMasteryLevel(totalScore) {
+  const points = Math.max(0, Number(totalScore) || 0)
+  let thresholdIndex = 0
+  PROFILE_LEVEL_THRESHOLDS.forEach((threshold, index) => {
+    if (points >= threshold) thresholdIndex = index
+  })
+
+  const currentThreshold = PROFILE_LEVEL_THRESHOLDS[thresholdIndex]
+  const fallbackStep = Math.max(1000, currentThreshold || 1000)
+  const nextThreshold = PROFILE_LEVEL_THRESHOLDS[thresholdIndex + 1] ?? currentThreshold + fallbackStep
+
+  return {
+    level: thresholdIndex + 1,
+    nextLevel: thresholdIndex + 2,
+    nextThreshold,
+    remaining: Math.max(0, nextThreshold - points),
+    progress: calculatePercent(points - currentThreshold, nextThreshold - currentThreshold)
+  }
+}
+
+function createTrophy(id, title, description, icon, unlocked, current, target, category = 'Mastery') {
   const safeTarget = Math.max(target || 1, 1)
+  const safeCurrent = Math.max(0, Number(current) || 0)
   return {
     id,
     title,
     description,
     icon,
+    category,
     unlocked: !!unlocked,
-    progress: unlocked ? 100 : calculatePercent(current || 0, safeTarget),
-    progressText: unlocked ? 'Unlocked' : `${Math.min(current || 0, safeTarget)} / ${safeTarget}`
+    current: safeCurrent,
+    target: safeTarget,
+    progress: unlocked ? 100 : calculatePercent(safeCurrent, safeTarget),
+    progressText: unlocked ? 'Completed' : `${Math.min(safeCurrent, safeTarget)} / ${safeTarget}`
   }
 }
 
@@ -2718,16 +2984,17 @@ function getProfileTrophies(stats = getStudentProfileStats()) {
   const progressMilestones = [25, 50, 75, 100]
 
   return [
-    createTrophy('first-mcq', 'First MCQ', 'Answer your first MCQ.', '01', stats.answeredCount >= 1, stats.answeredCount, 1),
-    createTrophy('first-complete', 'First Finish', 'Complete your first quiz part.', '02', stats.completedQuizzes >= 1, stats.completedQuizzes, 1),
+    createTrophy('first-mcq', 'First MCQ', 'Answer your first MCQ.', '01', stats.answeredCount >= 1, stats.answeredCount, 1, 'Getting started'),
+    createTrophy('first-complete', 'First Finish', 'Complete your first quiz part.', '02', stats.completedQuizzes >= 1, stats.completedQuizzes, 1, 'Getting started'),
     ...scoreMilestones.map((target) => createTrophy(
       `score-${target}`,
-      `${target} Correct`,
-      `Reach ${target} correct answers.`,
+      `${target} Points`,
+      `Reach ${target} mastery points.`,
       String(target),
       stats.correctAnswers >= target,
       stats.correctAnswers,
-      target
+      target,
+      'Mastery'
     )),
     ...completionMilestones.map((target) => createTrophy(
       `complete-${target}`,
@@ -2736,7 +3003,8 @@ function getProfileTrophies(stats = getStudentProfileStats()) {
       String(target),
       stats.completedQuizzes >= target,
       stats.completedQuizzes,
-      target
+      target,
+      'Completion'
     )),
     ...accuracyMilestones.map((target) => createTrophy(
       `accuracy-${target}`,
@@ -2745,26 +3013,78 @@ function getProfileTrophies(stats = getStudentProfileStats()) {
       `${target}%`,
       stats.bestPercent >= target,
       stats.bestPercent,
-      target
+      target,
+      'Accuracy'
     )),
     ...progressMilestones.map((target) => createTrophy(
       `progress-${target}`,
-      `${target}% Progress`,
-      `Attempt ${target}% of available section MCQs.`,
+      `${target}% Coverage`,
+      `Cover ${target}% of available section MCQs.`,
       `${target}%`,
       stats.mcqBankProgress.percent >= target,
       stats.mcqBankProgress.percent,
-      target
+      target,
+      'Coverage'
     )),
-    createTrophy('wrong-review', 'Comeback', 'Complete a wrong-answer review session.', 'WR', stats.wrongReviewCompleted, stats.wrongReviewCompleted ? 1 : 0, 1)
+    createTrophy('wrong-review', 'Comeback', 'Complete a wrong-answer review session.', 'WR', stats.wrongReviewCompleted, stats.wrongReviewCompleted ? 1 : 0, 1, 'Review')
   ]
 }
 
+function getClosestLockedTrophies(trophies) {
+  return trophies
+    .filter((trophy) => !trophy.unlocked)
+    .sort((first, second) => {
+      const progressDifference = second.progress - first.progress
+      if (progressDifference) return progressDifference
+      return (first.target - first.current) - (second.target - second.current)
+    })
+}
+
+function getProfileAchievementPreview(trophies) {
+  const unlocked = trophies.filter((trophy) => trophy.unlocked)
+  const closestLocked = getClosestLockedTrophies(trophies)
+  const preview = []
+  const unlockedHighlight = unlocked[unlocked.length - 1]
+  if (unlockedHighlight) preview.push({ ...unlockedHighlight, previewLabel: 'Completed highlight' })
+  closestLocked.slice(0, 3 - preview.length).forEach((trophy, index) => {
+    preview.push({ ...trophy, previewLabel: index === 0 ? 'Closest milestone' : 'Coming up' })
+  })
+  return preview.length ? preview : trophies.slice(0, 3)
+}
+
+function renderProfileTrophyCard(trophy, options = {}) {
+  const statusLabel = trophy.unlocked ? 'Completed' : trophy.progressText
+  const previewLabel = options.previewLabel || trophy.category
+  return `
+    <article class="${options.featured ? 'profile-achievement-card' : 'profile-trophy'}${trophy.unlocked ? ' profile-trophy--unlocked' : ''}${options.isNew ? ' profile-trophy--new' : ''}">
+      <div class="profile-trophy__top">
+        <span class="profile-trophy__icon" aria-hidden="true">${trophy.unlocked ? '✓' : escapeHtml(trophy.icon)}</span>
+        <small>${escapeHtml(previewLabel)}</small>
+      </div>
+      <strong>${escapeHtml(trophy.title)}</strong>
+      <p>${escapeHtml(trophy.description)}</p>
+      <span class="profile-trophy__status">${escapeHtml(statusLabel)}</span>
+      <span class="profile-trophy__bar" role="progressbar" aria-label="${escapeHtml(trophy.title)} progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${trophy.progress}">
+        <span style="width: ${trophy.progress}%;"></span>
+      </span>
+    </article>
+  `
+}
+
 function getProfileAvatarHtml() {
-  const avatarUrl = getSafeExternalUrl(studentProgressState.user?.user_metadata?.avatar_url || studentProgressState.user?.user_metadata?.picture || '')
-  if (avatarUrl) return `<img src="${avatarUrl}" alt="">`
-  const initials = getPrivateProfileDisplayName().split(/\s+/).filter(Boolean).slice(0, 2).map((part) => part[0]).join('').toUpperCase() || 'S'
-  return escapeHtml(initials)
+  return getProfileAvatarMarkup(getStudentAvatarId(), 'student-avatar--profile', 'Selected profile')
+}
+
+function renderProfileAvatarPicker() {
+  const container = document.getElementById('profile-avatar-options')
+  if (!container) return
+  const selectedAvatarId = getStudentAvatarId()
+  container.innerHTML = PROFILE_AVATARS.map((avatar) => `
+    <button class="profile-avatar-option${avatar.id === selectedAvatarId ? ' is-selected' : ''}" type="button" data-profile-avatar="${avatar.id}" aria-label="Choose ${escapeHtml(avatar.label)} avatar" aria-pressed="${avatar.id === selectedAvatarId}">
+      ${getProfileAvatarMarkup(avatar.id, 'student-avatar--option', avatar.label)}
+      <span>${escapeHtml(avatar.label)}</span>
+    </button>
+  `).join('')
 }
 
 function renderProfileSection() {
@@ -2776,6 +3096,8 @@ function renderProfileSection() {
   const nickname = getStudentNickname()
   const trophies = getProfileTrophies(stats)
   const unlockedTrophies = trophies.filter((trophy) => trophy.unlocked)
+  const masteryLevel = getProfileMasteryLevel(stats.totalScore)
+  const isPublic = leaderboardState.preferences.anonymous === false && !!nickname
 
   const avatar = document.getElementById('profile-avatar')
   const sectionLabel = document.getElementById('profile-section-label')
@@ -2783,15 +3105,16 @@ function renderProfileSection() {
   const nicknameState = document.getElementById('profile-nickname-state')
   const nicknameInput = document.getElementById('profile-nickname-input')
 
+  profileRoot.classList.toggle('is-loading', signedIn && !studentProgressState.ready)
   if (avatar) avatar.innerHTML = signedIn ? getProfileAvatarHtml() : 'S'
   if (sectionLabel) sectionLabel.textContent = `${activeAcademicSectionData.title} section`
   if (displayName) displayName.textContent = signedIn ? getPrivateProfileDisplayName() : 'Sign in required'
   if (nicknameState) {
-    nicknameState.textContent = nickname
-      ? (leaderboardState.preferences.anonymous === false ? 'Nickname is visible on the leaderboard.' : 'Nickname saved. Turn off anonymous mode to show it publicly.')
-      : 'No public nickname yet.'
+    nicknameState.textContent = nickname ? `Profile nickname: ${nickname}` : 'No public nickname yet.'
   }
   if (nicknameInput && document.activeElement !== nicknameInput) nicknameInput.value = nickname
+  renderProfileAvatarPicker()
+  renderAnonToggleUi()
 
   const setText = (id, value) => {
     const element = document.getElementById(id)
@@ -2802,33 +3125,64 @@ function renderProfileSection() {
   setText('profile-answered-count', String(stats.answeredCount))
   setText('profile-completed-quizzes', String(stats.completedQuizzes))
   setText('profile-rank', stats.rank ? `#${stats.rank}` : '-')
-  setText('profile-rank-note', stats.rank ? 'Current leaderboard position' : (stats.leaderboardSynced ? 'No rank yet' : 'Open leaderboard to sync'))
+  setText('profile-rank-note', stats.rank ? `of ${leaderboardState.rows.length} ranked students` : (stats.leaderboardSynced ? 'No rank yet' : 'Syncing your position'))
   setText('profile-topic-progress-label', `${stats.mcqBankProgress.percent}%`)
-  setText('profile-mcq-bank-progress-note', `${stats.mcqBankProgress.answered} of ${stats.mcqBankProgress.total} MCQs attempted`)
+  setText('profile-mcq-bank-progress-note', `${stats.mcqBankProgress.answered} of ${stats.mcqBankProgress.total} unique bank questions`)
   setText('profile-trophy-count', `${unlockedTrophies.length} / ${trophies.length} unlocked`)
+  setText('profile-achievement-total', String(trophies.length))
+  setText('profile-best-percent', stats.bestPercent ? `${stats.bestPercent}%` : '-')
+  setText('profile-topics-touched', String(stats.mcqTopicsTouched))
+  setText('profile-level', `Level ${masteryLevel.level}`)
+  setText('profile-level-note', `${masteryLevel.remaining} mastery points to Level ${masteryLevel.nextLevel}`)
+  setText('profile-public-preview', isPublic ? nickname : 'Anonymous Student')
+  setText('profile-public-note', isPublic
+    ? 'Other students can see this nickname on the leaderboard.'
+    : (nickname ? 'Your saved nickname is hidden from other students.' : 'Add a nickname before making your identity public.'))
 
-  const nextLockedTrophy = trophies.find((trophy) => !trophy.unlocked)
-  setText('profile-next-goal', nextLockedTrophy ? nextLockedTrophy.title : 'All current trophies unlocked')
-  setText('profile-next-goal-note', nextLockedTrophy ? nextLockedTrophy.description : 'New trophy tiers can be added as the website grows.')
+  const nextLockedTrophy = getClosestLockedTrophies(trophies)[0]
+  setText('profile-next-goal', nextLockedTrophy ? nextLockedTrophy.title : 'All milestones completed')
+  setText('profile-next-goal-note', nextLockedTrophy ? nextLockedTrophy.description : 'You have completed every current achievement.')
+  setText('profile-next-goal-progress', nextLockedTrophy ? nextLockedTrophy.progressText : 'Completed')
 
   const progressFill = document.getElementById('profile-topic-progress-fill')
   if (progressFill) progressFill.style.width = `${stats.mcqBankProgress.percent}%`
+  const progressBar = document.getElementById('profile-topic-progress')
+  if (progressBar) progressBar.setAttribute('aria-valuenow', String(stats.mcqBankProgress.percent))
+  const levelFill = document.getElementById('profile-level-progress-fill')
+  if (levelFill) levelFill.style.width = `${masteryLevel.progress}%`
+  const levelBar = document.getElementById('profile-level-progress')
+  if (levelBar) levelBar.setAttribute('aria-valuenow', String(masteryLevel.progress))
+  const nextGoalProgress = nextLockedTrophy?.progress ?? 100
+  const nextGoalFill = document.getElementById('profile-next-goal-fill')
+  if (nextGoalFill) nextGoalFill.style.width = `${nextGoalProgress}%`
+  const nextGoalBar = document.getElementById('profile-next-goal-bar')
+  if (nextGoalBar) nextGoalBar.setAttribute('aria-valuenow', String(nextGoalProgress))
+
+  const preview = document.getElementById('profile-achievement-preview')
+  if (preview) {
+    preview.innerHTML = getProfileAchievementPreview(trophies)
+      .map((trophy) => renderProfileTrophyCard(trophy, { featured: true, previewLabel: trophy.previewLabel }))
+      .join('')
+  }
 
   const grid = document.getElementById('profile-trophy-grid')
   if (grid) {
     const seenIds = getSeenTrophyIds()
     const nextSeenIds = new Set(seenIds)
-    grid.innerHTML = trophies.map((trophy) => {
-      const isNew = signedIn && trophy.unlocked && !seenIds.has(trophy.id)
-      if (trophy.unlocked) nextSeenIds.add(trophy.id)
+    grid.innerHTML = PROFILE_TROPHY_CATEGORIES.map((category) => {
+      const categoryTrophies = trophies.filter((trophy) => trophy.category === category)
+      if (!categoryTrophies.length) return ''
       return `
-        <article class="profile-trophy${trophy.unlocked ? ' profile-trophy--unlocked' : ''}${isNew ? ' profile-trophy--new' : ''}">
-          <span class="profile-trophy__icon">${escapeHtml(trophy.icon)}</span>
-          <strong>${escapeHtml(trophy.title)}</strong>
-          <p>${escapeHtml(trophy.description)}</p>
-          <small>${escapeHtml(trophy.progressText)}</small>
-          <span class="profile-trophy__bar" aria-hidden="true"><span style="width: ${trophy.progress}%;"></span></span>
-        </article>
+        <section class="profile-trophy-group" aria-labelledby="profile-trophy-group-${category.toLowerCase().replace(/\s+/g, '-')}">
+          <h3 id="profile-trophy-group-${category.toLowerCase().replace(/\s+/g, '-')}">${escapeHtml(category)}</h3>
+          <div class="profile-trophy-group__grid">
+            ${categoryTrophies.map((trophy) => {
+              const isNew = signedIn && trophy.unlocked && !seenIds.has(trophy.id)
+              if (trophy.unlocked) nextSeenIds.add(trophy.id)
+              return renderProfileTrophyCard(trophy, { isNew })
+            }).join('')}
+          </div>
+        </section>
       `
     }).join('')
     if (signedIn && nextSeenIds.size !== seenIds.size) saveSeenTrophyIds(nextSeenIds)
@@ -3805,6 +4159,7 @@ function ensureQuizModal() {
         <span id="quiz-progress-fill"></span>
         </div>
       </div>
+      <div class="study-pulse study-pulse--quiz" id="quiz-live-activity" aria-live="polite" hidden></div>
       <div class="quiz-modal__top">
         <span class="quiz-timer" id="quiz-timer" hidden role="timer" aria-label="Quiz timer" data-mood="neutral">
           <span class="quiz-robot__antenna" aria-hidden="true"><span></span></span>
@@ -3936,7 +4291,11 @@ function saveQuizState() {
     })
       .then(() => {
         leaderboardState.lastFetched = 0
-        return refreshLeaderboardIfActive(true)
+        liveActivityState.lastFetched = 0
+        return Promise.all([
+          refreshLeaderboardIfActive(true),
+          fetchAndRenderLiveActivity(true)
+        ])
       })
       .catch((error) => {
         studentProgressState.lastError = error.message
@@ -7049,6 +7408,7 @@ function routeAuthenticatedUser(section, options = {}) {
     })
   }
   setAuthGateState('ready')
+  fetchAndRenderLiveActivity(true)
   if (initialParams.get('admin') === 'login' && !initialAdminLoginHandled) {
     initialAdminLoginHandled = true
     openAdminLogin()
@@ -7129,7 +7489,8 @@ async function saveSelectedSection(section, options = {}) {
       user_id: studentProgressState.user.id,
       anonymous: leaderboardState.preferences.anonymous !== false,
       selected_section: section,
-      nickname: getStudentNickname() || null
+      nickname: getStudentNickname() || null,
+      avatar_id: getStudentAvatarId()
     })
     leaderboardState.preferences = preference
     studentProgressState.selectedSection = section
@@ -7209,6 +7570,8 @@ if (subjectList) {
   syncModeToBody()
   showSelector({ scroll: false, historyMode: 'none' })
   window.setInterval(render401ExamSchedule, 3600000)
+  initLeaderboardVisibilityLoading()
+  initLiveActivity()
   initStudentSync()
   renderTrackerAdminUi()
 }
@@ -7287,6 +7650,13 @@ document.addEventListener('click', (event) => {
   if (event.target.closest('[data-profile-edit-nickname]')) {
     event.preventDefault()
     openProfileNicknameEditor()
+    return
+  }
+
+  const avatarChoice = event.target.closest('[data-profile-avatar]')
+  if (avatarChoice) {
+    event.preventDefault()
+    saveProfileAvatar(avatarChoice.dataset.profileAvatar, avatarChoice)
     return
   }
 

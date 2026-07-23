@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&display=swap" rel="stylesheet" />
   <meta name="theme-color" content="#315f72" />
-  <link rel="stylesheet" href="/src/style.css?v=20260722-profile-page-v1" />
+  <link rel="stylesheet" href="/src/style.css?v=20260723-profile-faceless-activity-v3" />
 </head>
 <body class="profile-page" data-auth-state="checking" data-site-mode="profile">
   <div class="auth-gate" id="auth-gate" aria-live="polite">
@@ -26,15 +26,15 @@
       <p class="eyebrow">Student profile</p>
       <h1>Sign in to view your profile</h1>
       <p>Your score, trophies, nickname, and progress are connected to your Google account.</p>
-      <button class="button button--primary" type="button" data-auth-login>Continue with Google</button>
+      <button class="auth-gate__google" type="button" data-auth-login>Continue with Google</button>
       <p class="auth-gate__status" id="auth-gate-status" hidden></p>
     </div>
   </div>
 
   <header class="site-header profile-page__header">
-    <a class="brand" href="/" aria-label="Back to Clinical Hub home">
+    <a class="brand" href="/#tracker" aria-label="Back to Tracker">
       <span class="brand-mark">M</span>
-      <span>Clinical Hub</span>
+      <span>Profile</span>
     </a>
     <nav class="profile-page__quick-nav" aria-label="Profile navigation">
       <a href="/#tracker">Tracker</a>
@@ -47,24 +47,38 @@
       <div class="profile-page-hero">
         <div>
           <p class="eyebrow">Student profile</p>
-          <h1 id="profile-title">Your study profile</h1>
-          <p>Score, rank, progress, and trophies in one private page.</p>
+          <h1 id="profile-title">Your progress, clearly.</h1>
+          <p>See what you have achieved and the best goal to work toward next.</p>
         </div>
-        <a class="profile-page-hero__practice" href="/#tracker">Practice MCQs</a>
       </div>
 
       <div class="profile-dashboard" id="profile-dashboard">
         <article class="profile-hero-card">
-          <div class="profile-hero-card__avatar" id="profile-avatar" aria-hidden="true">S</div>
-          <div>
+          <div class="profile-hero-card__avatar" id="profile-avatar">S</div>
+          <div class="profile-hero-card__identity">
             <p class="profile-hero-card__eyebrow" id="profile-section-label">Section</p>
             <h2 id="profile-display-name">Student</h2>
-            <p id="profile-nickname-state">No public nickname yet.</p>
+            <p id="profile-nickname-state">Your leaderboard identity is private.</p>
           </div>
-          <button class="profile-hero-card__edit" type="button" data-profile-edit-nickname>Edit nickname</button>
+          <button class="profile-hero-card__edit" type="button" data-profile-edit-nickname>Edit profile</button>
+          <div class="profile-identity-setting">
+            <div>
+              <span>Leaderboard identity</span>
+              <strong id="profile-public-preview">Anonymous Student</strong>
+              <small id="profile-public-note">Your nickname is hidden from other students.</small>
+            </div>
+            <button class="profile-public-toggle" type="button" id="leaderboard-anon-toggle" aria-label="Show nickname on the leaderboard" aria-pressed="false">
+              <span id="leaderboard-anon-label">Show nickname publicly</span>
+            </button>
+          </div>
         </article>
 
         <form class="profile-nickname-form" id="profile-nickname-form" hidden>
+          <fieldset class="profile-avatar-picker">
+            <legend>Choose your avatar</legend>
+            <div class="profile-avatar-options" id="profile-avatar-options" aria-label="Available profile avatars"></div>
+            <p id="profile-avatar-help">Your avatar can appear even when your leaderboard name stays anonymous.</p>
+          </fieldset>
           <label for="profile-nickname-input">Nickname</label>
           <div class="profile-nickname-form__row">
             <input id="profile-nickname-input" name="nickname" maxlength="24" autocomplete="nickname" placeholder="Choose a public nickname">
@@ -73,36 +87,83 @@
           <p id="profile-nickname-help">2-24 characters. No emails or links.</p>
         </form>
 
-        <div class="profile-stats-grid" aria-label="Profile stats">
-          <article class="profile-stat profile-stat--score"><span>Total score</span><strong id="profile-total-score">0</strong><small>correct answers</small></article>
-          <article class="profile-stat"><span>Answered</span><strong id="profile-answered-count">0</strong><small>MCQs attempted</small></article>
-          <article class="profile-stat"><span>Completed</span><strong id="profile-completed-quizzes">0</strong><small>quiz parts</small></article>
-          <article class="profile-stat"><span>Rank</span><strong id="profile-rank">-</strong><small id="profile-rank-note">Open leaderboard to sync</small></article>
+        <article class="profile-mastery-card">
+          <div class="profile-mastery-card__top">
+            <div>
+              <span>Mastery level</span>
+              <strong id="profile-level">Level 1</strong>
+            </div>
+            <div class="profile-mastery-card__points">
+              <strong id="profile-total-score">0</strong>
+              <small>mastery points</small>
+            </div>
+          </div>
+          <div class="profile-mastery-card__bar" id="profile-level-progress" role="progressbar" aria-label="Progress to next mastery level" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+            <span id="profile-level-progress-fill"></span>
+          </div>
+          <p id="profile-level-note">Answer MCQs to reach your next level.</p>
+          <a class="profile-mastery-card__practice" href="/#tracker">Practice MCQs</a>
+        </article>
+
+        <div class="profile-stats-grid" aria-label="Profile summary">
+          <article class="profile-stat profile-stat--coverage">
+            <span>Bank coverage</span>
+            <strong id="profile-topic-progress-label">0%</strong>
+            <small id="profile-mcq-bank-progress-note">0 of 0 unique bank questions</small>
+            <div class="profile-stat__bar" id="profile-topic-progress" role="progressbar" aria-label="MCQ bank coverage" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+              <span id="profile-topic-progress-fill"></span>
+            </div>
+          </article>
+          <article class="profile-stat">
+            <span>Completed</span>
+            <strong id="profile-completed-quizzes">0</strong>
+            <small>quiz parts finished</small>
+          </article>
+          <article class="profile-stat profile-stat--rank">
+            <span>Leaderboard</span>
+            <strong id="profile-rank">-</strong>
+            <small id="profile-rank-note">Syncing your position</small>
+          </article>
         </div>
 
-        <section class="profile-duo-grid" aria-label="Study momentum">
-          <article class="profile-progress-card profile-progress-card--wide">
-            <div class="profile-progress-card__top">
-              <span>MCQ bank progress</span>
-              <strong id="profile-topic-progress-label">0%</strong>
-            </div>
-            <p class="profile-progress-card__note" id="profile-mcq-bank-progress-note">0 of 0 MCQs attempted</p>
-            <div class="profile-progress-card__bar" aria-hidden="true"><span id="profile-topic-progress-fill"></span></div>
-          </article>
-          <article class="profile-momentum-card">
-            <span>Next goal</span>
+        <article class="profile-momentum-card">
+          <div class="profile-momentum-card__copy">
+            <span>Next milestone</span>
             <strong id="profile-next-goal">Start your first MCQ</strong>
-            <p id="profile-next-goal-note">Trophies unlock as you answer and finish quiz parts.</p>
-          </article>
-        </section>
+            <p id="profile-next-goal-note">Your closest useful achievement will appear here.</p>
+          </div>
+          <div class="profile-momentum-card__progress">
+            <small id="profile-next-goal-progress">0 / 1</small>
+            <div class="profile-momentum-card__bar" id="profile-next-goal-bar" role="progressbar" aria-label="Progress to next milestone" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+              <span id="profile-next-goal-fill"></span>
+            </div>
+          </div>
+          <a href="/#tracker">Continue practicing</a>
+        </article>
 
         <section class="profile-trophies" aria-labelledby="profile-trophies-title">
           <div class="profile-trophies__top">
-            <h2 id="profile-trophies-title">Trophy cabinet</h2>
+            <div>
+              <p class="eyebrow">Achievements</p>
+              <h2 id="profile-trophies-title">Your milestones</h2>
+            </div>
             <p id="profile-trophy-count">0 unlocked</p>
           </div>
-          <div class="profile-trophy-grid" id="profile-trophy-grid"></div>
+          <div class="profile-achievement-preview" id="profile-achievement-preview"></div>
+          <details class="profile-achievement-cabinet">
+            <summary>View all achievements <span id="profile-achievement-total">18</span></summary>
+            <div class="profile-trophy-grid" id="profile-trophy-grid"></div>
+          </details>
         </section>
+
+        <details class="profile-study-details">
+          <summary>Study details</summary>
+          <div class="profile-study-details__grid">
+            <article><span>Saved answers</span><strong id="profile-answered-count">0</strong><small>answers across saved quiz sessions</small></article>
+            <article><span>Best result</span><strong id="profile-best-percent">-</strong><small>on a completed 20+ question part</small></article>
+            <article><span>Topics practiced</span><strong id="profile-topics-touched">0</strong><small>topics with saved answers</small></article>
+          </div>
+        </details>
       </div>
     </section>
   </main>
@@ -125,6 +186,6 @@
       }
     }
   </script>
-  <script type="module" src="/src/main.js?v=20260723-med2-cardio-chest-v1"></script>
+  <script type="module" src="/src/main.js?v=20260723-profile-faceless-activity-v3"></script>
 </body>
 </html>
