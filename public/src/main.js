@@ -869,7 +869,9 @@ const midtermExamSchedule = [
     subjectName: 'Internal Medicine 2',
     date: '2026-07-25',
     dayLabel: 'Sat',
-    time: '2:30-3:30'
+    time: '2:30-3:30',
+    quizTopicKey: 'MED 401-2 MCQs',
+    quizActionLabel: 'MCQs'
   },
   {
     code: 'MED 401-1',

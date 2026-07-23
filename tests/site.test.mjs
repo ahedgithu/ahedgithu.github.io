@@ -22,6 +22,7 @@ test('application modules are valid and mirrored', () => {
     'src/sur402-textbook-mcqs.js',
     'src/sur402-amr-beshry-mcqs.js',
     'src/med402-endocrine-mcqs.js',
+    'src/med2-cardio-chest-mcqs.js',
     'src/progress.js',
     'src/supabaseClient.js'
   ]
@@ -30,7 +31,7 @@ test('application modules are valid and mirrored', () => {
     execFileSync(process.execPath, ['--check', file], { cwd: new URL('..', import.meta.url) })
   }
 
-  const mirroredFiles = ['main.js', 'admin.js', 'analytics.js', 'mcqs.js', 'sur1-kellawi-mcqs.js', 'sur1-past-exam-mcqs.js', 'sur1-matching-questions.js', 'sur402-past-exam-mcqs.js', 'sur402-textbook-mcqs.js', 'sur402-amr-beshry-mcqs.js', 'med402-endocrine-mcqs.js', 'progress.js', 'style.css', 'supabaseClient.js']
+  const mirroredFiles = ['main.js', 'admin.js', 'analytics.js', 'mcqs.js', 'sur1-kellawi-mcqs.js', 'sur1-past-exam-mcqs.js', 'sur1-matching-questions.js', 'sur402-past-exam-mcqs.js', 'sur402-textbook-mcqs.js', 'sur402-amr-beshry-mcqs.js', 'med402-endocrine-mcqs.js', 'med2-cardio-chest-mcqs.js', 'progress.js', 'style.css', 'supabaseClient.js']
   for (const file of mirroredFiles) {
     assert.equal(read(`src/${file}`), read(`public/src/${file}`), `${file} mirror is out of sync`)
   }
@@ -59,7 +60,7 @@ test('tracker search splits topics and MCQs with focused question launch', () =>
   assert.match(html, /data-search-mode="mcqs"[^>]*aria-pressed="false"/)
   assert.match(html, /id="mcq-search-results"[^>]*aria-live="polite"[^>]*hidden/)
   assert.match(html, /style\.css\?v=20260723-cardio-chest-revision-v1/)
-  assert.match(html, /main\.js\?v=20260723-med402-endocrine-v1/)
+  assert.match(html, /main\.js\?v=20260723-med2-cardio-chest-v1/)
 
   for (const helper of [
     'normalizeMcqSearchText',
@@ -295,6 +296,66 @@ test('MED 402-1 endocrine bank is answer-safe, grouped, and wired to the exam ca
   const mainSource = read('src/main.js')
   assert.match(html, /med402-endocrine-mcqs\.js\?v=20260723-med402-endocrine-v1/)
   assert.match(mainSource, /code:\s*'MED 402-1'[\s\S]{0,240}quizTopicKey:\s*'MED 402-1 MCQs'/)
+})
+
+test('MED 401-2 Cardio and Chest banks are source-faithful, grouped, and wired to the exam card', () => {
+  const context = { window: { mcqQuizzes: {} } }
+  vm.runInNewContext(read('src/med2-cardio-chest-mcqs.js'), context)
+
+  const quiz = context.window.mcqQuizzes['MED 401-2 MCQs']
+  assert.equal(quiz.alwaysShowSourcePicker, true)
+  assert.equal(quiz.sources.length, 2)
+
+  const cardio = quiz.sources.find((source) => source.id === 'med2-cardio-question-bank')
+  const chest = quiz.sources.find((source) => source.id === 'med2-chest-question-bank')
+  assert.ok(cardio, 'Cardiology source is missing')
+  assert.ok(chest, 'Chest source is missing')
+  assert.equal(cardio.mcqs.length, 208)
+  assert.equal(cardio.heldForReview.length, 27)
+  assert.equal(cardio.mcqs.length + cardio.heldForReview.length, 235)
+  assert.equal(chest.mcqs.length, 300)
+  assert.equal(chest.heldForReview.length, 0)
+
+  for (const source of [cardio, chest]) {
+    assert.equal(new Set(source.mcqs.map((question) => question.id)).size, source.mcqs.length)
+    assert.ok(source.mcqs.every((question) => question.choices.length >= 2))
+    assert.ok(source.mcqs.every((question) => Number.isInteger(question.answerIndex) && question.choices[question.answerIndex]))
+    assert.ok(source.mcqs.every((question) => question.question && question.source && question.explanation))
+    assert.deepEqual(Array.from(source.collection.mixedSizes, (mode) => mode.size), [20, 30, 50])
+    assert.ok(source.collection.groups.every((group) => (
+      group.parts.length > 0 &&
+      group.parts.flatMap((part) => part.mcqs).length === group.questionCount
+    )))
+  }
+
+  assert.deepEqual(
+    Array.from(cardio.collection.groups, (group) => [group.label, group.questionCount]),
+    [
+      ['Pulmonary Embolism', 46],
+      ['Rheumatic Fever', 39],
+      ['Systemic Hypertension', 51],
+      ['Mitral Valve Diseases', 32],
+      ['Aortic Valve Diseases', 40]
+    ]
+  )
+  assert.deepEqual(
+    Array.from(chest.collection.groups, (group) => [group.label, group.questionCount]),
+    [
+      ['Cough, Sputum, Hemoptysis & Dyspnea', 70],
+      ['Pulmonary Function Tests', 80],
+      ['Upper & Lower Airway Diseases', 20],
+      ['Small Airway Diseases', 20],
+      ['Subglottic Stenosis & Vocal Cord Dysfunction', 10],
+      ['Bronchial Asthma, Steps & Biologics', 100]
+    ]
+  )
+
+  const html = read('index.html')
+  const profileHtml = read('profile.html')
+  const mainSource = read('src/main.js')
+  assert.match(html, /med2-cardio-chest-mcqs\.js\?v=20260723-med2-cardio-chest-v1/)
+  assert.match(profileHtml, /med2-cardio-chest-mcqs\.js\?v=20260723-med2-cardio-chest-v1/)
+  assert.match(mainSource, /code:\s*'MED 401-2'[\s\S]{0,260}quizTopicKey:\s*'MED 401-2 MCQs'/)
 })
 
 test('SUR 401-1 past-exam bank is answer-safe, grouped, and wired', () => {
@@ -557,7 +618,7 @@ test('Google login is mandatory and the academic section is account-bound', () =
   assert.match(mainSource, /\$\{TOPIC_COMPLETION_STORAGE_PREFIX\}::\$\{getProgressStorageOwnerId\(\)\}::\$\{section\}/)
   assert.match(schedule, /window\.location\.replace\('\/#schedule'\)/)
   assert.match(html, /style\.css\?v=20260723-cardio-chest-revision-v1/)
-  assert.match(html, /main\.js\?v=20260723-med402-endocrine-v1/)
+  assert.match(html, /main\.js\?v=20260723-med2-cardio-chest-v1/)
 })
 
 test('student profile opens as a standalone gamified page', () => {
@@ -584,7 +645,7 @@ test('student profile opens as a standalone gamified page', () => {
   assert.match(html, /data-profile-open/)
   assert.match(html, /data-profile-edit-nickname/)
   assert.match(profileHtml, /style\.css\?v=20260722-profile-page-v1/)
-  assert.match(profileHtml, /main\.js\?v=20260722-profile-page-v1/)
+  assert.match(profileHtml, /main\.js\?v=20260723-med2-cardio-chest-v1/)
   assert.match(viteConfig, /profile:\s*resolve\(__dirname,\s*'profile\.html'\)/)
 
   assert.match(mainSource, /function getStudentProfileStats\s*\(/)
@@ -693,7 +754,7 @@ test('section selector is centered and the wide review remains fully visible', (
   assert.match(style, /\.home-review-screenshot--fit\s*\{[^}]*object-fit:\s*contain;[^}]*object-position:\s*left center;/s)
   assert.equal((html.match(/review5\.jpg" class="home-review-screenshot home-review-screenshot--fit"/g) || []).length, 2)
   assert.match(html, /style\.css\?v=20260723-cardio-chest-revision-v1/)
-  assert.match(html, /main\.js\?v=20260723-med402-endocrine-v1/)
+  assert.match(html, /main\.js\?v=20260723-med2-cardio-chest-v1/)
   assert.match(style, /body\[data-site-mode="selector"\] > main > \.site-footer/)
 
   for (const file of ['review1.jpg', 'review2.jpg', 'review3.jpg', 'review4.jpg', 'review5.jpg', 'review6.png', 'review7.png', 'review8.png']) {

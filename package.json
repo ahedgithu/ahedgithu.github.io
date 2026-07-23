@@ -11,6 +11,7 @@
     "build:sur402-textbooks": "node scripts/build-sur402-textbook-mcqs.mjs",
     "build:sur402-amr-beshry": "node scripts/build-sur402-amr-beshry-mcqs.mjs",
     "build:med402-endocrine": "node scripts/build-med402-endocrine-mcqs.mjs",
+    "build:med2-cardio-chest": "node scripts/build-med2-cardio-chest-mcqs.mjs",
     "export:tracker-seed": "node scripts/export-tracker-seed.mjs",
     "test": "node --test tests/*.test.mjs",
     "build": "vite build",
