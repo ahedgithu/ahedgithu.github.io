@@ -4,6 +4,7 @@ let supabaseClient = null
 let trackerTopicsIncludeOptionalColumns = true
 let trackerTopicsIncludeMidtermColumns = true
 let trackerTopicsIncludeCreatedAt = true
+let userPreferencesIncludeNickname = true
 
 export function getSupabaseConfig() {
   const windowConfig = window.SUPABASE_CONFIG || {}
@@ -62,6 +63,11 @@ function isMissingCreatedAtError(error) {
   return /created_at/i.test(message) && /tracker_topics|schema cache|column/i.test(message)
 }
 
+function isMissingUserPreferenceNicknameError(error) {
+  const message = `${error?.message || ''} ${error?.details || ''} ${error?.hint || ''}`
+  return /nickname/i.test(message) && /user_preferences|schema cache|column/i.test(message)
+}
+
 function stripOptionalColumns(row) {
   const { drive_url, audio_url, display_order, ...basicRow } = row
   return basicRow
@@ -69,6 +75,11 @@ function stripOptionalColumns(row) {
 
 function stripMidtermColumns(row) {
   const { midterm_scope, midterm_scope_note, ...basicRow } = row
+  return basicRow
+}
+
+function stripUserPreferenceNickname(row) {
+  const { nickname, ...basicRow } = row
   return basicRow
 }
 
@@ -335,10 +346,19 @@ export async function fetchUserPreference() {
   const supabase = getSupabaseClient()
   if (!supabase) return null
 
+  const selectFields = userPreferencesIncludeNickname
+    ? 'anonymous, selected_section, nickname, updated_at'
+    : 'anonymous, selected_section, updated_at'
+
   const { data, error } = await supabase
     .from('user_preferences')
-    .select('anonymous, selected_section, updated_at')
+    .select(selectFields)
     .maybeSingle()
+
+  if (error && userPreferencesIncludeNickname && isMissingUserPreferenceNicknameError(error)) {
+    userPreferencesIncludeNickname = false
+    return fetchUserPreference()
+  }
 
   if (error) throw error
   return data
@@ -348,11 +368,21 @@ export async function upsertUserPreference(row) {
   const supabase = getSupabaseClient()
   if (!supabase) throw new Error('Supabase is not configured.')
 
+  const payload = userPreferencesIncludeNickname ? row : stripUserPreferenceNickname(row)
+  const selectFields = userPreferencesIncludeNickname
+    ? 'anonymous, selected_section, nickname, updated_at'
+    : 'anonymous, selected_section, updated_at'
+
   const { data, error } = await supabase
     .from('user_preferences')
-    .upsert(row, { onConflict: 'user_id' })
-    .select('anonymous, selected_section, updated_at')
+    .upsert(payload, { onConflict: 'user_id' })
+    .select(selectFields)
     .single()
+
+  if (error && userPreferencesIncludeNickname && isMissingUserPreferenceNicknameError(error)) {
+    userPreferencesIncludeNickname = false
+    return upsertUserPreference(row)
+  }
 
   if (error) throw error
   return data
@@ -362,12 +392,25 @@ export async function updateUserPreference(userId, changes) {
   const supabase = getSupabaseClient()
   if (!supabase) throw new Error('Supabase is not configured.')
 
+  const payload = userPreferencesIncludeNickname ? changes : stripUserPreferenceNickname(changes)
+  if (!Object.keys(payload).length) {
+    throw new Error('Nickname support is not enabled yet.')
+  }
+  const selectFields = userPreferencesIncludeNickname
+    ? 'anonymous, selected_section, nickname, updated_at'
+    : 'anonymous, selected_section, updated_at'
+
   const { data, error } = await supabase
     .from('user_preferences')
-    .update({ ...changes, updated_at: new Date().toISOString() })
+    .update({ ...payload, updated_at: new Date().toISOString() })
     .eq('user_id', userId)
-    .select('anonymous, selected_section, updated_at')
+    .select(selectFields)
     .single()
+
+  if (error && userPreferencesIncludeNickname && isMissingUserPreferenceNicknameError(error)) {
+    userPreferencesIncludeNickname = false
+    return updateUserPreference(userId, changes)
+  }
 
   if (error) throw error
   return data

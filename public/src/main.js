@@ -763,6 +763,7 @@ const LEGACY_QUIZ_STORAGE_PREFIX = 'mcq-progress-'
 const TOPIC_COMPLETION_STORAGE_PREFIX = 'topicCompletion'
 const LEGACY_TOPIC_COMPLETION_STORAGE_PREFIX = 'med401-topic-progress-v1::'
 const LOCAL_PROGRESS_OWNER_KEY = 'mustHubLocalProgressOwner'
+const SEEN_TROPHIES_STORAGE_PREFIX = 'seenProfileTrophies'
 const TOPIC_UPDATE_STORAGE_KEY_PREFIX = 'tracker-seen-topic-updates-v1'
 let TOPIC_UPDATE_STORAGE_KEY = `${TOPIC_UPDATE_STORAGE_KEY_PREFIX}::401`
 const UNIVERSITY_WEEK_START_DAY = 0 // Sunday
@@ -776,7 +777,15 @@ const mcqQuizzesBySection = {
   '401': mcqQuizzes,
   '402': window.mcqQuizzes402 || {}
 }
+
+function getMcqQuizzesForSection(section = activeAcademicSection) {
+  if (section === '402') return window.mcqQuizzes402 || mcqQuizzesBySection['402'] || {}
+  return window.mcqQuizzes || mcqQuizzesBySection['401'] || {}
+}
+
 const dynamicQuizConfigs = new Map()
+let trackerSearchMode = 'topics'
+let renderedMcqSearchResults = []
 const quizState = {
   topicLabel: null,
   sourceId: 'current',
@@ -794,7 +803,8 @@ const quizState = {
   timeLimitMinutes: null,
   timerEndsAt: null,
   timerStartedAt: null,
-  timerElapsedMs: 0
+  timerElapsedMs: 0,
+  transient: false
 }
 let quizTimerInterval = null
 let quizRobotMoodTimeout = null
@@ -892,7 +902,7 @@ const courseSchedule = [
 
 const midtermExamSchedule402 = [
   { code: 'SUR 402-1', subjectCode: 'SUR402-1', subjectName: 'Surgery 402-1', date: '2026-07-22', dayLabel: 'Wed', time: '11:30-12:30', quizTopicKey: 'SUR 402-1 MCQs', quizActionLabel: 'MCQs' },
-  { code: 'MED 402-1', subjectCode: 'MED402-1', subjectName: 'Medicine 402-1', date: '2026-07-25', dayLabel: 'Sat', time: '11:30-12:30' },
+  { code: 'MED 402-1', subjectCode: 'MED402-1', subjectName: 'Medicine 402-1', date: '2026-07-25', dayLabel: 'Sat', time: '11:30-12:30', quizTopicKey: 'MED 402-1 MCQs', quizActionLabel: 'MCQs' },
   { code: 'MED 402-2', subjectCode: 'MED402-2', subjectName: 'Medicine 402-2', date: '2026-07-29', dayLabel: 'Wed', time: '11:30-12:30' },
   { code: 'GYN 402', subjectCode: 'GYNA402', subjectName: 'Gynecology & Obstetrics 402', date: '2026-08-01', dayLabel: 'Sat', time: '11:30-12:30' }
 ]
@@ -933,7 +943,10 @@ const progressFill = document.getElementById('progress-fill')
 const topicList = document.getElementById('topic-list')
 const subjectDetail = document.querySelector('.subject-detail')
 const subjectTrackTabs = document.getElementById('subject-track-tabs')
+const subjectRevisionLauncher = document.getElementById('subject-revision-launcher')
 const trackerSearch = document.getElementById('tracker-search')
+const trackerSearchModeButtons = document.querySelectorAll('[data-search-mode]')
+const mcqSearchResults = document.getElementById('mcq-search-results')
 const trackerStatusFilter = document.getElementById('tracker-status-filter')
 const trackerScopeFilter = document.getElementById('tracker-scope-filter')
 const semesterFill = document.getElementById('semester-fill')
@@ -990,6 +1003,8 @@ const authGateStatus = document.getElementById('auth-gate-status')
 const authSectionTitle = document.getElementById('auth-section-title')
 const authSectionCopy = document.getElementById('auth-section-copy')
 const authSectionCancel = document.querySelector('[data-auth-section-cancel]')
+const isStandaloneProfilePage = document.body.classList.contains('profile-page') || window.location.pathname.endsWith('/profile.html')
+let profileNicknameEditOpened = false
 const trackerAdminToolbar = document.getElementById('tracker-admin-toolbar')
 const trackerAdminEmail = document.getElementById('tracker-admin-email')
 const trackerAdminSubject = document.getElementById('tracker-admin-subject')
@@ -1283,7 +1298,7 @@ function renderTrackerAdminUi() {
   if (adminSwitch) {
     adminSwitch.setAttribute('aria-label', enabled ? 'Switch to student view' : 'Switch to admin mode')
     const label = adminSwitch.querySelector('span')
-    if (label) label.textContent = enabled ? 'Student' : 'Admin'
+    if (label) label.textContent = enabled ? 'Student view' : 'Admin mode'
   }
   if (trackerAdminToolbar) trackerAdminToolbar.hidden = !enabled
   if (trackerAdminEmail) trackerAdminEmail.textContent = enabled ? studentProgressState.user?.email || '' : ''
@@ -1317,6 +1332,7 @@ async function refreshTrackerAdminProfile(user) {
     console.warn('Admin profile check failed.', error)
   }
   renderTrackerAdminUi()
+  renderStudentSyncUi()
   if (newsCardsState.remoteSections.has(activeAcademicSection)) {
     replaceNewsFeedWithRemoteRows()
     renderNewsFilters()
@@ -1449,6 +1465,27 @@ function getStudentDisplayName() {
   return metadata.full_name || metadata.name || studentProgressState.user?.email || 'Student'
 }
 
+function getDefaultUserPreferences() {
+  return { anonymous: true, selected_section: null, nickname: '' }
+}
+
+function getStudentNickname() {
+  return String(leaderboardState.preferences?.nickname || '').trim()
+}
+
+function validateNickname(rawValue) {
+  const nickname = String(rawValue || '').trim().replace(/\s+/g, ' ')
+  if (!nickname) return { nickname: '', error: '' }
+  if (nickname.length < 2 || nickname.length > 24) return { nickname, error: 'Nickname must be 2-24 characters.' }
+  if (/[\u0000-\u001f\u007f]/.test(nickname)) return { nickname, error: 'Nickname has unsupported characters.' }
+  if (/@/.test(nickname) || /\bhttps?:\/\//i.test(nickname) || /\bwww\./i.test(nickname)) return { nickname, error: 'Do not use emails or links.' }
+  return { nickname, error: '' }
+}
+
+function getPrivateProfileDisplayName() {
+  return getStudentNickname() || getStudentDisplayName()
+}
+
 function getProgressStorageOwnerId() {
   return studentProgressState.user?.id || ''
 }
@@ -1550,8 +1587,12 @@ function renderStudentSyncUi() {
   if (studentSyncButton) studentSyncButton.hidden = !signedIn
   const logoutButton = studentSync.querySelector('[data-student-sync-logout]')
   const switchSectionButton = studentSync.querySelector('[data-student-switch-section]')
+  const profileButtons = studentSync.querySelectorAll('[data-profile-open], [data-profile-edit-nickname]')
+  const adminModeButton = studentSync.querySelector('[data-tracker-admin-toggle]')
   if (logoutButton) logoutButton.hidden = !signedIn
   if (switchSectionButton) switchSectionButton.hidden = !signedIn
+  profileButtons.forEach((button) => { button.hidden = !signedIn })
+  if (adminModeButton) adminModeButton.hidden = !signedIn || !hasTrackerAdminAccess()
 
   if (studentSyncAvatar) {
     const avatarUrl = signedIn ? getSafeExternalUrl(studentProgressState.user?.user_metadata?.avatar_url || studentProgressState.user?.user_metadata?.picture || '') : ''
@@ -1568,7 +1609,7 @@ function renderStudentSyncUi() {
   }
 
   if (studentSyncEmail) {
-    studentSyncEmail.textContent = signedIn ? getStudentDisplayName() : 'Google sync is off'
+    studentSyncEmail.textContent = signedIn ? getPrivateProfileDisplayName() : 'Google sync is off'
   }
 
   const anonBtn = document.getElementById('leaderboard-anon-toggle')
@@ -1597,13 +1638,14 @@ function renderStudentSyncUi() {
       studentSyncStatus.textContent = 'Google login is required to use MUST Hub.'
     }
   }
+  renderProfileSection()
 }
 
 const leaderboardState = {
   loading: false,
   error: '',
   rows: [],
-  preferences: { anonymous: true },
+  preferences: getDefaultUserPreferences(),
   lastFetched: 0,
   section: '',
   requestId: 0
@@ -1635,15 +1677,80 @@ async function toggleLeaderboardAnonymousMode(button) {
       { anonymous: nextAnon }
     )
     renderAnonToggleUi()
+    renderProfileSection()
     await fetchAndRenderLeaderboard(true)
     showGlobalToast(nextAnon ? 'Your name is hidden.' : 'Your name is now visible.')
   } catch (error) {
     leaderboardState.preferences = previousPreference
     renderAnonToggleUi()
+    renderProfileSection()
     showGlobalToast('Name visibility was not changed. Please try again.')
     console.error('Name visibility update failed:', error)
   } finally {
     button.disabled = false
+  }
+}
+
+async function saveProfileNickname(rawValue) {
+  if (!studentProgressState.user) return false
+  const { nickname, error } = validateNickname(rawValue)
+  const help = document.getElementById('profile-nickname-help')
+  const form = document.getElementById('profile-nickname-form')
+  if (error) {
+    if (help) help.textContent = error
+    return false
+  }
+
+  try {
+    if (help) help.textContent = 'Saving nickname...'
+    leaderboardState.preferences = await updateUserPreference(studentProgressState.user.id, {
+      nickname: nickname || null
+    })
+    renderStudentSyncUi()
+    renderProfileSection()
+    invalidateLeaderboard(activeAcademicSection)
+    await refreshLeaderboardIfActive(true)
+    if (form) form.hidden = true
+    if (help) help.textContent = '2-24 characters. No emails or links.'
+    showGlobalToast(nickname ? 'Nickname saved.' : 'Nickname cleared.')
+    return true
+  } catch (error) {
+    if (help) help.textContent = 'Nickname was not saved. Please try again.'
+    console.warn('Nickname update failed.', error)
+    return false
+  }
+}
+
+function openProfileSection(options = {}) {
+  if (!studentProgressState.user) return
+  setStudentSyncMenu(false)
+  if (!isStandaloneProfilePage) {
+    const url = new URL('/profile.html', window.location.origin)
+    if (activeAcademicSection) url.searchParams.set('section', activeAcademicSection)
+    window.location.href = url.toString()
+    return
+  }
+  renderProfileSection()
+  if (options.scroll !== false) window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' })
+}
+
+function openProfileNicknameEditor() {
+  if (!studentProgressState.user) return
+  if (!isStandaloneProfilePage) {
+    const url = new URL('/profile.html', window.location.origin)
+    if (activeAcademicSection) url.searchParams.set('section', activeAcademicSection)
+    url.searchParams.set('edit', 'nickname')
+    window.location.href = url.toString()
+    return
+  }
+  openProfileSection()
+  const form = document.getElementById('profile-nickname-form')
+  const input = document.getElementById('profile-nickname-input')
+  if (form) form.hidden = false
+  if (input) {
+    input.value = getStudentNickname()
+    input.focus()
+    input.select()
   }
 }
 
@@ -1665,6 +1772,11 @@ function invalidateLeaderboard(section = activeAcademicSection) {
 function refreshLeaderboardIfActive(force = false) {
   if (!isLeaderboardActive()) return Promise.resolve()
   return fetchAndRenderLeaderboard(force)
+}
+
+function getCurrentLeaderboardEntry() {
+  return (leaderboardState.rows || [])
+    .find((row) => studentProgressState.user && row.user_id === studentProgressState.user.id)
 }
 
 function showGlobalToast(text) {
@@ -1871,6 +1983,7 @@ function renderLeaderboardHtml() {
     const timeStr = new Date(leaderboardState.lastFetched).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })
     updatedEl.textContent = `Scores update automatically · Last updated at ${timeStr}`
   }
+  renderProfileSection()
 }
 
 function setStudentSyncMenu(open) {
@@ -1955,7 +2068,7 @@ async function loadStudentProgress(section = activeAcademicSection) {
       fetchUserPreference().catch(() => null)
     ])
 
-    leaderboardState.preferences = pref || { anonymous: true }
+    leaderboardState.preferences = { ...getDefaultUserPreferences(), ...(pref || {}) }
     renderAnonToggleUi()
 
     ;[...studentProgressState.topicRows.keys()]
@@ -1990,6 +2103,10 @@ async function loadStudentProgress(section = activeAcademicSection) {
   } finally {
     studentProgressState.loading = false
     renderStudentSyncUi()
+    if (isStandaloneProfilePage && initialParams.get('edit') === 'nickname' && !profileNicknameEditOpened && studentProgressState.user) {
+      profileNicknameEditOpened = true
+      openProfileNicknameEditor()
+    }
   }
 }
 
@@ -2016,7 +2133,7 @@ function updateAcademicSectionUi() {
   if (newsTitle) newsTitle.textContent = activeAcademicSectionData.newsTitle
   renderClassRepresentatives()
   if (scheduleTitle) scheduleTitle.textContent = `${activeAcademicSectionData.title} schedule`
-  if (trackerSearch) trackerSearch.placeholder = activeAcademicSectionData.trackerSearchPlaceholder
+  if (trackerSearch) setTrackerSearchMode(trackerSearchMode)
   if (examScheduleCards) {
     examScheduleCards.setAttribute('aria-label', `${activeAcademicSectionData.title} subject exam dates`)
   }
@@ -2026,7 +2143,7 @@ function updateAcademicSectionUi() {
 }
 
 function getActiveSectionQuizStats() {
-  const sectionQuizzes = mcqQuizzesBySection[activeAcademicSection] || {}
+  const sectionQuizzes = getMcqQuizzesForSection()
   let activeQuizzesCount = 0
   let totalMcqsCount = 0
 
@@ -2445,13 +2562,275 @@ function updateGlobalProgress() {
   const mcqsFill = document.getElementById('global-mcqs-fill')
   if (!mcqsPercent || !mcqsFill) return
 
+  const { completed, total, percent } = getActiveTopicProgressStats()
+
+  mcqsPercent.textContent = `${percent}%`
+  mcqsFill.style.width = `${percent}%`
+  renderProfileSection()
+  return { completed, total, percent }
+}
+
+function getActiveTopicProgressStats() {
   const total = subjects.reduce((sum, s) => sum + (s.topics?.length || 0) + (s.clinicalTopics?.length || 0), 0)
-  const mcqs = subjects.reduce((sum, s) => sum + (s.topics?.filter(t => getTopicCompletionState(s.code, t.label).mcqs || hasCompletedQuizProgress(t)).length || 0) + (s.clinicalTopics?.filter(t => getTopicCompletionState(s.code, t.label).mcqs || hasCompletedQuizProgress(t)).length || 0), 0)
+  const completed = subjects.reduce((sum, s) => (
+    sum
+    + (s.topics?.filter(t => getTopicCompletionState(s.code, t.label).mcqs || hasCompletedQuizProgress(t)).length || 0)
+    + (s.clinicalTopics?.filter(t => getTopicCompletionState(s.code, t.label).mcqs || hasCompletedQuizProgress(t)).length || 0)
+  ), 0)
 
-  const mcqsValue = calculatePercent(mcqs, total)
+  return {
+    completed,
+    total,
+    percent: calculatePercent(completed, total)
+  }
+}
 
-  mcqsPercent.textContent = `${mcqsValue}%`
-  mcqsFill.style.width = `${mcqsValue}%`
+function getProfileMcqBankProgressStats() {
+  const sectionQuizzes = getMcqQuizzesForSection()
+  let answered = 0
+  let total = 0
+
+  Object.keys(sectionQuizzes).forEach((topicLabel) => {
+    getQuizSources(topicLabel).forEach((source) => {
+      if (source.collection) {
+        getCollectionParts(source).forEach((part) => {
+          const status = getSavedQuizStatus(topicLabel, part)
+          const partTotal = part.mcqs?.length || status?.total || 0
+          total += partTotal
+          if (!status) return
+          answered += status.completed ? partTotal : Math.min(status.answeredCount || 0, partTotal)
+        })
+        return
+      }
+
+      const status = getSavedQuizStatus(topicLabel, source)
+      const sourceTotal = source.mcqs?.length || status?.total || 0
+      total += sourceTotal
+      if (!status) return
+      answered += status.completed ? sourceTotal : Math.min(status.answeredCount || 0, sourceTotal)
+    })
+  })
+
+  return {
+    answered,
+    total,
+    percent: calculatePercent(answered, total)
+  }
+}
+
+function getSeenTrophiesStorageKey() {
+  return `${SEEN_TROPHIES_STORAGE_PREFIX}::${getProgressStorageOwnerId()}::${activeAcademicSection}`
+}
+
+function getSeenTrophyIds() {
+  try {
+    return new Set(JSON.parse(localStorage.getItem(getSeenTrophiesStorageKey()) || '[]'))
+  } catch {
+    localStorage.removeItem(getSeenTrophiesStorageKey())
+    return new Set()
+  }
+}
+
+function saveSeenTrophyIds(ids) {
+  try {
+    localStorage.setItem(getSeenTrophiesStorageKey(), JSON.stringify([...ids]))
+  } catch {
+    // Trophy state is decorative; progress remains the source of truth.
+  }
+}
+
+function getStudentProfileStats() {
+  const rows = [...studentProgressState.quizRows.entries()]
+    .filter(([key]) => key.startsWith(`${activeAcademicSection}::`))
+    .map(([, payload]) => normalizeSavedQuizState(payload))
+    .filter(Boolean)
+
+  const topicLabels = new Set()
+  let totalScore = 0
+  let answeredCount = 0
+  let completedQuizzes = 0
+  let bestPercent = 0
+  let perfectParts = 0
+  let wrongReviewCompleted = false
+
+  rows.forEach((payload) => {
+    const stats = getQuizProgressStatsFromPayload(payload)
+    if (stats.answeredCount > 0 && payload.topicLabel) topicLabels.add(payload.topicLabel)
+    answeredCount += stats.answeredCount
+    totalScore += Number.isFinite(stats.score) ? stats.score : 0
+
+    if (payload.completed) {
+      completedQuizzes += 1
+      if (payload.mode === 'wrong-review' || /wrong-review/i.test(payload.sourceId || '')) wrongReviewCompleted = true
+      if (stats.totalQuestions >= 20 && Number.isFinite(stats.score)) {
+        const scorePercent = Math.round((stats.score / Math.max(stats.totalQuestions, 1)) * 100)
+        bestPercent = Math.max(bestPercent, scorePercent)
+        if (scorePercent === 100) perfectParts += 1
+      }
+    }
+  })
+
+  const topicProgress = getActiveTopicProgressStats()
+  const mcqBankProgress = getProfileMcqBankProgressStats()
+  const leaderboardRows = leaderboardState.rows || []
+  const rankIndex = leaderboardRows.findIndex((row) => studentProgressState.user && row.user_id === studentProgressState.user.id)
+  const currentLeaderboardEntry = getCurrentLeaderboardEntry()
+  const serverScore = Number(currentLeaderboardEntry?.total_score)
+  const serverAnsweredTopics = Number(currentLeaderboardEntry?.mcqs_count)
+  const serverCompletedQuizzes = Number(currentLeaderboardEntry?.quizzes_completed)
+  const serverCorrectAnswers = Number(currentLeaderboardEntry?.correct_answers)
+
+  return {
+    totalScore: Number.isFinite(serverScore) ? serverScore : totalScore,
+    answeredCount,
+    correctAnswers: Number.isFinite(serverCorrectAnswers) ? serverCorrectAnswers : totalScore,
+    completedQuizzes: Number.isFinite(serverCompletedQuizzes) ? serverCompletedQuizzes : completedQuizzes,
+    mcqTopicsTouched: Number.isFinite(serverAnsweredTopics) ? serverAnsweredTopics : topicLabels.size,
+    bestPercent,
+    perfectParts,
+    wrongReviewCompleted,
+    topicProgress,
+    mcqBankProgress,
+    rank: rankIndex >= 0 ? rankIndex + 1 : null,
+    leaderboardSynced: leaderboardRows.length > 0 && leaderboardState.section === activeAcademicSection
+  }
+}
+
+function createTrophy(id, title, description, icon, unlocked, current, target) {
+  const safeTarget = Math.max(target || 1, 1)
+  return {
+    id,
+    title,
+    description,
+    icon,
+    unlocked: !!unlocked,
+    progress: unlocked ? 100 : calculatePercent(current || 0, safeTarget),
+    progressText: unlocked ? 'Unlocked' : `${Math.min(current || 0, safeTarget)} / ${safeTarget}`
+  }
+}
+
+function getProfileTrophies(stats = getStudentProfileStats()) {
+  const scoreMilestones = [50, 100, 250, 500, 1000]
+  const completionMilestones = [5, 10, 25]
+  const accuracyMilestones = [80, 90, 100]
+  const progressMilestones = [25, 50, 75, 100]
+
+  return [
+    createTrophy('first-mcq', 'First MCQ', 'Answer your first MCQ.', '01', stats.answeredCount >= 1, stats.answeredCount, 1),
+    createTrophy('first-complete', 'First Finish', 'Complete your first quiz part.', '02', stats.completedQuizzes >= 1, stats.completedQuizzes, 1),
+    ...scoreMilestones.map((target) => createTrophy(
+      `score-${target}`,
+      `${target} Correct`,
+      `Reach ${target} correct answers.`,
+      String(target),
+      stats.correctAnswers >= target,
+      stats.correctAnswers,
+      target
+    )),
+    ...completionMilestones.map((target) => createTrophy(
+      `complete-${target}`,
+      `${target} Parts`,
+      `Complete ${target} quiz parts.`,
+      String(target),
+      stats.completedQuizzes >= target,
+      stats.completedQuizzes,
+      target
+    )),
+    ...accuracyMilestones.map((target) => createTrophy(
+      `accuracy-${target}`,
+      `${target}% Part`,
+      `Score at least ${target}% on a 20+ question part.`,
+      `${target}%`,
+      stats.bestPercent >= target,
+      stats.bestPercent,
+      target
+    )),
+    ...progressMilestones.map((target) => createTrophy(
+      `progress-${target}`,
+      `${target}% Progress`,
+      `Attempt ${target}% of available section MCQs.`,
+      `${target}%`,
+      stats.mcqBankProgress.percent >= target,
+      stats.mcqBankProgress.percent,
+      target
+    )),
+    createTrophy('wrong-review', 'Comeback', 'Complete a wrong-answer review session.', 'WR', stats.wrongReviewCompleted, stats.wrongReviewCompleted ? 1 : 0, 1)
+  ]
+}
+
+function getProfileAvatarHtml() {
+  const avatarUrl = getSafeExternalUrl(studentProgressState.user?.user_metadata?.avatar_url || studentProgressState.user?.user_metadata?.picture || '')
+  if (avatarUrl) return `<img src="${avatarUrl}" alt="">`
+  const initials = getPrivateProfileDisplayName().split(/\s+/).filter(Boolean).slice(0, 2).map((part) => part[0]).join('').toUpperCase() || 'S'
+  return escapeHtml(initials)
+}
+
+function renderProfileSection() {
+  const profileRoot = document.getElementById('profile-dashboard')
+  if (!profileRoot) return
+
+  const signedIn = !!studentProgressState.user
+  const stats = getStudentProfileStats()
+  const nickname = getStudentNickname()
+  const trophies = getProfileTrophies(stats)
+  const unlockedTrophies = trophies.filter((trophy) => trophy.unlocked)
+
+  const avatar = document.getElementById('profile-avatar')
+  const sectionLabel = document.getElementById('profile-section-label')
+  const displayName = document.getElementById('profile-display-name')
+  const nicknameState = document.getElementById('profile-nickname-state')
+  const nicknameInput = document.getElementById('profile-nickname-input')
+
+  if (avatar) avatar.innerHTML = signedIn ? getProfileAvatarHtml() : 'S'
+  if (sectionLabel) sectionLabel.textContent = `${activeAcademicSectionData.title} section`
+  if (displayName) displayName.textContent = signedIn ? getPrivateProfileDisplayName() : 'Sign in required'
+  if (nicknameState) {
+    nicknameState.textContent = nickname
+      ? (leaderboardState.preferences.anonymous === false ? 'Nickname is visible on the leaderboard.' : 'Nickname saved. Turn off anonymous mode to show it publicly.')
+      : 'No public nickname yet.'
+  }
+  if (nicknameInput && document.activeElement !== nicknameInput) nicknameInput.value = nickname
+
+  const setText = (id, value) => {
+    const element = document.getElementById(id)
+    if (element) element.textContent = value
+  }
+
+  setText('profile-total-score', String(stats.totalScore))
+  setText('profile-answered-count', String(stats.answeredCount))
+  setText('profile-completed-quizzes', String(stats.completedQuizzes))
+  setText('profile-rank', stats.rank ? `#${stats.rank}` : '-')
+  setText('profile-rank-note', stats.rank ? 'Current leaderboard position' : (stats.leaderboardSynced ? 'No rank yet' : 'Open leaderboard to sync'))
+  setText('profile-topic-progress-label', `${stats.mcqBankProgress.percent}%`)
+  setText('profile-mcq-bank-progress-note', `${stats.mcqBankProgress.answered} of ${stats.mcqBankProgress.total} MCQs attempted`)
+  setText('profile-trophy-count', `${unlockedTrophies.length} / ${trophies.length} unlocked`)
+
+  const nextLockedTrophy = trophies.find((trophy) => !trophy.unlocked)
+  setText('profile-next-goal', nextLockedTrophy ? nextLockedTrophy.title : 'All current trophies unlocked')
+  setText('profile-next-goal-note', nextLockedTrophy ? nextLockedTrophy.description : 'New trophy tiers can be added as the website grows.')
+
+  const progressFill = document.getElementById('profile-topic-progress-fill')
+  if (progressFill) progressFill.style.width = `${stats.mcqBankProgress.percent}%`
+
+  const grid = document.getElementById('profile-trophy-grid')
+  if (grid) {
+    const seenIds = getSeenTrophyIds()
+    const nextSeenIds = new Set(seenIds)
+    grid.innerHTML = trophies.map((trophy) => {
+      const isNew = signedIn && trophy.unlocked && !seenIds.has(trophy.id)
+      if (trophy.unlocked) nextSeenIds.add(trophy.id)
+      return `
+        <article class="profile-trophy${trophy.unlocked ? ' profile-trophy--unlocked' : ''}${isNew ? ' profile-trophy--new' : ''}">
+          <span class="profile-trophy__icon">${escapeHtml(trophy.icon)}</span>
+          <strong>${escapeHtml(trophy.title)}</strong>
+          <p>${escapeHtml(trophy.description)}</p>
+          <small>${escapeHtml(trophy.progressText)}</small>
+          <span class="profile-trophy__bar" aria-hidden="true"><span style="width: ${trophy.progress}%;"></span></span>
+        </article>
+      `
+    }).join('')
+    if (signedIn && nextSeenIds.size !== seenIds.size) saveSeenTrophyIds(nextSeenIds)
+  }
 }
 
 function getLegacyTopicCompletionKey(subjectCode, topicLabel) {
@@ -2603,26 +2982,159 @@ function escapeHtml(value) {
     .replace(/'/g, '&#039;')
 }
 
-function getDriveFileId(url = '') {
-  const match = String(url).match(/\/file\/d\/([^/]+)/) || String(url).match(/[?&]id=([^&]+)/)
-  return match ? match[1] : ''
-}
-
 function isDriveUrl(url = '') {
   return /drive\.google\.com|docs\.google\.com/.test(String(url))
 }
 
-function getDriveDownloadUrl(url = '') {
-  const fileId = getDriveFileId(url)
-  return fileId ? `https://drive.google.com/uc?export=download&id=${fileId}` : url
-}
-
 function getTrackerFilters() {
+  const query = trackerSearch?.value.trim().toLowerCase() || ''
   return {
-    query: trackerSearch?.value.trim().toLowerCase() || '',
+    query: trackerSearchMode === 'topics' ? query : '',
     status: trackerStatusFilter?.value || 'all',
     scope: trackerScopeFilter?.value || 'all'
   }
+}
+
+function normalizeMcqSearchText(value = '') {
+  return String(value).toLowerCase().replace(/\s+/g, ' ').trim()
+}
+
+function getMcqSearchIndex() {
+  const results = []
+  const seen = new Set()
+  const sectionQuizzes = getMcqQuizzesForSection()
+
+  Object.keys(sectionQuizzes).forEach((topicLabel) => {
+    getQuizSources(topicLabel).forEach((source) => {
+      const questions = source.mcqs?.length
+        ? source.mcqs
+        : getCollectionParts(source).flatMap((part) => part.mcqs || [])
+
+      questions.forEach((question, questionIndex) => {
+        const questionId = question.id || `${source.id}-${questionIndex}`
+        const key = `${topicLabel}::${source.id}::${questionId}`
+        if (seen.has(key)) return
+        seen.add(key)
+
+        const choices = question.choices || question.options?.map((option) => option.text) || []
+        const searchable = normalizeMcqSearchText([
+          topicLabel,
+          source.label,
+          source.description,
+          question.question,
+          question.section,
+          question.organ,
+          question.source,
+          ...choices
+        ].filter(Boolean).join(' '))
+
+        results.push({
+          resultId: key,
+          topicLabel,
+          sourceId: source.id,
+          sourceLabel: source.label || 'MCQs',
+          question,
+          questionId,
+          searchable
+        })
+      })
+    })
+  })
+
+  return results
+}
+
+function getMcqSearchResults(query) {
+  const normalizedQuery = normalizeMcqSearchText(query)
+  if (!normalizedQuery) return []
+
+  const words = normalizedQuery.split(' ').filter(Boolean)
+  return getMcqSearchIndex()
+    .filter((result) => words.every((word) => result.searchable.includes(word)))
+    .slice(0, 24)
+}
+
+function renderMcqSearchResults() {
+  if (!mcqSearchResults) return
+
+  const query = trackerSearch?.value.trim() || ''
+  const isMcqMode = trackerSearchMode === 'mcqs'
+  mcqSearchResults.hidden = !isMcqMode
+
+  if (!isMcqMode) {
+    renderedMcqSearchResults = []
+    mcqSearchResults.innerHTML = ''
+    return
+  }
+
+  if (!query) {
+    renderedMcqSearchResults = []
+    mcqSearchResults.innerHTML = '<p class="mcq-search-results__empty">Type a question keyword to search MCQs.</p>'
+    return
+  }
+
+  renderedMcqSearchResults = getMcqSearchResults(query)
+  if (!renderedMcqSearchResults.length) {
+    mcqSearchResults.innerHTML = '<p class="mcq-search-results__empty">No MCQ questions match this search.</p>'
+    return
+  }
+
+  mcqSearchResults.innerHTML = `
+    <div class="mcq-search-results__top">
+      <strong>${renderedMcqSearchResults.length} MCQ match${renderedMcqSearchResults.length === 1 ? '' : 'es'}</strong>
+      <span>Click a result to open that question.</span>
+    </div>
+    <div class="mcq-search-results__list">
+      ${renderedMcqSearchResults.map((result, index) => {
+        const meta = [result.sourceLabel, result.question.organ, result.question.section]
+          .filter(Boolean)
+          .join(' - ')
+        return `
+          <button class="mcq-search-result" type="button" data-mcq-search-result="${index}">
+            <span class="mcq-search-result__topic">${escapeHtml(result.topicLabel)}</span>
+            <strong>${escapeHtml(result.question.question || 'Untitled question')}</strong>
+            ${meta ? `<small>${escapeHtml(meta)}</small>` : ''}
+          </button>
+        `
+      }).join('')}
+    </div>
+  `
+}
+
+function setTrackerSearchMode(mode = 'topics') {
+  trackerSearchMode = mode === 'mcqs' ? 'mcqs' : 'topics'
+  trackerSearchModeButtons.forEach((button) => {
+    const isActive = button.dataset.searchMode === trackerSearchMode
+    button.classList.toggle('filter-panel__mode-btn--active', isActive)
+    button.setAttribute('aria-pressed', String(isActive))
+  })
+
+  if (trackerSearch) {
+    trackerSearch.placeholder = trackerSearchMode === 'mcqs'
+      ? 'Search MCQ questions...'
+      : activeAcademicSectionData.trackerSearchPlaceholder
+  }
+
+  renderMcqSearchResults()
+}
+
+function openMcqSearchResult(index, event = null) {
+  const result = renderedMcqSearchResults[Number(index)]
+  if (!result) return
+
+  const config = registerDynamicQuizConfig(result.topicLabel, {
+    id: `mcq-search-${result.sourceId}-${result.questionId}`,
+    label: 'Search result',
+    description: result.sourceLabel,
+    mode: 'search-result',
+    mcqs: [result.question],
+    shuffleQuestions: false,
+    shuffleOptions: false,
+    timeLimitMinutes: null,
+    transient: true
+  })
+
+  openQuiz(result.topicLabel, config.id, event, { skipSaved: true })
 }
 
 function getFilteredTopics(subject) {
@@ -3133,6 +3645,27 @@ function renderSubjectTrackTabs(subject) {
   `).join('')
 }
 
+function renderSubjectRevisionLauncher(subject) {
+  if (subject.code !== 'MED-2') return ''
+
+  return `
+    <aside class="subject-revision-launcher" aria-label="Cardio and Chest Premium Revision Tool">
+      <span class="subject-revision-launcher__title">Cardio &amp; Chest Premium Revision Tool</span>
+      <a
+        class="subject-revision-launcher__action"
+        href="/cardio-chest-revision.html"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span>Open</span>
+        <svg aria-hidden="true" viewBox="0 0 24 24">
+          <path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+        </svg>
+      </a>
+    </aside>
+  `
+}
+
 function renderSubjectTrackList(subject) {
   if (activeSubjectTrack === 'clinical') {
     const clinicalTopics = getClinicalTopics(subject)
@@ -3166,6 +3699,7 @@ function renderSubjectInlineDetail(subject) {
       <div class="subject-track-tabs subject-track-tabs--inline" role="tablist" aria-label="${subject.code} sections">
         ${renderSubjectTrackTabs(subject)}
       </div>
+      ${renderSubjectRevisionLauncher(subject)}
       <ul class="topic-list topic-list--inline">
         ${renderSubjectTrackList(subject)}
       </ul>
@@ -3374,6 +3908,8 @@ function buildQuizProgressPayload() {
 }
 
 function saveQuizState() {
+  if (quizState.transient) return
+
   const payload = buildQuizProgressPayload()
   if (!payload) return
 
@@ -3651,7 +4187,7 @@ function shuffleArray(array) {
 }
 
 function getQuizSources(topicLabel) {
-  const sectionQuizzes = mcqQuizzesBySection[activeAcademicSection] || {}
+  const sectionQuizzes = getMcqQuizzesForSection()
   const raw = sectionQuizzes[topicLabel]
   if (!raw) return []
 
@@ -3724,7 +4260,7 @@ function registerDynamicQuizConfig(topicLabel, config) {
 }
 
 function shouldShowQuizSourcePicker(topicLabel) {
-  const sectionQuizzes = mcqQuizzesBySection[activeAcademicSection] || {}
+  const sectionQuizzes = getMcqQuizzesForSection()
   return Boolean(sectionQuizzes[topicLabel]?.alwaysShowSourcePicker)
 }
 
@@ -3836,6 +4372,7 @@ function initializeQuiz(topicLabel, {
   quizState.timerEndsAt = null
   quizState.timerStartedAt = null
   quizState.timerElapsedMs = 0
+  quizState.transient = !!config.transient
 
   if (quizState.timeLimitMinutes && !completed) {
     const savedTimerEndsAt = savedState?.timerEndsAt ? new Date(savedState.timerEndsAt).getTime() : NaN
@@ -4635,7 +5172,7 @@ function openQuiz(topicLabel, sourceId = 'current', event = null, launchOptions 
   const config = getQuizConfig(topicLabel, sourceId)
   if (!config || !config.mcqs.length) return
 
-  const savedState = getSavedQuizState(topicLabel, config.id)
+  const savedState = config.transient || launchOptions.skipSaved ? null : getSavedQuizState(topicLabel, config.id)
   const useSaved = Boolean(savedState)
   const resumeDirectly = Boolean(launchOptions.resumeDirectly && savedState && !savedState.completed)
   initializeQuiz(topicLabel, {
@@ -4708,7 +5245,7 @@ function openQuiz(topicLabel, sourceId = 'current', event = null, launchOptions 
 
 function closeQuiz() {
   const modal = ensureQuizModal()
-  if (quizState.topicLabel && !quizState.completed && !quizState.showResumePrompt) {
+  if (quizState.topicLabel && !quizState.completed && !quizState.showResumePrompt && !quizState.transient) {
     pauseQuizCountupTimer()
     saveQuizState()
   }
@@ -4947,6 +5484,12 @@ function handleQuizClick(event) {
         resumeDirectly: sourceButton.hasAttribute('data-quiz-resume-direct')
       })
     }
+    return
+  }
+
+  const mcqSearchResult = event.target.closest('[data-mcq-search-result]')
+  if (mcqSearchResult) {
+    openMcqSearchResult(mcqSearchResult.dataset.mcqSearchResult, event)
     return
   }
 
@@ -5190,6 +5733,10 @@ function clearSubjectDetail() {
   selectedPercent.textContent = '0%'
   progressFill.style.width = '0%'
   if (subjectTrackTabs) subjectTrackTabs.innerHTML = ''
+  if (subjectRevisionLauncher) {
+    subjectRevisionLauncher.innerHTML = ''
+    subjectRevisionLauncher.hidden = true
+  }
   topicList.innerHTML = '<li class="topic-empty">Click a subject card to view its topics.</li>'
 }
 
@@ -5250,6 +5797,11 @@ function setActiveSubject(code, mobileMode = 'toggle') {
   if (subjectTrackTabs) {
     subjectTrackTabs.innerHTML = renderSubjectTrackTabs(subject)
     bindSubjectTrackTabs(subjectTrackTabs)
+  }
+  if (subjectRevisionLauncher) {
+    const launcherMarkup = renderSubjectRevisionLauncher(subject)
+    subjectRevisionLauncher.innerHTML = launcherMarkup
+    subjectRevisionLauncher.hidden = !launcherMarkup
   }
   progressFill.style.width = '0%'
   if (prefersReducedMotion) {
@@ -6463,6 +7015,22 @@ function isSavedAcademicSection(section) {
 }
 
 function routeAuthenticatedUser(section, options = {}) {
+  if (isStandaloneProfilePage) {
+    activeAcademicSection = isSavedAcademicSection(section) ? section : '401'
+    activeSiteMode = 'profile'
+    updateAcademicSectionUi()
+    syncModeToBody()
+    loadStudentProgress(activeAcademicSection)
+      .then(() => fetchAndRenderLeaderboard(true))
+      .catch((error) => console.warn('Profile progress refresh failed.', error))
+    const url = new URL(window.location.href)
+    url.searchParams.set('section', activeAcademicSection)
+    updateSiteHistory(url, options.historyMode || 'replace')
+    renderProfileSection()
+    setAuthGateState('ready')
+    return
+  }
+
   const preserveDestination = options.preserveDestination !== false
   const hash = preserveDestination ? window.location.hash : ''
   if (hash === '#history') {
@@ -6491,7 +7059,7 @@ function clearAuthenticatedProgressState() {
   studentProgressState.ready = false
   studentProgressState.loading = false
   studentProgressState.selectedSection = ''
-  leaderboardState.preferences = { anonymous: true, selected_section: null }
+  leaderboardState.preferences = getDefaultUserPreferences()
   invalidateLeaderboard()
 }
 
@@ -6517,7 +7085,7 @@ async function handleStudentAuthUser(user) {
     const preference = await fetchUserPreference()
     if (requestId !== studentProgressState.authRequestId) return
 
-    leaderboardState.preferences = preference || { anonymous: true, selected_section: null }
+    leaderboardState.preferences = { ...getDefaultUserPreferences(), ...(preference || {}) }
     const selectedSection = preference?.selected_section || ''
     refreshTrackerAdminProfile(user)
 
@@ -6532,6 +7100,15 @@ async function handleStudentAuthUser(user) {
   } catch (error) {
     if (requestId !== studentProgressState.authRequestId) return
     studentProgressState.lastError = error.message
+    const fallbackSection = isSavedAcademicSection(initialParams.get('section'))
+      ? initialParams.get('section')
+      : (isSavedAcademicSection(studentProgressState.selectedSection) ? studentProgressState.selectedSection : '401')
+    if (fallbackSection) {
+      studentProgressState.selectedSection = fallbackSection
+      routeAuthenticatedUser(fallbackSection)
+      renderStudentSyncUi()
+      return
+    }
     setSectionSelectionMode('onboarding')
     setAuthGateState('needs-section', 'We could not load your saved section. Choose it again to finish account setup.')
     renderStudentSyncUi()
@@ -6549,7 +7126,8 @@ async function saveSelectedSection(section, options = {}) {
     const preference = await upsertUserPreference({
       user_id: studentProgressState.user.id,
       anonymous: leaderboardState.preferences.anonymous !== false,
-      selected_section: section
+      selected_section: section,
+      nickname: getStudentNickname() || null
     })
     leaderboardState.preferences = preference
     studentProgressState.selectedSection = section
@@ -6600,7 +7178,12 @@ function cancelSectionSwitcher() {
 }
 
 function initStudentSync() {
-  if (!studentSync || !isSupabaseConfigured()) {
+  if (!isSupabaseConfigured()) {
+    renderStudentSyncUi()
+    setAuthGateState('signed-out', 'Google login is temporarily unavailable.')
+    return
+  }
+  if (!studentSync && !isStandaloneProfilePage) {
     renderStudentSyncUi()
     setAuthGateState('signed-out', 'Google login is temporarily unavailable.')
     return
@@ -6626,6 +7209,20 @@ if (subjectList) {
   window.setInterval(render401ExamSchedule, 3600000)
   initStudentSync()
   renderTrackerAdminUi()
+}
+
+if (isStandaloneProfilePage) {
+  const requestedSection = initialParams.get('section')
+  if (isSavedAcademicSection(requestedSection)) activeAcademicSection = requestedSection
+  activeSiteMode = 'profile'
+  updateAcademicSectionUi()
+  syncModeToBody()
+  initStudentSync()
+  renderProfileSection()
+  window.addEventListener('load', () => {
+    renderProfileSection()
+    if (studentProgressState.user) fetchAndRenderLeaderboard(true)
+  }, { once: true })
 }
 
 document.addEventListener('click', (event) => {
@@ -6676,6 +7273,24 @@ document.addEventListener('click', (event) => {
   if (event.target.closest('[data-student-switch-section]')) {
     event.preventDefault()
     openSectionSwitcher()
+    return
+  }
+
+  if (event.target.closest('[data-profile-open]')) {
+    event.preventDefault()
+    openProfileSection()
+    return
+  }
+
+  if (event.target.closest('[data-profile-edit-nickname]')) {
+    event.preventDefault()
+    openProfileNicknameEditor()
+    return
+  }
+
+  if (event.target.closest('[data-tracker-admin-toggle]')) {
+    event.preventDefault()
+    openAdminLogin()
     return
   }
 
@@ -6808,6 +7423,7 @@ adminLoginForm?.addEventListener('submit', async (event) => {
     trackerAdminState.enabled = true
     closeAdminLogin()
     renderTrackerAdminUi()
+    renderStudentSyncUi()
     await refreshRemoteNewsCards(activeAcademicSection)
     renderSubjects()
     if (activeSubjectCode) setActiveSubject(activeSubjectCode, 'open')
@@ -6816,6 +7432,12 @@ adminLoginForm?.addEventListener('submit', async (event) => {
   } finally {
     if (submit) submit.disabled = false
   }
+})
+
+document.getElementById('profile-nickname-form')?.addEventListener('submit', async (event) => {
+  event.preventDefault()
+  const input = document.getElementById('profile-nickname-input')
+  await saveProfileNickname(input?.value || '')
 })
 
 trackerAdminEditPanel?.addEventListener('change', (event) => {
@@ -6909,6 +7531,8 @@ document.addEventListener('visibilitychange', () => {
 
 
 function refreshTrackerFilters() {
+  if (!subjectList) return
+  setTrackerSearchMode(trackerSearchMode)
   if (trackerScopeFilter) {
     document.querySelectorAll('.scope-toggle__btn').forEach((button) => {
       button.classList.toggle('scope-toggle__btn--active', button.dataset.scope === trackerScopeFilter.value)
@@ -6926,6 +7550,13 @@ if (trackerSearch && trackerStatusFilter) {
     control.addEventListener('change', refreshTrackerFilters)
   })
 }
+
+trackerSearchModeButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    setTrackerSearchMode(button.dataset.searchMode)
+    refreshTrackerFilters()
+  })
+})
 
 // Scope pill button wiring
 document.querySelectorAll('.scope-toggle__btn').forEach((btn) => {
@@ -7659,6 +8290,9 @@ function initBottomSectionNav() {
     })
     if (id === 'leaderboard') {
       fetchAndRenderLeaderboard()
+    }
+    if (id === 'profile') {
+      renderProfileSection()
     }
   }
 

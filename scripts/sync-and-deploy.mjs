@@ -53,7 +53,7 @@ try {
 
 try {
   console.log('Staging files...');
-  execSync(`git add src/mcqs.js public/src/mcqs.js index.html`, { stdio: 'inherit' });
+  execSync(`git add src/mcqs.js public/src/mcqs.js src/sur1-stomach-master-mcqs.js public/src/sur1-stomach-master-mcqs.js src/sur1-liver-spleen-answers-mcqs.js public/src/sur1-liver-spleen-answers-mcqs.js index.html`, { stdio: 'inherit' });
   
   const commitMsg = `Add MCQs for ${topicName}`;
   console.log(`Committing changes: "${commitMsg}"...`);

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>
+    window.SUPABASE_CONFIG = {
+      url: '%VITE_SUPABASE_URL%',
+      anonKey: '%VITE_SUPABASE_ANON_KEY%'
+    }
+  </script>
+  <script defer src="/src/analytics.js?v=20260620-ga4"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Profile | Clinical Hub</title>
+  <meta name="description" content="Student profile, score, trophies, and progress for the MED 401 clinical hub." />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&display=swap" rel="stylesheet" />
+  <meta name="theme-color" content="#315f72" />
+  <link rel="stylesheet" href="/src/style.css?v=20260722-profile-page-v1" />
+</head>
+<body class="profile-page" data-auth-state="checking" data-site-mode="profile">
+  <div class="auth-gate" id="auth-gate" aria-live="polite">
+    <div class="auth-gate__card">
+      <img class="auth-gate__logo" src="/assets/must-university-logo.png" alt="MUST University logo">
+      <p class="eyebrow">Student profile</p>
+      <h1>Sign in to view your profile</h1>
+      <p>Your score, trophies, nickname, and progress are connected to your Google account.</p>
+      <button class="button button--primary" type="button" data-auth-login>Continue with Google</button>
+      <p class="auth-gate__status" id="auth-gate-status" hidden></p>
+    </div>
+  </div>
+
+  <header class="site-header profile-page__header">
+    <a class="brand" href="/" aria-label="Back to Clinical Hub home">
+      <span class="brand-mark">M</span>
+      <span>Clinical Hub</span>
+    </a>
+    <nav class="profile-page__quick-nav" aria-label="Profile navigation">
+      <a href="/#tracker">Tracker</a>
+      <a href="/#leaderboard">Leaderboard</a>
+    </nav>
+  </header>
+
+  <main class="profile-page__main">
+    <section class="profile-section hub-section" id="profile" aria-labelledby="profile-title">
+      <div class="profile-page-hero">
+        <div>
+          <p class="eyebrow">Student profile</p>
+          <h1 id="profile-title">Your study profile</h1>
+          <p>Score, rank, progress, and trophies in one private page.</p>
+        </div>
+        <a class="profile-page-hero__practice" href="/#tracker">Practice MCQs</a>
+      </div>
+
+      <div class="profile-dashboard" id="profile-dashboard">
+        <article class="profile-hero-card">
+          <div class="profile-hero-card__avatar" id="profile-avatar" aria-hidden="true">S</div>
+          <div>
+            <p class="profile-hero-card__eyebrow" id="profile-section-label">Section</p>
+            <h2 id="profile-display-name">Student</h2>
+            <p id="profile-nickname-state">No public nickname yet.</p>
+          </div>
+          <button class="profile-hero-card__edit" type="button" data-profile-edit-nickname>Edit nickname</button>
+        </article>
+
+        <form class="profile-nickname-form" id="profile-nickname-form" hidden>
+          <label for="profile-nickname-input">Nickname</label>
+          <div class="profile-nickname-form__row">
+            <input id="profile-nickname-input" name="nickname" maxlength="24" autocomplete="nickname" placeholder="Choose a public nickname">
+            <button type="submit">Save</button>
+          </div>
+          <p id="profile-nickname-help">2-24 characters. No emails or links.</p>
+        </form>
+
+        <div class="profile-stats-grid" aria-label="Profile stats">
+          <article class="profile-stat profile-stat--score"><span>Total score</span><strong id="profile-total-score">0</strong><small>correct answers</small></article>
+          <article class="profile-stat"><span>Answered</span><strong id="profile-answered-count">0</strong><small>MCQs attempted</small></article>
+          <article class="profile-stat"><span>Completed</span><strong id="profile-completed-quizzes">0</strong><small>quiz parts</small></article>
+          <article class="profile-stat"><span>Rank</span><strong id="profile-rank">-</strong><small id="profile-rank-note">Open leaderboard to sync</small></article>
+        </div>
+
+        <section class="profile-duo-grid" aria-label="Study momentum">
+          <article class="profile-progress-card profile-progress-card--wide">
+            <div class="profile-progress-card__top">
+              <span>MCQ bank progress</span>
+              <strong id="profile-topic-progress-label">0%</strong>
+            </div>
+            <p class="profile-progress-card__note" id="profile-mcq-bank-progress-note">0 of 0 MCQs attempted</p>
+            <div class="profile-progress-card__bar" aria-hidden="true"><span id="profile-topic-progress-fill"></span></div>
+          </article>
+          <article class="profile-momentum-card">
+            <span>Next goal</span>
+            <strong id="profile-next-goal">Start your first MCQ</strong>
+            <p id="profile-next-goal-note">Trophies unlock as you answer and finish quiz parts.</p>
+          </article>
+        </section>
+
+        <section class="profile-trophies" aria-labelledby="profile-trophies-title">
+          <div class="profile-trophies__top">
+            <h2 id="profile-trophies-title">Trophy cabinet</h2>
+            <p id="profile-trophy-count">0 unlocked</p>
+          </div>
+          <div class="profile-trophy-grid" id="profile-trophy-grid"></div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script defer src="/src/mcqs.js?v=20260720-270"></script>
+  <script defer src="/src/sur1-kellawi-mcqs.js?v=20260721-kellawi-esoph-v1"></script>
+  <script defer src="/src/sur1-past-exam-mcqs.js?v=20260719-sur1-past-exams-v1"></script>
+  <script defer src="/src/sur1-matching-questions.js?v=20260719-sur1-matching-v1"></script>
+  <script defer src="/src/sur1-stomach-master-mcqs.js?v=20260721-mor-ragab-v1"></script>
+  <script defer src="/src/sur1-liver-spleen-answers-mcqs.js?v=20260720-liver-spleen-v1"></script>
+  <script defer src="/src/sur402-past-exam-mcqs.js?v=20260719-sur402-past-exams-v1"></script>
+  <script defer src="/src/sur402-textbook-mcqs.js?v=20260719-sur402-textbooks-v1"></script>
+  <script defer src="/src/sur402-amr-beshry-mcqs.js?v=20260719-sur402-amr-beshry-v1"></script>
+  <script type="importmap">
+    {
+      "imports": {
+        "canvas-confetti": "https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/confetti.module.mjs",
+        "@supabase/supabase-js": "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.110.1/+esm"
+      }
+    }
+  </script>
+  <script type="module" src="/src/main.js?v=20260722-profile-page-v1"></script>
+</body>
+</html>
