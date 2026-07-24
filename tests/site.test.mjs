@@ -298,20 +298,22 @@ test('MED 402-1 endocrine bank is answer-safe, grouped, and wired to the exam ca
   assert.match(mainSource, /code:\s*'MED 402-1'[\s\S]{0,240}quizTopicKey:\s*'MED 402-1 MCQs'/)
 })
 
-test('MED 401-2 Cardio, Chest, and Past Exams banks are source-faithful, grouped, and wired to the exam card', () => {
+test('MED 401-2 Cardio, Chest, Past Exams, and Mo.ragab banks are source-faithful, grouped, and wired to the exam card', () => {
   const context = { window: { mcqQuizzes: {} } }
   vm.runInNewContext(read('src/med2-cardio-chest-mcqs.js'), context)
 
   const quiz = context.window.mcqQuizzes['MED 401-2 MCQs']
   assert.equal(quiz.alwaysShowSourcePicker, true)
-  assert.equal(quiz.sources.length, 3)
+  assert.equal(quiz.sources.length, 4)
 
   const cardio = quiz.sources.find((source) => source.id === 'med2-cardio-question-bank')
   const chest = quiz.sources.find((source) => source.id === 'med2-chest-question-bank')
   const pastExams = quiz.sources.find((source) => source.id === 'med2-past-exams-golden-quizzes')
+  const moRagab = quiz.sources.find((source) => source.id === 'med2-mo-ragab-past-exams')
   assert.ok(cardio, 'Cardiology source is missing')
   assert.ok(chest, 'Chest source is missing')
   assert.ok(pastExams, 'Past Exams source is missing')
+  assert.ok(moRagab, 'Mo.ragab source is missing')
   assert.equal(cardio.mcqs.length, 208)
   assert.equal(cardio.heldForReview.length, 27)
   assert.equal(cardio.mcqs.length + cardio.heldForReview.length, 235)
@@ -319,8 +321,10 @@ test('MED 401-2 Cardio, Chest, and Past Exams banks are source-faithful, grouped
   assert.equal(chest.heldForReview.length, 0)
   assert.equal(pastExams.mcqs.length, 81)
   assert.equal(pastExams.heldForReview.length, 0)
+  assert.equal(moRagab.mcqs.length, 157)
+  assert.equal(moRagab.heldForReview.length, 0)
 
-  for (const source of [cardio, chest, pastExams]) {
+  for (const source of [cardio, chest, pastExams, moRagab]) {
     assert.equal(new Set(source.mcqs.map((question) => question.id)).size, source.mcqs.length)
     assert.ok(source.mcqs.every((question) => question.choices.length >= 2))
     assert.ok(source.mcqs.every((question) => Number.isInteger(question.answerIndex) && question.choices[question.answerIndex]))
@@ -367,12 +371,24 @@ test('MED 401-2 Cardio, Chest, and Past Exams banks are source-faithful, grouped
       ['Bronchial Asthma', 18]
     ]
   )
+  assert.deepEqual(
+    Array.from(moRagab.collection.groups, (group) => [group.label, group.questionCount]),
+    [
+      ['Pulmonary Embolism', 45],
+      ['Systemic Hypertension', 26],
+      ['Rheumatic Fever', 27],
+      ['Aortic Stenosis', 19],
+      ['Aortic Regurgitation', 14],
+      ['Mitral Stenosis', 13],
+      ['Mitral Regurgitation', 13]
+    ]
+  )
 
   const html = read('index.html')
   const profileHtml = read('profile.html')
   const mainSource = read('src/main.js')
-  assert.match(html, /med2-cardio-chest-mcqs\.js\?v=20260724-past-exams-v1/)
-  assert.match(profileHtml, /med2-cardio-chest-mcqs\.js\?v=20260724-past-exams-v1/)
+  assert.match(html, /med2-cardio-chest-mcqs\.js\?v=20260724-mo-ragab-v1/)
+  assert.match(profileHtml, /med2-cardio-chest-mcqs\.js\?v=20260724-mo-ragab-v1/)
   assert.match(mainSource, /code:\s*'MED 401-2'[\s\S]{0,260}quizTopicKey:\s*'MED 401-2 MCQs'/)
 })
 

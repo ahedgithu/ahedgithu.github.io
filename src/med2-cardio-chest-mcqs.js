@@ -2,7 +2,7 @@
 // Cardio SHA-256: e49f6378029fb3a6dc92412e0454dd1bb549c836f406296a32c0d5aebf020277
 // Chest SHA-256: eab3f553207e75291a598417f7cddd798a52882e1559123ff2e35f828b45a158
 // Past Exams SHA-256: f3f377639b3b9a47e20568ca9b49a0d8668e6196a2928eb6053be1572c74e729
-// Included: 589 answer-safe MED-2 questions; 27 records held for review.
+// Included: 746 answer-safe MED-2 questions; 27 records held for review.
 (() => {
   const quizzes = window.mcqQuizzes || (window.mcqQuizzes = {})
   const quiz = quizzes["MED 401-2 MCQs"] || (quizzes["MED 401-2 MCQs"] = { alwaysShowSourcePicker: true, sources: [] })
@@ -27293,6 +27293,7176 @@
                     "MED-2",
                     "PAST exams and golden quizes",
                     "Bronchial Asthma"
+                  ]
+                }
+              ],
+              "partCount": 1
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "med2-mo-ragab-past-exams",
+    "label": "Mo.ragab repeated past exams",
+    "description": "157 answer-safe questions · 7 topics · 10 short parts",
+    "sourceFile": "PE_RF_HTN.json, Valvular_Heart_Diseases.json",
+    "sourceHash": "7f83a5587c730b471241cec65a86cd3a892ce4e15bb79bdad146646460d15a83",
+    "shuffleQuestions": false,
+    "shuffleOptions": false,
+    "mcqs": [
+      {
+        "id": "med2-mo-ragab-q001",
+        "originalNumber": "1",
+        "category": "Pulmonary Embolism",
+        "organ": "Pulmonary Embolism",
+        "question": "What is pulmonary embolism?",
+        "choices": [
+          "A sudden blockage in coronary arteries",
+          "A sudden blockage in pulmonary arteries",
+          "A condition affecting the brain's blood vessels",
+          "A blockage in the aorta"
+        ],
+        "answerIndex": 1,
+        "explanation": "Pulmonary embolism is obstruction of the pulmonary arterial circulation, most often by a thrombus that has traveled from a deep vein.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Pulmonary Embolism"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q002",
+        "originalNumber": "2",
+        "category": "Pulmonary Embolism",
+        "organ": "Pulmonary Embolism",
+        "question": "In pulmonary embolism, what type is characterized by affecting medium-sized pulmonary arteries without hemodynamic instability?",
+        "choices": [
+          "Mild",
+          "Moderate",
+          "Severe",
+          "Massive"
+        ],
+        "answerIndex": 1,
+        "explanation": "Moderate is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Pulmonary Embolism"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q003",
+        "originalNumber": "3",
+        "category": "Pulmonary Embolism",
+        "organ": "Pulmonary Embolism",
+        "question": "In pulmonary embolism, what type is characterized by affecting main, left and/or right pulmonary artery causing a hemodynamic instability up to obstructive shock?",
+        "choices": [
+          "Mild",
+          "Moderate",
+          "Severe or massive",
+          "Chronic"
+        ],
+        "answerIndex": 2,
+        "explanation": "Severe or massive is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Pulmonary Embolism"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q004",
+        "originalNumber": "4",
+        "category": "Pulmonary Embolism",
+        "organ": "Pulmonary Embolism",
+        "question": "A 78-year-old female is evaluated in the hospital for sudden loss of consciousness and severe hypoxemia (O2 saturation 80%) one day after a total hip replacement surgery. Her blood pressure is 76/48 mmHg. What is the most likely diagnosis?",
+        "choices": [
+          "Acute myocardial infarction",
+          "Tension pneumothorax",
+          "Massive pulmonary embolism",
+          "Anaphylactic shock"
+        ],
+        "answerIndex": 2,
+        "explanation": "Massive pulmonary embolism is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Pulmonary Embolism"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q005",
+        "originalNumber": "5",
+        "category": "Pulmonary Embolism",
+        "organ": "Pulmonary Embolism",
+        "question": "Which of the following combinations correctly represents Virchow’s Triad for the development of Deep Vein Thrombosis (DVT) and Pulmonary Embolism (PE)?",
+        "choices": [
+          "Inflammation, fever, and leukocytosis",
+          "Stasis, endothelial injury, and hypercoagulability",
+          "Hypoxia, hypercapnia, and acidosis",
+          "Hypertension, diabetes, and dyslipidemia"
+        ],
+        "answerIndex": 1,
+        "explanation": "Virchow’s triad comprises venous stasis, endothelial injury, and hypercoagulability, which together promote thrombosis.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Pulmonary Embolism"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q006",
+        "originalNumber": "6",
+        "category": "Pulmonary Embolism",
+        "organ": "Pulmonary Embolism",
+        "question": "All of the following are risk factors for Pulmonary embolism (PE) EXCEPT:",
+        "choices": [
+          "Cerebrovascular stroke",
+          "Autoimmune diseases",
+          "Air travel",
+          "Aortopulmonary shunts"
+        ],
+        "answerIndex": 3,
+        "explanation": "Aortopulmonary shunts is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Pulmonary Embolism"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q007",
+        "originalNumber": "7",
+        "category": "Pulmonary Embolism",
+        "organ": "Pulmonary Embolism",
+        "question": "A 35-year-old woman, who is currently on oral contraceptives, presents with sudden-onset shortness of breath and pleuritic chest pain. Which of the following risk factors is most relevant to her presentation?",
+        "choices": [
+          "Smoking",
+          "Hypertension",
+          "Family history of heart disease",
+          "Use of oral contraceptives"
+        ],
+        "answerIndex": 3,
+        "explanation": "Use of oral contraceptives is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Pulmonary Embolism"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q008",
+        "originalNumber": "8",
+        "category": "Pulmonary Embolism",
+        "organ": "Pulmonary Embolism",
+        "question": "Which factor significantly increases the incidence of pulmonary embolism in the context of Covid-19?",
+        "choices": [
+          "Heavy cigarette smoking",
+          "Obesity",
+          "Immobilization",
+          "Previous stroke"
+        ],
+        "answerIndex": 2,
+        "explanation": "Immobilization is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Pulmonary Embolism"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q009",
+        "originalNumber": "9",
+        "category": "Pulmonary Embolism",
+        "organ": "Pulmonary Embolism",
+        "question": "What is a common risk factor associated with pulmonary embolism?",
+        "choices": [
+          "High cholesterol levels",
+          "Air travel",
+          "Regular exercise",
+          "Low blood pressure"
+        ],
+        "answerIndex": 1,
+        "explanation": "Air travel is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Pulmonary Embolism"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q010",
+        "originalNumber": "10",
+        "category": "Pulmonary Embolism",
+        "organ": "Pulmonary Embolism",
+        "question": "Which of the following is NOT a cause of pulmonary embolism?",
+        "choices": [
+          "Detached blood clot from DVT",
+          "Air embolism",
+          "Bacterial infection",
+          "Fat embolus"
+        ],
+        "answerIndex": 2,
+        "explanation": "Bacterial infection is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Pulmonary Embolism"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q011",
+        "originalNumber": "11",
+        "category": "Pulmonary Embolism",
+        "organ": "Pulmonary Embolism",
+        "question": "Which condition is NOT listed as a risk factor for pulmonary embolism?",
+        "choices": [
+          "Hypertension",
+          "Air travel",
+          "Regular exercise",
+          "Thrombophilias"
+        ],
+        "answerIndex": 2,
+        "explanation": "Regular exercise is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Pulmonary Embolism"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q012",
+        "originalNumber": "12",
+        "category": "Pulmonary Embolism",
+        "organ": "Pulmonary Embolism",
+        "question": "What are the most common presenting symptom and the most common clinical sign in a patient with a pulmonary embolism, respectively?",
+        "choices": [
+          "Chest pain and bradycardia",
+          "Syncope and distant heart sounds",
+          "Dyspnea and tachypnea",
+          "Hemoptysis and congested neck veins"
+        ],
+        "answerIndex": 2,
+        "explanation": "Dyspnea and tachypnea is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Pulmonary Embolism"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q013",
+        "originalNumber": "13",
+        "category": "Pulmonary Embolism",
+        "organ": "Pulmonary Embolism",
+        "question": "Hypoxemia is a complication of pulmonary embolism. What is hypoxemia?",
+        "choices": [
+          "High level of carbon monoxide in the blood",
+          "High level of oxygen in the blood",
+          "Low level of carbon dioxide in the blood",
+          "Low level of oxygen in the blood"
+        ],
+        "answerIndex": 3,
+        "explanation": "Low level of oxygen in the blood is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Pulmonary Embolism"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q014",
+        "originalNumber": "14",
+        "category": "Pulmonary Embolism",
+        "organ": "Pulmonary Embolism",
+        "question": "A patient with PE may develop complications as all of the following EXCEPT:",
+        "choices": [
+          "Obstructive cardiogenic shock",
+          "Right sided heart failure",
+          "Persistent pulmonary hypertension",
+          "Recurrent upper respiratory tract infections"
+        ],
+        "answerIndex": 3,
+        "explanation": "Recurrent upper respiratory tract infections is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Pulmonary Embolism"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q015",
+        "originalNumber": "15",
+        "category": "Pulmonary Embolism",
+        "organ": "Pulmonary Embolism",
+        "question": "What is the primary effect of pulmonary embolism on the pulmonary arterioles or capillaries in the mild type?",
+        "choices": [
+          "Hemodynamic instability",
+          "Pleuritic chest pain",
+          "Severe wheezing",
+          "Decreased breath sounds"
+        ],
+        "answerIndex": 1,
+        "explanation": "Pleuritic chest pain is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Pulmonary Embolism"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q016",
+        "originalNumber": "16",
+        "category": "Pulmonary Embolism",
+        "organ": "Pulmonary Embolism",
+        "question": "Which sign is commonly associated with pulmonary embolism?",
+        "choices": [
+          "Increased breath sounds",
+          "Bradycardia",
+          "Jugular venous distension",
+          "Normal second heart sound"
+        ],
+        "answerIndex": 2,
+        "explanation": "Jugular venous distension is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Pulmonary Embolism"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q017",
+        "originalNumber": "17",
+        "category": "Pulmonary Embolism",
+        "organ": "Pulmonary Embolism",
+        "question": "What is a potential consequence of severe or massive pulmonary embolism?",
+        "choices": [
+          "Mild cough",
+          "Hemodynamic instability up to obstructive shock",
+          "Reduced blood clotting",
+          "Improved lung function"
+        ],
+        "answerIndex": 1,
+        "explanation": "Hemodynamic instability up to obstructive shock is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Pulmonary Embolism"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q018",
+        "originalNumber": "18",
+        "category": "Pulmonary Embolism",
+        "organ": "Pulmonary Embolism",
+        "question": "Which of the following complications is NOT commonly associated with pulmonary embolism?",
+        "choices": [
+          "Pulmonary hypertension",
+          "Right-sided heart failure",
+          "Ischemic stroke",
+          "Chronic thromboembolic pulmonary hypertension"
+        ],
+        "answerIndex": 2,
+        "explanation": "Ischemic stroke is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Pulmonary Embolism"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q019",
+        "originalNumber": "19",
+        "category": "Pulmonary Embolism",
+        "organ": "Pulmonary Embolism",
+        "question": "What is the Wells score commonly used for in the context of pulmonary embolism?",
+        "choices": [
+          "Assessing response to treatment",
+          "Predicting the risk of pulmonary embolism",
+          "Evaluating the severity of lung damage",
+          "Measuring lung capacity"
+        ],
+        "answerIndex": 1,
+        "explanation": "Predicting the risk of pulmonary embolism is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Pulmonary Embolism"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q020",
+        "originalNumber": "20",
+        "category": "Pulmonary Embolism",
+        "organ": "Pulmonary Embolism",
+        "question": "How does the presence of an alternative diagnosis impact the Wells score for pulmonary embolism?",
+        "choices": [
+          "Increases the score",
+          "Decreases the score",
+          "Has no impact on the score",
+          "Converts the score to an automatic diagnosis"
+        ],
+        "answerIndex": 1,
+        "explanation": "Decreases the score is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Pulmonary Embolism"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q021",
+        "originalNumber": "21",
+        "category": "Pulmonary Embolism",
+        "organ": "Pulmonary Embolism",
+        "question": "Regarding Simplified Geneva Score, a score of less than 2 plus a negative d-dimer results of a likelihood of PE of?",
+        "choices": [
+          "6%",
+          "9%",
+          "3%",
+          "2%"
+        ],
+        "answerIndex": 2,
+        "explanation": "3% is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Pulmonary Embolism"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q022",
+        "originalNumber": "22",
+        "category": "Pulmonary Embolism",
+        "organ": "Pulmonary Embolism",
+        "question": "Which factor is NOT included in the Wells score for pulmonary embolism assessment?",
+        "choices": [
+          "Clinical signs and symptoms of deep vein thrombosis (DVT)",
+          "Heart rate greater than 100 beats per minute",
+          "Hemoptysis",
+          "Active cancer or cancer treatment within the last 6 months",
+          "None of the above"
+        ],
+        "answerIndex": 4,
+        "explanation": "None of the above is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Pulmonary Embolism"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q023",
+        "originalNumber": "23",
+        "category": "Pulmonary Embolism",
+        "organ": "Pulmonary Embolism",
+        "question": "In the Wells scoring system, what score range is generally considered \"low probability\" for pulmonary embolism?",
+        "choices": [
+          "0-1",
+          "2-4",
+          "5-7",
+          "8-10"
+        ],
+        "answerIndex": 0,
+        "explanation": "0-1 is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Pulmonary Embolism"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q024",
+        "originalNumber": "24",
+        "category": "Pulmonary Embolism",
+        "organ": "Pulmonary Embolism",
+        "question": "What is the significance of a high Wells score in the assessment of pulmonary embolism?",
+        "choices": [
+          "Indicates a low probability of pulmonary embolism",
+          "Suggests a moderate risk of pulmonary embolism",
+          "Implies a high probability of pulmonary embolism",
+          "Reflects no correlation with pulmonary embolism risk"
+        ],
+        "answerIndex": 2,
+        "explanation": "Implies a high probability of pulmonary embolism is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Pulmonary Embolism"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q025",
+        "originalNumber": "25",
+        "category": "Pulmonary Embolism",
+        "organ": "Pulmonary Embolism",
+        "question": "Patient has right lower limb calf muscle (hot, tender, swollen). Diagnosed as DVT. ER: dyspnea, stitching pain, palpitations. ECG shows a pathognomonic sign. This case is:",
+        "choices": [
+          "Sinus tachycardia",
+          "S1 Q3 T3 pattern",
+          "Sinus bradycardia",
+          "ST segment elevation"
+        ],
+        "answerIndex": 1,
+        "explanation": "S1 Q3 T3 pattern is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Pulmonary Embolism"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q026",
+        "originalNumber": "26",
+        "category": "Pulmonary Embolism",
+        "organ": "Pulmonary Embolism",
+        "question": "What is the most common ECG finding in patients with pulmonary embolism? (Note the difference between this and the specific sign)",
+        "choices": [
+          "Sinus Bradycardia",
+          "Atrial fibrillation",
+          "Sinus Tachycardia",
+          "Premature ventricular contractions (PVCs)"
+        ],
+        "answerIndex": 2,
+        "explanation": "Sinus Tachycardia is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Pulmonary Embolism"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q027",
+        "originalNumber": "27",
+        "category": "Pulmonary Embolism",
+        "organ": "Pulmonary Embolism",
+        "question": "What is considered the historical gold standard imaging modality for the definitive diagnosis of pulmonary embolism?",
+        "choices": [
+          "Ventilation-Perfusion (V/Q) scan",
+          "Pulmonary angiography",
+          "D-Dimer assay",
+          "Echocardiography"
+        ],
+        "answerIndex": 1,
+        "explanation": "Pulmonary angiography is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Pulmonary Embolism"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q028",
+        "originalNumber": "28",
+        "category": "Pulmonary Embolism",
+        "organ": "Pulmonary Embolism",
+        "question": "What is the most common practical imaging test used today to confirm the presence of pulmonary embolism with high sensitivity (modern gold standard)?",
+        "choices": [
+          "Chest Radiography",
+          "CT Pulmonary Angiography (CTPA)",
+          "Magnetic Resonance Imaging (MRI)",
+          "Exercise ECG"
+        ],
+        "answerIndex": 1,
+        "explanation": "CT Pulmonary Angiography (CTPA) is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Pulmonary Embolism"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q029",
+        "originalNumber": "29",
+        "category": "Pulmonary Embolism",
+        "organ": "Pulmonary Embolism",
+        "question": "In the diagnostic pathway for pulmonary embolism, what is the primary clinical utility of a quantitative D-Dimer assay in a patient with a low clinical probability?",
+        "choices": [
+          "To safely rule out pulmonary embolism",
+          "To confirm the exact location of the thrombus",
+          "To assess the severity of right ventricular strain",
+          "To determine the required dose of anticoagulation"
+        ],
+        "answerIndex": 0,
+        "explanation": "To safely rule out pulmonary embolism is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Pulmonary Embolism"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q030",
+        "originalNumber": "30",
+        "category": "Pulmonary Embolism",
+        "organ": "Pulmonary Embolism",
+        "question": "What is the recommended threshold for D-Dimer results to rule out pulmonary embolism in mild and moderate cases?",
+        "choices": [
+          ">500 ng/ml",
+          "<250 ng/ml",
+          "<500 ng/ml",
+          ">1000 ng/ml"
+        ],
+        "answerIndex": 2,
+        "explanation": "<500 ng/ml is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Pulmonary Embolism"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q031",
+        "originalNumber": "31",
+        "category": "Pulmonary Embolism",
+        "organ": "Pulmonary Embolism",
+        "question": "In patients with a severe or massive pulmonary embolism, what percentage of cases can be missed if relying solely on a negative D-Dimer result?",
+        "choices": [
+          "5%",
+          "10%",
+          "15%",
+          "20%"
+        ],
+        "answerIndex": 2,
+        "explanation": "15% is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Pulmonary Embolism"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q032",
+        "originalNumber": "32",
+        "category": "Pulmonary Embolism",
+        "organ": "Pulmonary Embolism",
+        "question": "In severe or massive pulmonary embolism, what action is suggested if the D-Dimer result is negative?",
+        "choices": [
+          "Proceed to CT-PA",
+          "Repeat D-Dimer test",
+          "Rule out other cardiac conditions",
+          "Monitor the patient without further testing"
+        ],
+        "answerIndex": 0,
+        "explanation": "Proceed to CT-PA is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Pulmonary Embolism"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q033",
+        "originalNumber": "33",
+        "category": "Pulmonary Embolism",
+        "organ": "Pulmonary Embolism",
+        "question": "What is the diagnostic yield of ventilation-perfusion scans in detecting pulmonary embolism?",
+        "choices": [
+          "10-20%",
+          "30-50%",
+          "60-70%",
+          "80-90%"
+        ],
+        "answerIndex": 1,
+        "explanation": "30-50% is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Pulmonary Embolism"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q034",
+        "originalNumber": "34",
+        "category": "Pulmonary Embolism",
+        "organ": "Pulmonary Embolism",
+        "question": "What is Hampton's Hump seen on chest radiography, and what does it indicate?",
+        "choices": [
+          "Enlarged heart; heart failure",
+          "Wedge-shaped opacity; pulmonary infarction distal to thrombus",
+          "Flattened diaphragm; respiratory distress",
+          "Bilateral infiltrates; pneumonia"
+        ],
+        "answerIndex": 1,
+        "explanation": "Wedge-shaped opacity; pulmonary infarction distal to thrombus is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Pulmonary Embolism"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q035",
+        "originalNumber": "35",
+        "category": "Pulmonary Embolism",
+        "organ": "Pulmonary Embolism",
+        "question": "What does the Westermark Sign on chest radiography indicate in the context of pulmonary embolism?",
+        "choices": [
+          "Atelectasis",
+          "Pleural effusion",
+          "Pulmonary infarction",
+          "Thrombus proximal to embolism (Focal oligemia)"
+        ],
+        "answerIndex": 3,
+        "explanation": "Thrombus proximal to embolism (Focal oligemia) is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Pulmonary Embolism"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q036",
+        "originalNumber": "36",
+        "category": "Pulmonary Embolism",
+        "organ": "Pulmonary Embolism",
+        "question": "His lungs are normal on auscultation, the JVP is 8 cm, and P2 is loud. There is no edema or leg tenderness. D-dimer assay is positive, ECG reveals sinus tachycardia, and cardiac enzymes are negative. The lung scan is read as high probability for PE. Which of the following tests is most likely to help in guiding emergent therapy?",
+        "choices": [
+          "Echocardiogram",
+          "CT scan",
+          "Venous ultrasound of the legs",
+          "Contrast phlebography"
+        ],
+        "answerIndex": 0,
+        "explanation": "Echocardiogram is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Pulmonary Embolism"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q037",
+        "originalNumber": "37",
+        "category": "Pulmonary Embolism",
+        "organ": "Pulmonary Embolism",
+        "question": "A 25-year-old obese woman complains of shortness of breath after 10 hours of travel by air. In the Emergency Ward her respiratory rate is 25/min. BP 110/70. P= 90. Pulmonary embolism is suspected. Her D-Dimer is 200 mg/ml fibrinogen units. Best line of treatment of PE is:",
+        "choices": [
+          "Streptokinase",
+          "Unfractionated heparin",
+          "Prophylaxis and prevention",
+          "Pain killers and O2 therapy"
+        ],
+        "answerIndex": 2,
+        "explanation": "Prophylaxis and prevention is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Pulmonary Embolism"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q038",
+        "originalNumber": "38",
+        "category": "Pulmonary Embolism",
+        "organ": "Pulmonary Embolism",
+        "question": "A 65-year-old lady with history of mastectomy, received chemotherapy and radiation in the preceding 3 months presented with sudden attacks of right sided chest pain, SOB and tachycardia. PE was suspected, but anticoagulation was contraindicated due to bleeding tendencies. Also, assume a scenario of recurrent PE despite adequate anticoagulation. In these situations, what is the best interventional line to minimize pulmonary showers?",
+        "choices": [
+          "Anti-Heart failure treatments",
+          "IVC filter insertion",
+          "Thrombolytic therapy",
+          "Low dose aspirin"
+        ],
+        "answerIndex": 1,
+        "explanation": "IVC filter insertion is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Pulmonary Embolism"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q039",
+        "originalNumber": "39",
+        "category": "Pulmonary Embolism",
+        "organ": "Pulmonary Embolism",
+        "question": "A 60-year-old male is diagnosed with a massive pulmonary embolism confirmed by CTPA. He is currently hypotensive, diaphoretic, and showing signs of cardiogenic shock. What is the most appropriate first-line definitive treatment?",
+        "choices": [
+          "Oral warfarin therapy",
+          "Systemic thrombolytic therapy (e.g., tPA)",
+          "Insertion of an IVC filter",
+          "High-flow oxygen therapy and painkillers only"
+        ],
+        "answerIndex": 1,
+        "explanation": "Systemic thrombolytic therapy (e.g., tPA) is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Pulmonary Embolism"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q040",
+        "originalNumber": "40",
+        "category": "Pulmonary Embolism",
+        "organ": "Pulmonary Embolism",
+        "question": "How is a massive pulmonary embolism with hemodynamic instability treated initially? (Focusing on stabilization before definitive treatment)",
+        "choices": [
+          "Dopamine only",
+          "Fluid administration and vasopressor therapy",
+          "Inferior vena cava filter placement",
+          "Surgical embolectomy"
+        ],
+        "answerIndex": 1,
+        "explanation": "Fluid administration and vasopressor therapy is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Pulmonary Embolism"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q041",
+        "originalNumber": "41",
+        "category": "Pulmonary Embolism",
+        "organ": "Pulmonary Embolism",
+        "question": "What is the suggested treatment if systemic thrombolysis fails to remove the embolism in pulmonary embolism cases?",
+        "choices": [
+          "Repeat thrombolysis",
+          "Inferior vena cava filter",
+          "Surgical embolectomy",
+          "Vasopressor therapy"
+        ],
+        "answerIndex": 2,
+        "explanation": "Surgical embolectomy is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Pulmonary Embolism"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q042",
+        "originalNumber": "42",
+        "category": "Pulmonary Embolism",
+        "organ": "Pulmonary Embolism",
+        "question": "What is the standard first-line anticoagulant therapy initiated for a hemodynamically stable patient diagnosed with acute pulmonary embolism?",
+        "choices": [
+          "Aspirin and Clopidogrel",
+          "Warfarin monotherapy without bridging",
+          "Low Molecular Weight Heparin (LMWH) or Unfractionated Heparin (UFH)",
+          "Streptokinase"
+        ],
+        "answerIndex": 2,
+        "explanation": "Low Molecular Weight Heparin (LMWH) or Unfractionated Heparin (UFH) is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Pulmonary Embolism"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q043",
+        "originalNumber": "43",
+        "category": "Pulmonary Embolism",
+        "organ": "Pulmonary Embolism",
+        "question": "When can warfarin be initiated in the treatment of pulmonary embolism?",
+        "choices": [
+          "Immediately upon diagnosis (bridged with LMWH)",
+          "After 3 days of LMW heparin therapy",
+          "Only after confirming resolution of symptoms",
+          "Warfarin is not recommended for PE treatment"
+        ],
+        "answerIndex": 0,
+        "explanation": "Immediately upon diagnosis (bridged with LMWH) is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Pulmonary Embolism"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q044",
+        "originalNumber": "44",
+        "category": "Pulmonary Embolism",
+        "organ": "Pulmonary Embolism",
+        "question": "What is the preferred choice over warfarin for anticoagulation in the treatment of pulmonary embolism?",
+        "choices": [
+          "Apixaban",
+          "Rivaroxaban",
+          "Both a and b (NOACs)",
+          "LMW heparin"
+        ],
+        "answerIndex": 2,
+        "explanation": "Both a and b (NOACs) is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Pulmonary Embolism"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q045",
+        "originalNumber": "45",
+        "category": "Pulmonary Embolism",
+        "organ": "Pulmonary Embolism",
+        "question": "Treatment of pregnant female with recurrent DVT / PE:",
+        "choices": [
+          "Oral anticoagulants (Warfarin)",
+          "Aspirin",
+          "Low molecular weight heparin (LMWH)",
+          "All of the above"
+        ],
+        "answerIndex": 2,
+        "explanation": "Low molecular weight heparin (LMWH) is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Pulmonary Embolism"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q046",
+        "originalNumber": "46",
+        "category": "Systemic Hypertension",
+        "organ": "Systemic Hypertension",
+        "question": "Mr. Ahmed, 39 years old, is anxious. His office blood pressure is always high, about 145/95 mmHg, while his home blood pressure is normal around 120/80 mmHg. What is the most probable diagnosis?",
+        "choices": [
+          "Secondary renal hypertension",
+          "White coat hypertension",
+          "Masked hypertension",
+          "Resistant hypertension"
+        ],
+        "answerIndex": 1,
+        "explanation": "White coat hypertension is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Systemic Hypertension · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Systemic Hypertension"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q047",
+        "originalNumber": "47",
+        "category": "Systemic Hypertension",
+        "organ": "Systemic Hypertension",
+        "question": "What is the best and most accurate investigation to evaluate and confirm white coat hypertension?",
+        "choices": [
+          "Home blood pressure monitoring",
+          "Ambulatory blood pressure monitoring (ABPM)",
+          "Repeated office BP after rest",
+          "Echocardiography"
+        ],
+        "answerIndex": 1,
+        "explanation": "White-coat hypertension means blood pressure is elevated in the clinic but normal outside it; ambulatory monitoring confirms the pattern.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Systemic Hypertension · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Systemic Hypertension"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q048",
+        "originalNumber": "48",
+        "category": "Systemic Hypertension",
+        "organ": "Systemic Hypertension",
+        "question": "A 49-year-old male known to be hypertensive presents for his monthly follow-up, and his blood pressure is persistently high. The cardiologist increased his medication dose, but in the next follow-up, the BP was still persistently high. Which of the following can cause resistant/persistent hypertension?",
+        "choices": [
+          "Excess sodium (Na) intake",
+          "Over-the-counter (OTC) drugs and drug interactions",
+          "Inadequate drug doses and poor adherence",
+          "All of the above"
+        ],
+        "answerIndex": 3,
+        "explanation": "All of the above is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Systemic Hypertension · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Systemic Hypertension"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q049",
+        "originalNumber": "49",
+        "category": "Systemic Hypertension",
+        "organ": "Systemic Hypertension",
+        "question": "Mr. Talaat, 60 years old, is hypertensive and has congestive heart failure. Which of the following anti-hypertensive drugs is contraindicated in his case?",
+        "choices": [
+          "Angiotensin-converting enzyme (ACE) inhibitors",
+          "Spironolactone",
+          "Verapamil",
+          "Angiotensin receptor blockers (ARBs)"
+        ],
+        "answerIndex": 2,
+        "explanation": "Verapamil is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Systemic Hypertension · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Systemic Hypertension"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q050",
+        "originalNumber": "50",
+        "category": "Systemic Hypertension",
+        "organ": "Systemic Hypertension",
+        "question": "Mr. Hasan, 64 years old, recently developed mild hypertension. His serum creatinine is 3.6 mg/dL. Which of the following is the anti-hypertensive drug of choice?",
+        "choices": [
+          "ACE inhibitors",
+          "Calcium channel blockers (CCB)",
+          "Spironolactone",
+          "ARB + diuretic"
+        ],
+        "answerIndex": 0,
+        "explanation": "ACE inhibitors is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Systemic Hypertension · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Systemic Hypertension"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q051",
+        "originalNumber": "51",
+        "category": "Systemic Hypertension",
+        "organ": "Systemic Hypertension",
+        "question": "A 32-year-old pregnant female at 29 weeks of gestation was discovered during follow-up to have hypertension (BP 160/105 mmHg). Which drug is considered the first choice?",
+        "choices": [
+          "ACE inhibitors",
+          "Angiotensin receptor blockers (ARBs)",
+          "Alpha-methyldopa",
+          "Combination of diuretic and ACE inhibitors"
+        ],
+        "answerIndex": 2,
+        "explanation": "Alpha-methyldopa is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Systemic Hypertension · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Systemic Hypertension"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q052",
+        "originalNumber": "52",
+        "category": "Systemic Hypertension",
+        "organ": "Systemic Hypertension",
+        "question": "Pregnancy-associated hypertension should NOT be treated with which of the following drug classes due to teratogenicity?",
+        "choices": [
+          "Alpha-methyldopa",
+          "Labetalol",
+          "Hydralazine",
+          "ACE inhibitors / ARBs"
+        ],
+        "answerIndex": 3,
+        "explanation": "ACE inhibitors / ARBs is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Systemic Hypertension · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Systemic Hypertension"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q053",
+        "originalNumber": "53",
+        "category": "Systemic Hypertension",
+        "organ": "Systemic Hypertension",
+        "question": "Hypertension in a patient with diabetes mellitus is best initially treated by which of the following to offer renal protection?",
+        "choices": [
+          "Beta-blocker",
+          "ACE inhibitor",
+          "Thiazide",
+          "Calcium channel blocker"
+        ],
+        "answerIndex": 1,
+        "explanation": "ACE inhibitor is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Systemic Hypertension · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Systemic Hypertension"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q054",
+        "originalNumber": "54",
+        "category": "Systemic Hypertension",
+        "organ": "Systemic Hypertension",
+        "question": "Which anti-hypertensive drug class is strictly contraindicated in a patient with bilateral renal artery stenosis?",
+        "choices": [
+          "Spironolactone",
+          "Propranolol",
+          "Verapamil",
+          "Losartan (ARBs) / ACE inhibitors"
+        ],
+        "answerIndex": 3,
+        "explanation": "Losartan (ARBs) / ACE inhibitors is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Systemic Hypertension · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Systemic Hypertension"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q055",
+        "originalNumber": "55",
+        "category": "Systemic Hypertension",
+        "organ": "Systemic Hypertension",
+        "question": "Which drug should be avoided in hypertensive encephalopathy due to its slow onset and unsuitable pharmacological profile in emergency contexts?",
+        "choices": [
+          "Labetalol",
+          "Sodium nitroprusside",
+          "Alpha-Methyldopa",
+          "Nicardipine"
+        ],
+        "answerIndex": 2,
+        "explanation": "Alpha-Methyldopa is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Systemic Hypertension · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Systemic Hypertension"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q056",
+        "originalNumber": "56",
+        "category": "Systemic Hypertension",
+        "organ": "Systemic Hypertension",
+        "question": "Which anti-hypertensive drug class commonly causes a dry cough and potentially angioedema as side effects?",
+        "choices": [
+          "Beta-blockers",
+          "Calcium channel blockers",
+          "Thiazide diuretics",
+          "ACE inhibitors"
+        ],
+        "answerIndex": 3,
+        "explanation": "ACE inhibitors is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Systemic Hypertension · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Systemic Hypertension"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q057",
+        "originalNumber": "57",
+        "category": "Systemic Hypertension",
+        "organ": "Systemic Hypertension",
+        "question": "Thiazide and loop diuretics may cause which of the following metabolic side effects?",
+        "choices": [
+          "Hyperkalemia and gynecomastia",
+          "Hypokalemia, hyponatremia, hyperuricemia",
+          "Renal impairment and cough",
+          "Bradycardia and bronchospasm"
+        ],
+        "answerIndex": 1,
+        "explanation": "Hypokalemia, hyponatremia, hyperuricemia is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Systemic Hypertension · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Systemic Hypertension"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q058",
+        "originalNumber": "58",
+        "category": "Systemic Hypertension",
+        "organ": "Systemic Hypertension",
+        "question": "Beta-blockers are known to potentially cause which of the following adverse effects?",
+        "choices": [
+          "Flushing and pedal edema",
+          "Dry cough and angioedema",
+          "Bradycardia, lethargy, and impotence",
+          "Sleep disturbance and hyperuricemia"
+        ],
+        "answerIndex": 2,
+        "explanation": "Bradycardia, lethargy, and impotence is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Systemic Hypertension · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Systemic Hypertension"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q059",
+        "originalNumber": "59",
+        "category": "Systemic Hypertension",
+        "organ": "Systemic Hypertension",
+        "question": "Calcium channel blockers (such as amlodipine) may commonly cause which of the following side effects?",
+        "choices": [
+          "Flushing, headache, and pedal edema",
+          "Bradycardia and bronchospasm",
+          "Renal impairment and cough",
+          "Hyperkalemia and gynecomastia"
+        ],
+        "answerIndex": 0,
+        "explanation": "Flushing, headache, and pedal edema is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Systemic Hypertension · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Systemic Hypertension"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q060",
+        "originalNumber": "60",
+        "category": "Systemic Hypertension",
+        "organ": "Systemic Hypertension",
+        "question": "Which of the following is considered a curable cause of secondary hypertension?",
+        "choices": [
+          "Renal artery stenosis",
+          "Endocrine hypertension (e.g., Pheochromocytoma)",
+          "Aortic coarctation",
+          "All of the above"
+        ],
+        "answerIndex": 3,
+        "explanation": "All of the above is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Systemic Hypertension · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Systemic Hypertension"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q061",
+        "originalNumber": "61",
+        "category": "Systemic Hypertension",
+        "organ": "Systemic Hypertension",
+        "question": "Which of the following is NOT considered a cause of secondary hypertension?",
+        "choices": [
+          "Endocrinal causes",
+          "Renal causes",
+          "Pregnancy",
+          "Rheumatic fever"
+        ],
+        "answerIndex": 3,
+        "explanation": "Rheumatic fever is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Systemic Hypertension · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Systemic Hypertension"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q062",
+        "originalNumber": "62",
+        "category": "Systemic Hypertension",
+        "organ": "Systemic Hypertension",
+        "question": "Which of the following conditions classically causes paroxysmal (episodic) hypertension?",
+        "choices": [
+          "Pheochromocytoma",
+          "Primary hyperaldosteronism",
+          "Cushing syndrome",
+          "Renal artery stenosis"
+        ],
+        "answerIndex": 0,
+        "explanation": "Pheochromocytoma is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Systemic Hypertension · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Systemic Hypertension"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q063",
+        "originalNumber": "63",
+        "category": "Systemic Hypertension",
+        "organ": "Systemic Hypertension",
+        "question": "All the following are considered causes of systemic hypertension EXCEPT:",
+        "choices": [
+          "Primary hyperaldosteronism",
+          "Estrogen-containing oral contraceptives",
+          "Chronic kidney disease",
+          "Addison disease (or Patent ductus arteriosus)"
+        ],
+        "answerIndex": 3,
+        "explanation": "Addison disease (or Patent ductus arteriosus) is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Systemic Hypertension · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Systemic Hypertension"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q064",
+        "originalNumber": "64",
+        "category": "Systemic Hypertension",
+        "organ": "Systemic Hypertension",
+        "question": "Due to its frequently asymptomatic nature until severe complications arise, hypertension is commonly referred to in clinical practice as the:",
+        "choices": [
+          "White coat disease",
+          "Blue bloater",
+          "Water-hammer disease",
+          "Silent killer"
+        ],
+        "answerIndex": 3,
+        "explanation": "Silent killer is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Systemic Hypertension · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Systemic Hypertension"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q065",
+        "originalNumber": "65",
+        "category": "Systemic Hypertension",
+        "organ": "Systemic Hypertension",
+        "question": "Which of the following is NOT considered a complication of long-standing uncontrolled hypertension?",
+        "choices": [
+          "Cardiovascular accidents (hemorrhage or ischemic infarcts)",
+          "Renal failure",
+          "Ischemic heart disease",
+          "Mitral valve stenosis"
+        ],
+        "answerIndex": 3,
+        "explanation": "Mitral valve stenosis is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Systemic Hypertension · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Systemic Hypertension"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q066",
+        "originalNumber": "66",
+        "category": "Systemic Hypertension",
+        "organ": "Systemic Hypertension",
+        "question": "Which of the following statements is NOT correct regarding the standard management and assessment of hypertension?",
+        "choices": [
+          "Confirming the diagnosis of hypertension is essential",
+          "Assessing for possible secondary causes is part of the workup",
+          "Assessing for complications via fundoscopy is needed",
+          "Echocardiography is never recommended"
+        ],
+        "answerIndex": 3,
+        "explanation": "Echocardiography is never recommended is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Systemic Hypertension · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Systemic Hypertension"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q067",
+        "originalNumber": "67",
+        "category": "Systemic Hypertension",
+        "organ": "Systemic Hypertension",
+        "question": "Which organ disease is a leading and common cause of mortality in patients with uncontrolled hypertension?",
+        "choices": [
+          "Brain",
+          "Kidney",
+          "Heart",
+          "Retina"
+        ],
+        "answerIndex": 2,
+        "explanation": "Heart is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Systemic Hypertension · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Systemic Hypertension"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q068",
+        "originalNumber": "68",
+        "category": "Systemic Hypertension",
+        "organ": "Systemic Hypertension",
+        "question": "Which lifestyle advice is NOT advisable for a patient diagnosed with hypertension and ischemic heart disease?",
+        "choices": [
+          "Stop smoking cigarettes",
+          "Lose weight if overweight",
+          "Engage in 30-60 minutes of exercise every day",
+          "Continue smoking shisha"
+        ],
+        "answerIndex": 3,
+        "explanation": "Continue smoking shisha is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Systemic Hypertension · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Systemic Hypertension"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q069",
+        "originalNumber": "69",
+        "category": "Systemic Hypertension",
+        "organ": "Systemic Hypertension",
+        "question": "Systemic hypertension incidence is highly associated with which of the following dietary habits?",
+        "choices": [
+          "Low sodium (Na+) intake",
+          "High sodium (Na+) intake",
+          "Low potassium (K+) intake",
+          "All of the above"
+        ],
+        "answerIndex": 1,
+        "explanation": "High sodium (Na+) intake is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Systemic Hypertension · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Systemic Hypertension"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q070",
+        "originalNumber": "70",
+        "category": "Systemic Hypertension",
+        "organ": "Systemic Hypertension",
+        "question": "Self-measurement of blood pressure and ambulatory monitoring provide information about:",
+        "choices": [
+          "Response to antihypertensive therapy",
+          "Adherence to therapy",
+          "Evaluating white coat hypertension",
+          "All of the above"
+        ],
+        "answerIndex": 3,
+        "explanation": "All of the above is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Systemic Hypertension · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Systemic Hypertension"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q071",
+        "originalNumber": "71",
+        "category": "Systemic Hypertension",
+        "organ": "Systemic Hypertension",
+        "question": "HTN occurs with:",
+        "choices": [
+          "Low Na+ intake",
+          "High Na intake",
+          "Low K intake",
+          "All of the above"
+        ],
+        "answerIndex": 1,
+        "explanation": "High Na intake is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Systemic Hypertension · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Systemic Hypertension"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q072",
+        "originalNumber": "72",
+        "category": "Rheumatic Fever",
+        "organ": "Rheumatic Fever",
+        "question": "Rheumatic fever is most commonly preceded by which of the following infections?",
+        "choices": [
+          "Viral influenza infection",
+          "Upper respiratory tract infection with Group A β-hemolytic streptococci",
+          "Bacterial pneumonia",
+          "Fungal pharyngitis"
+        ],
+        "answerIndex": 1,
+        "explanation": "Upper respiratory tract infection with Group A β-hemolytic streptococci is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Rheumatic Fever"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q073",
+        "originalNumber": "73",
+        "category": "Rheumatic Fever",
+        "organ": "Rheumatic Fever",
+        "question": "In individuals with rheumatic fever, the presence of recurrent and severe recent infections is primarily associated with:",
+        "choices": [
+          "Viral infections",
+          "Fungal infections",
+          "Bacterial infections, particularly Streptococcus pyogenes",
+          "Parasitic infections"
+        ],
+        "answerIndex": 2,
+        "explanation": "Bacterial infections, particularly Streptococcus pyogenes is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Rheumatic Fever"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q074",
+        "originalNumber": "74",
+        "category": "Rheumatic Fever",
+        "organ": "Rheumatic Fever",
+        "question": "Rheumatic fever is most prevalent in which of the following age groups?",
+        "choices": [
+          "Infants (0-1 year)",
+          "Toddlers (1-3 years)",
+          "School-age children (5-15 years)",
+          "Elderly (> 65 years)"
+        ],
+        "answerIndex": 2,
+        "explanation": "School-age children (5-15 years) is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Rheumatic Fever"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q075",
+        "originalNumber": "75",
+        "category": "Rheumatic Fever",
+        "organ": "Rheumatic Fever",
+        "question": "Which of the following is considered a contributing socio-economic factor for the development of rheumatic fever?",
+        "choices": [
+          "High social class",
+          "Good hygiene practices",
+          "Living in developed countries",
+          "Overcrowding"
+        ],
+        "answerIndex": 3,
+        "explanation": "Overcrowding is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Rheumatic Fever"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q076",
+        "originalNumber": "76",
+        "category": "Rheumatic Fever",
+        "organ": "Rheumatic Fever",
+        "question": "A 13-year-old child presents with migratory arthritis. On examination, there is a truncal rash that appears and disappears within hours, characterized by pink, irregular red edges, serpiginous borders, and a clear center. What is this truncal rash called?",
+        "choices": [
+          "Erythema nodosum",
+          "Subcutaneous nodules",
+          "Erythema marginatum",
+          "Urticarial rash"
+        ],
+        "answerIndex": 2,
+        "explanation": "Erythema marginatum is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Rheumatic Fever"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q077",
+        "originalNumber": "77",
+        "category": "Rheumatic Fever",
+        "organ": "Rheumatic Fever",
+        "question": "Based on the previous clinical presentation of migratory joint pain in a young patient following a suspected infection, what is this specific type of arthritis clinically called?",
+        "choices": [
+          "Rheumatoid arthritis",
+          "Rheumatic arthritis",
+          "Traumatic arthritis",
+          "Ankylosing spondylitis"
+        ],
+        "answerIndex": 1,
+        "explanation": "Rheumatic arthritis is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Rheumatic Fever"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q078",
+        "originalNumber": "78",
+        "category": "Rheumatic Fever",
+        "organ": "Rheumatic Fever",
+        "question": "Regarding the polyarthritis associated with acute rheumatic fever, all of the following statements are true EXCEPT:",
+        "choices": [
+          "It primarily affects small joints of the hands and feet.",
+          "It typically leaves no permanent joint dysfunction.",
+          "It is migratory in nature, affecting large joints.",
+          "The joint pain is usually accompanied by other symptoms of inflammation."
+        ],
+        "answerIndex": 0,
+        "explanation": "It primarily affects small joints of the hands and feet. is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Rheumatic Fever"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q079",
+        "originalNumber": "79",
+        "category": "Rheumatic Fever",
+        "organ": "Rheumatic Fever",
+        "question": "What are the minimum criteria required for a diagnosis of acute rheumatic fever?",
+        "choices": [
+          "Two major criteria only",
+          "One major criterion and one minor criterion",
+          "One major criterion and two minor criteria",
+          "Either Two major criteria OR One major criterion and two minor criteria"
+        ],
+        "answerIndex": 3,
+        "explanation": "Either Two major criteria OR One major criterion and two minor criteria is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Rheumatic Fever"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q080",
+        "originalNumber": "80",
+        "category": "Rheumatic Fever",
+        "organ": "Rheumatic Fever",
+        "question": "A 14-year-old female patient presents with a history of low-grade fever, elevated ESR, elevated ASO titer, and joint pain, but without objective evidence of arthritis. How can the diagnosis of acute rheumatic fever be clinically confirmed in this case?",
+        "choices": [
+          "Presence of two major Duke’s criteria",
+          "Presence of one major and two minor Jones criteria",
+          "Presence of three minor Jones criteria",
+          "Presence of one major and three minor Duke criteria"
+        ],
+        "answerIndex": 1,
+        "explanation": "Presence of one major and two minor Jones criteria is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Rheumatic Fever"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q081",
+        "originalNumber": "81",
+        "category": "Rheumatic Fever",
+        "organ": "Rheumatic Fever",
+        "question": "Which of the following manifestations of acute rheumatic fever is most commonly observed?",
+        "choices": [
+          "Subcutaneous nodules",
+          "Erythema marginatum",
+          "Polyarthritis",
+          "Chorea"
+        ],
+        "answerIndex": 2,
+        "explanation": "Polyarthritis is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Rheumatic Fever"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q082",
+        "originalNumber": "82",
+        "category": "Rheumatic Fever",
+        "organ": "Rheumatic Fever",
+        "question": "The minor Jones criteria for the diagnosis of acute rheumatic fever include all of the following EXCEPT:",
+        "choices": [
+          "Fever",
+          "Arthralgia (mild pain without objective findings of arthritis)",
+          "Elevated acute-phase reactants (ESR, CRP)",
+          "Evidence of recent Streptococcal infection"
+        ],
+        "answerIndex": 3,
+        "explanation": "Evidence of recent Streptococcal infection is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Rheumatic Fever"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q083",
+        "originalNumber": "83",
+        "category": "Rheumatic Fever",
+        "organ": "Rheumatic Fever",
+        "question": "Which of the following clinical findings is considered a major Jones criterion for the diagnosis of acute rheumatic fever?",
+        "choices": [
+          "Fever",
+          "Prolonged PR interval on ECG",
+          "Subcutaneous nodules",
+          "Elevated C-reactive protein"
+        ],
+        "answerIndex": 2,
+        "explanation": "Subcutaneous nodules is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Rheumatic Fever"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q084",
+        "originalNumber": "84",
+        "category": "Rheumatic Fever",
+        "organ": "Rheumatic Fever",
+        "question": "Which of the following is considered a minor criterion for the diagnosis of acute rheumatic fever?",
+        "choices": [
+          "Elevated acute phase reactants",
+          "Previous rheumatic fever",
+          "Erythema marginatum",
+          "Chorea"
+        ],
+        "answerIndex": 0,
+        "explanation": "Elevated acute phase reactants is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Rheumatic Fever"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q085",
+        "originalNumber": "85",
+        "category": "Rheumatic Fever",
+        "organ": "Rheumatic Fever",
+        "question": "Subcutaneous nodules in acute rheumatic fever typically occur:",
+        "choices": [
+          "At the same time as the initial infection",
+          "Immediately after the infection resolves",
+          "Months after the initial infection",
+          "Years after the initial infection"
+        ],
+        "answerIndex": 2,
+        "explanation": "Months after the initial infection is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Rheumatic Fever"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q086",
+        "originalNumber": "86",
+        "category": "Rheumatic Fever",
+        "organ": "Rheumatic Fever",
+        "question": "Rheumatic chorea, a major neurological manifestation of rheumatic fever, is more commonly observed in:",
+        "choices": [
+          "Adult males",
+          "Adult females",
+          "Young females",
+          "Young males"
+        ],
+        "answerIndex": 2,
+        "explanation": "Young females is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Rheumatic Fever"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q087",
+        "originalNumber": "87",
+        "category": "Rheumatic Fever",
+        "organ": "Rheumatic Fever",
+        "question": "A young adult patient with a history of rheumatic fever presents with an irregular rapid pulse, accelerating shortness of breath, and hemoptysis. Echocardiography reveals moderate mitral valve pathology, and the ECG shows an absent P wave. What is the most probable diagnosis?",
+        "choices": [
+          "Rheumatic aortic stenosis",
+          "Rheumatic mitral regurgitation",
+          "Rheumatic mitral stenosis complicated with atrial fibrillation",
+          "Combined mitral stenosis and regurgitation"
+        ],
+        "answerIndex": 2,
+        "explanation": "Rheumatic mitral stenosis complicated with atrial fibrillation is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Rheumatic Fever"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q088",
+        "originalNumber": "88",
+        "category": "Rheumatic Fever",
+        "organ": "Rheumatic Fever",
+        "question": "A 33-year-old male patient with a past history of rheumatic fever presents with shortness of breath. On examination, blood pressure is 140/55 mmHg, a diastolic blowing murmur is heard at the left sternal border, and a \"pistol shot\" pulse is felt on the femoral artery. What is your provisional diagnosis?",
+        "choices": [
+          "Rheumatic Mitral Stenosis",
+          "Rheumatic Aortic Regurgitation",
+          "Rheumatic Mitral Regurgitation",
+          "Rheumatic Aortic Stenosis"
+        ],
+        "answerIndex": 1,
+        "explanation": "Rheumatic Aortic Regurgitation is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Rheumatic Fever"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q089",
+        "originalNumber": "89",
+        "category": "Rheumatic Fever",
+        "organ": "Rheumatic Fever",
+        "question": "The most common cause of valvular heart disease in young patients in Egypt is:",
+        "choices": [
+          "Congenital anomalies",
+          "Degenerative calcification",
+          "Rheumatic fever",
+          "Infective endocarditis"
+        ],
+        "answerIndex": 2,
+        "explanation": "Rheumatic fever is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Rheumatic Fever"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q090",
+        "originalNumber": "90",
+        "category": "Rheumatic Fever",
+        "organ": "Rheumatic Fever",
+        "question": "What is the recommended alternative for the primary prevention of rheumatic fever in a patient with a documented penicillin allergy?",
+        "choices": [
+          "Oral erythromycin or newer macrolides",
+          "Intravenous vancomycin",
+          "Aminoglycosides",
+          "Tetracyclines"
+        ],
+        "answerIndex": 0,
+        "explanation": "Oral erythromycin or newer macrolides is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Rheumatic Fever"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q091",
+        "originalNumber": "91",
+        "category": "Rheumatic Fever",
+        "organ": "Rheumatic Fever",
+        "question": "Why does Rheumatic Fever require continuous prophylactic antibiotics in secondary prevention?",
+        "choices": [
+          "Due to the asymptomatic nature of Streptococcal infections",
+          "Due to the increased susceptibility to and severity of recurrences",
+          "To prevent the development of infective endocarditis only",
+          "To treat ongoing chronic active joint inflammation"
+        ],
+        "answerIndex": 1,
+        "explanation": "Due to the increased susceptibility to and severity of recurrences is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Rheumatic Fever"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q092",
+        "originalNumber": "92",
+        "category": "Rheumatic Fever",
+        "organ": "Rheumatic Fever",
+        "question": "What is the reason for using penicillin as the drug of choice for treating Streptococcal pharyngitis?",
+        "choices": [
+          "Broad spectrum of activity",
+          "Short standing efficacy",
+          "High cost",
+          "Narrow spectrum of activity"
+        ],
+        "answerIndex": 3,
+        "explanation": "Narrow spectrum of activity is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Rheumatic Fever"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q093",
+        "originalNumber": "93",
+        "category": "Rheumatic Fever",
+        "organ": "Rheumatic Fever",
+        "question": "What is the recommended dose of benzathine penicillin for treating Streptococcal pharyngitis in children (< 27 Kg)?",
+        "choices": [
+          "0.6 million units IM 1 time",
+          "1.2 million units IM 1 time",
+          "250 mg (2-3 times/day) x10 days",
+          "500 mg TID x10 days"
+        ],
+        "answerIndex": 0,
+        "explanation": "0.6 million units IM 1 time is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Rheumatic Fever"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q094",
+        "originalNumber": "94",
+        "category": "Rheumatic Fever",
+        "organ": "Rheumatic Fever",
+        "question": "Which form of benzathine penicillin is used for the prophylaxis of rheumatic fever?",
+        "choices": [
+          "Intramuscular (IM) benzathine penicillin",
+          "Intravenous (IV) benzathine penicillin",
+          "Oral benzathine penicillin",
+          "Subcutaneous benzathine penicillin"
+        ],
+        "answerIndex": 0,
+        "explanation": "Intramuscular (IM) benzathine penicillin is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Rheumatic Fever"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q095",
+        "originalNumber": "95",
+        "category": "Rheumatic Fever",
+        "organ": "Rheumatic Fever",
+        "question": "What is the first-line and best medical medication for the acute migratory polyarthritis seen in rheumatic fever?",
+        "choices": [
+          "Corticosteroids",
+          "Acetylsalicylic acid (Aspirin)",
+          "Ibuprofen",
+          "Paracetamol"
+        ],
+        "answerIndex": 1,
+        "explanation": "Acetylsalicylic acid (Aspirin) is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Rheumatic Fever"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q096",
+        "originalNumber": "96",
+        "category": "Rheumatic Fever",
+        "organ": "Rheumatic Fever",
+        "question": "What is the recommended dose of aspirin for pediatrics with arthritis?",
+        "choices": [
+          "90–130 mg/kg/day in equally divided doses every 4–6 hrs, up to 5.5 gm/day",
+          "60–70 mg/kg/day in equally divided doses every 4–6 hrs, up to 5.5 gm/day",
+          "100 mg/kg/day in equally divided doses every 4–6 hrs, up to 5.5 gm/day",
+          "90–130 mg/kg/day in equally divided doses every 8–12 hrs, up to 5.5 gm/day"
+        ],
+        "answerIndex": 0,
+        "explanation": "90–130 mg/kg/day in equally divided doses every 4–6 hrs, up to 5.5 gm/day is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Rheumatic Fever"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q097",
+        "originalNumber": "97",
+        "category": "Rheumatic Fever",
+        "organ": "Rheumatic Fever",
+        "question": "What is the recommended treatment for arthralgia or mild arthritis without carditis?",
+        "choices": [
+          "Analgesics only",
+          "Aspirin 100 mg/kg/d with meals for 3 weeks",
+          "Prednisone 40–60 mg/d",
+          "Intravenous Immunoglobulins"
+        ],
+        "answerIndex": 1,
+        "explanation": "Aspirin 100 mg/kg/d with meals for 3 weeks is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Rheumatic Fever"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q098",
+        "originalNumber": "98",
+        "category": "Rheumatic Fever",
+        "organ": "Rheumatic Fever",
+        "question": "What is the preferred pharmacological treatment for severe cases of rheumatic carditis?",
+        "choices": [
+          "Aspirin 100 mg/kg/day",
+          "Prednisone (Steroids) 40–60 mg/day",
+          "Intravenous Immunoglobulins (IVIG)",
+          "Non-steroidal anti-inflammatory drugs (NSAIDs)"
+        ],
+        "answerIndex": 1,
+        "explanation": "Prednisone (Steroids) 40–60 mg/day is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Rheumatic Fever"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q099",
+        "originalNumber": "99",
+        "category": "Aortic Stenosis",
+        "organ": "Aortic Stenosis",
+        "question": "A female patient aged 83 years presented with syncope. She was first diagnosed as a case of aortic stenosis three years ago. What is the most common cause of Aortic Stenosis in this patient?",
+        "choices": [
+          "Rheumatic valve disease",
+          "Congenital bicuspid valve",
+          "Degenerative calcific disease",
+          "Infective endocarditis"
+        ],
+        "answerIndex": 2,
+        "explanation": "Degenerative calcific disease is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Aortic Stenosis · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Aortic Stenosis"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q100",
+        "originalNumber": "100",
+        "category": "Aortic Stenosis",
+        "organ": "Aortic Stenosis",
+        "question": "Aging is considered a major risk factor for the development of which of the following valvular diseases?",
+        "choices": [
+          "Mitral Stenosis",
+          "Aortic Stenosis",
+          "Aortic Regurgitation",
+          "Tricuspid Regurgitation"
+        ],
+        "answerIndex": 1,
+        "explanation": "Aortic Stenosis is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Aortic Stenosis · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Aortic Stenosis"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q101",
+        "originalNumber": "101",
+        "category": "Aortic Stenosis",
+        "organ": "Aortic Stenosis",
+        "question": "Congenital bicuspid aortic valve stenosis typically presents and shows symptoms in patients at what age group?",
+        "choices": [
+          "Under 70 years (usually 50-60 years)",
+          "Above 70 years",
+          "At birth",
+          "Above 80 years"
+        ],
+        "answerIndex": 0,
+        "explanation": "Under 70 years (usually 50-60 years) is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Aortic Stenosis · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Aortic Stenosis"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q102",
+        "originalNumber": "102",
+        "category": "Aortic Stenosis",
+        "organ": "Aortic Stenosis",
+        "question": "According to the pathophysiology of Aortic Stenosis, the obstruction to left ventricular emptying primarily causes an increase in:",
+        "choices": [
+          "Left ventricular preload",
+          "Pulmonary artery pressure",
+          "Left ventricular afterload",
+          "Both afterload and preload"
+        ],
+        "answerIndex": 2,
+        "explanation": "Left ventricular afterload is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Aortic Stenosis · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Aortic Stenosis"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q103",
+        "originalNumber": "103",
+        "category": "Aortic Stenosis",
+        "organ": "Aortic Stenosis",
+        "question": "Which of the following symptom combinations represents the classic clinical triad of severe Aortic Stenosis?",
+        "choices": [
+          "Palpitations, hemoptysis, and malar flush",
+          "Angina, syncope, and dyspnea",
+          "Fever, splenomegaly, and embolic phenomena",
+          "Wide pulse pressure, bounding pulse, and head nodding"
+        ],
+        "answerIndex": 1,
+        "explanation": "Angina, syncope, and dyspnea is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Aortic Stenosis · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Aortic Stenosis"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q104",
+        "originalNumber": "104",
+        "category": "Aortic Stenosis",
+        "organ": "Aortic Stenosis",
+        "question": "The classic symptoms of Aortic Stenosis include all of the following EXCEPT:",
+        "choices": [
+          "Syncope",
+          "Exertional dyspnea",
+          "Angina",
+          "Palpitations"
+        ],
+        "answerIndex": 3,
+        "explanation": "Palpitations is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Aortic Stenosis · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Aortic Stenosis"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q105",
+        "originalNumber": "105",
+        "category": "Aortic Stenosis",
+        "organ": "Aortic Stenosis",
+        "question": "Symptoms of Aortic Stenosis typically begin to occur when the valve area is severely reduced to what fraction of the normal area?",
+        "choices": [
+          "1/2 the normal area",
+          "1/4 the normal area",
+          "1/3 the normal area",
+          "3/4 the normal area"
+        ],
+        "answerIndex": 1,
+        "explanation": "1/4 the normal area is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Aortic Stenosis · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Aortic Stenosis"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q106",
+        "originalNumber": "106",
+        "category": "Aortic Stenosis",
+        "organ": "Aortic Stenosis",
+        "question": "Which of the following clinical events has the most significant poor prognostic value in a patient with severe Aortic Stenosis?",
+        "choices": [
+          "Advancing age",
+          "Increased loudness of the murmur",
+          "Onset of clinical symptoms (angina, syncope, or heart failure)",
+          "Presence of a basal thrill"
+        ],
+        "answerIndex": 2,
+        "explanation": "Onset of clinical symptoms (angina, syncope, or heart failure) is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Aortic Stenosis · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Aortic Stenosis"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q107",
+        "originalNumber": "107",
+        "category": "Aortic Stenosis",
+        "organ": "Aortic Stenosis",
+        "question": "The physical sign \"Pulsus Parvus et Tardus\" classically seen in Aortic Stenosis refers to:",
+        "choices": [
+          "Increase in pulse amplitude",
+          "Decrease in pulse amplitude with a delayed peak",
+          "Constant pulse amplitude",
+          "Collapsing water-hammer pulse"
+        ],
+        "answerIndex": 1,
+        "explanation": "This pulse is low in amplitude and delayed because severe aortic stenosis obstructs left-ventricular outflow.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Aortic Stenosis · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Aortic Stenosis"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q108",
+        "originalNumber": "108",
+        "category": "Aortic Stenosis",
+        "organ": "Aortic Stenosis",
+        "question": "What is the characteristic auscultatory finding (heart sound/murmur) in Aortic Stenosis?",
+        "choices": [
+          "Diastolic rumbling murmur",
+          "Holosystolic murmur at the apex",
+          "Systolic ejection murmur",
+          "Early diastolic decrescendo murmur"
+        ],
+        "answerIndex": 2,
+        "explanation": "Systolic ejection murmur is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Aortic Stenosis · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Aortic Stenosis"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q109",
+        "originalNumber": "109",
+        "category": "Aortic Stenosis",
+        "organ": "Aortic Stenosis",
+        "question": "The A2 component of the second heart sound in severe Aortic Stenosis is characteristically:",
+        "choices": [
+          "Diminished or absent",
+          "Normal in character",
+          "Ringing in character",
+          "Accentuated"
+        ],
+        "answerIndex": 0,
+        "explanation": "Diminished or absent is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Aortic Stenosis · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Aortic Stenosis"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q110",
+        "originalNumber": "110",
+        "category": "Aortic Stenosis",
+        "organ": "Aortic Stenosis",
+        "question": "On physical examination, a patient with severe Aortic Stenosis will classically have:",
+        "choices": [
+          "Apical diastolic thrill",
+          "Hyperdynamic apex",
+          "Basal systolic thrill",
+          "Parasternal heave"
+        ],
+        "answerIndex": 2,
+        "explanation": "Basal systolic thrill is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Aortic Stenosis · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Aortic Stenosis"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q111",
+        "originalNumber": "111",
+        "category": "Aortic Stenosis",
+        "organ": "Aortic Stenosis",
+        "question": "In patients with Aortic Stenosis, echocardiography (ECHO) is routinely used to measure:",
+        "choices": [
+          "Ejection Fraction (EF) only",
+          "Left Ventricular Hypertrophy (LVH) only",
+          "Both EF and LVH",
+          "Right atrial dilatation"
+        ],
+        "answerIndex": 2,
+        "explanation": "Both EF and LVH is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Aortic Stenosis · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Aortic Stenosis"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q112",
+        "originalNumber": "112",
+        "category": "Aortic Stenosis",
+        "organ": "Aortic Stenosis",
+        "question": "According to Doppler-derived gradient and Aortic Valve Area (AVA), moderate Aortic Stenosis is defined by an AVA of:",
+        "choices": [
+          "> 1.5 cm²",
+          "≤ 1.0 cm²",
+          "1.0 - 1.5 cm²",
+          "< 0.6 cm²"
+        ],
+        "answerIndex": 2,
+        "explanation": "1.0 - 1.5 cm² is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Aortic Stenosis · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Aortic Stenosis"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q113",
+        "originalNumber": "113",
+        "category": "Aortic Stenosis",
+        "organ": "Aortic Stenosis",
+        "question": "During preoperative assessment for an eye surgery, Mr. X has no symptoms of heart disease but routine echocardiography revealed an Aortic valve area of 1.1 cm². This case is considered:",
+        "choices": [
+          "Normal",
+          "Mild AS",
+          "Moderate AS",
+          "Severe AS"
+        ],
+        "answerIndex": 2,
+        "explanation": "Moderate AS is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Aortic Stenosis · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Aortic Stenosis"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q114",
+        "originalNumber": "114",
+        "category": "Aortic Stenosis",
+        "organ": "Aortic Stenosis",
+        "question": "A 63-year-old male presented with angina. Coronary angiography revealed normal coronary arteries. His echocardiography showed an Aortic Valve Area (AVA) of 0.8 cm². What is your decision regarding his management?",
+        "choices": [
+          "Medical treatment only",
+          "Follow up after 6 months",
+          "Aortic valve replacement is currently indicated",
+          "Lifestyle modification and palliative treatment"
+        ],
+        "answerIndex": 2,
+        "explanation": "Aortic valve replacement is currently indicated is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Aortic Stenosis · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Aortic Stenosis"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q115",
+        "originalNumber": "115",
+        "category": "Aortic Stenosis",
+        "organ": "Aortic Stenosis",
+        "question": "Which of the following is considered the definitive treatment line for a patient presenting with symptomatic severe aortic stenosis?",
+        "choices": [
+          "Valve replacement / Transcatheter Aortic Valve Implantation (TAVI)",
+          "Long-term beta-blocker therapy",
+          "Medical treatment with loop diuretics only",
+          "Watchful waiting and regular follow-up"
+        ],
+        "answerIndex": 0,
+        "explanation": "Valve replacement / Transcatheter Aortic Valve Implantation (TAVI) is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Aortic Stenosis · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Aortic Stenosis"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q116",
+        "originalNumber": "116",
+        "category": "Aortic Stenosis",
+        "organ": "Aortic Stenosis",
+        "question": "What is the role of medical treatment in patients with severe symptomatic Aortic Stenosis?",
+        "choices": [
+          "It is superior to surgical intervention",
+          "It has a limited role (Definitive treatment is surgery/TAVI)",
+          "Vasodilators are strongly indicated",
+          "It is the treatment of choice in all age groups"
+        ],
+        "answerIndex": 1,
+        "explanation": "It has a limited role (Definitive treatment is surgery/TAVI) is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Aortic Stenosis · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Aortic Stenosis"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q117",
+        "originalNumber": "117",
+        "category": "Aortic Stenosis",
+        "organ": "Aortic Stenosis",
+        "question": "A 75-year-old man is brought to the hospital because of a syncopal episode. On examination, his blood pressure is 140/80 mmHg. His second heart sound is diminished and there is a systolic ejection murmur that radiates to the carotids. With the Valsalva maneuver, the murmur decreases in length and intensity. What is the most likely diagnosis?",
+        "choices": [
+          "Aortic stenosis",
+          "Hypertrophic Obstructive Cardiomyopathy (HOCM)",
+          "Mitral regurgitation",
+          "Tricuspid regurgitation"
+        ],
+        "answerIndex": 0,
+        "explanation": "Aortic stenosis is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Aortic Stenosis · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Aortic Stenosis"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q118",
+        "originalNumber": "118",
+        "category": "Aortic Regurgitation",
+        "organ": "Aortic Regurgitation",
+        "question": "Pathophysiologically, severe Aortic Regurgitation leads to an increase in:",
+        "choices": [
+          "Preload only",
+          "Afterload only",
+          "Both afterload and preload",
+          "Pulmonary vascular resistance"
+        ],
+        "answerIndex": 2,
+        "explanation": "Both afterload and preload is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Aortic Regurgitation · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Aortic Regurgitation"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q119",
+        "originalNumber": "119",
+        "category": "Aortic Regurgitation",
+        "organ": "Aortic Regurgitation",
+        "question": "The left ventricle initially compensates for the volume overload in chronic Aortic Regurgitation by:",
+        "choices": [
+          "Concentric pressure hypertrophy",
+          "Left ventricular dilatation (eccentric hypertrophy)",
+          "Atrial fibrillation",
+          "Right ventricular failure"
+        ],
+        "answerIndex": 1,
+        "explanation": "Left ventricular dilatation (eccentric hypertrophy) is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Aortic Regurgitation · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Aortic Regurgitation"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q120",
+        "originalNumber": "120",
+        "category": "Aortic Regurgitation",
+        "organ": "Aortic Regurgitation",
+        "question": "The natural history of chronic asymptomatic Aortic Regurgitation is typically:",
+        "choices": [
+          "Symptomatic in the 2nd decade",
+          "Asymptomatic until the 6th decade",
+          "Asymptomatic until the 4th or 5th decade",
+          "Rapidly progressive within months"
+        ],
+        "answerIndex": 2,
+        "explanation": "Asymptomatic until the 4th or 5th decade is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Aortic Regurgitation · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Aortic Regurgitation"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q121",
+        "originalNumber": "121",
+        "category": "Aortic Regurgitation",
+        "organ": "Aortic Regurgitation",
+        "question": "What type of dyspnea can occur in advanced Aortic Regurgitation?",
+        "choices": [
+          "Exertional dyspnea",
+          "Paroxysmal nocturnal dyspnea",
+          "Orthopnea",
+          "All of the above"
+        ],
+        "answerIndex": 3,
+        "explanation": "All of the above is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Aortic Regurgitation · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Aortic Regurgitation"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q122",
+        "originalNumber": "122",
+        "category": "Aortic Regurgitation",
+        "organ": "Aortic Regurgitation",
+        "question": "A 33-year-old male patient with a past history of rheumatic fever presented with shortness of breath. On examination: Blood pressure was 140/55 mmHg, a diastolic blowing murmur was heard at the left sternal border, and a pistol shot sound was felt on the femoral artery. What is your provisional diagnosis?",
+        "choices": [
+          "Rheumatic Aortic Stenosis",
+          "Rheumatic Mitral Stenosis",
+          "Rheumatic Aortic Regurgitation",
+          "Rheumatic Mitral Regurgitation"
+        ],
+        "answerIndex": 2,
+        "explanation": "Rheumatic Aortic Regurgitation is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Aortic Regurgitation · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Aortic Regurgitation"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q123",
+        "originalNumber": "123",
+        "category": "Aortic Regurgitation",
+        "organ": "Aortic Regurgitation",
+        "question": "The classic diastolic soft blowing murmur of Aortic Regurgitation is typically best heard at:",
+        "choices": [
+          "The apex",
+          "Left sternal border",
+          "Right sternal border",
+          "The axilla"
+        ],
+        "answerIndex": 1,
+        "explanation": "Left sternal border is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Aortic Regurgitation · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Aortic Regurgitation"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q124",
+        "originalNumber": "124",
+        "category": "Aortic Regurgitation",
+        "organ": "Aortic Regurgitation",
+        "question": "A 51-year-old female patient presented with shortness of breath. On Examination: Blood pressure was 150/60mmHg and an Austin flint murmur was heard over the apex. The gold standard test to confirm the diagnosis of this valvular lesion is:",
+        "choices": [
+          "ECG",
+          "Cardiac CT",
+          "Echocardiography",
+          "Cardiac catheterization"
+        ],
+        "answerIndex": 2,
+        "explanation": "An Austin Flint murmur suggests significant aortic regurgitation, and echocardiography is the key test for confirmation and severity assessment.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Aortic Regurgitation · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Aortic Regurgitation"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q125",
+        "originalNumber": "125",
+        "category": "Aortic Regurgitation",
+        "organ": "Aortic Regurgitation",
+        "question": "Chronic severe aortic regurgitation classically causes which of the following physical examination findings?",
+        "choices": [
+          "Narrow pulse pressure with slow-rising pulse",
+          "Pansystolic murmur radiating to the axilla",
+          "Wide pulse pressure / water-hammer pulse (Corrigan's pulse)",
+          "Ejection systolic murmur radiating to the carotids"
+        ],
+        "answerIndex": 2,
+        "explanation": "Wide pulse pressure / water-hammer pulse (Corrigan's pulse) is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Aortic Regurgitation · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Aortic Regurgitation"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q126",
+        "originalNumber": "126",
+        "category": "Aortic Regurgitation",
+        "organ": "Aortic Regurgitation",
+        "question": "Peripheral signs of chronic Aortic Regurgitation include all of the following EXCEPT:",
+        "choices": [
+          "Water-hammer pulse",
+          "Low blood pressure in the lower limbs",
+          "Pistol shot sound over femoral arteries",
+          "Capillary pulsation (Quincke's pulse)"
+        ],
+        "answerIndex": 1,
+        "explanation": "Low blood pressure in the lower limbs is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Aortic Regurgitation · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Aortic Regurgitation"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q127",
+        "originalNumber": "127",
+        "category": "Aortic Regurgitation",
+        "organ": "Aortic Regurgitation",
+        "question": "Which of the following is a recognized physical examination finding in a patient with chronic aortic regurgitation?",
+        "choices": [
+          "Becker sign",
+          "Corrigan pulse (\"water-hammer\" pulse)",
+          "Traube sign (\"pistol-shot\" pulse)",
+          "All of the above"
+        ],
+        "answerIndex": 3,
+        "explanation": "All of the above is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Aortic Regurgitation · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Aortic Regurgitation"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q128",
+        "originalNumber": "128",
+        "category": "Aortic Regurgitation",
+        "organ": "Aortic Regurgitation",
+        "question": "Surgical valve replacement in chronic Aortic Regurgitation is indicated in:",
+        "choices": [
+          "All patients with symptoms",
+          "Asymptomatic patients with an Ejection Fraction (EF) < 50%",
+          "Patients with severe LV dilatation",
+          "All of the above"
+        ],
+        "answerIndex": 3,
+        "explanation": "All of the above is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Aortic Regurgitation · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Aortic Regurgitation"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q129",
+        "originalNumber": "129",
+        "category": "Aortic Regurgitation",
+        "organ": "Aortic Regurgitation",
+        "question": "In the medical management of chronic severe Aortic Regurgitation, which drug class should be avoided because it prolongs diastole and worsens regurgitation?",
+        "choices": [
+          "Positive inotropes",
+          "Vasodilators",
+          "Beta-blockers",
+          "Diuretics"
+        ],
+        "answerIndex": 2,
+        "explanation": "Beta-blockers is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Aortic Regurgitation · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Aortic Regurgitation"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q130",
+        "originalNumber": "130",
+        "category": "Aortic Regurgitation",
+        "organ": "Aortic Regurgitation",
+        "question": "A patient has a history of severe asymptomatic Aortic Regurgitation and is doing daily activities without fatigue. One month ago, he developed acute coronary syndrome, and coronary angiography revealed multi-vessel disease requiring CABG. Which of the following is true regarding his management plan?",
+        "choices": [
+          "CABG only",
+          "CABG and Aortic Valve (AV) replacement in the same surgery",
+          "TAVI only before CABG",
+          "Medical therapy until Left Ventricular dilatation appears"
+        ],
+        "answerIndex": 1,
+        "explanation": "CABG and Aortic Valve (AV) replacement in the same surgery is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Aortic Regurgitation · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Aortic Regurgitation"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q131",
+        "originalNumber": "131",
+        "category": "Aortic Regurgitation",
+        "organ": "Aortic Regurgitation",
+        "question": "A 42-year-old male presented to the ER with cardiogenic shock of a few hours duration. Echocardiography revealed infective endocarditis complicated by acute severe aortic regurgitation. What is the correct next step in management?",
+        "choices": [
+          "Intra-aortic balloon pump is usually used",
+          "High-dose beta blockers administration",
+          "Avoid positive inotropes completely",
+          "It is a true surgical emergency"
+        ],
+        "answerIndex": 3,
+        "explanation": "It is a true surgical emergency is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Aortic Regurgitation · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Aortic Regurgitation"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q132",
+        "originalNumber": "132",
+        "category": "Mitral Stenosis",
+        "organ": "Mitral Stenosis",
+        "question": "What is the normal mitral valve area in healthy adults?",
+        "choices": [
+          "1.0 - 2.0 cm²",
+          "2.5 - 3.5 cm²",
+          "4.0 - 6.0 cm²",
+          "> 7.0 cm²"
+        ],
+        "answerIndex": 2,
+        "explanation": "4.0 - 6.0 cm² is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Mitral Stenosis · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Mitral Stenosis"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q133",
+        "originalNumber": "133",
+        "category": "Mitral Stenosis",
+        "organ": "Mitral Stenosis",
+        "question": "The most common cause of Mitral Stenosis is:",
+        "choices": [
+          "Mitral annular calcification",
+          "Congenital VSD",
+          "Rheumatic endocarditis (Rheumatic fever)",
+          "Infective endocarditis"
+        ],
+        "answerIndex": 2,
+        "explanation": "Rheumatic endocarditis (Rheumatic fever) is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Mitral Stenosis · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Mitral Stenosis"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q134",
+        "originalNumber": "134",
+        "category": "Mitral Stenosis",
+        "organ": "Mitral Stenosis",
+        "question": "What is the most common cause of valvular heart disease in young patients in Egypt?",
+        "choices": [
+          "Congenital bicuspid valve disease",
+          "Degenerative calcific valve disease",
+          "Rheumatic fever",
+          "Infective endocarditis"
+        ],
+        "answerIndex": 2,
+        "explanation": "Rheumatic fever is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Mitral Stenosis · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Mitral Stenosis"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q135",
+        "originalNumber": "135",
+        "category": "Mitral Stenosis",
+        "organ": "Mitral Stenosis",
+        "question": "A 33-year-old female patient presented to the ER with accelerating shortness of breath, hemoptysis, and palpitations over the last 3 days. She has a history of recurrent tonsillitis and joint pain. Examination revealed a mid-diastolic rumbling murmur heard over the apex and a pulsus deficit of 15 beats/min. What is the most probable diagnosis?",
+        "choices": [
+          "Rheumatic Aortic Stenosis",
+          "Rheumatic Mitral Regurgitation",
+          "Rheumatic Mitral Stenosis complicated with Atrial Fibrillation",
+          "Combined mitral stenosis and regurgitation"
+        ],
+        "answerIndex": 2,
+        "explanation": "Rheumatic Mitral Stenosis complicated with Atrial Fibrillation is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Mitral Stenosis · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Mitral Stenosis"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q136",
+        "originalNumber": "136",
+        "category": "Mitral Stenosis",
+        "organ": "Mitral Stenosis",
+        "question": "According to the pathophysiology of Mitral Stenosis, hemoptysis is primarily due to:",
+        "choices": [
+          "Left atrial enlargement",
+          "Right heart failure",
+          "Systemic hypertension",
+          "Pulmonary hypertension"
+        ],
+        "answerIndex": 3,
+        "explanation": "Pulmonary hypertension is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Mitral Stenosis · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Mitral Stenosis"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q137",
+        "originalNumber": "137",
+        "category": "Mitral Stenosis",
+        "organ": "Mitral Stenosis",
+        "question": "Ortner's syndrome in the context of severe Mitral Stenosis is defined as:",
+        "choices": [
+          "Hoarseness of voice due to left atrial enlargement compressing the recurrent laryngeal nerve",
+          "Pulmonary congestion symptoms",
+          "Right ventricular failure signs",
+          "Dysphagia due to left atrial enlargement"
+        ],
+        "answerIndex": 0,
+        "explanation": "Ortner syndrome is hoarseness caused by compression of the left recurrent laryngeal nerve by an enlarged left atrium.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Mitral Stenosis · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Mitral Stenosis"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q138",
+        "originalNumber": "138",
+        "category": "Mitral Stenosis",
+        "organ": "Mitral Stenosis",
+        "question": "According to physical findings in Mitral Stenosis, Malar flush typically occurs:",
+        "choices": [
+          "Before symptoms start",
+          "As an early sign of the disease",
+          "In patients with severe MS",
+          "Only when complicated by AF"
+        ],
+        "answerIndex": 2,
+        "explanation": "In patients with severe MS is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Mitral Stenosis · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Mitral Stenosis"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q139",
+        "originalNumber": "139",
+        "category": "Mitral Stenosis",
+        "organ": "Mitral Stenosis",
+        "question": "Mitral stenosis classically causes which of the following auscultatory findings?",
+        "choices": [
+          "Mid-diastolic rumbling murmur at the apex",
+          "Ejection systolic murmur radiating to carotids",
+          "Early diastolic decrescendo murmur at the left sternal edge",
+          "Pansystolic murmur at the apex radiating to the axilla"
+        ],
+        "answerIndex": 0,
+        "explanation": "Mid-diastolic rumbling murmur at the apex is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Mitral Stenosis · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Mitral Stenosis"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q140",
+        "originalNumber": "140",
+        "category": "Mitral Stenosis",
+        "organ": "Mitral Stenosis",
+        "question": "Which of the following auscultatory findings indicates the severity of Mitral Stenosis?",
+        "choices": [
+          "Presence of an opening snap",
+          "High intensity of the diastolic murmur",
+          "A shorter A2 to Opening Snap (OS) interval",
+          "Loud S1"
+        ],
+        "answerIndex": 2,
+        "explanation": "A shorter A2 to Opening Snap (OS) interval is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Mitral Stenosis · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Mitral Stenosis"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q141",
+        "originalNumber": "141",
+        "category": "Mitral Stenosis",
+        "organ": "Mitral Stenosis",
+        "question": "Mortality in Mitral Stenosis is most frequently due to:",
+        "choices": [
+          "Low cardiac output",
+          "Systemic hypertension",
+          "Recurrent chest infections and thromboembolism",
+          "Aortic root dilatation"
+        ],
+        "answerIndex": 2,
+        "explanation": "Recurrent chest infections and thromboembolism is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Mitral Stenosis · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Mitral Stenosis"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q142",
+        "originalNumber": "142",
+        "category": "Mitral Stenosis",
+        "organ": "Mitral Stenosis",
+        "question": "A patient with mild asymptomatic Mitral Stenosis should be followed up by echocardiography every:",
+        "choices": [
+          "3 to 5 years",
+          "2 years",
+          "6 months",
+          "10 years"
+        ],
+        "answerIndex": 0,
+        "explanation": "3 to 5 years is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Mitral Stenosis · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Mitral Stenosis"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q143",
+        "originalNumber": "143",
+        "category": "Mitral Stenosis",
+        "organ": "Mitral Stenosis",
+        "question": "What is the role of medical treatment in isolated Mitral Stenosis?",
+        "choices": [
+          "It has no role",
+          "It is superior to surgery",
+          "It is just symptomatic (e.g., HR control, diuretics)",
+          "It reverses valve calcification"
+        ],
+        "answerIndex": 2,
+        "explanation": "It is just symptomatic (e.g., HR control, diuretics) is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Mitral Stenosis · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Mitral Stenosis"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q144",
+        "originalNumber": "144",
+        "category": "Mitral Stenosis",
+        "organ": "Mitral Stenosis",
+        "question": "Which of the following statements is true regarding the surgical management of patients with asymptomatic moderate or severe Mitral Stenosis using Percutaneous Mitral Balloon Valvotomy (PMBV)?",
+        "choices": [
+          "Surgery/PMBV is considered on a case-by-case basis for suitable asymptomatic patients",
+          "It is never used in asymptomatic patients",
+          "It is the treatment of choice for MS with severe mitral regurgitation",
+          "Surgery is only considered if EF drops below 30%"
+        ],
+        "answerIndex": 0,
+        "explanation": "Surgery/PMBV is considered on a case-by-case basis for suitable asymptomatic patients is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Mitral Stenosis · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Mitral Stenosis"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q145",
+        "originalNumber": "145",
+        "category": "Mitral Regurgitation",
+        "organ": "Mitral Regurgitation",
+        "question": "What is the backflow of blood from the left ventricle to the left atrium during systole called?",
+        "choices": [
+          "Mitral regurgitation (MR)",
+          "Aortic regurgitation (AR)",
+          "Tricuspid regurgitation (TR)",
+          "Pulmonary regurgitation (PR)"
+        ],
+        "answerIndex": 0,
+        "explanation": "Mitral regurgitation (MR) is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Mitral Regurgitation · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Mitral Regurgitation"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q146",
+        "originalNumber": "146",
+        "category": "Mitral Regurgitation",
+        "organ": "Mitral Regurgitation",
+        "question": "What is the primary compensatory mechanism for the pure volume overload seen in chronic Mitral Regurgitation?",
+        "choices": [
+          "Left atrial enlargement only",
+          "Right atrial enlargement",
+          "Left ventricular hypertrophy and dilatation (LVH)",
+          "Right ventricular hypertrophy (RVH)"
+        ],
+        "answerIndex": 2,
+        "explanation": "Left ventricular hypertrophy and dilatation (LVH) is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Mitral Regurgitation · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Mitral Regurgitation"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q147",
+        "originalNumber": "147",
+        "category": "Mitral Regurgitation",
+        "organ": "Mitral Regurgitation",
+        "question": "The phase of Mitral Regurgitation where the patient has LV volume overload but remains asymptomatic due to LV compliance is called:",
+        "choices": [
+          "Acute phase",
+          "Chronic compensated phase",
+          "Chronic decompensated phase",
+          "Refractory phase"
+        ],
+        "answerIndex": 1,
+        "explanation": "Chronic compensated phase is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Mitral Regurgitation · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Mitral Regurgitation"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q148",
+        "originalNumber": "148",
+        "category": "Mitral Regurgitation",
+        "organ": "Mitral Regurgitation",
+        "question": "What is the name of the extra heart sound that is frequently heard in patients with congestive heart failure or significant left atrial volume overload (like severe MR)?",
+        "choices": [
+          "S1",
+          "S2",
+          "S3",
+          "S4"
+        ],
+        "answerIndex": 2,
+        "explanation": "S3 is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Mitral Regurgitation · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Mitral Regurgitation"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q149",
+        "originalNumber": "149",
+        "category": "Mitral Regurgitation",
+        "organ": "Mitral Regurgitation",
+        "question": "What is the name of the heart valve disease that is primarily caused by myxomatous degeneration?",
+        "choices": [
+          "Mitral regurgitation (via MVP)",
+          "Aortic regurgitation",
+          "Tricuspid regurgitation",
+          "Pulmonary regurgitation"
+        ],
+        "answerIndex": 0,
+        "explanation": "Mitral regurgitation (via MVP) is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Mitral Regurgitation · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Mitral Regurgitation"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q150",
+        "originalNumber": "150",
+        "category": "Mitral Regurgitation",
+        "organ": "Mitral Regurgitation",
+        "question": "Mitral regurgitation classically causes which of the following auscultatory findings?",
+        "choices": [
+          "Mid-diastolic rumble with an opening snap",
+          "Pansystolic murmur at the apex radiating to the axilla",
+          "Ejection systolic murmur radiating to the carotids",
+          "Continuous machinery murmur"
+        ],
+        "answerIndex": 1,
+        "explanation": "Pansystolic murmur at the apex radiating to the axilla is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Mitral Regurgitation · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Mitral Regurgitation"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q151",
+        "originalNumber": "151",
+        "category": "Mitral Regurgitation",
+        "organ": "Mitral Regurgitation",
+        "question": "In chronic Mitral Regurgitation, does the intensity (loudness) of the murmur strictly correlate with the severity of the regurgitation?",
+        "choices": [
+          "Yes",
+          "No",
+          "Only in acute MR",
+          "Only in rheumatic MR"
+        ],
+        "answerIndex": 1,
+        "explanation": "No is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Mitral Regurgitation · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Mitral Regurgitation"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q152",
+        "originalNumber": "152",
+        "category": "Mitral Regurgitation",
+        "organ": "Mitral Regurgitation",
+        "question": "Which of the following time intervals is recommended for serial echocardiography in patients with Mild Mitral Regurgitation?",
+        "choices": [
+          "Mild: 1-2 years",
+          "Mild: 6-12 months",
+          "Mild: 2-3 years",
+          "Mild: 5 years"
+        ],
+        "answerIndex": 2,
+        "explanation": "Mild: 2-3 years is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Mitral Regurgitation · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Mitral Regurgitation"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q153",
+        "originalNumber": "153",
+        "category": "Mitral Regurgitation",
+        "organ": "Mitral Regurgitation",
+        "question": "Hypertrophic Obstructive Cardiomyopathy (HOCM) is commonly associated with which of the following valvular complications (often due to Systolic Anterior Motion of the mitral valve)?",
+        "choices": [
+          "Aortic Stenosis",
+          "Aortic Regurgitation",
+          "Mitral Stenosis",
+          "Mitral Regurgitation"
+        ],
+        "answerIndex": 3,
+        "explanation": "Mitral Regurgitation is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Mitral Regurgitation · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Mitral Regurgitation"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q154",
+        "originalNumber": "154",
+        "category": "Mitral Regurgitation",
+        "organ": "Mitral Regurgitation",
+        "question": "A 72-year-old woman presented with acute severe chest pain and ST-segment elevation myocardial infarction. Two days later, she became acutely unwell with pulmonary edema and a loud pansystolic murmur at the apex radiating to the axilla. What is the most likely diagnosis?",
+        "choices": [
+          "Ventricular septal defect",
+          "Acute pericarditis",
+          "Ruptured papillary muscle causing acute Mitral Regurgitation",
+          "Free-wall rupture causing cardiac tamponade"
+        ],
+        "answerIndex": 2,
+        "explanation": "Ruptured papillary muscle causing acute Mitral Regurgitation is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Mitral Regurgitation · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Mitral Regurgitation"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q155",
+        "originalNumber": "155",
+        "category": "Mitral Regurgitation",
+        "organ": "Mitral Regurgitation",
+        "question": "Surgery for Mitral Regurgitation is generally recommended for:",
+        "choices": [
+          "Any patient with symptoms at rest or exercise, and repair should be considered if feasible",
+          "All asymptomatic patients regardless of EF",
+          "Patients with mild MR and normal EF",
+          "Only patients with acute chordal rupture"
+        ],
+        "answerIndex": 0,
+        "explanation": "Any patient with symptoms at rest or exercise, and repair should be considered if feasible is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Mitral Regurgitation · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Mitral Regurgitation"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q156",
+        "originalNumber": "156",
+        "category": "Mitral Regurgitation",
+        "organ": "Mitral Regurgitation",
+        "question": "The echocardiogram of a 22-year-old woman reveals mitral valve prolapse (MVP). Which of the following is the most common physical finding in this condition?",
+        "choices": [
+          "Diastolic rumble",
+          "Absent first heart sound",
+          "Diastolic click",
+          "Mid-systolic click and late systolic murmur"
+        ],
+        "answerIndex": 3,
+        "explanation": "Mid-systolic click and late systolic murmur is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Mitral Regurgitation · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Mitral Regurgitation"
+        ]
+      },
+      {
+        "id": "med2-mo-ragab-q157",
+        "originalNumber": "157",
+        "category": "Mitral Regurgitation",
+        "organ": "Mitral Regurgitation",
+        "question": "A 65-year-old man with a previous history of an anterior MI comes for follow-up. On examination, he has a systolic murmur heard best at the apex and radiating to the axilla. Transient external compression of both arms with blood pressure cuffs (increasing afterload) increases the murmur. What is the diagnosis?",
+        "choices": [
+          "Aortic Stenosis",
+          "HOCM",
+          "Chronic Mitral Regurgitation",
+          "Tricuspid Regurgitation"
+        ],
+        "answerIndex": 2,
+        "explanation": "Chronic Mitral Regurgitation is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+        "source": "Dr. Mohamed Ragab Past Exams",
+        "section": "Mitral Regurgitation · Dr. Mohamed Ragab Past Exams",
+        "topicTags": [
+          "MED-2",
+          "Mo.ragab repeated past exams",
+          "Mitral Regurgitation"
+        ]
+      }
+    ],
+    "heldForReview": [],
+    "collection": {
+      "prompt": "Choose a topic from Dr. Mohamed Ragab repeated past exams.",
+      "groupNoun": "topic",
+      "groupEyebrow": "MED-2 Mo.ragab past exams",
+      "mixedMeta": "Random questions from Dr. Mohamed Ragab past exam questions.",
+      "mixedSizes": [
+        {
+          "id": "quick-20",
+          "label": "Quick 20",
+          "size": 20,
+          "description": "A short mixed revision session."
+        },
+        {
+          "id": "standard-30",
+          "label": "Standard 30",
+          "size": 30,
+          "description": "Balanced mixed practice."
+        },
+        {
+          "id": "exam-50",
+          "label": "Exam 50",
+          "size": 50,
+          "description": "A longer mixed exam session."
+        }
+      ],
+      "wrongReviewId": "med2-mo-ragab-wrong-review",
+      "groups": [
+        {
+          "id": "pulmonary-embolism",
+          "label": "Pulmonary Embolism",
+          "questionCount": 45,
+          "parts": [
+            {
+              "id": "med2-mo-ragab-past-exams-pulmonary-embolism-p01",
+              "label": "Part 1 · Q1–23",
+              "description": "Pulmonary Embolism questions",
+              "range": "Q1–23",
+              "questionStart": 1,
+              "questionEnd": 23,
+              "parentSourceId": "med2-mo-ragab-past-exams",
+              "groupId": "pulmonary-embolism",
+              "groupLabel": "Pulmonary Embolism",
+              "partIndex": 0,
+              "shuffleQuestions": false,
+              "shuffleOptions": false,
+              "mcqs": [
+                {
+                  "id": "med2-mo-ragab-q001",
+                  "originalNumber": "1",
+                  "category": "Pulmonary Embolism",
+                  "organ": "Pulmonary Embolism",
+                  "question": "What is pulmonary embolism?",
+                  "choices": [
+                    "A sudden blockage in coronary arteries",
+                    "A sudden blockage in pulmonary arteries",
+                    "A condition affecting the brain's blood vessels",
+                    "A blockage in the aorta"
+                  ],
+                  "answerIndex": 1,
+                  "explanation": "Pulmonary embolism is obstruction of the pulmonary arterial circulation, most often by a thrombus that has traveled from a deep vein.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Pulmonary Embolism"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q002",
+                  "originalNumber": "2",
+                  "category": "Pulmonary Embolism",
+                  "organ": "Pulmonary Embolism",
+                  "question": "In pulmonary embolism, what type is characterized by affecting medium-sized pulmonary arteries without hemodynamic instability?",
+                  "choices": [
+                    "Mild",
+                    "Moderate",
+                    "Severe",
+                    "Massive"
+                  ],
+                  "answerIndex": 1,
+                  "explanation": "Moderate is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Pulmonary Embolism"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q003",
+                  "originalNumber": "3",
+                  "category": "Pulmonary Embolism",
+                  "organ": "Pulmonary Embolism",
+                  "question": "In pulmonary embolism, what type is characterized by affecting main, left and/or right pulmonary artery causing a hemodynamic instability up to obstructive shock?",
+                  "choices": [
+                    "Mild",
+                    "Moderate",
+                    "Severe or massive",
+                    "Chronic"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "Severe or massive is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Pulmonary Embolism"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q004",
+                  "originalNumber": "4",
+                  "category": "Pulmonary Embolism",
+                  "organ": "Pulmonary Embolism",
+                  "question": "A 78-year-old female is evaluated in the hospital for sudden loss of consciousness and severe hypoxemia (O2 saturation 80%) one day after a total hip replacement surgery. Her blood pressure is 76/48 mmHg. What is the most likely diagnosis?",
+                  "choices": [
+                    "Acute myocardial infarction",
+                    "Tension pneumothorax",
+                    "Massive pulmonary embolism",
+                    "Anaphylactic shock"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "Massive pulmonary embolism is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Pulmonary Embolism"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q005",
+                  "originalNumber": "5",
+                  "category": "Pulmonary Embolism",
+                  "organ": "Pulmonary Embolism",
+                  "question": "Which of the following combinations correctly represents Virchow’s Triad for the development of Deep Vein Thrombosis (DVT) and Pulmonary Embolism (PE)?",
+                  "choices": [
+                    "Inflammation, fever, and leukocytosis",
+                    "Stasis, endothelial injury, and hypercoagulability",
+                    "Hypoxia, hypercapnia, and acidosis",
+                    "Hypertension, diabetes, and dyslipidemia"
+                  ],
+                  "answerIndex": 1,
+                  "explanation": "Virchow’s triad comprises venous stasis, endothelial injury, and hypercoagulability, which together promote thrombosis.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Pulmonary Embolism"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q006",
+                  "originalNumber": "6",
+                  "category": "Pulmonary Embolism",
+                  "organ": "Pulmonary Embolism",
+                  "question": "All of the following are risk factors for Pulmonary embolism (PE) EXCEPT:",
+                  "choices": [
+                    "Cerebrovascular stroke",
+                    "Autoimmune diseases",
+                    "Air travel",
+                    "Aortopulmonary shunts"
+                  ],
+                  "answerIndex": 3,
+                  "explanation": "Aortopulmonary shunts is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Pulmonary Embolism"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q007",
+                  "originalNumber": "7",
+                  "category": "Pulmonary Embolism",
+                  "organ": "Pulmonary Embolism",
+                  "question": "A 35-year-old woman, who is currently on oral contraceptives, presents with sudden-onset shortness of breath and pleuritic chest pain. Which of the following risk factors is most relevant to her presentation?",
+                  "choices": [
+                    "Smoking",
+                    "Hypertension",
+                    "Family history of heart disease",
+                    "Use of oral contraceptives"
+                  ],
+                  "answerIndex": 3,
+                  "explanation": "Use of oral contraceptives is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Pulmonary Embolism"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q008",
+                  "originalNumber": "8",
+                  "category": "Pulmonary Embolism",
+                  "organ": "Pulmonary Embolism",
+                  "question": "Which factor significantly increases the incidence of pulmonary embolism in the context of Covid-19?",
+                  "choices": [
+                    "Heavy cigarette smoking",
+                    "Obesity",
+                    "Immobilization",
+                    "Previous stroke"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "Immobilization is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Pulmonary Embolism"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q009",
+                  "originalNumber": "9",
+                  "category": "Pulmonary Embolism",
+                  "organ": "Pulmonary Embolism",
+                  "question": "What is a common risk factor associated with pulmonary embolism?",
+                  "choices": [
+                    "High cholesterol levels",
+                    "Air travel",
+                    "Regular exercise",
+                    "Low blood pressure"
+                  ],
+                  "answerIndex": 1,
+                  "explanation": "Air travel is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Pulmonary Embolism"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q010",
+                  "originalNumber": "10",
+                  "category": "Pulmonary Embolism",
+                  "organ": "Pulmonary Embolism",
+                  "question": "Which of the following is NOT a cause of pulmonary embolism?",
+                  "choices": [
+                    "Detached blood clot from DVT",
+                    "Air embolism",
+                    "Bacterial infection",
+                    "Fat embolus"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "Bacterial infection is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Pulmonary Embolism"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q011",
+                  "originalNumber": "11",
+                  "category": "Pulmonary Embolism",
+                  "organ": "Pulmonary Embolism",
+                  "question": "Which condition is NOT listed as a risk factor for pulmonary embolism?",
+                  "choices": [
+                    "Hypertension",
+                    "Air travel",
+                    "Regular exercise",
+                    "Thrombophilias"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "Regular exercise is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Pulmonary Embolism"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q012",
+                  "originalNumber": "12",
+                  "category": "Pulmonary Embolism",
+                  "organ": "Pulmonary Embolism",
+                  "question": "What are the most common presenting symptom and the most common clinical sign in a patient with a pulmonary embolism, respectively?",
+                  "choices": [
+                    "Chest pain and bradycardia",
+                    "Syncope and distant heart sounds",
+                    "Dyspnea and tachypnea",
+                    "Hemoptysis and congested neck veins"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "Dyspnea and tachypnea is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Pulmonary Embolism"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q013",
+                  "originalNumber": "13",
+                  "category": "Pulmonary Embolism",
+                  "organ": "Pulmonary Embolism",
+                  "question": "Hypoxemia is a complication of pulmonary embolism. What is hypoxemia?",
+                  "choices": [
+                    "High level of carbon monoxide in the blood",
+                    "High level of oxygen in the blood",
+                    "Low level of carbon dioxide in the blood",
+                    "Low level of oxygen in the blood"
+                  ],
+                  "answerIndex": 3,
+                  "explanation": "Low level of oxygen in the blood is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Pulmonary Embolism"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q014",
+                  "originalNumber": "14",
+                  "category": "Pulmonary Embolism",
+                  "organ": "Pulmonary Embolism",
+                  "question": "A patient with PE may develop complications as all of the following EXCEPT:",
+                  "choices": [
+                    "Obstructive cardiogenic shock",
+                    "Right sided heart failure",
+                    "Persistent pulmonary hypertension",
+                    "Recurrent upper respiratory tract infections"
+                  ],
+                  "answerIndex": 3,
+                  "explanation": "Recurrent upper respiratory tract infections is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Pulmonary Embolism"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q015",
+                  "originalNumber": "15",
+                  "category": "Pulmonary Embolism",
+                  "organ": "Pulmonary Embolism",
+                  "question": "What is the primary effect of pulmonary embolism on the pulmonary arterioles or capillaries in the mild type?",
+                  "choices": [
+                    "Hemodynamic instability",
+                    "Pleuritic chest pain",
+                    "Severe wheezing",
+                    "Decreased breath sounds"
+                  ],
+                  "answerIndex": 1,
+                  "explanation": "Pleuritic chest pain is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Pulmonary Embolism"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q016",
+                  "originalNumber": "16",
+                  "category": "Pulmonary Embolism",
+                  "organ": "Pulmonary Embolism",
+                  "question": "Which sign is commonly associated with pulmonary embolism?",
+                  "choices": [
+                    "Increased breath sounds",
+                    "Bradycardia",
+                    "Jugular venous distension",
+                    "Normal second heart sound"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "Jugular venous distension is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Pulmonary Embolism"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q017",
+                  "originalNumber": "17",
+                  "category": "Pulmonary Embolism",
+                  "organ": "Pulmonary Embolism",
+                  "question": "What is a potential consequence of severe or massive pulmonary embolism?",
+                  "choices": [
+                    "Mild cough",
+                    "Hemodynamic instability up to obstructive shock",
+                    "Reduced blood clotting",
+                    "Improved lung function"
+                  ],
+                  "answerIndex": 1,
+                  "explanation": "Hemodynamic instability up to obstructive shock is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Pulmonary Embolism"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q018",
+                  "originalNumber": "18",
+                  "category": "Pulmonary Embolism",
+                  "organ": "Pulmonary Embolism",
+                  "question": "Which of the following complications is NOT commonly associated with pulmonary embolism?",
+                  "choices": [
+                    "Pulmonary hypertension",
+                    "Right-sided heart failure",
+                    "Ischemic stroke",
+                    "Chronic thromboembolic pulmonary hypertension"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "Ischemic stroke is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Pulmonary Embolism"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q019",
+                  "originalNumber": "19",
+                  "category": "Pulmonary Embolism",
+                  "organ": "Pulmonary Embolism",
+                  "question": "What is the Wells score commonly used for in the context of pulmonary embolism?",
+                  "choices": [
+                    "Assessing response to treatment",
+                    "Predicting the risk of pulmonary embolism",
+                    "Evaluating the severity of lung damage",
+                    "Measuring lung capacity"
+                  ],
+                  "answerIndex": 1,
+                  "explanation": "Predicting the risk of pulmonary embolism is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Pulmonary Embolism"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q020",
+                  "originalNumber": "20",
+                  "category": "Pulmonary Embolism",
+                  "organ": "Pulmonary Embolism",
+                  "question": "How does the presence of an alternative diagnosis impact the Wells score for pulmonary embolism?",
+                  "choices": [
+                    "Increases the score",
+                    "Decreases the score",
+                    "Has no impact on the score",
+                    "Converts the score to an automatic diagnosis"
+                  ],
+                  "answerIndex": 1,
+                  "explanation": "Decreases the score is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Pulmonary Embolism"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q021",
+                  "originalNumber": "21",
+                  "category": "Pulmonary Embolism",
+                  "organ": "Pulmonary Embolism",
+                  "question": "Regarding Simplified Geneva Score, a score of less than 2 plus a negative d-dimer results of a likelihood of PE of?",
+                  "choices": [
+                    "6%",
+                    "9%",
+                    "3%",
+                    "2%"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "3% is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Pulmonary Embolism"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q022",
+                  "originalNumber": "22",
+                  "category": "Pulmonary Embolism",
+                  "organ": "Pulmonary Embolism",
+                  "question": "Which factor is NOT included in the Wells score for pulmonary embolism assessment?",
+                  "choices": [
+                    "Clinical signs and symptoms of deep vein thrombosis (DVT)",
+                    "Heart rate greater than 100 beats per minute",
+                    "Hemoptysis",
+                    "Active cancer or cancer treatment within the last 6 months",
+                    "None of the above"
+                  ],
+                  "answerIndex": 4,
+                  "explanation": "None of the above is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Pulmonary Embolism"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q023",
+                  "originalNumber": "23",
+                  "category": "Pulmonary Embolism",
+                  "organ": "Pulmonary Embolism",
+                  "question": "In the Wells scoring system, what score range is generally considered \"low probability\" for pulmonary embolism?",
+                  "choices": [
+                    "0-1",
+                    "2-4",
+                    "5-7",
+                    "8-10"
+                  ],
+                  "answerIndex": 0,
+                  "explanation": "0-1 is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Pulmonary Embolism"
+                  ]
+                }
+              ],
+              "partCount": 2
+            },
+            {
+              "id": "med2-mo-ragab-past-exams-pulmonary-embolism-p02",
+              "label": "Part 2 · Q24–45",
+              "description": "Pulmonary Embolism questions",
+              "range": "Q24–45",
+              "questionStart": 24,
+              "questionEnd": 45,
+              "parentSourceId": "med2-mo-ragab-past-exams",
+              "groupId": "pulmonary-embolism",
+              "groupLabel": "Pulmonary Embolism",
+              "partIndex": 1,
+              "shuffleQuestions": false,
+              "shuffleOptions": false,
+              "mcqs": [
+                {
+                  "id": "med2-mo-ragab-q024",
+                  "originalNumber": "24",
+                  "category": "Pulmonary Embolism",
+                  "organ": "Pulmonary Embolism",
+                  "question": "What is the significance of a high Wells score in the assessment of pulmonary embolism?",
+                  "choices": [
+                    "Indicates a low probability of pulmonary embolism",
+                    "Suggests a moderate risk of pulmonary embolism",
+                    "Implies a high probability of pulmonary embolism",
+                    "Reflects no correlation with pulmonary embolism risk"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "Implies a high probability of pulmonary embolism is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Pulmonary Embolism"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q025",
+                  "originalNumber": "25",
+                  "category": "Pulmonary Embolism",
+                  "organ": "Pulmonary Embolism",
+                  "question": "Patient has right lower limb calf muscle (hot, tender, swollen). Diagnosed as DVT. ER: dyspnea, stitching pain, palpitations. ECG shows a pathognomonic sign. This case is:",
+                  "choices": [
+                    "Sinus tachycardia",
+                    "S1 Q3 T3 pattern",
+                    "Sinus bradycardia",
+                    "ST segment elevation"
+                  ],
+                  "answerIndex": 1,
+                  "explanation": "S1 Q3 T3 pattern is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Pulmonary Embolism"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q026",
+                  "originalNumber": "26",
+                  "category": "Pulmonary Embolism",
+                  "organ": "Pulmonary Embolism",
+                  "question": "What is the most common ECG finding in patients with pulmonary embolism? (Note the difference between this and the specific sign)",
+                  "choices": [
+                    "Sinus Bradycardia",
+                    "Atrial fibrillation",
+                    "Sinus Tachycardia",
+                    "Premature ventricular contractions (PVCs)"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "Sinus Tachycardia is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Pulmonary Embolism"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q027",
+                  "originalNumber": "27",
+                  "category": "Pulmonary Embolism",
+                  "organ": "Pulmonary Embolism",
+                  "question": "What is considered the historical gold standard imaging modality for the definitive diagnosis of pulmonary embolism?",
+                  "choices": [
+                    "Ventilation-Perfusion (V/Q) scan",
+                    "Pulmonary angiography",
+                    "D-Dimer assay",
+                    "Echocardiography"
+                  ],
+                  "answerIndex": 1,
+                  "explanation": "Pulmonary angiography is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Pulmonary Embolism"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q028",
+                  "originalNumber": "28",
+                  "category": "Pulmonary Embolism",
+                  "organ": "Pulmonary Embolism",
+                  "question": "What is the most common practical imaging test used today to confirm the presence of pulmonary embolism with high sensitivity (modern gold standard)?",
+                  "choices": [
+                    "Chest Radiography",
+                    "CT Pulmonary Angiography (CTPA)",
+                    "Magnetic Resonance Imaging (MRI)",
+                    "Exercise ECG"
+                  ],
+                  "answerIndex": 1,
+                  "explanation": "CT Pulmonary Angiography (CTPA) is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Pulmonary Embolism"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q029",
+                  "originalNumber": "29",
+                  "category": "Pulmonary Embolism",
+                  "organ": "Pulmonary Embolism",
+                  "question": "In the diagnostic pathway for pulmonary embolism, what is the primary clinical utility of a quantitative D-Dimer assay in a patient with a low clinical probability?",
+                  "choices": [
+                    "To safely rule out pulmonary embolism",
+                    "To confirm the exact location of the thrombus",
+                    "To assess the severity of right ventricular strain",
+                    "To determine the required dose of anticoagulation"
+                  ],
+                  "answerIndex": 0,
+                  "explanation": "To safely rule out pulmonary embolism is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Pulmonary Embolism"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q030",
+                  "originalNumber": "30",
+                  "category": "Pulmonary Embolism",
+                  "organ": "Pulmonary Embolism",
+                  "question": "What is the recommended threshold for D-Dimer results to rule out pulmonary embolism in mild and moderate cases?",
+                  "choices": [
+                    ">500 ng/ml",
+                    "<250 ng/ml",
+                    "<500 ng/ml",
+                    ">1000 ng/ml"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "<500 ng/ml is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Pulmonary Embolism"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q031",
+                  "originalNumber": "31",
+                  "category": "Pulmonary Embolism",
+                  "organ": "Pulmonary Embolism",
+                  "question": "In patients with a severe or massive pulmonary embolism, what percentage of cases can be missed if relying solely on a negative D-Dimer result?",
+                  "choices": [
+                    "5%",
+                    "10%",
+                    "15%",
+                    "20%"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "15% is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Pulmonary Embolism"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q032",
+                  "originalNumber": "32",
+                  "category": "Pulmonary Embolism",
+                  "organ": "Pulmonary Embolism",
+                  "question": "In severe or massive pulmonary embolism, what action is suggested if the D-Dimer result is negative?",
+                  "choices": [
+                    "Proceed to CT-PA",
+                    "Repeat D-Dimer test",
+                    "Rule out other cardiac conditions",
+                    "Monitor the patient without further testing"
+                  ],
+                  "answerIndex": 0,
+                  "explanation": "Proceed to CT-PA is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Pulmonary Embolism"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q033",
+                  "originalNumber": "33",
+                  "category": "Pulmonary Embolism",
+                  "organ": "Pulmonary Embolism",
+                  "question": "What is the diagnostic yield of ventilation-perfusion scans in detecting pulmonary embolism?",
+                  "choices": [
+                    "10-20%",
+                    "30-50%",
+                    "60-70%",
+                    "80-90%"
+                  ],
+                  "answerIndex": 1,
+                  "explanation": "30-50% is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Pulmonary Embolism"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q034",
+                  "originalNumber": "34",
+                  "category": "Pulmonary Embolism",
+                  "organ": "Pulmonary Embolism",
+                  "question": "What is Hampton's Hump seen on chest radiography, and what does it indicate?",
+                  "choices": [
+                    "Enlarged heart; heart failure",
+                    "Wedge-shaped opacity; pulmonary infarction distal to thrombus",
+                    "Flattened diaphragm; respiratory distress",
+                    "Bilateral infiltrates; pneumonia"
+                  ],
+                  "answerIndex": 1,
+                  "explanation": "Wedge-shaped opacity; pulmonary infarction distal to thrombus is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Pulmonary Embolism"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q035",
+                  "originalNumber": "35",
+                  "category": "Pulmonary Embolism",
+                  "organ": "Pulmonary Embolism",
+                  "question": "What does the Westermark Sign on chest radiography indicate in the context of pulmonary embolism?",
+                  "choices": [
+                    "Atelectasis",
+                    "Pleural effusion",
+                    "Pulmonary infarction",
+                    "Thrombus proximal to embolism (Focal oligemia)"
+                  ],
+                  "answerIndex": 3,
+                  "explanation": "Thrombus proximal to embolism (Focal oligemia) is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Pulmonary Embolism"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q036",
+                  "originalNumber": "36",
+                  "category": "Pulmonary Embolism",
+                  "organ": "Pulmonary Embolism",
+                  "question": "His lungs are normal on auscultation, the JVP is 8 cm, and P2 is loud. There is no edema or leg tenderness. D-dimer assay is positive, ECG reveals sinus tachycardia, and cardiac enzymes are negative. The lung scan is read as high probability for PE. Which of the following tests is most likely to help in guiding emergent therapy?",
+                  "choices": [
+                    "Echocardiogram",
+                    "CT scan",
+                    "Venous ultrasound of the legs",
+                    "Contrast phlebography"
+                  ],
+                  "answerIndex": 0,
+                  "explanation": "Echocardiogram is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Pulmonary Embolism"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q037",
+                  "originalNumber": "37",
+                  "category": "Pulmonary Embolism",
+                  "organ": "Pulmonary Embolism",
+                  "question": "A 25-year-old obese woman complains of shortness of breath after 10 hours of travel by air. In the Emergency Ward her respiratory rate is 25/min. BP 110/70. P= 90. Pulmonary embolism is suspected. Her D-Dimer is 200 mg/ml fibrinogen units. Best line of treatment of PE is:",
+                  "choices": [
+                    "Streptokinase",
+                    "Unfractionated heparin",
+                    "Prophylaxis and prevention",
+                    "Pain killers and O2 therapy"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "Prophylaxis and prevention is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Pulmonary Embolism"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q038",
+                  "originalNumber": "38",
+                  "category": "Pulmonary Embolism",
+                  "organ": "Pulmonary Embolism",
+                  "question": "A 65-year-old lady with history of mastectomy, received chemotherapy and radiation in the preceding 3 months presented with sudden attacks of right sided chest pain, SOB and tachycardia. PE was suspected, but anticoagulation was contraindicated due to bleeding tendencies. Also, assume a scenario of recurrent PE despite adequate anticoagulation. In these situations, what is the best interventional line to minimize pulmonary showers?",
+                  "choices": [
+                    "Anti-Heart failure treatments",
+                    "IVC filter insertion",
+                    "Thrombolytic therapy",
+                    "Low dose aspirin"
+                  ],
+                  "answerIndex": 1,
+                  "explanation": "IVC filter insertion is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Pulmonary Embolism"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q039",
+                  "originalNumber": "39",
+                  "category": "Pulmonary Embolism",
+                  "organ": "Pulmonary Embolism",
+                  "question": "A 60-year-old male is diagnosed with a massive pulmonary embolism confirmed by CTPA. He is currently hypotensive, diaphoretic, and showing signs of cardiogenic shock. What is the most appropriate first-line definitive treatment?",
+                  "choices": [
+                    "Oral warfarin therapy",
+                    "Systemic thrombolytic therapy (e.g., tPA)",
+                    "Insertion of an IVC filter",
+                    "High-flow oxygen therapy and painkillers only"
+                  ],
+                  "answerIndex": 1,
+                  "explanation": "Systemic thrombolytic therapy (e.g., tPA) is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Pulmonary Embolism"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q040",
+                  "originalNumber": "40",
+                  "category": "Pulmonary Embolism",
+                  "organ": "Pulmonary Embolism",
+                  "question": "How is a massive pulmonary embolism with hemodynamic instability treated initially? (Focusing on stabilization before definitive treatment)",
+                  "choices": [
+                    "Dopamine only",
+                    "Fluid administration and vasopressor therapy",
+                    "Inferior vena cava filter placement",
+                    "Surgical embolectomy"
+                  ],
+                  "answerIndex": 1,
+                  "explanation": "Fluid administration and vasopressor therapy is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Pulmonary Embolism"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q041",
+                  "originalNumber": "41",
+                  "category": "Pulmonary Embolism",
+                  "organ": "Pulmonary Embolism",
+                  "question": "What is the suggested treatment if systemic thrombolysis fails to remove the embolism in pulmonary embolism cases?",
+                  "choices": [
+                    "Repeat thrombolysis",
+                    "Inferior vena cava filter",
+                    "Surgical embolectomy",
+                    "Vasopressor therapy"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "Surgical embolectomy is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Pulmonary Embolism"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q042",
+                  "originalNumber": "42",
+                  "category": "Pulmonary Embolism",
+                  "organ": "Pulmonary Embolism",
+                  "question": "What is the standard first-line anticoagulant therapy initiated for a hemodynamically stable patient diagnosed with acute pulmonary embolism?",
+                  "choices": [
+                    "Aspirin and Clopidogrel",
+                    "Warfarin monotherapy without bridging",
+                    "Low Molecular Weight Heparin (LMWH) or Unfractionated Heparin (UFH)",
+                    "Streptokinase"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "Low Molecular Weight Heparin (LMWH) or Unfractionated Heparin (UFH) is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Pulmonary Embolism"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q043",
+                  "originalNumber": "43",
+                  "category": "Pulmonary Embolism",
+                  "organ": "Pulmonary Embolism",
+                  "question": "When can warfarin be initiated in the treatment of pulmonary embolism?",
+                  "choices": [
+                    "Immediately upon diagnosis (bridged with LMWH)",
+                    "After 3 days of LMW heparin therapy",
+                    "Only after confirming resolution of symptoms",
+                    "Warfarin is not recommended for PE treatment"
+                  ],
+                  "answerIndex": 0,
+                  "explanation": "Immediately upon diagnosis (bridged with LMWH) is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Pulmonary Embolism"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q044",
+                  "originalNumber": "44",
+                  "category": "Pulmonary Embolism",
+                  "organ": "Pulmonary Embolism",
+                  "question": "What is the preferred choice over warfarin for anticoagulation in the treatment of pulmonary embolism?",
+                  "choices": [
+                    "Apixaban",
+                    "Rivaroxaban",
+                    "Both a and b (NOACs)",
+                    "LMW heparin"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "Both a and b (NOACs) is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Pulmonary Embolism"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q045",
+                  "originalNumber": "45",
+                  "category": "Pulmonary Embolism",
+                  "organ": "Pulmonary Embolism",
+                  "question": "Treatment of pregnant female with recurrent DVT / PE:",
+                  "choices": [
+                    "Oral anticoagulants (Warfarin)",
+                    "Aspirin",
+                    "Low molecular weight heparin (LMWH)",
+                    "All of the above"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "Low molecular weight heparin (LMWH) is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Pulmonary Embolism · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Pulmonary Embolism"
+                  ]
+                }
+              ],
+              "partCount": 2
+            }
+          ]
+        },
+        {
+          "id": "systemic-hypertension",
+          "label": "Systemic Hypertension",
+          "questionCount": 26,
+          "parts": [
+            {
+              "id": "med2-mo-ragab-past-exams-systemic-hypertension-p01",
+              "label": "Part 1 · Q46–58",
+              "description": "Systemic Hypertension questions",
+              "range": "Q46–58",
+              "questionStart": 46,
+              "questionEnd": 58,
+              "parentSourceId": "med2-mo-ragab-past-exams",
+              "groupId": "systemic-hypertension",
+              "groupLabel": "Systemic Hypertension",
+              "partIndex": 0,
+              "shuffleQuestions": false,
+              "shuffleOptions": false,
+              "mcqs": [
+                {
+                  "id": "med2-mo-ragab-q046",
+                  "originalNumber": "46",
+                  "category": "Systemic Hypertension",
+                  "organ": "Systemic Hypertension",
+                  "question": "Mr. Ahmed, 39 years old, is anxious. His office blood pressure is always high, about 145/95 mmHg, while his home blood pressure is normal around 120/80 mmHg. What is the most probable diagnosis?",
+                  "choices": [
+                    "Secondary renal hypertension",
+                    "White coat hypertension",
+                    "Masked hypertension",
+                    "Resistant hypertension"
+                  ],
+                  "answerIndex": 1,
+                  "explanation": "White coat hypertension is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Systemic Hypertension · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Systemic Hypertension"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q047",
+                  "originalNumber": "47",
+                  "category": "Systemic Hypertension",
+                  "organ": "Systemic Hypertension",
+                  "question": "What is the best and most accurate investigation to evaluate and confirm white coat hypertension?",
+                  "choices": [
+                    "Home blood pressure monitoring",
+                    "Ambulatory blood pressure monitoring (ABPM)",
+                    "Repeated office BP after rest",
+                    "Echocardiography"
+                  ],
+                  "answerIndex": 1,
+                  "explanation": "White-coat hypertension means blood pressure is elevated in the clinic but normal outside it; ambulatory monitoring confirms the pattern.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Systemic Hypertension · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Systemic Hypertension"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q048",
+                  "originalNumber": "48",
+                  "category": "Systemic Hypertension",
+                  "organ": "Systemic Hypertension",
+                  "question": "A 49-year-old male known to be hypertensive presents for his monthly follow-up, and his blood pressure is persistently high. The cardiologist increased his medication dose, but in the next follow-up, the BP was still persistently high. Which of the following can cause resistant/persistent hypertension?",
+                  "choices": [
+                    "Excess sodium (Na) intake",
+                    "Over-the-counter (OTC) drugs and drug interactions",
+                    "Inadequate drug doses and poor adherence",
+                    "All of the above"
+                  ],
+                  "answerIndex": 3,
+                  "explanation": "All of the above is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Systemic Hypertension · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Systemic Hypertension"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q049",
+                  "originalNumber": "49",
+                  "category": "Systemic Hypertension",
+                  "organ": "Systemic Hypertension",
+                  "question": "Mr. Talaat, 60 years old, is hypertensive and has congestive heart failure. Which of the following anti-hypertensive drugs is contraindicated in his case?",
+                  "choices": [
+                    "Angiotensin-converting enzyme (ACE) inhibitors",
+                    "Spironolactone",
+                    "Verapamil",
+                    "Angiotensin receptor blockers (ARBs)"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "Verapamil is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Systemic Hypertension · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Systemic Hypertension"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q050",
+                  "originalNumber": "50",
+                  "category": "Systemic Hypertension",
+                  "organ": "Systemic Hypertension",
+                  "question": "Mr. Hasan, 64 years old, recently developed mild hypertension. His serum creatinine is 3.6 mg/dL. Which of the following is the anti-hypertensive drug of choice?",
+                  "choices": [
+                    "ACE inhibitors",
+                    "Calcium channel blockers (CCB)",
+                    "Spironolactone",
+                    "ARB + diuretic"
+                  ],
+                  "answerIndex": 0,
+                  "explanation": "ACE inhibitors is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Systemic Hypertension · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Systemic Hypertension"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q051",
+                  "originalNumber": "51",
+                  "category": "Systemic Hypertension",
+                  "organ": "Systemic Hypertension",
+                  "question": "A 32-year-old pregnant female at 29 weeks of gestation was discovered during follow-up to have hypertension (BP 160/105 mmHg). Which drug is considered the first choice?",
+                  "choices": [
+                    "ACE inhibitors",
+                    "Angiotensin receptor blockers (ARBs)",
+                    "Alpha-methyldopa",
+                    "Combination of diuretic and ACE inhibitors"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "Alpha-methyldopa is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Systemic Hypertension · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Systemic Hypertension"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q052",
+                  "originalNumber": "52",
+                  "category": "Systemic Hypertension",
+                  "organ": "Systemic Hypertension",
+                  "question": "Pregnancy-associated hypertension should NOT be treated with which of the following drug classes due to teratogenicity?",
+                  "choices": [
+                    "Alpha-methyldopa",
+                    "Labetalol",
+                    "Hydralazine",
+                    "ACE inhibitors / ARBs"
+                  ],
+                  "answerIndex": 3,
+                  "explanation": "ACE inhibitors / ARBs is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Systemic Hypertension · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Systemic Hypertension"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q053",
+                  "originalNumber": "53",
+                  "category": "Systemic Hypertension",
+                  "organ": "Systemic Hypertension",
+                  "question": "Hypertension in a patient with diabetes mellitus is best initially treated by which of the following to offer renal protection?",
+                  "choices": [
+                    "Beta-blocker",
+                    "ACE inhibitor",
+                    "Thiazide",
+                    "Calcium channel blocker"
+                  ],
+                  "answerIndex": 1,
+                  "explanation": "ACE inhibitor is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Systemic Hypertension · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Systemic Hypertension"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q054",
+                  "originalNumber": "54",
+                  "category": "Systemic Hypertension",
+                  "organ": "Systemic Hypertension",
+                  "question": "Which anti-hypertensive drug class is strictly contraindicated in a patient with bilateral renal artery stenosis?",
+                  "choices": [
+                    "Spironolactone",
+                    "Propranolol",
+                    "Verapamil",
+                    "Losartan (ARBs) / ACE inhibitors"
+                  ],
+                  "answerIndex": 3,
+                  "explanation": "Losartan (ARBs) / ACE inhibitors is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Systemic Hypertension · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Systemic Hypertension"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q055",
+                  "originalNumber": "55",
+                  "category": "Systemic Hypertension",
+                  "organ": "Systemic Hypertension",
+                  "question": "Which drug should be avoided in hypertensive encephalopathy due to its slow onset and unsuitable pharmacological profile in emergency contexts?",
+                  "choices": [
+                    "Labetalol",
+                    "Sodium nitroprusside",
+                    "Alpha-Methyldopa",
+                    "Nicardipine"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "Alpha-Methyldopa is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Systemic Hypertension · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Systemic Hypertension"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q056",
+                  "originalNumber": "56",
+                  "category": "Systemic Hypertension",
+                  "organ": "Systemic Hypertension",
+                  "question": "Which anti-hypertensive drug class commonly causes a dry cough and potentially angioedema as side effects?",
+                  "choices": [
+                    "Beta-blockers",
+                    "Calcium channel blockers",
+                    "Thiazide diuretics",
+                    "ACE inhibitors"
+                  ],
+                  "answerIndex": 3,
+                  "explanation": "ACE inhibitors is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Systemic Hypertension · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Systemic Hypertension"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q057",
+                  "originalNumber": "57",
+                  "category": "Systemic Hypertension",
+                  "organ": "Systemic Hypertension",
+                  "question": "Thiazide and loop diuretics may cause which of the following metabolic side effects?",
+                  "choices": [
+                    "Hyperkalemia and gynecomastia",
+                    "Hypokalemia, hyponatremia, hyperuricemia",
+                    "Renal impairment and cough",
+                    "Bradycardia and bronchospasm"
+                  ],
+                  "answerIndex": 1,
+                  "explanation": "Hypokalemia, hyponatremia, hyperuricemia is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Systemic Hypertension · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Systemic Hypertension"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q058",
+                  "originalNumber": "58",
+                  "category": "Systemic Hypertension",
+                  "organ": "Systemic Hypertension",
+                  "question": "Beta-blockers are known to potentially cause which of the following adverse effects?",
+                  "choices": [
+                    "Flushing and pedal edema",
+                    "Dry cough and angioedema",
+                    "Bradycardia, lethargy, and impotence",
+                    "Sleep disturbance and hyperuricemia"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "Bradycardia, lethargy, and impotence is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Systemic Hypertension · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Systemic Hypertension"
+                  ]
+                }
+              ],
+              "partCount": 2
+            },
+            {
+              "id": "med2-mo-ragab-past-exams-systemic-hypertension-p02",
+              "label": "Part 2 · Q59–71",
+              "description": "Systemic Hypertension questions",
+              "range": "Q59–71",
+              "questionStart": 59,
+              "questionEnd": 71,
+              "parentSourceId": "med2-mo-ragab-past-exams",
+              "groupId": "systemic-hypertension",
+              "groupLabel": "Systemic Hypertension",
+              "partIndex": 1,
+              "shuffleQuestions": false,
+              "shuffleOptions": false,
+              "mcqs": [
+                {
+                  "id": "med2-mo-ragab-q059",
+                  "originalNumber": "59",
+                  "category": "Systemic Hypertension",
+                  "organ": "Systemic Hypertension",
+                  "question": "Calcium channel blockers (such as amlodipine) may commonly cause which of the following side effects?",
+                  "choices": [
+                    "Flushing, headache, and pedal edema",
+                    "Bradycardia and bronchospasm",
+                    "Renal impairment and cough",
+                    "Hyperkalemia and gynecomastia"
+                  ],
+                  "answerIndex": 0,
+                  "explanation": "Flushing, headache, and pedal edema is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Systemic Hypertension · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Systemic Hypertension"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q060",
+                  "originalNumber": "60",
+                  "category": "Systemic Hypertension",
+                  "organ": "Systemic Hypertension",
+                  "question": "Which of the following is considered a curable cause of secondary hypertension?",
+                  "choices": [
+                    "Renal artery stenosis",
+                    "Endocrine hypertension (e.g., Pheochromocytoma)",
+                    "Aortic coarctation",
+                    "All of the above"
+                  ],
+                  "answerIndex": 3,
+                  "explanation": "All of the above is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Systemic Hypertension · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Systemic Hypertension"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q061",
+                  "originalNumber": "61",
+                  "category": "Systemic Hypertension",
+                  "organ": "Systemic Hypertension",
+                  "question": "Which of the following is NOT considered a cause of secondary hypertension?",
+                  "choices": [
+                    "Endocrinal causes",
+                    "Renal causes",
+                    "Pregnancy",
+                    "Rheumatic fever"
+                  ],
+                  "answerIndex": 3,
+                  "explanation": "Rheumatic fever is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Systemic Hypertension · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Systemic Hypertension"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q062",
+                  "originalNumber": "62",
+                  "category": "Systemic Hypertension",
+                  "organ": "Systemic Hypertension",
+                  "question": "Which of the following conditions classically causes paroxysmal (episodic) hypertension?",
+                  "choices": [
+                    "Pheochromocytoma",
+                    "Primary hyperaldosteronism",
+                    "Cushing syndrome",
+                    "Renal artery stenosis"
+                  ],
+                  "answerIndex": 0,
+                  "explanation": "Pheochromocytoma is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Systemic Hypertension · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Systemic Hypertension"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q063",
+                  "originalNumber": "63",
+                  "category": "Systemic Hypertension",
+                  "organ": "Systemic Hypertension",
+                  "question": "All the following are considered causes of systemic hypertension EXCEPT:",
+                  "choices": [
+                    "Primary hyperaldosteronism",
+                    "Estrogen-containing oral contraceptives",
+                    "Chronic kidney disease",
+                    "Addison disease (or Patent ductus arteriosus)"
+                  ],
+                  "answerIndex": 3,
+                  "explanation": "Addison disease (or Patent ductus arteriosus) is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Systemic Hypertension · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Systemic Hypertension"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q064",
+                  "originalNumber": "64",
+                  "category": "Systemic Hypertension",
+                  "organ": "Systemic Hypertension",
+                  "question": "Due to its frequently asymptomatic nature until severe complications arise, hypertension is commonly referred to in clinical practice as the:",
+                  "choices": [
+                    "White coat disease",
+                    "Blue bloater",
+                    "Water-hammer disease",
+                    "Silent killer"
+                  ],
+                  "answerIndex": 3,
+                  "explanation": "Silent killer is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Systemic Hypertension · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Systemic Hypertension"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q065",
+                  "originalNumber": "65",
+                  "category": "Systemic Hypertension",
+                  "organ": "Systemic Hypertension",
+                  "question": "Which of the following is NOT considered a complication of long-standing uncontrolled hypertension?",
+                  "choices": [
+                    "Cardiovascular accidents (hemorrhage or ischemic infarcts)",
+                    "Renal failure",
+                    "Ischemic heart disease",
+                    "Mitral valve stenosis"
+                  ],
+                  "answerIndex": 3,
+                  "explanation": "Mitral valve stenosis is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Systemic Hypertension · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Systemic Hypertension"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q066",
+                  "originalNumber": "66",
+                  "category": "Systemic Hypertension",
+                  "organ": "Systemic Hypertension",
+                  "question": "Which of the following statements is NOT correct regarding the standard management and assessment of hypertension?",
+                  "choices": [
+                    "Confirming the diagnosis of hypertension is essential",
+                    "Assessing for possible secondary causes is part of the workup",
+                    "Assessing for complications via fundoscopy is needed",
+                    "Echocardiography is never recommended"
+                  ],
+                  "answerIndex": 3,
+                  "explanation": "Echocardiography is never recommended is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Systemic Hypertension · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Systemic Hypertension"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q067",
+                  "originalNumber": "67",
+                  "category": "Systemic Hypertension",
+                  "organ": "Systemic Hypertension",
+                  "question": "Which organ disease is a leading and common cause of mortality in patients with uncontrolled hypertension?",
+                  "choices": [
+                    "Brain",
+                    "Kidney",
+                    "Heart",
+                    "Retina"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "Heart is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Systemic Hypertension · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Systemic Hypertension"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q068",
+                  "originalNumber": "68",
+                  "category": "Systemic Hypertension",
+                  "organ": "Systemic Hypertension",
+                  "question": "Which lifestyle advice is NOT advisable for a patient diagnosed with hypertension and ischemic heart disease?",
+                  "choices": [
+                    "Stop smoking cigarettes",
+                    "Lose weight if overweight",
+                    "Engage in 30-60 minutes of exercise every day",
+                    "Continue smoking shisha"
+                  ],
+                  "answerIndex": 3,
+                  "explanation": "Continue smoking shisha is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Systemic Hypertension · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Systemic Hypertension"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q069",
+                  "originalNumber": "69",
+                  "category": "Systemic Hypertension",
+                  "organ": "Systemic Hypertension",
+                  "question": "Systemic hypertension incidence is highly associated with which of the following dietary habits?",
+                  "choices": [
+                    "Low sodium (Na+) intake",
+                    "High sodium (Na+) intake",
+                    "Low potassium (K+) intake",
+                    "All of the above"
+                  ],
+                  "answerIndex": 1,
+                  "explanation": "High sodium (Na+) intake is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Systemic Hypertension · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Systemic Hypertension"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q070",
+                  "originalNumber": "70",
+                  "category": "Systemic Hypertension",
+                  "organ": "Systemic Hypertension",
+                  "question": "Self-measurement of blood pressure and ambulatory monitoring provide information about:",
+                  "choices": [
+                    "Response to antihypertensive therapy",
+                    "Adherence to therapy",
+                    "Evaluating white coat hypertension",
+                    "All of the above"
+                  ],
+                  "answerIndex": 3,
+                  "explanation": "All of the above is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Systemic Hypertension · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Systemic Hypertension"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q071",
+                  "originalNumber": "71",
+                  "category": "Systemic Hypertension",
+                  "organ": "Systemic Hypertension",
+                  "question": "HTN occurs with:",
+                  "choices": [
+                    "Low Na+ intake",
+                    "High Na intake",
+                    "Low K intake",
+                    "All of the above"
+                  ],
+                  "answerIndex": 1,
+                  "explanation": "High Na intake is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Systemic Hypertension · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Systemic Hypertension"
+                  ]
+                }
+              ],
+              "partCount": 2
+            }
+          ]
+        },
+        {
+          "id": "rheumatic-fever",
+          "label": "Rheumatic Fever",
+          "questionCount": 27,
+          "parts": [
+            {
+              "id": "med2-mo-ragab-past-exams-rheumatic-fever-p01",
+              "label": "Part 1 · Q72–85",
+              "description": "Rheumatic Fever questions",
+              "range": "Q72–85",
+              "questionStart": 72,
+              "questionEnd": 85,
+              "parentSourceId": "med2-mo-ragab-past-exams",
+              "groupId": "rheumatic-fever",
+              "groupLabel": "Rheumatic Fever",
+              "partIndex": 0,
+              "shuffleQuestions": false,
+              "shuffleOptions": false,
+              "mcqs": [
+                {
+                  "id": "med2-mo-ragab-q072",
+                  "originalNumber": "72",
+                  "category": "Rheumatic Fever",
+                  "organ": "Rheumatic Fever",
+                  "question": "Rheumatic fever is most commonly preceded by which of the following infections?",
+                  "choices": [
+                    "Viral influenza infection",
+                    "Upper respiratory tract infection with Group A β-hemolytic streptococci",
+                    "Bacterial pneumonia",
+                    "Fungal pharyngitis"
+                  ],
+                  "answerIndex": 1,
+                  "explanation": "Upper respiratory tract infection with Group A β-hemolytic streptococci is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Rheumatic Fever"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q073",
+                  "originalNumber": "73",
+                  "category": "Rheumatic Fever",
+                  "organ": "Rheumatic Fever",
+                  "question": "In individuals with rheumatic fever, the presence of recurrent and severe recent infections is primarily associated with:",
+                  "choices": [
+                    "Viral infections",
+                    "Fungal infections",
+                    "Bacterial infections, particularly Streptococcus pyogenes",
+                    "Parasitic infections"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "Bacterial infections, particularly Streptococcus pyogenes is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Rheumatic Fever"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q074",
+                  "originalNumber": "74",
+                  "category": "Rheumatic Fever",
+                  "organ": "Rheumatic Fever",
+                  "question": "Rheumatic fever is most prevalent in which of the following age groups?",
+                  "choices": [
+                    "Infants (0-1 year)",
+                    "Toddlers (1-3 years)",
+                    "School-age children (5-15 years)",
+                    "Elderly (> 65 years)"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "School-age children (5-15 years) is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Rheumatic Fever"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q075",
+                  "originalNumber": "75",
+                  "category": "Rheumatic Fever",
+                  "organ": "Rheumatic Fever",
+                  "question": "Which of the following is considered a contributing socio-economic factor for the development of rheumatic fever?",
+                  "choices": [
+                    "High social class",
+                    "Good hygiene practices",
+                    "Living in developed countries",
+                    "Overcrowding"
+                  ],
+                  "answerIndex": 3,
+                  "explanation": "Overcrowding is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Rheumatic Fever"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q076",
+                  "originalNumber": "76",
+                  "category": "Rheumatic Fever",
+                  "organ": "Rheumatic Fever",
+                  "question": "A 13-year-old child presents with migratory arthritis. On examination, there is a truncal rash that appears and disappears within hours, characterized by pink, irregular red edges, serpiginous borders, and a clear center. What is this truncal rash called?",
+                  "choices": [
+                    "Erythema nodosum",
+                    "Subcutaneous nodules",
+                    "Erythema marginatum",
+                    "Urticarial rash"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "Erythema marginatum is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Rheumatic Fever"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q077",
+                  "originalNumber": "77",
+                  "category": "Rheumatic Fever",
+                  "organ": "Rheumatic Fever",
+                  "question": "Based on the previous clinical presentation of migratory joint pain in a young patient following a suspected infection, what is this specific type of arthritis clinically called?",
+                  "choices": [
+                    "Rheumatoid arthritis",
+                    "Rheumatic arthritis",
+                    "Traumatic arthritis",
+                    "Ankylosing spondylitis"
+                  ],
+                  "answerIndex": 1,
+                  "explanation": "Rheumatic arthritis is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Rheumatic Fever"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q078",
+                  "originalNumber": "78",
+                  "category": "Rheumatic Fever",
+                  "organ": "Rheumatic Fever",
+                  "question": "Regarding the polyarthritis associated with acute rheumatic fever, all of the following statements are true EXCEPT:",
+                  "choices": [
+                    "It primarily affects small joints of the hands and feet.",
+                    "It typically leaves no permanent joint dysfunction.",
+                    "It is migratory in nature, affecting large joints.",
+                    "The joint pain is usually accompanied by other symptoms of inflammation."
+                  ],
+                  "answerIndex": 0,
+                  "explanation": "It primarily affects small joints of the hands and feet. is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Rheumatic Fever"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q079",
+                  "originalNumber": "79",
+                  "category": "Rheumatic Fever",
+                  "organ": "Rheumatic Fever",
+                  "question": "What are the minimum criteria required for a diagnosis of acute rheumatic fever?",
+                  "choices": [
+                    "Two major criteria only",
+                    "One major criterion and one minor criterion",
+                    "One major criterion and two minor criteria",
+                    "Either Two major criteria OR One major criterion and two minor criteria"
+                  ],
+                  "answerIndex": 3,
+                  "explanation": "Either Two major criteria OR One major criterion and two minor criteria is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Rheumatic Fever"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q080",
+                  "originalNumber": "80",
+                  "category": "Rheumatic Fever",
+                  "organ": "Rheumatic Fever",
+                  "question": "A 14-year-old female patient presents with a history of low-grade fever, elevated ESR, elevated ASO titer, and joint pain, but without objective evidence of arthritis. How can the diagnosis of acute rheumatic fever be clinically confirmed in this case?",
+                  "choices": [
+                    "Presence of two major Duke’s criteria",
+                    "Presence of one major and two minor Jones criteria",
+                    "Presence of three minor Jones criteria",
+                    "Presence of one major and three minor Duke criteria"
+                  ],
+                  "answerIndex": 1,
+                  "explanation": "Presence of one major and two minor Jones criteria is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Rheumatic Fever"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q081",
+                  "originalNumber": "81",
+                  "category": "Rheumatic Fever",
+                  "organ": "Rheumatic Fever",
+                  "question": "Which of the following manifestations of acute rheumatic fever is most commonly observed?",
+                  "choices": [
+                    "Subcutaneous nodules",
+                    "Erythema marginatum",
+                    "Polyarthritis",
+                    "Chorea"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "Polyarthritis is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Rheumatic Fever"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q082",
+                  "originalNumber": "82",
+                  "category": "Rheumatic Fever",
+                  "organ": "Rheumatic Fever",
+                  "question": "The minor Jones criteria for the diagnosis of acute rheumatic fever include all of the following EXCEPT:",
+                  "choices": [
+                    "Fever",
+                    "Arthralgia (mild pain without objective findings of arthritis)",
+                    "Elevated acute-phase reactants (ESR, CRP)",
+                    "Evidence of recent Streptococcal infection"
+                  ],
+                  "answerIndex": 3,
+                  "explanation": "Evidence of recent Streptococcal infection is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Rheumatic Fever"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q083",
+                  "originalNumber": "83",
+                  "category": "Rheumatic Fever",
+                  "organ": "Rheumatic Fever",
+                  "question": "Which of the following clinical findings is considered a major Jones criterion for the diagnosis of acute rheumatic fever?",
+                  "choices": [
+                    "Fever",
+                    "Prolonged PR interval on ECG",
+                    "Subcutaneous nodules",
+                    "Elevated C-reactive protein"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "Subcutaneous nodules is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Rheumatic Fever"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q084",
+                  "originalNumber": "84",
+                  "category": "Rheumatic Fever",
+                  "organ": "Rheumatic Fever",
+                  "question": "Which of the following is considered a minor criterion for the diagnosis of acute rheumatic fever?",
+                  "choices": [
+                    "Elevated acute phase reactants",
+                    "Previous rheumatic fever",
+                    "Erythema marginatum",
+                    "Chorea"
+                  ],
+                  "answerIndex": 0,
+                  "explanation": "Elevated acute phase reactants is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Rheumatic Fever"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q085",
+                  "originalNumber": "85",
+                  "category": "Rheumatic Fever",
+                  "organ": "Rheumatic Fever",
+                  "question": "Subcutaneous nodules in acute rheumatic fever typically occur:",
+                  "choices": [
+                    "At the same time as the initial infection",
+                    "Immediately after the infection resolves",
+                    "Months after the initial infection",
+                    "Years after the initial infection"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "Months after the initial infection is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Rheumatic Fever"
+                  ]
+                }
+              ],
+              "partCount": 2
+            },
+            {
+              "id": "med2-mo-ragab-past-exams-rheumatic-fever-p02",
+              "label": "Part 2 · Q86–98",
+              "description": "Rheumatic Fever questions",
+              "range": "Q86–98",
+              "questionStart": 86,
+              "questionEnd": 98,
+              "parentSourceId": "med2-mo-ragab-past-exams",
+              "groupId": "rheumatic-fever",
+              "groupLabel": "Rheumatic Fever",
+              "partIndex": 1,
+              "shuffleQuestions": false,
+              "shuffleOptions": false,
+              "mcqs": [
+                {
+                  "id": "med2-mo-ragab-q086",
+                  "originalNumber": "86",
+                  "category": "Rheumatic Fever",
+                  "organ": "Rheumatic Fever",
+                  "question": "Rheumatic chorea, a major neurological manifestation of rheumatic fever, is more commonly observed in:",
+                  "choices": [
+                    "Adult males",
+                    "Adult females",
+                    "Young females",
+                    "Young males"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "Young females is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Rheumatic Fever"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q087",
+                  "originalNumber": "87",
+                  "category": "Rheumatic Fever",
+                  "organ": "Rheumatic Fever",
+                  "question": "A young adult patient with a history of rheumatic fever presents with an irregular rapid pulse, accelerating shortness of breath, and hemoptysis. Echocardiography reveals moderate mitral valve pathology, and the ECG shows an absent P wave. What is the most probable diagnosis?",
+                  "choices": [
+                    "Rheumatic aortic stenosis",
+                    "Rheumatic mitral regurgitation",
+                    "Rheumatic mitral stenosis complicated with atrial fibrillation",
+                    "Combined mitral stenosis and regurgitation"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "Rheumatic mitral stenosis complicated with atrial fibrillation is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Rheumatic Fever"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q088",
+                  "originalNumber": "88",
+                  "category": "Rheumatic Fever",
+                  "organ": "Rheumatic Fever",
+                  "question": "A 33-year-old male patient with a past history of rheumatic fever presents with shortness of breath. On examination, blood pressure is 140/55 mmHg, a diastolic blowing murmur is heard at the left sternal border, and a \"pistol shot\" pulse is felt on the femoral artery. What is your provisional diagnosis?",
+                  "choices": [
+                    "Rheumatic Mitral Stenosis",
+                    "Rheumatic Aortic Regurgitation",
+                    "Rheumatic Mitral Regurgitation",
+                    "Rheumatic Aortic Stenosis"
+                  ],
+                  "answerIndex": 1,
+                  "explanation": "Rheumatic Aortic Regurgitation is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Rheumatic Fever"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q089",
+                  "originalNumber": "89",
+                  "category": "Rheumatic Fever",
+                  "organ": "Rheumatic Fever",
+                  "question": "The most common cause of valvular heart disease in young patients in Egypt is:",
+                  "choices": [
+                    "Congenital anomalies",
+                    "Degenerative calcification",
+                    "Rheumatic fever",
+                    "Infective endocarditis"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "Rheumatic fever is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Rheumatic Fever"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q090",
+                  "originalNumber": "90",
+                  "category": "Rheumatic Fever",
+                  "organ": "Rheumatic Fever",
+                  "question": "What is the recommended alternative for the primary prevention of rheumatic fever in a patient with a documented penicillin allergy?",
+                  "choices": [
+                    "Oral erythromycin or newer macrolides",
+                    "Intravenous vancomycin",
+                    "Aminoglycosides",
+                    "Tetracyclines"
+                  ],
+                  "answerIndex": 0,
+                  "explanation": "Oral erythromycin or newer macrolides is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Rheumatic Fever"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q091",
+                  "originalNumber": "91",
+                  "category": "Rheumatic Fever",
+                  "organ": "Rheumatic Fever",
+                  "question": "Why does Rheumatic Fever require continuous prophylactic antibiotics in secondary prevention?",
+                  "choices": [
+                    "Due to the asymptomatic nature of Streptococcal infections",
+                    "Due to the increased susceptibility to and severity of recurrences",
+                    "To prevent the development of infective endocarditis only",
+                    "To treat ongoing chronic active joint inflammation"
+                  ],
+                  "answerIndex": 1,
+                  "explanation": "Due to the increased susceptibility to and severity of recurrences is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Rheumatic Fever"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q092",
+                  "originalNumber": "92",
+                  "category": "Rheumatic Fever",
+                  "organ": "Rheumatic Fever",
+                  "question": "What is the reason for using penicillin as the drug of choice for treating Streptococcal pharyngitis?",
+                  "choices": [
+                    "Broad spectrum of activity",
+                    "Short standing efficacy",
+                    "High cost",
+                    "Narrow spectrum of activity"
+                  ],
+                  "answerIndex": 3,
+                  "explanation": "Narrow spectrum of activity is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Rheumatic Fever"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q093",
+                  "originalNumber": "93",
+                  "category": "Rheumatic Fever",
+                  "organ": "Rheumatic Fever",
+                  "question": "What is the recommended dose of benzathine penicillin for treating Streptococcal pharyngitis in children (< 27 Kg)?",
+                  "choices": [
+                    "0.6 million units IM 1 time",
+                    "1.2 million units IM 1 time",
+                    "250 mg (2-3 times/day) x10 days",
+                    "500 mg TID x10 days"
+                  ],
+                  "answerIndex": 0,
+                  "explanation": "0.6 million units IM 1 time is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Rheumatic Fever"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q094",
+                  "originalNumber": "94",
+                  "category": "Rheumatic Fever",
+                  "organ": "Rheumatic Fever",
+                  "question": "Which form of benzathine penicillin is used for the prophylaxis of rheumatic fever?",
+                  "choices": [
+                    "Intramuscular (IM) benzathine penicillin",
+                    "Intravenous (IV) benzathine penicillin",
+                    "Oral benzathine penicillin",
+                    "Subcutaneous benzathine penicillin"
+                  ],
+                  "answerIndex": 0,
+                  "explanation": "Intramuscular (IM) benzathine penicillin is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Rheumatic Fever"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q095",
+                  "originalNumber": "95",
+                  "category": "Rheumatic Fever",
+                  "organ": "Rheumatic Fever",
+                  "question": "What is the first-line and best medical medication for the acute migratory polyarthritis seen in rheumatic fever?",
+                  "choices": [
+                    "Corticosteroids",
+                    "Acetylsalicylic acid (Aspirin)",
+                    "Ibuprofen",
+                    "Paracetamol"
+                  ],
+                  "answerIndex": 1,
+                  "explanation": "Acetylsalicylic acid (Aspirin) is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Rheumatic Fever"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q096",
+                  "originalNumber": "96",
+                  "category": "Rheumatic Fever",
+                  "organ": "Rheumatic Fever",
+                  "question": "What is the recommended dose of aspirin for pediatrics with arthritis?",
+                  "choices": [
+                    "90–130 mg/kg/day in equally divided doses every 4–6 hrs, up to 5.5 gm/day",
+                    "60–70 mg/kg/day in equally divided doses every 4–6 hrs, up to 5.5 gm/day",
+                    "100 mg/kg/day in equally divided doses every 4–6 hrs, up to 5.5 gm/day",
+                    "90–130 mg/kg/day in equally divided doses every 8–12 hrs, up to 5.5 gm/day"
+                  ],
+                  "answerIndex": 0,
+                  "explanation": "90–130 mg/kg/day in equally divided doses every 4–6 hrs, up to 5.5 gm/day is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Rheumatic Fever"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q097",
+                  "originalNumber": "97",
+                  "category": "Rheumatic Fever",
+                  "organ": "Rheumatic Fever",
+                  "question": "What is the recommended treatment for arthralgia or mild arthritis without carditis?",
+                  "choices": [
+                    "Analgesics only",
+                    "Aspirin 100 mg/kg/d with meals for 3 weeks",
+                    "Prednisone 40–60 mg/d",
+                    "Intravenous Immunoglobulins"
+                  ],
+                  "answerIndex": 1,
+                  "explanation": "Aspirin 100 mg/kg/d with meals for 3 weeks is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Rheumatic Fever"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q098",
+                  "originalNumber": "98",
+                  "category": "Rheumatic Fever",
+                  "organ": "Rheumatic Fever",
+                  "question": "What is the preferred pharmacological treatment for severe cases of rheumatic carditis?",
+                  "choices": [
+                    "Aspirin 100 mg/kg/day",
+                    "Prednisone (Steroids) 40–60 mg/day",
+                    "Intravenous Immunoglobulins (IVIG)",
+                    "Non-steroidal anti-inflammatory drugs (NSAIDs)"
+                  ],
+                  "answerIndex": 1,
+                  "explanation": "Prednisone (Steroids) 40–60 mg/day is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Rheumatic Fever · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Rheumatic Fever"
+                  ]
+                }
+              ],
+              "partCount": 2
+            }
+          ]
+        },
+        {
+          "id": "aortic-stenosis",
+          "label": "Aortic Stenosis",
+          "questionCount": 19,
+          "parts": [
+            {
+              "id": "med2-mo-ragab-past-exams-aortic-stenosis-p01",
+              "label": "Part 1 · Q99–117",
+              "description": "Aortic Stenosis questions",
+              "range": "Q99–117",
+              "questionStart": 99,
+              "questionEnd": 117,
+              "parentSourceId": "med2-mo-ragab-past-exams",
+              "groupId": "aortic-stenosis",
+              "groupLabel": "Aortic Stenosis",
+              "partIndex": 0,
+              "shuffleQuestions": false,
+              "shuffleOptions": false,
+              "mcqs": [
+                {
+                  "id": "med2-mo-ragab-q099",
+                  "originalNumber": "99",
+                  "category": "Aortic Stenosis",
+                  "organ": "Aortic Stenosis",
+                  "question": "A female patient aged 83 years presented with syncope. She was first diagnosed as a case of aortic stenosis three years ago. What is the most common cause of Aortic Stenosis in this patient?",
+                  "choices": [
+                    "Rheumatic valve disease",
+                    "Congenital bicuspid valve",
+                    "Degenerative calcific disease",
+                    "Infective endocarditis"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "Degenerative calcific disease is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Aortic Stenosis · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Aortic Stenosis"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q100",
+                  "originalNumber": "100",
+                  "category": "Aortic Stenosis",
+                  "organ": "Aortic Stenosis",
+                  "question": "Aging is considered a major risk factor for the development of which of the following valvular diseases?",
+                  "choices": [
+                    "Mitral Stenosis",
+                    "Aortic Stenosis",
+                    "Aortic Regurgitation",
+                    "Tricuspid Regurgitation"
+                  ],
+                  "answerIndex": 1,
+                  "explanation": "Aortic Stenosis is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Aortic Stenosis · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Aortic Stenosis"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q101",
+                  "originalNumber": "101",
+                  "category": "Aortic Stenosis",
+                  "organ": "Aortic Stenosis",
+                  "question": "Congenital bicuspid aortic valve stenosis typically presents and shows symptoms in patients at what age group?",
+                  "choices": [
+                    "Under 70 years (usually 50-60 years)",
+                    "Above 70 years",
+                    "At birth",
+                    "Above 80 years"
+                  ],
+                  "answerIndex": 0,
+                  "explanation": "Under 70 years (usually 50-60 years) is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Aortic Stenosis · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Aortic Stenosis"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q102",
+                  "originalNumber": "102",
+                  "category": "Aortic Stenosis",
+                  "organ": "Aortic Stenosis",
+                  "question": "According to the pathophysiology of Aortic Stenosis, the obstruction to left ventricular emptying primarily causes an increase in:",
+                  "choices": [
+                    "Left ventricular preload",
+                    "Pulmonary artery pressure",
+                    "Left ventricular afterload",
+                    "Both afterload and preload"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "Left ventricular afterload is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Aortic Stenosis · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Aortic Stenosis"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q103",
+                  "originalNumber": "103",
+                  "category": "Aortic Stenosis",
+                  "organ": "Aortic Stenosis",
+                  "question": "Which of the following symptom combinations represents the classic clinical triad of severe Aortic Stenosis?",
+                  "choices": [
+                    "Palpitations, hemoptysis, and malar flush",
+                    "Angina, syncope, and dyspnea",
+                    "Fever, splenomegaly, and embolic phenomena",
+                    "Wide pulse pressure, bounding pulse, and head nodding"
+                  ],
+                  "answerIndex": 1,
+                  "explanation": "Angina, syncope, and dyspnea is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Aortic Stenosis · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Aortic Stenosis"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q104",
+                  "originalNumber": "104",
+                  "category": "Aortic Stenosis",
+                  "organ": "Aortic Stenosis",
+                  "question": "The classic symptoms of Aortic Stenosis include all of the following EXCEPT:",
+                  "choices": [
+                    "Syncope",
+                    "Exertional dyspnea",
+                    "Angina",
+                    "Palpitations"
+                  ],
+                  "answerIndex": 3,
+                  "explanation": "Palpitations is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Aortic Stenosis · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Aortic Stenosis"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q105",
+                  "originalNumber": "105",
+                  "category": "Aortic Stenosis",
+                  "organ": "Aortic Stenosis",
+                  "question": "Symptoms of Aortic Stenosis typically begin to occur when the valve area is severely reduced to what fraction of the normal area?",
+                  "choices": [
+                    "1/2 the normal area",
+                    "1/4 the normal area",
+                    "1/3 the normal area",
+                    "3/4 the normal area"
+                  ],
+                  "answerIndex": 1,
+                  "explanation": "1/4 the normal area is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Aortic Stenosis · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Aortic Stenosis"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q106",
+                  "originalNumber": "106",
+                  "category": "Aortic Stenosis",
+                  "organ": "Aortic Stenosis",
+                  "question": "Which of the following clinical events has the most significant poor prognostic value in a patient with severe Aortic Stenosis?",
+                  "choices": [
+                    "Advancing age",
+                    "Increased loudness of the murmur",
+                    "Onset of clinical symptoms (angina, syncope, or heart failure)",
+                    "Presence of a basal thrill"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "Onset of clinical symptoms (angina, syncope, or heart failure) is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Aortic Stenosis · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Aortic Stenosis"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q107",
+                  "originalNumber": "107",
+                  "category": "Aortic Stenosis",
+                  "organ": "Aortic Stenosis",
+                  "question": "The physical sign \"Pulsus Parvus et Tardus\" classically seen in Aortic Stenosis refers to:",
+                  "choices": [
+                    "Increase in pulse amplitude",
+                    "Decrease in pulse amplitude with a delayed peak",
+                    "Constant pulse amplitude",
+                    "Collapsing water-hammer pulse"
+                  ],
+                  "answerIndex": 1,
+                  "explanation": "This pulse is low in amplitude and delayed because severe aortic stenosis obstructs left-ventricular outflow.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Aortic Stenosis · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Aortic Stenosis"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q108",
+                  "originalNumber": "108",
+                  "category": "Aortic Stenosis",
+                  "organ": "Aortic Stenosis",
+                  "question": "What is the characteristic auscultatory finding (heart sound/murmur) in Aortic Stenosis?",
+                  "choices": [
+                    "Diastolic rumbling murmur",
+                    "Holosystolic murmur at the apex",
+                    "Systolic ejection murmur",
+                    "Early diastolic decrescendo murmur"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "Systolic ejection murmur is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Aortic Stenosis · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Aortic Stenosis"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q109",
+                  "originalNumber": "109",
+                  "category": "Aortic Stenosis",
+                  "organ": "Aortic Stenosis",
+                  "question": "The A2 component of the second heart sound in severe Aortic Stenosis is characteristically:",
+                  "choices": [
+                    "Diminished or absent",
+                    "Normal in character",
+                    "Ringing in character",
+                    "Accentuated"
+                  ],
+                  "answerIndex": 0,
+                  "explanation": "Diminished or absent is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Aortic Stenosis · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Aortic Stenosis"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q110",
+                  "originalNumber": "110",
+                  "category": "Aortic Stenosis",
+                  "organ": "Aortic Stenosis",
+                  "question": "On physical examination, a patient with severe Aortic Stenosis will classically have:",
+                  "choices": [
+                    "Apical diastolic thrill",
+                    "Hyperdynamic apex",
+                    "Basal systolic thrill",
+                    "Parasternal heave"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "Basal systolic thrill is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Aortic Stenosis · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Aortic Stenosis"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q111",
+                  "originalNumber": "111",
+                  "category": "Aortic Stenosis",
+                  "organ": "Aortic Stenosis",
+                  "question": "In patients with Aortic Stenosis, echocardiography (ECHO) is routinely used to measure:",
+                  "choices": [
+                    "Ejection Fraction (EF) only",
+                    "Left Ventricular Hypertrophy (LVH) only",
+                    "Both EF and LVH",
+                    "Right atrial dilatation"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "Both EF and LVH is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Aortic Stenosis · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Aortic Stenosis"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q112",
+                  "originalNumber": "112",
+                  "category": "Aortic Stenosis",
+                  "organ": "Aortic Stenosis",
+                  "question": "According to Doppler-derived gradient and Aortic Valve Area (AVA), moderate Aortic Stenosis is defined by an AVA of:",
+                  "choices": [
+                    "> 1.5 cm²",
+                    "≤ 1.0 cm²",
+                    "1.0 - 1.5 cm²",
+                    "< 0.6 cm²"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "1.0 - 1.5 cm² is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Aortic Stenosis · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Aortic Stenosis"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q113",
+                  "originalNumber": "113",
+                  "category": "Aortic Stenosis",
+                  "organ": "Aortic Stenosis",
+                  "question": "During preoperative assessment for an eye surgery, Mr. X has no symptoms of heart disease but routine echocardiography revealed an Aortic valve area of 1.1 cm². This case is considered:",
+                  "choices": [
+                    "Normal",
+                    "Mild AS",
+                    "Moderate AS",
+                    "Severe AS"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "Moderate AS is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Aortic Stenosis · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Aortic Stenosis"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q114",
+                  "originalNumber": "114",
+                  "category": "Aortic Stenosis",
+                  "organ": "Aortic Stenosis",
+                  "question": "A 63-year-old male presented with angina. Coronary angiography revealed normal coronary arteries. His echocardiography showed an Aortic Valve Area (AVA) of 0.8 cm². What is your decision regarding his management?",
+                  "choices": [
+                    "Medical treatment only",
+                    "Follow up after 6 months",
+                    "Aortic valve replacement is currently indicated",
+                    "Lifestyle modification and palliative treatment"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "Aortic valve replacement is currently indicated is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Aortic Stenosis · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Aortic Stenosis"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q115",
+                  "originalNumber": "115",
+                  "category": "Aortic Stenosis",
+                  "organ": "Aortic Stenosis",
+                  "question": "Which of the following is considered the definitive treatment line for a patient presenting with symptomatic severe aortic stenosis?",
+                  "choices": [
+                    "Valve replacement / Transcatheter Aortic Valve Implantation (TAVI)",
+                    "Long-term beta-blocker therapy",
+                    "Medical treatment with loop diuretics only",
+                    "Watchful waiting and regular follow-up"
+                  ],
+                  "answerIndex": 0,
+                  "explanation": "Valve replacement / Transcatheter Aortic Valve Implantation (TAVI) is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Aortic Stenosis · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Aortic Stenosis"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q116",
+                  "originalNumber": "116",
+                  "category": "Aortic Stenosis",
+                  "organ": "Aortic Stenosis",
+                  "question": "What is the role of medical treatment in patients with severe symptomatic Aortic Stenosis?",
+                  "choices": [
+                    "It is superior to surgical intervention",
+                    "It has a limited role (Definitive treatment is surgery/TAVI)",
+                    "Vasodilators are strongly indicated",
+                    "It is the treatment of choice in all age groups"
+                  ],
+                  "answerIndex": 1,
+                  "explanation": "It has a limited role (Definitive treatment is surgery/TAVI) is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Aortic Stenosis · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Aortic Stenosis"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q117",
+                  "originalNumber": "117",
+                  "category": "Aortic Stenosis",
+                  "organ": "Aortic Stenosis",
+                  "question": "A 75-year-old man is brought to the hospital because of a syncopal episode. On examination, his blood pressure is 140/80 mmHg. His second heart sound is diminished and there is a systolic ejection murmur that radiates to the carotids. With the Valsalva maneuver, the murmur decreases in length and intensity. What is the most likely diagnosis?",
+                  "choices": [
+                    "Aortic stenosis",
+                    "Hypertrophic Obstructive Cardiomyopathy (HOCM)",
+                    "Mitral regurgitation",
+                    "Tricuspid regurgitation"
+                  ],
+                  "answerIndex": 0,
+                  "explanation": "Aortic stenosis is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Aortic Stenosis · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Aortic Stenosis"
+                  ]
+                }
+              ],
+              "partCount": 1
+            }
+          ]
+        },
+        {
+          "id": "aortic-regurgitation",
+          "label": "Aortic Regurgitation",
+          "questionCount": 14,
+          "parts": [
+            {
+              "id": "med2-mo-ragab-past-exams-aortic-regurgitation-p01",
+              "label": "Part 1 · Q118–131",
+              "description": "Aortic Regurgitation questions",
+              "range": "Q118–131",
+              "questionStart": 118,
+              "questionEnd": 131,
+              "parentSourceId": "med2-mo-ragab-past-exams",
+              "groupId": "aortic-regurgitation",
+              "groupLabel": "Aortic Regurgitation",
+              "partIndex": 0,
+              "shuffleQuestions": false,
+              "shuffleOptions": false,
+              "mcqs": [
+                {
+                  "id": "med2-mo-ragab-q118",
+                  "originalNumber": "118",
+                  "category": "Aortic Regurgitation",
+                  "organ": "Aortic Regurgitation",
+                  "question": "Pathophysiologically, severe Aortic Regurgitation leads to an increase in:",
+                  "choices": [
+                    "Preload only",
+                    "Afterload only",
+                    "Both afterload and preload",
+                    "Pulmonary vascular resistance"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "Both afterload and preload is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Aortic Regurgitation · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Aortic Regurgitation"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q119",
+                  "originalNumber": "119",
+                  "category": "Aortic Regurgitation",
+                  "organ": "Aortic Regurgitation",
+                  "question": "The left ventricle initially compensates for the volume overload in chronic Aortic Regurgitation by:",
+                  "choices": [
+                    "Concentric pressure hypertrophy",
+                    "Left ventricular dilatation (eccentric hypertrophy)",
+                    "Atrial fibrillation",
+                    "Right ventricular failure"
+                  ],
+                  "answerIndex": 1,
+                  "explanation": "Left ventricular dilatation (eccentric hypertrophy) is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Aortic Regurgitation · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Aortic Regurgitation"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q120",
+                  "originalNumber": "120",
+                  "category": "Aortic Regurgitation",
+                  "organ": "Aortic Regurgitation",
+                  "question": "The natural history of chronic asymptomatic Aortic Regurgitation is typically:",
+                  "choices": [
+                    "Symptomatic in the 2nd decade",
+                    "Asymptomatic until the 6th decade",
+                    "Asymptomatic until the 4th or 5th decade",
+                    "Rapidly progressive within months"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "Asymptomatic until the 4th or 5th decade is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Aortic Regurgitation · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Aortic Regurgitation"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q121",
+                  "originalNumber": "121",
+                  "category": "Aortic Regurgitation",
+                  "organ": "Aortic Regurgitation",
+                  "question": "What type of dyspnea can occur in advanced Aortic Regurgitation?",
+                  "choices": [
+                    "Exertional dyspnea",
+                    "Paroxysmal nocturnal dyspnea",
+                    "Orthopnea",
+                    "All of the above"
+                  ],
+                  "answerIndex": 3,
+                  "explanation": "All of the above is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Aortic Regurgitation · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Aortic Regurgitation"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q122",
+                  "originalNumber": "122",
+                  "category": "Aortic Regurgitation",
+                  "organ": "Aortic Regurgitation",
+                  "question": "A 33-year-old male patient with a past history of rheumatic fever presented with shortness of breath. On examination: Blood pressure was 140/55 mmHg, a diastolic blowing murmur was heard at the left sternal border, and a pistol shot sound was felt on the femoral artery. What is your provisional diagnosis?",
+                  "choices": [
+                    "Rheumatic Aortic Stenosis",
+                    "Rheumatic Mitral Stenosis",
+                    "Rheumatic Aortic Regurgitation",
+                    "Rheumatic Mitral Regurgitation"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "Rheumatic Aortic Regurgitation is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Aortic Regurgitation · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Aortic Regurgitation"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q123",
+                  "originalNumber": "123",
+                  "category": "Aortic Regurgitation",
+                  "organ": "Aortic Regurgitation",
+                  "question": "The classic diastolic soft blowing murmur of Aortic Regurgitation is typically best heard at:",
+                  "choices": [
+                    "The apex",
+                    "Left sternal border",
+                    "Right sternal border",
+                    "The axilla"
+                  ],
+                  "answerIndex": 1,
+                  "explanation": "Left sternal border is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Aortic Regurgitation · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Aortic Regurgitation"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q124",
+                  "originalNumber": "124",
+                  "category": "Aortic Regurgitation",
+                  "organ": "Aortic Regurgitation",
+                  "question": "A 51-year-old female patient presented with shortness of breath. On Examination: Blood pressure was 150/60mmHg and an Austin flint murmur was heard over the apex. The gold standard test to confirm the diagnosis of this valvular lesion is:",
+                  "choices": [
+                    "ECG",
+                    "Cardiac CT",
+                    "Echocardiography",
+                    "Cardiac catheterization"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "An Austin Flint murmur suggests significant aortic regurgitation, and echocardiography is the key test for confirmation and severity assessment.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Aortic Regurgitation · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Aortic Regurgitation"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q125",
+                  "originalNumber": "125",
+                  "category": "Aortic Regurgitation",
+                  "organ": "Aortic Regurgitation",
+                  "question": "Chronic severe aortic regurgitation classically causes which of the following physical examination findings?",
+                  "choices": [
+                    "Narrow pulse pressure with slow-rising pulse",
+                    "Pansystolic murmur radiating to the axilla",
+                    "Wide pulse pressure / water-hammer pulse (Corrigan's pulse)",
+                    "Ejection systolic murmur radiating to the carotids"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "Wide pulse pressure / water-hammer pulse (Corrigan's pulse) is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Aortic Regurgitation · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Aortic Regurgitation"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q126",
+                  "originalNumber": "126",
+                  "category": "Aortic Regurgitation",
+                  "organ": "Aortic Regurgitation",
+                  "question": "Peripheral signs of chronic Aortic Regurgitation include all of the following EXCEPT:",
+                  "choices": [
+                    "Water-hammer pulse",
+                    "Low blood pressure in the lower limbs",
+                    "Pistol shot sound over femoral arteries",
+                    "Capillary pulsation (Quincke's pulse)"
+                  ],
+                  "answerIndex": 1,
+                  "explanation": "Low blood pressure in the lower limbs is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Aortic Regurgitation · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Aortic Regurgitation"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q127",
+                  "originalNumber": "127",
+                  "category": "Aortic Regurgitation",
+                  "organ": "Aortic Regurgitation",
+                  "question": "Which of the following is a recognized physical examination finding in a patient with chronic aortic regurgitation?",
+                  "choices": [
+                    "Becker sign",
+                    "Corrigan pulse (\"water-hammer\" pulse)",
+                    "Traube sign (\"pistol-shot\" pulse)",
+                    "All of the above"
+                  ],
+                  "answerIndex": 3,
+                  "explanation": "All of the above is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Aortic Regurgitation · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Aortic Regurgitation"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q128",
+                  "originalNumber": "128",
+                  "category": "Aortic Regurgitation",
+                  "organ": "Aortic Regurgitation",
+                  "question": "Surgical valve replacement in chronic Aortic Regurgitation is indicated in:",
+                  "choices": [
+                    "All patients with symptoms",
+                    "Asymptomatic patients with an Ejection Fraction (EF) < 50%",
+                    "Patients with severe LV dilatation",
+                    "All of the above"
+                  ],
+                  "answerIndex": 3,
+                  "explanation": "All of the above is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Aortic Regurgitation · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Aortic Regurgitation"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q129",
+                  "originalNumber": "129",
+                  "category": "Aortic Regurgitation",
+                  "organ": "Aortic Regurgitation",
+                  "question": "In the medical management of chronic severe Aortic Regurgitation, which drug class should be avoided because it prolongs diastole and worsens regurgitation?",
+                  "choices": [
+                    "Positive inotropes",
+                    "Vasodilators",
+                    "Beta-blockers",
+                    "Diuretics"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "Beta-blockers is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Aortic Regurgitation · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Aortic Regurgitation"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q130",
+                  "originalNumber": "130",
+                  "category": "Aortic Regurgitation",
+                  "organ": "Aortic Regurgitation",
+                  "question": "A patient has a history of severe asymptomatic Aortic Regurgitation and is doing daily activities without fatigue. One month ago, he developed acute coronary syndrome, and coronary angiography revealed multi-vessel disease requiring CABG. Which of the following is true regarding his management plan?",
+                  "choices": [
+                    "CABG only",
+                    "CABG and Aortic Valve (AV) replacement in the same surgery",
+                    "TAVI only before CABG",
+                    "Medical therapy until Left Ventricular dilatation appears"
+                  ],
+                  "answerIndex": 1,
+                  "explanation": "CABG and Aortic Valve (AV) replacement in the same surgery is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Aortic Regurgitation · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Aortic Regurgitation"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q131",
+                  "originalNumber": "131",
+                  "category": "Aortic Regurgitation",
+                  "organ": "Aortic Regurgitation",
+                  "question": "A 42-year-old male presented to the ER with cardiogenic shock of a few hours duration. Echocardiography revealed infective endocarditis complicated by acute severe aortic regurgitation. What is the correct next step in management?",
+                  "choices": [
+                    "Intra-aortic balloon pump is usually used",
+                    "High-dose beta blockers administration",
+                    "Avoid positive inotropes completely",
+                    "It is a true surgical emergency"
+                  ],
+                  "answerIndex": 3,
+                  "explanation": "It is a true surgical emergency is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Aortic Regurgitation · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Aortic Regurgitation"
+                  ]
+                }
+              ],
+              "partCount": 1
+            }
+          ]
+        },
+        {
+          "id": "mitral-stenosis",
+          "label": "Mitral Stenosis",
+          "questionCount": 13,
+          "parts": [
+            {
+              "id": "med2-mo-ragab-past-exams-mitral-stenosis-p01",
+              "label": "Part 1 · Q132–144",
+              "description": "Mitral Stenosis questions",
+              "range": "Q132–144",
+              "questionStart": 132,
+              "questionEnd": 144,
+              "parentSourceId": "med2-mo-ragab-past-exams",
+              "groupId": "mitral-stenosis",
+              "groupLabel": "Mitral Stenosis",
+              "partIndex": 0,
+              "shuffleQuestions": false,
+              "shuffleOptions": false,
+              "mcqs": [
+                {
+                  "id": "med2-mo-ragab-q132",
+                  "originalNumber": "132",
+                  "category": "Mitral Stenosis",
+                  "organ": "Mitral Stenosis",
+                  "question": "What is the normal mitral valve area in healthy adults?",
+                  "choices": [
+                    "1.0 - 2.0 cm²",
+                    "2.5 - 3.5 cm²",
+                    "4.0 - 6.0 cm²",
+                    "> 7.0 cm²"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "4.0 - 6.0 cm² is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Mitral Stenosis · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Mitral Stenosis"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q133",
+                  "originalNumber": "133",
+                  "category": "Mitral Stenosis",
+                  "organ": "Mitral Stenosis",
+                  "question": "The most common cause of Mitral Stenosis is:",
+                  "choices": [
+                    "Mitral annular calcification",
+                    "Congenital VSD",
+                    "Rheumatic endocarditis (Rheumatic fever)",
+                    "Infective endocarditis"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "Rheumatic endocarditis (Rheumatic fever) is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Mitral Stenosis · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Mitral Stenosis"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q134",
+                  "originalNumber": "134",
+                  "category": "Mitral Stenosis",
+                  "organ": "Mitral Stenosis",
+                  "question": "What is the most common cause of valvular heart disease in young patients in Egypt?",
+                  "choices": [
+                    "Congenital bicuspid valve disease",
+                    "Degenerative calcific valve disease",
+                    "Rheumatic fever",
+                    "Infective endocarditis"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "Rheumatic fever is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Mitral Stenosis · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Mitral Stenosis"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q135",
+                  "originalNumber": "135",
+                  "category": "Mitral Stenosis",
+                  "organ": "Mitral Stenosis",
+                  "question": "A 33-year-old female patient presented to the ER with accelerating shortness of breath, hemoptysis, and palpitations over the last 3 days. She has a history of recurrent tonsillitis and joint pain. Examination revealed a mid-diastolic rumbling murmur heard over the apex and a pulsus deficit of 15 beats/min. What is the most probable diagnosis?",
+                  "choices": [
+                    "Rheumatic Aortic Stenosis",
+                    "Rheumatic Mitral Regurgitation",
+                    "Rheumatic Mitral Stenosis complicated with Atrial Fibrillation",
+                    "Combined mitral stenosis and regurgitation"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "Rheumatic Mitral Stenosis complicated with Atrial Fibrillation is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Mitral Stenosis · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Mitral Stenosis"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q136",
+                  "originalNumber": "136",
+                  "category": "Mitral Stenosis",
+                  "organ": "Mitral Stenosis",
+                  "question": "According to the pathophysiology of Mitral Stenosis, hemoptysis is primarily due to:",
+                  "choices": [
+                    "Left atrial enlargement",
+                    "Right heart failure",
+                    "Systemic hypertension",
+                    "Pulmonary hypertension"
+                  ],
+                  "answerIndex": 3,
+                  "explanation": "Pulmonary hypertension is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Mitral Stenosis · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Mitral Stenosis"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q137",
+                  "originalNumber": "137",
+                  "category": "Mitral Stenosis",
+                  "organ": "Mitral Stenosis",
+                  "question": "Ortner's syndrome in the context of severe Mitral Stenosis is defined as:",
+                  "choices": [
+                    "Hoarseness of voice due to left atrial enlargement compressing the recurrent laryngeal nerve",
+                    "Pulmonary congestion symptoms",
+                    "Right ventricular failure signs",
+                    "Dysphagia due to left atrial enlargement"
+                  ],
+                  "answerIndex": 0,
+                  "explanation": "Ortner syndrome is hoarseness caused by compression of the left recurrent laryngeal nerve by an enlarged left atrium.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Mitral Stenosis · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Mitral Stenosis"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q138",
+                  "originalNumber": "138",
+                  "category": "Mitral Stenosis",
+                  "organ": "Mitral Stenosis",
+                  "question": "According to physical findings in Mitral Stenosis, Malar flush typically occurs:",
+                  "choices": [
+                    "Before symptoms start",
+                    "As an early sign of the disease",
+                    "In patients with severe MS",
+                    "Only when complicated by AF"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "In patients with severe MS is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Mitral Stenosis · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Mitral Stenosis"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q139",
+                  "originalNumber": "139",
+                  "category": "Mitral Stenosis",
+                  "organ": "Mitral Stenosis",
+                  "question": "Mitral stenosis classically causes which of the following auscultatory findings?",
+                  "choices": [
+                    "Mid-diastolic rumbling murmur at the apex",
+                    "Ejection systolic murmur radiating to carotids",
+                    "Early diastolic decrescendo murmur at the left sternal edge",
+                    "Pansystolic murmur at the apex radiating to the axilla"
+                  ],
+                  "answerIndex": 0,
+                  "explanation": "Mid-diastolic rumbling murmur at the apex is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Mitral Stenosis · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Mitral Stenosis"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q140",
+                  "originalNumber": "140",
+                  "category": "Mitral Stenosis",
+                  "organ": "Mitral Stenosis",
+                  "question": "Which of the following auscultatory findings indicates the severity of Mitral Stenosis?",
+                  "choices": [
+                    "Presence of an opening snap",
+                    "High intensity of the diastolic murmur",
+                    "A shorter A2 to Opening Snap (OS) interval",
+                    "Loud S1"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "A shorter A2 to Opening Snap (OS) interval is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Mitral Stenosis · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Mitral Stenosis"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q141",
+                  "originalNumber": "141",
+                  "category": "Mitral Stenosis",
+                  "organ": "Mitral Stenosis",
+                  "question": "Mortality in Mitral Stenosis is most frequently due to:",
+                  "choices": [
+                    "Low cardiac output",
+                    "Systemic hypertension",
+                    "Recurrent chest infections and thromboembolism",
+                    "Aortic root dilatation"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "Recurrent chest infections and thromboembolism is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Mitral Stenosis · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Mitral Stenosis"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q142",
+                  "originalNumber": "142",
+                  "category": "Mitral Stenosis",
+                  "organ": "Mitral Stenosis",
+                  "question": "A patient with mild asymptomatic Mitral Stenosis should be followed up by echocardiography every:",
+                  "choices": [
+                    "3 to 5 years",
+                    "2 years",
+                    "6 months",
+                    "10 years"
+                  ],
+                  "answerIndex": 0,
+                  "explanation": "3 to 5 years is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Mitral Stenosis · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Mitral Stenosis"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q143",
+                  "originalNumber": "143",
+                  "category": "Mitral Stenosis",
+                  "organ": "Mitral Stenosis",
+                  "question": "What is the role of medical treatment in isolated Mitral Stenosis?",
+                  "choices": [
+                    "It has no role",
+                    "It is superior to surgery",
+                    "It is just symptomatic (e.g., HR control, diuretics)",
+                    "It reverses valve calcification"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "It is just symptomatic (e.g., HR control, diuretics) is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Mitral Stenosis · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Mitral Stenosis"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q144",
+                  "originalNumber": "144",
+                  "category": "Mitral Stenosis",
+                  "organ": "Mitral Stenosis",
+                  "question": "Which of the following statements is true regarding the surgical management of patients with asymptomatic moderate or severe Mitral Stenosis using Percutaneous Mitral Balloon Valvotomy (PMBV)?",
+                  "choices": [
+                    "Surgery/PMBV is considered on a case-by-case basis for suitable asymptomatic patients",
+                    "It is never used in asymptomatic patients",
+                    "It is the treatment of choice for MS with severe mitral regurgitation",
+                    "Surgery is only considered if EF drops below 30%"
+                  ],
+                  "answerIndex": 0,
+                  "explanation": "Surgery/PMBV is considered on a case-by-case basis for suitable asymptomatic patients is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Mitral Stenosis · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Mitral Stenosis"
+                  ]
+                }
+              ],
+              "partCount": 1
+            }
+          ]
+        },
+        {
+          "id": "mitral-regurgitation",
+          "label": "Mitral Regurgitation",
+          "questionCount": 13,
+          "parts": [
+            {
+              "id": "med2-mo-ragab-past-exams-mitral-regurgitation-p01",
+              "label": "Part 1 · Q145–157",
+              "description": "Mitral Regurgitation questions",
+              "range": "Q145–157",
+              "questionStart": 145,
+              "questionEnd": 157,
+              "parentSourceId": "med2-mo-ragab-past-exams",
+              "groupId": "mitral-regurgitation",
+              "groupLabel": "Mitral Regurgitation",
+              "partIndex": 0,
+              "shuffleQuestions": false,
+              "shuffleOptions": false,
+              "mcqs": [
+                {
+                  "id": "med2-mo-ragab-q145",
+                  "originalNumber": "145",
+                  "category": "Mitral Regurgitation",
+                  "organ": "Mitral Regurgitation",
+                  "question": "What is the backflow of blood from the left ventricle to the left atrium during systole called?",
+                  "choices": [
+                    "Mitral regurgitation (MR)",
+                    "Aortic regurgitation (AR)",
+                    "Tricuspid regurgitation (TR)",
+                    "Pulmonary regurgitation (PR)"
+                  ],
+                  "answerIndex": 0,
+                  "explanation": "Mitral regurgitation (MR) is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Mitral Regurgitation · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Mitral Regurgitation"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q146",
+                  "originalNumber": "146",
+                  "category": "Mitral Regurgitation",
+                  "organ": "Mitral Regurgitation",
+                  "question": "What is the primary compensatory mechanism for the pure volume overload seen in chronic Mitral Regurgitation?",
+                  "choices": [
+                    "Left atrial enlargement only",
+                    "Right atrial enlargement",
+                    "Left ventricular hypertrophy and dilatation (LVH)",
+                    "Right ventricular hypertrophy (RVH)"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "Left ventricular hypertrophy and dilatation (LVH) is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Mitral Regurgitation · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Mitral Regurgitation"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q147",
+                  "originalNumber": "147",
+                  "category": "Mitral Regurgitation",
+                  "organ": "Mitral Regurgitation",
+                  "question": "The phase of Mitral Regurgitation where the patient has LV volume overload but remains asymptomatic due to LV compliance is called:",
+                  "choices": [
+                    "Acute phase",
+                    "Chronic compensated phase",
+                    "Chronic decompensated phase",
+                    "Refractory phase"
+                  ],
+                  "answerIndex": 1,
+                  "explanation": "Chronic compensated phase is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Mitral Regurgitation · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Mitral Regurgitation"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q148",
+                  "originalNumber": "148",
+                  "category": "Mitral Regurgitation",
+                  "organ": "Mitral Regurgitation",
+                  "question": "What is the name of the extra heart sound that is frequently heard in patients with congestive heart failure or significant left atrial volume overload (like severe MR)?",
+                  "choices": [
+                    "S1",
+                    "S2",
+                    "S3",
+                    "S4"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "S3 is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Mitral Regurgitation · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Mitral Regurgitation"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q149",
+                  "originalNumber": "149",
+                  "category": "Mitral Regurgitation",
+                  "organ": "Mitral Regurgitation",
+                  "question": "What is the name of the heart valve disease that is primarily caused by myxomatous degeneration?",
+                  "choices": [
+                    "Mitral regurgitation (via MVP)",
+                    "Aortic regurgitation",
+                    "Tricuspid regurgitation",
+                    "Pulmonary regurgitation"
+                  ],
+                  "answerIndex": 0,
+                  "explanation": "Mitral regurgitation (via MVP) is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Mitral Regurgitation · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Mitral Regurgitation"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q150",
+                  "originalNumber": "150",
+                  "category": "Mitral Regurgitation",
+                  "organ": "Mitral Regurgitation",
+                  "question": "Mitral regurgitation classically causes which of the following auscultatory findings?",
+                  "choices": [
+                    "Mid-diastolic rumble with an opening snap",
+                    "Pansystolic murmur at the apex radiating to the axilla",
+                    "Ejection systolic murmur radiating to the carotids",
+                    "Continuous machinery murmur"
+                  ],
+                  "answerIndex": 1,
+                  "explanation": "Pansystolic murmur at the apex radiating to the axilla is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Mitral Regurgitation · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Mitral Regurgitation"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q151",
+                  "originalNumber": "151",
+                  "category": "Mitral Regurgitation",
+                  "organ": "Mitral Regurgitation",
+                  "question": "In chronic Mitral Regurgitation, does the intensity (loudness) of the murmur strictly correlate with the severity of the regurgitation?",
+                  "choices": [
+                    "Yes",
+                    "No",
+                    "Only in acute MR",
+                    "Only in rheumatic MR"
+                  ],
+                  "answerIndex": 1,
+                  "explanation": "No is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Mitral Regurgitation · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Mitral Regurgitation"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q152",
+                  "originalNumber": "152",
+                  "category": "Mitral Regurgitation",
+                  "organ": "Mitral Regurgitation",
+                  "question": "Which of the following time intervals is recommended for serial echocardiography in patients with Mild Mitral Regurgitation?",
+                  "choices": [
+                    "Mild: 1-2 years",
+                    "Mild: 6-12 months",
+                    "Mild: 2-3 years",
+                    "Mild: 5 years"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "Mild: 2-3 years is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Mitral Regurgitation · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Mitral Regurgitation"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q153",
+                  "originalNumber": "153",
+                  "category": "Mitral Regurgitation",
+                  "organ": "Mitral Regurgitation",
+                  "question": "Hypertrophic Obstructive Cardiomyopathy (HOCM) is commonly associated with which of the following valvular complications (often due to Systolic Anterior Motion of the mitral valve)?",
+                  "choices": [
+                    "Aortic Stenosis",
+                    "Aortic Regurgitation",
+                    "Mitral Stenosis",
+                    "Mitral Regurgitation"
+                  ],
+                  "answerIndex": 3,
+                  "explanation": "Mitral Regurgitation is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Mitral Regurgitation · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Mitral Regurgitation"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q154",
+                  "originalNumber": "154",
+                  "category": "Mitral Regurgitation",
+                  "organ": "Mitral Regurgitation",
+                  "question": "A 72-year-old woman presented with acute severe chest pain and ST-segment elevation myocardial infarction. Two days later, she became acutely unwell with pulmonary edema and a loud pansystolic murmur at the apex radiating to the axilla. What is the most likely diagnosis?",
+                  "choices": [
+                    "Ventricular septal defect",
+                    "Acute pericarditis",
+                    "Ruptured papillary muscle causing acute Mitral Regurgitation",
+                    "Free-wall rupture causing cardiac tamponade"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "Ruptured papillary muscle causing acute Mitral Regurgitation is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Mitral Regurgitation · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Mitral Regurgitation"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q155",
+                  "originalNumber": "155",
+                  "category": "Mitral Regurgitation",
+                  "organ": "Mitral Regurgitation",
+                  "question": "Surgery for Mitral Regurgitation is generally recommended for:",
+                  "choices": [
+                    "Any patient with symptoms at rest or exercise, and repair should be considered if feasible",
+                    "All asymptomatic patients regardless of EF",
+                    "Patients with mild MR and normal EF",
+                    "Only patients with acute chordal rupture"
+                  ],
+                  "answerIndex": 0,
+                  "explanation": "Any patient with symptoms at rest or exercise, and repair should be considered if feasible is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Mitral Regurgitation · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Mitral Regurgitation"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q156",
+                  "originalNumber": "156",
+                  "category": "Mitral Regurgitation",
+                  "organ": "Mitral Regurgitation",
+                  "question": "The echocardiogram of a 22-year-old woman reveals mitral valve prolapse (MVP). Which of the following is the most common physical finding in this condition?",
+                  "choices": [
+                    "Diastolic rumble",
+                    "Absent first heart sound",
+                    "Diastolic click",
+                    "Mid-systolic click and late systolic murmur"
+                  ],
+                  "answerIndex": 3,
+                  "explanation": "Mid-systolic click and late systolic murmur is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Mitral Regurgitation · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Mitral Regurgitation"
+                  ]
+                },
+                {
+                  "id": "med2-mo-ragab-q157",
+                  "originalNumber": "157",
+                  "category": "Mitral Regurgitation",
+                  "organ": "Mitral Regurgitation",
+                  "question": "A 65-year-old man with a previous history of an anterior MI comes for follow-up. On examination, he has a systolic murmur heard best at the apex and radiating to the axilla. Transient external compression of both arms with blood pressure cuffs (increasing afterload) increases the murmur. What is the diagnosis?",
+                  "choices": [
+                    "Aortic Stenosis",
+                    "HOCM",
+                    "Chronic Mitral Regurgitation",
+                    "Tricuspid Regurgitation"
+                  ],
+                  "answerIndex": 2,
+                  "explanation": "Chronic Mitral Regurgitation is correct because it best matches the established clinical definition, mechanism, investigation, or management principle tested by the question.",
+                  "source": "Dr. Mohamed Ragab Past Exams",
+                  "section": "Mitral Regurgitation · Dr. Mohamed Ragab Past Exams",
+                  "topicTags": [
+                    "MED-2",
+                    "Mo.ragab repeated past exams",
+                    "Mitral Regurgitation"
                   ]
                 }
               ],

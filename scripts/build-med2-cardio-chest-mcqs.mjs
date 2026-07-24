@@ -72,6 +72,31 @@ const sourceDefinitions = [
       { id: 'upper-lower-airway', label: 'Upper & Lower Airway Diseases', start: 59, end: 63 },
       { id: 'bronchial-asthma', label: 'Bronchial Asthma', start: 64, end: 81 }
     ]
+  },
+  {
+    id: 'med2-mo-ragab-past-exams',
+    label: 'Mo.ragab repeated past exams',
+    fileRelPaths: [
+      path.join('mo ragab', 'jason ready', 'PE_RF_HTN.json'),
+      path.join('mo ragab', 'jason ready', 'Valvular_Heart_Diseases.json')
+    ],
+    prefix: 'med2-mo-ragab',
+    expectedCount: 157,
+    groupEyebrow: 'MED-2 Mo.ragab past exams',
+    groupNoun: 'topic',
+    prompt: 'Choose a topic from Dr. Mohamed Ragab repeated past exams.',
+    mixedMeta: 'Random questions from Dr. Mohamed Ragab past exam questions.',
+    wrongReviewId: 'med2-mo-ragab-wrong-review',
+    format: 'json',
+    groups: [
+      { id: 'pulmonary-embolism', label: 'Pulmonary Embolism', start: 1, end: 45 },
+      { id: 'systemic-hypertension', label: 'Systemic Hypertension', start: 46, end: 71 },
+      { id: 'rheumatic-fever', label: 'Rheumatic Fever', start: 72, end: 98 },
+      { id: 'aortic-stenosis', label: 'Aortic Stenosis', start: 99, end: 117 },
+      { id: 'aortic-regurgitation', label: 'Aortic Regurgitation', start: 118, end: 131 },
+      { id: 'mitral-stenosis', label: 'Mitral Stenosis', start: 132, end: 144 },
+      { id: 'mitral-regurgitation', label: 'Mitral Regurgitation', start: 145, end: 157 }
+    ]
   }
 ]
 
@@ -320,6 +345,60 @@ function parsePastExamsSource(markdown, definition) {
   return { questions: parsed, heldForReview, rawCount: blocks.length }
 }
 
+function parseJsonSources(jsonItems, definition) {
+  const parsed = []
+  const heldForReview = []
+
+  jsonItems.forEach((item, index) => {
+    const questionNumber = index + 1
+    const group = getGroup(definition, questionNumber)
+    if (!group) throw new Error(`${definition.label} Q${questionNumber} is outside configured topic ranges`)
+
+    let reason = ''
+    if (
+      !item.question ||
+      !Array.isArray(item.choices) ||
+      item.choices.length < 2 ||
+      typeof item.answerIndex !== 'number' ||
+      item.answerIndex < 0 ||
+      item.answerIndex >= item.choices.length
+    ) {
+      reason = 'Invalid JSON question format'
+    }
+
+    if (reason) {
+      heldForReview.push({
+        category: group.label,
+        originalNumber: String(questionNumber),
+        question: item.question || '',
+        choices: item.choices || [],
+        answer: String(item.answerIndex),
+        rationale: item.explanation || '',
+        source: 'Dr. Mohamed Ragab Past Exams',
+        reason
+      })
+      return
+    }
+
+    const sourceLabel = 'Dr. Mohamed Ragab Past Exams'
+    parsed.push({
+      id: `${definition.prefix}-q${String(questionNumber).padStart(3, '0')}`,
+      originalNumber: String(questionNumber),
+      category: group.label,
+      organ: group.label,
+      question: cleanText(item.question),
+      choices: item.choices.map((c) => cleanText(c)),
+      answerIndex: item.answerIndex,
+      explanation: cleanText(item.explanation || `Answer: ${item.choices[item.answerIndex]}.`),
+      source: sourceLabel,
+      section: `${group.label} · ${sourceLabel}`,
+      topicTags: ['MED-2', definition.label, group.label]
+    })
+  })
+
+  return { questions: parsed, heldForReview, rawCount: jsonItems.length }
+}
+
 function createParts(group, questions, sourceId) {
   const parts = []
   const partCount = Math.max(1, Math.ceil(questions.length / 25))
@@ -375,7 +454,9 @@ function buildSource(definition, parsed, sourceHash) {
     id: definition.id,
     label: definition.label,
     description: `${parsed.questions.length} answer-safe questions · ${groups.length} topics · ${partCount} short parts`,
-    sourceFile: path.basename(definition.fileRelPath),
+    sourceFile: definition.fileRelPaths
+      ? definition.fileRelPaths.map((p) => path.basename(p)).join(', ')
+      : path.basename(definition.fileRelPath),
     sourceHash,
     shuffleQuestions: false,
     shuffleOptions: false,
@@ -401,11 +482,30 @@ const generatedSources = []
 const report = {}
 
 for (const definition of sourceDefinitions) {
-  const sourcePath = path.join(sourceRoot, definition.fileRelPath)
-  const markdown = await readFile(sourcePath, 'utf8')
-  const parsed = definition.format === 'past-exams'
-    ? parsePastExamsSource(markdown, definition)
-    : parseStandardSource(markdown, definition)
+  let parsed
+  let sourceHash
+  let sourcePath = ''
+
+  if (definition.format === 'json') {
+    const rawItems = []
+    let combinedContent = ''
+    for (const relPath of definition.fileRelPaths) {
+      const fullPath = path.join(sourceRoot, relPath)
+      const content = await readFile(fullPath, 'utf8')
+      combinedContent += content
+      rawItems.push(...JSON.parse(content))
+    }
+    sourcePath = definition.fileRelPaths.map((p) => path.join(sourceRoot, p)).join('; ')
+    parsed = parseJsonSources(rawItems, definition)
+    sourceHash = createHash('sha256').update(combinedContent).digest('hex')
+  } else {
+    sourcePath = path.join(sourceRoot, definition.fileRelPath)
+    const markdown = await readFile(sourcePath, 'utf8')
+    parsed = definition.format === 'past-exams'
+      ? parsePastExamsSource(markdown, definition)
+      : parseStandardSource(markdown, definition)
+    sourceHash = createHash('sha256').update(markdown).digest('hex')
+  }
 
   const allNumbers = [
     ...parsed.questions.map((question) => Number(question.originalNumber)),
@@ -426,7 +526,6 @@ for (const definition of sourceDefinitions) {
     throw new Error(`${definition.label} contains an invalid included answer`)
   }
 
-  const sourceHash = createHash('sha256').update(markdown).digest('hex')
   generatedSources.push(buildSource(definition, parsed, sourceHash))
   report[definition.label] = {
     sourcePath,
