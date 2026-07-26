@@ -23,7 +23,11 @@ test('application modules are valid and mirrored', () => {
     'src/sur402-amr-beshry-mcqs.js',
     'src/med402-endocrine-mcqs.js',
     'src/med402-neurology-mcqs.js',
+    'src/med402-neuro-extra-mcqs.js',
+    'src/med402-old-psychiatry-mcqs.js',
     'src/med2-cardio-chest-mcqs.js',
+    'src/med1-kellawi-mcqs.js',
+    'src/med1-mw-ragab-mcqs.js',
     'src/progress.js',
     'src/supabaseClient.js'
   ]
@@ -32,7 +36,7 @@ test('application modules are valid and mirrored', () => {
     execFileSync(process.execPath, ['--check', file], { cwd: new URL('..', import.meta.url) })
   }
 
-  const mirroredFiles = ['main.js', 'admin.js', 'analytics.js', 'mcqs.js', 'sur1-kellawi-mcqs.js', 'sur1-past-exam-mcqs.js', 'sur1-matching-questions.js', 'sur402-past-exam-mcqs.js', 'sur402-textbook-mcqs.js', 'sur402-amr-beshry-mcqs.js', 'med402-endocrine-mcqs.js', 'med402-neurology-mcqs.js', 'med2-cardio-chest-mcqs.js', 'med1-kellawi-mcqs.js', 'progress.js', 'style.css', 'supabaseClient.js']
+  const mirroredFiles = ['main.js', 'admin.js', 'analytics.js', 'mcqs.js', 'sur1-kellawi-mcqs.js', 'sur1-past-exam-mcqs.js', 'sur1-matching-questions.js', 'sur402-past-exam-mcqs.js', 'sur402-textbook-mcqs.js', 'sur402-amr-beshry-mcqs.js', 'med402-endocrine-mcqs.js', 'med402-neurology-mcqs.js', 'med402-neuro-extra-mcqs.js', 'med402-old-psychiatry-mcqs.js', 'med2-cardio-chest-mcqs.js', 'med1-kellawi-mcqs.js', 'med1-mw-ragab-mcqs.js', 'progress.js', 'style.css', 'supabaseClient.js']
   for (const file of mirroredFiles) {
     assert.equal(read(`src/${file}`), read(`public/src/${file}`), `${file} mirror is out of sync`)
   }
@@ -304,12 +308,19 @@ test('MED 402-1 endocrine bank is answer-safe, grouped, and wired to the exam ca
 test('MED 402-2 neurology bank is answer-safe, grouped, and wired to the exam card', () => {
   const context = { window: { mcqQuizzes402: {} } }
   vm.runInNewContext(read('src/med402-neurology-mcqs.js'), context)
+  vm.runInNewContext(read('src/med402-neuro-extra-mcqs.js'), context)
+  vm.runInNewContext(read('src/med402-old-psychiatry-mcqs.js'), context)
 
   const quiz = context.window.mcqQuizzes402['MED 402-2 MCQs']
   assert.equal(quiz.alwaysShowSourcePicker, true)
-  assert.equal(quiz.sources.length, 1)
+  assert.equal(quiz.sources.length, 3)
 
-  const source = quiz.sources[0]
+  const source = quiz.sources.find((item) => item.id === 'med402-neurology-question-bank')
+  const oldMidterm = quiz.sources.find((item) => item.id === 'med402-neuro-extra-question-set')
+  const oldPsychiatry = quiz.sources.find((item) => item.id === 'med402-old-psychiatry-mcqs')
+  assert.ok(source, 'Neurology Question Bank source is missing')
+  assert.ok(oldMidterm, 'Old Midterm Neuro MCQs source is missing')
+  assert.ok(oldPsychiatry, 'Old Psychiatry MCQs source is missing')
   assert.equal(source.id, 'med402-neurology-question-bank')
   assert.equal(source.label, 'Neurology Question Bank')
   assert.equal(source.mcqs.length, 269)
@@ -337,9 +348,45 @@ test('MED 402-2 neurology bank is answer-safe, grouped, and wired to the exam ca
   assert.deepEqual(Array.from(source.collection.mixedSizes, (mode) => mode.size), [20, 30, 50])
   assert.equal(source.collection.wrongReviewId, 'med402-neurology-wrong-review')
 
+  assert.equal(oldMidterm.label, 'Old Midterm Neuro MCQs')
+  assert.equal(oldMidterm.mcqs.length, 56)
+  assert.equal(oldMidterm.heldForReview.length, 0)
+  assert.equal(new Set(oldMidterm.mcqs.map((question) => question.id)).size, 56)
+  assert.ok(oldMidterm.mcqs.every((question) => question.choices.length >= 2))
+  assert.ok(oldMidterm.mcqs.every((question) => Number.isInteger(question.answerIndex) && question.choices[question.answerIndex]))
+  assert.deepEqual(
+    Array.from(oldMidterm.collection.groups, (group) => [group.label, group.questionCount, group.parts.length]),
+    [
+      ['Introduction', 9, 1],
+      ['Hemiplegia', 37, 2],
+      ['Cranial nerve / brainstem', 3, 1],
+      ['Speech and Cranial Nerve', 5, 1],
+      ['Multiple Sclerosis', 2, 1]
+    ]
+  )
+  assert.deepEqual(Array.from(oldMidterm.collection.mixedSizes, (mode) => mode.size), [20, 30, 56])
+  assert.equal(oldMidterm.collection.wrongReviewId, 'med402-neuro-extra-wrong-review')
+
+  assert.equal(oldPsychiatry.label, 'Old Psychiatry MCQs')
+  assert.equal(oldPsychiatry.mcqs.length, 67)
+  assert.equal(oldPsychiatry.heldForReview.length, 0)
+  assert.equal(new Set(oldPsychiatry.mcqs.map((question) => question.id)).size, 67)
+  assert.ok(oldPsychiatry.mcqs.every((question) => question.choices.length >= 1))
+  assert.ok(oldPsychiatry.mcqs.every((question) => Number.isInteger(question.answerIndex) && question.choices[question.answerIndex]))
+  assert.deepEqual(
+    Array.from(oldPsychiatry.collection.groups, (group) => [group.label, group.questionCount, group.parts.length]),
+    [
+      ['Psychiatry', 67, 3]
+    ]
+  )
+  assert.deepEqual(Array.from(oldPsychiatry.collection.mixedSizes, (mode) => mode.size), [20, 30, 67])
+  assert.equal(oldPsychiatry.collection.wrongReviewId, 'med402-old-psychiatry-wrong-review')
+
   const html = read('index.html')
   const mainSource = read('src/main.js')
   assert.match(html, /med402-neurology-mcqs\.js\?v=20260726-med402-neurology-v1/)
+  assert.match(html, /med402-neuro-extra-mcqs\.js\?v=20260726-med402-neuro-extra-v1/)
+  assert.match(html, /med402-old-psychiatry-mcqs\.js\?v=20260726-med402-old-psychiatry-v1/)
   assert.match(mainSource, /code:\s*'MED 402-2'[\s\S]{0,260}quizTopicKey:\s*'MED 402-2 MCQs'/)
 })
 
@@ -483,6 +530,40 @@ test('MED 401-1 Kellawi gastroenterology bank is source-faithful, grouped, wired
   assert.match(mainSource, /code:\s*'MED 401-1'[\s\S]{0,240}quizTopicKey:\s*'MED 401-1 MCQs'/)
   assert.match(mainSource, /'med1-kellawi-gastroenterology'[\s\S]{0,100}]\.includes\(source\.id\)/)
   assert.match(mainSource, /quiz-source-option--kellawi/)
+})
+
+test('MED 401-1 Mw ragab comperhensive bank is source-faithful, grouped, and wired', () => {
+  const context = { window: { mcqQuizzes: {} } }
+  vm.runInNewContext(read('src/med1-kellawi-mcqs.js'), context)
+  vm.runInNewContext(read('src/med1-mw-ragab-mcqs.js'), context)
+
+  const quiz = context.window.mcqQuizzes['MED 401-1 MCQs']
+  assert.equal(quiz.alwaysShowSourcePicker, true)
+  assert.equal(quiz.sources.length, 2)
+
+  const source = quiz.sources.find((item) => item.id === 'med1-mw-ragab-comperhensive')
+  assert.ok(source, 'med1-mw-ragab-comperhensive source is missing')
+  assert.equal(source.label, 'Mw ragab comperhensive')
+  assert.equal(source.mcqs.length, 74)
+  assert.equal(source.heldForReview.length, 0)
+  assert.equal(new Set(source.mcqs.map((question) => question.id)).size, source.mcqs.length)
+  assert.ok(source.mcqs.every((question) => question.choices.length >= 2))
+  assert.ok(source.mcqs.every((question) => Number.isInteger(question.answerIndex) && question.choices[question.answerIndex]))
+  assert.ok(source.mcqs.every((question) => question.question && question.source && question.explanation))
+  assert.deepEqual(Array.from(source.collection.mixedSizes, (mode) => mode.size), [20, 30, 50])
+  assert.deepEqual(
+    Array.from(source.collection.groups, (group) => [group.label, group.questionCount]),
+    [
+      ['Gastroenterology & Hepatology', 74]
+    ]
+  )
+  assert.ok(source.collection.groups.every((group) => (
+    group.parts.length > 0 &&
+    group.parts.flatMap((part) => part.mcqs).length === group.questionCount
+  )))
+
+  const html = read('index.html')
+  assert.match(html, /med1-mw-ragab-mcqs\.js\?v=20260726-med1-mw-ragab-v1/)
 })
 
 test('SUR 401-1 past-exam bank is answer-safe, grouped, and wired', () => {
