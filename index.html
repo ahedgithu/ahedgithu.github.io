@@ -19,7 +19,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&display=swap" rel="stylesheet" />
   <meta name="theme-color" content="#315f72" />
-  <link rel="stylesheet" href="/src/style.css?v=20260726-profile-med1-season-v1" />
+  <link rel="stylesheet" href="/src/style.css?v=20260726-profile-single-nickname-v1" />
 
 </head>
 <body data-auth-state="checking">
@@ -97,9 +97,8 @@
     <div class="tracker-actions">
       <div class="student-sync" id="student-sync">
         <button class="student-sync__button" id="student-sync-button" type="button" aria-expanded="false" aria-controls="student-sync-menu" data-student-sync-toggle>
-          <img class="student-sync__avatar" id="student-sync-avatar" alt="" hidden>
-          <span class="student-sync__initials" id="student-sync-initials" aria-hidden="true" hidden></span>
-          <span class="sr-only">Open Google profile menu</span>
+          <span class="student-sync__avatar student-avatar" id="student-sync-avatar" role="img" hidden></span>
+          <span class="sr-only">Open profile menu</span>
         </button>
         <div class="student-sync__menu" id="student-sync-menu" hidden>
           <div class="student-sync__identity">
@@ -1190,7 +1189,7 @@
       }
     }
   </script>
-  <script type="module" src="/src/main.js?v=20260726-profile-med1-season-v1"></script>
+  <script type="module" src="/src/main.js?v=20260726-profile-single-nickname-v1"></script>
 
   <script defer src="/pwa.js?v=20260712-pwa-cleanup-v1"></script>
 </body>

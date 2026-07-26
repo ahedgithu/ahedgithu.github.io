@@ -1013,7 +1013,6 @@ const studentSync = document.getElementById('student-sync')
 const studentSyncButton = document.getElementById('student-sync-button')
 const studentSyncMenu = document.getElementById('student-sync-menu')
 const studentSyncAvatar = document.getElementById('student-sync-avatar')
-const studentSyncInitials = document.getElementById('student-sync-initials')
 const studentSyncStatus = document.getElementById('student-sync-status')
 const studentSyncEmail = document.getElementById('student-sync-email')
 const authGate = document.getElementById('auth-gate')
@@ -1482,11 +1481,6 @@ async function saveAdminArrangement() {
   }
 }
 
-function getStudentDisplayName() {
-  const metadata = studentProgressState.user?.user_metadata || {}
-  return metadata.full_name || metadata.name || studentProgressState.user?.email || 'Student'
-}
-
 function getDefaultUserPreferences() {
   return {
     anonymous: false,
@@ -1510,10 +1504,6 @@ function validateNickname(rawValue) {
   return { nickname, error: '' }
 }
 
-function getPrivateProfileDisplayName() {
-  return getStudentNickname() || getStudentDisplayName()
-}
-
 function getProgressStorageOwnerId() {
   return studentProgressState.user?.id || ''
 }
@@ -1523,7 +1513,7 @@ function getProfileAvatarById(avatarId) {
 }
 
 function getDefaultProfileAvatarId(ownerId = getProgressStorageOwnerId()) {
-  const seed = String(ownerId || getStudentDisplayName())
+  const seed = String(ownerId || 'student')
   const hash = [...seed].reduce((total, character) => total + character.charCodeAt(0), 0)
   return PROFILE_AVATARS[hash % PROFILE_AVATARS.length].id
 }
@@ -1687,21 +1677,15 @@ function renderStudentSyncUi() {
   if (adminModeButton) adminModeButton.hidden = !signedIn || !hasTrackerAdminAccess()
 
   if (studentSyncAvatar) {
-    const avatarUrl = signedIn ? getSafeExternalUrl(studentProgressState.user?.user_metadata?.avatar_url || studentProgressState.user?.user_metadata?.picture || '') : ''
-    studentSyncAvatar.src = avatarUrl
-    studentSyncAvatar.hidden = !avatarUrl
-    studentSyncAvatar.alt = avatarUrl ? `${getStudentDisplayName()} profile` : ''
-    studentSyncButton?.setAttribute('aria-label', signedIn ? `Open ${getStudentDisplayName()} profile menu` : 'Login')
-    if (studentSyncInitials) {
-      studentSyncInitials.textContent = signedIn && !avatarUrl
-        ? getStudentDisplayName().split(/\s+/).filter(Boolean).slice(0, 2).map((part) => part[0]).join('').toUpperCase()
-        : ''
-      studentSyncInitials.hidden = !signedIn || !!avatarUrl
-    }
+    const nickname = getStudentNickname() || 'Student'
+    studentSyncAvatar.className = `student-sync__avatar student-avatar ${getProfileAvatarClass(getStudentAvatarId())}`
+    studentSyncAvatar.hidden = !signedIn
+    studentSyncAvatar.setAttribute('aria-label', `${nickname} avatar`)
+    studentSyncButton?.setAttribute('aria-label', signedIn ? `Open ${nickname} profile menu` : 'Login')
   }
 
   if (studentSyncEmail) {
-    studentSyncEmail.textContent = signedIn ? getPrivateProfileDisplayName() : 'Google sync is off'
+    studentSyncEmail.textContent = signedIn ? (getStudentNickname() || 'Complete your profile') : 'Google sync is off'
   }
 
   if (studentSyncStatus) {
@@ -1735,6 +1719,35 @@ const leaderboardState = {
   requestId: 0
 }
 let pendingProfileAvatarId = ''
+const profileOnboardingTourState = {
+  active: false,
+  stepIndex: 0,
+  root: null,
+  target: null,
+  positionFrame: 0,
+  listenersBound: false
+}
+
+const PROFILE_ONBOARDING_STEPS = [
+  {
+    target: '#profile-nickname-input',
+    title: 'Choose your nickname',
+    copy: 'Enter a unique nickname. This is the name other students will see.',
+    action: 'Next: choose an avatar'
+  },
+  {
+    target: '#profile-avatar-options',
+    title: 'Choose an avatar',
+    copy: 'Tap the picture you like. We will move to the last step.',
+    action: ''
+  },
+  {
+    target: '#profile-nickname-form [type="submit"]',
+    title: 'Save your profile',
+    copy: 'Tap Save profile to finish. Then you can open the tracker.',
+    action: ''
+  }
+]
 
 const liveActivityState = {
   loading: false,
@@ -1845,6 +1858,258 @@ function initLiveActivity() {
   })
 }
 
+function getProfileOnboardingStep() {
+  return PROFILE_ONBOARDING_STEPS[profileOnboardingTourState.stepIndex] || PROFILE_ONBOARDING_STEPS[0]
+}
+
+function getProfileOnboardingFocusableElements() {
+  const target = profileOnboardingTourState.target
+  const tooltip = profileOnboardingTourState.root?.querySelector('.profile-onboarding-tour__tooltip')
+  return [...new Set([
+    ...(target?.matches('button, input, select, textarea, a[href]') ? [target] : []),
+    ...(target?.querySelectorAll?.('button, input, select, textarea, a[href]') || []),
+    ...(tooltip?.querySelectorAll('button:not([disabled])') || [])
+  ])].filter((element) => !element.hidden && element.getAttribute('aria-hidden') !== 'true')
+}
+
+function focusProfileOnboardingTarget() {
+  const focusable = getProfileOnboardingFocusableElements()
+  focusable[0]?.focus({ preventScroll: true })
+}
+
+function updateProfileOnboardingAction() {
+  const action = profileOnboardingTourState.root?.querySelector('[data-profile-onboarding-next]')
+  if (!action) return
+  const step = getProfileOnboardingStep()
+  action.hidden = !step.action
+  action.textContent = step.action
+  if (profileOnboardingTourState.stepIndex === 0) {
+    const input = document.getElementById('profile-nickname-input')
+    const validation = validateNickname(input?.value || '')
+    action.disabled = !!validation.error || !validation.nickname
+  } else {
+    action.disabled = false
+  }
+}
+
+function setProfileOnboardingPanel(panel, styles) {
+  if (!panel) return
+  Object.assign(panel.style, styles)
+}
+
+function positionProfileOnboardingTour() {
+  if (!profileOnboardingTourState.active) return
+  const root = profileOnboardingTourState.root
+  const target = profileOnboardingTourState.target
+  const tooltip = root?.querySelector('.profile-onboarding-tour__tooltip')
+  if (!root || !target || !tooltip) return
+
+  const viewportWidth = document.documentElement.clientWidth
+  const viewportHeight = window.innerHeight
+  const targetRect = target.getBoundingClientRect()
+  const highlightPadding = 8
+  const gap = 14
+  const edge = 12
+  const top = Math.max(0, Math.min(viewportHeight, targetRect.top - highlightPadding))
+  const right = Math.max(0, Math.min(viewportWidth, targetRect.right + highlightPadding))
+  const bottom = Math.max(0, Math.min(viewportHeight, targetRect.bottom + highlightPadding))
+  const left = Math.max(0, Math.min(viewportWidth, targetRect.left - highlightPadding))
+
+  setProfileOnboardingPanel(root.querySelector('[data-profile-tour-panel="top"]'), {
+    inset: '0 0 auto 0',
+    height: `${top}px`
+  })
+  setProfileOnboardingPanel(root.querySelector('[data-profile-tour-panel="bottom"]'), {
+    inset: `${bottom}px 0 0 0`
+  })
+  setProfileOnboardingPanel(root.querySelector('[data-profile-tour-panel="left"]'), {
+    inset: `${top}px auto auto 0`,
+    width: `${left}px`,
+    height: `${Math.max(0, bottom - top)}px`
+  })
+  setProfileOnboardingPanel(root.querySelector('[data-profile-tour-panel="right"]'), {
+    inset: `${top}px 0 auto ${right}px`,
+    height: `${Math.max(0, bottom - top)}px`
+  })
+
+  const tooltipRect = tooltip.getBoundingClientRect()
+  const available = {
+    below: viewportHeight - bottom - gap - edge,
+    above: top - gap - edge,
+    right: viewportWidth - right - gap - edge,
+    left: left - gap - edge
+  }
+  const placements = viewportWidth <= 680
+    ? ['below', 'above', 'right', 'left']
+    : ['right', 'below', 'above', 'left']
+  const fits = {
+    below: available.below >= tooltipRect.height,
+    above: available.above >= tooltipRect.height,
+    right: available.right >= tooltipRect.width,
+    left: available.left >= tooltipRect.width
+  }
+  const placement = placements.find((candidate) => fits[candidate])
+    || placements.sort((a, b) => available[b] - available[a])[0]
+
+  let tooltipTop = edge
+  let tooltipLeft = edge
+  if (placement === 'below' || placement === 'above') {
+    tooltipTop = placement === 'below' ? bottom + gap : top - gap - tooltipRect.height
+    tooltipLeft = Math.min(
+      viewportWidth - tooltipRect.width - edge,
+      Math.max(edge, targetRect.left + (targetRect.width - tooltipRect.width) / 2)
+    )
+    tooltip.style.setProperty(
+      '--profile-tour-arrow-offset',
+      `${Math.max(22, Math.min(tooltipRect.width - 22, targetRect.left + (targetRect.width / 2) - tooltipLeft))}px`
+    )
+  } else {
+    tooltipLeft = placement === 'right' ? right + gap : left - gap - tooltipRect.width
+    tooltipTop = Math.min(
+      viewportHeight - tooltipRect.height - edge,
+      Math.max(edge, targetRect.top + (targetRect.height - tooltipRect.height) / 2)
+    )
+    tooltip.style.setProperty(
+      '--profile-tour-arrow-offset',
+      `${Math.max(22, Math.min(tooltipRect.height - 22, targetRect.top + (targetRect.height / 2) - tooltipTop))}px`
+    )
+  }
+
+  tooltip.dataset.placement = placement
+  tooltip.style.top = `${Math.max(edge, tooltipTop)}px`
+  tooltip.style.left = `${Math.max(edge, tooltipLeft)}px`
+  tooltip.style.visibility = 'visible'
+}
+
+function requestProfileOnboardingPosition() {
+  window.cancelAnimationFrame(profileOnboardingTourState.positionFrame)
+  profileOnboardingTourState.positionFrame = window.requestAnimationFrame(positionProfileOnboardingTour)
+}
+
+function ensureProfileOnboardingTour() {
+  if (profileOnboardingTourState.root) return profileOnboardingTourState.root
+  const root = document.createElement('div')
+  root.className = 'profile-onboarding-tour'
+  root.hidden = true
+  root.innerHTML = `
+    <div class="profile-onboarding-tour__panel" data-profile-tour-panel="top"></div>
+    <div class="profile-onboarding-tour__panel" data-profile-tour-panel="right"></div>
+    <div class="profile-onboarding-tour__panel" data-profile-tour-panel="bottom"></div>
+    <div class="profile-onboarding-tour__panel" data-profile-tour-panel="left"></div>
+    <aside class="profile-onboarding-tour__tooltip" role="dialog" aria-modal="true" aria-labelledby="profile-onboarding-title" aria-describedby="profile-onboarding-copy">
+      <span class="profile-onboarding-tour__step"></span>
+      <strong id="profile-onboarding-title"></strong>
+      <p id="profile-onboarding-copy"></p>
+      <button type="button" data-profile-onboarding-next></button>
+    </aside>
+  `
+  document.body.append(root)
+  root.querySelector('[data-profile-onboarding-next]')?.addEventListener('click', () => {
+    const input = document.getElementById('profile-nickname-input')
+    const validation = validateNickname(input?.value || '')
+    if (validation.error || !validation.nickname) {
+      input?.focus()
+      return
+    }
+    showProfileOnboardingStep(1)
+  })
+  profileOnboardingTourState.root = root
+
+  if (!profileOnboardingTourState.listenersBound) {
+    profileOnboardingTourState.listenersBound = true
+    window.addEventListener('resize', requestProfileOnboardingPosition)
+    window.addEventListener('scroll', requestProfileOnboardingPosition, { passive: true })
+    document.addEventListener('focusin', (event) => {
+      if (!profileOnboardingTourState.active) return
+      const tooltip = profileOnboardingTourState.root?.querySelector('.profile-onboarding-tour__tooltip')
+      if (profileOnboardingTourState.target?.contains(event.target) || tooltip?.contains(event.target)) return
+      focusProfileOnboardingTarget()
+    })
+    document.addEventListener('keydown', (event) => {
+      if (!profileOnboardingTourState.active) return
+      if (event.key === 'Escape') {
+        event.preventDefault()
+        focusProfileOnboardingTarget()
+        return
+      }
+      if (event.key !== 'Tab') return
+      const focusable = getProfileOnboardingFocusableElements()
+      if (!focusable.length) {
+        event.preventDefault()
+        return
+      }
+      const currentIndex = focusable.indexOf(document.activeElement)
+      const nextIndex = event.shiftKey
+        ? (currentIndex <= 0 ? focusable.length - 1 : currentIndex - 1)
+        : (currentIndex === focusable.length - 1 ? 0 : currentIndex + 1)
+      event.preventDefault()
+      focusable[nextIndex]?.focus()
+    }, true)
+  }
+  return root
+}
+
+function showProfileOnboardingStep(stepIndex) {
+  if (!profileOnboardingTourState.active) return
+  const root = ensureProfileOnboardingTour()
+  const step = PROFILE_ONBOARDING_STEPS[stepIndex]
+  const target = step ? document.querySelector(step.target) : null
+  if (!step || !target) return
+
+  profileOnboardingTourState.target?.classList.remove('profile-onboarding-tour__target')
+  profileOnboardingTourState.stepIndex = stepIndex
+  profileOnboardingTourState.target = target
+  target.classList.add('profile-onboarding-tour__target')
+  const tooltip = root.querySelector('.profile-onboarding-tour__tooltip')
+  if (tooltip) tooltip.style.visibility = 'hidden'
+  root.querySelector('.profile-onboarding-tour__step').textContent = `Step ${stepIndex + 1} of ${PROFILE_ONBOARDING_STEPS.length}`
+  root.querySelector('#profile-onboarding-title').textContent = step.title
+  root.querySelector('#profile-onboarding-copy').textContent = step.copy
+  updateProfileOnboardingAction()
+  target.scrollIntoView({
+    behavior: prefersReducedMotion ? 'auto' : 'smooth',
+    block: 'center',
+    inline: 'nearest'
+  })
+  window.setTimeout(() => {
+    requestProfileOnboardingPosition()
+    focusProfileOnboardingTarget()
+  }, prefersReducedMotion ? 0 : 240)
+}
+
+function startProfileOnboardingTour() {
+  if (profileOnboardingTourState.active || !isStandaloneProfilePage) return
+  const root = ensureProfileOnboardingTour()
+  const form = document.getElementById('profile-nickname-form')
+  if (form) form.hidden = false
+  renderProfileAvatarPicker()
+  profileOnboardingTourState.active = true
+  document.body.dataset.profileTour = 'active'
+  root.hidden = false
+  showProfileOnboardingStep(0)
+}
+
+function stopProfileOnboardingTour() {
+  profileOnboardingTourState.active = false
+  window.cancelAnimationFrame(profileOnboardingTourState.positionFrame)
+  profileOnboardingTourState.target?.classList.remove('profile-onboarding-tour__target')
+  profileOnboardingTourState.target = null
+  if (profileOnboardingTourState.root) profileOnboardingTourState.root.hidden = true
+  delete document.body.dataset.profileTour
+}
+
+function syncProfileOnboardingTour() {
+  const shouldRun = isStandaloneProfilePage
+    && document.body.dataset.authState === 'ready'
+    && !!studentProgressState.user
+    && !isProfileSetupComplete()
+  if (shouldRun) {
+    startProfileOnboardingTour()
+  } else {
+    stopProfileOnboardingTour()
+  }
+}
+
 function selectProfileAvatar(rawAvatarId) {
   const avatar = getProfileAvatarById(rawAvatarId)
   if (!avatar) return false
@@ -1852,6 +2117,9 @@ function selectProfileAvatar(rawAvatarId) {
   renderProfileAvatarPicker()
   const help = document.getElementById('profile-avatar-help')
   if (help) help.textContent = `${avatar.label} selected. Save your profile to confirm it.`
+  if (profileOnboardingTourState.active && profileOnboardingTourState.stepIndex === 1) {
+    showProfileOnboardingStep(2)
+  }
   return true
 }
 
@@ -1867,10 +2135,12 @@ async function saveProfileSetup(rawValue) {
 
   if (error || !nickname) {
     if (help) help.textContent = error || 'Choose a nickname before saving your profile.'
+    if (profileOnboardingTourState.active) showProfileOnboardingStep(0)
     return false
   }
   if (!avatarId) {
     if (avatarHelp) avatarHelp.textContent = 'Choose an avatar before saving your profile.'
+    if (profileOnboardingTourState.active) showProfileOnboardingStep(1)
     return false
   }
 
@@ -1884,13 +2154,13 @@ async function saveProfileSetup(rawValue) {
     pendingProfileAvatarId = ''
     saveLocalProfileAvatarId(avatarId)
     document.body.dataset.profileSetup = 'complete'
+    stopProfileOnboardingTour()
     renderStudentSyncUi()
     renderProfileSection()
     invalidateLeaderboard(activeAcademicSection)
     await fetchAndRenderLeaderboard(true)
-    if (form) form.hidden = true
-    if (help) help.textContent = 'Your nickname is public and unique.'
-    if (avatarHelp) avatarHelp.textContent = 'Your avatar is saved and visible to other students.'
+    if (help) help.textContent = 'Profile saved.'
+    if (avatarHelp) avatarHelp.textContent = 'Avatar saved.'
     showGlobalToast('Profile complete. Welcome to the board.')
     return true
   } catch (saveError) {
@@ -1900,6 +2170,7 @@ async function saveProfileSetup(rawValue) {
         ? 'That nickname is already taken. Choose another one.'
         : 'Your profile was not saved. Please try again.'
     }
+    if (profileOnboardingTourState.active) showProfileOnboardingStep(0)
     console.warn('Profile setup failed.', saveError)
     return false
   } finally {
@@ -3044,14 +3315,23 @@ function getProfileAvatarHtml() {
 
 function renderProfileAvatarPicker() {
   const container = document.getElementById('profile-avatar-options')
-  if (!container) return
   const selectedAvatarId = pendingProfileAvatarId || getSavedProfileAvatarId()
-  container.innerHTML = PROFILE_AVATARS.map((avatar) => `
-    <button class="profile-avatar-option${avatar.id === selectedAvatarId ? ' is-selected' : ''}" type="button" data-profile-avatar="${avatar.id}" aria-label="Choose ${escapeHtml(avatar.label)} avatar" aria-pressed="${avatar.id === selectedAvatarId}">
-      ${getProfileAvatarMarkup(avatar.id, 'student-avatar--option', avatar.label)}
-      <span>${escapeHtml(avatar.label)}</span>
-    </button>
-  `).join('')
+  const preview = document.getElementById('profile-avatar')
+  const selectedAvatar = getProfileAvatarById(selectedAvatarId)
+  if (preview) {
+    preview.innerHTML = selectedAvatar
+      ? getProfileAvatarMarkup(selectedAvatar.id, 'student-avatar--profile', 'Selected profile')
+      : '<span class="profile-nickname-form__avatar-placeholder" aria-hidden="true">?</span>'
+    preview.setAttribute('aria-label', selectedAvatar ? `${selectedAvatar.label} avatar selected` : 'No avatar selected')
+  }
+  if (container) {
+    container.innerHTML = PROFILE_AVATARS.map((avatar) => `
+      <button class="profile-avatar-option${avatar.id === selectedAvatarId ? ' is-selected' : ''}" type="button" data-profile-avatar="${avatar.id}" aria-label="Choose ${escapeHtml(avatar.label)} avatar" aria-pressed="${avatar.id === selectedAvatarId}">
+        ${getProfileAvatarMarkup(avatar.id, 'student-avatar--option', avatar.label)}
+        <span>${escapeHtml(avatar.label)}</span>
+      </button>
+    `).join('')
+  }
 }
 
 function renderProfileSection() {
@@ -3066,10 +3346,6 @@ function renderProfileSection() {
   const unlockedTrophies = trophies.filter((trophy) => trophy.unlocked)
   const masteryLevel = getProfileMasteryLevel(stats.totalScore)
 
-  const avatar = document.getElementById('profile-avatar')
-  const sectionLabel = document.getElementById('profile-section-label')
-  const displayName = document.getElementById('profile-display-name')
-  const nicknameState = document.getElementById('profile-nickname-state')
   const nicknameInput = document.getElementById('profile-nickname-input')
   const profileForm = document.getElementById('profile-nickname-form')
   const editButton = document.querySelector('[data-profile-edit-nickname]')
@@ -3077,19 +3353,12 @@ function renderProfileSection() {
 
   profileRoot.classList.toggle('is-loading', signedIn && !studentProgressState.ready)
   document.body.dataset.profileSetup = setupRequired ? 'required' : 'complete'
-  if (avatar) avatar.innerHTML = signedIn ? getProfileAvatarHtml() : 'S'
-  if (sectionLabel) sectionLabel.textContent = `${activeAcademicSectionData.title} section`
-  if (displayName) displayName.textContent = signedIn ? getPrivateProfileDisplayName() : 'Sign in required'
-  if (nicknameState) {
-    nicknameState.textContent = setupRequired
-      ? 'Choose the public identity you will use with your classmates.'
-      : `Public nickname: ${nickname}`
-  }
   if (nicknameInput && document.activeElement !== nicknameInput) nicknameInput.value = nickname
-  if (profileForm && setupRequired) profileForm.hidden = false
+  if (profileForm) profileForm.hidden = false
   if (editButton) editButton.textContent = setupRequired ? 'Complete profile' : 'Edit profile'
   if (setupBanner) setupBanner.hidden = !setupRequired
   renderProfileAvatarPicker()
+  window.requestAnimationFrame(syncProfileOnboardingTour)
 
   const setText = (id, value) => {
     const element = document.getElementById(id)
@@ -3114,11 +3383,6 @@ function renderProfileSection() {
   setText('profile-topics-touched', String(stats.mcqTopicsTouched))
   setText('profile-level', `Level ${masteryLevel.level}`)
   setText('profile-level-note', `${masteryLevel.remaining} points to Level ${masteryLevel.nextLevel}`)
-  setText('profile-public-preview', nickname || 'Choose your nickname')
-  setText('profile-public-note', setupRequired
-    ? 'A unique nickname and avatar are required before opening the tracker.'
-    : 'Other signed-in students can see your nickname and avatar.')
-
   const nextLockedTrophy = getClosestLockedTrophies(trophies)[0]
   setText('profile-next-goal', nextLockedTrophy ? nextLockedTrophy.title : 'All milestones completed')
   setText('profile-next-goal-note', nextLockedTrophy ? nextLockedTrophy.description : 'You have completed every current achievement.')
@@ -7363,6 +7627,7 @@ function setAuthGateState(state, message = '') {
     authGateStatus.textContent = message
     authGateStatus.hidden = !message
   }
+  window.requestAnimationFrame(syncProfileOnboardingTour)
 }
 
 function setSectionSelectionMode(mode = 'onboarding') {
@@ -7823,6 +8088,12 @@ document.getElementById('profile-nickname-form')?.addEventListener('submit', asy
   event.preventDefault()
   const input = document.getElementById('profile-nickname-input')
   await saveProfileSetup(input?.value || '')
+})
+
+document.getElementById('profile-nickname-input')?.addEventListener('input', () => {
+  if (profileOnboardingTourState.active && profileOnboardingTourState.stepIndex === 0) {
+    updateProfileOnboardingAction()
+  }
 })
 
 trackerAdminEditPanel?.addEventListener('change', (event) => {

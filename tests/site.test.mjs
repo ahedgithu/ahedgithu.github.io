@@ -59,8 +59,8 @@ test('tracker search splits topics and MCQs with focused question launch', () =>
   assert.match(html, /data-search-mode="topics"[^>]*aria-pressed="true"/)
   assert.match(html, /data-search-mode="mcqs"[^>]*aria-pressed="false"/)
   assert.match(html, /id="mcq-search-results"[^>]*aria-live="polite"[^>]*hidden/)
-  assert.match(html, /style\.css\?v=20260726-profile-med1-season-v1/)
-  assert.match(html, /main\.js\?v=20260726-profile-med1-season-v1/)
+  assert.match(html, /style\.css\?v=20260726-profile-single-nickname-v1/)
+  assert.match(html, /main\.js\?v=20260726-profile-single-nickname-v1/)
 
   for (const helper of [
     'normalizeMcqSearchText',
@@ -709,8 +709,8 @@ test('Google login is mandatory and the academic section is account-bound', () =
   assert.match(mainSource, /\$\{QUIZ_STORAGE_PREFIX\}::\$\{getProgressStorageOwnerId\(\)\}::\$\{section\}/)
   assert.match(mainSource, /\$\{TOPIC_COMPLETION_STORAGE_PREFIX\}::\$\{getProgressStorageOwnerId\(\)\}::\$\{section\}/)
   assert.match(schedule, /window\.location\.replace\('\/#schedule'\)/)
-  assert.match(html, /style\.css\?v=20260726-profile-med1-season-v1/)
-  assert.match(html, /main\.js\?v=20260726-profile-med1-season-v1/)
+  assert.match(html, /style\.css\?v=20260726-profile-single-nickname-v1/)
+  assert.match(html, /main\.js\?v=20260726-profile-single-nickname-v1/)
 })
 
 test('student profile opens as a standalone gamified page', () => {
@@ -732,7 +732,7 @@ test('student profile opens as a standalone gamified page', () => {
 
   assert.match(profileHtml, /<body class="profile-page"[^>]*data-site-mode="profile"/)
   assert.match(profileHtml, /<section class="profile-section hub-section" id="profile"/)
-  assert.match(profileHtml, /id="profile-nickname-form"/)
+  assert.match(profileHtml, /<form class="profile-nickname-form" id="profile-nickname-form">/)
   assert.match(profileHtml, /id="profile-next-goal"/)
   assert.match(profileHtml, /Questions covered/)
   assert.match(profileHtml, /id="profile-mcq-bank-progress-note"/)
@@ -740,17 +740,18 @@ test('student profile opens as a standalone gamified page', () => {
   assert.match(profileHtml, /<details class="profile-achievement-cabinet">/)
   assert.doesNotMatch(profileHtml, /id="leaderboard-anon-toggle"/)
   assert.match(profileHtml, /id="profile-setup-banner"/)
-  assert.match(profileHtml, /Choose a unique public nickname/)
-  assert.match(profileHtml, /id="profile-public-preview"/)
+  assert.match(profileHtml, /placeholder="Choose a unique nickname"/)
+  assert.doesNotMatch(profileHtml, /Public nickname|Leaderboard name|public identity/i)
+  assert.doesNotMatch(profileHtml, /profile-public-preview|profile-nickname-state|profile-display-name|profile-identity-setting/)
   assert.match(profileHtml, /id="profile-level-progress" role="progressbar"/)
   assert.match(profileHtml, /id="profile-avatar-options"/)
-  assert.match(profileHtml, /id="profile-avatar"[\s\S]{0,180}id="profile-display-name"/)
-  assert.match(style, /\.profile-hero-card\s*\{[\s\S]{0,180}justify-items:\s*center/)
-  assert.match(style, /\.profile-hero-card__avatar\s*\{[\s\S]{0,100}width:\s*104px/)
+  assert.match(profileHtml, /class="profile-nickname-form__avatar" id="profile-avatar"/)
+  assert.equal((profileHtml.match(/id="profile-nickname-input"/g) || []).length, 1)
+  assert.equal((profileHtml.match(/type="submit">Save profile/g) || []).length, 1)
   assert.match(html, /data-profile-open/)
   assert.match(html, /data-profile-edit-nickname/)
-  assert.match(profileHtml, /style\.css\?v=20260726-profile-med1-season-v1/)
-  assert.match(profileHtml, /main\.js\?v=20260726-profile-med1-season-v1/)
+  assert.match(profileHtml, /style\.css\?v=20260726-profile-single-nickname-v1/)
+  assert.match(profileHtml, /main\.js\?v=20260726-profile-single-nickname-v1/)
   assert.ok(readBytes('public/assets/profile-avatars-faceless-v3.webp').length > 50_000)
   assert.match(viteConfig, /profile:\s*resolve\(__dirname,\s*'profile\.html'\)/)
 
@@ -761,6 +762,9 @@ test('student profile opens as a standalone gamified page', () => {
   assert.match(mainSource, /function getMcqQuizzesForSection\s*\(/)
   assert.match(mainSource, /return window\.mcqQuizzes \|\| mcqQuizzesBySection\['401'\] \|\| \{\}/)
   assert.match(mainSource, /function validateNickname\s*\(/)
+  assert.doesNotMatch(mainSource, /user_metadata|full_name|getStudentDisplayName|getPrivateProfileDisplayName/)
+  assert.match(mainSource, /studentSyncEmail\.textContent = signedIn \? \(getStudentNickname\(\) \|\| 'Complete your profile'\)/)
+  assert.match(mainSource, /studentSyncAvatar\.className = `student-sync__avatar student-avatar \$\{getProfileAvatarClass\(getStudentAvatarId\(\)\)\}`/)
   assert.match(mainSource, /const isStandaloneProfilePage/)
   assert.match(mainSource, /window\.location\.href = url\.toString\(\)/)
   assert.match(mainSource, /activeSiteMode = 'profile'/)
@@ -774,6 +778,7 @@ test('student profile opens as a standalone gamified page', () => {
   assert.match(mainSource, /function selectProfileAvatar\s*\(/)
   assert.match(mainSource, /async function saveProfileSetup\s*\(/)
   assert.match(mainSource, /function renderProfileAvatarPicker\s*\(/)
+  assert.match(mainSource, /preview\.setAttribute\('aria-label', selectedAvatar \? `\$\{selectedAvatar\.label\} avatar selected` : 'No avatar selected'\)/)
   assert.match(mainSource, /function getLeaderboardAvatarId\s*\(/)
   assert.match(mainSource, /function initLeaderboardVisibilityLoading\s*\(/)
   assert.match(mainSource, /new IntersectionObserver/)
@@ -827,11 +832,42 @@ test('student profile opens as a standalone gamified page', () => {
   assert.match(seasonMigration, /preferences\.profile_setup_version >= 1/i)
   assert.doesNotMatch(seasonMigration, /DELETE FROM public\.user_mcq_progress/i)
   assert.match(style, /\.profile-trophy--unlocked/)
+  assert.match(style, /\.profile-nickname-form__avatar\s*\{[\s\S]*width:\s*92px;[\s\S]*height:\s*92px;/)
   assert.match(style, /\.profile-page-hero/)
   assert.match(style, /\.profile-momentum-card/)
   assert.match(style, /\.auth-gate__logo\s*\{[^}]*width:\s*88px;[^}]*object-fit:\s*contain;/s)
   assert.match(style, /\.profile-page \.auth-gate__card\s*\{[^}]*width:\s*min\(100%,\s*460px\);/s)
   assert.match(style, /\.bottom-nav\s*\{[\s\S]*?grid-template-columns:\s*repeat\(5,/)
+})
+
+test('mandatory profile onboarding guides each required control and cannot be skipped', () => {
+  const profileHtml = read('profile.html')
+  const mainSource = read('src/main.js')
+  const publicMainSource = read('public/src/main.js')
+  const style = read('src/style.css')
+
+  assert.ok(
+    profileHtml.indexOf('id="profile-nickname-input"') < profileHtml.indexOf('id="profile-avatar-options"'),
+    'nickname must appear before avatar choices in the guided setup'
+  )
+  assert.match(mainSource, /const PROFILE_ONBOARDING_STEPS = \[/)
+  assert.match(mainSource, /target: '#profile-nickname-input'/)
+  assert.match(mainSource, /target: '#profile-avatar-options'/)
+  assert.match(mainSource, /target: '#profile-nickname-form \[type="submit"\]'/)
+  assert.match(mainSource, /Step \$\{stepIndex \+ 1\} of \$\{PROFILE_ONBOARDING_STEPS\.length\}/)
+  assert.match(mainSource, /document\.body\.dataset\.authState === 'ready'/)
+  assert.match(mainSource, /&& !isProfileSetupComplete\(\)/)
+  assert.match(mainSource, /if \(event\.key === 'Escape'\) \{\s*event\.preventDefault\(\)/)
+  assert.match(mainSource, /showProfileOnboardingStep\(2\)/)
+  assert.match(mainSource, /stopProfileOnboardingTour\(\)\s*renderStudentSyncUi\(\)/)
+  assert.match(mainSource, /profileForm\.hidden = false/)
+  assert.match(mainSource, /redirectToRequiredProfile\(section\)/)
+  assert.equal(mainSource, publicMainSource)
+  assert.match(style, /\.profile-onboarding-tour__panel\s*\{[\s\S]*position:\s*fixed/)
+  assert.match(style, /\.profile-onboarding-tour__target\s*\{[\s\S]*z-index:\s*10002/)
+  assert.match(style, /@media \(max-width: 520px\) \{[\s\S]*\.profile-avatar-options\s*\{[\s\S]*grid-template-columns:\s*repeat\(4,/)
+  assert.match(style, /@media \(max-width: 340px\) \{[\s\S]*\.profile-avatar-options\s*\{[\s\S]*grid-template-columns:\s*repeat\(2,/)
+  assert.match(style, /\.profile-page\s*\{[\s\S]*overflow-x:\s*hidden/)
 })
 
 test('MED-1 season points require fresh attempts while lifetime points remain durable', () => {
@@ -924,8 +960,8 @@ test('section selector is centered and the wide review remains fully visible', (
   assert.match(style, /\.home-review-screenshot\s*\{[\s\S]*?aspect-ratio:\s*1\.9\s*\/\s*1;[\s\S]*?object-fit:\s*cover;/s)
   assert.match(style, /\.home-review-screenshot--fit\s*\{[^}]*object-fit:\s*contain;[^}]*object-position:\s*left center;/s)
   assert.equal((html.match(/review5\.jpg" class="home-review-screenshot home-review-screenshot--fit"/g) || []).length, 2)
-  assert.match(html, /style\.css\?v=20260726-profile-med1-season-v1/)
-  assert.match(html, /main\.js\?v=20260726-profile-med1-season-v1/)
+  assert.match(html, /style\.css\?v=20260726-profile-single-nickname-v1/)
+  assert.match(html, /main\.js\?v=20260726-profile-single-nickname-v1/)
   assert.match(style, /body\[data-site-mode="selector"\] > main > \.site-footer/)
 
   for (const file of ['review1.jpg', 'review2.jpg', 'review3.jpg', 'review4.jpg', 'review5.jpg', 'review6.png', 'review7.png', 'review8.png']) {

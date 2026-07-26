@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&display=swap" rel="stylesheet" />
   <meta name="theme-color" content="#315f72" />
-  <link rel="stylesheet" href="/src/style.css?v=20260726-profile-med1-season-v1" />
+  <link rel="stylesheet" href="/src/style.css?v=20260726-profile-single-nickname-v1" />
 </head>
 <body class="profile-page" data-auth-state="checking" data-site-mode="profile">
   <div class="auth-gate" id="auth-gate" aria-live="polite">
@@ -54,39 +54,23 @@
 
       <div class="profile-dashboard" id="profile-dashboard">
         <article class="profile-setup-banner" id="profile-setup-banner" hidden>
-          <strong>Complete your public profile</strong>
-          <p>Choose one unique nickname and one avatar before opening the tracker. Both will be visible to signed-in students.</p>
+          <strong>Complete your profile</strong>
+          <p>Choose one unique nickname and one avatar to open the tracker.</p>
         </article>
 
-        <article class="profile-hero-card">
-          <div class="profile-hero-card__avatar" id="profile-avatar">S</div>
-          <div class="profile-hero-card__identity">
-            <h2 id="profile-display-name">Student</h2>
-            <p class="profile-hero-card__eyebrow" id="profile-section-label">Section</p>
-            <p id="profile-nickname-state">Your public student identity.</p>
-          </div>
-          <button class="profile-hero-card__edit" type="button" data-profile-edit-nickname>Edit profile</button>
-          <div class="profile-identity-setting">
-            <div>
-              <span>Leaderboard name</span>
-              <strong id="profile-public-preview">Choose your nickname</strong>
-              <small id="profile-public-note">Your nickname and avatar are visible to signed-in students.</small>
-            </div>
-          </div>
-        </article>
-
-        <form class="profile-nickname-form" id="profile-nickname-form" hidden>
-          <fieldset class="profile-avatar-picker">
-            <legend>Choose your avatar</legend>
-            <div class="profile-avatar-options" id="profile-avatar-options" aria-label="Available profile avatars"></div>
-            <p id="profile-avatar-help">Choose the avatar that will appear beside your nickname.</p>
-          </fieldset>
+        <form class="profile-nickname-form" id="profile-nickname-form">
+          <div class="profile-nickname-form__avatar" id="profile-avatar" aria-live="polite"></div>
           <label for="profile-nickname-input">Nickname</label>
           <div class="profile-nickname-form__row">
-            <input id="profile-nickname-input" name="nickname" minlength="2" maxlength="24" autocomplete="nickname" placeholder="Choose a unique public nickname" required>
+            <input id="profile-nickname-input" name="nickname" minlength="2" maxlength="24" autocomplete="nickname" placeholder="Choose a unique nickname" required>
             <button type="submit">Save profile</button>
           </div>
           <p id="profile-nickname-help">2-24 characters. Nicknames are unique; emails and links are not allowed.</p>
+          <fieldset class="profile-avatar-picker">
+            <legend>Avatar</legend>
+            <div class="profile-avatar-options" id="profile-avatar-options" aria-label="Available profile avatars"></div>
+            <p id="profile-avatar-help" aria-live="polite"></p>
+          </fieldset>
         </form>
 
         <article class="profile-mastery-card">
@@ -190,6 +174,6 @@
       }
     }
   </script>
-  <script type="module" src="/src/main.js?v=20260726-profile-med1-season-v1"></script>
+  <script type="module" src="/src/main.js?v=20260726-profile-single-nickname-v1"></script>
 </body>
 </html>
