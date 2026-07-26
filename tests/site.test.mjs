@@ -31,7 +31,7 @@ test('application modules are valid and mirrored', () => {
     execFileSync(process.execPath, ['--check', file], { cwd: new URL('..', import.meta.url) })
   }
 
-  const mirroredFiles = ['main.js', 'admin.js', 'analytics.js', 'mcqs.js', 'sur1-kellawi-mcqs.js', 'sur1-past-exam-mcqs.js', 'sur1-matching-questions.js', 'sur402-past-exam-mcqs.js', 'sur402-textbook-mcqs.js', 'sur402-amr-beshry-mcqs.js', 'med402-endocrine-mcqs.js', 'med2-cardio-chest-mcqs.js', 'progress.js', 'style.css', 'supabaseClient.js']
+  const mirroredFiles = ['main.js', 'admin.js', 'analytics.js', 'mcqs.js', 'sur1-kellawi-mcqs.js', 'sur1-past-exam-mcqs.js', 'sur1-matching-questions.js', 'sur402-past-exam-mcqs.js', 'sur402-textbook-mcqs.js', 'sur402-amr-beshry-mcqs.js', 'med402-endocrine-mcqs.js', 'med2-cardio-chest-mcqs.js', 'med1-kellawi-mcqs.js', 'progress.js', 'style.css', 'supabaseClient.js']
   for (const file of mirroredFiles) {
     assert.equal(read(`src/${file}`), read(`public/src/${file}`), `${file} mirror is out of sync`)
   }
@@ -59,8 +59,8 @@ test('tracker search splits topics and MCQs with focused question launch', () =>
   assert.match(html, /data-search-mode="topics"[^>]*aria-pressed="true"/)
   assert.match(html, /data-search-mode="mcqs"[^>]*aria-pressed="false"/)
   assert.match(html, /id="mcq-search-results"[^>]*aria-live="polite"[^>]*hidden/)
-  assert.match(html, /style\.css\?v=20260723-profile-faceless-activity-v3/)
-  assert.match(html, /main\.js\?v=20260723-profile-faceless-activity-v3/)
+  assert.match(html, /style\.css\?v=20260726-profile-simple-med1-v1/)
+  assert.match(html, /main\.js\?v=20260726-med1-kellawi-v1/)
 
   for (const helper of [
     'normalizeMcqSearchText',
@@ -153,8 +153,10 @@ test('SUR 401-1 Kellawi MCQ bank is complete and wired', () => {
   assert.match(mainSource, /restartTimer/)
   assert.match(mainSource, /promptOnSaved/)
   assert.doesNotMatch(mainSource, /Take over/)
-  assert.match(mainSource, /Ready\? Let’s solve it organ by organ\./)
-  assert.match(mainSource, /1,064 questions · 5 organs · 30 short parts/)
+  assert.match(mainSource, /Let’s solve organ by organ\./)
+  assert.match(mainSource, /source\.mcqs\.length\.toLocaleString\(\)/)
+  assert.match(mainSource, /kellawiGroupCount/)
+  assert.match(mainSource, /kellawiPartCount/)
   assert.ok(readBytes('public/assets/mohamed-kellawi-avatar.jpg').length > 0)
 
   const index = read('index.html')
@@ -394,6 +396,50 @@ test('MED 401-2 Cardio, Chest, Past Exams, Mo.ragab, and Final Exam 80 banks are
   assert.match(html, /med2-cardio-chest-mcqs\.js\?v=20260725-final-exam-80-v1/)
   assert.match(profileHtml, /med2-cardio-chest-mcqs\.js\?v=20260725-final-exam-80-v1/)
   assert.match(mainSource, /code:\s*'MED 401-2'[\s\S]{0,260}quizTopicKey:\s*'MED 401-2 MCQs'/)
+})
+
+test('MED 401-1 Kellawi gastroenterology bank is source-faithful, grouped, wired, and uses the Kellawi source card', () => {
+  const context = { window: { mcqQuizzes: {} } }
+  vm.runInNewContext(read('src/med1-kellawi-mcqs.js'), context)
+
+  const quiz = context.window.mcqQuizzes['MED 401-1 MCQs']
+  assert.equal(quiz.alwaysShowSourcePicker, true)
+  assert.equal(quiz.sources.length, 1)
+
+  const source = quiz.sources[0]
+  assert.equal(source.id, 'med1-kellawi-gastroenterology')
+  assert.equal(source.label, 'Kellawi Gastroenterology MCQs')
+  assert.equal(source.mcqs.length, 155)
+  assert.equal(source.heldForReview.length, 55)
+  assert.equal(source.mcqs.length + source.heldForReview.length, 210)
+  assert.equal(new Set(source.mcqs.map((question) => question.id)).size, source.mcqs.length)
+  assert.ok(source.mcqs.every((question) => question.choices.length >= 2))
+  assert.ok(source.mcqs.every((question) => Number.isInteger(question.answerIndex) && question.choices[question.answerIndex]))
+  assert.ok(source.mcqs.every((question) => question.question && question.source && question.explanation))
+  assert.deepEqual(Array.from(source.collection.mixedSizes, (mode) => mode.size), [20, 30, 50])
+  assert.deepEqual(
+    Array.from(source.collection.groups, (group) => [group.label, group.questionCount]),
+    [
+      ['Diseases of the Pancreas', 13],
+      ['Diseases of the Esophagus', 26],
+      ['Acute Viral Hepatitis & Liver Investigations', 14],
+      ['NAFLD & NASH', 6],
+      ['Autoimmune Liver Disease', 13],
+      ['Diseases of the Small Intestine', 62],
+      ['Liver Cirrhosis & Portal Hypertension', 21]
+    ]
+  )
+  assert.ok(source.collection.groups.every((group) => (
+    group.parts.length > 0 &&
+    group.parts.flatMap((part) => part.mcqs).length === group.questionCount
+  )))
+
+  const html = read('index.html')
+  const mainSource = read('src/main.js')
+  assert.match(html, /med1-kellawi-mcqs\.js\?v=20260726-med1-kellawi-v1/)
+  assert.match(mainSource, /code:\s*'MED 401-1'[\s\S]{0,240}quizTopicKey:\s*'MED 401-1 MCQs'/)
+  assert.match(mainSource, /'med1-kellawi-gastroenterology'[\s\S]{0,100}]\.includes\(source\.id\)/)
+  assert.match(mainSource, /quiz-source-option--kellawi/)
 })
 
 test('SUR 401-1 past-exam bank is answer-safe, grouped, and wired', () => {
@@ -664,8 +710,8 @@ test('Google login is mandatory and the academic section is account-bound', () =
   assert.match(mainSource, /\$\{QUIZ_STORAGE_PREFIX\}::\$\{getProgressStorageOwnerId\(\)\}::\$\{section\}/)
   assert.match(mainSource, /\$\{TOPIC_COMPLETION_STORAGE_PREFIX\}::\$\{getProgressStorageOwnerId\(\)\}::\$\{section\}/)
   assert.match(schedule, /window\.location\.replace\('\/#schedule'\)/)
-  assert.match(html, /style\.css\?v=20260723-profile-faceless-activity-v3/)
-  assert.match(html, /main\.js\?v=20260723-profile-faceless-activity-v3/)
+  assert.match(html, /style\.css\?v=20260726-profile-simple-med1-v1/)
+  assert.match(html, /main\.js\?v=20260726-med1-kellawi-v1/)
 })
 
 test('student profile opens as a standalone gamified page', () => {
@@ -688,18 +734,21 @@ test('student profile opens as a standalone gamified page', () => {
   assert.match(profileHtml, /<section class="profile-section hub-section" id="profile"/)
   assert.match(profileHtml, /id="profile-nickname-form"/)
   assert.match(profileHtml, /id="profile-next-goal"/)
-  assert.match(profileHtml, /Bank coverage/)
+  assert.match(profileHtml, /Questions covered/)
   assert.match(profileHtml, /id="profile-mcq-bank-progress-note"/)
-  assert.match(profileHtml, /Your milestones/)
+  assert.match(profileHtml, /Your achievements/)
   assert.match(profileHtml, /<details class="profile-achievement-cabinet">/)
   assert.match(profileHtml, /id="leaderboard-anon-toggle"/)
   assert.match(profileHtml, /id="profile-public-preview"/)
   assert.match(profileHtml, /id="profile-level-progress" role="progressbar"/)
   assert.match(profileHtml, /id="profile-avatar-options"/)
+  assert.match(profileHtml, /id="profile-avatar"[\s\S]{0,180}id="profile-display-name"/)
+  assert.match(style, /\.profile-hero-card\s*\{[\s\S]{0,180}justify-items:\s*center/)
+  assert.match(style, /\.profile-hero-card__avatar\s*\{[\s\S]{0,100}width:\s*104px/)
   assert.match(html, /data-profile-open/)
   assert.match(html, /data-profile-edit-nickname/)
-  assert.match(profileHtml, /style\.css\?v=20260723-profile-faceless-activity-v3/)
-  assert.match(profileHtml, /main\.js\?v=20260723-profile-faceless-activity-v3/)
+  assert.match(profileHtml, /style\.css\?v=20260726-profile-simple-med1-v1/)
+  assert.match(profileHtml, /main\.js\?v=20260726-med1-kellawi-v1/)
   assert.ok(readBytes('public/assets/profile-avatars-faceless-v3.webp').length > 50_000)
   assert.match(viteConfig, /profile:\s*resolve\(__dirname,\s*'profile\.html'\)/)
 
@@ -732,7 +781,7 @@ test('student profile opens as a standalone gamified page', () => {
   assert.match(mainSource, /totalScore: Number\.isFinite\(serverScore\) \? serverScore : totalScore/)
   assert.match(mainSource, /loadStudentProgress\(activeAcademicSection\)\s*\.then\(\(\) => fetchAndRenderLeaderboard\(true\)\)/)
   assert.match(mainSource, /getCollectionParts\(source\)\.forEach/)
-  assert.match(mainSource, /setText\('profile-mcq-bank-progress-note', `\$\{stats\.mcqBankProgress\.answered\} of \$\{stats\.mcqBankProgress\.total\} unique bank questions`\)/)
+  assert.match(mainSource, /setText\('profile-mcq-bank-progress-note', `\$\{stats\.mcqBankProgress\.answered\} of \$\{stats\.mcqBankProgress\.total\} questions`\)/)
   assert.match(mainSource, /progressFill\.style\.width = `\$\{stats\.mcqBankProgress\.percent\}%`/)
   assert.match(mainSource, /window\.addEventListener\('load', \(\) => \{\s*renderProfileSection\(\)/)
   assert.match(mainSource, /initialParams\.get\('edit'\) === 'nickname'/)
@@ -830,8 +879,8 @@ test('section selector is centered and the wide review remains fully visible', (
   assert.match(style, /\.home-review-screenshot\s*\{[\s\S]*?aspect-ratio:\s*1\.9\s*\/\s*1;[\s\S]*?object-fit:\s*cover;/s)
   assert.match(style, /\.home-review-screenshot--fit\s*\{[^}]*object-fit:\s*contain;[^}]*object-position:\s*left center;/s)
   assert.equal((html.match(/review5\.jpg" class="home-review-screenshot home-review-screenshot--fit"/g) || []).length, 2)
-  assert.match(html, /style\.css\?v=20260723-profile-faceless-activity-v3/)
-  assert.match(html, /main\.js\?v=20260723-profile-faceless-activity-v3/)
+  assert.match(html, /style\.css\?v=20260726-profile-simple-med1-v1/)
+  assert.match(html, /main\.js\?v=20260726-med1-kellawi-v1/)
   assert.match(style, /body\[data-site-mode="selector"\] > main > \.site-footer/)
 
   for (const file of ['review1.jpg', 'review2.jpg', 'review3.jpg', 'review4.jpg', 'review5.jpg', 'review6.png', 'review7.png', 'review8.png']) {

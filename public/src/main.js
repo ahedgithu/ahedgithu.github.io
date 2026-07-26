@@ -891,7 +891,9 @@ const midtermExamSchedule = [
     subjectName: 'Internal Medicine 1',
     date: '2026-07-29',
     dayLabel: 'Wed',
-    time: '2:30-3:30'
+    time: '2:30-3:30',
+    quizTopicKey: 'MED 401-1 MCQs',
+    quizActionLabel: 'MCQs'
   }
 ]
 
@@ -3110,7 +3112,7 @@ function renderProfileSection() {
   if (sectionLabel) sectionLabel.textContent = `${activeAcademicSectionData.title} section`
   if (displayName) displayName.textContent = signedIn ? getPrivateProfileDisplayName() : 'Sign in required'
   if (nicknameState) {
-    nicknameState.textContent = nickname ? `Profile nickname: ${nickname}` : 'No public nickname yet.'
+    nicknameState.textContent = nickname ? `Nickname: ${nickname}` : 'No nickname yet'
   }
   if (nicknameInput && document.activeElement !== nicknameInput) nicknameInput.value = nickname
   renderProfileAvatarPicker()
@@ -3127,13 +3129,13 @@ function renderProfileSection() {
   setText('profile-rank', stats.rank ? `#${stats.rank}` : '-')
   setText('profile-rank-note', stats.rank ? `of ${leaderboardState.rows.length} ranked students` : (stats.leaderboardSynced ? 'No rank yet' : 'Syncing your position'))
   setText('profile-topic-progress-label', `${stats.mcqBankProgress.percent}%`)
-  setText('profile-mcq-bank-progress-note', `${stats.mcqBankProgress.answered} of ${stats.mcqBankProgress.total} unique bank questions`)
+  setText('profile-mcq-bank-progress-note', `${stats.mcqBankProgress.answered} of ${stats.mcqBankProgress.total} questions`)
   setText('profile-trophy-count', `${unlockedTrophies.length} / ${trophies.length} unlocked`)
   setText('profile-achievement-total', String(trophies.length))
   setText('profile-best-percent', stats.bestPercent ? `${stats.bestPercent}%` : '-')
   setText('profile-topics-touched', String(stats.mcqTopicsTouched))
   setText('profile-level', `Level ${masteryLevel.level}`)
-  setText('profile-level-note', `${masteryLevel.remaining} mastery points to Level ${masteryLevel.nextLevel}`)
+  setText('profile-level-note', `${masteryLevel.remaining} points to Level ${masteryLevel.nextLevel}`)
   setText('profile-public-preview', isPublic ? nickname : 'Anonymous Student')
   setText('profile-public-note', isPublic
     ? 'Other students can see this nickname on the leaderboard.'
@@ -5216,7 +5218,16 @@ function renderQuizSourcePicker(topicLabel, event = null) {
     <article class="quiz-card quiz-source-picker">
       ${sourcesWithProgress.map((source) => {
         const isVipPastExam = source.id === 'nutr-quiz-1-2-cleaned-bank'
-        const isKellawiCollection = source.id === 'kellawi-surgical-git-master-bank'
+        const isKellawiCollection = [
+          'kellawi-surgical-git-master-bank',
+          'med1-kellawi-gastroenterology'
+        ].includes(source.id)
+        const kellawiGroupCount = source.collection?.groups?.length || 0
+        const kellawiPartCount = source.collection?.groups?.reduce(
+          (total, group) => total + (group.parts?.length || 0),
+          0
+        ) || 0
+        const kellawiGroupNoun = source.id === 'kellawi-surgical-git-master-bank' ? 'organs' : 'topics'
         const resumesDirectly = Boolean(source.savedProgress && !source.collection)
         return `
         <button class="quiz-source-option${isVipPastExam ? ' quiz-source-option--vip' : ''}${isKellawiCollection ? ' quiz-source-option--kellawi' : ''}" type="button" data-quiz-source="${source.id}" data-quiz-topic="${escapeHtml(topicLabel)}" ${resumesDirectly ? 'data-quiz-resume-direct' : ''} ${isVipPastExam ? 'dir="rtl"' : ''}>
@@ -5226,7 +5237,7 @@ function renderQuizSourcePicker(topicLabel, event = null) {
               <span class="quiz-source-option__kellawi-avatar">
                 <img src="/assets/mohamed-kellawi-avatar.jpg" alt="" />
               </span>
-              <span class="quiz-source-option__thought">Ready? Let’s solve it organ by organ.</span>
+              <span class="quiz-source-option__thought">Let’s solve organ by organ.</span>
             </span>
           ` : ''}
           <span class="quiz-source-option__content">
@@ -5234,7 +5245,7 @@ function renderQuizSourcePicker(topicLabel, event = null) {
             ${isVipPastExam
               ? '<span>15 min timer</span>'
               : isKellawiCollection
-                ? '<span>1,064 questions · 5 organs · 30 short parts</span>'
+                ? `<span>${source.mcqs.length.toLocaleString()} questions · ${kellawiGroupCount} ${kellawiGroupNoun} · ${kellawiPartCount} short parts</span>`
                 : `<span>${source.mcqs.length} questions${source.description ? ` - ${source.description}` : ''}</span>`}
             ${renderSourceProgress(source.savedProgress)}
           </span>

@@ -12856,6 +12856,216 @@ body[data-site-mode="tools"] .site-footer {
   }
 }
 
+/* Simple centered profile */
+.profile-page-hero {
+  justify-content: center;
+  padding: 8px 0 4px;
+  text-align: center;
+}
+
+.profile-page-hero .eyebrow {
+  margin-bottom: 4px;
+}
+
+.profile-page-hero h1 {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  line-height: 1.1;
+}
+
+.profile-page-hero p {
+  margin: 5px auto 0;
+  font-size: 0.9rem;
+}
+
+.profile-dashboard {
+  max-width: 900px;
+  margin: 0 auto;
+  gap: 10px;
+}
+
+.profile-hero-card {
+  grid-template-columns: 1fr;
+  justify-items: center;
+  gap: 8px;
+  padding: 24px 18px 18px;
+  text-align: center;
+  background: rgba(14, 18, 26, 0.9);
+  box-shadow: none;
+}
+
+.profile-hero-card__avatar {
+  width: 104px;
+  height: 104px;
+  margin-bottom: 2px;
+}
+
+.profile-hero-card__identity {
+  display: grid;
+  justify-items: center;
+  gap: 3px;
+}
+
+.profile-hero-card__identity h2 {
+  margin: 0;
+  font-size: clamp(1.6rem, 4vw, 2.15rem);
+}
+
+.profile-hero-card__identity p {
+  margin: 0;
+}
+
+.profile-hero-card__edit {
+  min-height: 38px;
+  padding: 8px 14px;
+}
+
+.profile-identity-setting {
+  grid-column: auto;
+  flex-direction: column;
+  width: min(100%, 520px);
+  gap: 10px;
+  padding-top: 12px;
+}
+
+.profile-identity-setting > div {
+  justify-items: center;
+}
+
+.profile-public-toggle {
+  min-height: 40px;
+}
+
+.profile-mastery-card,
+.profile-momentum-card,
+.profile-trophies,
+.profile-stat,
+.profile-study-details {
+  box-shadow: none;
+}
+
+.profile-mastery-card {
+  padding: 18px;
+  background: rgba(14, 18, 26, 0.9);
+}
+
+.profile-mastery-card__points strong {
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+}
+
+.profile-stats-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.profile-stat {
+  min-height: 112px;
+  padding: 14px;
+  background: rgba(14, 18, 26, 0.9);
+}
+
+.profile-momentum-card {
+  grid-template-columns: minmax(0, 1fr) minmax(150px, 0.5fr) auto;
+  padding: 16px;
+  background: rgba(14, 18, 26, 0.9);
+}
+
+.profile-achievement-card,
+.profile-trophy {
+  box-shadow: none;
+}
+
+@media (max-width: 760px) {
+  .profile-page-hero {
+    align-items: center;
+  }
+
+  .profile-hero-card {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-hero-card__edit {
+    grid-column: auto;
+  }
+
+  .profile-stats-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .profile-momentum-card {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .profile-page__main {
+    width: min(100% - 16px, 640px);
+  }
+
+  .profile-page-hero h1 {
+    font-size: 1.75rem;
+  }
+
+  .profile-hero-card {
+    padding: 20px 14px 16px;
+  }
+
+  .profile-hero-card__avatar {
+    width: 92px;
+    height: 92px;
+  }
+
+  .profile-stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .profile-stat--coverage {
+    grid-column: 1 / -1;
+  }
+
+  .profile-stat {
+    min-height: 96px;
+  }
+
+  .profile-mastery-card__top {
+    align-items: center;
+  }
+
+  .profile-public-toggle,
+  .profile-hero-card__edit,
+  .profile-mastery-card__practice,
+  .profile-momentum-card > a {
+    width: 100%;
+  }
+
+  .profile-trophy-group__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-trophy {
+    min-height: 0;
+  }
+}
+
+@media (max-width: 390px) {
+  .profile-page__header {
+    padding: 7px 8px;
+  }
+
+  .profile-page__quick-nav {
+    gap: 6px;
+  }
+
+  .profile-page__quick-nav a {
+    min-height: 38px;
+    padding: 8px 9px;
+    font-size: 0.7rem;
+  }
+
+  .profile-mastery-card__points strong {
+    font-size: 2rem;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .study-pulse__label i {
     animation: none;

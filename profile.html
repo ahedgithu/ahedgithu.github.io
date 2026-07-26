@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&display=swap" rel="stylesheet" />
   <meta name="theme-color" content="#315f72" />
-  <link rel="stylesheet" href="/src/style.css?v=20260723-profile-faceless-activity-v3" />
+  <link rel="stylesheet" href="/src/style.css?v=20260726-profile-simple-med1-v1" />
 </head>
 <body class="profile-page" data-auth-state="checking" data-site-mode="profile">
   <div class="auth-gate" id="auth-gate" aria-live="polite">
@@ -46,9 +46,9 @@
     <section class="profile-section hub-section" id="profile" aria-labelledby="profile-title">
       <div class="profile-page-hero">
         <div>
-          <p class="eyebrow">Student profile</p>
-          <h1 id="profile-title">Your progress, clearly.</h1>
-          <p>See what you have achieved and the best goal to work toward next.</p>
+          <p class="eyebrow">Profile</p>
+          <h1 id="profile-title">Your profile</h1>
+          <p>Your progress in one simple place.</p>
         </div>
       </div>
 
@@ -56,14 +56,14 @@
         <article class="profile-hero-card">
           <div class="profile-hero-card__avatar" id="profile-avatar">S</div>
           <div class="profile-hero-card__identity">
-            <p class="profile-hero-card__eyebrow" id="profile-section-label">Section</p>
             <h2 id="profile-display-name">Student</h2>
+            <p class="profile-hero-card__eyebrow" id="profile-section-label">Section</p>
             <p id="profile-nickname-state">Your leaderboard identity is private.</p>
           </div>
           <button class="profile-hero-card__edit" type="button" data-profile-edit-nickname>Edit profile</button>
           <div class="profile-identity-setting">
             <div>
-              <span>Leaderboard identity</span>
+              <span>Leaderboard name</span>
               <strong id="profile-public-preview">Anonymous Student</strong>
               <small id="profile-public-note">Your nickname is hidden from other students.</small>
             </div>
@@ -90,12 +90,12 @@
         <article class="profile-mastery-card">
           <div class="profile-mastery-card__top">
             <div>
-              <span>Mastery level</span>
+              <span>Your level</span>
               <strong id="profile-level">Level 1</strong>
             </div>
             <div class="profile-mastery-card__points">
               <strong id="profile-total-score">0</strong>
-              <small>mastery points</small>
+              <small>points</small>
             </div>
           </div>
           <div class="profile-mastery-card__bar" id="profile-level-progress" role="progressbar" aria-label="Progress to next mastery level" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
@@ -107,20 +107,20 @@
 
         <div class="profile-stats-grid" aria-label="Profile summary">
           <article class="profile-stat profile-stat--coverage">
-            <span>Bank coverage</span>
+            <span>Questions covered</span>
             <strong id="profile-topic-progress-label">0%</strong>
-            <small id="profile-mcq-bank-progress-note">0 of 0 unique bank questions</small>
+            <small id="profile-mcq-bank-progress-note">0 of 0 questions</small>
             <div class="profile-stat__bar" id="profile-topic-progress" role="progressbar" aria-label="MCQ bank coverage" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
               <span id="profile-topic-progress-fill"></span>
             </div>
           </article>
           <article class="profile-stat">
-            <span>Completed</span>
+            <span>Finished parts</span>
             <strong id="profile-completed-quizzes">0</strong>
-            <small>quiz parts finished</small>
+            <small>completed</small>
           </article>
           <article class="profile-stat profile-stat--rank">
-            <span>Leaderboard</span>
+            <span>Your rank</span>
             <strong id="profile-rank">-</strong>
             <small id="profile-rank-note">Syncing your position</small>
           </article>
@@ -128,7 +128,7 @@
 
         <article class="profile-momentum-card">
           <div class="profile-momentum-card__copy">
-            <span>Next milestone</span>
+            <span>Next goal</span>
             <strong id="profile-next-goal">Start your first MCQ</strong>
             <p id="profile-next-goal-note">Your closest useful achievement will appear here.</p>
           </div>
@@ -138,14 +138,14 @@
               <span id="profile-next-goal-fill"></span>
             </div>
           </div>
-          <a href="/#tracker">Continue practicing</a>
+          <a href="/#tracker">Practice</a>
         </article>
 
         <section class="profile-trophies" aria-labelledby="profile-trophies-title">
           <div class="profile-trophies__top">
             <div>
               <p class="eyebrow">Achievements</p>
-              <h2 id="profile-trophies-title">Your milestones</h2>
+              <h2 id="profile-trophies-title">Your achievements</h2>
             </div>
             <p id="profile-trophy-count">0 unlocked</p>
           </div>
@@ -178,6 +178,7 @@
   <script defer src="/src/sur402-textbook-mcqs.js?v=20260719-sur402-textbooks-v1"></script>
   <script defer src="/src/sur402-amr-beshry-mcqs.js?v=20260719-sur402-amr-beshry-v1"></script>
   <script defer src="/src/med2-cardio-chest-mcqs.js?v=20260725-final-exam-80-v1"></script>
+  <script defer src="/src/med1-kellawi-mcqs.js?v=20260726-med1-kellawi-v1"></script>
   <script type="importmap">
     {
       "imports": {
@@ -186,6 +187,6 @@
       }
     }
   </script>
-  <script type="module" src="/src/main.js?v=20260723-profile-faceless-activity-v3"></script>
+  <script type="module" src="/src/main.js?v=20260726-med1-kellawi-v1"></script>
 </body>
 </html>
