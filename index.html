@@ -19,7 +19,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&display=swap" rel="stylesheet" />
   <meta name="theme-color" content="#315f72" />
-  <link rel="stylesheet" href="/src/style.css?v=20260726-profile-simple-med1-v1" />
+  <link rel="stylesheet" href="/src/style.css?v=20260726-profile-med1-season-v1" />
 
 </head>
 <body data-auth-state="checking">
@@ -118,9 +118,9 @@
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 21a8 8 0 0 0-16 0"/><circle cx="12" cy="7" r="4"/></svg>
             <span>View profile</span>
           </a>
-          <a class="student-sync__compact student-sync__compact--nickname" href="/profile.html?edit=nickname" data-profile-edit-nickname aria-label="Edit nickname">
+          <a class="student-sync__compact student-sync__compact--nickname" href="/profile.html?edit=nickname" data-profile-edit-nickname aria-label="Edit public profile">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
-            <span>Edit nickname</span>
+            <span>Edit profile</span>
           </a>
           <button class="student-sync__compact student-sync__compact--admin" type="button" data-tracker-admin-toggle aria-label="Switch to admin mode" hidden>
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.4-2.9 8.4-7 10-4.1-1.6-7-5.6-7-10V6l7-3z"/><path d="M9.5 12.5l1.6 1.6 3.8-4.2"/></svg>
@@ -128,10 +128,6 @@
           </button>
         </div>
       </div>
-      <button class="tracker-anonymous-control" type="button" id="leaderboard-anon-toggle" aria-label="Toggle anonymous mode on leaderboard">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19M1 1l22 22"/><path d="M14.12 14.12a3 3 0 1 1-4.24-4.24"/></svg>
-        <span id="leaderboard-anon-label">Go anonymous</span>
-      </button>
     </div>
   </header>
 
@@ -549,7 +545,7 @@
 
     <section class="leaderboard-section hub-section" id="leaderboard" aria-labelledby="leaderboard-title">
       <div class="section-heading">
-        <p class="eyebrow">Class ranking</p>
+        <p class="eyebrow" id="leaderboard-eyebrow">Class ranking</p>
         <h1 id="leaderboard-title">🏆 Leaderboard</h1>
       </div>
 
@@ -569,7 +565,7 @@
       <!-- No data state -->
       <div class="leaderboard__empty" id="leaderboard-no-data" hidden>
         <div class="leaderboard__empty-icon">🏆</div>
-        <p>No one's on the board yet — start studying to claim #1!</p>
+        <p id="leaderboard-no-data-copy">No one's on the board yet — start studying to claim #1!</p>
       </div>
 
       <div class="leaderboard__empty" id="leaderboard-error" hidden>
@@ -1194,7 +1190,7 @@
       }
     }
   </script>
-  <script type="module" src="/src/main.js?v=20260726-med1-kellawi-v1"></script>
+  <script type="module" src="/src/main.js?v=20260726-profile-med1-season-v1"></script>
 
   <script defer src="/pwa.js?v=20260712-pwa-cleanup-v1"></script>
 </body>

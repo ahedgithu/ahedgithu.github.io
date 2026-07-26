@@ -3,6 +3,7 @@ import confetti from 'canvas-confetti'
 import { calculatePercent, calculateQuizProgress } from './progress.js'
 
 import {
+  completeProfileSetup,
   deleteNewsCard,
   deleteUserQuizProgress,
   fetchAdminProfile,
@@ -13,7 +14,6 @@ import {
   fetchLeaderboard,
   fetchRecentMcqActivity,
   fetchUserPreference,
-  updateUserPreference,
   upsertUserPreference,
   getCurrentUser,
   isSupabaseConfigured,
@@ -816,6 +816,8 @@ const quizState = {
   timerEndsAt: null,
   timerStartedAt: null,
   timerElapsedMs: 0,
+  attemptId: null,
+  attemptStartedAt: null,
   transient: false
 }
 let quizTimerInterval = null
@@ -1486,7 +1488,13 @@ function getStudentDisplayName() {
 }
 
 function getDefaultUserPreferences() {
-  return { anonymous: true, selected_section: null, nickname: '', avatar_id: '' }
+  return {
+    anonymous: false,
+    selected_section: null,
+    nickname: '',
+    avatar_id: '',
+    profile_setup_version: 0
+  }
 }
 
 function getStudentNickname() {
@@ -1545,6 +1553,18 @@ function getStudentAvatarId() {
   const cloudAvatarId = String(leaderboardState.preferences?.avatar_id || '')
   if (getProfileAvatarById(cloudAvatarId)) return cloudAvatarId
   return getLocalProfileAvatarId() || getDefaultProfileAvatarId()
+}
+
+function getSavedProfileAvatarId() {
+  const avatarId = String(leaderboardState.preferences?.avatar_id || '')
+  return getProfileAvatarById(avatarId) ? avatarId : ''
+}
+
+function isProfileSetupComplete(preferences = leaderboardState.preferences) {
+  return Number(preferences?.profile_setup_version) >= 1
+    && preferences?.anonymous === false
+    && !!String(preferences?.nickname || '').trim()
+    && !!getProfileAvatarById(String(preferences?.avatar_id || ''))
 }
 
 function getProfileAvatarClass(avatarId) {
@@ -1684,14 +1704,6 @@ function renderStudentSyncUi() {
     studentSyncEmail.textContent = signedIn ? getPrivateProfileDisplayName() : 'Google sync is off'
   }
 
-  const anonBtn = document.getElementById('leaderboard-anon-toggle')
-  if (anonBtn) {
-    anonBtn.style.display = signedIn ? '' : 'none'
-  }
-  if (signedIn) {
-    renderAnonToggleUi()
-  }
-
   if (studentSyncStatus) {
     if (!isSupabaseConfigured()) {
       studentSyncStatus.hidden = false
@@ -1722,6 +1734,7 @@ const leaderboardState = {
   section: '',
   requestId: 0
 }
+let pendingProfileAvatarId = ''
 
 const liveActivityState = {
   loading: false,
@@ -1832,124 +1845,65 @@ function initLiveActivity() {
   })
 }
 
-function renderAnonToggleUi() {
-  const btn = document.getElementById('leaderboard-anon-toggle')
-  const label = document.getElementById('leaderboard-anon-label')
-  if (!btn || !label) return
-
-  const isAnon = !!leaderboardState.preferences.anonymous
-  const nickname = getStudentNickname()
-  btn.classList.toggle('is-anon', isAnon)
-  btn.classList.toggle('is-public', !isAnon)
-  btn.setAttribute('aria-pressed', String(!isAnon))
-  if (isStandaloneProfilePage) {
-    label.textContent = isAnon
-      ? (nickname ? 'Show nickname publicly' : 'Add a public nickname')
-      : 'Appear anonymously'
-    btn.setAttribute('aria-label', label.textContent)
-    return
-  }
-  label.textContent = isAnon ? 'Show my name' : 'Go anonymous'
+function selectProfileAvatar(rawAvatarId) {
+  const avatar = getProfileAvatarById(rawAvatarId)
+  if (!avatar) return false
+  pendingProfileAvatarId = avatar.id
+  renderProfileAvatarPicker()
+  const help = document.getElementById('profile-avatar-help')
+  if (help) help.textContent = `${avatar.label} selected. Save your profile to confirm it.`
+  return true
 }
 
-async function toggleLeaderboardAnonymousMode(button) {
-  if (!studentProgressState.user || button.disabled) return
-
-  const previousPreference = { ...leaderboardState.preferences }
-  if (isStandaloneProfilePage && previousPreference.anonymous && !getStudentNickname()) {
-    openProfileNicknameEditor()
-    showGlobalToast('Add a nickname before making your identity public.')
-    return
-  }
-  const nextAnon = !previousPreference.anonymous
-  leaderboardState.preferences = { ...previousPreference, anonymous: nextAnon }
-  button.disabled = true
-  renderAnonToggleUi()
-
-  try {
-    leaderboardState.preferences = await updateUserPreference(
-      studentProgressState.user.id,
-      { anonymous: nextAnon }
-    )
-    renderAnonToggleUi()
-    renderProfileSection()
-    await fetchAndRenderLeaderboard(true)
-    showGlobalToast(nextAnon ? 'Your name is hidden.' : 'Your name is now visible.')
-  } catch (error) {
-    leaderboardState.preferences = previousPreference
-    renderAnonToggleUi()
-    renderProfileSection()
-    showGlobalToast('Name visibility was not changed. Please try again.')
-    console.error('Name visibility update failed:', error)
-  } finally {
-    button.disabled = false
-  }
-}
-
-async function saveProfileNickname(rawValue) {
+async function saveProfileSetup(rawValue) {
   if (!studentProgressState.user) return false
   const { nickname, error } = validateNickname(rawValue)
   const help = document.getElementById('profile-nickname-help')
+  const avatarHelp = document.getElementById('profile-avatar-help')
   const form = document.getElementById('profile-nickname-form')
-  if (error) {
-    if (help) help.textContent = error
+  const submit = form?.querySelector('[type="submit"]')
+  const setupRequired = !isProfileSetupComplete()
+  const avatarId = pendingProfileAvatarId || (setupRequired ? '' : getSavedProfileAvatarId())
+
+  if (error || !nickname) {
+    if (help) help.textContent = error || 'Choose a nickname before saving your profile.'
+    return false
+  }
+  if (!avatarId) {
+    if (avatarHelp) avatarHelp.textContent = 'Choose an avatar before saving your profile.'
     return false
   }
 
   try {
-    if (help) help.textContent = 'Saving nickname...'
-    leaderboardState.preferences = await updateUserPreference(studentProgressState.user.id, {
-      nickname: nickname || null
-    })
+    if (submit) submit.disabled = true
+    if (help) help.textContent = 'Saving your public profile...'
+    leaderboardState.preferences = {
+      ...getDefaultUserPreferences(),
+      ...(await completeProfileSetup(nickname, avatarId))
+    }
+    pendingProfileAvatarId = ''
+    saveLocalProfileAvatarId(avatarId)
+    document.body.dataset.profileSetup = 'complete'
     renderStudentSyncUi()
     renderProfileSection()
-    invalidateLeaderboard(activeAcademicSection)
-    await refreshLeaderboardIfActive(true)
-    if (form) form.hidden = true
-    if (help) help.textContent = '2-24 characters. No emails or links.'
-    showGlobalToast(nickname ? 'Nickname saved.' : 'Nickname cleared.')
-    return true
-  } catch (error) {
-    if (help) help.textContent = 'Nickname was not saved. Please try again.'
-    console.warn('Nickname update failed.', error)
-    return false
-  }
-}
-
-async function saveProfileAvatar(rawAvatarId, button) {
-  if (!studentProgressState.user || button?.disabled) return false
-  const avatar = getProfileAvatarById(rawAvatarId)
-  if (!avatar) return false
-
-  const previousPreference = { ...leaderboardState.preferences }
-  const help = document.getElementById('profile-avatar-help')
-  saveLocalProfileAvatarId(avatar.id)
-  leaderboardState.preferences = { ...previousPreference, avatar_id: avatar.id }
-  if (button) button.disabled = true
-  if (help) help.textContent = 'Saving your avatar...'
-  renderProfileSection()
-
-  try {
-    leaderboardState.preferences = await updateUserPreference(studentProgressState.user.id, {
-      avatar_id: avatar.id
-    })
-    saveLocalProfileAvatarId(avatar.id)
     invalidateLeaderboard(activeAcademicSection)
     await fetchAndRenderLeaderboard(true)
-    renderStudentSyncUi()
-    renderProfileSection()
-    if (help) help.textContent = 'Your avatar is saved and will appear on the leaderboard.'
-    showGlobalToast(`${avatar.label} avatar selected.`)
+    if (form) form.hidden = true
+    if (help) help.textContent = 'Your nickname is public and unique.'
+    if (avatarHelp) avatarHelp.textContent = 'Your avatar is saved and visible to other students.'
+    showGlobalToast('Profile complete. Welcome to the board.')
     return true
-  } catch (error) {
-    leaderboardState.preferences = { ...previousPreference, avatar_id: avatar.id }
-    renderProfileSection()
-    if (help) help.textContent = 'Saved on this device. Cloud sync will start after the avatar update is enabled.'
-    showGlobalToast(`${avatar.label} avatar saved on this device.`)
-    console.warn('Avatar cloud sync is not available yet.', error)
-    return true
+  } catch (saveError) {
+    const duplicateNickname = saveError?.code === '23505' || /already taken|unique/i.test(saveError?.message || '')
+    if (help) {
+      help.textContent = duplicateNickname
+        ? 'That nickname is already taken. Choose another one.'
+        : 'Your profile was not saved. Please try again.'
+    }
+    console.warn('Profile setup failed.', saveError)
+    return false
   } finally {
-    if (button) button.disabled = false
+    if (submit) submit.disabled = false
   }
 }
 
@@ -1976,9 +1930,11 @@ function openProfileNicknameEditor() {
     return
   }
   openProfileSection()
+  pendingProfileAvatarId = getSavedProfileAvatarId()
   const form = document.getElementById('profile-nickname-form')
   const input = document.getElementById('profile-nickname-input')
   if (form) form.hidden = false
+  renderProfileAvatarPicker()
   if (input) {
     input.value = getStudentNickname()
     input.focus()
@@ -2033,6 +1989,10 @@ function initLeaderboardVisibilityLoading() {
 function getCurrentLeaderboardEntry() {
   return (leaderboardState.rows || [])
     .find((row) => studentProgressState.user && row.user_id === studentProgressState.user.id)
+}
+
+function getRankedLeaderboardRows() {
+  return (leaderboardState.rows || []).filter((row) => Number(row.total_score) > 0)
 }
 
 function showGlobalToast(text) {
@@ -2115,7 +2075,19 @@ function renderLeaderboardHtml() {
   if (notSignedInEl) notSignedInEl.hidden = true
   if (errorEl) errorEl.hidden = true
 
-  const rows = leaderboardState.rows || []
+  const seasonName = leaderboardState.rows.find((row) => row.season_name)?.season_name || ''
+  const titleEl = document.getElementById('leaderboard-title')
+  const eyebrowEl = document.getElementById('leaderboard-eyebrow')
+  const noDataCopyEl = document.getElementById('leaderboard-no-data-copy')
+  if (titleEl) titleEl.textContent = seasonName ? `🏆 ${seasonName} Leaderboard` : '🏆 Leaderboard'
+  if (eyebrowEl) eyebrowEl.textContent = seasonName ? 'Fresh points season' : 'Class ranking'
+  if (noDataCopyEl) {
+    noDataCopyEl.textContent = seasonName
+      ? `The ${seasonName} board starts at zero. Complete a fresh MED-1 attempt to claim #1.`
+      : `No one's on the board yet — start studying to claim #1!`
+  }
+
+  const rows = getRankedLeaderboardRows()
   if (rows.length === 0) {
     if (noDataEl) noDataEl.hidden = false
     if (contentEl) contentEl.hidden = true
@@ -2140,11 +2112,7 @@ function renderLeaderboardHtml() {
       const entry = top3[rank - 1]
       if (!entry) return
 
-      const isMe = studentProgressState.user && entry.user_id === studentProgressState.user.id
-      const isAnon = entry.anonymous
-      const displayName = isAnon
-        ? (isMe ? 'You (Anon)' : 'Anonymous Student')
-        : (entry.display_name || 'Student')
+      const displayName = entry.display_name || 'Student'
 
       const avatarId = getLeaderboardAvatarId(entry, rank - 1)
       const avatarHtml = getProfileAvatarMarkup(avatarId, 'leaderboard__podium-avatar', displayName)
@@ -2165,11 +2133,7 @@ function renderLeaderboardHtml() {
     listEl.innerHTML = ''
     rest.forEach((entry, idx) => {
       const rank = idx + 4
-      const isMe = studentProgressState.user && entry.user_id === studentProgressState.user.id
-      const isAnon = entry.anonymous
-      const displayName = isAnon
-        ? (isMe ? 'You (Anon)' : 'Anonymous Student')
-        : (entry.display_name || 'Student')
+      const displayName = entry.display_name || 'Student'
 
       const avatarId = getLeaderboardAvatarId(entry, idx + 3)
       const avatarHtml = getProfileAvatarMarkup(avatarId, 'leaderboard__row-avatar', displayName)
@@ -2192,10 +2156,7 @@ function renderLeaderboardHtml() {
       yourRankEl.hidden = false
       const myEntry = rows[myIndex]
       const rank = myIndex + 1
-      const isAnon = myEntry.anonymous
-      const displayName = isAnon
-        ? 'You (Anonymous)'
-        : (myEntry.display_name || 'Student')
+      const displayName = myEntry.display_name || 'Student'
 
       const avatarId = getProfileAvatarById(myEntry.avatar_id) ? myEntry.avatar_id : getStudentAvatarId()
 
@@ -2223,7 +2184,7 @@ function renderLeaderboardHtml() {
 
   if (updatedEl) {
     const timeStr = new Date(leaderboardState.lastFetched).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })
-    updatedEl.textContent = `Scores update automatically · Last updated at ${timeStr}`
+    updatedEl.textContent = `${seasonName || 'Lifetime'} scores update automatically · Last updated at ${timeStr}`
   }
   renderProfileSection()
 }
@@ -2287,6 +2248,8 @@ async function syncLocalProgressToCloud(section = activeAcademicSection) {
       total_questions: stats.totalQuestions,
       answered_count: stats.answeredCount,
       wrong_question_ids: stats.wrongQuestionIds,
+      attempt_id: payload.attemptId || null,
+      attempt_started_at: payload.attemptStartedAt || null,
       completed_at: payload.completed ? new Date().toISOString() : null
     })
   }
@@ -2311,7 +2274,6 @@ async function loadStudentProgress(section = activeAcademicSection) {
     ])
 
     leaderboardState.preferences = { ...getDefaultUserPreferences(), ...(pref || {}) }
-    renderAnonToggleUi()
 
     ;[...studentProgressState.topicRows.keys()]
       .filter((key) => key.startsWith(`${section}::`))
@@ -2915,16 +2877,19 @@ function getStudentProfileStats() {
 
   const topicProgress = getActiveTopicProgressStats()
   const mcqBankProgress = getProfileMcqBankProgressStats()
-  const leaderboardRows = leaderboardState.rows || []
+  const leaderboardRows = getRankedLeaderboardRows()
   const rankIndex = leaderboardRows.findIndex((row) => studentProgressState.user && row.user_id === studentProgressState.user.id)
   const currentLeaderboardEntry = getCurrentLeaderboardEntry()
-  const serverScore = Number(currentLeaderboardEntry?.total_score)
-  const serverAnsweredTopics = Number(currentLeaderboardEntry?.mcqs_count)
-  const serverCompletedQuizzes = Number(currentLeaderboardEntry?.quizzes_completed)
-  const serverCorrectAnswers = Number(currentLeaderboardEntry?.correct_answers)
+  const serverScore = Number(currentLeaderboardEntry?.lifetime_score)
+  const serverAnsweredTopics = Number(currentLeaderboardEntry?.lifetime_mcqs_count)
+  const serverCompletedQuizzes = Number(currentLeaderboardEntry?.lifetime_quizzes_completed)
+  const serverCorrectAnswers = Number(currentLeaderboardEntry?.lifetime_correct_answers)
+  const seasonScore = Number(currentLeaderboardEntry?.total_score)
 
   return {
     totalScore: Number.isFinite(serverScore) ? serverScore : totalScore,
+    seasonScore: Number.isFinite(seasonScore) && currentLeaderboardEntry?.season_id ? seasonScore : null,
+    seasonName: currentLeaderboardEntry?.season_name || '',
     answeredCount,
     correctAnswers: Number.isFinite(serverCorrectAnswers) ? serverCorrectAnswers : totalScore,
     completedQuizzes: Number.isFinite(serverCompletedQuizzes) ? serverCompletedQuizzes : completedQuizzes,
@@ -2935,7 +2900,7 @@ function getStudentProfileStats() {
     topicProgress,
     mcqBankProgress,
     rank: rankIndex >= 0 ? rankIndex + 1 : null,
-    leaderboardSynced: leaderboardRows.length > 0 && leaderboardState.section === activeAcademicSection
+    leaderboardSynced: leaderboardState.lastFetched > 0 && leaderboardState.section === activeAcademicSection
   }
 }
 
@@ -3080,7 +3045,7 @@ function getProfileAvatarHtml() {
 function renderProfileAvatarPicker() {
   const container = document.getElementById('profile-avatar-options')
   if (!container) return
-  const selectedAvatarId = getStudentAvatarId()
+  const selectedAvatarId = pendingProfileAvatarId || getSavedProfileAvatarId()
   container.innerHTML = PROFILE_AVATARS.map((avatar) => `
     <button class="profile-avatar-option${avatar.id === selectedAvatarId ? ' is-selected' : ''}" type="button" data-profile-avatar="${avatar.id}" aria-label="Choose ${escapeHtml(avatar.label)} avatar" aria-pressed="${avatar.id === selectedAvatarId}">
       ${getProfileAvatarMarkup(avatar.id, 'student-avatar--option', avatar.label)}
@@ -3096,27 +3061,35 @@ function renderProfileSection() {
   const signedIn = !!studentProgressState.user
   const stats = getStudentProfileStats()
   const nickname = getStudentNickname()
+  const setupRequired = signedIn && !isProfileSetupComplete()
   const trophies = getProfileTrophies(stats)
   const unlockedTrophies = trophies.filter((trophy) => trophy.unlocked)
   const masteryLevel = getProfileMasteryLevel(stats.totalScore)
-  const isPublic = leaderboardState.preferences.anonymous === false && !!nickname
 
   const avatar = document.getElementById('profile-avatar')
   const sectionLabel = document.getElementById('profile-section-label')
   const displayName = document.getElementById('profile-display-name')
   const nicknameState = document.getElementById('profile-nickname-state')
   const nicknameInput = document.getElementById('profile-nickname-input')
+  const profileForm = document.getElementById('profile-nickname-form')
+  const editButton = document.querySelector('[data-profile-edit-nickname]')
+  const setupBanner = document.getElementById('profile-setup-banner')
 
   profileRoot.classList.toggle('is-loading', signedIn && !studentProgressState.ready)
+  document.body.dataset.profileSetup = setupRequired ? 'required' : 'complete'
   if (avatar) avatar.innerHTML = signedIn ? getProfileAvatarHtml() : 'S'
   if (sectionLabel) sectionLabel.textContent = `${activeAcademicSectionData.title} section`
   if (displayName) displayName.textContent = signedIn ? getPrivateProfileDisplayName() : 'Sign in required'
   if (nicknameState) {
-    nicknameState.textContent = nickname ? `Nickname: ${nickname}` : 'No nickname yet'
+    nicknameState.textContent = setupRequired
+      ? 'Choose the public identity you will use with your classmates.'
+      : `Public nickname: ${nickname}`
   }
   if (nicknameInput && document.activeElement !== nicknameInput) nicknameInput.value = nickname
+  if (profileForm && setupRequired) profileForm.hidden = false
+  if (editButton) editButton.textContent = setupRequired ? 'Complete profile' : 'Edit profile'
+  if (setupBanner) setupBanner.hidden = !setupRequired
   renderProfileAvatarPicker()
-  renderAnonToggleUi()
 
   const setText = (id, value) => {
     const element = document.getElementById(id)
@@ -3124,10 +3097,15 @@ function renderProfileSection() {
   }
 
   setText('profile-total-score', String(stats.totalScore))
+  setText('profile-season-score-note', stats.seasonName
+    ? `${stats.seasonName}: ${stats.seasonScore || 0} points`
+    : 'Lifetime score across this section')
   setText('profile-answered-count', String(stats.answeredCount))
   setText('profile-completed-quizzes', String(stats.completedQuizzes))
   setText('profile-rank', stats.rank ? `#${stats.rank}` : '-')
-  setText('profile-rank-note', stats.rank ? `of ${leaderboardState.rows.length} ranked students` : (stats.leaderboardSynced ? 'No rank yet' : 'Syncing your position'))
+  setText('profile-rank-note', stats.rank
+    ? `of ${getRankedLeaderboardRows().length} in ${stats.seasonName || 'this section'}`
+    : (stats.leaderboardSynced ? `No ${stats.seasonName || 'section'} rank yet` : 'Syncing your position'))
   setText('profile-topic-progress-label', `${stats.mcqBankProgress.percent}%`)
   setText('profile-mcq-bank-progress-note', `${stats.mcqBankProgress.answered} of ${stats.mcqBankProgress.total} questions`)
   setText('profile-trophy-count', `${unlockedTrophies.length} / ${trophies.length} unlocked`)
@@ -3136,10 +3114,10 @@ function renderProfileSection() {
   setText('profile-topics-touched', String(stats.mcqTopicsTouched))
   setText('profile-level', `Level ${masteryLevel.level}`)
   setText('profile-level-note', `${masteryLevel.remaining} points to Level ${masteryLevel.nextLevel}`)
-  setText('profile-public-preview', isPublic ? nickname : 'Anonymous Student')
-  setText('profile-public-note', isPublic
-    ? 'Other students can see this nickname on the leaderboard.'
-    : (nickname ? 'Your saved nickname is hidden from other students.' : 'Add a nickname before making your identity public.'))
+  setText('profile-public-preview', nickname || 'Choose your nickname')
+  setText('profile-public-note', setupRequired
+    ? 'A unique nickname and avatar are required before opening the tracker.'
+    : 'Other signed-in students can see your nickname and avatar.')
 
   const nextLockedTrophy = getClosestLockedTrophies(trophies)[0]
   setText('profile-next-goal', nextLockedTrophy ? nextLockedTrophy.title : 'All milestones completed')
@@ -4210,6 +4188,15 @@ function getQuizStorageKey(topicLabel, sourceId = quizState.sourceId || 'current
   return `${QUIZ_STORAGE_PREFIX}::${getProgressStorageOwnerId()}::${section}::${encodeURIComponent(topicLabel)}::${encodeURIComponent(sourceId)}`
 }
 
+function createQuizAttemptId() {
+  if (typeof globalThis.crypto?.randomUUID === 'function') return globalThis.crypto.randomUUID()
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (character) => {
+    const value = Math.floor(Math.random() * 16)
+    const nibble = character === 'x' ? value : ((value & 0x3) | 0x8)
+    return nibble.toString(16)
+  })
+}
+
 function getLegacyQuizStorageKey(topicLabel, sourceId = quizState.sourceId || 'current') {
   return `${LEGACY_QUIZ_STORAGE_PREFIX}${encodeURIComponent(topicLabel)}::${encodeURIComponent(sourceId)}`
 }
@@ -4258,6 +4245,8 @@ function buildQuizProgressPayload() {
     timerEndsAt: quizState.timerEndsAt || null,
     timerStartedAt: quizState.timerStartedAt || null,
     timerElapsedMs: getQuizTimerElapsedMs(),
+    attemptId: quizState.attemptId,
+    attemptStartedAt: quizState.attemptStartedAt,
     score: quizState.completed ? getQuizScore() : null,
     totalQuestions,
     answeredCount,
@@ -4289,6 +4278,8 @@ function saveQuizState() {
       total_questions: payload.totalQuestions,
       answered_count: payload.answeredCount,
       wrong_question_ids: payload.wrongQuestionIds,
+      attempt_id: payload.attemptId,
+      attempt_started_at: payload.attemptStartedAt,
       completed_at: quizState.completed ? new Date().toISOString() : null
     })
       .then(() => {
@@ -4735,6 +4726,8 @@ function initializeQuiz(topicLabel, {
   quizState.timerEndsAt = null
   quizState.timerStartedAt = null
   quizState.timerElapsedMs = 0
+  quizState.attemptId = savedState && !fresh ? (savedState.attemptId || null) : createQuizAttemptId()
+  quizState.attemptStartedAt = savedState && !fresh ? (savedState.attemptStartedAt || null) : new Date().toISOString()
   quizState.transient = !!config.transient
 
   if (quizState.timeLimitMinutes && !completed) {
@@ -5990,6 +5983,8 @@ function handleQuizClick(event) {
     quizState.index = 0
     quizState.completed = false
     quizState.missingQuestionIds = []
+    quizState.attemptId = createQuizAttemptId()
+    quizState.attemptStartedAt = new Date().toISOString()
     clearSavedQuizState(quizState.topicLabel, quizState.sourceId)
     quizState.timerEndsAt = quizState.timeLimitMinutes
       ? new Date(Date.now() + quizState.timeLimitMinutes * 60000).toISOString()
@@ -7386,7 +7381,19 @@ function isSavedAcademicSection(section) {
   return section === '401' || section === '402'
 }
 
+function redirectToRequiredProfile(section) {
+  const profileUrl = new URL('/profile.html', window.location.origin)
+  profileUrl.searchParams.set('setup', 'required')
+  profileUrl.searchParams.set('section', isSavedAcademicSection(section) ? section : '401')
+  window.location.replace(profileUrl.toString())
+}
+
 function routeAuthenticatedUser(section, options = {}) {
+  if (!isStandaloneProfilePage && !isProfileSetupComplete()) {
+    redirectToRequiredProfile(section)
+    return
+  }
+
   if (isStandaloneProfilePage) {
     activeAcademicSection = isSavedAcademicSection(section) ? section : '401'
     activeSiteMode = 'profile'
@@ -7432,6 +7439,7 @@ function clearAuthenticatedProgressState() {
   studentProgressState.ready = false
   studentProgressState.loading = false
   studentProgressState.selectedSection = ''
+  pendingProfileAvatarId = ''
   leaderboardState.preferences = getDefaultUserPreferences()
   invalidateLeaderboard()
 }
@@ -7498,10 +7506,11 @@ async function saveSelectedSection(section, options = {}) {
   try {
     const preference = await upsertUserPreference({
       user_id: studentProgressState.user.id,
-      anonymous: leaderboardState.preferences.anonymous !== false,
+      anonymous: false,
       selected_section: section,
       nickname: getStudentNickname() || null,
-      avatar_id: getStudentAvatarId()
+      avatar_id: getSavedProfileAvatarId() || null,
+      profile_setup_version: Number(leaderboardState.preferences.profile_setup_version) || 0
     })
     leaderboardState.preferences = preference
     studentProgressState.selectedSection = section
@@ -7667,20 +7676,13 @@ document.addEventListener('click', (event) => {
   const avatarChoice = event.target.closest('[data-profile-avatar]')
   if (avatarChoice) {
     event.preventDefault()
-    saveProfileAvatar(avatarChoice.dataset.profileAvatar, avatarChoice)
+    selectProfileAvatar(avatarChoice.dataset.profileAvatar)
     return
   }
 
   if (event.target.closest('[data-tracker-admin-toggle]')) {
     event.preventDefault()
     openAdminLogin()
-    return
-  }
-
-  const anonToggle = event.target.closest('#leaderboard-anon-toggle')
-  if (anonToggle) {
-    event.preventDefault()
-    toggleLeaderboardAnonymousMode(anonToggle)
     return
   }
 
@@ -7820,7 +7822,7 @@ adminLoginForm?.addEventListener('submit', async (event) => {
 document.getElementById('profile-nickname-form')?.addEventListener('submit', async (event) => {
   event.preventDefault()
   const input = document.getElementById('profile-nickname-input')
-  await saveProfileNickname(input?.value || '')
+  await saveProfileSetup(input?.value || '')
 })
 
 trackerAdminEditPanel?.addEventListener('change', (event) => {

@@ -6,6 +6,8 @@ let trackerTopicsIncludeMidtermColumns = true
 let trackerTopicsIncludeCreatedAt = true
 let userPreferencesIncludeNickname = true
 let userPreferencesIncludeAvatar = true
+let userPreferencesIncludeProfileSetup = true
+let userQuizProgressIncludesAttemptMetadata = true
 
 export function getSupabaseConfig() {
   const windowConfig = window.SUPABASE_CONFIG || {}
@@ -74,6 +76,16 @@ function isMissingUserPreferenceAvatarError(error) {
   return /avatar_id/i.test(message) && /user_preferences|schema cache|column/i.test(message)
 }
 
+function isMissingUserPreferenceProfileSetupError(error) {
+  const message = `${error?.message || ''} ${error?.details || ''} ${error?.hint || ''}`
+  return /profile_setup_version/i.test(message) && /user_preferences|schema cache|column/i.test(message)
+}
+
+function isMissingQuizAttemptMetadataError(error) {
+  const message = `${error?.message || ''} ${error?.details || ''} ${error?.hint || ''}`
+  return /attempt_id|attempt_started_at/i.test(message) && /user_mcq_progress|schema cache|column/i.test(message)
+}
+
 function stripOptionalColumns(row) {
   const { drive_url, audio_url, display_order, ...basicRow } = row
   return basicRow
@@ -94,12 +106,18 @@ function stripUserPreferenceAvatar(row) {
   return basicRow
 }
 
+function stripUserPreferenceProfileSetup(row) {
+  const { profile_setup_version, ...basicRow } = row
+  return basicRow
+}
+
 function getUserPreferenceSelectFields() {
   return [
     'anonymous',
     'selected_section',
     ...(userPreferencesIncludeNickname ? ['nickname'] : []),
     ...(userPreferencesIncludeAvatar ? ['avatar_id'] : []),
+    ...(userPreferencesIncludeProfileSetup ? ['profile_setup_version'] : []),
     'updated_at'
   ].join(', ')
 }
@@ -107,6 +125,7 @@ function getUserPreferenceSelectFields() {
 function stripUnsupportedUserPreferenceFields(row) {
   let payload = userPreferencesIncludeNickname ? row : stripUserPreferenceNickname(row)
   payload = userPreferencesIncludeAvatar ? payload : stripUserPreferenceAvatar(payload)
+  payload = userPreferencesIncludeProfileSetup ? payload : stripUserPreferenceProfileSetup(payload)
   return payload
 }
 
@@ -315,12 +334,17 @@ export async function upsertUserTopicProgress(row) {
 export async function fetchUserQuizProgressRows(section) {
   const supabase = getSupabaseClient()
   if (!supabase) return []
+  const attemptFields = userQuizProgressIncludesAttemptMetadata ? ', attempt_id, attempt_started_at' : ''
 
   const { data, error } = await supabase
     .from('user_mcq_progress')
-    .select('section, topic_label, source_id, source_label, progress, completed, score, total_questions, answered_count, wrong_question_ids, completed_at, updated_at')
+    .select(`section, topic_label, source_id, source_label, progress, completed, score, total_questions, answered_count, wrong_question_ids${attemptFields}, completed_at, updated_at`)
     .eq('section', section)
 
+  if (error && userQuizProgressIncludesAttemptMetadata && isMissingQuizAttemptMetadataError(error)) {
+    userQuizProgressIncludesAttemptMetadata = false
+    return fetchUserQuizProgressRows(section)
+  }
   if (error) throw error
   return data || []
 }
@@ -328,15 +352,23 @@ export async function fetchUserQuizProgressRows(section) {
 export async function upsertUserQuizProgress(row) {
   const supabase = getSupabaseClient()
   if (!supabase) throw new Error('Supabase is not configured.')
+  const payload = userQuizProgressIncludesAttemptMetadata
+    ? row
+    : (({ attempt_id, attempt_started_at, ...basicRow }) => basicRow)(row)
+  const attemptFields = userQuizProgressIncludesAttemptMetadata ? ', attempt_id, attempt_started_at' : ''
 
   const { data, error } = await supabase
     .from('user_mcq_progress')
-    .upsert(row, {
+    .upsert(payload, {
       onConflict: 'user_id,section,topic_label,source_id'
     })
-    .select('section, topic_label, source_id, source_label, progress, completed, score, total_questions, answered_count, wrong_question_ids, completed_at, updated_at')
+    .select(`section, topic_label, source_id, source_label, progress, completed, score, total_questions, answered_count, wrong_question_ids${attemptFields}, completed_at, updated_at`)
     .single()
 
+  if (error && userQuizProgressIncludesAttemptMetadata && isMissingQuizAttemptMetadataError(error)) {
+    userQuizProgressIncludesAttemptMetadata = false
+    return upsertUserQuizProgress(row)
+  }
   if (error) throw error
   return data
 }
@@ -402,6 +434,10 @@ export async function fetchUserPreference() {
     userPreferencesIncludeAvatar = false
     return fetchUserPreference()
   }
+  if (error && userPreferencesIncludeProfileSetup && isMissingUserPreferenceProfileSetupError(error)) {
+    userPreferencesIncludeProfileSetup = false
+    return fetchUserPreference()
+  }
 
   if (error) throw error
   return data
@@ -426,6 +462,10 @@ export async function upsertUserPreference(row) {
   }
   if (error && userPreferencesIncludeAvatar && isMissingUserPreferenceAvatarError(error)) {
     userPreferencesIncludeAvatar = false
+    return upsertUserPreference(row)
+  }
+  if (error && userPreferencesIncludeProfileSetup && isMissingUserPreferenceProfileSetupError(error)) {
+    userPreferencesIncludeProfileSetup = false
     return upsertUserPreference(row)
   }
 
@@ -458,6 +498,23 @@ export async function updateUserPreference(userId, changes) {
     userPreferencesIncludeAvatar = false
     return updateUserPreference(userId, changes)
   }
+  if (error && userPreferencesIncludeProfileSetup && isMissingUserPreferenceProfileSetupError(error)) {
+    userPreferencesIncludeProfileSetup = false
+    return updateUserPreference(userId, changes)
+  }
+
+  if (error) throw error
+  return data
+}
+
+export async function completeProfileSetup(nickname, avatarId) {
+  const supabase = getSupabaseClient()
+  if (!supabase) throw new Error('Supabase is not configured.')
+
+  const { data, error } = await supabase.rpc('complete_profile_setup', {
+    p_nickname: nickname,
+    p_avatar_id: avatarId
+  })
 
   if (error) throw error
   return data

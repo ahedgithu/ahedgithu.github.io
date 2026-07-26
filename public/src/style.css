@@ -11931,6 +11931,36 @@ body[data-site-mode="tools"] .site-footer {
   gap: 14px;
 }
 
+.profile-setup-banner {
+  display: grid;
+  gap: 6px;
+  padding: 16px 18px;
+  border: 1px solid rgba(70, 210, 154, 0.35);
+  border-radius: var(--radius);
+  color: var(--text);
+  background: rgba(70, 210, 154, 0.09);
+}
+
+.profile-setup-banner[hidden] {
+  display: none !important;
+}
+
+.profile-setup-banner strong {
+  font-size: 1rem;
+}
+
+.profile-setup-banner p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+body[data-profile-setup="required"] .profile-page__quick-nav,
+body[data-profile-setup="required"] .profile-mastery-card__practice,
+body[data-profile-setup="required"] .profile-momentum-card > a {
+  display: none !important;
+}
+
 .profile-hero-card,
 .profile-nickname-form,
 .profile-progress-card,
@@ -12418,6 +12448,13 @@ body[data-site-mode="tools"] .site-footer {
   border-radius: inherit;
   background: linear-gradient(90deg, var(--blue), var(--green), var(--gold));
   transition: width 420ms var(--ease);
+}
+
+.profile-mastery-card__season {
+  margin: 0;
+  color: var(--green);
+  font-size: 0.82rem;
+  font-weight: 850;
 }
 
 .profile-mastery-card__practice {
