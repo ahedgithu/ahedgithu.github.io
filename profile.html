@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&display=swap" rel="stylesheet" />
   <meta name="theme-color" content="#315f72" />
-  <link rel="stylesheet" href="/src/style.css?v=20260726-profile-single-nickname-v1" />
+  <link rel="stylesheet" href="/src/style.css?v=20260726-profile-single-nickname-v2" />
 </head>
 <body class="profile-page" data-auth-state="checking" data-site-mode="profile">
   <div class="auth-gate" id="auth-gate" aria-live="polite">
@@ -60,17 +60,26 @@
 
         <form class="profile-nickname-form" id="profile-nickname-form">
           <div class="profile-nickname-form__avatar" id="profile-avatar" aria-live="polite"></div>
-          <label for="profile-nickname-input">Nickname</label>
-          <div class="profile-nickname-form__row">
-            <input id="profile-nickname-input" name="nickname" minlength="2" maxlength="24" autocomplete="nickname" placeholder="Choose a unique nickname" required>
-            <button type="submit">Save profile</button>
+          <div class="profile-nickname-form__name-row" id="profile-name-row">
+            <strong id="profile-display-nickname">Your nickname</strong>
+            <button class="profile-nickname-form__edit-name" type="button" data-profile-edit-nickname aria-label="Edit name" title="Edit name">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 20h9"></path>
+                <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"></path>
+              </svg>
+            </button>
           </div>
-          <p id="profile-nickname-help">2-24 characters. Nicknames are unique; emails and links are not allowed.</p>
+          <div class="profile-nickname-form__editor" id="profile-nickname-editor" hidden>
+            <label for="profile-nickname-input">Nickname</label>
+            <input id="profile-nickname-input" name="nickname" minlength="2" maxlength="24" autocomplete="nickname" placeholder="Choose a unique nickname" required>
+            <p id="profile-nickname-help">2-24 characters. Nicknames are unique; emails and links are not allowed.</p>
+          </div>
           <fieldset class="profile-avatar-picker">
             <legend>Avatar</legend>
             <div class="profile-avatar-options" id="profile-avatar-options" aria-label="Available profile avatars"></div>
             <p id="profile-avatar-help" aria-live="polite"></p>
           </fieldset>
+          <button class="profile-nickname-form__save" type="submit">Save profile</button>
         </form>
 
         <article class="profile-mastery-card">
@@ -174,6 +183,6 @@
       }
     }
   </script>
-  <script type="module" src="/src/main.js?v=20260726-profile-single-nickname-v1"></script>
+  <script type="module" src="/src/main.js?v=20260726-profile-single-nickname-v2"></script>
 </body>
 </html>

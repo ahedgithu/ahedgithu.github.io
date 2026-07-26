@@ -415,6 +415,36 @@ export async function fetchRecentMcqActivity(section = '401', limit = 8) {
   return data || []
 }
 
+export async function markStudentOnline({ section = '401', page = 'tracker', isMcqActive = false, topicLabel = null, sourceLabel = null } = {}) {
+  const supabase = getSupabaseClient()
+  if (!supabase) return
+
+  const { error } = await supabase
+    .rpc('mark_student_online', {
+      p_section: section,
+      p_page: page,
+      p_is_mcq_active: isMcqActive,
+      p_topic_label: topicLabel,
+      p_source_label: sourceLabel
+    })
+
+  if (error) throw error
+}
+
+export async function fetchOnlineStudents(section = '401', limit = 10) {
+  const supabase = getSupabaseClient()
+  if (!supabase) return []
+
+  const { data, error } = await supabase
+    .rpc('get_online_students', {
+      p_section: section,
+      p_limit: Math.max(1, Math.min(Number(limit) || 10, 20))
+    })
+
+  if (error) throw error
+  return data || []
+}
+
 export async function fetchUserPreference() {
   const supabase = getSupabaseClient()
   if (!supabase) return null

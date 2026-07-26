@@ -8,6 +8,7 @@ import {
   deleteUserQuizProgress,
   fetchAdminProfile,
   fetchNewsCards,
+  fetchOnlineStudents,
   fetchTrackerTopicRows,
   fetchUserQuizProgressRows,
   fetchUserTopicProgressRows,
@@ -17,6 +18,7 @@ import {
   upsertUserPreference,
   getCurrentUser,
   isSupabaseConfigured,
+  markStudentOnline,
   onAuthStateChange,
   signInAdmin,
   signInWithGoogle,
@@ -921,7 +923,7 @@ const courseSchedule = [
 const midtermExamSchedule402 = [
   { code: 'SUR 402-1', subjectCode: 'SUR402-1', subjectName: 'Surgery 402-1', date: '2026-07-22', dayLabel: 'Wed', time: '11:30-12:30', quizTopicKey: 'SUR 402-1 MCQs', quizActionLabel: 'MCQs' },
   { code: 'MED 402-1', subjectCode: 'MED402-1', subjectName: 'Medicine 402-1', date: '2026-07-25', dayLabel: 'Sat', time: '11:30-12:30', quizTopicKey: 'MED 402-1 MCQs', quizActionLabel: 'MCQs' },
-  { code: 'MED 402-2', subjectCode: 'MED402-2', subjectName: 'Medicine 402-2', date: '2026-07-29', dayLabel: 'Wed', time: '11:30-12:30' },
+  { code: 'MED 402-2', subjectCode: 'MED402-2', subjectName: 'Medicine 402-2', date: '2026-07-29', dayLabel: 'Wed', time: '11:30-12:30', quizTopicKey: 'MED 402-2 MCQs', quizActionLabel: 'MCQs' },
   { code: 'GYN 402', subjectCode: 'GYNA402', subjectName: 'Gynecology & Obstetrics 402', date: '2026-08-01', dayLabel: 'Sat', time: '11:30-12:30' }
 ]
 
@@ -1022,6 +1024,7 @@ const authSectionCopy = document.getElementById('auth-section-copy')
 const authSectionCancel = document.querySelector('[data-auth-section-cancel]')
 const isStandaloneProfilePage = document.body.classList.contains('profile-page') || window.location.pathname.endsWith('/profile.html')
 let profileNicknameEditOpened = false
+let profileNicknameEditorOpen = false
 const trackerAdminToolbar = document.getElementById('tracker-admin-toolbar')
 const trackerAdminEmail = document.getElementById('tracker-admin-email')
 const trackerAdminSubject = document.getElementById('tracker-admin-subject')
@@ -1758,6 +1761,16 @@ const liveActivityState = {
   unavailable: false
 }
 
+const onlineStudentsState = {
+  loading: false,
+  rows: [],
+  lastFetched: 0,
+  section: '',
+  timer: null,
+  heartbeatTimer: null,
+  unavailable: false
+}
+
 function formatActivityTime(value) {
   const timestamp = new Date(value || 0).getTime()
   if (!timestamp) return 'just now'
@@ -1788,7 +1801,7 @@ function renderLiveActivityContainer(container, limit) {
   container.innerHTML = `
     <span class="study-pulse__label">
       <i aria-hidden="true"></i>
-      Study pulse
+      MCQ activity
     </span>
     <div class="study-pulse__rail">
       ${rows.map((row, index) => {
@@ -1812,8 +1825,118 @@ function renderLiveActivityContainer(container, limit) {
 }
 
 function renderLiveActivity() {
-  renderLiveActivityContainer(document.getElementById('tracker-live-activity'), 6)
   renderLiveActivityContainer(document.getElementById('quiz-live-activity'), 3)
+}
+
+function renderOnlineStudents() {
+  const container = document.getElementById('tracker-live-activity')
+  if (!container) return
+  const rows = onlineStudentsState.rows.slice(0, 10)
+  if (!rows.length) {
+    container.hidden = true
+    container.innerHTML = ''
+    return
+  }
+
+  container.hidden = false
+  container.innerHTML = `
+    <div class="study-pulse__rail">
+      ${rows.map((row, index) => {
+        const name = String(row.display_name || 'Student')
+        const avatarId = getLeaderboardAvatarId(row, index)
+        const isMcqActive = Boolean(row.is_mcq_active)
+        return `
+          <article class="study-pulse__event${isMcqActive ? ' study-pulse__event--mcq' : ''}">
+            ${getProfileAvatarMarkup(avatarId, 'study-pulse__avatar', name)}
+            <span class="study-pulse__copy">
+              <strong>${escapeHtml(name)}</strong>
+              <small>${isMcqActive ? 'Solving MCQs' : 'Online'}</small>
+            </span>
+            ${isMcqActive ? '<span class="study-pulse__rank">MCQ</span>' : ''}
+          </article>
+        `
+      }).join('')}
+    </div>
+  `
+}
+
+function getPresencePage() {
+  if (isStandaloneProfilePage) return 'profile'
+  if (window.location.hash === '#leaderboard') return 'leaderboard'
+  if (window.location.hash === '#schedule') return 'schedule'
+  if (window.location.hash === '#news') return 'news'
+  return 'tracker'
+}
+
+function getPresencePayload() {
+  const modal = document.getElementById('quiz-modal')
+  const isQuizOpen = Boolean(modal && modal.getAttribute('aria-hidden') === 'false' && quizState.topicLabel && !quizState.showResumePrompt)
+  return {
+    section: activeAcademicSection,
+    page: isQuizOpen ? 'mcqs' : getPresencePage(),
+    isMcqActive: isQuizOpen,
+    topicLabel: isQuizOpen ? quizState.topicLabel : null,
+    sourceLabel: isQuizOpen ? quizState.sourceLabel : null
+  }
+}
+
+async function refreshOnlineStudents(force = false) {
+  if (!studentProgressState.user || onlineStudentsState.loading || onlineStudentsState.unavailable) {
+    renderOnlineStudents()
+    return
+  }
+  const now = Date.now()
+  if (
+    !force
+    && onlineStudentsState.section === activeAcademicSection
+    && now - onlineStudentsState.lastFetched < 15000
+  ) {
+    renderOnlineStudents()
+    return
+  }
+
+  onlineStudentsState.loading = true
+  try {
+    onlineStudentsState.rows = await fetchOnlineStudents(activeAcademicSection, 10)
+    onlineStudentsState.section = activeAcademicSection
+    onlineStudentsState.lastFetched = Date.now()
+    renderOnlineStudents()
+  } catch (error) {
+    onlineStudentsState.rows = []
+    onlineStudentsState.unavailable = true
+    renderOnlineStudents()
+    console.info('Online students will appear after the presence database update is enabled.', error)
+  } finally {
+    onlineStudentsState.loading = false
+  }
+}
+
+async function sendStudentPresence(forceRefresh = false) {
+  if (!studentProgressState.user || onlineStudentsState.unavailable) {
+    renderOnlineStudents()
+    return
+  }
+  try {
+    await markStudentOnline(getPresencePayload())
+    await refreshOnlineStudents(forceRefresh)
+  } catch (error) {
+    onlineStudentsState.unavailable = true
+    onlineStudentsState.rows = []
+    renderOnlineStudents()
+    console.info('Online presence will appear after its database update is enabled.', error)
+  }
+}
+
+function initOnlineStudents() {
+  renderOnlineStudents()
+  if (onlineStudentsState.timer) return
+  sendStudentPresence(true)
+  onlineStudentsState.timer = window.setInterval(() => {
+    if (document.visibilityState === 'visible') sendStudentPresence()
+  }, 30000)
+  onlineStudentsState.heartbeatTimer = window.setInterval(() => {
+    if (document.visibilityState === 'visible') refreshOnlineStudents()
+  }, 15000)
 }
 
 async function fetchAndRenderLiveActivity(force = false) {
@@ -2153,6 +2276,7 @@ async function saveProfileSetup(rawValue) {
     }
     pendingProfileAvatarId = ''
     saveLocalProfileAvatarId(avatarId)
+    profileNicknameEditorOpen = false
     document.body.dataset.profileSetup = 'complete'
     stopProfileOnboardingTour()
     renderStudentSyncUi()
@@ -2200,12 +2324,9 @@ function openProfileNicknameEditor() {
     window.location.href = url.toString()
     return
   }
+  profileNicknameEditorOpen = true
   openProfileSection()
-  pendingProfileAvatarId = getSavedProfileAvatarId()
-  const form = document.getElementById('profile-nickname-form')
   const input = document.getElementById('profile-nickname-input')
-  if (form) form.hidden = false
-  renderProfileAvatarPicker()
   if (input) {
     input.value = getStudentNickname()
     input.focus()
@@ -2264,6 +2385,29 @@ function getCurrentLeaderboardEntry() {
 
 function getRankedLeaderboardRows() {
   return (leaderboardState.rows || []).filter((row) => Number(row.total_score) > 0)
+}
+
+function normalizePresenceName(value) {
+  return String(value || '').trim().toLowerCase()
+}
+
+function isLeaderboardEntryOnline(entry) {
+  const displayName = normalizePresenceName(entry.display_name)
+  const avatarId = String(entry.avatar_id || '').trim()
+  return onlineStudentsState.rows.some((student) => {
+    return normalizePresenceName(student.display_name) === displayName
+      && (!avatarId || String(student.avatar_id || '').trim() === avatarId)
+  })
+}
+
+function renderLeaderboardPresence(entry) {
+  const online = isLeaderboardEntryOnline(entry)
+  return `
+    <span class="leaderboard-presence${online ? ' leaderboard-presence--online' : ''}">
+      <i aria-hidden="true"></i>
+      ${online ? 'Online' : 'Offline'}
+    </span>
+  `
 }
 
 function showGlobalToast(text) {
@@ -2354,7 +2498,7 @@ function renderLeaderboardHtml() {
   if (eyebrowEl) eyebrowEl.textContent = seasonName ? 'Fresh points season' : 'Class ranking'
   if (noDataCopyEl) {
     noDataCopyEl.textContent = seasonName
-      ? `The ${seasonName} board starts at zero. Complete a fresh MED-1 attempt to claim #1.`
+      ? `The ${seasonName} board starts at zero. Complete a fresh scoped MCQ attempt to claim #1.`
       : `No one's on the board yet — start studying to claim #1!`
   }
 
@@ -2394,6 +2538,7 @@ function renderLeaderboardHtml() {
         <span class="leaderboard__podium-medal">${medal}</span>
         ${avatarHtml}
         <span class="leaderboard__podium-name">${escapeHtml(displayName)}</span>
+        ${renderLeaderboardPresence(entry)}
         <span class="leaderboard__podium-score">${entry.total_score} pts</span>
       `
       podiumEl.appendChild(card)
@@ -2414,7 +2559,7 @@ function renderLeaderboardHtml() {
       row.innerHTML = `
         <span class="leaderboard__row-rank">${rank}</span>
         ${avatarHtml}
-        <span class="leaderboard__row-name">${escapeHtml(displayName)}</span>
+        <span class="leaderboard__row-name">${escapeHtml(displayName)}${renderLeaderboardPresence(entry)}</span>
         <span class="leaderboard__row-score">${entry.total_score} pts</span>
       `
       listEl.appendChild(row)
@@ -2445,8 +2590,11 @@ function renderLeaderboardHtml() {
       }
 
       document.getElementById('leaderboard-your-rank-name').textContent = displayName
-      document.getElementById('leaderboard-your-rank-breakdown').textContent =
-        `${myEntry.mcqs_count} MCQ topics · ${myEntry.quizzes_completed} quizzes · ${myEntry.correct_answers} correct`
+      const yourRankBreakdown = document.getElementById('leaderboard-your-rank-breakdown')
+      if (yourRankBreakdown) {
+        yourRankBreakdown.innerHTML =
+          `${myEntry.mcqs_count} MCQ topics &middot; ${myEntry.quizzes_completed} quizzes &middot; ${myEntry.correct_answers} correct ${renderLeaderboardPresence(myEntry)}`
+      }
       document.getElementById('leaderboard-your-rank-score').textContent = `${myEntry.total_score} pts`
     } else {
       yourRankEl.hidden = true
@@ -2573,6 +2721,7 @@ async function loadStudentProgress(section = activeAcademicSection) {
     updateGlobalProgress()
     await refreshLeaderboardIfActive(true)
     await fetchAndRenderLiveActivity(true)
+    await sendStudentPresence(true)
   } catch (error) {
     studentProgressState.lastError = error.message
     console.warn('Student progress sync failed.', error)
@@ -3348,14 +3497,20 @@ function renderProfileSection() {
 
   const nicknameInput = document.getElementById('profile-nickname-input')
   const profileForm = document.getElementById('profile-nickname-form')
+  const displayNickname = document.getElementById('profile-display-nickname')
+  const nameRow = document.getElementById('profile-name-row')
+  const nicknameEditor = document.getElementById('profile-nickname-editor')
   const editButton = document.querySelector('[data-profile-edit-nickname]')
   const setupBanner = document.getElementById('profile-setup-banner')
 
   profileRoot.classList.toggle('is-loading', signedIn && !studentProgressState.ready)
   document.body.dataset.profileSetup = setupRequired ? 'required' : 'complete'
+  if (displayNickname) displayNickname.textContent = nickname || 'Choose your nickname'
+  if (nameRow) nameRow.hidden = setupRequired && profileNicknameEditorOpen
   if (nicknameInput && document.activeElement !== nicknameInput) nicknameInput.value = nickname
   if (profileForm) profileForm.hidden = false
-  if (editButton) editButton.textContent = setupRequired ? 'Complete profile' : 'Edit profile'
+  if (nicknameEditor) nicknameEditor.hidden = !setupRequired && !profileNicknameEditorOpen
+  if (editButton) editButton.hidden = setupRequired || profileNicknameEditorOpen
   if (setupBanner) setupBanner.hidden = !setupRequired
   renderProfileAvatarPicker()
   window.requestAnimationFrame(syncProfileOnboardingTour)
@@ -4549,9 +4704,11 @@ function saveQuizState() {
       .then(() => {
         leaderboardState.lastFetched = 0
         liveActivityState.lastFetched = 0
+        onlineStudentsState.lastFetched = 0
         return Promise.all([
           refreshLeaderboardIfActive(true),
-          fetchAndRenderLiveActivity(true)
+          fetchAndRenderLiveActivity(true),
+          sendStudentPresence(true)
         ])
       })
       .catch((error) => {
@@ -5844,6 +6001,7 @@ function openQuiz(topicLabel, sourceId = 'current', event = null, launchOptions 
 
   modal.setAttribute('aria-hidden', 'false')
   document.body.classList.add('panel-open')
+  sendStudentPresence(true)
   renderQuizMeta()
   renderQuizActions()
 
@@ -5882,6 +6040,7 @@ function closeQuiz() {
   document.body.classList.remove('panel-open')
   clearQuizTimerInterval()
   resetQuizRobotMood()
+  sendStudentPresence(true)
 }
 
 function ensurePdfPreviewModal() {
@@ -7692,6 +7851,7 @@ function routeAuthenticatedUser(section, options = {}) {
   }
   setAuthGateState('ready')
   fetchAndRenderLiveActivity(true)
+  sendStudentPresence(true)
   if (initialParams.get('admin') === 'login' && !initialAdminLoginHandled) {
     initialAdminLoginHandled = true
     openAdminLogin()
@@ -7706,7 +7866,10 @@ function clearAuthenticatedProgressState() {
   studentProgressState.selectedSection = ''
   pendingProfileAvatarId = ''
   leaderboardState.preferences = getDefaultUserPreferences()
+  onlineStudentsState.rows = []
+  onlineStudentsState.lastFetched = 0
   invalidateLeaderboard()
+  renderOnlineStudents()
 }
 
 async function handleStudentAuthUser(user) {
@@ -7857,6 +8020,7 @@ if (subjectList) {
   window.setInterval(render401ExamSchedule, 3600000)
   initLeaderboardVisibilityLoading()
   initLiveActivity()
+  initOnlineStudents()
   initStudentSync()
   renderTrackerAdminUi()
 }

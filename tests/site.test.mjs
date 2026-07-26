@@ -22,6 +22,7 @@ test('application modules are valid and mirrored', () => {
     'src/sur402-textbook-mcqs.js',
     'src/sur402-amr-beshry-mcqs.js',
     'src/med402-endocrine-mcqs.js',
+    'src/med402-neurology-mcqs.js',
     'src/med2-cardio-chest-mcqs.js',
     'src/progress.js',
     'src/supabaseClient.js'
@@ -31,7 +32,7 @@ test('application modules are valid and mirrored', () => {
     execFileSync(process.execPath, ['--check', file], { cwd: new URL('..', import.meta.url) })
   }
 
-  const mirroredFiles = ['main.js', 'admin.js', 'analytics.js', 'mcqs.js', 'sur1-kellawi-mcqs.js', 'sur1-past-exam-mcqs.js', 'sur1-matching-questions.js', 'sur402-past-exam-mcqs.js', 'sur402-textbook-mcqs.js', 'sur402-amr-beshry-mcqs.js', 'med402-endocrine-mcqs.js', 'med2-cardio-chest-mcqs.js', 'med1-kellawi-mcqs.js', 'progress.js', 'style.css', 'supabaseClient.js']
+  const mirroredFiles = ['main.js', 'admin.js', 'analytics.js', 'mcqs.js', 'sur1-kellawi-mcqs.js', 'sur1-past-exam-mcqs.js', 'sur1-matching-questions.js', 'sur402-past-exam-mcqs.js', 'sur402-textbook-mcqs.js', 'sur402-amr-beshry-mcqs.js', 'med402-endocrine-mcqs.js', 'med402-neurology-mcqs.js', 'med2-cardio-chest-mcqs.js', 'med1-kellawi-mcqs.js', 'progress.js', 'style.css', 'supabaseClient.js']
   for (const file of mirroredFiles) {
     assert.equal(read(`src/${file}`), read(`public/src/${file}`), `${file} mirror is out of sync`)
   }
@@ -59,8 +60,8 @@ test('tracker search splits topics and MCQs with focused question launch', () =>
   assert.match(html, /data-search-mode="topics"[^>]*aria-pressed="true"/)
   assert.match(html, /data-search-mode="mcqs"[^>]*aria-pressed="false"/)
   assert.match(html, /id="mcq-search-results"[^>]*aria-live="polite"[^>]*hidden/)
-  assert.match(html, /style\.css\?v=20260726-profile-single-nickname-v1/)
-  assert.match(html, /main\.js\?v=20260726-profile-single-nickname-v1/)
+  assert.match(html, /style\.css\?v=20260726-profile-single-nickname-v2/)
+  assert.match(html, /main\.js\?v=20260726-profile-single-nickname-v2/)
 
   for (const helper of [
     'normalizeMcqSearchText',
@@ -298,6 +299,48 @@ test('MED 402-1 endocrine bank is answer-safe, grouped, and wired to the exam ca
   const mainSource = read('src/main.js')
   assert.match(html, /med402-endocrine-mcqs\.js\?v=20260723-med402-endocrine-v1/)
   assert.match(mainSource, /code:\s*'MED 402-1'[\s\S]{0,240}quizTopicKey:\s*'MED 402-1 MCQs'/)
+})
+
+test('MED 402-2 neurology bank is answer-safe, grouped, and wired to the exam card', () => {
+  const context = { window: { mcqQuizzes402: {} } }
+  vm.runInNewContext(read('src/med402-neurology-mcqs.js'), context)
+
+  const quiz = context.window.mcqQuizzes402['MED 402-2 MCQs']
+  assert.equal(quiz.alwaysShowSourcePicker, true)
+  assert.equal(quiz.sources.length, 1)
+
+  const source = quiz.sources[0]
+  assert.equal(source.id, 'med402-neurology-question-bank')
+  assert.equal(source.label, 'Neurology Question Bank')
+  assert.equal(source.mcqs.length, 269)
+  assert.equal(source.heldForReview.length, 54)
+  assert.equal(source.mcqs.length + source.heldForReview.length, 323)
+  assert.equal(new Set(source.mcqs.map((question) => question.id)).size, 269)
+  assert.ok(source.mcqs.every((question) => question.choices.length >= 2))
+  assert.ok(source.mcqs.every((question) => Number.isInteger(question.answerIndex) && question.choices[question.answerIndex]))
+  assert.ok(source.mcqs.every((question) => question.question && question.source && question.explanation))
+
+  assert.deepEqual(
+    Array.from(source.collection.groups, (group) => [group.label, group.questionCount, group.parts.length]),
+    [
+      ['Introduction of Neuro', 106, 4],
+      ['Speech and Cranial Nerve', 66, 3],
+      ['Hemiplegia', 33, 2],
+      ['Cerebral Vascular Insufficiency', 41, 2],
+      ['Paraplegia', 23, 2]
+    ]
+  )
+  assert.deepEqual(
+    Array.from(source.collection.groups, (group) => Array.from(group.parts, (part) => part.mcqs.length)),
+    [[27, 27, 27, 25], [22, 22, 22], [17, 16], [21, 20], [12, 11]]
+  )
+  assert.deepEqual(Array.from(source.collection.mixedSizes, (mode) => mode.size), [20, 30, 50])
+  assert.equal(source.collection.wrongReviewId, 'med402-neurology-wrong-review')
+
+  const html = read('index.html')
+  const mainSource = read('src/main.js')
+  assert.match(html, /med402-neurology-mcqs\.js\?v=20260726-med402-neurology-v1/)
+  assert.match(mainSource, /code:\s*'MED 402-2'[\s\S]{0,260}quizTopicKey:\s*'MED 402-2 MCQs'/)
 })
 
 test('MED 401-2 Cardio, Chest, Past Exams, Mo.ragab, and Final Exam 80 banks are source-faithful, grouped, and wired to the exam card', () => {
@@ -709,8 +752,8 @@ test('Google login is mandatory and the academic section is account-bound', () =
   assert.match(mainSource, /\$\{QUIZ_STORAGE_PREFIX\}::\$\{getProgressStorageOwnerId\(\)\}::\$\{section\}/)
   assert.match(mainSource, /\$\{TOPIC_COMPLETION_STORAGE_PREFIX\}::\$\{getProgressStorageOwnerId\(\)\}::\$\{section\}/)
   assert.match(schedule, /window\.location\.replace\('\/#schedule'\)/)
-  assert.match(html, /style\.css\?v=20260726-profile-single-nickname-v1/)
-  assert.match(html, /main\.js\?v=20260726-profile-single-nickname-v1/)
+  assert.match(html, /style\.css\?v=20260726-profile-single-nickname-v2/)
+  assert.match(html, /main\.js\?v=20260726-profile-single-nickname-v2/)
 })
 
 test('student profile opens as a standalone gamified page', () => {
@@ -724,6 +767,7 @@ test('student profile opens as a standalone gamified page', () => {
   const avatarMigration = read('supabase/migrations/20260723193000_add_profile_avatar.sql')
   const activityMigration = read('supabase/migrations/20260723201500_add_recent_mcq_activity.sql')
   const seasonMigration = read('supabase/migrations/20260726130240_mandatory_profiles_med1_season.sql')
+  const presenceMigration = read('supabase/migrations/20260726164500_student_presence.sql')
 
   assert.doesNotMatch(html, /<section class="profile-section hub-section" id="profile"/)
   assert.match(html, /href="\/profile\.html" data-profile-open/)
@@ -746,12 +790,16 @@ test('student profile opens as a standalone gamified page', () => {
   assert.match(profileHtml, /id="profile-level-progress" role="progressbar"/)
   assert.match(profileHtml, /id="profile-avatar-options"/)
   assert.match(profileHtml, /class="profile-nickname-form__avatar" id="profile-avatar"/)
+  assert.match(profileHtml, /id="profile-name-row"/)
+  assert.match(profileHtml, /id="profile-display-nickname">Your nickname/)
+  assert.match(profileHtml, /class="profile-nickname-form__edit-name"[^>]*data-profile-edit-nickname[^>]*aria-label="Edit name"[\s\S]*<svg viewBox="0 0 24 24"/)
+  assert.match(profileHtml, /id="profile-nickname-editor" hidden/)
   assert.equal((profileHtml.match(/id="profile-nickname-input"/g) || []).length, 1)
   assert.equal((profileHtml.match(/type="submit">Save profile/g) || []).length, 1)
   assert.match(html, /data-profile-open/)
   assert.match(html, /data-profile-edit-nickname/)
-  assert.match(profileHtml, /style\.css\?v=20260726-profile-single-nickname-v1/)
-  assert.match(profileHtml, /main\.js\?v=20260726-profile-single-nickname-v1/)
+  assert.match(profileHtml, /style\.css\?v=20260726-profile-single-nickname-v2/)
+  assert.match(profileHtml, /main\.js\?v=20260726-profile-single-nickname-v2/)
   assert.ok(readBytes('public/assets/profile-avatars-faceless-v3.webp').length > 50_000)
   assert.match(viteConfig, /profile:\s*resolve\(__dirname,\s*'profile\.html'\)/)
 
@@ -762,6 +810,9 @@ test('student profile opens as a standalone gamified page', () => {
   assert.match(mainSource, /function getMcqQuizzesForSection\s*\(/)
   assert.match(mainSource, /return window\.mcqQuizzes \|\| mcqQuizzesBySection\['401'\] \|\| \{\}/)
   assert.match(mainSource, /function validateNickname\s*\(/)
+  assert.match(mainSource, /displayNickname\.textContent = nickname \|\| 'Choose your nickname'/)
+  assert.match(mainSource, /nicknameEditor\.hidden = !setupRequired && !profileNicknameEditorOpen/)
+  assert.match(mainSource, /editButton\.hidden = setupRequired \|\| profileNicknameEditorOpen/)
   assert.doesNotMatch(mainSource, /user_metadata|full_name|getStudentDisplayName|getPrivateProfileDisplayName/)
   assert.match(mainSource, /studentSyncEmail\.textContent = signedIn \? \(getStudentNickname\(\) \|\| 'Complete your profile'\)/)
   assert.match(mainSource, /studentSyncAvatar\.className = `student-sync__avatar student-avatar \$\{getProfileAvatarClass\(getStudentAvatarId\(\)\)\}`/)
@@ -783,7 +834,15 @@ test('student profile opens as a standalone gamified page', () => {
   assert.match(mainSource, /function initLeaderboardVisibilityLoading\s*\(/)
   assert.match(mainSource, /new IntersectionObserver/)
   assert.match(mainSource, /function fetchAndRenderLiveActivity\s*\(/)
+  assert.match(mainSource, /function renderOnlineStudents\s*\(/)
+  assert.match(mainSource, /function sendStudentPresence\s*\(/)
+  assert.match(mainSource, /function initOnlineStudents\s*\(/)
+  assert.match(mainSource, /function renderLeaderboardPresence\s*\(/)
+  assert.doesNotMatch(mainSource, /Online now|Live now/)
+  assert.match(mainSource, /Solving MCQs/)
+  assert.match(mainSource, /MCQ activity/)
   assert.match(mainSource, /id="quiz-live-activity"/)
+  assert.doesNotMatch(mainSource, /renderLiveActivityContainer\(document\.getElementById\('tracker-live-activity'\)/)
   assert.match(mainSource, /data-profile-avatar="\$\{avatar\.id\}"/)
   assert.match(mainSource, /const serverScore = Number\(currentLeaderboardEntry\?\.lifetime_score\)/)
   assert.match(mainSource, /totalScore: Number\.isFinite\(serverScore\) \? serverScore : totalScore/)
@@ -813,6 +872,10 @@ test('student profile opens as a standalone gamified page', () => {
   assert.match(supabaseClient, /profile_setup_version/)
   assert.match(supabaseClient, /export async function fetchRecentMcqActivity\s*\(/)
   assert.match(supabaseClient, /\.rpc\('get_recent_mcq_activity'/)
+  assert.match(supabaseClient, /export async function markStudentOnline\s*\(/)
+  assert.match(supabaseClient, /\.rpc\('mark_student_online'/)
+  assert.match(supabaseClient, /export async function fetchOnlineStudents\s*\(/)
+  assert.match(supabaseClient, /\.rpc\('get_online_students'/)
   assert.match(leaderboardMigration, /WHEN COALESCE\(up\.anonymous, true\) = false AND NULLIF\(btrim\(up\.nickname\), ''\) IS NOT NULL THEN btrim\(up\.nickname\)/i)
   assert.doesNotMatch(leaderboardMigration, /WHEN COALESCE\(up\.anonymous, true\) = false[\s\S]{0,160}raw_user_meta_data->>'full_name'/i)
   assert.match(avatarMigration, /COALESCE\(\s*NULLIF\(up\.avatar_id, ''\)/i)
@@ -820,6 +883,12 @@ test('student profile opens as a standalone gamified page', () => {
   assert.match(activityMigration, /NOW\(\) - INTERVAL '15 minutes'/i)
   assert.match(activityMigration, /WHEN recent\.user_id = \(SELECT auth\.uid\(\)\)/i)
   assert.doesNotMatch(activityMigration, /RETURNS TABLE \(\s*user_id/i)
+  assert.match(presenceMigration, /CREATE TABLE IF NOT EXISTS public\.student_presence/i)
+  assert.match(presenceMigration, /last_seen_at >= now\(\) - INTERVAL '90 seconds'/i)
+  assert.match(presenceMigration, /REVOKE ALL ON TABLE public\.student_presence FROM PUBLIC, anon, authenticated/i)
+  assert.match(presenceMigration, /GRANT EXECUTE ON FUNCTION public\.mark_student_online/i)
+  assert.match(presenceMigration, /GRANT EXECUTE ON FUNCTION public\.get_online_students/i)
+  assert.doesNotMatch(presenceMigration, /RETURNS TABLE \(\s*user_id/i)
   assert.match(seasonMigration, /ADD COLUMN IF NOT EXISTS profile_setup_version INTEGER NOT NULL DEFAULT 0/i)
   assert.match(seasonMigration, /user_preferences_nickname_unique/i)
   assert.match(seasonMigration, /CREATE OR REPLACE FUNCTION public\.complete_profile_setup/i)
@@ -833,6 +902,11 @@ test('student profile opens as a standalone gamified page', () => {
   assert.doesNotMatch(seasonMigration, /DELETE FROM public\.user_mcq_progress/i)
   assert.match(style, /\.profile-trophy--unlocked/)
   assert.match(style, /\.profile-nickname-form__avatar\s*\{[\s\S]*width:\s*92px;[\s\S]*height:\s*92px;/)
+  assert.match(style, /\.profile-nickname-form__name-row\s*\{[\s\S]*display:\s*inline-flex;/)
+  assert.match(style, /\.profile-nickname-form__edit-name\s*\{[\s\S]*width:\s*34px;/)
+  assert.match(style, /\.profile-nickname-form__edit-name svg\s*\{[\s\S]*stroke:\s*currentColor;/)
+  assert.match(style, /\.study-pulse--tracker \.study-pulse__avatar\s*\{[\s\S]*online-avatar-pulse/)
+  assert.match(style, /\.leaderboard-presence--online/)
   assert.match(style, /\.profile-page-hero/)
   assert.match(style, /\.profile-momentum-card/)
   assert.match(style, /\.auth-gate__logo\s*\{[^}]*width:\s*88px;[^}]*object-fit:\s*contain;/s)
@@ -874,6 +948,7 @@ test('MED-1 season points require fresh attempts while lifetime points remain du
   const mainSource = read('src/main.js')
   const supabaseClient = read('src/supabaseClient.js')
   const migration = read('supabase/migrations/20260726130240_mandatory_profiles_med1_season.sql')
+  const med402SeasonMigration = read('supabase/migrations/20260726163747_med402_2_fresh_season.sql')
 
   assert.match(mainSource, /attemptId:\s*null/)
   assert.match(mainSource, /attemptStartedAt:\s*null/)
@@ -887,6 +962,7 @@ test('MED-1 season points require fresh attempts while lifetime points remain du
   assert.match(mainSource, /function getRankedLeaderboardRows\s*\(\)[\s\S]{0,140}Number\(row\.total_score\) > 0/)
   assert.match(mainSource, /currentLeaderboardEntry\?\.lifetime_score/)
   assert.match(mainSource, /seasonName \? `🏆 \$\{seasonName\} Leaderboard`/)
+  assert.match(mainSource, /Complete a fresh scoped MCQ attempt to claim #1/)
   assert.doesNotMatch(mainSource, /Anonymous Student|You \(Anon/)
 
   assert.match(supabaseClient, /attempt_id, attempt_started_at/)
@@ -898,6 +974,10 @@ test('MED-1 season points require fresh attempts while lifetime points remain du
   assert.match(migration, /ON CONFLICT \(season_id, user_id, topic_label, source_id\)[\s\S]*GREATEST\(public\.user_season_scores\.best_score, EXCLUDED\.best_score\)/i)
   assert.match(migration, /DROP TRIGGER IF EXISTS capture_quiz_best_scores/i)
   assert.doesNotMatch(migration, /UPDATE public\.user_mcq_progress[\s\S]*SET score\s*=\s*0/i)
+  assert.match(med402SeasonMigration, /scope_topic_label\s+IS DISTINCT FROM 'MED 402-2 MCQs'/i)
+  assert.match(med402SeasonMigration, /'MED 402-2 Midterm'/)
+  assert.match(med402SeasonMigration, /'MED 402-2 MCQs'/)
+  assert.doesNotMatch(med402SeasonMigration, /DELETE FROM public\.user_mcq_progress/i)
 })
 
 test('topic actions are accessible boxless premium icons and legacy PWA state is cleaned up', () => {
@@ -960,8 +1040,8 @@ test('section selector is centered and the wide review remains fully visible', (
   assert.match(style, /\.home-review-screenshot\s*\{[\s\S]*?aspect-ratio:\s*1\.9\s*\/\s*1;[\s\S]*?object-fit:\s*cover;/s)
   assert.match(style, /\.home-review-screenshot--fit\s*\{[^}]*object-fit:\s*contain;[^}]*object-position:\s*left center;/s)
   assert.equal((html.match(/review5\.jpg" class="home-review-screenshot home-review-screenshot--fit"/g) || []).length, 2)
-  assert.match(html, /style\.css\?v=20260726-profile-single-nickname-v1/)
-  assert.match(html, /main\.js\?v=20260726-profile-single-nickname-v1/)
+  assert.match(html, /style\.css\?v=20260726-profile-single-nickname-v2/)
+  assert.match(html, /main\.js\?v=20260726-profile-single-nickname-v2/)
   assert.match(style, /body\[data-site-mode="selector"\] > main > \.site-footer/)
 
   for (const file of ['review1.jpg', 'review2.jpg', 'review3.jpg', 'review4.jpg', 'review5.jpg', 'review6.png', 'review7.png', 'review8.png']) {
