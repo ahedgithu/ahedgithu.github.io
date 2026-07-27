@@ -4,7 +4,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
-const defaultSource = 'G:\\school\\study mode\\subjects\\402\\fresh\\neuro_question_bank.json'
+const defaultSource = 'C:\\Users\\ahmed\\Downloads\\Telegram Desktop\\neurology_question_bank.json'
 const sourcePath = path.resolve(process.argv[2] || defaultSource)
 const targetPaths = [
   path.join(repoRoot, 'src', 'med402-neurology-mcqs.js'),
@@ -33,16 +33,47 @@ function normalizeAnswer(answer) {
   return value
 }
 
-function parseQuestion(question) {
-  const chapter = chapterDefinitions.find((item) => item.name === question.chapter)
-  const choices = Array.isArray(question.options)
-    ? question.options.map((option) => ({
+function normalizeChoices(question) {
+  if (question.type === 'true_false') {
+    return [
+      { label: 'T', text: 'True' },
+      { label: 'F', text: 'False' }
+    ]
+  }
+
+  if (Array.isArray(question.options)) {
+    return question.options.map((option) => ({
       label: cleanText(option.label),
       text: cleanText(option.text)
     }))
-    : []
-  const answer = normalizeAnswer(question.answer)
-  const answerIndex = choices.findIndex((choice) => choice.label === answer)
+  }
+
+  if (question.options && typeof question.options === 'object') {
+    return Object.entries(question.options).map(([label, text]) => ({
+      label: cleanText(label),
+      text: cleanText(text)
+    }))
+  }
+
+  return []
+}
+
+function getAnswerIndex(choices, rawAnswer) {
+  const answer = normalizeAnswer(rawAnswer)
+  const labelIndex = choices.findIndex((choice) => choice.label.toUpperCase() === answer.toUpperCase())
+  if (labelIndex >= 0) return labelIndex
+
+  const normalizedAnswer = cleanText(rawAnswer).toLowerCase()
+  const textMatches = choices
+    .map((choice, index) => ({ choice, index }))
+    .filter(({ choice }) => choice.text.toLowerCase() === normalizedAnswer)
+  return textMatches.length === 1 ? textMatches[0].index : -1
+}
+
+function parseQuestion(question) {
+  const chapter = chapterDefinitions.find((item) => item.name === question.chapter)
+  const choices = normalizeChoices(question)
+  const answerIndex = getAnswerIndex(choices, question.answer)
   const source = cleanText(question.source || `Neurology Midterm Question Bank - Q${question.id}`)
   const questionText = cleanText(question.question)
 
@@ -159,8 +190,14 @@ const json = await readFile(sourcePath, 'utf8')
 const bank = JSON.parse(json)
 const byChapter = Object.fromEntries(chapterDefinitions.map((chapter) => [chapter.name, { ...chapter, questions: [] }]))
 const heldForReview = []
+const sourceQuestions = Array.isArray(bank.questions)
+  ? bank.questions
+  : (bank.chapters || []).flatMap((chapter) => (chapter.questions || []).map((question) => ({
+    ...question,
+    chapter: chapter.title || chapter.name
+  })))
 
-for (const rawQuestion of bank.questions || []) {
+for (const rawQuestion of sourceQuestions) {
   const result = parseQuestion(rawQuestion)
   if (result.parsed) {
     byChapter[rawQuestion.chapter].questions.push(result.parsed)
@@ -172,14 +209,14 @@ for (const rawQuestion of bank.questions || []) {
 const chapters = chapterDefinitions.map((chapter) => byChapter[chapter.name])
 const questions = chapters.flatMap((chapter) => chapter.questions)
 
-if (bank.total_questions !== 323 || (bank.questions || []).length !== 323) {
-  throw new Error(`Expected 323 source records, got ${bank.questions?.length || 0}`)
+if (bank.total_questions !== 93 || sourceQuestions.length !== 93) {
+  throw new Error(`Expected 93 source records, got ${sourceQuestions.length}`)
 }
-if (questions.length + heldForReview.length !== 323) {
-  throw new Error(`Expected 323 accounted records, got ${questions.length} included and ${heldForReview.length} held`)
+if (questions.length + heldForReview.length !== 93) {
+  throw new Error(`Expected 93 accounted records, got ${questions.length} included and ${heldForReview.length} held`)
 }
-if (questions.length !== 269 || heldForReview.length !== 54) {
-  throw new Error(`Expected 269 included and 54 held, got ${questions.length} included and ${heldForReview.length} held`)
+if (questions.length !== 73 || heldForReview.length !== 20) {
+  throw new Error(`Expected 73 included and 20 held, got ${questions.length} included and ${heldForReview.length} held`)
 }
 if (new Set(questions.map((question) => question.id)).size !== questions.length) {
   throw new Error('Generated MED402 neurology question IDs are not unique')

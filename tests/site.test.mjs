@@ -326,10 +326,10 @@ test('MED 402-2 neurology bank is answer-safe, grouped, and wired to the exam ca
   assert.ok(oldPsychiatry, 'Old Psychiatry MCQs source is missing')
   assert.equal(source.id, 'med402-neurology-question-bank')
   assert.equal(source.label, 'Neurology Question Bank')
-  assert.equal(source.mcqs.length, 269)
-  assert.equal(source.heldForReview.length, 54)
-  assert.equal(source.mcqs.length + source.heldForReview.length, 323)
-  assert.equal(new Set(source.mcqs.map((question) => question.id)).size, 269)
+  assert.equal(source.mcqs.length, 73)
+  assert.equal(source.heldForReview.length, 20)
+  assert.equal(source.mcqs.length + source.heldForReview.length, 93)
+  assert.equal(new Set(source.mcqs.map((question) => question.id)).size, 73)
   assert.ok(source.mcqs.every((question) => question.choices.length >= 2))
   assert.ok(source.mcqs.every((question) => Number.isInteger(question.answerIndex) && question.choices[question.answerIndex]))
   assert.ok(source.mcqs.every((question) => question.question && question.source && question.explanation))
@@ -337,16 +337,16 @@ test('MED 402-2 neurology bank is answer-safe, grouped, and wired to the exam ca
   assert.deepEqual(
     Array.from(source.collection.groups, (group) => [group.label, group.questionCount, group.parts.length]),
     [
-      ['Introduction of Neuro', 106, 4],
-      ['Speech and Cranial Nerve', 66, 3],
-      ['Hemiplegia', 33, 2],
-      ['Cerebral Vascular Insufficiency', 41, 2],
-      ['Paraplegia', 23, 2]
+      ['Introduction of Neuro', 10, 2],
+      ['Speech and Cranial Nerve', 28, 2],
+      ['Hemiplegia', 20, 2],
+      ['Cerebral Vascular Insufficiency', 8, 2],
+      ['Paraplegia', 7, 2]
     ]
   )
   assert.deepEqual(
     Array.from(source.collection.groups, (group) => Array.from(group.parts, (part) => part.mcqs.length)),
-    [[27, 27, 27, 25], [22, 22, 22], [17, 16], [21, 20], [12, 11]]
+    [[5, 5], [14, 14], [10, 10], [4, 4], [4, 3]]
   )
   assert.deepEqual(Array.from(source.collection.mixedSizes, (mode) => mode.size), [20, 30, 50])
   assert.equal(source.collection.wrongReviewId, 'med402-neurology-wrong-review')
@@ -408,7 +408,7 @@ test('MED 402-2 neurology bank is answer-safe, grouped, and wired to the exam ca
 
   const html = read('index.html')
   const mainSource = read('src/main.js')
-  assert.match(html, /med402-neurology-mcqs\.js\?v=20260726-med402-neurology-v1/)
+  assert.match(html, /med402-neurology-mcqs\.js\?v=20260727-med402-neurology-v2/)
   assert.match(html, /med402-neuro-extra-mcqs\.js\?v=20260726-med402-neuro-extra-v1/)
   assert.match(html, /med402-old-psychiatry-mcqs\.js\?v=20260726-med402-old-psychiatry-v1/)
   assert.match(html, /med402-zatoona-psychiatry-mcqs\.js\?v=20260727-med402-zatoona-psychiatry-v1/)
