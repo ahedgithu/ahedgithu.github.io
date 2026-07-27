@@ -25,6 +25,7 @@ test('application modules are valid and mirrored', () => {
     'src/med402-neurology-mcqs.js',
     'src/med402-neuro-extra-mcqs.js',
     'src/med402-old-psychiatry-mcqs.js',
+    'src/med402-zatoona-psychiatry-mcqs.js',
     'src/med2-cardio-chest-mcqs.js',
     'src/med1-kellawi-mcqs.js',
     'src/med1-mw-ragab-mcqs.js',
@@ -36,7 +37,7 @@ test('application modules are valid and mirrored', () => {
     execFileSync(process.execPath, ['--check', file], { cwd: new URL('..', import.meta.url) })
   }
 
-  const mirroredFiles = ['main.js', 'admin.js', 'analytics.js', 'mcqs.js', 'sur1-kellawi-mcqs.js', 'sur1-past-exam-mcqs.js', 'sur1-matching-questions.js', 'sur402-past-exam-mcqs.js', 'sur402-textbook-mcqs.js', 'sur402-amr-beshry-mcqs.js', 'med402-endocrine-mcqs.js', 'med402-neurology-mcqs.js', 'med402-neuro-extra-mcqs.js', 'med402-old-psychiatry-mcqs.js', 'med2-cardio-chest-mcqs.js', 'med1-kellawi-mcqs.js', 'med1-mw-ragab-mcqs.js', 'progress.js', 'style.css', 'supabaseClient.js']
+  const mirroredFiles = ['main.js', 'admin.js', 'analytics.js', 'mcqs.js', 'sur1-kellawi-mcqs.js', 'sur1-past-exam-mcqs.js', 'sur1-matching-questions.js', 'sur402-past-exam-mcqs.js', 'sur402-textbook-mcqs.js', 'sur402-amr-beshry-mcqs.js', 'med402-endocrine-mcqs.js', 'med402-neurology-mcqs.js', 'med402-neuro-extra-mcqs.js', 'med402-old-psychiatry-mcqs.js', 'med402-zatoona-psychiatry-mcqs.js', 'med2-cardio-chest-mcqs.js', 'med1-kellawi-mcqs.js', 'med1-mw-ragab-mcqs.js', 'progress.js', 'style.css', 'supabaseClient.js']
   for (const file of mirroredFiles) {
     assert.equal(read(`src/${file}`), read(`public/src/${file}`), `${file} mirror is out of sync`)
   }
@@ -310,14 +311,16 @@ test('MED 402-2 neurology bank is answer-safe, grouped, and wired to the exam ca
   vm.runInNewContext(read('src/med402-neurology-mcqs.js'), context)
   vm.runInNewContext(read('src/med402-neuro-extra-mcqs.js'), context)
   vm.runInNewContext(read('src/med402-old-psychiatry-mcqs.js'), context)
+  vm.runInNewContext(read('src/med402-zatoona-psychiatry-mcqs.js'), context)
 
   const quiz = context.window.mcqQuizzes402['MED 402-2 MCQs']
   assert.equal(quiz.alwaysShowSourcePicker, true)
-  assert.equal(quiz.sources.length, 3)
+  assert.equal(quiz.sources.length, 4)
 
   const source = quiz.sources.find((item) => item.id === 'med402-neurology-question-bank')
   const oldMidterm = quiz.sources.find((item) => item.id === 'med402-neuro-extra-question-set')
   const oldPsychiatry = quiz.sources.find((item) => item.id === 'med402-old-psychiatry-mcqs')
+  const zatoonaPsychiatry = quiz.sources.find((item) => item.id === 'med402-zatoona-psychiatry-mcqs')
   assert.ok(source, 'Neurology Question Bank source is missing')
   assert.ok(oldMidterm, 'Old Midterm Neuro MCQs source is missing')
   assert.ok(oldPsychiatry, 'Old Psychiatry MCQs source is missing')
@@ -382,11 +385,33 @@ test('MED 402-2 neurology bank is answer-safe, grouped, and wired to the exam ca
   assert.deepEqual(Array.from(oldPsychiatry.collection.mixedSizes, (mode) => mode.size), [20, 30, 67])
   assert.equal(oldPsychiatry.collection.wrongReviewId, 'med402-old-psychiatry-wrong-review')
 
+  assert.ok(zatoonaPsychiatry, 'zatoona psychiatry mcqs source is missing')
+  assert.equal(zatoonaPsychiatry.label, 'zatoona psychiatry mcqs')
+  assert.equal(zatoonaPsychiatry.mcqs.length, 148)
+  assert.equal(zatoonaPsychiatry.heldForReview.length, 10)
+  assert.equal(zatoonaPsychiatry.mcqs.length + zatoonaPsychiatry.heldForReview.length, 158)
+  assert.equal(new Set(zatoonaPsychiatry.mcqs.map((question) => question.id)).size, 148)
+  assert.ok(zatoonaPsychiatry.mcqs.every((question) => question.choices.length >= 1))
+  assert.ok(zatoonaPsychiatry.mcqs.every((question) => Number.isInteger(question.answerIndex) && question.choices[question.answerIndex]))
+  assert.deepEqual(
+    Array.from(zatoonaPsychiatry.collection.groups, (group) => [group.label, group.questionCount, group.parts.length]),
+    [
+      ['Psychiatry', 148, 6]
+    ]
+  )
+  assert.deepEqual(
+    Array.from(zatoonaPsychiatry.collection.groups, (group) => Array.from(group.parts, (part) => part.mcqs.length)),
+    [[19, 16, 24, 30, 30, 29]]
+  )
+  assert.deepEqual(Array.from(zatoonaPsychiatry.collection.mixedSizes, (mode) => mode.size), [20, 30, 148])
+  assert.equal(zatoonaPsychiatry.collection.wrongReviewId, 'med402-zatoona-psychiatry-wrong-review')
+
   const html = read('index.html')
   const mainSource = read('src/main.js')
   assert.match(html, /med402-neurology-mcqs\.js\?v=20260726-med402-neurology-v1/)
   assert.match(html, /med402-neuro-extra-mcqs\.js\?v=20260726-med402-neuro-extra-v1/)
   assert.match(html, /med402-old-psychiatry-mcqs\.js\?v=20260726-med402-old-psychiatry-v1/)
+  assert.match(html, /med402-zatoona-psychiatry-mcqs\.js\?v=20260727-med402-zatoona-psychiatry-v1/)
   assert.match(mainSource, /code:\s*'MED 402-2'[\s\S]{0,260}quizTopicKey:\s*'MED 402-2 MCQs'/)
 })
 
