@@ -66,8 +66,8 @@ test('tracker search splits topics and MCQs with focused question launch', () =>
   assert.match(html, /data-search-mode="topics"[^>]*aria-pressed="true"/)
   assert.match(html, /data-search-mode="mcqs"[^>]*aria-pressed="false"/)
   assert.match(html, /id="mcq-search-results"[^>]*aria-live="polite"[^>]*hidden/)
-  assert.match(html, /style\.css\?v=20260726-profile-single-nickname-v2/)
-  assert.match(html, /main\.js\?v=20260726-profile-single-nickname-v2/)
+  assert.match(html, /style\.css\?v=20260728-today-cockpit-v1/)
+  assert.match(html, /main\.js\?v=20260728-today-cockpit-v1/)
 
   for (const helper of [
     'normalizeMcqSearchText',
@@ -860,8 +860,8 @@ test('Google login is mandatory and the academic section is account-bound', () =
   assert.match(mainSource, /\$\{QUIZ_STORAGE_PREFIX\}::\$\{getProgressStorageOwnerId\(\)\}::\$\{section\}/)
   assert.match(mainSource, /\$\{TOPIC_COMPLETION_STORAGE_PREFIX\}::\$\{getProgressStorageOwnerId\(\)\}::\$\{section\}/)
   assert.match(schedule, /window\.location\.replace\('\/#schedule'\)/)
-  assert.match(html, /style\.css\?v=20260726-profile-single-nickname-v2/)
-  assert.match(html, /main\.js\?v=20260726-profile-single-nickname-v2/)
+  assert.match(html, /style\.css\?v=20260728-today-cockpit-v1/)
+  assert.match(html, /main\.js\?v=20260728-today-cockpit-v1/)
 })
 
 test('student profile opens as a standalone gamified page', () => {
@@ -906,8 +906,8 @@ test('student profile opens as a standalone gamified page', () => {
   assert.equal((profileHtml.match(/type="submit">Save profile/g) || []).length, 1)
   assert.match(html, /data-profile-open/)
   assert.match(html, /data-profile-edit-nickname/)
-  assert.match(profileHtml, /style\.css\?v=20260726-profile-single-nickname-v2/)
-  assert.match(profileHtml, /main\.js\?v=20260726-profile-single-nickname-v2/)
+  assert.match(profileHtml, /style\.css\?v=20260728-today-cockpit-v1/)
+  assert.match(profileHtml, /main\.js\?v=20260728-today-cockpit-v1/)
   assert.ok(readBytes('public/assets/profile-avatars-faceless-v3.webp').length > 50_000)
   assert.match(viteConfig, /profile:\s*resolve\(__dirname,\s*'profile\.html'\)/)
 
@@ -1148,8 +1148,8 @@ test('section selector is centered and the wide review remains fully visible', (
   assert.match(style, /\.home-review-screenshot\s*\{[\s\S]*?aspect-ratio:\s*1\.9\s*\/\s*1;[\s\S]*?object-fit:\s*cover;/s)
   assert.match(style, /\.home-review-screenshot--fit\s*\{[^}]*object-fit:\s*contain;[^}]*object-position:\s*left center;/s)
   assert.equal((html.match(/review5\.jpg" class="home-review-screenshot home-review-screenshot--fit"/g) || []).length, 2)
-  assert.match(html, /style\.css\?v=20260726-profile-single-nickname-v2/)
-  assert.match(html, /main\.js\?v=20260726-profile-single-nickname-v2/)
+  assert.match(html, /style\.css\?v=20260728-today-cockpit-v1/)
+  assert.match(html, /main\.js\?v=20260728-today-cockpit-v1/)
   assert.match(style, /body\[data-site-mode="selector"\] > main > \.site-footer/)
 
   for (const file of ['review1.jpg', 'review2.jpg', 'review3.jpg', 'review4.jpg', 'review5.jpg', 'review6.png', 'review7.png', 'review8.png']) {
@@ -1192,6 +1192,55 @@ test('MED-2 exposes the standalone Cardio and Chest revision tool', () => {
   assert.match(style, /\.subject-revision-launcher\s*\{[^}]*display:\s*flex;[^}]*border-radius:\s*8px;/s)
   assert.match(viteConfig, /cardioChestRevision:\s*resolve\(__dirname,\s*'cardio-chest-revision\.html'\)/)
   assert.match(revisionTool, /<title>Cardio &amp; Chest Premium Revision Tool<\/title>/)
+})
+
+test('Today cockpit turns saved progress and real section data into one accessible next action', () => {
+  const html = read('index.html')
+  const profileHtml = read('profile.html')
+  const mainSource = read('src/main.js')
+  const style = read('src/style.css')
+
+  assert.match(html, /class="skip-link" href="#tracker-main-content"/)
+  assert.match(profileHtml, /class="skip-link" href="#profile-main-content"/)
+  assert.match(html, /id="today-cockpit"[^>]*aria-labelledby="today-cockpit-title"/)
+  assert.match(html, /id="today-cockpit-freshness"[^>]*role="status"[^>]*aria-live="polite"/)
+  assert.match(html, /id="today-primary-action"[^>]*data-today-action="quiz"/)
+  assert.match(html, /<label class="sr-only" for="tracker-search">/)
+  assert.equal((html.match(/<main\b/g) || []).length, 1, 'homepage must have one main landmark')
+  assert.doesNotMatch(html, /<main class="layout">/)
+
+  for (const helper of [
+    'getTodayUpcomingExam',
+    'getTodayContinueCandidate',
+    'getTodayBoardUpdate',
+    'renderTodayFreshnessStatus',
+    'renderTodayCockpit',
+    'activateManagedModal',
+    'deactivateManagedModal'
+  ]) {
+    assert.match(mainSource, new RegExp(`function ${helper}\\s*\\(`), `${helper} is missing`)
+  }
+
+  assert.match(mainSource, /openQuiz\(topicLabel, sourceId, event, \{ resumeDirectly: true \}\)/)
+  assert.match(mainSource, /Offline · showing saved page data/)
+  assert.match(mainSource, /Progress saved on this device/)
+  assert.match(mainSource, /Class Board unavailable · showing built-in updates/)
+  assert.match(mainSource, /element\.inert = true/)
+  assert.match(mainSource, /event\.key === 'Escape'/)
+
+  assert.match(style, /\.today-cockpit\s*\{/)
+  assert.match(style, /\.today-primary-action:focus-visible/)
+  assert.match(style, /env\(safe-area-inset-bottom\)/)
+  assert.match(style, /@media \(prefers-reduced-motion: reduce\)[\s\S]*?\.today-primary-action/s)
+  assert.match(style, /\.quiz-modal__panel,[\s\S]*?overscroll-behavior:\s*contain;/s)
+
+  for (const pageHtml of [html, profileHtml]) {
+    const imageTags = pageHtml.match(/<img\b[^>]*>/g) || []
+    imageTags.forEach((tag) => {
+      assert.match(tag, /\bwidth="\d+"/, `image is missing width: ${tag}`)
+      assert.match(tag, /\bheight="\d+"/, `image is missing height: ${tag}`)
+    })
+  }
 })
 
 test('deployment includes every public page and requires tests before build', () => {

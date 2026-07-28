@@ -940,7 +940,7 @@ const academicSections = {
     id: '401',
     title: '401',
     newsTitle: 'MED 401 news',
-    trackerSearchPlaceholder: 'Search 401 topics or subjects...',
+    trackerSearchPlaceholder: 'Search 401 topics or subjects…',
     subjects: subjects401,
     midtermExamSchedule,
     courseSchedule
@@ -949,7 +949,7 @@ const academicSections = {
     id: '402',
     title: '402',
     newsTitle: 'MED 402 news',
-    trackerSearchPlaceholder: 'Search 402 topics or subjects...',
+    trackerSearchPlaceholder: 'Search 402 topics or subjects…',
     subjects: subjects402,
     midtermExamSchedule: midtermExamSchedule402,
     courseSchedule: []
@@ -975,6 +975,23 @@ const subjectRevisionLauncher = document.getElementById('subject-revision-launch
 const trackerSearch = document.getElementById('tracker-search')
 const trackerSearchModeButtons = document.querySelectorAll('[data-search-mode]')
 const mcqSearchResults = document.getElementById('mcq-search-results')
+const todayCockpit = document.getElementById('today-cockpit')
+const todayCockpitDate = document.getElementById('today-cockpit-date')
+const todayCockpitFreshness = document.getElementById('today-cockpit-freshness')
+const todayPrimaryAction = document.getElementById('today-primary-action')
+const todayPrimaryKicker = document.getElementById('today-primary-kicker')
+const todayPrimaryTitle = document.getElementById('today-primary-title')
+const todayPrimaryCopy = document.getElementById('today-primary-copy')
+const todayPrimaryCta = document.getElementById('today-primary-cta')
+const todayPrimaryProgressFill = document.getElementById('today-primary-progress-fill')
+const todayExamTitle = document.getElementById('today-exam-title')
+const todayExamCopy = document.getElementById('today-exam-copy')
+const todayCoverageTitle = document.getElementById('today-coverage-title')
+const todayCoverageCopy = document.getElementById('today-coverage-copy')
+const todayUpdateKicker = document.getElementById('today-update-kicker')
+const todayUpdateTitle = document.getElementById('today-update-title')
+const todayUpdateCopy = document.getElementById('today-update-copy')
+if (trackerSearch) trackerSearch.name = 'tracker-search'
 const trackerStatusFilter = document.getElementById('tracker-status-filter')
 const trackerScopeFilter = document.getElementById('tracker-scope-filter')
 const semesterFill = document.getElementById('semester-fill')
@@ -1063,13 +1080,96 @@ let activeAcademicSectionData = academicSections[activeAcademicSection]
 const newsCardsState = {
   rowsBySection: new Map(),
   remoteSections: new Set(),
-  loadingSections: new Set()
+  loadingSections: new Set(),
+  errorSections: new Set()
 }
 subjects = activeAcademicSectionData.subjects
 const initialSubject = subjects.find((subject) => subject.code === initialParams.get('subject'))
 let activeSubjectCode = initialParams.get('tracker') === '1' && initialSubject ? initialSubject.code : null
 let expandedSubjectCode = mobileQuery.matches && activeSubjectCode ? activeSubjectCode : null
 let activeSubjectTrack = 'theoretical'
+const managedModalStates = new WeakMap()
+
+function getFocusableElements(container) {
+  if (!container) return []
+  return [...container.querySelectorAll(
+    'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+  )].filter((element) => (
+    !element.hidden
+    && element.getAttribute('aria-hidden') !== 'true'
+    && !element.closest('[hidden], [inert]')
+  ))
+}
+
+function activateManagedModal(modal, close, preferredFocus = null) {
+  if (!modal) return
+  const existing = managedModalStates.get(modal)
+  if (existing?.active) {
+    existing.close = close
+    return
+  }
+
+  const pageElements = [...document.body.children].filter((element) => (
+    element !== modal
+    && element.tagName !== 'SCRIPT'
+    && !element.contains(modal)
+    && !element.hasAttribute('inert')
+  ))
+  const state = {
+    active: true,
+    close,
+    trigger: document.activeElement instanceof HTMLElement ? document.activeElement : null,
+    pageElements,
+    keydown: null
+  }
+
+  state.keydown = (event) => {
+    if (!state.active) return
+    if (event.key === 'Escape') {
+      event.preventDefault()
+      state.close?.()
+      return
+    }
+    if (event.key !== 'Tab') return
+    const focusable = getFocusableElements(modal)
+    if (!focusable.length) {
+      event.preventDefault()
+      return
+    }
+    const first = focusable[0]
+    const last = focusable[focusable.length - 1]
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault()
+      last.focus()
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault()
+      first.focus()
+    }
+  }
+
+  state.pageElements.forEach((element) => { element.inert = true })
+  modal.addEventListener('keydown', state.keydown)
+  managedModalStates.set(modal, state)
+
+  window.requestAnimationFrame(() => {
+    const focusTarget = preferredFocus && !preferredFocus.disabled
+      ? preferredFocus
+      : getFocusableElements(modal)[0]
+    focusTarget?.focus({ preventScroll: true })
+  })
+}
+
+function deactivateManagedModal(modal) {
+  const state = modal ? managedModalStates.get(modal) : null
+  if (!state?.active) return
+  state.active = false
+  modal.removeEventListener('keydown', state.keydown)
+  state.pageElements.forEach((element) => { element.inert = false })
+  managedModalStates.delete(modal)
+  window.requestAnimationFrame(() => {
+    if (state.trigger?.isConnected) state.trigger.focus({ preventScroll: true })
+  })
+}
 
 function getAcademicSection(sectionId = activeAcademicSection) {
   return academicSections[sectionId] || academicSections['401']
@@ -1299,11 +1399,12 @@ function openAdminLogin() {
   adminLoginModal.hidden = false
   document.body.classList.add('admin-modal-open')
   setAdminLoginStatus('')
-  requestAnimationFrame(() => adminLoginEmail?.focus())
+  activateManagedModal(adminLoginModal, closeAdminLogin, adminLoginEmail)
 }
 
 function closeAdminLogin() {
   if (!adminLoginModal) return
+  deactivateManagedModal(adminLoginModal)
   adminLoginModal.hidden = true
   document.body.classList.remove('admin-modal-open')
   if (adminLoginPassword) adminLoginPassword.value = ''
@@ -2901,7 +3002,7 @@ const classRepresentativesBySection = {
 
 function renderRepresentativeAvatar(rep) {
   if (rep.image) {
-    return `<img src="${escapeHtml(rep.image)}" alt="" />`
+    return `<img src="${escapeHtml(rep.image)}" alt="" width="420" height="420" loading="lazy" decoding="async" />`
   }
 
   return `
@@ -3200,6 +3301,7 @@ function updateGlobalProgress() {
   mcqsPercent.textContent = `${percent}%`
   mcqsFill.style.width = `${percent}%`
   renderProfileSection()
+  renderTodayCockpit()
   return { completed, total, percent }
 }
 
@@ -3216,6 +3318,204 @@ function getActiveTopicProgressStats() {
     total,
     percent: calculatePercent(completed, total)
   }
+}
+
+function getTodayUpcomingExam() {
+  const todayStart = startOfDay(new Date())
+  return (activeAcademicSectionData.midtermExamSchedule || [])
+    .map((exam) => ({
+      ...exam,
+      daysUntil: Math.ceil((getLocalDate(exam.date) - todayStart) / 86400000)
+    }))
+    .find((exam) => exam.daysUntil >= 0) || null
+}
+
+function getTodayContinueCandidate() {
+  const candidates = new Map()
+  const addCandidate = (rawPayload) => {
+    const payload = normalizeSavedQuizState(rawPayload)
+    const topicLabel = payload?.topicLabel
+    const sourceId = payload?.sourceId || 'current'
+    const stats = getQuizProgressStatsFromPayload(payload)
+    if (!topicLabel || payload.completed || stats.answeredCount <= 0 || stats.totalQuestions <= 0) return
+    if (!getQuizConfig(topicLabel, sourceId)) return
+
+    const savedAt = Number.isFinite(Date.parse(payload.savedAt || ''))
+      ? Date.parse(payload.savedAt)
+      : 0
+    const key = `${topicLabel}::${sourceId}`
+    const existing = candidates.get(key)
+    if (existing && existing.savedAt > savedAt) return
+    candidates.set(key, {
+      topicLabel,
+      sourceId,
+      sourceLabel: payload.sourceLabel || 'Saved MCQ Session',
+      answeredCount: stats.answeredCount,
+      totalQuestions: stats.totalQuestions,
+      percent: calculatePercent(stats.answeredCount, stats.totalQuestions),
+      savedAt
+    })
+  }
+
+  studentProgressState.quizRows.forEach((payload, key) => {
+    if (key.startsWith(`${activeAcademicSection}::`)) addCandidate(payload)
+  })
+
+  const localPrefix = `${QUIZ_STORAGE_PREFIX}::${getProgressStorageOwnerId()}::${activeAcademicSection}::`
+  try {
+    for (let index = 0; index < localStorage.length; index += 1) {
+      const key = localStorage.key(index)
+      if (!key?.startsWith(localPrefix)) continue
+      try {
+        addCandidate(JSON.parse(localStorage.getItem(key) || 'null'))
+      } catch {
+        // Ignore malformed historical progress; the quiz screen already handles it safely.
+      }
+    }
+  } catch {
+    // Keep the daily action usable when browser storage is blocked.
+  }
+
+  return [...candidates.values()]
+    .sort((first, second) => second.savedAt - first.savedAt || second.percent - first.percent)[0] || null
+}
+
+function getTodayBoardUpdate() {
+  if (!newsFeed) return null
+  const seenCards = getNewsSeenCards()
+  const candidates = [...newsFeed.querySelectorAll('.update-panel')]
+    .filter((card) => (
+      (card.dataset.section || '401') === activeAcademicSection
+      && !card.hidden
+      && card.style.display !== 'none'
+      && !isNewsCardExpired(card)
+    ))
+    .map((card) => ({
+      card,
+      title: card.querySelector('h2')?.textContent?.trim() || 'Class Board Update',
+      label: card.querySelector('.card__kicker')?.textContent?.trim() || 'Class Board',
+      unread: !seenCards.has(getNewsCardId(card)),
+      priority: Number(card.dataset.priority || 0),
+      date: card.dataset.date || ''
+    }))
+    .sort((first, second) => (
+      Number(second.unread) - Number(first.unread)
+      || second.priority - first.priority
+      || second.date.localeCompare(first.date)
+    ))
+
+  return candidates[0] || null
+}
+
+function renderTodayFreshnessStatus() {
+  if (!todayCockpitFreshness || !todayCockpit) return
+  const checkedAt = new Intl.DateTimeFormat('en', {
+    hour: 'numeric',
+    minute: '2-digit'
+  }).format(new Date())
+
+  let state = 'online'
+  let message = `Online · checked ${checkedAt}`
+  if (!navigator.onLine) {
+    state = 'offline'
+    message = `Offline · showing saved page data · checked ${checkedAt}`
+  } else if (studentProgressState.lastError) {
+    state = 'saved'
+    message = `Progress saved on this device · checked ${checkedAt}`
+  } else if (studentProgressState.loading) {
+    state = 'syncing'
+    message = 'Syncing your saved progress…'
+  } else if (newsCardsState.errorSections.has(activeAcademicSection)) {
+    state = 'saved'
+    message = `Class Board unavailable · showing built-in updates · checked ${checkedAt}`
+  } else if (newsCardsState.loadingSections.has(activeAcademicSection)) {
+    state = 'syncing'
+    message = 'Checking the Class Board…'
+  } else if (newsCardsState.remoteSections.has(activeAcademicSection)) {
+    state = 'live'
+    message = `Class Board synced · checked ${checkedAt}`
+  } else {
+    message = `Online · built-in schedule & resources · checked ${checkedAt}`
+  }
+
+  todayCockpit.dataset.freshness = state
+  todayCockpitFreshness.textContent = message
+}
+
+function renderTodayCockpit() {
+  if (!todayCockpit || !todayPrimaryAction) return
+
+  if (todayCockpitDate) {
+    todayCockpitDate.dateTime = new Date().toISOString().slice(0, 10)
+    todayCockpitDate.textContent = new Intl.DateTimeFormat('en', {
+      weekday: 'long',
+      month: 'short',
+      day: 'numeric'
+    }).format(new Date())
+  }
+
+  const nextExam = getTodayUpcomingExam()
+  const progress = getActiveTopicProgressStats()
+  const continueCandidate = getTodayContinueCandidate()
+  const boardUpdate = getTodayBoardUpdate()
+  const fallbackTopic = nextExam?.quizTopicKey || Object.keys(getMcqQuizzesForSection())[0] || ''
+
+  todayPrimaryAction.dataset.todayAction = continueCandidate ? 'resume' : 'quiz'
+  todayPrimaryAction.dataset.todayTopic = continueCandidate?.topicLabel || fallbackTopic
+  todayPrimaryAction.dataset.todaySource = continueCandidate?.sourceId || ''
+  todayPrimaryAction.disabled = !todayPrimaryAction.dataset.todayTopic
+  todayPrimaryAction.setAttribute(
+    'aria-label',
+    continueCandidate
+      ? `Resume ${continueCandidate.topicLabel}, ${continueCandidate.answeredCount} of ${continueCandidate.totalQuestions} questions answered`
+      : fallbackTopic
+        ? `Start practice for ${fallbackTopic}`
+        : 'No MCQ practice is currently available'
+  )
+
+  if (continueCandidate) {
+    todayPrimaryKicker.textContent = 'Continue Your Last Session'
+    todayPrimaryTitle.textContent = continueCandidate.topicLabel
+    todayPrimaryCopy.textContent = `${continueCandidate.sourceLabel} · ${continueCandidate.answeredCount} of ${continueCandidate.totalQuestions} answered`
+    todayPrimaryCta.textContent = 'Resume Quiz'
+    todayPrimaryProgressFill.style.width = `${continueCandidate.percent}%`
+  } else if (nextExam?.quizTopicKey) {
+    todayPrimaryKicker.textContent = `${getExamCountdownText(nextExam.daysUntil)} · ${nextExam.code}`
+    todayPrimaryTitle.textContent = `Practice for ${nextExam.subjectName}`
+    todayPrimaryCopy.textContent = `${formatExamDate(nextExam.date)} at ${nextExam.time}`
+    todayPrimaryCta.textContent = 'Choose MCQs'
+    todayPrimaryProgressFill.style.width = `${progress.percent}%`
+  } else {
+    todayPrimaryKicker.textContent = 'Recommended Next Step'
+    todayPrimaryTitle.textContent = fallbackTopic || 'Your Section Is Up to Date'
+    todayPrimaryCopy.textContent = fallbackTopic
+      ? 'Start a focused MCQ session from your current section.'
+      : 'No MCQ bank is currently available for this section.'
+    todayPrimaryCta.textContent = fallbackTopic ? 'Start Practice' : 'Nothing Due'
+    todayPrimaryProgressFill.style.width = `${progress.percent}%`
+  }
+
+  if (todayExamTitle && todayExamCopy) {
+    todayExamTitle.textContent = nextExam ? nextExam.code : 'Midterms Complete'
+    todayExamCopy.textContent = nextExam
+      ? `${getExamCountdownText(nextExam.daysUntil)} · ${formatExamDate(nextExam.date)}, ${nextExam.time}`
+      : 'No upcoming midterm is listed.'
+  }
+
+  if (todayCoverageTitle && todayCoverageCopy) {
+    todayCoverageTitle.textContent = `${progress.percent}% Complete`
+    todayCoverageCopy.textContent = `${progress.completed} of ${progress.total} tracked topics completed.`
+  }
+
+  if (todayUpdateTitle && todayUpdateCopy && todayUpdateKicker) {
+    todayUpdateKicker.textContent = boardUpdate?.unread ? 'Unread Class Update' : boardUpdate?.label || 'Class Board'
+    todayUpdateTitle.textContent = boardUpdate?.title || 'Review Class Updates'
+    todayUpdateCopy.textContent = boardUpdate
+      ? 'Open the board for the full announcement.'
+      : 'Open the board for announcements and deadlines.'
+  }
+
+  renderTodayFreshnessStatus()
 }
 
 function getProfileMcqBankProgressStats() {
@@ -4098,9 +4398,9 @@ function setTrackerSearchMode(mode = 'topics') {
 
   if (trackerSearch) {
     if (trackerSearchMode === 'mcqs') {
-      trackerSearch.placeholder = 'Search MCQ questions...'
+      trackerSearch.placeholder = 'Search MCQ questions…'
     } else if (trackerSearchMode === 'sources') {
-      trackerSearch.placeholder = 'Search medical sources, topics, sections...'
+      trackerSearch.placeholder = 'Search medical sources, topics, sections…'
     } else {
       trackerSearch.placeholder = activeAcademicSectionData.trackerSearchPlaceholder
     }
@@ -4234,7 +4534,7 @@ function renderResourceItem(item) {
   if (item.type === 'audio') {
     return `
       <a class="topic-resource topic-resource--audio" href="${item.url}" target="_blank" rel="noopener noreferrer" aria-label="Open lecture record in Google Drive" title="${escapeHtml(tooltip)}">
-        <img class="topic-resource__play-icon" src="${PLAY_ICON_URL}" alt="" loading="lazy">
+        <img class="topic-resource__play-icon" src="${PLAY_ICON_URL}" alt="" width="128" height="128" loading="lazy" decoding="async">
         <span>${escapeHtml(compactLabel)}</span>
       </a>
     `
@@ -4250,7 +4550,7 @@ function renderResourceItem(item) {
     return `
       <details class="topic-resource-menu">
         <summary class="topic-resource topic-resource--drive" aria-label="Open Drive resources" title="${escapeHtml(tooltip)}">
-          <img class="topic-resource__drive-icon" src="${DRIVE_ICON_URL}" alt="" loading="lazy">
+          <img class="topic-resource__drive-icon" src="${DRIVE_ICON_URL}" alt="" width="56" height="55" loading="lazy" decoding="async">
           <span>${escapeHtml(compactLabel)}</span>
         </summary>
         <span class="topic-resource-menu__links">
@@ -4275,7 +4575,7 @@ function renderResourceItem(item) {
 
   return `
     <a class="topic-resource topic-resource--${item.type}${isDriveLecture ? ' topic-resource--drive' : ''}" href="${item.url}" target="_blank" rel="noopener noreferrer"${item.download ? ' download' : ''}${labelAttr} title="${escapeHtml(tooltip)}">
-      ${isDriveLecture ? `<img class="topic-resource__drive-icon" src="${DRIVE_ICON_URL}" alt="" loading="lazy">` : ''}
+      ${isDriveLecture ? `<img class="topic-resource__drive-icon" src="${DRIVE_ICON_URL}" alt="" width="56" height="55" loading="lazy" decoding="async">` : ''}
       <span>${escapeHtml(compactLabel)}</span>
     </a>
   `
@@ -4283,7 +4583,7 @@ function renderResourceItem(item) {
 
 function renderTopicActionIcon(type) {
   if (type === 'drive') {
-    return `<img class="topic-action-card__image" src="${DRIVE_ICON_URL}" alt="" loading="lazy">`
+    return `<img class="topic-action-card__image" src="${DRIVE_ICON_URL}" alt="" width="56" height="55" loading="lazy" decoding="async">`
   }
 
   if (type === 'mcq') {
@@ -5933,11 +6233,11 @@ function renderQuizSourcePicker(topicLabel, event = null) {
         const resumesDirectly = Boolean(source.savedProgress && !source.collection)
         return `
         <button class="quiz-source-option${isVipPastExam ? ' quiz-source-option--vip' : ''}${isKellawiCollection ? ' quiz-source-option--kellawi' : ''}" type="button" data-quiz-source="${source.id}" data-quiz-topic="${escapeHtml(topicLabel)}" ${resumesDirectly ? 'data-quiz-resume-direct' : ''} ${isVipPastExam ? 'dir="rtl"' : ''}>
-          ${isVipPastExam ? '<img class="quiz-source-option__icon" src="/assets/past-exams-vip-icon.png" alt="" />' : ''}
+          ${isVipPastExam ? '<img class="quiz-source-option__icon" src="/assets/past-exams-vip-icon.png" alt="" width="256" height="256" decoding="async" />' : ''}
           ${isKellawiCollection ? `
             <span class="quiz-source-option__kellawi-mascot" aria-hidden="true">
               <span class="quiz-source-option__kellawi-avatar">
-                <img src="/assets/mohamed-kellawi-avatar.jpg" alt="" />
+                <img src="/assets/mohamed-kellawi-avatar.jpg" alt="" width="420" height="420" loading="lazy" decoding="async" />
               </span>
               <span class="quiz-source-option__thought">Let’s solve organ by organ.</span>
             </span>
@@ -5958,6 +6258,7 @@ function renderQuizSourcePicker(topicLabel, event = null) {
   actions.innerHTML = '<button class="quiz-action quiz-action--primary" type="button" data-quiz-close>Close</button>'
   modal.setAttribute('aria-hidden', 'false')
   document.body.classList.add('panel-open')
+  activateManagedModal(modal, closeQuiz, modal.querySelector('[data-quiz-close]'))
 }
 
 function prepareQuizPicker({ titleText, metaText, progress = null, event = null }) {
@@ -5992,6 +6293,7 @@ function prepareQuizPicker({ titleText, metaText, progress = null, event = null 
   actions.innerHTML = '<button class="quiz-action quiz-action--primary" type="button" data-quiz-close>Close</button>'
   modal.setAttribute('aria-hidden', 'false')
   document.body.classList.add('panel-open')
+  activateManagedModal(modal, closeQuiz, modal.querySelector('[data-quiz-close]'))
 
   return { modal, body, actions, panel }
 }
@@ -6306,6 +6608,7 @@ function openQuiz(topicLabel, sourceId = 'current', event = null, launchOptions 
     startQuizTimer()
   }
   updateQuizRobotCompactMode()
+  activateManagedModal(modal, closeQuiz, modal.querySelector('[data-quiz-close]'))
 
   if (resumeDirectly) {
     setTimeout(() => {
@@ -6327,6 +6630,7 @@ function closeQuiz() {
     pauseQuizCountupTimer()
     saveQuizState()
   }
+  deactivateManagedModal(modal)
   modal.setAttribute('aria-hidden', 'true')
   document.body.classList.remove('panel-open')
   clearQuizTimerInterval()
@@ -6393,11 +6697,13 @@ function openPdfPreview({ url, title, downloadUrl }, event = null) {
   downloadLink.setAttribute('download', '')
   modal.setAttribute('aria-hidden', 'false')
   document.body.classList.add('panel-open')
+  activateManagedModal(modal, closePdfPreview, modal.querySelector('[data-pdf-close]'))
 }
 
 function closePdfPreview() {
   const modal = ensurePdfPreviewModal()
   const frame = modal.querySelector('.pdf-preview-frame')
+  deactivateManagedModal(modal)
   modal.setAttribute('aria-hidden', 'true')
   document.body.classList.remove('panel-open')
   if (frame) frame.src = 'about:blank'
@@ -7844,8 +8150,10 @@ function replaceNewsFeedWithRemoteRows() {
 async function refreshRemoteNewsCards(section = activeAcademicSection) {
   if (!newsFeed || !isSupabaseConfigured() || newsCardsState.loadingSections.has(section)) return
   newsCardsState.loadingSections.add(section)
+  renderTodayFreshnessStatus()
   try {
     const rows = await fetchNewsCards(section)
+    newsCardsState.errorSections.delete(section)
     if (rows.length || newsCardsState.remoteSections.has(section)) {
       newsCardsState.rowsBySection.set(section, rows)
       newsCardsState.remoteSections.add(section)
@@ -7856,10 +8164,12 @@ async function refreshRemoteNewsCards(section = activeAcademicSection) {
       }
     }
   } catch (error) {
+    newsCardsState.errorSections.add(section)
     console.warn('Remote news data unavailable; using static fallback.', error)
     if (newsAdminStatus && isNewsAdminForSection(section)) newsAdminStatus.textContent = `News sync unavailable: ${error.message}`
   } finally {
     newsCardsState.loadingSections.delete(section)
+    renderTodayCockpit()
   }
 }
 
@@ -7927,10 +8237,12 @@ function openNewsAdminEditor(row = null) {
   newsAdminFormStatus.textContent = ''
   newsAdminModal.hidden = false
   document.body.classList.add('admin-modal-open')
+  activateManagedModal(newsAdminModal, closeNewsAdminEditor, newsAdminModal.querySelector('input, textarea, select, button'))
 }
 
 function closeNewsAdminEditor() {
   if (!newsAdminModal) return
+  deactivateManagedModal(newsAdminModal)
   newsAdminModal.hidden = true
   document.body.classList.remove('admin-modal-open')
 }
@@ -8068,6 +8380,7 @@ function renderNewsFilters() {
   } else {
     emptyState?.remove()
   }
+  renderTodayCockpit()
 }
 
 function setAuthGateState(state, message = '') {
@@ -8441,6 +8754,26 @@ document.addEventListener('click', (event) => {
     return
   }
 
+  const todayActionButton = event.target.closest('[data-today-action]')
+  if (todayActionButton) {
+    event.preventDefault()
+    const topicLabel = todayActionButton.dataset.todayTopic
+    const sourceId = todayActionButton.dataset.todaySource
+    if (!topicLabel) return
+    if (todayActionButton.dataset.todayAction === 'resume' && sourceId) {
+      openQuiz(topicLabel, sourceId, event, { resumeDirectly: true })
+      return
+    }
+
+    const sources = getQuizSources(topicLabel)
+    if (sources.length > 1 || shouldShowQuizSourcePicker(topicLabel)) {
+      renderQuizSourcePicker(topicLabel, event)
+    } else {
+      openQuiz(topicLabel, sources[0]?.id || 'current', event)
+    }
+    return
+  }
+
   const avatarChoice = event.target.closest('[data-profile-avatar]')
   if (avatarChoice) {
     event.preventDefault()
@@ -8731,6 +9064,7 @@ if (newsFeed) {
   renderNewsFilters()
   newsNavLinks.forEach((link) => link.addEventListener('click', () => {
     markNewsCardsSeen([...newsFeed.querySelectorAll('.update-panel')])
+    renderTodayCockpit()
   }))
   ;[newsCourseFilter, newsDateFilter].filter(Boolean).forEach((control) => {
     control.addEventListener('input', renderNewsFilters)
@@ -8779,6 +9113,9 @@ if (copyHistorySummary && historySummaryText) {
 
 renderAssignmentProgress()
 renderSchedulePage()
+renderTodayCockpit()
+window.addEventListener('online', renderTodayFreshnessStatus)
+window.addEventListener('offline', renderTodayFreshnessStatus)
 if (scheduleTodayTitle) {
   window.setInterval(renderSchedulePage, 60 * 1000)
 }
