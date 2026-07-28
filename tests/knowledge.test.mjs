@@ -8,6 +8,7 @@ import { fileURLToPath } from 'node:url';
 import { runInNewContext } from 'node:vm';
 
 import {
+  DEFAULT_SOURCE_PATH,
   decodeHtmlEntities,
   sanitizeCoreContentHtml,
   stripStudentFacingMetadata,
@@ -279,10 +280,14 @@ test('extract and build are byte-deterministic and preserve evidence', () => {
 });
 
 function runLibraryGeneration() {
-  execFileSync(process.execPath, ['scripts/extract-med401-git-source.mjs'], {
-    cwd: ROOT_DIR,
-    stdio: 'pipe'
-  });
+  const sourcePath = process.env.MED401_GIT_SOURCE_PATH || DEFAULT_SOURCE_PATH;
+  if (existsSync(sourcePath)) {
+    execFileSync(process.execPath, ['scripts/extract-med401-git-source.mjs'], {
+      cwd: ROOT_DIR,
+      env: { ...process.env, MED401_GIT_SOURCE_PATH: sourcePath },
+      stdio: 'pipe'
+    });
+  }
   execFileSync(process.execPath, ['scripts/build-medical-library.mjs'], {
     cwd: ROOT_DIR,
     stdio: 'pipe'

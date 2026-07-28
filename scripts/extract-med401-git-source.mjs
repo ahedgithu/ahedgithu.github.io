@@ -7,7 +7,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const ROOT_DIR = path.resolve(__dirname, '..');
 
-const DEFAULT_SOURCE_PATH = 'C:\\Users\\ahmed\\Downloads\\MUST401_GIT_Interactive_Study_Platform.html';
+export const DEFAULT_SOURCE_PATH = 'C:\\Users\\ahmed\\Downloads\\MUST401_GIT_Interactive_Study_Platform.html';
 const EXPECTED_SHA256 = '36CA1A86B9C4E1E1D0F42F8D90858F2D72584DD2BCC53BEECEB69ED97A0C3688';
 const STABLE_ISO_DATE = '2026-07-27T00:00:00.000Z';
 const STABLE_DATE = '2026-07-27';
@@ -466,5 +466,5 @@ function resetGeneratedDirectory(targetDir, allowedParent) {
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === __filename) {
-  extractGitSource();
+  extractGitSource(process.env.MED401_GIT_SOURCE_PATH || DEFAULT_SOURCE_PATH);
 }
