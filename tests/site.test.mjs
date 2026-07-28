@@ -569,7 +569,7 @@ test('MED 401-1 Mw ragab comperhensive bank is source-faithful, grouped, and wir
   const source = quiz.sources.find((item) => item.id === 'med1-mw-ragab-comperhensive')
   assert.ok(source, 'med1-mw-ragab-comperhensive source is missing')
   assert.equal(source.label, 'Mw ragab comperhensive')
-  assert.equal(source.mcqs.length, 74)
+  assert.equal(source.mcqs.length, 120)
   assert.equal(source.heldForReview.length, 0)
   assert.equal(new Set(source.mcqs.map((question) => question.id)).size, source.mcqs.length)
   assert.ok(source.mcqs.every((question) => question.choices.length >= 2))
@@ -577,9 +577,10 @@ test('MED 401-1 Mw ragab comperhensive bank is source-faithful, grouped, and wir
   assert.ok(source.mcqs.every((question) => question.question && question.source && question.explanation))
   assert.deepEqual(Array.from(source.collection.mixedSizes, (mode) => mode.size), [20, 30, 50])
   assert.deepEqual(
-    Array.from(source.collection.groups, (group) => [group.label, group.questionCount]),
+    Array.from(source.collection.groups, (group) => [group.label, group.questionCount, group.parts.length]),
     [
-      ['Gastroenterology & Hepatology', 74]
+      ['Gastroenterology & Hepatology', 74, 3],
+      ['Small intestine MCQs', 46, 2]
     ]
   )
   assert.ok(source.collection.groups.every((group) => (
@@ -588,7 +589,7 @@ test('MED 401-1 Mw ragab comperhensive bank is source-faithful, grouped, and wir
   )))
 
   const html = read('index.html')
-  assert.match(html, /med1-mw-ragab-mcqs\.js\?v=20260726-med1-mw-ragab-v1/)
+  assert.match(html, /med1-mw-ragab-mcqs\.js\?v=20260728-med1-mw-ragab-v2/)
 })
 
 test('SUR 401-1 past-exam bank is answer-safe, grouped, and wired', () => {

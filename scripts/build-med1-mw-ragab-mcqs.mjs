@@ -5,7 +5,9 @@ import { fileURLToPath } from 'node:url'
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const defaultSourcePath = 'G:\\school\\study mode\\subjects\\med1\\mw ragab mcqs\\mw ragab comperhensive.json'
+const defaultSmallIntestineSourcePath = 'G:\\school\\study mode\\subjects\\med1\\mw ragab mcqs\\small intestine mcqs.json'
 const sourcePath = path.resolve(process.argv[2] || defaultSourcePath)
+const smallIntestineSourcePath = path.resolve(process.argv[3] || defaultSmallIntestineSourcePath)
 const targetPaths = [
   path.join(repoRoot, 'src', 'med1-mw-ragab-mcqs.js'),
   path.join(repoRoot, 'public', 'src', 'med1-mw-ragab-mcqs.js')
@@ -70,6 +72,12 @@ function createParts(group, questions) {
 const sourceContent = await readFile(sourcePath, 'utf8')
 const parsedJson = JSON.parse(sourceContent)
 const sourceQuestions = Array.isArray(parsedJson.questions) ? parsedJson.questions : []
+const smallIntestineSourceContent = await readFile(smallIntestineSourcePath, 'utf8')
+const smallIntestineSourceQuestions = JSON.parse(smallIntestineSourceContent)
+
+if (!Array.isArray(smallIntestineSourceQuestions)) {
+  throw new Error('Expected the Small intestine MCQs source to be a JSON array')
+}
 
 const questions = []
 const heldForReview = []
@@ -118,8 +126,56 @@ for (const item of sourceQuestions) {
   })
 }
 
+let smallIntestineOriginalNumber = 0
+
+for (const item of smallIntestineSourceQuestions) {
+  smallIntestineOriginalNumber += 1
+  const choices = Array.isArray(item.choices) ? item.choices.map(cleanText) : []
+  const answerIndex = getAnswerIndex(item.answerIndex, choices)
+  let reason = ''
+
+  if (!cleanText(item.question)) {
+    reason = 'Missing question text'
+  } else if (choices.length < 2) {
+    reason = 'No answer choices supplied'
+  } else if (answerIndex < 0) {
+    reason = `Answer references a missing or unresolved option: ${cleanText(item.answerIndex)}`
+  }
+
+  if (reason) {
+    heldForReview.push({
+      category: 'Small intestine MCQs',
+      originalNumber: String(smallIntestineOriginalNumber),
+      question: cleanText(item.question),
+      choices,
+      answer: cleanText(item.answerIndex),
+      rationale: cleanText(item.explanation),
+      source: 'Small intestine MCQs',
+      reason
+    })
+    continue
+  }
+
+  questions.push({
+    id: `med1-mw-ragab-small-intestine-q${String(smallIntestineOriginalNumber).padStart(3, '0')}`,
+    originalNumber: String(smallIntestineOriginalNumber),
+    category: 'Small intestine MCQs',
+    organ: 'Small intestine MCQs',
+    question: cleanText(item.question),
+    choices,
+    answerIndex,
+    explanation: cleanText(item.explanation) || `Answer: ${choices[answerIndex]}.`,
+    source: 'Small intestine MCQs',
+    section: 'Small intestine MCQs · Mw ragab comperhensive',
+    topicTags: ['MED-1', 'Mw ragab comperhensive', 'Small intestine MCQs', cleanText(item.topic)].filter(Boolean)
+  })
+}
+
 if (originalNumber !== 74) throw new Error(`Expected 74 source records, found ${originalNumber}`)
-if (questions.length !== 74) throw new Error(`Expected 74 answer-safe questions, found ${questions.length}`)
+if (smallIntestineOriginalNumber !== 46) {
+  throw new Error(`Expected 46 Small intestine MCQ source records, found ${smallIntestineOriginalNumber}`)
+}
+if (questions.length !== 120) throw new Error(`Expected 120 answer-safe questions, found ${questions.length}`)
 if (heldForReview.length !== 0) throw new Error(`Expected 0 held records, found ${heldForReview.length}`)
 if (new Set(questions.map((question) => question.id)).size !== questions.length) {
   throw new Error('Generated question IDs are not unique')
@@ -128,29 +184,39 @@ if (questions.some((question) => question.choices.length < 2 || !question.choice
   throw new Error('Generated bank contains an invalid included answer')
 }
 
-const groupDef = { id: 'gastroenterology-hepatology', label: 'Gastroenterology & Hepatology' }
-const group = {
-  id: groupDef.id,
-  label: groupDef.label,
-  questionCount: questions.length,
-  parts: createParts(groupDef, questions)
-}
-const groups = [group]
-const partCount = group.parts.length
-const sourceHash = createHash('sha256').update(sourceContent).digest('hex')
+const groupDefs = [
+  { id: 'gastroenterology-hepatology', label: 'Gastroenterology & Hepatology' },
+  { id: 'small-intestine-mcqs', label: 'Small intestine MCQs' }
+]
+const groups = groupDefs.map((groupDef) => {
+  const groupQuestions = questions.filter((question) => question.category === groupDef.label)
+  return {
+    id: groupDef.id,
+    label: groupDef.label,
+    questionCount: groupQuestions.length,
+    parts: createParts(groupDef, groupQuestions)
+  }
+})
+const partCount = groups.reduce((total, group) => total + group.parts.length, 0)
+const sourceHash = createHash('sha256')
+  .update(sourceContent)
+  .update('\n')
+  .update(smallIntestineSourceContent)
+  .digest('hex')
 
 const source = {
   id: 'med1-mw-ragab-comperhensive',
   label: 'Mw ragab comperhensive',
-  description: `${questions.length} answer-safe questions · 1 topic · ${partCount} short parts`,
+  description: `${questions.length} answer-safe questions · ${groups.length} topics · ${partCount} short parts`,
   sourceFile: path.basename(sourcePath),
+  sourceFiles: [path.basename(sourcePath), path.basename(smallIntestineSourcePath)],
   sourceHash,
   shuffleQuestions: false,
   shuffleOptions: false,
   mcqs: questions,
   heldForReview,
   collection: {
-    prompt: 'Choose a gastroenterology & hepatology topic or a revision mode.',
+    prompt: 'Choose a topic or a revision mode.',
     groupNoun: 'topic',
     groupEyebrow: 'MED-1 Mw ragab comperhensive',
     mixedMeta: 'Random questions from the Mw ragab comperhensive question bank.',
@@ -165,7 +231,7 @@ const source = {
 }
 
 const generatedSource = `// Generated by scripts/build-med1-mw-ragab-mcqs.mjs.
-// mw ragab comperhensive.json SHA-256: ${sourceHash}
+// Combined source SHA-256: ${sourceHash}
 // Included: ${questions.length} answer-safe MED-1 questions; ${heldForReview.length} records held for review.
 (() => {
   const quizzes = window.mcqQuizzes || (window.mcqQuizzes = {})
@@ -181,8 +247,9 @@ const generatedSource = `// Generated by scripts/build-med1-mw-ragab-mcqs.mjs.
 await Promise.all(targetPaths.map((targetPath) => writeFile(targetPath, generatedSource, 'utf8')))
 console.log(JSON.stringify({
   sourcePath,
+  smallIntestineSourcePath,
   sourceHash,
-  sourceRecords: originalNumber,
+  sourceRecords: originalNumber + smallIntestineOriginalNumber,
   included: questions.length,
   heldForReview: heldForReview.length,
   groups: Object.fromEntries(groups.map((g) => [g.label, g.questionCount])),
