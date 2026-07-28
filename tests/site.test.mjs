@@ -331,15 +331,17 @@ test('MED 402-2 neurology bank is answer-safe, grouped, and wired to the exam ca
   vm.runInNewContext(read('src/med402-neuro-extra-mcqs.js'), context)
   vm.runInNewContext(read('src/med402-old-psychiatry-mcqs.js'), context)
   vm.runInNewContext(read('src/med402-zatoona-psychiatry-mcqs.js'), context)
+  vm.runInNewContext(read('src/med402-psychiatry-question-bank.js'), context)
 
   const quiz = context.window.mcqQuizzes402['MED 402-2 MCQs']
   assert.equal(quiz.alwaysShowSourcePicker, true)
-  assert.equal(quiz.sources.length, 4)
+  assert.equal(quiz.sources.length, 5)
 
   const source = quiz.sources.find((item) => item.id === 'med402-neurology-question-bank')
   const oldMidterm = quiz.sources.find((item) => item.id === 'med402-neuro-extra-question-set')
   const oldPsychiatry = quiz.sources.find((item) => item.id === 'med402-old-psychiatry-mcqs')
   const zatoonaPsychiatry = quiz.sources.find((item) => item.id === 'med402-zatoona-psychiatry-mcqs')
+  const psychiatryQuestionBank = quiz.sources.find((item) => item.id === 'med402-psychiatry-question-bank')
   assert.ok(source, 'Neurology Question Bank source is missing')
   assert.ok(oldMidterm, 'Old Midterm Neuro MCQs source is missing')
   assert.ok(oldPsychiatry, 'Old Psychiatry MCQs source is missing')
@@ -425,12 +427,37 @@ test('MED 402-2 neurology bank is answer-safe, grouped, and wired to the exam ca
   assert.deepEqual(Array.from(zatoonaPsychiatry.collection.mixedSizes, (mode) => mode.size), [20, 30, 148])
   assert.equal(zatoonaPsychiatry.collection.wrongReviewId, 'med402-zatoona-psychiatry-wrong-review')
 
+  assert.ok(psychiatryQuestionBank, 'psychiatry_question_bank source is missing')
+  assert.equal(psychiatryQuestionBank.label, 'psychiatry_question_bank')
+  assert.equal(psychiatryQuestionBank.mcqs.length, 117)
+  assert.equal(psychiatryQuestionBank.heldForReview.length, 11)
+  assert.equal(psychiatryQuestionBank.mcqs.length + psychiatryQuestionBank.heldForReview.length, 128)
+  assert.equal(new Set(psychiatryQuestionBank.mcqs.map((question) => question.id)).size, 117)
+  assert.ok(psychiatryQuestionBank.mcqs.every((question) => question.choices.length >= 2))
+  assert.ok(psychiatryQuestionBank.mcqs.every((question) => Number.isInteger(question.answerIndex) && question.choices[question.answerIndex]))
+  assert.deepEqual(
+    Array.from(psychiatryQuestionBank.collection.groups, (group) => [group.label, group.questionCount, group.parts.length]),
+    [
+      ['HISTORY TAKING', 29, 1],
+      ['MOOD DISORDER', 44, 2],
+      ['MOOD STABILIZER', 11, 1],
+      ['ANTIDEPRESSANT', 33, 2]
+    ]
+  )
+  assert.deepEqual(
+    Array.from(psychiatryQuestionBank.collection.groups, (group) => Array.from(group.parts, (part) => part.mcqs.length)),
+    [[29], [30, 14], [11], [30, 3]]
+  )
+  assert.deepEqual(Array.from(psychiatryQuestionBank.collection.mixedSizes, (mode) => mode.size), [20, 30, 117])
+  assert.equal(psychiatryQuestionBank.collection.wrongReviewId, 'med402-psychiatry-question-bank-wrong-review')
+
   const html = read('index.html')
   const mainSource = read('src/main.js')
   assert.match(html, /med402-neurology-mcqs\.js\?v=20260727-med402-neurology-v2/)
   assert.match(html, /med402-neuro-extra-mcqs\.js\?v=20260726-med402-neuro-extra-v1/)
   assert.match(html, /med402-old-psychiatry-mcqs\.js\?v=20260726-med402-old-psychiatry-v1/)
   assert.match(html, /med402-zatoona-psychiatry-mcqs\.js\?v=20260727-med402-zatoona-psychiatry-v1/)
+  assert.match(html, /med402-psychiatry-question-bank\.js\?v=20260728-med402-psychiatry-question-bank-v1/)
   assert.match(mainSource, /code:\s*'MED 402-2'[\s\S]{0,260}quizTopicKey:\s*'MED 402-2 MCQs'/)
 })
 
