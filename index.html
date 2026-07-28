@@ -9,7 +9,28 @@
   </script>
   <script defer src="/src/analytics.js?v=20260620-ga4"></script>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    (() => {
+      const viewport = document.querySelector('meta[name="viewport"]')
+      const normalViewport = 'width=device-width, initial-scale=1.0'
+      const lockedViewport = `${normalViewport}, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no`
+      const syncSectionViewport = () => {
+        const section = document.body?.dataset.academicSection
+          || new URLSearchParams(window.location.search).get('section')
+        viewport.content = section === '402' ? lockedViewport : normalViewport
+      }
+
+      syncSectionViewport()
+      window.addEventListener('DOMContentLoaded', () => {
+        syncSectionViewport()
+        new MutationObserver(syncSectionViewport).observe(document.body, {
+          attributes: true,
+          attributeFilter: ['data-academic-section']
+        })
+      }, { once: true })
+    })()
+  </script>
   <title>Ahmed Sayed | Clinical Hub</title>
   <meta name="description" content="A public clinical semester hub for topics, resources, tools, and exam awareness." />
   <meta property="og:title" content="Ahmed Sayed | Clinical Hub" />

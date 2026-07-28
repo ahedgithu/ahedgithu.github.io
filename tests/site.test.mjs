@@ -1330,7 +1330,6 @@ test('deployment includes every public page and requires tests before build', ()
 
 test('mobile entry pages lock the viewport to the phone screen', () => {
   const pages = [
-    'index.html',
     'profile.html',
     'history.html',
     'news.html',
@@ -1348,4 +1347,15 @@ test('mobile entry pages lock the viewport to the phone screen', () => {
     assert.match(viewport, /maximum-scale=1\.0/, `${page} must prevent zooming past the phone layout`)
     assert.match(viewport, /user-scalable=no/, `${page} must enforce the viewport lock`)
   }
+})
+
+test('the shared tracker locks 402 without changing 401 phone behavior', () => {
+  const html = read('index.html')
+  const viewport = html.match(/<meta[^>]+name="viewport"[^>]*>/i)?.[0] || ''
+
+  assert.match(viewport, /width=device-width, initial-scale=1\.0/)
+  assert.doesNotMatch(viewport, /maximum-scale|user-scalable/)
+  assert.match(html, /const lockedViewport = `\$\{normalViewport\}, minimum-scale=1\.0, maximum-scale=1\.0, user-scalable=no`/)
+  assert.match(html, /viewport\.content = section === '402' \? lockedViewport : normalViewport/)
+  assert.match(html, /new MutationObserver\(syncSectionViewport\)/)
 })
