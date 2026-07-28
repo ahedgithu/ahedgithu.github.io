@@ -1327,3 +1327,25 @@ test('deployment includes every public page and requires tests before build', ()
   assert.match(deployment, /- name: Test\s+run: npm test/)
   assert.ok(deployment.indexOf('run: npm test') < deployment.indexOf('run: npm run build'))
 })
+
+test('mobile entry pages lock the viewport to the phone screen', () => {
+  const pages = [
+    'index.html',
+    'profile.html',
+    'history.html',
+    'news.html',
+    'schedule.html',
+    'work.html',
+    'cardio-chest-revision.html',
+    'public/news.html',
+    'public/work.html'
+  ]
+
+  for (const page of pages) {
+    const viewport = read(page).match(/<meta[^>]+(?:name="viewport"|name='viewport'|name=viewport)[^>]*>/i)?.[0] || ''
+    assert.match(viewport, /width=device-width/, `${page} must use the device width`)
+    assert.match(viewport, /minimum-scale=1\.0/, `${page} must prevent zooming out`)
+    assert.match(viewport, /maximum-scale=1\.0/, `${page} must prevent zooming past the phone layout`)
+    assert.match(viewport, /user-scalable=no/, `${page} must enforce the viewport lock`)
+  }
+})
