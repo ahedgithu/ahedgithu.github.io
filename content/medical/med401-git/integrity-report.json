@@ -1,0 +1,463 @@
+{
+  "expected": {
+    "topics": 6,
+    "sections": 37,
+    "passages": 82,
+    "sourceVisuals": 6,
+    "studentFacingImages": 0,
+    "inputHash": "36CA1A86B9C4E1E1D0F42F8D90858F2D72584DD2BCC53BEECEB69ED97A0C3688"
+  },
+  "actual": {
+    "topics": 6,
+    "sections": 37,
+    "passages": 82,
+    "sourceVisuals": 6,
+    "studentFacingImages": 0,
+    "inputHash": "36CA1A86B9C4E1E1D0F42F8D90858F2D72584DD2BCC53BEECEB69ED97A0C3688"
+  },
+  "status": "PASS",
+  "extractedAssets": [
+    {
+      "hash": "8fc5cfef9e6add4beb329dba2caa4c637acaf5123386cece93fa9e04d50c11de",
+      "sizeBytes": 96082,
+      "disposition": "converted-to-text-not-published"
+    },
+    {
+      "hash": "84849e5fb31ebc8fa746a73fd14689d8adb1965c28cddafed3184386a079e140",
+      "sizeBytes": 83752,
+      "disposition": "converted-to-text-not-published"
+    },
+    {
+      "hash": "eb082f19507e4bc4e6e94a7614c1a56e29e120df5f89a5de95359463f0b2a003",
+      "sizeBytes": 60544,
+      "disposition": "converted-to-text-not-published"
+    },
+    {
+      "hash": "e1de5b1fa82c0e3894970493d406fb7543d492d7775e8b36c3c09e711c189d07",
+      "sizeBytes": 53898,
+      "disposition": "converted-to-text-not-published"
+    },
+    {
+      "hash": "5ed98994f446ee2d513d20a7055efe4adb88bc253756f1c3dae159afa0b6b983",
+      "sizeBytes": 79240,
+      "disposition": "converted-to-text-not-published"
+    },
+    {
+      "hash": "a18aa53f8ff4fcde083c0aa1b4b63df9a6eae129980814fb42676181f4cc2d15",
+      "sizeBytes": 76666,
+      "disposition": "converted-to-text-not-published"
+    }
+  ],
+  "passageHashes": [
+    {
+      "id": "med401-git-acute-source-1",
+      "hash": "b884d9013f128aa1eb1ae1094ebed033efd799c86546e7a35b3ab7ff54b45b1e",
+      "topicId": "med401-git-acute-hepatitis"
+    },
+    {
+      "id": "med401-git-acute-source-2",
+      "hash": "b026fa302964b5140f03d1513509309bafadb0410c8217a37a814ba8318a14f0",
+      "topicId": "med401-git-acute-hepatitis"
+    },
+    {
+      "id": "med401-git-acute-source-3",
+      "hash": "3ac9a5ce69cca6964af6b1b5d8a8d69a95318c4e54bdf02965c81b2f53142162",
+      "topicId": "med401-git-acute-hepatitis"
+    },
+    {
+      "id": "med401-git-acute-source-4",
+      "hash": "d1cece63538fd6f19b6d2bcf6fa797a10ad9ca1d5362f5cc95eb232b78fd1a40",
+      "topicId": "med401-git-acute-hepatitis"
+    },
+    {
+      "id": "med401-git-acute-source-5",
+      "hash": "9ce35b53efc47be306f48b782d0877d806882c1ab0fa42ae367596306cb5a48f",
+      "topicId": "med401-git-acute-hepatitis"
+    },
+    {
+      "id": "med401-git-acute-source-6",
+      "hash": "86378c5ae0988d422002574e954d06a8814c2944e7d760e83eba478aa3727ca0",
+      "topicId": "med401-git-acute-hepatitis"
+    },
+    {
+      "id": "med401-git-acute-source-7",
+      "hash": "583680bbcaba06987ee0e6284fb2f9d4212e5f16d221ac5cf9f0c5f30df3d00c",
+      "topicId": "med401-git-acute-hepatitis"
+    },
+    {
+      "id": "med401-git-acute-source-8",
+      "hash": "e7aa9b921eb55b84a530070375caac6cbc237256dbb0a4f71611a1525f6079e8",
+      "topicId": "med401-git-acute-hepatitis"
+    },
+    {
+      "id": "med401-git-acute-source-9",
+      "hash": "a6f89f9c5c011f20e9d0163fa4d5ae24c303c0f10c20045d2ff0e33ba4df889f",
+      "topicId": "med401-git-acute-hepatitis"
+    },
+    {
+      "id": "med401-git-acute-source-10",
+      "hash": "5c305c827d12ed0cd7826c4db7390803ca231c66f4d7f71aabab38bec003172f",
+      "topicId": "med401-git-acute-hepatitis"
+    },
+    {
+      "id": "med401-git-aih-source-1",
+      "hash": "51d8a9e63710999ce7ff5741b12dae928c5f68e9eda2c87f80a79bc8babed930",
+      "topicId": "med401-git-autoimmune-hepatitis"
+    },
+    {
+      "id": "med401-git-aih-source-2",
+      "hash": "e00c6833fdac225b89007e87c463f3b251857a6780801c6332b37250a8f71ec9",
+      "topicId": "med401-git-autoimmune-hepatitis"
+    },
+    {
+      "id": "med401-git-aih-source-3",
+      "hash": "8ca830b9228492eabd3d6147568d63e8e4447ddd32516168a4c3b11b1bf783a0",
+      "topicId": "med401-git-autoimmune-hepatitis"
+    },
+    {
+      "id": "med401-git-aih-source-4",
+      "hash": "aed6f3539d467ab64fe812df1c858f7c225ae7b56e7effd3a81eb140ed2acad3",
+      "topicId": "med401-git-autoimmune-hepatitis"
+    },
+    {
+      "id": "med401-git-aih-source-5",
+      "hash": "433fd3b93533d8becc4580738ab9804db165a85cc1e0acdf18c74d9e89f1cc36",
+      "topicId": "med401-git-autoimmune-hepatitis"
+    },
+    {
+      "id": "med401-git-aih-source-6",
+      "hash": "cbc41853b693780ecd60175f6d48651ffc5e46ca14f2ab45eb836e920b94cc4e",
+      "topicId": "med401-git-autoimmune-hepatitis"
+    },
+    {
+      "id": "med401-git-aih-source-7",
+      "hash": "2f2df366c7458cc5919e85fc722d996472ead77c264bbfffe04276742196272a",
+      "topicId": "med401-git-autoimmune-hepatitis"
+    },
+    {
+      "id": "med401-git-nafld-source-1",
+      "hash": "f245fae32a8037d4e8db1279f6b22c9177b4c6f60397f13cf36d7356d71c7ca1",
+      "topicId": "med401-git-nafld-nash"
+    },
+    {
+      "id": "med401-git-nafld-source-2",
+      "hash": "92bc2f1f3f689d15fbcd34731419c09a278920c58812a1007ad10cfb17a4db6e",
+      "topicId": "med401-git-nafld-nash"
+    },
+    {
+      "id": "med401-git-nafld-source-3",
+      "hash": "67412bb4df94f4cc1eba784e058dab3f710c81b74c16575f81e884695f65f90a",
+      "topicId": "med401-git-nafld-nash"
+    },
+    {
+      "id": "med401-git-nafld-source-4",
+      "hash": "5815c7407f80849b22625035558ade4971f40a1ce7bdf981eaf92f82b4a1e972",
+      "topicId": "med401-git-nafld-nash"
+    },
+    {
+      "id": "med401-git-nafld-source-5",
+      "hash": "85c64c4558704a683bd6161ce10f61653db17a0270bc36e6684b167a2e90c57d",
+      "topicId": "med401-git-nafld-nash"
+    },
+    {
+      "id": "med401-git-nafld-source-6",
+      "hash": "b40bec8ee10fd3e54b816f6233d25b31365d034bb6cd4d48ba6b78421a8f726a",
+      "topicId": "med401-git-nafld-nash"
+    },
+    {
+      "id": "med401-git-nafld-source-7",
+      "hash": "77f2f46864fe4b8779191ca652f054304ef5ae63fe6fd0168662df2d1c899789",
+      "topicId": "med401-git-nafld-nash"
+    },
+    {
+      "id": "med401-git-nafld-source-8",
+      "hash": "ea8c7323bfd938372cb9b1b51fd7416af5bfc94db178bd14bdcb9c25c601a8a6",
+      "topicId": "med401-git-nafld-nash"
+    },
+    {
+      "id": "med401-git-nafld-source-9",
+      "hash": "c01754c3738265c59acce9674011138ed41ab680a9288521648ba91f5fc18d86",
+      "topicId": "med401-git-nafld-nash"
+    },
+    {
+      "id": "med401-git-nafld-source-10",
+      "hash": "77e9c41466332f3c8264d80f960a69dc5530f75a22b8a29762b431a41570ca7c",
+      "topicId": "med401-git-nafld-nash"
+    },
+    {
+      "id": "med401-git-nafld-source-11",
+      "hash": "f5bdf80718429bd79c3b571eb12663984ee4228f0b3bf8e6b3a0d9278ce580d7",
+      "topicId": "med401-git-nafld-nash"
+    },
+    {
+      "id": "med401-git-nafld-source-12",
+      "hash": "2946641f77edd00a6652ffaece5326a065f13a4aea71d0f3c35e61b66f305704",
+      "topicId": "med401-git-nafld-nash"
+    },
+    {
+      "id": "med401-git-nafld-source-13",
+      "hash": "c25a273cb10da503cce3e66089c1f390b1f7cc6eb20191aba2dc7700d6641d5f",
+      "topicId": "med401-git-nafld-nash"
+    },
+    {
+      "id": "med401-git-nafld-source-14",
+      "hash": "c4d0fe9450941482fe63b7a9a93b81806688c538e125d1df21af0b6571439cfd",
+      "topicId": "med401-git-nafld-nash"
+    },
+    {
+      "id": "med401-git-pancreas-source-1",
+      "hash": "8ac44dc5dddd3845f058b5e99d5aec991320716d20f7d54bd30bab1d4afe10e5",
+      "topicId": "med401-git-diseases-of-the-pancreas"
+    },
+    {
+      "id": "med401-git-pancreas-source-2",
+      "hash": "61a0e3f1fce6b38b3e0a695c2f4b7b9584d4040dd39a41d21b79ad0e24968e0d",
+      "topicId": "med401-git-diseases-of-the-pancreas"
+    },
+    {
+      "id": "med401-git-pancreas-source-3",
+      "hash": "efc4a27b5c7e13e5438fec3b23b2cb8a772e3a7c4a0c7331a4568f51cd05ecdd",
+      "topicId": "med401-git-diseases-of-the-pancreas"
+    },
+    {
+      "id": "med401-git-pancreas-source-4",
+      "hash": "883700c97ca5b8b1d8c3d0720b441c04cd37bcd225087e3a64b8e76a8655b464",
+      "topicId": "med401-git-diseases-of-the-pancreas"
+    },
+    {
+      "id": "med401-git-pancreas-source-5",
+      "hash": "5feca344460b0c96eec876a47285057815b5b09dc628782e21c8cb2cf93420bb",
+      "topicId": "med401-git-diseases-of-the-pancreas"
+    },
+    {
+      "id": "med401-git-pancreas-source-6",
+      "hash": "6b7f6504e60bfb5e7bdfbcaaadc2f32add644e02c25612fd210a01b8fe7944bb",
+      "topicId": "med401-git-diseases-of-the-pancreas"
+    },
+    {
+      "id": "med401-git-pancreas-source-7",
+      "hash": "37b1a6226ba05cf16879e31632f221176e003178350cf0e357ee19ce3a296117",
+      "topicId": "med401-git-diseases-of-the-pancreas"
+    },
+    {
+      "id": "med401-git-pancreas-source-8",
+      "hash": "16a2b2f01b24bee347a33020f666ccf0cffc87b8439a04e43d2a83fca177df56",
+      "topicId": "med401-git-diseases-of-the-pancreas"
+    },
+    {
+      "id": "med401-git-pancreas-source-9",
+      "hash": "dd2bc215e8b0de6c2807d19f8dd6474e7be50bf33931b62dbaa85bdea2b344ed",
+      "topicId": "med401-git-diseases-of-the-pancreas"
+    },
+    {
+      "id": "med401-git-pancreas-source-10",
+      "hash": "3e3f314abfa51aea1931af429a196c631b414fc0997e722be82c0fe18d844f97",
+      "topicId": "med401-git-diseases-of-the-pancreas"
+    },
+    {
+      "id": "med401-git-pancreas-source-11",
+      "hash": "2cfaaddc2351b42524b286715b28b058feaad088dcb5eb6845ca999f1ef43ba9",
+      "topicId": "med401-git-diseases-of-the-pancreas"
+    },
+    {
+      "id": "med401-git-pancreas-source-12",
+      "hash": "663892694cfc0784bd6789de98aa855057c09b11721b492d5e493c2f765ace63",
+      "topicId": "med401-git-diseases-of-the-pancreas"
+    },
+    {
+      "id": "med401-git-pancreas-source-13",
+      "hash": "9d9e4e443dd736a353f1192644e31177e033ec14dc265fc73d3cd17a5c2a626e",
+      "topicId": "med401-git-diseases-of-the-pancreas"
+    },
+    {
+      "id": "med401-git-pancreas-source-14",
+      "hash": "c819bc1b6b2b564371402e5852870d352ac09c720e6758d27997a1132acc647e",
+      "topicId": "med401-git-diseases-of-the-pancreas"
+    },
+    {
+      "id": "med401-git-pancreas-source-15",
+      "hash": "91f749e4cdae623ea4a321a414c59892442317b9fcae140fb3861ec288160ac2",
+      "topicId": "med401-git-diseases-of-the-pancreas"
+    },
+    {
+      "id": "med401-git-pancreas-source-16",
+      "hash": "679aec1e349f47fecb3dce7291e1877c65e806754784c3ae3d1ee09566330a7f",
+      "topicId": "med401-git-diseases-of-the-pancreas"
+    },
+    {
+      "id": "med401-git-pancreas-source-17",
+      "hash": "057b1a466eaff15e89201bc18e0565e3351e99c66567ca602931dc2c5f96b964",
+      "topicId": "med401-git-diseases-of-the-pancreas"
+    },
+    {
+      "id": "med401-git-portal-source-1",
+      "hash": "9f604a0af637232f473cbc699e701ee83cc8d524fab66fd2d3af11de3b9f09f1",
+      "topicId": "med401-git-portal-hypertension-cirrhosis"
+    },
+    {
+      "id": "med401-git-portal-source-2",
+      "hash": "529ae81546894f3436e5b17ff88ac70d1bb879bc5f4c3246ce2beaeb1589ef08",
+      "topicId": "med401-git-portal-hypertension-cirrhosis"
+    },
+    {
+      "id": "med401-git-portal-source-3",
+      "hash": "5972a6191a34ad9d03f573da035d629cd8c0c46a5cd0522cbe77bcd1b714ba9f",
+      "topicId": "med401-git-portal-hypertension-cirrhosis"
+    },
+    {
+      "id": "med401-git-portal-source-4",
+      "hash": "93bf474b444ade3092513758860fd8b481b39ee793547ea6f38f267a2fc07b3c",
+      "topicId": "med401-git-portal-hypertension-cirrhosis"
+    },
+    {
+      "id": "med401-git-portal-source-5",
+      "hash": "5bd94d5b09c48d2a60c61c67e06f001373131995c50a2ead114a5944c6f29f71",
+      "topicId": "med401-git-portal-hypertension-cirrhosis"
+    },
+    {
+      "id": "med401-git-portal-source-6",
+      "hash": "989aa833de12a26ba58f1ef33e076f28c49b9ae03d7ff06f14db8f870afdf46f",
+      "topicId": "med401-git-portal-hypertension-cirrhosis"
+    },
+    {
+      "id": "med401-git-portal-source-7",
+      "hash": "1b362a28f8a435716ef3b9afe0b6583db3a9d484b7416b4a081e01636d068ba3",
+      "topicId": "med401-git-portal-hypertension-cirrhosis"
+    },
+    {
+      "id": "med401-git-portal-source-8",
+      "hash": "c903a3b76ae8ea1aa5a3f99cd4c02465f55896c7b327b96547dbcbad24ed3d73",
+      "topicId": "med401-git-portal-hypertension-cirrhosis"
+    },
+    {
+      "id": "med401-git-portal-source-9",
+      "hash": "0fd30a6aa2506315fa7498abdfd483a5162d94c752dbeccffaa45bf8b5843f26",
+      "topicId": "med401-git-portal-hypertension-cirrhosis"
+    },
+    {
+      "id": "med401-git-portal-source-10",
+      "hash": "7e526e8bffe28a1ca9fefbc03ff20377e3a741647da3d7e40b826c09d62741f1",
+      "topicId": "med401-git-portal-hypertension-cirrhosis"
+    },
+    {
+      "id": "med401-git-portal-source-11",
+      "hash": "3d74e2738dfd27aa9fb36d0c4cadc94a93fa5dda2403381fbcaf78b4052b7157",
+      "topicId": "med401-git-portal-hypertension-cirrhosis"
+    },
+    {
+      "id": "med401-git-portal-source-12",
+      "hash": "1768299b46ebc3d7c193d7bdb93a5979f1cdb4fabec842f6efd732645c6defe4",
+      "topicId": "med401-git-portal-hypertension-cirrhosis"
+    },
+    {
+      "id": "med401-git-small-source-1",
+      "hash": "3d96a9a129fc17c1b38c402b6465de5f88463ec04070fbdb1ed14a025a3e3625",
+      "topicId": "med401-git-small-intestinal-diseases"
+    },
+    {
+      "id": "med401-git-small-source-2",
+      "hash": "85b440676ae9064de93c4cb802285b371aed91cf1f912491b298a50671c02125",
+      "topicId": "med401-git-small-intestinal-diseases"
+    },
+    {
+      "id": "med401-git-small-source-3",
+      "hash": "dcc793e4ea5f211acc3a85204325f99df22399583e330fdf0b4026e6c85f4be6",
+      "topicId": "med401-git-small-intestinal-diseases"
+    },
+    {
+      "id": "med401-git-small-source-4",
+      "hash": "f5d34fa9d857a45b8fcac13414b848e4a3f54b0e4e9fddb8866682967908d41d",
+      "topicId": "med401-git-small-intestinal-diseases"
+    },
+    {
+      "id": "med401-git-small-source-5",
+      "hash": "6589f43e23e3d046308d15fabf95b6310f94741a149613eb752a5a680e072bd5",
+      "topicId": "med401-git-small-intestinal-diseases"
+    },
+    {
+      "id": "med401-git-small-source-6",
+      "hash": "c1c788bba0d7ba2ad00530de98be07586779e9e3f61f57ae74c8144d913c50c1",
+      "topicId": "med401-git-small-intestinal-diseases"
+    },
+    {
+      "id": "med401-git-small-source-7",
+      "hash": "cb2ec2b6988a83f5a1be24e1003ff1fc2a7ded41c0d23abb78ef66135b7b5bff",
+      "topicId": "med401-git-small-intestinal-diseases"
+    },
+    {
+      "id": "med401-git-small-source-8",
+      "hash": "1bff953bec8d7e8bddbd7fb94e0f86d38a1d2de4b3159634e3eb0a84fbf84edd",
+      "topicId": "med401-git-small-intestinal-diseases"
+    },
+    {
+      "id": "med401-git-small-source-9",
+      "hash": "dd7f7d743fc451862e8add5b2c3869375d1a0094034d3d11fef4bc2a9c29ac0f",
+      "topicId": "med401-git-small-intestinal-diseases"
+    },
+    {
+      "id": "med401-git-small-source-10",
+      "hash": "d39fee8e446764d9114ee41e086aed5d35f23f6f9b4c6b946a85b675f6d9d759",
+      "topicId": "med401-git-small-intestinal-diseases"
+    },
+    {
+      "id": "med401-git-small-source-11",
+      "hash": "4e0da9686855c0059314644258cd87c9efbbb44692d897bc488592d591023463",
+      "topicId": "med401-git-small-intestinal-diseases"
+    },
+    {
+      "id": "med401-git-small-source-12",
+      "hash": "84d42e31897b4d1520e698fc20079b9ffd5df5604c7361bb700f07a4ff372018",
+      "topicId": "med401-git-small-intestinal-diseases"
+    },
+    {
+      "id": "med401-git-small-source-13",
+      "hash": "1e967d556b3a20222660239bfff51cf817a278ccff5087ffaf68a625aa12f8b7",
+      "topicId": "med401-git-small-intestinal-diseases"
+    },
+    {
+      "id": "med401-git-small-source-14",
+      "hash": "6eb62cbaf6af7ecd051c02fdafd39b868d375eeaed9577529bd711a78e101e8e",
+      "topicId": "med401-git-small-intestinal-diseases"
+    },
+    {
+      "id": "med401-git-small-source-15",
+      "hash": "d15dec2d717c2566427b609f3a528effd5ff240a558a4b97e9777f75c4d5801e",
+      "topicId": "med401-git-small-intestinal-diseases"
+    },
+    {
+      "id": "med401-git-small-source-16",
+      "hash": "bab26dcd359533bac63552107077084043ac6bab112be8f06f529453c43a6466",
+      "topicId": "med401-git-small-intestinal-diseases"
+    },
+    {
+      "id": "med401-git-small-source-17",
+      "hash": "a130fca670d038e7c5f37362246a147cf30deae067cde3ff8c8da16521c4e642",
+      "topicId": "med401-git-small-intestinal-diseases"
+    },
+    {
+      "id": "med401-git-small-source-18",
+      "hash": "97b58b134fd6419d773719119e685769cac52e7ff2622ba8907eee8672648a4b",
+      "topicId": "med401-git-small-intestinal-diseases"
+    },
+    {
+      "id": "med401-git-small-source-19",
+      "hash": "89127536686d545d1d1fc53ac34598388f875ad6e976115d096a00de65e9aebf",
+      "topicId": "med401-git-small-intestinal-diseases"
+    },
+    {
+      "id": "med401-git-small-source-20",
+      "hash": "4f61b7ba8b8141ee53d0f35cf6fd7ec90672cc255e6d638275c3fcde94d1aa92",
+      "topicId": "med401-git-small-intestinal-diseases"
+    },
+    {
+      "id": "med401-git-small-source-21",
+      "hash": "de3531e538d53153e4ea87519c953bdf4c10601353fd85a358a26cdf55011d9d",
+      "topicId": "med401-git-small-intestinal-diseases"
+    },
+    {
+      "id": "med401-git-small-source-22",
+      "hash": "e343628fbc179a856c9d9123b80916a76ee6e05b15b7cb7d2d672e0e1cc9aea0",
+      "topicId": "med401-git-small-intestinal-diseases"
+    }
+  ]
+}

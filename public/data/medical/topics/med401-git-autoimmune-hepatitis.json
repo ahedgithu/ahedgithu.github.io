@@ -1,0 +1,894 @@
+{
+  "id": "med401-git-autoimmune-hepatitis",
+  "subjectId": "med401-git",
+  "title": "Autoimmune Hepatitis",
+  "aliases": [],
+  "sectionIds": [
+    "med401-git-aih-definition",
+    "med401-git-aih-types",
+    "med401-git-aih-clinical",
+    "med401-git-aih-investigations",
+    "med401-git-aih-treatment"
+  ],
+  "sections": [
+    {
+      "id": "med401-git-aih-definition",
+      "topicId": "med401-git-autoimmune-hepatitis",
+      "title": "Definition, hallmark and trigger sequence",
+      "category": "definition",
+      "keywords": [
+        "AIH",
+        "interface",
+        "hepatitis",
+        "plasma",
+        "cells",
+        "IgG",
+        "trigger"
+      ],
+      "contentHtml": "<div><p><strong>Autoimmune hepatitis (AIH)</strong> is chronic, unresolving, severe liver inflammation produced by an interaction between environmental triggers, autoantigens and genetic predisposition.</p></div><ol><li><span>1</span><div>Genetically predisposed individual</div></li><li><span>2</span><div>Exposure to an environmental triggering agent</div></li><li><span>3</span><div>Activation of an autoimmune pathogenic process</div></li><li><span>4</span><div>Hepatocellular damage, necroinflammation and fibrosis</div></li></ol><div><b>Histological hallmark</b><p>Interface hepatitis with portal plasma-cell infiltration.</p></div>",
+      "contentHash": "ad60338b158fe9de8df052010147bf66505a1f559d2d83afc20b0eababfc3c8a"
+    },
+    {
+      "id": "med401-git-aih-types",
+      "topicId": "med401-git-autoimmune-hepatitis",
+      "title": "HLA associations and AIH types",
+      "category": "classification",
+      "keywords": [
+        "Type",
+        "1",
+        "Type",
+        "2",
+        "Type",
+        "3",
+        "HLA",
+        "DR3",
+        "DR4",
+        "LKM1",
+        "SLA"
+      ],
+      "contentHtml": "<div><table><thead><tr><th>Type / HLA</th><th>Typical group</th><th>Antibodies / significance</th></tr></thead><tbody><tr><td>Type 1 — HLA-DR3 or DR4</td><td>Young females; bimodal 10–20 and 45–70 years</td><td>ANA or SMA &gt;1:100; anti-actin has highest specificity; DR3 is earlier/more severe, DR4 has better steroid response</td></tr><tr><td>Type 2 — HLA-DR1 or DQB1</td><td>Children 2–14 years; Mediterranean predominance</td><td>Anti-LKM1 targeting CYP2D6 and anti-liver cytosol (ALC-1); may be acute or fulminant</td></tr><tr><td>Type 3 — anti-SLA/LP</td><td>Predominantly women; considered within Type 1 spectrum</td><td>ANA and anti-LKM1 absent; 75% progression to cirrhosis in the source</td></tr></tbody></table></div>",
+      "contentHash": "a44e4fd554b96cbc2d9f84e45f7bc605636afc43ae03697e02d234e9d5e09e88"
+    },
+    {
+      "id": "med401-git-aih-clinical",
+      "topicId": "med401-git-autoimmune-hepatitis",
+      "title": "Clinical presentation",
+      "category": "clinical",
+      "keywords": [
+        "fatigue",
+        "jaundice",
+        "hepatomegaly",
+        "asymptomatic",
+        "extrahepatic"
+      ],
+      "contentHtml": "<div><div><strong>34%</strong><span>Asymptomatic</span></div><div><strong>86%</strong><span>Fatigue / malaise</span></div><div><strong>77%</strong><span>Jaundice</span></div><div><strong>48%</strong><span>Abdominal pain</span></div><div><strong>78%</strong><span>Hepatomegaly</span></div><div><strong>20%</strong><span>Ascites</span></div></div><ul><li>Most often a chronic hepatitis pattern, but 40% of Type 1 cases may present acutely and mimic toxic or viral hepatitis.</li><li>Symptoms may include pruritus, anorexia, nausea/vomiting, myalgia, fever, arthritis/arthralgia and amenorrhea.</li><li>Extrahepatic autoimmune disease may include thyroid disease, ulcerative colitis and less commonly RA, SLE, ITP, pernicious anemia or systemic sclerosis.</li></ul>",
+      "contentHash": "35e79f72e832fa968cda928ffcf87cbea88bdcf008a469b935d084f8f698e43b"
+    },
+    {
+      "id": "med401-git-aih-investigations",
+      "topicId": "med401-git-autoimmune-hepatitis",
+      "title": "Investigations and histology",
+      "category": "investigation",
+      "keywords": [
+        "AST",
+        "IgG",
+        "ANA",
+        "SMA",
+        "LKM1",
+        "SLA",
+        "histology"
+      ],
+      "contentHtml": "<div><table><thead><tr><th>Investigation</th><th>Source frequency / role</th></tr></thead><tbody><tr><td>AST elevation</td><td>100%</td></tr><tr><td>Hypergammaglobulinemia</td><td>92%</td></tr><tr><td>Elevated IgG</td><td>91%</td></tr><tr><td>Hyperbilirubinemia</td><td>83%</td></tr><tr><td>SMA / ANA / anti-LKM1</td><td>100% across type-specific patterns</td></tr><tr><td>pANCA</td><td>92% in Type 1</td></tr><tr><td>Anti-actin</td><td>74%; highest specificity for Type 1</td></tr><tr><td>Anti-SLA</td><td>11–17%; hallmark of Type 3</td></tr></tbody></table></div><div><b>Histology</b><p>Interface hepatitis, numerous plasma cells in portal and lobular infiltrates, marked lobular necroinflammatory activity and bridging necrosis in severe cases.</p></div>",
+      "contentHash": "f835e84244753e7b34291c637d9bca995214c33ca7515c8570de1185f96d0c2b"
+    },
+    {
+      "id": "med401-git-aih-treatment",
+      "topicId": "med401-git-autoimmune-hepatitis",
+      "title": "Treatment indications, regimens and remission",
+      "category": "treatment",
+      "keywords": [
+        "prednisone",
+        "azathioprine",
+        "remission",
+        "rescue",
+        "transplant"
+      ],
+      "contentHtml": "<div><div><h4>Prednisone monotherapy</h4><p>60 mg/day, taper to 30 mg by week 4, then maintenance 20 mg/day until endpoint. Used when combination therapy is unsuitable, including cytopenia, malignancy or pregnancy in the source.</p></div><div><h4>Preferred combination</h4><p>Prednisone 30 mg/day + azathioprine 50 mg/day; taper prednisolone to 15 mg by week 4, then maintain prednisolone 10 mg/day + azathioprine 50 mg/day.</p></div></div><ul><li>Absolute indications include incapacitating symptoms, relentless progression, AST &gt;10× ULN, AST &gt;5× ULN plus gammaglobulin &gt;2× normal, bridging necrosis or multilobular necrosis.</li><li>Up to 80% achieve remission.</li><li>Remission requires disappearance of symptoms; normal bilirubin and IgG; aminotransferases normal or &lt;2× ULN; and normal histology or minimal inflammation without interface hepatitis.</li><li>Alternative/rescue drugs listed include cyclosporine, 6-MP, ursodeoxycholic acid, budesonide, methotrexate, cyclophosphamide and mycophenolate mofetil.</li></ul>",
+      "contentHash": "a1b5cf777aa19292a5474cd3b6b6852071e21edd23cd18f1929d8c2ceb71c68a"
+    }
+  ],
+  "passages": [
+    {
+      "id": "med401-git-aih-source-1",
+      "order": 1,
+      "title": "1. Definition",
+      "text": "Autoimmune Hepatitis\nLiver Diseases\n1. Definition\nAutoimmune hepatitis (AIH) is a chronic, unresolving, severe inflammation of the liver resulting from a\ncomplex interaction between triggering environmental factors, autoantigens, and genetic predisposition,\nleading to a dysregulated immunoregulatory network.\nDefining Characteristics\n› Interface hepatitis with portal plasma cell infiltration (hallmark histological finding)\n› Hypergammaglobulinemia and presence of circulating autoantibodies\n› Continuing / unresolving hepatocellular inflammation and necrosis\n› Progressive course — can advance to cirrhosis if untreated\n› Diagnosis requires exclusion of other chronic liver diseases (viral, metabolic, drug-induced)\n2. Epidemiology & Background\n3.6 : 1 40% 40% 54% 6%\nDie within 6 months Develop esophageal Of liver transplants\nFemale : Male ratio Develop cirrhosis\n(untreated) varices (USA)\n• Incidence: 15–22 cases per 100,000 patients per year\n• 50% of cases are diagnosed late with advanced liver cirrhosis and complications\n• Frequency among chronic liver disease patients: 12–22%\n• 20% of untreated patients die of variceal hemorrhage\n3. Pathogenesis\nTrigger Sequence\nStep Event\n1 Genetically predisposed individual\n2 Exposure to an environmental triggering agent\n3 Activation of autoimmune pathogenic process\n4 Hepatocellular damage, necroinflammation, and fibrosis",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "Autoimmune Hepatitis"
+        },
+        {
+          "type": "paragraph",
+          "text": "Liver Diseases"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Definition"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Autoimmune hepatitis (AIH) is a chronic, unresolving, severe inflammation of the liver resulting from a"
+        },
+        {
+          "type": "paragraph",
+          "text": "complex interaction between triggering environmental factors, autoantigens, and genetic predisposition,"
+        },
+        {
+          "type": "paragraph",
+          "text": "leading to a dysregulated immunoregulatory network."
+        },
+        {
+          "type": "paragraph",
+          "text": "Defining Characteristics"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Interface hepatitis with portal plasma cell infiltration (hallmark histological finding)",
+            "Hypergammaglobulinemia and presence of circulating autoantibodies",
+            "Continuing / unresolving hepatocellular inflammation and necrosis",
+            "Progressive course — can advance to cirrhosis if untreated",
+            "Diagnosis requires exclusion of other chronic liver diseases (viral, metabolic, drug-induced)",
+            "Epidemiology & Background",
+            "6 : 1 40% 40% 54% 6%"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Die within 6 months Develop esophageal Of liver transplants"
+        },
+        {
+          "type": "paragraph",
+          "text": "Female : Male ratio Develop cirrhosis"
+        },
+        {
+          "type": "paragraph",
+          "text": "(untreated) varices (USA)"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Incidence: 15–22 cases per 100,000 patients per year",
+            "50% of cases are diagnosed late with advanced liver cirrhosis and complications",
+            "Frequency among chronic liver disease patients: 12–22%",
+            "20% of untreated patients die of variceal hemorrhage",
+            "Pathogenesis"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Trigger Sequence"
+        },
+        {
+          "type": "paragraph",
+          "text": "Step Event"
+        },
+        {
+          "type": "heading",
+          "text": "1 Genetically predisposed individual"
+        },
+        {
+          "type": "heading",
+          "text": "2 Exposure to an environmental triggering agent"
+        },
+        {
+          "type": "heading",
+          "text": "3 Activation of autoimmune pathogenic process"
+        },
+        {
+          "type": "heading",
+          "text": "4 Hepatocellular damage, necroinflammation, and fibrosis"
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "aih-source-1",
+        "sourceOrder": 1,
+        "originalLabel": "Lecture page 1",
+        "originalSourceHash": "8245bd073968a0d1b78ef13332660812bce7c981929b9d3ae46154367d523960"
+      },
+      "sourceHash": "51d8a9e63710999ce7ff5741b12dae928c5f68e9eda2c87f80a79bc8babed930"
+    },
+    {
+      "id": "med401-git-aih-source-2",
+      "order": 2,
+      "title": "Genetic Predisposition — HLA Associations",
+      "text": "Genetic Predisposition — HLA Associations\nHLA Type Clinical Features Significance\nHLA-DR3 Early onset, severe form More aggressive disease course\nHigher incidence of extrahepatic\nHLA-DR4 Late onset, better steroid response\nmanifestations\nAssociated with anti-LKM1\nHLA-DR1 / DQB1 Type 2 AIH (children, Mediterranean)\nantibodies\nEvidence Supporting Autoimmune Pathogenesis\n• Histopathology: cytotoxic T-cells and plasma cells in liver tissue\n• Circulating autoantibodies (ANA, SMA, anti-LKM1, etc.)\n• Hypergammaglobulinemia and elevated IgG\n• Association with other autoimmune disorders: thyroiditis, RA, autoimmune hemolytic anemia,\nulcerative colitis, membranoproliferative GN, DM, coeliac disease, Sjögren's syndrome\n• Favorable response to corticosteroids and immunosuppression\n4. Classification\nType 1 (Most Common)\nFeature Detail\nDemographics Young females; bimodal age distribution (10–20 yrs and 45–70 yrs); F:M = 3.6:1\nKey Antibodies ANA or Anti-Smooth Muscle Antibody (SMA), titre > 1:100\nAnti-DNA, pANCA, anti-mitochondrial, anti-actin (AAA — highest specificity), cytoskeletal,\nOther Antibodies\nnuclear envelope; 10% have anti-SLA\nHLA Association HLA DR3 or DR4\n38% — autoimmune thyroiditis, Graves' disease, UC; less commonly RA, SLE, ITP,\nExtrahepatic\npernicious anemia, systemic sclerosis\nOnset Pattern 40% present acutely, mimicking toxic or viral hepatitis\nType 2\nFeature Detail\nDemographics Children aged 2–14 years; Mediterranean population predominance\nAnti-LKM1 (anti-Liver/Kidney Microsome-1) targeting cytochrome P450 2D6;\nKey Antibodies\nAnti-Liver Cytosol (ALC-1)\nNote on anti-LKM1 Same antibody seen in chronic hepatitis C patients — must be distinguished\nHLA Association HLA DR1 or DQB1\nPresentation Acute or fulminant hepatic failure possible",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "Genetic Predisposition — HLA Associations"
+        },
+        {
+          "type": "paragraph",
+          "text": "HLA Type Clinical Features Significance"
+        },
+        {
+          "type": "paragraph",
+          "text": "HLA-DR3 Early onset, severe form More aggressive disease course"
+        },
+        {
+          "type": "paragraph",
+          "text": "Higher incidence of extrahepatic"
+        },
+        {
+          "type": "paragraph",
+          "text": "HLA-DR4 Late onset, better steroid response"
+        },
+        {
+          "type": "paragraph",
+          "text": "manifestations"
+        },
+        {
+          "type": "paragraph",
+          "text": "Associated with anti-LKM1"
+        },
+        {
+          "type": "paragraph",
+          "text": "HLA-DR1 / DQB1 Type 2 AIH (children, Mediterranean)"
+        },
+        {
+          "type": "paragraph",
+          "text": "antibodies"
+        },
+        {
+          "type": "paragraph",
+          "text": "Evidence Supporting Autoimmune Pathogenesis"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Histopathology: cytotoxic T-cells and plasma cells in liver tissue",
+            "Circulating autoantibodies (ANA, SMA, anti-LKM1, etc.)",
+            "Hypergammaglobulinemia and elevated IgG",
+            "Association with other autoimmune disorders: thyroiditis, RA, autoimmune hemolytic anemia,"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "ulcerative colitis, membranoproliferative GN, DM, coeliac disease, Sjögren's syndrome"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Favorable response to corticosteroids and immunosuppression",
+            "Classification"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Type 1 (Most Common)"
+        },
+        {
+          "type": "paragraph",
+          "text": "Feature Detail"
+        },
+        {
+          "type": "paragraph",
+          "text": "Demographics Young females; bimodal age distribution (10–20 yrs and 45–70 yrs); F:M = 3.6:1"
+        },
+        {
+          "type": "paragraph",
+          "text": "Key Antibodies ANA or Anti-Smooth Muscle Antibody (SMA), titre > 1:100"
+        },
+        {
+          "type": "paragraph",
+          "text": "Anti-DNA, pANCA, anti-mitochondrial, anti-actin (AAA — highest specificity), cytoskeletal,"
+        },
+        {
+          "type": "paragraph",
+          "text": "Other Antibodies"
+        },
+        {
+          "type": "paragraph",
+          "text": "nuclear envelope; 10% have anti-SLA"
+        },
+        {
+          "type": "paragraph",
+          "text": "HLA Association HLA DR3 or DR4"
+        },
+        {
+          "type": "paragraph",
+          "text": "38% — autoimmune thyroiditis, Graves' disease, UC; less commonly RA, SLE, ITP,"
+        },
+        {
+          "type": "paragraph",
+          "text": "Extrahepatic"
+        },
+        {
+          "type": "paragraph",
+          "text": "pernicious anemia, systemic sclerosis"
+        },
+        {
+          "type": "paragraph",
+          "text": "Onset Pattern 40% present acutely, mimicking toxic or viral hepatitis"
+        },
+        {
+          "type": "paragraph",
+          "text": "Type 2"
+        },
+        {
+          "type": "paragraph",
+          "text": "Feature Detail"
+        },
+        {
+          "type": "paragraph",
+          "text": "Demographics Children aged 2–14 years; Mediterranean population predominance"
+        },
+        {
+          "type": "paragraph",
+          "text": "Anti-LKM1 (anti-Liver/Kidney Microsome-1) targeting cytochrome P450 2D6;"
+        },
+        {
+          "type": "paragraph",
+          "text": "Key Antibodies"
+        },
+        {
+          "type": "paragraph",
+          "text": "Anti-Liver Cytosol (ALC-1)"
+        },
+        {
+          "type": "paragraph",
+          "text": "Note on anti-LKM1 Same antibody seen in chronic hepatitis C patients — must be distinguished"
+        },
+        {
+          "type": "paragraph",
+          "text": "HLA Association HLA DR1 or DQB1"
+        },
+        {
+          "type": "paragraph",
+          "text": "Presentation Acute or fulminant hepatic failure possible"
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "aih-source-2",
+        "sourceOrder": 2,
+        "originalLabel": "Lecture page 2",
+        "originalSourceHash": "c000fadbfe4e01555ebfe774fb3741b5c6616337fec3c361a528b2b657f07966"
+      },
+      "sourceHash": "e00c6833fdac225b89007e87c463f3b251857a6780801c6332b37250a8f71ec9"
+    },
+    {
+      "id": "med401-git-aih-source-3",
+      "order": 3,
+      "title": "Type 3",
+      "text": "Type 3\nFeature Detail\nKey Antibodies Anti-soluble liver antigen / liver pancreas antigen (anti-SLA/LP)\nAbsent Antibodies ANA and anti-LKM1 are ABSENT\nDemographics Predominantly women; considered part of the Type 1 AIH spectrum\nConcurrent autoimmune\n58%\ndisease\nElevated gamma-globulin ++\nSteroid responsive +++\nRisk of cirrhosis 75% progression to cirrhosis\nOverlap Syndromes (Variant Forms)\nAIH Overlap Syndromes\n› AIH + Primary Biliary Cholangitis (PBC)\n› AIH + Primary Sclerosing Cholangitis (PSC)\n› 15% of chronic hepatitis C patients have low-titer autoantibodies — ANA titre >1:100 suggests true AIH\n› Homogeneous ANA staining pattern is more common in AIH than in hepatitis C-associated ANA\n5. Clinical Features\nThe clinical presentation is highly variable — AIH can mimic acute hepatitis, present as chronic liver\ndisease, or remain completely asymptomatic.\nPresentation Patterns\n› Chronic hepatitis pattern (most common)\n› Acute severe / fulminant hepatitis — history of recurrent bouts\n› Asymptomatic in 34% of cases (incidental finding on LFTs)\n› May be confused with acute viral hepatitis or toxic hepatitis",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "Type 3"
+        },
+        {
+          "type": "paragraph",
+          "text": "Feature Detail"
+        },
+        {
+          "type": "paragraph",
+          "text": "Key Antibodies Anti-soluble liver antigen / liver pancreas antigen (anti-SLA/LP)"
+        },
+        {
+          "type": "paragraph",
+          "text": "Absent Antibodies ANA and anti-LKM1 are ABSENT"
+        },
+        {
+          "type": "paragraph",
+          "text": "Demographics Predominantly women; considered part of the Type 1 AIH spectrum"
+        },
+        {
+          "type": "paragraph",
+          "text": "Concurrent autoimmune"
+        },
+        {
+          "type": "paragraph",
+          "text": "58%"
+        },
+        {
+          "type": "paragraph",
+          "text": "disease"
+        },
+        {
+          "type": "paragraph",
+          "text": "Elevated gamma-globulin ++"
+        },
+        {
+          "type": "paragraph",
+          "text": "Steroid responsive +++"
+        },
+        {
+          "type": "paragraph",
+          "text": "Risk of cirrhosis 75% progression to cirrhosis"
+        },
+        {
+          "type": "paragraph",
+          "text": "Overlap Syndromes (Variant Forms)"
+        },
+        {
+          "type": "paragraph",
+          "text": "AIH Overlap Syndromes"
+        },
+        {
+          "type": "list",
+          "items": [
+            "AIH + Primary Biliary Cholangitis (PBC)",
+            "AIH + Primary Sclerosing Cholangitis (PSC)",
+            "15% of chronic hepatitis C patients have low-titer autoantibodies — ANA titre >1:100 suggests true AIH",
+            "Homogeneous ANA staining pattern is more common in AIH than in hepatitis C-associated ANA",
+            "Clinical Features"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The clinical presentation is highly variable — AIH can mimic acute hepatitis, present as chronic liver"
+        },
+        {
+          "type": "paragraph",
+          "text": "disease, or remain completely asymptomatic."
+        },
+        {
+          "type": "paragraph",
+          "text": "Presentation Patterns"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Chronic hepatitis pattern (most common)",
+            "Acute severe / fulminant hepatitis — history of recurrent bouts",
+            "Asymptomatic in 34% of cases (incidental finding on LFTs)",
+            "May be confused with acute viral hepatitis or toxic hepatitis"
+          ]
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "aih-source-3",
+        "sourceOrder": 3,
+        "originalLabel": "Lecture page 3",
+        "originalSourceHash": "2fafd7745fdbd9d7da9905179c47871d378305bbe54d918032d6132c42028dae"
+      },
+      "sourceHash": "8ca830b9228492eabd3d6147568d63e8e4447ddd32516168a4c3b11b1bf783a0"
+    },
+    {
+      "id": "med401-git-aih-source-4",
+      "order": 4,
+      "title": "Symptoms (with frequency)",
+      "text": "Symptoms (with frequency)\nSymptom Frequency Symptom Frequency\nFatigue / Malaise 86% Nausea / Vomiting Common\nJaundice 77% Myalgias Common\nAbdominal pain 48% Fever Common\nPruritis 36% Arthritis / Arthralgias Common\nAnorexia 30% Amenorrhea Common\nErythema nodosum Variable Maculopapular eruptions Variable\nFeatures of concurrent\nAnemia Variable Up to 38%\nautoimmune disease\nSigns (with frequency)\nSign Frequency\nHepatomegaly 78%\nJaundice 69%\nSplenomegaly 32%\nAscites 20%\nEncephalopathy 14%\nConcurrent immune\n<38%\ndisease signs\nStigmata of chronic liver\nVariable\ndisease",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "Symptoms (with frequency)"
+        },
+        {
+          "type": "paragraph",
+          "text": "Symptom Frequency Symptom Frequency"
+        },
+        {
+          "type": "paragraph",
+          "text": "Fatigue / Malaise 86% Nausea / Vomiting Common"
+        },
+        {
+          "type": "paragraph",
+          "text": "Jaundice 77% Myalgias Common"
+        },
+        {
+          "type": "paragraph",
+          "text": "Abdominal pain 48% Fever Common"
+        },
+        {
+          "type": "paragraph",
+          "text": "Pruritis 36% Arthritis / Arthralgias Common"
+        },
+        {
+          "type": "paragraph",
+          "text": "Anorexia 30% Amenorrhea Common"
+        },
+        {
+          "type": "paragraph",
+          "text": "Erythema nodosum Variable Maculopapular eruptions Variable"
+        },
+        {
+          "type": "paragraph",
+          "text": "Features of concurrent"
+        },
+        {
+          "type": "paragraph",
+          "text": "Anemia Variable Up to 38%"
+        },
+        {
+          "type": "paragraph",
+          "text": "autoimmune disease"
+        },
+        {
+          "type": "paragraph",
+          "text": "Signs (with frequency)"
+        },
+        {
+          "type": "paragraph",
+          "text": "Sign Frequency"
+        },
+        {
+          "type": "paragraph",
+          "text": "Hepatomegaly 78%"
+        },
+        {
+          "type": "paragraph",
+          "text": "Jaundice 69%"
+        },
+        {
+          "type": "paragraph",
+          "text": "Splenomegaly 32%"
+        },
+        {
+          "type": "paragraph",
+          "text": "Ascites 20%"
+        },
+        {
+          "type": "paragraph",
+          "text": "Encephalopathy 14%"
+        },
+        {
+          "type": "paragraph",
+          "text": "Concurrent immune"
+        },
+        {
+          "type": "paragraph",
+          "text": "<38%"
+        },
+        {
+          "type": "paragraph",
+          "text": "disease signs"
+        },
+        {
+          "type": "paragraph",
+          "text": "Stigmata of chronic liver"
+        },
+        {
+          "type": "paragraph",
+          "text": "Variable"
+        },
+        {
+          "type": "paragraph",
+          "text": "disease"
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "aih-source-4",
+        "sourceOrder": 4,
+        "originalLabel": "Lecture page 4",
+        "originalSourceHash": "e3877777a6d3d3f18bcdcb684282d2506e17301dc3fcfab21557763077d91f53"
+      },
+      "sourceHash": "aed6f3539d467ab64fe812df1c858f7c225ae7b56e7effd3a81eb140ed2acad3"
+    },
+    {
+      "id": "med401-git-aih-source-5",
+      "order": 5,
+      "title": "6. Investigations",
+      "text": "6. Investigations\nA. Liver Function Tests\nTest Frequency\nElevated AST 100%\nHypergammaglobulinemia 92% ▪ Similar to chronic viral hepatitis\n▪ May not correlate with clinical or\nElevated IgG level 91% histological severity\nHyperbilirubinemia 83%\nAlkaline phosphatase > 2× ULN 33%\nB. Immunoserological Markers\nMarker Frequency Type Specificity\nSMA / ANA / anti-LKM1 100% Type 1 (SMA/ANA) or Type 2 (anti-LKM1)\npANCA 92% Type 1 only\nAnti-asialoglycoprotein receptor 82% All types\nAnti-actin antibodies (AAA) 74% Type 1 — highest specificity\nAnti-liver cytosol (ALC-1) 32% Type 2 only\nAnti-soluble liver antigen (SLA) 11–17% Type 3 (hallmark)\nC. Histology\nCharacteristic Histological Features\n› Interface hepatitis — hallmark finding (piecemeal necrosis at the portal-hepatocyte interface)\n› Numerous plasma cells in portal and lobular infiltrate\n› Marked lobular involvement with necroinflammatory activity\n› Chronic hepatitis with bridging necrosis in severe cases\n› These findings, combined with serology, establish the diagnosis",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Investigations"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "A. Liver Function Tests"
+        },
+        {
+          "type": "paragraph",
+          "text": "Test Frequency"
+        },
+        {
+          "type": "paragraph",
+          "text": "Elevated AST 100%"
+        },
+        {
+          "type": "paragraph",
+          "text": "Hypergammaglobulinemia 92% ▪ Similar to chronic viral hepatitis"
+        },
+        {
+          "type": "list",
+          "items": [
+            "May not correlate with clinical or"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Elevated IgG level 91% histological severity"
+        },
+        {
+          "type": "paragraph",
+          "text": "Hyperbilirubinemia 83%"
+        },
+        {
+          "type": "paragraph",
+          "text": "Alkaline phosphatase > 2× ULN 33%"
+        },
+        {
+          "type": "paragraph",
+          "text": "B. Immunoserological Markers"
+        },
+        {
+          "type": "paragraph",
+          "text": "Marker Frequency Type Specificity"
+        },
+        {
+          "type": "paragraph",
+          "text": "SMA / ANA / anti-LKM1 100% Type 1 (SMA/ANA) or Type 2 (anti-LKM1)"
+        },
+        {
+          "type": "paragraph",
+          "text": "pANCA 92% Type 1 only"
+        },
+        {
+          "type": "paragraph",
+          "text": "Anti-asialoglycoprotein receptor 82% All types"
+        },
+        {
+          "type": "paragraph",
+          "text": "Anti-actin antibodies (AAA) 74% Type 1 — highest specificity"
+        },
+        {
+          "type": "paragraph",
+          "text": "Anti-liver cytosol (ALC-1) 32% Type 2 only"
+        },
+        {
+          "type": "paragraph",
+          "text": "Anti-soluble liver antigen (SLA) 11–17% Type 3 (hallmark)"
+        },
+        {
+          "type": "paragraph",
+          "text": "C. Histology"
+        },
+        {
+          "type": "paragraph",
+          "text": "Characteristic Histological Features"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Interface hepatitis — hallmark finding (piecemeal necrosis at the portal-hepatocyte interface)",
+            "Numerous plasma cells in portal and lobular infiltrate",
+            "Marked lobular involvement with necroinflammatory activity",
+            "Chronic hepatitis with bridging necrosis in severe cases",
+            "These findings, combined with serology, establish the diagnosis"
+          ]
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "aih-source-5",
+        "sourceOrder": 5,
+        "originalLabel": "Lecture page 5",
+        "originalSourceHash": "15d609e9a8a7488d42881ed841aa9503a4e2dd1fcdd2082d3fb022cf00e13350"
+      },
+      "sourceHash": "433fd3b93533d8becc4580738ab9804db165a85cc1e0acdf18c74d9e89f1cc36"
+    },
+    {
+      "id": "med401-git-aih-source-6",
+      "order": 6,
+      "title": "7. Treatment",
+      "text": "7. Treatment\nA. Indications for Treatment\nCategory Absolute Indication Relative Indication No Treatment\nClinical Incapacitating symptoms Mild or no symptoms Asymptomatic with minimal\nRelentless clinical lab changes\nprogression Previous intolerance to\nprednisolone/azathioprine\nLaboratory (AST) > 10× ULN AST AST 3–9.9× ULN AST < 3× ULN\n> 5× ULN + gammaglobulin AST > 5× ULN +\n> 2× normal gammaglobulin < 2×\nnormal\nHistological Bridging necrosis Interface hepatitis Inactive cirrhosis\nMultilobar necrosis Portal hepatitis\nDecompensated cirrhosis\nB. Treatment Regimens\nPrednisone Monotherapy Combination Therapy (Preferred)\nPrednisone 60 mg/day PO Prednisone 30 mg/day PO + Azathioprine 50 mg/day\n↓ Taper to 30 mg by Week 4 ↓ Taper prednisolone to 15 mg by Week 4\n↓ Maintenance: 20 mg/day ↓ Maintain prednisolone 10 mg/day + Azathioprine 50 mg/day\nuntil endpoint until endpoint\nIndications for monotherapy: Expected response: up to 80% of cases achieve remission\nCytopenia | Malignancy | Pregnancy\nC. Side Effects of Prednisone\nCategory Side Effects Frequency\nAlopecia, dorsal hump, facial rounding, hirsutism,\nCosmetic (usually mild) 80% after 2 years\nstriae, weight gain\nCataracts, diabetes mellitus, emotional instability,\nSomatic (severe) hypertension, osteopenia, vertebral compression ~13% (emotional)\nfractures\nInflammatory /\nOpportunistic infections, malignancy, pancreatitis Rare\nNeoplastic\nD. Treatment Remission Criteria\nDefinition of Remission (All Four Must Be Met)\n› Disappearance of symptoms\n› Normal serum bilirubin and IgG\n› Serum aminotransferases normal or < 2× ULN\n› Normal hepatic histology OR minimal inflammation with no interface hepatitis\n› → Then: gradual withdrawal of prednisone with maintenance therapy",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Treatment"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "A. Indications for Treatment"
+        },
+        {
+          "type": "paragraph",
+          "text": "Category Absolute Indication Relative Indication No Treatment"
+        },
+        {
+          "type": "paragraph",
+          "text": "Clinical Incapacitating symptoms Mild or no symptoms Asymptomatic with minimal"
+        },
+        {
+          "type": "paragraph",
+          "text": "Relentless clinical lab changes"
+        },
+        {
+          "type": "paragraph",
+          "text": "progression Previous intolerance to"
+        },
+        {
+          "type": "paragraph",
+          "text": "prednisolone/azathioprine"
+        },
+        {
+          "type": "paragraph",
+          "text": "Laboratory (AST) > 10× ULN AST AST 3–9.9× ULN AST < 3× ULN"
+        },
+        {
+          "type": "paragraph",
+          "text": "> 5× ULN + gammaglobulin AST > 5× ULN +"
+        },
+        {
+          "type": "paragraph",
+          "text": "> 2× normal gammaglobulin < 2×"
+        },
+        {
+          "type": "paragraph",
+          "text": "normal"
+        },
+        {
+          "type": "paragraph",
+          "text": "Histological Bridging necrosis Interface hepatitis Inactive cirrhosis"
+        },
+        {
+          "type": "paragraph",
+          "text": "Multilobar necrosis Portal hepatitis"
+        },
+        {
+          "type": "paragraph",
+          "text": "Decompensated cirrhosis"
+        },
+        {
+          "type": "paragraph",
+          "text": "B. Treatment Regimens"
+        },
+        {
+          "type": "paragraph",
+          "text": "Prednisone Monotherapy Combination Therapy (Preferred)"
+        },
+        {
+          "type": "paragraph",
+          "text": "Prednisone 60 mg/day PO Prednisone 30 mg/day PO + Azathioprine 50 mg/day"
+        },
+        {
+          "type": "paragraph",
+          "text": "↓ Taper to 30 mg by Week 4 ↓ Taper prednisolone to 15 mg by Week 4"
+        },
+        {
+          "type": "paragraph",
+          "text": "↓ Maintenance: 20 mg/day ↓ Maintain prednisolone 10 mg/day + Azathioprine 50 mg/day"
+        },
+        {
+          "type": "paragraph",
+          "text": "until endpoint until endpoint"
+        },
+        {
+          "type": "paragraph",
+          "text": "Indications for monotherapy: Expected response: up to 80% of cases achieve remission"
+        },
+        {
+          "type": "paragraph",
+          "text": "Cytopenia | Malignancy | Pregnancy"
+        },
+        {
+          "type": "paragraph",
+          "text": "C. Side Effects of Prednisone"
+        },
+        {
+          "type": "paragraph",
+          "text": "Category Side Effects Frequency"
+        },
+        {
+          "type": "paragraph",
+          "text": "Alopecia, dorsal hump, facial rounding, hirsutism,"
+        },
+        {
+          "type": "paragraph",
+          "text": "Cosmetic (usually mild) 80% after 2 years"
+        },
+        {
+          "type": "paragraph",
+          "text": "striae, weight gain"
+        },
+        {
+          "type": "paragraph",
+          "text": "Cataracts, diabetes mellitus, emotional instability,"
+        },
+        {
+          "type": "paragraph",
+          "text": "Somatic (severe) hypertension, osteopenia, vertebral compression ~13% (emotional)"
+        },
+        {
+          "type": "paragraph",
+          "text": "fractures"
+        },
+        {
+          "type": "paragraph",
+          "text": "Inflammatory /"
+        },
+        {
+          "type": "paragraph",
+          "text": "Opportunistic infections, malignancy, pancreatitis Rare"
+        },
+        {
+          "type": "paragraph",
+          "text": "Neoplastic"
+        },
+        {
+          "type": "paragraph",
+          "text": "D. Treatment Remission Criteria"
+        },
+        {
+          "type": "paragraph",
+          "text": "Definition of Remission (All Four Must Be Met)"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Disappearance of symptoms",
+            "Normal serum bilirubin and IgG",
+            "Serum aminotransferases normal or < 2× ULN",
+            "Normal hepatic histology OR minimal inflammation with no interface hepatitis",
+            "→ Then: gradual withdrawal of prednisone with maintenance therapy"
+          ]
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "aih-source-6",
+        "sourceOrder": 6,
+        "originalLabel": "Lecture page 6",
+        "originalSourceHash": "e195efac80ae852b17d95c8b5fcb65fcff858b9e479c05d8ed577523432ebb61"
+      },
+      "sourceHash": "cbc41853b693780ecd60175f6d48651ffc5e46ca14f2ab45eb836e920b94cc4e"
+    },
+    {
+      "id": "med401-git-aih-source-7",
+      "order": 7,
+      "title": "E. Alternative / Rescue Medications",
+      "text": "E. Alternative / Rescue Medications\n▪ Cyclosporine\n▪ 6-Mercaptopurine (6-MP)\n▪ Ursodeoxycholic acid\n▪ Budesonide\n▪ Methotrexate\n▪ Cyclophosphamide\n▪ Mycophenolate mofetil\n8. Liver Transplantation\nIndications for Liver Transplant in AIH\n› Ascites with hepatic encephalopathy (decompensated cirrhosis)\n› Failed glucocorticoid therapy\n› Clinical deterioration or worsening while on glucocorticoid therapy\n› Hepatocellular carcinoma (HCC)\n› MELD score > 15\n› Multilobar necrosis with acute liver failure",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "E. Alternative / Rescue Medications"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Cyclosporine",
+            "6-Mercaptopurine (6-MP)",
+            "Ursodeoxycholic acid",
+            "Budesonide",
+            "Methotrexate",
+            "Cyclophosphamide",
+            "Mycophenolate mofetil",
+            "Liver Transplantation"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Indications for Liver Transplant in AIH"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Ascites with hepatic encephalopathy (decompensated cirrhosis)",
+            "Failed glucocorticoid therapy",
+            "Clinical deterioration or worsening while on glucocorticoid therapy",
+            "Hepatocellular carcinoma (HCC)",
+            "MELD score > 15",
+            "Multilobar necrosis with acute liver failure"
+          ]
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "aih-source-7",
+        "sourceOrder": 7,
+        "originalLabel": "Lecture page 7",
+        "originalSourceHash": "ddcd2c5cabee920c627d2f10117424443de872040cefa8a0166f0f921bcd4f7d"
+      },
+      "sourceHash": "2f2df366c7458cc5919e85fc722d996472ead77c264bbfffe04276742196272a"
+    }
+  ],
+  "sourceVersion": "must401-git-2026-07-27",
+  "status": "published"
+}

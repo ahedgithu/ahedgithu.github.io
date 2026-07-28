@@ -1,0 +1,1534 @@
+{
+  "id": "med401-git-portal-hypertension-cirrhosis",
+  "subjectId": "med401-git",
+  "title": "Portal Hypertension & Cirrhosis",
+  "aliases": [],
+  "sectionIds": [
+    "med401-git-portal-definition",
+    "med401-git-portal-causes",
+    "med401-git-portal-workup",
+    "med401-git-portal-management",
+    "med401-git-cirrhosis",
+    "med401-git-cirrhosis-management"
+  ],
+  "sections": [
+    {
+      "id": "med401-git-portal-definition",
+      "topicId": "med401-git-portal-hypertension-cirrhosis",
+      "title": "Portal anatomy and pressure thresholds",
+      "category": "definition",
+      "keywords": [
+        "portal",
+        "pressure",
+        "SMV",
+        "splenic",
+        "vein",
+        "varices",
+        "collaterals"
+      ],
+      "contentHtml": "<div><div><strong>5–10 mmHg</strong><span>Normal portal pressure</span></div><div><strong>≥12 mmHg</strong><span>Complications can arise</span></div></div><ul><li>The superior mesenteric and splenic veins unite behind the pancreatic neck to form the portal vein.</li><li>The portal vein drains the intestines, stomach, spleen, pancreas and gallbladder.</li><li>Paraumbilical veins enlarge into umbilical varices; distal esophageal veins received by the left gastric vein enlarge into esophageal varices.</li></ul>",
+      "contentHash": "61a3c9956680059309548c524fb46548ee4939abb2f2d28d9aaacf4a6851eafe"
+    },
+    {
+      "id": "med401-git-portal-causes",
+      "topicId": "med401-git-portal-hypertension-cirrhosis",
+      "title": "Causes and hemodynamic mechanism",
+      "category": "classification",
+      "keywords": [
+        "prehepatic",
+        "intrahepatic",
+        "posthepatic",
+        "Ohm",
+        "flow",
+        "resistance"
+      ],
+      "contentHtml": "<div><table><thead><tr><th>Level</th><th>Causes in source</th></tr></thead><tbody><tr><td>Prehepatic / infrahepatic</td><td>Congenital atresia/stenosis, portal-vein thrombosis, splenic-vein thrombosis, extrinsic compression</td></tr><tr><td>Intrahepatic</td><td>Cirrhosis, hepatic fibrosis, Wilson disease, hemochromatosis, congenital fibrosis, schistosomiasis, massive fatty change, diffuse granulomatous disease</td></tr><tr><td>Posthepatic / suprahepatic</td><td>Budd–Chiari syndrome, IVC thrombosis, constrictive pericarditis, valvular disease and right-heart failure</td></tr></tbody></table></div><div><span>P</span>=<span>F</span>×<span>R</span><small>Portal pressure gradient = flow × resistance</small></div>",
+      "contentHash": "63e66f0662e43e1a272c4aaba4891f8d7eb4a78138fcce716085ef4e8234c12e"
+    },
+    {
+      "id": "med401-git-portal-workup",
+      "topicId": "med401-git-portal-hypertension-cirrhosis",
+      "title": "Clinical picture and diagnostic work-up",
+      "category": "investigation",
+      "keywords": [
+        "GI",
+        "bleeding",
+        "ascites",
+        "encephalopathy",
+        "Doppler",
+        "endoscopy",
+        "HVPG"
+      ],
+      "contentHtml": "<ul><li>GI hemorrhage may be the initial presentation.</li><li>Ascites, hepatic encephalopathy, jaundice, coagulopathy and spider angiomata may occur.</li><li>Stable patients may have warm skin, hyperdynamic pulses and low systolic pressure.</li><li>Work-up includes history, examination, laboratory testing, Doppler ultrasonography and endoscopy.</li></ul><div><b>Gold standard in the source</b><p>Hepatic venous pressure gradient (HVPG) measurement assesses severity; a normal value is under 5 mmHg.</p></div>",
+      "contentHash": "5e3d9a094a54506168042335a47b1ce8e788921d6bc34e73173bbbbae260d277"
+    },
+    {
+      "id": "med401-git-portal-management",
+      "topicId": "med401-git-portal-hypertension-cirrhosis",
+      "title": "Management of varices and portal hypertension",
+      "category": "treatment",
+      "keywords": [
+        "banding",
+        "sclerotherapy",
+        "beta",
+        "blocker",
+        "TIPS",
+        "DSRS",
+        "paracentesis"
+      ],
+      "contentHtml": "<div><div><b>Endoscopic first line</b><span>Variceal band ligation; sclerotherapy when banding cannot be used</span></div><div><b>Medication</b><span>Nonselective beta-blockers (nadolol/propranolol); lactulose for encephalopathy</span></div><div><b>Decompression / surgery</b><span>TIPS, distal splenorenal shunt, devascularization</span></div><div><b>Definitive / supportive</b><span>Liver transplant for end-stage disease; paracentesis for ascites</span></div></div><ul><li>Band ligation is described as the gold-standard treatment for esophageal varices, with less bleeding, fewer complications and fewer sessions than sclerotherapy.</li><li>TIPS connects the portal vein to a hepatic vein to reroute blood and reduce pressure.</li><li>Distal splenorenal shunt connects the splenic vein to the left renal vein and is a selective shunt.</li></ul>",
+      "contentHash": "a45127fe2e044eeaafde6d1404cb9ff01ee132bd737fa5600b8cad8103efff2f"
+    },
+    {
+      "id": "med401-git-cirrhosis",
+      "topicId": "med401-git-portal-hypertension-cirrhosis",
+      "title": "Cirrhosis: causes, features and diagnosis",
+      "category": "clinical",
+      "keywords": [
+        "cirrhosis",
+        "fibrosis",
+        "Couinaud",
+        "ascites",
+        "jaundice"
+      ],
+      "contentHtml": "<div><p>Cirrhosis is late-stage chronic liver disease in which progressive fibrosis replaces healthy tissue and reduces liver function.</p></div><div><table><thead><tr><th>Domain</th><th>Key source content</th></tr></thead><tbody><tr><td>Causes</td><td>Viral hepatitis, alcohol, NAFLD, autoimmune and biliary disease, metabolic disorders and other chronic insults described in the lecture</td></tr><tr><td>Early symptoms</td><td>Loss of appetite, tiredness, nausea, weight loss, abdominal pain, spider angiomas and palmar erythema</td></tr><tr><td>Advanced features</td><td>Jaundice, ascites, edema, bleeding, encephalopathy, pruritus and portal-hypertension complications</td></tr><tr><td>Diagnosis</td><td>History/examination; blood count, liver tests, coagulation, renal parameters; ultrasound/CT; endoscopy; biopsy when required</td></tr></tbody></table></div><div><b>Couinaud segments</b><span>Caudate I; left II–IV; right V–VIII.</span></div>",
+      "contentHash": "2046913b83128e2580f1d47e7658999876effa3e1beb4e2a028c8de53050552b"
+    },
+    {
+      "id": "med401-git-cirrhosis-management",
+      "topicId": "med401-git-portal-hypertension-cirrhosis",
+      "title": "Cirrhosis care, liver failure and transplantation",
+      "category": "treatment",
+      "keywords": [
+        "nutrition",
+        "sodium",
+        "bleeding",
+        "encephalopathy",
+        "liver",
+        "failure",
+        "transplant"
+      ],
+      "contentHtml": "<ul><li>No single drug reverses cirrhosis in the lecture; treatment targets causes, symptoms and complications.</li><li>Nutrition: small frequent meals, sodium restriction when indicated, and protein adjustment when confusion/encephalopathy is present.</li><li>Monitor fluid balance, daily weight, abdominal girth, respiratory status, bleeding, renal function and mental state.</li><li>Avoid alcohol, street drugs and unapproved prescription, over-the-counter or herbal medicines.</li><li>Acute liver failure may develop rapidly; chronic liver failure usually evolves over months to years.</li><li>When functional liver cannot be preserved, liver transplantation is required.</li></ul><div><ol><li><span>1</span><div>Referral to a transplant center</div></li><li><span>2</span><div>Physical, mental, financial and social-support evaluation</div></li><li><span>3</span><div>Eligibility decision</div></li><li><span>4</span><div>Placement on a severity-prioritized waiting list</div></li><li><span>5</span><div>Matching by blood type, body size, disease stage, overall health and organ availability</div></li></ol></div>",
+      "contentHash": "236b762fd9ed115f0af1195d649d5ab375f381f719f5ff35db07e6b9c7d97719"
+    }
+  ],
+  "passages": [
+    {
+      "id": "med401-git-portal-source-1",
+      "order": 1,
+      "title": "Portal Hypertension",
+      "text": "Portal Hypertension\nDEFINITION\nPortal hypertension is an increase in the blood pressure within a system of veins called the\nportal venous system\n• Normal portal pressure is generally considered to be between 5 and 10 mm Hg.\n• Once the portal pressure rises to 12 mm Hg or greater, complications can arise, such\nas varices and ascites\n• The portal vein drains blood from the small and large intestines, stomach, spleen,\npancreas, and gallbladder.\n• The superior mesenteric vein and the splenic vein unite behind the neck of the\npancreas to form the portal vein.\nThe portal trunk divides into 2 lobar veins:- right branch - left branch\n• The right branch drains the cystic vein and the left branch receives the umbilical and\nparaumbilical veins that enlarge to form umbilical varices in portal hypertension.\n• The left gastric vein (formerly, gastric coronary vein), which runs along the lesser\ncurvature of the stomach, receives distal esophageal veins, which also enlarge in\nportal hypertension",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "Portal Hypertension"
+        },
+        {
+          "type": "heading",
+          "text": "DEFINITION"
+        },
+        {
+          "type": "paragraph",
+          "text": "Portal hypertension is an increase in the blood pressure within a system of veins called the"
+        },
+        {
+          "type": "paragraph",
+          "text": "portal venous system"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Normal portal pressure is generally considered to be between 5 and 10 mm Hg.",
+            "Once the portal pressure rises to 12 mm Hg or greater, complications can arise, such"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "as varices and ascites"
+        },
+        {
+          "type": "list",
+          "items": [
+            "The portal vein drains blood from the small and large intestines, stomach, spleen,"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "pancreas, and gallbladder."
+        },
+        {
+          "type": "list",
+          "items": [
+            "The superior mesenteric vein and the splenic vein unite behind the neck of the"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "pancreas to form the portal vein."
+        },
+        {
+          "type": "paragraph",
+          "text": "The portal trunk divides into 2 lobar veins:- right branch - left branch"
+        },
+        {
+          "type": "list",
+          "items": [
+            "The right branch drains the cystic vein and the left branch receives the umbilical and"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "paraumbilical veins that enlarge to form umbilical varices in portal hypertension."
+        },
+        {
+          "type": "list",
+          "items": [
+            "The left gastric vein (formerly, gastric coronary vein), which runs along the lesser"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "curvature of the stomach, receives distal esophageal veins, which also enlarge in"
+        },
+        {
+          "type": "paragraph",
+          "text": "portal hypertension"
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "portal-source-1",
+        "sourceOrder": 1,
+        "originalLabel": "Lecture page 1",
+        "originalSourceHash": "2cfca443824945cf004186ec1f301c8c43d68b08be7b3a6e88094cbd789c946b"
+      },
+      "sourceHash": "9f604a0af637232f473cbc699e701ee83cc8d524fab66fd2d3af11de3b9f09f1"
+    },
+    {
+      "id": "med401-git-portal-source-2",
+      "order": 2,
+      "title": "CAUSES OF PORTAL HYPERTENSION",
+      "text": "CAUSES OF PORTAL HYPERTENSION\n• Infra hepatic Causes\n• Hepatic Causes\n• Supra hepatic Cause\n1. PREHEPATIC OR INFRAHEPATIC CAUSES\n• Congenital Atresia Or Stenosis\n• Thrombosis Of Portal Vein → It is thought that portal vein thrombosis accounts for 5\nto 10 percent of patients with portal hypertension in developed countries And up to\none third of patients in developing countries\n• Thrombosis Of Splenic Vein.\n• Extrinsic compression (e.g , tumor).\n2- INTRAHEPATIC OR HEPATIC CAUSES\n• Liver cirrhosis\n• hepatic fibrosis (e.g. due to Wilson's disease ,hemochromatosis, or congenital fibrosis)\n• less commonly noncirrhotic causes such as schistosomiasis, massive fatty change and\ndiffuse granulomatous diseases\n3-POSTHEPATIC OR SUPRAHEPATIC CAUSES\n• Budd Chiari Syndrome ( Hepatic Vein Thrombosis )\n• IVC thrombosis.\n• Cardiac Disease:\n✓ Constrictive Pericarditis.\n✓ Valvular Heart Disease.\n✓ Right Heart Failure.\nTwo important factors vascular resistance and blood flow exist in the development of portal\nhypertension.\n❖ Ohm law is V = IR, where V is voltage, I is current, and R is resistance.\n→ This can be applied to vascular flow; ie, P = FR, where :\nP is the pressure gradient through the portal venous system,\nF is the volume of blood flowing through the system,\nand R is the resistance to flow.\n❖ Changes in either F or R affect the pressure ,although in most types of portal\nhypertension ,both of these are altered.\n❖ Indeed, esophageal varices are responsible for the main complication of portal\nhypertension , massive upper gastrointestinal (GI) hemorrhage.",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "CAUSES OF PORTAL HYPERTENSION"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Infra hepatic Causes",
+            "Hepatic Causes",
+            "Supra hepatic Cause",
+            "PREHEPATIC OR INFRAHEPATIC CAUSES",
+            "Congenital Atresia Or Stenosis",
+            "Thrombosis Of Portal Vein → It is thought that portal vein thrombosis accounts for 5"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "to 10 percent of patients with portal hypertension in developed countries And up to"
+        },
+        {
+          "type": "paragraph",
+          "text": "one third of patients in developing countries"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Thrombosis Of Splenic Vein.",
+            "Extrinsic compression (e.g , tumor)."
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "2- INTRAHEPATIC OR HEPATIC CAUSES"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Liver cirrhosis",
+            "hepatic fibrosis (e.g. due to Wilson's disease ,hemochromatosis, or congenital fibrosis)",
+            "less commonly noncirrhotic causes such as schistosomiasis, massive fatty change and"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "diffuse granulomatous diseases"
+        },
+        {
+          "type": "heading",
+          "text": "3-POSTHEPATIC OR SUPRAHEPATIC CAUSES"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Budd Chiari Syndrome ( Hepatic Vein Thrombosis )",
+            "IVC thrombosis.",
+            "Cardiac Disease:",
+            "Constrictive Pericarditis.",
+            "Valvular Heart Disease.",
+            "Right Heart Failure."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Two important factors vascular resistance and blood flow exist in the development of portal"
+        },
+        {
+          "type": "paragraph",
+          "text": "hypertension."
+        },
+        {
+          "type": "paragraph",
+          "text": "❖ Ohm law is V = IR, where V is voltage, I is current, and R is resistance."
+        },
+        {
+          "type": "paragraph",
+          "text": "→ This can be applied to vascular flow; ie, P = FR, where :"
+        },
+        {
+          "type": "paragraph",
+          "text": "P is the pressure gradient through the portal venous system,"
+        },
+        {
+          "type": "paragraph",
+          "text": "F is the volume of blood flowing through the system,"
+        },
+        {
+          "type": "paragraph",
+          "text": "and R is the resistance to flow."
+        },
+        {
+          "type": "paragraph",
+          "text": "❖ Changes in either F or R affect the pressure ,although in most types of portal"
+        },
+        {
+          "type": "paragraph",
+          "text": "hypertension ,both of these are altered."
+        },
+        {
+          "type": "paragraph",
+          "text": "❖ Indeed, esophageal varices are responsible for the main complication of portal"
+        },
+        {
+          "type": "paragraph",
+          "text": "hypertension , massive upper gastrointestinal (GI) hemorrhage."
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "portal-source-2",
+        "sourceOrder": 2,
+        "originalLabel": "Lecture page 2",
+        "originalSourceHash": "2137dbf0ed9a30f1f532171be637d1b057fda3da695959874884b8a7867c9243"
+      },
+      "sourceHash": "529ae81546894f3436e5b17ff88ac70d1bb879bc5f4c3246ce2beaeb1589ef08"
+    },
+    {
+      "id": "med401-git-portal-source-3",
+      "order": 3,
+      "title": "SIGNS AND SYMPTOMS",
+      "text": "SIGNS AND SYMPTOMS\no Gastrointestinal hemorrhage may be the initial presenting symptom\no Ascites\no hepatic encephalopathy\no jaundice\no coagulopathy, or spider angiomata.\no Patients who are hemodynamically stable ma have warm skin , hyperdynamic pulses\n, low systolic blood pressures\nDIAGNOSTIC WORKUP\n1. Complete history of patient\n2. Physical examination\n3. Various lab tests\n4. Hepatic Venous Pressure Gradient measurement has been accepted as the gold\nstandard for assessing the severity of portal hypertension(<5mmHg)\n5. doppler ultrasonography\n6. Endoscopic test\nMANAGEMENT\n❖ Treatment depends on the severity of the symptoms\n❖ GOAL\n• To treat symptomatic causes • To prevent complication\nEndoscopic therapy\nThis is usually the first line of treatment for variceal bleeding and consists of either banding\nor sclerotherapy\nBANDING\nrubber bands are used to block off the blood vessel to stop bleeding.\nvariceal band ligation-it is gold standard treatment for esophageal varices less\nbleeding, fewer complication and requires fewer treatment sessions to achieve variceal\neradication than sclerotherapy.\nSCLEROTHERAPY\nSclerotherapy is occasionally used when banding cannot be used and is a procedure\nin which a blood-clotting solution is injected into the bleeding varices to stop bleeding.\nMedications\n• Nonselective beta-blockers (nadolol or propranolol) may be prescribed alone or in\ncombination with endoscopic therapy to reduce the pressure in varices and further\nreduce the risk of bleeding\n• The drug lactulose can help treat confusion and other mental changes associated with\nencephalopathy",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "SIGNS AND SYMPTOMS"
+        },
+        {
+          "type": "paragraph",
+          "text": "o Gastrointestinal hemorrhage may be the initial presenting symptom"
+        },
+        {
+          "type": "paragraph",
+          "text": "o Ascites"
+        },
+        {
+          "type": "paragraph",
+          "text": "o hepatic encephalopathy"
+        },
+        {
+          "type": "paragraph",
+          "text": "o jaundice"
+        },
+        {
+          "type": "paragraph",
+          "text": "o coagulopathy, or spider angiomata."
+        },
+        {
+          "type": "paragraph",
+          "text": "o Patients who are hemodynamically stable ma have warm skin , hyperdynamic pulses"
+        },
+        {
+          "type": "paragraph",
+          "text": ", low systolic blood pressures"
+        },
+        {
+          "type": "heading",
+          "text": "DIAGNOSTIC WORKUP"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Complete history of patient",
+            "Physical examination",
+            "Various lab tests",
+            "Hepatic Venous Pressure Gradient measurement has been accepted as the gold"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "standard for assessing the severity of portal hypertension(<5mmHg)"
+        },
+        {
+          "type": "list",
+          "items": [
+            "doppler ultrasonography",
+            "Endoscopic test"
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "MANAGEMENT"
+        },
+        {
+          "type": "paragraph",
+          "text": "❖ Treatment depends on the severity of the symptoms"
+        },
+        {
+          "type": "heading",
+          "text": "❖ GOAL"
+        },
+        {
+          "type": "list",
+          "items": [
+            "To treat symptomatic causes • To prevent complication"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Endoscopic therapy"
+        },
+        {
+          "type": "paragraph",
+          "text": "This is usually the first line of treatment for variceal bleeding and consists of either banding"
+        },
+        {
+          "type": "paragraph",
+          "text": "or sclerotherapy"
+        },
+        {
+          "type": "heading",
+          "text": "BANDING"
+        },
+        {
+          "type": "paragraph",
+          "text": "rubber bands are used to block off the blood vessel to stop bleeding."
+        },
+        {
+          "type": "paragraph",
+          "text": "variceal band ligation-it is gold standard treatment for esophageal varices less"
+        },
+        {
+          "type": "paragraph",
+          "text": "bleeding, fewer complication and requires fewer treatment sessions to achieve variceal"
+        },
+        {
+          "type": "paragraph",
+          "text": "eradication than sclerotherapy."
+        },
+        {
+          "type": "heading",
+          "text": "SCLEROTHERAPY"
+        },
+        {
+          "type": "paragraph",
+          "text": "Sclerotherapy is occasionally used when banding cannot be used and is a procedure"
+        },
+        {
+          "type": "paragraph",
+          "text": "in which a blood-clotting solution is injected into the bleeding varices to stop bleeding."
+        },
+        {
+          "type": "paragraph",
+          "text": "Medications"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Nonselective beta-blockers (nadolol or propranolol) may be prescribed alone or in"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "combination with endoscopic therapy to reduce the pressure in varices and further"
+        },
+        {
+          "type": "paragraph",
+          "text": "reduce the risk of bleeding"
+        },
+        {
+          "type": "list",
+          "items": [
+            "The drug lactulose can help treat confusion and other mental changes associated with"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "encephalopathy"
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "portal-source-3",
+        "sourceOrder": 3,
+        "originalLabel": "Lecture page 3",
+        "originalSourceHash": "fcba7a6d3f44a3028199d343825cdb3c322aebc7cad602359764937496100e0f"
+      },
+      "sourceHash": "5972a6191a34ad9d03f573da035d629cd8c0c46a5cd0522cbe77bcd1b714ba9f"
+    },
+    {
+      "id": "med401-git-portal-source-4",
+      "order": 4,
+      "title": "SURGICAL MANAGEMENT",
+      "text": "SURGICAL MANAGEMENT\nTrans jugular intrahepatic portosystemic shunt (TIPS):\n• This procedure involves placing a stint (a tubular device) in the middle of the liver.\n• The stent connects the hepatic vein with the portal vein, which reroutes blood flow in\nthe liver and helps relieve pressure in abnormal veins.\nDistal splenorenal shunt (DSRS):\n• This procedure connects the vein from your spleen to the vein from the left kidney in\norder to reduce pressure in the varices and control bleeding.\n• It is selective shunt\n• Some causes un accompanied by refractory ascites\nDevascularization\nA surgical procedure that removes the bleeding varices; this procedure is done when\na TIPS or a surgical shunt is not possible or is unsuccessful in controlling the bleeding.\nLiver transplant\nThis is done in cases of end-stage liver disease.\nParacentesis\nThis is a procedure in which the accumulation of fluid in the abdomen (ascites) is\ndirectly removed. The results are usually temporary and the procedure will need to be\nrepeated as needed.",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "SURGICAL MANAGEMENT"
+        },
+        {
+          "type": "heading",
+          "text": "Trans jugular intrahepatic portosystemic shunt (TIPS)"
+        },
+        {
+          "type": "list",
+          "items": [
+            "This procedure involves placing a stint (a tubular device) in the middle of the liver.",
+            "The stent connects the hepatic vein with the portal vein, which reroutes blood flow in"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "the liver and helps relieve pressure in abnormal veins."
+        },
+        {
+          "type": "heading",
+          "text": "Distal splenorenal shunt (DSRS)"
+        },
+        {
+          "type": "list",
+          "items": [
+            "This procedure connects the vein from your spleen to the vein from the left kidney in"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "order to reduce pressure in the varices and control bleeding."
+        },
+        {
+          "type": "list",
+          "items": [
+            "It is selective shunt",
+            "Some causes un accompanied by refractory ascites"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Devascularization"
+        },
+        {
+          "type": "paragraph",
+          "text": "A surgical procedure that removes the bleeding varices; this procedure is done when"
+        },
+        {
+          "type": "paragraph",
+          "text": "a TIPS or a surgical shunt is not possible or is unsuccessful in controlling the bleeding."
+        },
+        {
+          "type": "paragraph",
+          "text": "Liver transplant"
+        },
+        {
+          "type": "paragraph",
+          "text": "This is done in cases of end-stage liver disease."
+        },
+        {
+          "type": "paragraph",
+          "text": "Paracentesis"
+        },
+        {
+          "type": "paragraph",
+          "text": "This is a procedure in which the accumulation of fluid in the abdomen (ascites) is"
+        },
+        {
+          "type": "paragraph",
+          "text": "directly removed. The results are usually temporary and the procedure will need to be"
+        },
+        {
+          "type": "paragraph",
+          "text": "repeated as needed."
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "portal-source-4",
+        "sourceOrder": 4,
+        "originalLabel": "Lecture page 4",
+        "originalSourceHash": "28952829a3e30e3aa5990fc4942b7e0398d838967c7e29ad40fe0de3569e9e62"
+      },
+      "sourceHash": "93bf474b444ade3092513758860fd8b481b39ee793547ea6f38f267a2fc07b3c"
+    },
+    {
+      "id": "med401-git-portal-source-5",
+      "order": 5,
+      "title": "LIVER CIRRHOSIS",
+      "text": "LIVER CIRRHOSIS\nDefinition\nLiver cirrhosis is a late-stage chronic liver disease characterized by progressive scaring\n( fibrosis) of liver tissue As liver attempts to repair itself, scar tissue replaces healthy\ntissue, leading to the loss of liver function over time.\nFUNCTION OF LIVER\nThe liver is a metabolically active organ responsible for many vital life functions. The primary\nfunctions of the liver are:\n• Bile production and excretion\n• Excretion of bilirubin, cholesterol, hormones, and drugs\n• Metabolism of fats, proteins, and carbohydrates\n• Enzyme activation\n• Storage of glycogen, vitamins, and minerals Synthesis of plasma proteins, such as\nalbumin, and clotting factors\n• Blood detoxification and purification.\nSURFACE ANATOMY OF LIVER\n• The limits of the normal liver are:\na) Left 5th intercostal space - below left nipple\nb) Right 5th costal cartilage midclavicular line\nc) Right 7th intercostal space midaxillary line – below\nright nipple\nd) Right 9th intercostal space midaxillary line\n• Upper border in 5th right intercostal space on full expiration\n• Lower border at the costal margin in the midclavicular line\non full inspiration\nAnatomical Lobes: morphologically, the liver is divided into right and left lobes by :\n✓ The attachment of falciform ligament on the anterior and superior surface. - -The\nfissure for ligamnetum venosum on the posterior surface.\n✓ The fissure for ligamentum teres on the interior surface\nSurgical (Structural) lobes:\nOn the basis of intrahepatic distribution of hepatic artery, portal vein and biliary duct,\nthe liver is divided into 2 nearly equal lobes (right & left) by an anteroposterior plane\npassing through the gallbladder fossa and grove for IVC",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "LIVER CIRRHOSIS"
+        },
+        {
+          "type": "paragraph",
+          "text": "Definition"
+        },
+        {
+          "type": "paragraph",
+          "text": "Liver cirrhosis is a late-stage chronic liver disease characterized by progressive scaring"
+        },
+        {
+          "type": "paragraph",
+          "text": "( fibrosis) of liver tissue As liver attempts to repair itself, scar tissue replaces healthy"
+        },
+        {
+          "type": "paragraph",
+          "text": "tissue, leading to the loss of liver function over time."
+        },
+        {
+          "type": "heading",
+          "text": "FUNCTION OF LIVER"
+        },
+        {
+          "type": "paragraph",
+          "text": "The liver is a metabolically active organ responsible for many vital life functions. The primary"
+        },
+        {
+          "type": "heading",
+          "text": "functions of the liver are"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Bile production and excretion",
+            "Excretion of bilirubin, cholesterol, hormones, and drugs",
+            "Metabolism of fats, proteins, and carbohydrates",
+            "Enzyme activation",
+            "Storage of glycogen, vitamins, and minerals Synthesis of plasma proteins, such as"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "albumin, and clotting factors"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Blood detoxification and purification."
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "SURFACE ANATOMY OF LIVER"
+        },
+        {
+          "type": "list",
+          "items": [
+            "The limits of the normal liver are:",
+            "Left 5th intercostal space - below left nipple",
+            "Right 5th costal cartilage midclavicular line",
+            "Right 7th intercostal space midaxillary line – below"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "right nipple"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Right 9th intercostal space midaxillary line",
+            "Upper border in 5th right intercostal space on full expiration",
+            "Lower border at the costal margin in the midclavicular line"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "on full inspiration"
+        },
+        {
+          "type": "paragraph",
+          "text": "Anatomical Lobes: morphologically, the liver is divided into right and left lobes by :"
+        },
+        {
+          "type": "list",
+          "items": [
+            "The attachment of falciform ligament on the anterior and superior surface. - -The"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "fissure for ligamnetum venosum on the posterior surface."
+        },
+        {
+          "type": "list",
+          "items": [
+            "The fissure for ligamentum teres on the interior surface"
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "Surgical (Structural) lobes"
+        },
+        {
+          "type": "paragraph",
+          "text": "On the basis of intrahepatic distribution of hepatic artery, portal vein and biliary duct,"
+        },
+        {
+          "type": "paragraph",
+          "text": "the liver is divided into 2 nearly equal lobes (right & left) by an anteroposterior plane"
+        },
+        {
+          "type": "paragraph",
+          "text": "passing through the gallbladder fossa and grove for IVC"
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "portal-source-5",
+        "sourceOrder": 5,
+        "originalLabel": "Lecture page 5",
+        "originalSourceHash": "9173b13cbac10d44c45add4974117c78490725cbde987659e9402de00dcda76b"
+      },
+      "sourceHash": "5bd94d5b09c48d2a60c61c67e06f001373131995c50a2ead114a5944c6f29f71"
+    },
+    {
+      "id": "med401-git-portal-source-6",
+      "order": 6,
+      "title": "SEGMENTALANATOMY",
+      "text": "SEGMENTALANATOMY\nDivided into 8 segments based on hepatic and portal venous segments (Couinaud System)\nCaudate lobe : segment I\nLeft lobe : segment II - IV\nRight lobe : segment V – VIII\nCaudate I\nLateral segment LF lobe superior II\nLateral segment LF lobe inferior III\nMedial segment LF lobe IV\nAnterior segment RT lobe inferior V\nPosterior segment RT lobe inferior VI\nPosterior segment RT lobe superior VII\nAnterior segment RT lobe superior VII",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "SEGMENTALANATOMY"
+        },
+        {
+          "type": "paragraph",
+          "text": "Divided into 8 segments based on hepatic and portal venous segments (Couinaud System)"
+        },
+        {
+          "type": "paragraph",
+          "text": "Caudate lobe : segment I"
+        },
+        {
+          "type": "paragraph",
+          "text": "Left lobe : segment II - IV"
+        },
+        {
+          "type": "paragraph",
+          "text": "Right lobe : segment V – VIII"
+        },
+        {
+          "type": "paragraph",
+          "text": "Caudate I"
+        },
+        {
+          "type": "paragraph",
+          "text": "Lateral segment LF lobe superior II"
+        },
+        {
+          "type": "paragraph",
+          "text": "Lateral segment LF lobe inferior III"
+        },
+        {
+          "type": "paragraph",
+          "text": "Medial segment LF lobe IV"
+        },
+        {
+          "type": "paragraph",
+          "text": "Anterior segment RT lobe inferior V"
+        },
+        {
+          "type": "paragraph",
+          "text": "Posterior segment RT lobe inferior VI"
+        },
+        {
+          "type": "paragraph",
+          "text": "Posterior segment RT lobe superior VII"
+        },
+        {
+          "type": "paragraph",
+          "text": "Anterior segment RT lobe superior VII"
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "portal-source-6",
+        "sourceOrder": 6,
+        "originalLabel": "Lecture page 6",
+        "originalSourceHash": "7afa7bcfa8a305f910e9121dc030f3aac5b7903c29eb15ee2d751c959ab2444c"
+      },
+      "sourceHash": "989aa833de12a26ba58f1ef33e076f28c49b9ae03d7ff06f14db8f870afdf46f"
+    },
+    {
+      "id": "med401-git-portal-source-7",
+      "order": 7,
+      "title": "DEFINITION",
+      "text": "DEFINITION\n• Cirrhosis is the scarring of the liver\n- hard scar tissue replaces soft healthy tissue.\n• As cirrhosis becomes worse, the liver will have less healthy tissue. If cirrhosis is not\ntreated, the liver will fail and will not be able to work well or at all.\nPATHOPHYSIOLOGY\n• Regenerative process is disorganized, resulting in abnormal blood vessel and bile\nduct from fibrosis\n• Normal lobular structure distorted by fibrotic connective tissue\n• Lobules are irregular in size and shape with impaired vascular flow\n• Insidious, prolonged course\nCAUSES OF LIVER CIRRHOSIS\n• Alcoholic liver disease\n• Chronic viral hepatitis\n• Non-alcoholic fatty liver disease(NAFLD)\n• Autoimmune diseases\n• Genetic disorders (e.g., Wilson' s disease, hemochromatosis )\n• Cardiac cirrhosis\n• Chronic bile duct issues\n• Medications and toxins",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "DEFINITION"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Cirrhosis is the scarring of the liver",
+            "hard scar tissue replaces soft healthy tissue.",
+            "As cirrhosis becomes worse, the liver will have less healthy tissue. If cirrhosis is not"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "treated, the liver will fail and will not be able to work well or at all."
+        },
+        {
+          "type": "heading",
+          "text": "PATHOPHYSIOLOGY"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Regenerative process is disorganized, resulting in abnormal blood vessel and bile"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "duct from fibrosis"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Normal lobular structure distorted by fibrotic connective tissue",
+            "Lobules are irregular in size and shape with impaired vascular flow",
+            "Insidious, prolonged course"
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "CAUSES OF LIVER CIRRHOSIS"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Alcoholic liver disease",
+            "Chronic viral hepatitis",
+            "Non-alcoholic fatty liver disease(NAFLD)",
+            "Autoimmune diseases",
+            "Genetic disorders (e.g., Wilson' s disease, hemochromatosis )",
+            "Cardiac cirrhosis",
+            "Chronic bile duct issues",
+            "Medications and toxins"
+          ]
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "portal-source-7",
+        "sourceOrder": 7,
+        "originalLabel": "Lecture page 7",
+        "originalSourceHash": "e955b49922d01919724ef047ac5ad0f6069f9ab1ed78473d8f386afc654be649"
+      },
+      "sourceHash": "1b362a28f8a435716ef3b9afe0b6583db3a9d484b7416b4a081e01636d068ba3"
+    },
+    {
+      "id": "med401-git-portal-source-8",
+      "order": 8,
+      "title": "SYMPTOMS",
+      "text": "SYMPTOMS\nEarly stage:\no Loss of appetite\no Tiredness\no Nausea\no Weight loss\no Abdominal pain\no Spider-like blood vessels\no Severe itching\nAdvanced - stage:\no Jaundice\no Ascites\no Variceal bleeding\no Confusion (hepatic encephalopathy)\no Hepatocellular carcinoma\no Hepatorenal syndrome\nDIAGNOSIS OF LIVER CIRRHOSIS\nTests to measure liver function.\n• Complete blood count\n• Prothrombin time\n• Liver function tests\n• Blood albumin level\nOther tests to check for liver damage include:\n• Computed tomography (CT) of the abdomen\n• Magnetic resonance imaging (MRI) of the abdomen\n• Endoscopy to check for abnormal veins in the esophagus or stomach\n• Ultrasound of the abdomen\n• You will need a liver biopsy to confirm the diagnosis.\nBilirubin >2mg/dl to 40 mg/dl\nAST, ALT, alkaline phosphatase\no Aid in early diagnosis, prognosis, and response to treatment\no Alkaline phosphatase > 3 times normal indicate biliary disease\nAlbumin\no (non-specific protein) & Factor V and VII (specific proteins) can provide\ninformation on the functional capacity of the liver\no Low albumin < 3 that does not respond to therapy is bad prognosis\nPT\no Prolongation due to impaired synthesis of vitamin K dependent clotting factors\no No response to VIT K is poor prognosis\nBUN\no < 5 due portal-hypertension - depressed hepatic capacity for urea synthesis\nBiopsy: - Confirm the presence of cirrhosis.",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "SYMPTOMS"
+        },
+        {
+          "type": "heading",
+          "text": "Early stage"
+        },
+        {
+          "type": "paragraph",
+          "text": "o Loss of appetite"
+        },
+        {
+          "type": "paragraph",
+          "text": "o Tiredness"
+        },
+        {
+          "type": "paragraph",
+          "text": "o Nausea"
+        },
+        {
+          "type": "paragraph",
+          "text": "o Weight loss"
+        },
+        {
+          "type": "paragraph",
+          "text": "o Abdominal pain"
+        },
+        {
+          "type": "paragraph",
+          "text": "o Spider-like blood vessels"
+        },
+        {
+          "type": "paragraph",
+          "text": "o Severe itching"
+        },
+        {
+          "type": "heading",
+          "text": "Advanced - stage"
+        },
+        {
+          "type": "paragraph",
+          "text": "o Jaundice"
+        },
+        {
+          "type": "paragraph",
+          "text": "o Ascites"
+        },
+        {
+          "type": "paragraph",
+          "text": "o Variceal bleeding"
+        },
+        {
+          "type": "paragraph",
+          "text": "o Confusion (hepatic encephalopathy)"
+        },
+        {
+          "type": "paragraph",
+          "text": "o Hepatocellular carcinoma"
+        },
+        {
+          "type": "paragraph",
+          "text": "o Hepatorenal syndrome"
+        },
+        {
+          "type": "heading",
+          "text": "DIAGNOSIS OF LIVER CIRRHOSIS"
+        },
+        {
+          "type": "paragraph",
+          "text": "Tests to measure liver function."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Complete blood count",
+            "Prothrombin time",
+            "Liver function tests",
+            "Blood albumin level"
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "Other tests to check for liver damage include"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Computed tomography (CT) of the abdomen",
+            "Magnetic resonance imaging (MRI) of the abdomen",
+            "Endoscopy to check for abnormal veins in the esophagus or stomach",
+            "Ultrasound of the abdomen",
+            "You will need a liver biopsy to confirm the diagnosis."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Bilirubin >2mg/dl to 40 mg/dl"
+        },
+        {
+          "type": "paragraph",
+          "text": "AST, ALT, alkaline phosphatase"
+        },
+        {
+          "type": "paragraph",
+          "text": "o Aid in early diagnosis, prognosis, and response to treatment"
+        },
+        {
+          "type": "paragraph",
+          "text": "o Alkaline phosphatase > 3 times normal indicate biliary disease"
+        },
+        {
+          "type": "paragraph",
+          "text": "Albumin"
+        },
+        {
+          "type": "paragraph",
+          "text": "o (non-specific protein) & Factor V and VII (specific proteins) can provide"
+        },
+        {
+          "type": "paragraph",
+          "text": "information on the functional capacity of the liver"
+        },
+        {
+          "type": "paragraph",
+          "text": "o Low albumin < 3 that does not respond to therapy is bad prognosis"
+        },
+        {
+          "type": "heading",
+          "text": "PT"
+        },
+        {
+          "type": "paragraph",
+          "text": "o Prolongation due to impaired synthesis of vitamin K dependent clotting factors"
+        },
+        {
+          "type": "paragraph",
+          "text": "o No response to VIT K is poor prognosis"
+        },
+        {
+          "type": "heading",
+          "text": "BUN"
+        },
+        {
+          "type": "paragraph",
+          "text": "o < 5 due portal-hypertension - depressed hepatic capacity for urea synthesis"
+        },
+        {
+          "type": "paragraph",
+          "text": "Biopsy: - Confirm the presence of cirrhosis."
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "portal-source-8",
+        "sourceOrder": 8,
+        "originalLabel": "Lecture page 8",
+        "originalSourceHash": "f160d496df3333789ee540bec2010795a9ba53a2c6c18cce5789fedf2425b504"
+      },
+      "sourceHash": "c903a3b76ae8ea1aa5a3f99cd4c02465f55896c7b327b96547dbcbad24ed3d73"
+    },
+    {
+      "id": "med401-git-portal-source-9",
+      "order": 9,
+      "title": "MANAGEMENT",
+      "text": "MANAGEMENT\nDrug Therapy\n• There is no specific drug therapy for cirrhosis\n• Drugs are used to treat symptoms and complications of advanced liver disease\nNUTRITIONAL THERAPY\n• Diet for patient without complications:\n- High in calories\n- ↑ CHO\n- Moderate to low fat\n- Amount of protein varies with degree of liver damage\n• Patient with hepatic encephalopathy\n- Very low to no-protein diet\n• Low sodium diet for patient with ascites and edema\nNURSING MANAGEMENT\nNursing Assessment\n• Past health history\n• Medications\n• Chronic alcoholism\n• Weight loss\nNURSING DIAGNOSES\n• Imbalanced nutrition: less than body requirements related to inadequate diet.\n• Ineffective breathing pattern related to intra- abdominal fluid collection\n• Excess fluid volume related to increased sodium and water intake\n• Risk for injury related to altered clotting factors\nOverall goals:\n• Relief of discomfort\n• Minimal to no complications\n• Return to as normal a lifestyle as possible\n1. IMBALANCED NUTRITION: LESS THAN BODY REQUIREMENTS\n• Measure dietary intake by calorie count.\n• Encourage patient to eat all meals including supplementary feedings.\n• Restrict intake of caffeine, gas-producing or spicy and excessively hot or cold foods.\n• Recommend cessation of smoking. Provide teaching on the possible negative effects\nof smoking.\n• Maintain NPO status when indicated.\n• Provide tube feedings, TPN, lipids if indicated.\n2. INEFFECTIVE BREATHING PATTERN\n• Monitor respiratory rate, depth, and effort\n• Keep head of bed elevated. Position on sides.\n• Encourage frequent repositioning and deep-breathing exercises and coughing\nexercises.",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "MANAGEMENT"
+        },
+        {
+          "type": "paragraph",
+          "text": "Drug Therapy"
+        },
+        {
+          "type": "list",
+          "items": [
+            "There is no specific drug therapy for cirrhosis",
+            "Drugs are used to treat symptoms and complications of advanced liver disease"
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "NUTRITIONAL THERAPY"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Diet for patient without complications:",
+            "High in calories",
+            "↑ CHO",
+            "Moderate to low fat",
+            "Amount of protein varies with degree of liver damage",
+            "Patient with hepatic encephalopathy",
+            "Very low to no-protein diet",
+            "Low sodium diet for patient with ascites and edema"
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "NURSING MANAGEMENT"
+        },
+        {
+          "type": "paragraph",
+          "text": "Nursing Assessment"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Past health history",
+            "Medications",
+            "Chronic alcoholism",
+            "Weight loss"
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "NURSING DIAGNOSES"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Imbalanced nutrition: less than body requirements related to inadequate diet.",
+            "Ineffective breathing pattern related to intra- abdominal fluid collection",
+            "Excess fluid volume related to increased sodium and water intake",
+            "Risk for injury related to altered clotting factors"
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "Overall goals"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Relief of discomfort",
+            "Minimal to no complications",
+            "Return to as normal a lifestyle as possible",
+            "IMBALANCED NUTRITION: LESS THAN BODY REQUIREMENTS",
+            "Measure dietary intake by calorie count.",
+            "Encourage patient to eat all meals including supplementary feedings.",
+            "Restrict intake of caffeine, gas-producing or spicy and excessively hot or cold foods.",
+            "Recommend cessation of smoking. Provide teaching on the possible negative effects"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "of smoking."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Maintain NPO status when indicated.",
+            "Provide tube feedings, TPN, lipids if indicated.",
+            "INEFFECTIVE BREATHING PATTERN",
+            "Monitor respiratory rate, depth, and effort",
+            "Keep head of bed elevated. Position on sides.",
+            "Encourage frequent repositioning and deep-breathing exercises and coughing"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "exercises."
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "portal-source-9",
+        "sourceOrder": 9,
+        "originalLabel": "Lecture page 9",
+        "originalSourceHash": "7dbe9efb7f4f72b32f8f88fed3fdb247aea12e581a2edb7012fcff57d7048ae9"
+      },
+      "sourceHash": "0fd30a6aa2506315fa7498abdfd483a5162d94c752dbeccffaa45bf8b5843f26"
+    },
+    {
+      "id": "med401-git-portal-source-10",
+      "order": 10,
+      "title": "• Monitor serial ABGs, pulse oximetry, vital capacity measurements, chest x-rays.",
+      "text": "• Monitor serial ABGs, pulse oximetry, vital capacity measurements, chest x-rays.\n• Provide supplemental O2, as indicated.\n• Demonstrate and assist with respiratory adjuncts: incentive spirometer.\n3. Excess fluid volume related to increased sodium and water intake.\n• Measure I&O, weigh daily, and note gain of more than 0.5 kg/day.\n• Measure abdominal girth.\n• Restrict sodium and fluids as indicated.\n• Auscultate lungs, noting diminished breath sounds and developing adventitious\nsounds.\n• Monitor for cardiac dysrhythmias. Auscultate heart sounds, noting development of\ngallop rhythm.\n4. RISK FOR INJURY\n• Observe for presence of petechiae, ecchymosis, bleeding from one or more sites.\n• Monitor pulse, BP, Closely assess for signs and symptoms of GI bleeding\n• Encourage use of soft toothbrush, electric razor, avoiding straining for stool, vigorous\nnose blowing\n• Use small needles for injections. Apply pressure to small bleeding and venipuncture\nsites for longer than usual.\n• Advice to avoid aspirin-containing products.\nHEALTH EDUCATION AND DISCHARGE TEACHING\n• Do not use alcohol or street drugs.\n• Do not take any over-the-counter or prescription drugs or herbal medicines without\nfirst consulting your doctor or nurse. (Some medications may make liver disease\nworse.)\n• Follow the dietary guidelines given by your health care provider, including eating a\nlow- sodium (salt) diet. You will probably be required to consume no more than 2\ngrams of sodium per day. Reduced protein intake may be required if confusion is a\nsymptom.\nCONCLUSION\n• Early diagnosis and lifestyle modifications are crucial in managing cirrhosis and\npreventing complications.",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Monitor serial ABGs, pulse oximetry, vital capacity measurements, chest x-rays.",
+            "Provide supplemental O2, as indicated.",
+            "Demonstrate and assist with respiratory adjuncts: incentive spirometer.",
+            "Excess fluid volume related to increased sodium and water intake.",
+            "Measure I&O, weigh daily, and note gain of more than 0.5 kg/day.",
+            "Measure abdominal girth.",
+            "Restrict sodium and fluids as indicated.",
+            "Auscultate lungs, noting diminished breath sounds and developing adventitious"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "sounds."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Monitor for cardiac dysrhythmias. Auscultate heart sounds, noting development of"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "gallop rhythm."
+        },
+        {
+          "type": "list",
+          "items": [
+            "RISK FOR INJURY",
+            "Observe for presence of petechiae, ecchymosis, bleeding from one or more sites.",
+            "Monitor pulse, BP, Closely assess for signs and symptoms of GI bleeding",
+            "Encourage use of soft toothbrush, electric razor, avoiding straining for stool, vigorous"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "nose blowing"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Use small needles for injections. Apply pressure to small bleeding and venipuncture"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "sites for longer than usual."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Advice to avoid aspirin-containing products."
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "HEALTH EDUCATION AND DISCHARGE TEACHING"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Do not use alcohol or street drugs.",
+            "Do not take any over-the-counter or prescription drugs or herbal medicines without"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "first consulting your doctor or nurse. (Some medications may make liver disease"
+        },
+        {
+          "type": "paragraph",
+          "text": "worse.)"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Follow the dietary guidelines given by your health care provider, including eating a"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "low- sodium (salt) diet. You will probably be required to consume no more than 2"
+        },
+        {
+          "type": "paragraph",
+          "text": "grams of sodium per day. Reduced protein intake may be required if confusion is a"
+        },
+        {
+          "type": "paragraph",
+          "text": "symptom."
+        },
+        {
+          "type": "heading",
+          "text": "CONCLUSION"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Early diagnosis and lifestyle modifications are crucial in managing cirrhosis and"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "preventing complications."
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "portal-source-10",
+        "sourceOrder": 10,
+        "originalLabel": "Lecture page 10",
+        "originalSourceHash": "7993fbfa71ed5e44f7be21e74d368d19ad2bfa12b52944ba0445dd401c7baf73"
+      },
+      "sourceHash": "7e526e8bffe28a1ca9fefbc03ff20377e3a741647da3d7e40b826c09d62741f1"
+    },
+    {
+      "id": "med401-git-portal-source-11",
+      "order": 11,
+      "title": "LIVER FAILURE",
+      "text": "LIVER FAILURE\n❖ Liver failure occurs when large parts of the liver become damaged beyond repair and\nthe liver is no longer able to function.\n❖ Liver failure is a life-threatening condition that demands urgent medical care. Most\noften, liver failure occurs gradually and over many years. However, a more rare\ncondition known as acute liver failure occurs rapidly (in as little as 48 hours) and can\nbe difficult to detect initially.\nWHAT CAUSES LIVER FAILURE?\nThe most common causes of chronic liver failure (where the liver fails over months to years)\ninclude:\n- Hepatitis B\n- Hepatitis C\n- Long-term alcohol consumption\n- Cirrhosis\n- Hemochromatosis (an inherited disorder that causes the body to absorb and store too\nmuch iron)\n- Malnutrition\nThe causes of acute liver failure, when the liver fails rapidly, however, are often different.\nThese include:\n- Acetaminophen (Tylenol) overdose\n- Viruses including hepatitis A, B, and C (especially in children)\n- Reactions to certain prescription and herbal medications\n- Ingestion of poisonous wild mushrooms\nSIGNS AND SYMPTOMS\nEarly symptoms include:\no Nausea, Diarrhea\no Loss of appetite\no Fatigue\nLater symptoms\no Jaundice\no Bleeding easily\no Swollen abdomen\no Mental disorientation or confusion (known as hepatic encephalopathy)\no Sleepiness\no Coma",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "LIVER FAILURE"
+        },
+        {
+          "type": "paragraph",
+          "text": "❖ Liver failure occurs when large parts of the liver become damaged beyond repair and"
+        },
+        {
+          "type": "paragraph",
+          "text": "the liver is no longer able to function."
+        },
+        {
+          "type": "paragraph",
+          "text": "❖ Liver failure is a life-threatening condition that demands urgent medical care. Most"
+        },
+        {
+          "type": "paragraph",
+          "text": "often, liver failure occurs gradually and over many years. However, a more rare"
+        },
+        {
+          "type": "paragraph",
+          "text": "condition known as acute liver failure occurs rapidly (in as little as 48 hours) and can"
+        },
+        {
+          "type": "paragraph",
+          "text": "be difficult to detect initially."
+        },
+        {
+          "type": "heading",
+          "text": "WHAT CAUSES LIVER FAILURE?"
+        },
+        {
+          "type": "paragraph",
+          "text": "The most common causes of chronic liver failure (where the liver fails over months to years)"
+        },
+        {
+          "type": "heading",
+          "text": "include"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Hepatitis B",
+            "Hepatitis C",
+            "Long-term alcohol consumption",
+            "Cirrhosis",
+            "Hemochromatosis (an inherited disorder that causes the body to absorb and store too"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "much iron)"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Malnutrition"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The causes of acute liver failure, when the liver fails rapidly, however, are often different."
+        },
+        {
+          "type": "heading",
+          "text": "These include"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Acetaminophen (Tylenol) overdose",
+            "Viruses including hepatitis A, B, and C (especially in children)",
+            "Reactions to certain prescription and herbal medications",
+            "Ingestion of poisonous wild mushrooms"
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "SIGNS AND SYMPTOMS"
+        },
+        {
+          "type": "heading",
+          "text": "Early symptoms include"
+        },
+        {
+          "type": "paragraph",
+          "text": "o Nausea, Diarrhea"
+        },
+        {
+          "type": "paragraph",
+          "text": "o Loss of appetite"
+        },
+        {
+          "type": "paragraph",
+          "text": "o Fatigue"
+        },
+        {
+          "type": "paragraph",
+          "text": "Later symptoms"
+        },
+        {
+          "type": "paragraph",
+          "text": "o Jaundice"
+        },
+        {
+          "type": "paragraph",
+          "text": "o Bleeding easily"
+        },
+        {
+          "type": "paragraph",
+          "text": "o Swollen abdomen"
+        },
+        {
+          "type": "paragraph",
+          "text": "o Mental disorientation or confusion (known as hepatic encephalopathy)"
+        },
+        {
+          "type": "paragraph",
+          "text": "o Sleepiness"
+        },
+        {
+          "type": "paragraph",
+          "text": "o Coma"
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "portal-source-11",
+        "sourceOrder": 11,
+        "originalLabel": "Lecture page 11",
+        "originalSourceHash": "842a97aba9a7002bf4aa1db524720917b057c935939d8dfbf5fde1012b793ca7"
+      },
+      "sourceHash": "3d74e2738dfd27aa9fb36d0c4cadc94a93fa5dda2403381fbcaf78b4052b7157"
+    },
+    {
+      "id": "med401-git-portal-source-12",
+      "order": 12,
+      "title": "HOW IS LIVER FAILURE TREATED?",
+      "text": "HOW IS LIVER FAILURE TREATED?\n▪ If detected early enough, acute liver failure caused by an overdose of acetaminophen\ncan sometimes be treated and its effects reversed.\n▪ Likewise, if a virus causes liver failure, supportive care can be given at a hospital to\ntreat the symptoms until the virus runs its course. In these cases, the liver will\nsometimes recover on its own.\n▪ For liver failure that is the result of long-term deterioration, the initial treatment goal\nmay be to save whatever part of the liver is still functioning. If this is not possible,\nthen a liver transplant is required. Fortunately, liver transplant is a common procedure\nthat is often successful.\nLIVER TRANSPLANT\n▪ A liver transplant is the process of replacing a sick liver with a donated, healthy liver.\nLiver transplants require that the blood type and body size of the donor match the\nperson receiving the transplant.\n▪ Donated livers come from living and non-living donors. Liver transplant surgery usually\ntakes between four and twelve hours. Most patients stay in the hospital for up to three\nweeks after surgery.\nTHE PROCESS TO BE ELIGIBLE FOR A LIVER TRANSPLANT IS:\n▪ Person's doctor refers him or her to be seen at a transplant center;\n▪ At the transplant center, the transplant team evaluates the person's overall physical\nand mental health, plan to pay for transplant related medical expenses, and emotional\nsupport family and friends will provide;\n▪ Based on the findings, the team decides if the person is eligible for a liver transplant;\n▪ If the person is eligible, the center will add him or her to the transplant waiting list.\n▪ The waiting list is prioritized so the sickest people are at the top of the list. The time\na person spends on the waiting list depends on:\n- Blood type\n- Body size\n- Stage of liver disease\n- Overall health\n- Availability of a matching liver\n▪ Most patients return to a regular lifestyle six months to a year after a successful liver\ntransplant. In some patients, the liver disease they had before the transplant comes\nback and they may need treatment or another transplant.",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "HOW IS LIVER FAILURE TREATED?"
+        },
+        {
+          "type": "list",
+          "items": [
+            "If detected early enough, acute liver failure caused by an overdose of acetaminophen"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "can sometimes be treated and its effects reversed."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Likewise, if a virus causes liver failure, supportive care can be given at a hospital to"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "treat the symptoms until the virus runs its course. In these cases, the liver will"
+        },
+        {
+          "type": "paragraph",
+          "text": "sometimes recover on its own."
+        },
+        {
+          "type": "list",
+          "items": [
+            "For liver failure that is the result of long-term deterioration, the initial treatment goal"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "may be to save whatever part of the liver is still functioning. If this is not possible,"
+        },
+        {
+          "type": "paragraph",
+          "text": "then a liver transplant is required. Fortunately, liver transplant is a common procedure"
+        },
+        {
+          "type": "paragraph",
+          "text": "that is often successful."
+        },
+        {
+          "type": "heading",
+          "text": "LIVER TRANSPLANT"
+        },
+        {
+          "type": "list",
+          "items": [
+            "A liver transplant is the process of replacing a sick liver with a donated, healthy liver."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Liver transplants require that the blood type and body size of the donor match the"
+        },
+        {
+          "type": "paragraph",
+          "text": "person receiving the transplant."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Donated livers come from living and non-living donors. Liver transplant surgery usually"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "takes between four and twelve hours. Most patients stay in the hospital for up to three"
+        },
+        {
+          "type": "paragraph",
+          "text": "weeks after surgery."
+        },
+        {
+          "type": "heading",
+          "text": "THE PROCESS TO BE ELIGIBLE FOR A LIVER TRANSPLANT IS"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Person's doctor refers him or her to be seen at a transplant center;",
+            "At the transplant center, the transplant team evaluates the person's overall physical"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "and mental health, plan to pay for transplant related medical expenses, and emotional"
+        },
+        {
+          "type": "paragraph",
+          "text": "support family and friends will provide;"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Based on the findings, the team decides if the person is eligible for a liver transplant;",
+            "If the person is eligible, the center will add him or her to the transplant waiting list.",
+            "The waiting list is prioritized so the sickest people are at the top of the list. The time"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "a person spends on the waiting list depends on:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Blood type",
+            "Body size",
+            "Stage of liver disease",
+            "Overall health",
+            "Availability of a matching liver",
+            "Most patients return to a regular lifestyle six months to a year after a successful liver"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "transplant. In some patients, the liver disease they had before the transplant comes"
+        },
+        {
+          "type": "paragraph",
+          "text": "back and they may need treatment or another transplant."
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "portal-source-12",
+        "sourceOrder": 12,
+        "originalLabel": "Lecture page 12",
+        "originalSourceHash": "dd4f514c63aa1d9d264168079b5603fa3274a1bb9f826210bfa68a0b2b13783b"
+      },
+      "sourceHash": "1768299b46ebc3d7c193d7bdb93a5979f1cdb4fabec842f6efd732645c6defe4"
+    }
+  ],
+  "sourceVersion": "must401-git-2026-07-27",
+  "status": "published"
+}

@@ -1,0 +1,667 @@
+{
+  "id": "med401-git-acute-hepatitis",
+  "subjectId": "med401-git",
+  "title": "Acute Hepatitis",
+  "aliases": [],
+  "sectionIds": [
+    "med401-git-acute-terms",
+    "med401-git-acute-viruses",
+    "med401-git-acute-course",
+    "med401-git-acute-markers",
+    "med401-git-acute-treatment"
+  ],
+  "sections": [
+    {
+      "id": "med401-git-acute-terms",
+      "topicId": "med401-git-acute-hepatitis",
+      "title": "Clinical terms and causes",
+      "category": "definition",
+      "keywords": [
+        "acute",
+        "chronic",
+        "fulminant",
+        "causes"
+      ],
+      "contentHtml": "<div><p><strong>Acute hepatitis</strong> lasts less than 6 months. <strong>Chronic hepatitis</strong> lasts at least 6 months. <strong>Fulminant hepatitis</strong> is severe hepatic dysfunction or massive hepatocyte necrosis without pre-existing liver disease.</p></div><div><table><thead><tr><th>Acute causes</th><th>Examples</th></tr></thead><tbody><tr><td>Infectious</td><td>HAV, HBV, HCV, HDV, HEV; less commonly HSV, CMV, EBV, yellow fever; malaria, brucellosis, leptospirosis</td></tr><tr><td>Drugs and toxins</td><td>Halothane, paracetamol, INH, alcohol, DDT; Jamaica bush tea and mushroom</td></tr><tr><td>Vascular / immune / metabolic</td><td>Hypotension, Budd–Chiari syndrome, autoimmune hepatitis, Wilson disease, alpha-1 antitrypsin deficiency</td></tr></tbody></table></div>",
+      "contentHash": "68ed7b128b0fca73c6a960f2acf80c2dae804e508fd0d0249e8781a7f0d50fc1"
+    },
+    {
+      "id": "med401-git-acute-viruses",
+      "topicId": "med401-git-acute-hepatitis",
+      "title": "Hepatotropic viruses at a glance",
+      "category": "comparison",
+      "keywords": [
+        "HAV",
+        "HBV",
+        "HCV",
+        "HDV",
+        "HEV",
+        "HGV",
+        "transmission",
+        "incubation"
+      ],
+      "contentHtml": "<div><table><thead><tr><th>Virus</th><th>Genome / family in source</th><th>Main transmission</th><th>Incubation</th><th>Chronicity / special point</th></tr></thead><tbody><tr><td>HAV</td><td>RNA enterovirus</td><td>Fecal–oral</td><td>2–6 weeks</td><td>No chronicity; usually mild</td></tr><tr><td>HBV</td><td>DNA hepadnavirus</td><td>Parenteral, sexual, vertical</td><td>1–6 months</td><td>Chronicity risk highest with early-age infection</td></tr><tr><td>HCV</td><td>RNA flavivirus</td><td>Mainly parenteral</td><td>1–6 months / 40–120 days</td><td>50–80% progress to chronic hepatitis in the lecture</td></tr><tr><td>HDV</td><td>Incomplete RNA virus</td><td>Mainly parenteral</td><td>2–12 weeks</td><td>Requires HBV; coinfection or superinfection</td></tr><tr><td>HEV</td><td>RNA virus</td><td>Fecal–oral</td><td>2–6 weeks / 3–8 weeks</td><td>Severe in pregnancy; chronic disease described in immunocompromised patients</td></tr><tr><td>HGV / GBV-C</td><td>Flaviviridae</td><td>Blood-associated settings</td><td>—</td><td>Not known to cause human disease</td></tr></tbody></table></div>",
+      "contentHash": "4674b28da6db092af74f28c5e713af45249a54a40333d79e43ca9937932af697"
+    },
+    {
+      "id": "med401-git-acute-course",
+      "topicId": "med401-git-acute-hepatitis",
+      "title": "Pathology and clinical stages",
+      "category": "mechanism",
+      "keywords": [
+        "preicteric",
+        "icteric",
+        "convalescent",
+        "zone",
+        "3",
+        "necrosis"
+      ],
+      "contentHtml": "<div><div><b>Pre-icteric</b><span>Fever, malaise, headache, nausea/vomiting, anorexia and right hypochondrial/epigastric pain</span></div><div><b>Icteric</b><span>Fever drops; jaundice, dark urine and pale stool appear; liver remains enlarged and tender</span></div><div><b>Convalescent</b><span>Gradual recovery; liver returns to normal within 6 months in most HAV/HEV cases</span></div></div><div><b>Pathology</b><p>Centrilobular (zone 3) necrosis with mononuclear infiltration, lymphocytes, plasma cells, histiocytes and Kupffer-cell hyperplasia. Severe cases may progress to massive necrosis and a small liver.</p></div>",
+      "contentHash": "83c7ac7a7b8edc0b8f2fdad7e53aec8443b88d85f01e1affaebea816ce519a7c"
+    },
+    {
+      "id": "med401-git-acute-markers",
+      "topicId": "med401-git-acute-hepatitis",
+      "title": "Viral markers — especially HBV",
+      "category": "investigation",
+      "keywords": [
+        "markers",
+        "serology",
+        "HBsAg",
+        "anti-HBs",
+        "anti-HBc",
+        "HBeAg",
+        "PCR"
+      ],
+      "contentHtml": "<div><div><b>HBsAg</b><span>First marker; persistence suggests carrier/chronic state</span></div><div><b>Anti-HBs</b><span>Recovery and non-infectivity after HBsAg disappears</span></div><div><b>Anti-HBc IgM</b><span>Active/recent hepatitis</span></div><div><b>Anti-HBc IgG</b><span>Old infection or chronic carrier state</span></div><div><b>HBeAg</b><span>Replication and infectivity</span></div><div><b>Anti-HBe</b><span>Low infectivity</span></div><div><b>HBV DNA PCR</b><span>Most accurate detection of viral replication</span></div></div>",
+      "contentHash": "a6eb00fb1091ca428776986e44f6cb27d4d38b6f5820543bbc102aabaf520b23"
+    },
+    {
+      "id": "med401-git-acute-treatment",
+      "topicId": "med401-git-acute-hepatitis",
+      "title": "Treatment and prophylaxis",
+      "category": "treatment",
+      "keywords": [
+        "rest",
+        "diet",
+        "prophylaxis",
+        "HAV",
+        "vaccine",
+        "HBIG",
+        "HBV"
+      ],
+      "contentHtml": "<ul><li>Rest until symptoms and liver tenderness resolve and bilirubin is below 1.5 mg/dL.</li><li>Carbohydrates and proteins are given freely; restrict protein only in hepatic failure.</li><li>Avoid fats when they worsen nausea; domperidone for nausea/vomiting and cholestyramine for itching.</li><li>HAV: vaccine for pre-exposure; immunoglobulin when indicated, including post-exposure within 2 weeks.</li><li>HBV: vaccine at 0, 1 and 6 months for high-risk individuals; HBIG plus vaccine after selected exposures.</li><li>Screen blood donors and use blood/body-fluid precautions.</li></ul><div><b>Source-specific note</b><p>The lecture includes a 6-week ledipasvir/sofosbuvir course for acute HCV and states that direct-acting agents have replaced interferon-based therapy.</p></div>",
+      "contentHash": "232d39d398a15a1b6e9f3145c10d8fae00e25041e84cced2b6c55493a0f57670"
+    }
+  ],
+  "passages": [
+    {
+      "id": "med401-git-acute-source-1",
+      "order": 1,
+      "title": "Clinical terms and causes",
+      "text": "CLINICAL TERMS\nHepatitis: inflammation of liver.\nAcute hepatitis: symptoms last less than 6 months.\nAcute hepatic failure: a rapid deterioration of severe complications after the first signs of liver disease, such as jaundice, indicating sustained severe liver damage (loss of function of 80–90% of liver cells). Massive hepatic necrosis with impaired consciousness occurs within 8 weeks of onset.\nChronic hepatitis: inflammation of liver for at least 6 months.\nCirrhosis: replacement of liver tissue by fibrosis (scar tissue), leading to loss of liver function.\nFulminant hepatitis: severe impairment of hepatic function or severe necrosis of hepatocytes in the absence of pre-existing liver disease.\nACUTE HEPATITIS — CAUSES\nInfectious: viral hepatitis A, B, C, D, E; less commonly HSV, CMV, EBV and yellow fever virus; non-viral malaria, brucellosis and leptospirosis.\nNon-infectious: drugs (halothane, paracetamol/Tylenol, INH, alcohol, DDT); toxins (Jamaica bush tea, mushroom); vascular (hypotension and Budd–Chiari syndrome); autoimmune hepatitis; metabolic causes (Wilson disease and alpha-1 antitrypsin deficiency).\nCHRONIC HEPATITIS — CAUSES\nViral hepatitis B and C; drugs (methotrexate, amiodarone, INH); alcohol; NAFLD; autoimmune causes (AIH, PBC, PSC); metabolic causes (alpha-1 antitrypsin deficiency, hemochromatosis, Wilson disease).",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "CLINICAL TERMS"
+        },
+        {
+          "type": "paragraph",
+          "text": "Hepatitis: inflammation of liver."
+        },
+        {
+          "type": "paragraph",
+          "text": "Acute hepatitis: symptoms last less than 6 months."
+        },
+        {
+          "type": "paragraph",
+          "text": "Acute hepatic failure: a rapid deterioration of severe complications after the first signs of liver disease, such as jaundice, indicating sustained severe liver damage (loss of function of 80–90% of liver cells). Massive hepatic necrosis with impaired consciousness occurs within 8 weeks of onset."
+        },
+        {
+          "type": "paragraph",
+          "text": "Chronic hepatitis: inflammation of liver for at least 6 months."
+        },
+        {
+          "type": "paragraph",
+          "text": "Cirrhosis: replacement of liver tissue by fibrosis (scar tissue), leading to loss of liver function."
+        },
+        {
+          "type": "paragraph",
+          "text": "Fulminant hepatitis: severe impairment of hepatic function or severe necrosis of hepatocytes in the absence of pre-existing liver disease."
+        },
+        {
+          "type": "heading",
+          "text": "ACUTE HEPATITIS — CAUSES"
+        },
+        {
+          "type": "paragraph",
+          "text": "Infectious: viral hepatitis A, B, C, D, E; less commonly HSV, CMV, EBV and yellow fever virus; non-viral malaria, brucellosis and leptospirosis."
+        },
+        {
+          "type": "paragraph",
+          "text": "Non-infectious: drugs (halothane, paracetamol/Tylenol, INH, alcohol, DDT); toxins (Jamaica bush tea, mushroom); vascular (hypotension and Budd–Chiari syndrome); autoimmune hepatitis; metabolic causes (Wilson disease and alpha-1 antitrypsin deficiency)."
+        },
+        {
+          "type": "heading",
+          "text": "CHRONIC HEPATITIS — CAUSES"
+        },
+        {
+          "type": "paragraph",
+          "text": "Viral hepatitis B and C; drugs (methotrexate, amiodarone, INH); alcohol; NAFLD; autoimmune causes (AIH, PBC, PSC); metabolic causes (alpha-1 antitrypsin deficiency, hemochromatosis, Wilson disease)."
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "acute-source-1",
+        "sourceOrder": 1,
+        "originalLabel": "Clinical terms and causes",
+        "originalSourceHash": "b906ad4ec8eb3be4d9bbdda6e81a966303d9916fd09ab4167600e870d2ff8ef0"
+      },
+      "sourceHash": "b884d9013f128aa1eb1ae1094ebed033efd799c86546e7a35b3ab7ff54b45b1e"
+    },
+    {
+      "id": "med401-git-acute-source-2",
+      "order": 2,
+      "title": "Acute viral hepatitis comparison and Hepatitis A",
+      "text": "Acute viral hepatitis is a systemic disease with primary inflammation of the liver caused by a heterogeneous group of hepatotropic viruses.\nETIOLOGY SUMMARY\nHepatitis A: enterovirus, RNA; fecal–oral transmission; incubation 2–6 weeks; sporadic or epidemic; children or young adults; usually mild; no chronicity; prophylaxis with immunoglobulin and vaccine.\nHepatitis B: hepadnavirus, DNA; parenteral (blood/needles), sexual and vertical transmission; incubation 1–6 months; sporadic; any age; severe acute infection; chronicity; prophylaxis with immunoglobulin and vaccine.\nHepatitis C: flavivirus, RNA; parenteral transmission; incubation 1–6 months; sporadic; any age; usually mild acute infection; chronicity; no specific prophylaxis listed.\nHepatitis D: incomplete virus, RNA; parenteral transmission; incubation 1–6 months; sporadic; any age; severe acute infection; HBV vaccine provides prevention by preventing HBV.\nHepatitis E: calicivirus, RNA; fecal–oral transmission; incubation 2–6 weeks; sporadic or epidemic; children or young adults; usually mild except in pregnant females; no chronicity in the lecture comparison.\nHEPATITIS A\nAn acute infectious disease caused by hepatitis A virus (HAV), formerly called infectious hepatitis or epidemic jaundice.\nAgent: enterovirus of the Picornaviridae family; multiplies only in hepatocytes.\nResistance: fairly resistant to heat and chemicals; virus is highly susceptible to chlorine in usual doses; formalin is used to disinfect infected stools; inactivated by ultraviolet rays and by boiling for 5 minutes or autoclaving.\nVirus excretion: infectivity from 2 weeks before to 1–2 weeks after onset of jaundice.",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Acute viral hepatitis is a systemic disease with primary inflammation of the liver caused by a heterogeneous group of hepatotropic viruses."
+        },
+        {
+          "type": "heading",
+          "text": "ETIOLOGY SUMMARY"
+        },
+        {
+          "type": "paragraph",
+          "text": "Hepatitis A: enterovirus, RNA; fecal–oral transmission; incubation 2–6 weeks; sporadic or epidemic; children or young adults; usually mild; no chronicity; prophylaxis with immunoglobulin and vaccine."
+        },
+        {
+          "type": "paragraph",
+          "text": "Hepatitis B: hepadnavirus, DNA; parenteral (blood/needles), sexual and vertical transmission; incubation 1–6 months; sporadic; any age; severe acute infection; chronicity; prophylaxis with immunoglobulin and vaccine."
+        },
+        {
+          "type": "paragraph",
+          "text": "Hepatitis C: flavivirus, RNA; parenteral transmission; incubation 1–6 months; sporadic; any age; usually mild acute infection; chronicity; no specific prophylaxis listed."
+        },
+        {
+          "type": "paragraph",
+          "text": "Hepatitis D: incomplete virus, RNA; parenteral transmission; incubation 1–6 months; sporadic; any age; severe acute infection; HBV vaccine provides prevention by preventing HBV."
+        },
+        {
+          "type": "paragraph",
+          "text": "Hepatitis E: calicivirus, RNA; fecal–oral transmission; incubation 2–6 weeks; sporadic or epidemic; children or young adults; usually mild except in pregnant females; no chronicity in the lecture comparison."
+        },
+        {
+          "type": "heading",
+          "text": "HEPATITIS A"
+        },
+        {
+          "type": "paragraph",
+          "text": "An acute infectious disease caused by hepatitis A virus (HAV), formerly called infectious hepatitis or epidemic jaundice."
+        },
+        {
+          "type": "paragraph",
+          "text": "Agent: enterovirus of the Picornaviridae family; multiplies only in hepatocytes."
+        },
+        {
+          "type": "paragraph",
+          "text": "Resistance: fairly resistant to heat and chemicals; virus is highly susceptible to chlorine in usual doses; formalin is used to disinfect infected stools; inactivated by ultraviolet rays and by boiling for 5 minutes or autoclaving."
+        },
+        {
+          "type": "paragraph",
+          "text": "Virus excretion: infectivity from 2 weeks before to 1–2 weeks after onset of jaundice."
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "acute-source-2",
+        "sourceOrder": 2,
+        "originalLabel": "Acute viral hepatitis comparison and Hepatitis A",
+        "originalSourceHash": "0a0c5dc8b9e872107cdde137a96c47400424b4d5c75d7b4ac2847910a2348d39"
+      },
+      "sourceHash": "b026fa302964b5140f03d1513509309bafadb0410c8217a37a814ba8318a14f0"
+    },
+    {
+      "id": "med401-git-acute-source-3",
+      "order": 3,
+      "title": "HAV host factors and HBV agent",
+      "text": "HEPATITIS A — HOST AND ENVIRONMENTAL FACTORS\nAge: HAV is more frequent among children than adults, but people of any age may be infected if susceptible.\nSex: both sexes are equally susceptible.\nImmunity: immunity after attack probably lasts for life.\nEnvironmental factors: cases may occur throughout the year.\nIncubation: 10–50 days, usually 25–30 days.\nMode of transmission: fecal–oral route is the major route, including contaminated water, food or milk.\nHEPATITIS B\nAn acute systemic infection with major pathology in the liver caused by hepatitis B virus; endemic throughout the world, especially in tropical and developing countries.\nAgent: HBV, a 42 nm double-shelled DNA virus originally known as the Dane particle. It replicates in liver cells.\nMorphology in serum: small spherical particles (~22 nm), filamentous or tubular particles (20–22 nm diameter), and Dane particles. Only the Dane particle is considered infectious.\nInfective material: contaminated blood is the main source; virus has also been found in saliva, vaginal secretion and semen.\nResistance: readily destroyed by sodium hypochlorite or heat sterilization in an autoclave for 30–60 minutes.",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "HEPATITIS A — HOST AND ENVIRONMENTAL FACTORS"
+        },
+        {
+          "type": "paragraph",
+          "text": "Age: HAV is more frequent among children than adults, but people of any age may be infected if susceptible."
+        },
+        {
+          "type": "paragraph",
+          "text": "Sex: both sexes are equally susceptible."
+        },
+        {
+          "type": "paragraph",
+          "text": "Immunity: immunity after attack probably lasts for life."
+        },
+        {
+          "type": "paragraph",
+          "text": "Environmental factors: cases may occur throughout the year."
+        },
+        {
+          "type": "paragraph",
+          "text": "Incubation: 10–50 days, usually 25–30 days."
+        },
+        {
+          "type": "paragraph",
+          "text": "Mode of transmission: fecal–oral route is the major route, including contaminated water, food or milk."
+        },
+        {
+          "type": "heading",
+          "text": "HEPATITIS B"
+        },
+        {
+          "type": "paragraph",
+          "text": "An acute systemic infection with major pathology in the liver caused by hepatitis B virus; endemic throughout the world, especially in tropical and developing countries."
+        },
+        {
+          "type": "paragraph",
+          "text": "Agent: HBV, a 42 nm double-shelled DNA virus originally known as the Dane particle. It replicates in liver cells."
+        },
+        {
+          "type": "paragraph",
+          "text": "Morphology in serum: small spherical particles (~22 nm), filamentous or tubular particles (20–22 nm diameter), and Dane particles. Only the Dane particle is considered infectious."
+        },
+        {
+          "type": "paragraph",
+          "text": "Infective material: contaminated blood is the main source; virus has also been found in saliva, vaginal secretion and semen."
+        },
+        {
+          "type": "paragraph",
+          "text": "Resistance: readily destroyed by sodium hypochlorite or heat sterilization in an autoclave for 30–60 minutes."
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "acute-source-3",
+        "sourceOrder": 3,
+        "originalLabel": "HAV host factors and HBV agent",
+        "originalSourceHash": "f3bcd6b195fad6a33f387313124427f8839afafa121ebb5e9d2b4a18ad2c1c7d"
+      },
+      "sourceHash": "3ac9a5ce69cca6964af6b1b5d8a8d69a95318c4e54bdf02965c81b2f53142162"
+    },
+    {
+      "id": "med401-git-acute-source-4",
+      "order": 4,
+      "title": "HBV host factors, risk groups and transmission",
+      "text": "HEPATITIS B — AGE AND CHRONICITY\nAcute hepatitis B: approximately 90% resolve by themselves; less than 1% develop fulminant hepatic failure. It occurs in approximately 1% of perinatal infection, over 10% of childhood infection (1–5 years), and over 30% after 5 years of age.\nChronic hepatitis B: approximately 2–10% progress to chronic state overall; about 95% after perinatal infection, over 80% after childhood infection, and 5–10% after age 5.\nThe lecture notes state that acute hepatitis B becomes chronic in over 90% of infants, 25–50% of children aged 1–5 years, and under 5% of older children and adults. Immunosuppressed patients, including those with HIV or on hemodialysis, have increased risk of chronic infection.\nRESPONSIBLE POPULATION\nParenteral drug abusers; hemophilia and hemolytic anemia patients; homosexuals and people with multiple sexual partners; health-care professionals; babies born to mothers with positive HBsAg; and people living in high-prevalence areas.\nANTIGENS AND ANTIBODY RESPONSE\nHBsAg (Australian antigen), HBcAg (core antigen) and HBeAg (envelope antigen) stimulate production of corresponding antibodies.\nIncubation: 45–180 days, usually 60–90 days.\nTransmission: parenteral, sexual and perinatal/vertical. Perinatal transmission is the main means of transmission in high-prevalence populations, especially from HBeAg-positive mothers.",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "HEPATITIS B — AGE AND CHRONICITY"
+        },
+        {
+          "type": "paragraph",
+          "text": "Acute hepatitis B: approximately 90% resolve by themselves; less than 1% develop fulminant hepatic failure. It occurs in approximately 1% of perinatal infection, over 10% of childhood infection (1–5 years), and over 30% after 5 years of age."
+        },
+        {
+          "type": "paragraph",
+          "text": "Chronic hepatitis B: approximately 2–10% progress to chronic state overall; about 95% after perinatal infection, over 80% after childhood infection, and 5–10% after age 5."
+        },
+        {
+          "type": "paragraph",
+          "text": "The lecture notes state that acute hepatitis B becomes chronic in over 90% of infants, 25–50% of children aged 1–5 years, and under 5% of older children and adults. Immunosuppressed patients, including those with HIV or on hemodialysis, have increased risk of chronic infection."
+        },
+        {
+          "type": "heading",
+          "text": "RESPONSIBLE POPULATION"
+        },
+        {
+          "type": "paragraph",
+          "text": "Parenteral drug abusers; hemophilia and hemolytic anemia patients; homosexuals and people with multiple sexual partners; health-care professionals; babies born to mothers with positive HBsAg; and people living in high-prevalence areas."
+        },
+        {
+          "type": "heading",
+          "text": "ANTIGENS AND ANTIBODY RESPONSE"
+        },
+        {
+          "type": "paragraph",
+          "text": "HBsAg (Australian antigen), HBcAg (core antigen) and HBeAg (envelope antigen) stimulate production of corresponding antibodies."
+        },
+        {
+          "type": "paragraph",
+          "text": "Incubation: 45–180 days, usually 60–90 days."
+        },
+        {
+          "type": "paragraph",
+          "text": "Transmission: parenteral, sexual and perinatal/vertical. Perinatal transmission is the main means of transmission in high-prevalence populations, especially from HBeAg-positive mothers."
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "acute-source-4",
+        "sourceOrder": 4,
+        "originalLabel": "HBV host factors, risk groups and transmission",
+        "originalSourceHash": "96d42183637c9db22c40375cef5d4ab5ca0bfeed717f353c05f34a33eb20c381"
+      },
+      "sourceHash": "d1cece63538fd6f19b6d2bcf6fa797a10ad9ca1d5362f5cc95eb232b78fd1a40"
+    },
+    {
+      "id": "med401-git-acute-source-5",
+      "order": 5,
+      "title": "Hepatitis C and D",
+      "text": "HEPATITIS C\nAn estimated 150–200 million people, or 3% of the world population, live with chronic hepatitis C. Seven major genotypes have been identified; genotype 4 is the most common variant in Egypt. Approximately 50–80% of infected patients progress to chronic hepatitis.\nAgent: HCV, a Flaviviridae virus with a 50–60 nm virion, linear single-stranded RNA genome, core and lipid envelope. The half-life of the virus particles in serum is around 3 hours and may be as short as 45 minutes. The virus replicates in the liver and can multiply in lymphocytes.\nIncubation: 40–120 days.\nTransmission: mainly parenteral. Risk includes IV drug use, health-care work, transfusion of blood products, organ transplantation without screening, hemodialysis and accidental needle-stick injuries. Sexual transmission is associated with multiple partners and certain exposure patterns. Perinatal transmission may occur.\nHEPATITIS D\nHDV is a subviral satellite requiring hepatitis B virus to propagate. It may occur as superinfection in a chronic HBV carrier or as coinfection with HBV, which can result in severe acute infection.\nVirus: spherical, 36–38 nm particle with an outer coat composed of HBsAg surrounding an ssRNA genome.\nIncubation: 2–12 weeks.\nTransmission: primarily parenteral and believed to be similar to HBV; the lecture notes state that HDV does not appear to be sexually transmitted.",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "HEPATITIS C"
+        },
+        {
+          "type": "paragraph",
+          "text": "An estimated 150–200 million people, or 3% of the world population, live with chronic hepatitis C. Seven major genotypes have been identified; genotype 4 is the most common variant in Egypt. Approximately 50–80% of infected patients progress to chronic hepatitis."
+        },
+        {
+          "type": "paragraph",
+          "text": "Agent: HCV, a Flaviviridae virus with a 50–60 nm virion, linear single-stranded RNA genome, core and lipid envelope. The half-life of the virus particles in serum is around 3 hours and may be as short as 45 minutes. The virus replicates in the liver and can multiply in lymphocytes."
+        },
+        {
+          "type": "paragraph",
+          "text": "Incubation: 40–120 days."
+        },
+        {
+          "type": "paragraph",
+          "text": "Transmission: mainly parenteral. Risk includes IV drug use, health-care work, transfusion of blood products, organ transplantation without screening, hemodialysis and accidental needle-stick injuries. Sexual transmission is associated with multiple partners and certain exposure patterns. Perinatal transmission may occur."
+        },
+        {
+          "type": "heading",
+          "text": "HEPATITIS D"
+        },
+        {
+          "type": "paragraph",
+          "text": "HDV is a subviral satellite requiring hepatitis B virus to propagate. It may occur as superinfection in a chronic HBV carrier or as coinfection with HBV, which can result in severe acute infection."
+        },
+        {
+          "type": "paragraph",
+          "text": "Virus: spherical, 36–38 nm particle with an outer coat composed of HBsAg surrounding an ssRNA genome."
+        },
+        {
+          "type": "paragraph",
+          "text": "Incubation: 2–12 weeks."
+        },
+        {
+          "type": "paragraph",
+          "text": "Transmission: primarily parenteral and believed to be similar to HBV; the lecture notes state that HDV does not appear to be sexually transmitted."
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "acute-source-5",
+        "sourceOrder": 5,
+        "originalLabel": "Hepatitis C and D",
+        "originalSourceHash": "46ccebabdaed62983ea10a4aa732515f74b5a4085e3d09aac97dc2d6305f3e45"
+      },
+      "sourceHash": "9ce35b53efc47be306f48b782d0877d806882c1ab0fa42ae367596306cb5a48f"
+    },
+    {
+      "id": "med401-git-acute-source-6",
+      "order": 6,
+      "title": "Hepatitis E and G",
+      "text": "HEPATITIS E\nOften causes an acute, self-limiting infection, but immunocompromised patients—particularly solid-organ transplant recipients—may develop chronic hepatitis with substantial mortality. In pregnant women, disease is more often severe and associated with a clinical syndrome called fulminant hepatic failure.\nAgent: classified in the genus Herpes virus under the family Caliciviridae in the lecture source; a spherical, non-enveloped virus 29–32 nm in diameter with an ssRNA genome. The surface has virion projections and the virus is very labile.\nAnimal reservoir: pigs.\nIncubation: 3–8 weeks.\nTransmission: mainly fecal–oral, including fecal contamination of water or food; person-to-person transmission is uncommon.\nHEPATITIS G\nGB virus C (GBV-C), formerly hepatitis G virus (HGV) and also known as HpgV, is a Flaviviridae virus and is not known to cause human disease. HGV RNA has been found in patients with acute, chronic and fulminant hepatitis, hemophilia, multiple transfusions, hemodialysis, IV drug use and blood donation.",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "HEPATITIS E"
+        },
+        {
+          "type": "paragraph",
+          "text": "Often causes an acute, self-limiting infection, but immunocompromised patients—particularly solid-organ transplant recipients—may develop chronic hepatitis with substantial mortality. In pregnant women, disease is more often severe and associated with a clinical syndrome called fulminant hepatic failure."
+        },
+        {
+          "type": "paragraph",
+          "text": "Agent: classified in the genus Herpes virus under the family Caliciviridae in the lecture source; a spherical, non-enveloped virus 29–32 nm in diameter with an ssRNA genome. The surface has virion projections and the virus is very labile."
+        },
+        {
+          "type": "paragraph",
+          "text": "Animal reservoir: pigs."
+        },
+        {
+          "type": "paragraph",
+          "text": "Incubation: 3–8 weeks."
+        },
+        {
+          "type": "paragraph",
+          "text": "Transmission: mainly fecal–oral, including fecal contamination of water or food; person-to-person transmission is uncommon."
+        },
+        {
+          "type": "heading",
+          "text": "HEPATITIS G"
+        },
+        {
+          "type": "paragraph",
+          "text": "GB virus C (GBV-C), formerly hepatitis G virus (HGV) and also known as HpgV, is a Flaviviridae virus and is not known to cause human disease. HGV RNA has been found in patients with acute, chronic and fulminant hepatitis, hemophilia, multiple transfusions, hemodialysis, IV drug use and blood donation."
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "acute-source-6",
+        "sourceOrder": 6,
+        "originalLabel": "Hepatitis E and G",
+        "originalSourceHash": "68d59c75705175b2d61857f65cad9a85bab5dc9ba6b086eea01842c095689ad5"
+      },
+      "sourceHash": "86378c5ae0988d422002574e954d06a8814c2944e7d760e83eba478aa3727ca0"
+    },
+    {
+      "id": "med401-git-acute-source-7",
+      "order": 7,
+      "title": "Pathology and clinical course",
+      "text": "PATHOLOGY\nCentrilobular (zone 3) hepatic necrosis with diffuse infiltration by mononuclear cells (lymphocytes and plasma cells); histiocytes together with Kupffer-cell hyperplasia. In severe and fulminant cases, there is massive necrosis with marked reduction of liver size. Virus may affect kidney, synovial membranes and other sites.\nCLINICAL PICTURE\nPatients may be asymptomatic, have anicteric hepatitis, icteric hepatitis or complications.\nAnicteric hepatitis is non-specific and may resemble influenza or typhoid; jaundice is absent, so diagnosis may be missed.\nICTERIC HEPATITIS — THREE STAGES\n1. Pre-icteric stage: fever, malaise, headache, nausea and vomiting, anorexia—especially to cigarettes and meat—and headache that may be severe, especially in children, with or without photophobia. Pain in the right hypochondrium and epigastrium. Signs include fever with relative bradycardia, enlarged tender liver, and in some patients non-specific abdominal rash.\n2. Icteric stage: anorexia improves and fever drops; jaundice appears with dark urine and pale stool. Temperature is normal; the liver is enlarged and tender; splenomegaly occurs in about 20% and cervical lymph nodes in about 10%.\n3. Convalescent stage: gradual improvement in symptoms and signs. The liver returns to normal within 6 months. Complete recovery occurs in most HAV and HEV cases.",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "PATHOLOGY"
+        },
+        {
+          "type": "paragraph",
+          "text": "Centrilobular (zone 3) hepatic necrosis with diffuse infiltration by mononuclear cells (lymphocytes and plasma cells); histiocytes together with Kupffer-cell hyperplasia. In severe and fulminant cases, there is massive necrosis with marked reduction of liver size. Virus may affect kidney, synovial membranes and other sites."
+        },
+        {
+          "type": "heading",
+          "text": "CLINICAL PICTURE"
+        },
+        {
+          "type": "paragraph",
+          "text": "Patients may be asymptomatic, have anicteric hepatitis, icteric hepatitis or complications."
+        },
+        {
+          "type": "paragraph",
+          "text": "Anicteric hepatitis is non-specific and may resemble influenza or typhoid; jaundice is absent, so diagnosis may be missed."
+        },
+        {
+          "type": "heading",
+          "text": "ICTERIC HEPATITIS — THREE STAGES"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Pre-icteric stage: fever, malaise, headache, nausea and vomiting, anorexia—especially to cigarettes and meat—and headache that may be severe, especially in children, with or without photophobia. Pain in the right hypochondrium and epigastrium. Signs include fever with relative bradycardia, enlarged tender liver, and in some patients non-specific abdominal rash.",
+            "Icteric stage: anorexia improves and fever drops; jaundice appears with dark urine and pale stool. Temperature is normal; the liver is enlarged and tender; splenomegaly occurs in about 20% and cervical lymph nodes in about 10%.",
+            "Convalescent stage: gradual improvement in symptoms and signs. The liver returns to normal within 6 months. Complete recovery occurs in most HAV and HEV cases."
+          ]
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "acute-source-7",
+        "sourceOrder": 7,
+        "originalLabel": "Pathology and clinical course",
+        "originalSourceHash": "8d030a9cc78bda43f2048f111106730be427df9b04ee6b8a9bafe001f42716fb"
+      },
+      "sourceHash": "583680bbcaba06987ee0e6284fb2f9d4212e5f16d221ac5cf9f0c5f30df3d00c"
+    },
+    {
+      "id": "med401-git-acute-source-8",
+      "order": 8,
+      "title": "Complications and investigations",
+      "text": "COMPLICATIONS\nHepatic: relapse (clinical or biochemical); fulminant hepatic failure—massive hepatic necrosis may occur with HBV and HDV but is rare with HAV and HEV, except in pregnancy; post-hepatitic cholestasis (Watson syndrome) with jaundice and pruritus for 8–28 weeks due to hepatocyte edema, followed by complete recovery and more common in HAV; post-hepatitis syndrome (transaminitis) with anxiety and inadequate understanding; chronic complications—carrier state, chronic hepatitis, cirrhosis and hepatocellular carcinoma—do not occur with HAV or HEV in this lecture.\nExtrahepatic: immunological reactions to HBV or HCV may include arthritis, PAN, glomerulonephritis, aplastic anemia, cryoglobulinemia and Guillain–Barré syndrome.\nINVESTIGATIONS\nLiver enzymes and function: ALT and AST increased in hundreds; bilirubin increased, both direct and indirect; alkaline phosphatase increased; plasma proteins show elevated globulins with normal albumin.\nUrine: bilirubin appears early; bile salts may be present.\nStool: pale and may show steatorrhea; diminished stercobilin.\nBlood: ESR increased; leukopenia with relative lymphocytosis.",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "COMPLICATIONS"
+        },
+        {
+          "type": "paragraph",
+          "text": "Hepatic: relapse (clinical or biochemical); fulminant hepatic failure—massive hepatic necrosis may occur with HBV and HDV but is rare with HAV and HEV, except in pregnancy; post-hepatitic cholestasis (Watson syndrome) with jaundice and pruritus for 8–28 weeks due to hepatocyte edema, followed by complete recovery and more common in HAV; post-hepatitis syndrome (transaminitis) with anxiety and inadequate understanding; chronic complications—carrier state, chronic hepatitis, cirrhosis and hepatocellular carcinoma—do not occur with HAV or HEV in this lecture."
+        },
+        {
+          "type": "paragraph",
+          "text": "Extrahepatic: immunological reactions to HBV or HCV may include arthritis, PAN, glomerulonephritis, aplastic anemia, cryoglobulinemia and Guillain–Barré syndrome."
+        },
+        {
+          "type": "heading",
+          "text": "INVESTIGATIONS"
+        },
+        {
+          "type": "paragraph",
+          "text": "Liver enzymes and function: ALT and AST increased in hundreds; bilirubin increased, both direct and indirect; alkaline phosphatase increased; plasma proteins show elevated globulins with normal albumin."
+        },
+        {
+          "type": "paragraph",
+          "text": "Urine: bilirubin appears early; bile salts may be present."
+        },
+        {
+          "type": "paragraph",
+          "text": "Stool: pale and may show steatorrhea; diminished stercobilin."
+        },
+        {
+          "type": "paragraph",
+          "text": "Blood: ESR increased; leukopenia with relative lymphocytosis."
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "acute-source-8",
+        "sourceOrder": 8,
+        "originalLabel": "Complications and investigations",
+        "originalSourceHash": "61c859a7da6fec69b0fc4f75b4d53061ea81da2d446672dae82c57a8f181b93a"
+      },
+      "sourceHash": "e7aa9b921eb55b84a530070375caac6cbc237256dbb0a4f71611a1525f6079e8"
+    },
+    {
+      "id": "med401-git-acute-source-9",
+      "order": 9,
+      "title": "Viral markers",
+      "text": "HEPATITIS A MARKERS\nAnti-HAV antibodies by ELISA: IgM denotes acute infection; IgG denotes old infection. Other methods listed are virus isolation, demonstration of virus in feces/blood/bile by immunoelectron microscopy, and RT-PCR of feces.\nHEPATITIS B MARKERS\nHBsAg is the first marker to appear in blood, around 6 weeks after infection, and disappears in about 3 months. Persistence denotes carrier or chronic state.\nAnti-HBs appears after about 3 months; disappearance of HBsAg with appearance of anti-HBs signals recovery and non-infectivity.\nHBcAg is detected in liver biopsy, not blood.\nAnti-HBc IgM appears shortly after HBsAg, may persist for 3–6 months or longer and indicates active hepatitis. Anti-HBc IgG appears during acute HBV but persists indefinitely, denoting old infection or chronic carrier state.\nHBeAg appears with or soon after HBsAg, indicates viral replication and infectivity, and persistence beyond 3 months indicates increased likelihood of chronic hepatitis B. The lecture notes state that HBeAg negativity may indicate the wild strain. Anti-HBe indicates low infectivity. PCR for HBV DNA is the most accurate method for detecting viral replication.\nLiver biopsy with histology and immunoperoxidase staining may determine grade (inflammation) and stage (fibrosis) in chronic hepatitis.\nHDV: delta antigen in liver-cell nuclei by immunofluorescence; anti-delta antibodies by ELISA. IgM appears 2–3 weeks after infection and is soon replaced by IgG in acute delta infection.\nHCV: anti-HCV by ELISA is not useful in the early acute phase because antibodies take at least 4 weeks; HCV RNA by PCR or branched DNA can diagnose acute infection and monitor response; HCV antigen EIA may be used similarly and is easier to perform.\nHEV: anti-HEV IgM and IgG.",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "HEPATITIS A MARKERS"
+        },
+        {
+          "type": "paragraph",
+          "text": "Anti-HAV antibodies by ELISA: IgM denotes acute infection; IgG denotes old infection. Other methods listed are virus isolation, demonstration of virus in feces/blood/bile by immunoelectron microscopy, and RT-PCR of feces."
+        },
+        {
+          "type": "heading",
+          "text": "HEPATITIS B MARKERS"
+        },
+        {
+          "type": "paragraph",
+          "text": "HBsAg is the first marker to appear in blood, around 6 weeks after infection, and disappears in about 3 months. Persistence denotes carrier or chronic state."
+        },
+        {
+          "type": "paragraph",
+          "text": "Anti-HBs appears after about 3 months; disappearance of HBsAg with appearance of anti-HBs signals recovery and non-infectivity."
+        },
+        {
+          "type": "paragraph",
+          "text": "HBcAg is detected in liver biopsy, not blood."
+        },
+        {
+          "type": "paragraph",
+          "text": "Anti-HBc IgM appears shortly after HBsAg, may persist for 3–6 months or longer and indicates active hepatitis. Anti-HBc IgG appears during acute HBV but persists indefinitely, denoting old infection or chronic carrier state."
+        },
+        {
+          "type": "paragraph",
+          "text": "HBeAg appears with or soon after HBsAg, indicates viral replication and infectivity, and persistence beyond 3 months indicates increased likelihood of chronic hepatitis B. The lecture notes state that HBeAg negativity may indicate the wild strain. Anti-HBe indicates low infectivity. PCR for HBV DNA is the most accurate method for detecting viral replication."
+        },
+        {
+          "type": "paragraph",
+          "text": "Liver biopsy with histology and immunoperoxidase staining may determine grade (inflammation) and stage (fibrosis) in chronic hepatitis."
+        },
+        {
+          "type": "paragraph",
+          "text": "HDV: delta antigen in liver-cell nuclei by immunofluorescence; anti-delta antibodies by ELISA. IgM appears 2–3 weeks after infection and is soon replaced by IgG in acute delta infection."
+        },
+        {
+          "type": "paragraph",
+          "text": "HCV: anti-HCV by ELISA is not useful in the early acute phase because antibodies take at least 4 weeks; HCV RNA by PCR or branched DNA can diagnose acute infection and monitor response; HCV antigen EIA may be used similarly and is easier to perform."
+        },
+        {
+          "type": "paragraph",
+          "text": "HEV: anti-HEV IgM and IgG."
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "acute-source-9",
+        "sourceOrder": 9,
+        "originalLabel": "Viral markers",
+        "originalSourceHash": "736f42000de66e1885996cf56cf731580d8c56ad94fe68a2f4f6c069c42df609"
+      },
+      "sourceHash": "a6f89f9c5c011f20e9d0163fa4d5ae24c303c0f10c20045d2ff0e33ba4df889f"
+    },
+    {
+      "id": "med401-git-acute-source-10",
+      "order": 10,
+      "title": "Treatment and prophylaxis",
+      "text": "GENERAL TREATMENT\nRest until symptoms resolve, liver tenderness disappears and serum bilirubin is below 1.5 mg/dL. Carbohydrates and proteins are given freely; protein is restricted only in hepatic failure. Fats may worsen nausea and are better avoided. Symptomatic treatment includes domperidone for nausea/vomiting and cholestyramine for itching. Prophylaxis includes hygienic measures, immunoglobulins and vaccines.\nHAV PROPHYLAXIS\nPre-exposure HAV vaccine: for travelers to endemic areas, given 4 weeks before travel; the lecture states 100% protection for more than 10 years. Immunoglobulin is used when there is allergy to a vaccine component and gives protection for 2–6 months.\nPost-exposure immunoglobulin: within 2 weeks of exposure in an unvaccinated individual; vaccine may be given at the same time in a different limb.\nHBV PROPHYLAXIS\nPre-exposure vaccine for high-risk individuals; prevaccination screening helps avoid vaccinating those with chronic infection. Dosing at 0, 1 and 6 months. Booster or revaccination for non-responders with anti-HBs below 10 mIU/mL.\nPost-exposure HBIG: for children born to HBV-positive mothers and needle-stick injury. HBIG should be given within 48 hours, with the first HBV vaccine dose at a different body site.\nNational immunization schedule shown in the lecture: hepatitis B at birth or as soon as possible within 24 hours, 0.5 mL IM in the anterolateral mid-thigh; subsequent hepatitis B-containing doses at 6, 10 and 14 weeks, 0.5 mL IM in the anterolateral mid-thigh. Other measures include screening blood donors and blood/body-fluid precautions.\nHCV\nThe lecture describes older peginterferon-based treatment for acute hepatitis C and notes that oral direct-acting agents have supplanted interferon therapy; a 6-week course of ledipasvir and sofosbuvir is stated to prevent chronic hepatitis.",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "GENERAL TREATMENT"
+        },
+        {
+          "type": "paragraph",
+          "text": "Rest until symptoms resolve, liver tenderness disappears and serum bilirubin is below 1.5 mg/dL. Carbohydrates and proteins are given freely; protein is restricted only in hepatic failure. Fats may worsen nausea and are better avoided. Symptomatic treatment includes domperidone for nausea/vomiting and cholestyramine for itching. Prophylaxis includes hygienic measures, immunoglobulins and vaccines."
+        },
+        {
+          "type": "heading",
+          "text": "HAV PROPHYLAXIS"
+        },
+        {
+          "type": "paragraph",
+          "text": "Pre-exposure HAV vaccine: for travelers to endemic areas, given 4 weeks before travel; the lecture states 100% protection for more than 10 years. Immunoglobulin is used when there is allergy to a vaccine component and gives protection for 2–6 months."
+        },
+        {
+          "type": "paragraph",
+          "text": "Post-exposure immunoglobulin: within 2 weeks of exposure in an unvaccinated individual; vaccine may be given at the same time in a different limb."
+        },
+        {
+          "type": "heading",
+          "text": "HBV PROPHYLAXIS"
+        },
+        {
+          "type": "paragraph",
+          "text": "Pre-exposure vaccine for high-risk individuals; prevaccination screening helps avoid vaccinating those with chronic infection. Dosing at 0, 1 and 6 months. Booster or revaccination for non-responders with anti-HBs below 10 mIU/mL."
+        },
+        {
+          "type": "paragraph",
+          "text": "Post-exposure HBIG: for children born to HBV-positive mothers and needle-stick injury. HBIG should be given within 48 hours, with the first HBV vaccine dose at a different body site."
+        },
+        {
+          "type": "paragraph",
+          "text": "National immunization schedule shown in the lecture: hepatitis B at birth or as soon as possible within 24 hours, 0.5 mL IM in the anterolateral mid-thigh; subsequent hepatitis B-containing doses at 6, 10 and 14 weeks, 0.5 mL IM in the anterolateral mid-thigh. Other measures include screening blood donors and blood/body-fluid precautions."
+        },
+        {
+          "type": "heading",
+          "text": "HCV"
+        },
+        {
+          "type": "paragraph",
+          "text": "The lecture describes older peginterferon-based treatment for acute hepatitis C and notes that oral direct-acting agents have supplanted interferon therapy; a 6-week course of ledipasvir and sofosbuvir is stated to prevent chronic hepatitis."
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "acute-source-10",
+        "sourceOrder": 10,
+        "originalLabel": "Treatment and prophylaxis",
+        "originalSourceHash": "a5ac12707c6697e4340715c7993147e8b44fb1c3365a26251ba72ded9cbcc6a7"
+      },
+      "sourceHash": "5c305c827d12ed0cd7826c4db7390803ca231c66f4d7f71aabab38bec003172f"
+    }
+  ],
+  "sourceVersion": "must401-git-2026-07-27",
+  "status": "published"
+}

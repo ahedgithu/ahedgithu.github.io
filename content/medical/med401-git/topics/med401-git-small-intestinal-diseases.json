@@ -1,0 +1,2824 @@
+{
+  "id": "med401-git-small-intestinal-diseases",
+  "subjectId": "med401-git",
+  "title": "Small Intestinal Diseases",
+  "aliases": [],
+  "sectionIds": [
+    "med401-git-diarrhea-mechanisms",
+    "med401-git-diarrhea-approach",
+    "med401-git-malabsorption",
+    "med401-git-malabsorption-tests",
+    "med401-git-celiac",
+    "med401-git-whipple-sibo",
+    "med401-git-lymph-lactose",
+    "med401-git-sbo",
+    "med401-git-tropical-tumors"
+  ],
+  "sections": [
+    {
+      "id": "med401-git-diarrhea-mechanisms",
+      "topicId": "med401-git-small-intestinal-diseases",
+      "title": "Four mechanisms of diarrhea",
+      "category": "classification",
+      "keywords": [
+        "osmotic",
+        "secretory",
+        "exudative",
+        "motility",
+        "fasting"
+      ],
+      "contentHtml": "<div><div><b>Osmotic</b><span>Poorly absorbed solutes retain water; improves with fasting</span></div><div><b>Secretory</b><span>Chloride and water secretion ± reduced sodium/water absorption; persists during fasting</span></div><div><b>Exudative</b><span>Mucus, blood and protein leak from inflamed/damaged mucosa</span></div><div><b>Motility</b><span>Abnormal contact time between luminal contents and mucosa</span></div></div>",
+      "contentHash": "2bcb656a3865f46621af6528e523605bd5ebe56e9abe4c49842b1d013630cc19"
+    },
+    {
+      "id": "med401-git-diarrhea-approach",
+      "topicId": "med401-git-small-intestinal-diseases",
+      "title": "Clinical approach and stool interpretation",
+      "category": "clinical",
+      "keywords": [
+        "history",
+        "nocturnal",
+        "stool",
+        "osmotic",
+        "gap",
+        "fecal",
+        "leukocytes"
+      ],
+      "contentHtml": "<div><table><thead><tr><th>Clue</th><th>Interpretation in source</th></tr></thead><tbody><tr><td>&lt;2–3 weeks</td><td>Acute diarrhea</td></tr><tr><td>&gt;3–4 weeks</td><td>Chronic diarrhea</td></tr><tr><td>Nocturnal persistence</td><td>Suggests organic disease</td></tr><tr><td>Large, soupy or greasy stools</td><td>Small-intestinal process / malabsorption</td></tr><tr><td>Small quantities + mucus + urgency/tenesmus</td><td>Descending colon or rectum</td></tr><tr><td>Blood</td><td>Inflammatory, vascular, infectious or neoplastic disease</td></tr><tr><td>Fecal leukocytes</td><td>Mucosal inflammation</td></tr><tr><td>Osmotic gap &gt;100</td><td>Osmotic diarrhea</td></tr><tr><td>Osmotic gap &lt;50</td><td>Secretory diarrhea</td></tr></tbody></table></div><ul><li>History: nature, volume, consistency, frequency, color, relation to meals, diet, drugs, disease and travel.</li><li>Examination: hydration, fever/toxicity, goiter, rash, neuropathy, postural hypotension, arthritis, abdominal bruit, perianal disease, fistula or rectal mass.</li><li>Stool evaluation includes fecal leukocytes, fat, occult blood, sodium and potassium.</li></ul>",
+      "contentHash": "6e80375a18b056ad84b8926473978bef9c34b119b26380d009a6516c54fa6b40"
+    },
+    {
+      "id": "med401-git-malabsorption",
+      "topicId": "med401-git-small-intestinal-diseases",
+      "title": "Malabsorption: sites and three phases",
+      "category": "mechanism",
+      "keywords": [
+        "duodenum",
+        "jejunum",
+        "ileum",
+        "intraluminal",
+        "mucosal",
+        "transport"
+      ],
+      "contentHtml": "<div><table><thead><tr><th>Site</th><th>Main nutrients listed</th></tr></thead><tbody><tr><td>Duodenum</td><td>Iron, calcium, magnesium, folic acid, water-soluble vitamins, amino acids and monosaccharides</td></tr><tr><td>Jejunum</td><td>Fatty acids, amino acids, monosaccharides and water-soluble vitamins</td></tr><tr><td>Ileum</td><td>Monosaccharides, fatty acids, amino acids, fat-soluble vitamins, vitamin B12 and conjugated bile salts</td></tr></tbody></table></div><ol><li><span>1</span><div>Intraluminal phase: pancreatic enzymes and bile digest nutrients.</div></li><li><span>2</span><div>Mucosal phase: intact surface area and brush-border enzymes absorb products; celiac and Crohn disease impair this phase.</div></li><li><span>3</span><div>Transport phase: vascular and lymphatic channels carry nutrients away; lymphatic obstruction impairs chylomicron transport and causes steatorrhea.</div></li></ol>",
+      "contentHash": "346fa71c3f9ebfe12a1758d29b0732858cdb29bf0e8110cdc1736e737f89aafd"
+    },
+    {
+      "id": "med401-git-malabsorption-tests",
+      "topicId": "med401-git-small-intestinal-diseases",
+      "title": "Consequences and diagnostic tests",
+      "category": "investigation",
+      "keywords": [
+        "fecal",
+        "fat",
+        "D-xylose",
+        "Schilling",
+        "secretin",
+        "CCK",
+        "SIBO",
+        "culture"
+      ],
+      "contentHtml": "<div><table><thead><tr><th>Deficiency / nutrient</th><th>Clinical result in source</th></tr></thead><tbody><tr><td>Fat</td><td>Steatorrhea and weight loss</td></tr><tr><td>Protein</td><td>Wasting and edema</td></tr><tr><td>Folate / B12</td><td>Macrocytic megaloblastic anemia and glossitis</td></tr><tr><td>Vitamin D + calcium</td><td>Osteomalacia and tetany</td></tr><tr><td>Vitamin K</td><td>Hemorrhage</td></tr><tr><td>Iron</td><td>Anemia</td></tr><tr><td>Potassium</td><td>Flaccidity and arrhythmias</td></tr></tbody></table></div><ul><li>Quantitative 72-hour fecal fat is the gold standard for maldigestion; normal &lt;7 g/day.</li><li>D-xylose assesses mucosal dysfunction: 25 g oral load; 5-hour urine &gt;4 g is normal in the source.</li><li>Schilling test determines the cause of B12 malabsorption.</li><li>Direct secretin/CCK pancreatic tests are the gold standard for pancreatic function but are invasive and costly.</li><li>Small-bowel culture is the gold standard for SIBO; abnormal &gt;10⁵ CFU/mL in the testing section.</li><li>Breath tests evaluate carbohydrate malabsorption and bacterial overgrowth.</li></ul>",
+      "contentHash": "9dbc7bf03bd6f825c1043416c03ed566be1123152521246b44f696700785220e"
+    },
+    {
+      "id": "med401-git-celiac",
+      "topicId": "med401-git-small-intestinal-diseases",
+      "title": "Celiac disease",
+      "category": "clinical",
+      "keywords": [
+        "celiac",
+        "gluten",
+        "tTG",
+        "endomysial",
+        "biopsy",
+        "villous",
+        "atrophy"
+      ],
+      "contentHtml": "<div><p>An autoimmune response to gluten in wheat, rye and barley causes small-intestinal mucosal inflammation. Most patients express HLA-DQ2 or HLA-DQ8.</p></div><div><table><thead><tr><th>Area</th><th>Source points</th></tr></thead><tbody><tr><td>Risk groups</td><td>Dermatitis herpetiformis, first-degree relatives, autoimmune thyroid disease, Down syndrome, Turner syndrome and type 1 diabetes</td></tr><tr><td>Serology</td><td>IgA endomysial and IgA tTG antibodies; sensitivity and specificity &gt;95%; tTG is recommended as the single primary-care screening test</td></tr><tr><td>Biopsy</td><td>Required for confirmation in most patients; villous atrophy, crypt lengthening and increased epithelial lymphocytes</td></tr><tr><td>Treatment</td><td>Strict gluten avoidance, confirmation before therapy, dietitian involvement and ongoing support</td></tr><tr><td>Comorbidities</td><td>Osteoporosis, thyroid dysfunction, folate/B12/fat-soluble vitamin/iron deficiencies and increased malignancy risk including non-Hodgkin lymphoma</td></tr></tbody></table></div>",
+      "contentHash": "e35044f49b08cbc449ad685a787661b82201a05361e8cd01034f4cafe28d6aa0"
+    },
+    {
+      "id": "med401-git-whipple-sibo",
+      "topicId": "med401-git-small-intestinal-diseases",
+      "title": "Whipple disease and SIBO",
+      "category": "comparison",
+      "keywords": [
+        "Whipple",
+        "PAS",
+        "PCR",
+        "SIBO",
+        "B12",
+        "folate",
+        "culture"
+      ],
+      "contentHtml": "<div><div><h4>Whipple disease</h4><ul><li>Tropheryma whipplei; weight loss, arthropathy, diarrhea, abdominal pain, fever and lymphadenopathy.</li><li>Neurologic clues include cognitive change, supranuclear gaze palsy and oculomasticatory myorhythmia.</li><li>Small-bowel biopsy: foamy histiocytes with PAS-positive inclusions; confirmation by electron microscopy or PCR.</li><li>Initial IV ceftriaxone or streptomycin, then prolonged oral TMP-SMX or cefixime in the source.</li></ul></div><div><h4>Small intestinal bacterial overgrowth</h4><ul><li>Caused by excessive small-bowel bacteria, promoted by dysmotility, achlorhydria or structural disease.</li><li>Steatorrhea from bile-salt deconjugation; diarrhea, bloating and B12 deficiency; folate may be high.</li><li>Gold standard: jejunal aspirate culture &gt;100,000 CFU/mL.</li><li>Treat cause, correct nutrition and use 10–14 days of antibiotics; some need rotating long-term therapy.</li></ul></div></div>",
+      "contentHash": "2ea600ee6e411a646ee70a6a17b1a4c7e672147f7a81672ecf741ef0241efc72"
+    },
+    {
+      "id": "med401-git-lymph-lactose",
+      "topicId": "med401-git-small-intestinal-diseases",
+      "title": "Intestinal lymphangiectasia and lactose intolerance",
+      "category": "clinical",
+      "keywords": [
+        "lymphangiectasia",
+        "MCT",
+        "lactose",
+        "lactase",
+        "breath",
+        "test"
+      ],
+      "contentHtml": "<div><div><h4>Intestinal lymphangiectasia</h4><ul><li>Dilated or obstructed lymphatic channels rupture and leak contents into the bowel.</li><li>Congenital or acquired from infiltrative/mechanical causes such as amyloidosis or malignancy.</li><li>Lower-limb edema, mild diarrhea/steatorrhea, weight loss, fatigue and abdominal pain.</li><li>Biopsy confirms dilated lymphatics; treat with a low-fat diet using medium-chain triglycerides.</li></ul></div><div><h4>Lactose intolerance</h4><ul><li>Lactase deficiency prevents lactose splitting into glucose and galactose.</li><li>Unabsorbed lactose retains water and is fermented by colonic bacteria into organic acids and gas.</li><li>Diarrhea, bloating and gas; may be secondary to celiac, Crohn disease or infection.</li><li>Diagnosis by dairy avoidance, breath testing or blood-glucose response after lactose.</li></ul></div></div>",
+      "contentHash": "b9eb21d84ed69c004873602b83969741542612af5f49370539b2d07bc46b97ef"
+    },
+    {
+      "id": "med401-git-sbo",
+      "topicId": "med401-git-small-intestinal-diseases",
+      "title": "Small-bowel obstruction",
+      "category": "clinical",
+      "keywords": [
+        "obstruction",
+        "hernia",
+        "adhesions",
+        "volvulus",
+        "intussusception",
+        "strangulation"
+      ],
+      "contentHtml": "<div><span>Hernias</span><span>Adhesions</span><span>Inflammatory bowel disease</span><span>Tumors</span><span>Volvulus</span><span>Intussusception</span></div><ul><li>Symptoms: intermittent peristaltic pain, distension depending on level, vomiting, constipation, fever and tachycardia.</li><li>Danger: strangulation can reduce blood flow and cause bowel death; rupture can cause peritonitis.</li><li>Diagnosis: abdominal X-ray, contrast studies, CT and ultrasound; determine location, severity, cause and whether obstruction is simple or complicated.</li><li>Treatment: antiemetics, analgesics, antibiotics when infection is present, bowel decompression and surgery.</li><li>Complications: abdominal abscess, sepsis and short-bowel syndrome.</li></ul>",
+      "contentHash": "61db9e8c13c9000b8a2338651f12d6bc21bb75e67fa2d4e10611bd15bd9dd65e"
+    },
+    {
+      "id": "med401-git-tropical-tumors",
+      "topicId": "med401-git-small-intestinal-diseases",
+      "title": "Tropical sprue, tumors and polyposis",
+      "category": "clinical",
+      "keywords": [
+        "tropical",
+        "sprue",
+        "adenocarcinoma",
+        "lymphoma",
+        "FAP",
+        "Peutz",
+        "Jeghers",
+        "Cronkhite",
+        "Canada"
+      ],
+      "contentHtml": "<div><div><h4>Tropical sprue</h4><p>Travel-associated malabsorptive disorder believed infectious; diarrhea, weight loss, dyspepsia and deficiencies. Biopsy shows villous blunting/inflammation. Treat with high-dose folic acid and antibiotics.</p></div><div><h4>Small-bowel tumors</h4><p>Rare and often silent. Symptoms include pain, nausea, weight loss, bleeding and obstruction. Malignant types include adenocarcinoma, lymphoma, leiomyosarcoma and metastases; benign types include leiomyoma, adenoma, lipoma, hemangioma and neurogenic tumors.</p></div><div><h4>Polyposis syndromes</h4><p>Familial adenomatous polyposis, Peutz–Jeghers, generalized juvenile polyposis and Cronkhite–Canada syndrome.</p></div></div><div><table><thead><tr><th>Syndrome</th><th>Distinctive source feature</th></tr></thead><tbody><tr><td>FAP</td><td>Autosomal dominant; &gt;80% develop small-intestinal adenomas, especially duodenal; periampullary cancer is an important post-colectomy risk</td></tr><tr><td>Peutz–Jeghers</td><td>Jejunal/ileal hamartomatous polyps, bleeding/obstruction and mucocutaneous pigmentation</td></tr><tr><td>Generalized juvenile polyposis</td><td>Inherited or sporadic; obstruction/bleeding and small increased GI-cancer risk</td></tr><tr><td>Cronkhite–Canada</td><td>Polyps, pigmentation, diarrhea, protein loss, alopecia and severe malnutrition; polyps usually not malignant</td></tr></tbody></table></div>",
+      "contentHash": "30f395feffc90a30f73faeb9cba905ffb9bec16c23f6f1de756dedfb1b1c8ada"
+    }
+  ],
+  "passages": [
+    {
+      "id": "med401-git-small-source-1",
+      "order": 1,
+      "title": "Diarrhea",
+      "text": "SMALL INTESTINAL DISEASES\nDiarrhea\n• Definition: Diarrhea can be defined as an increase in the fluidity, frequency and volume of\ndaily stool output.\n• Any process that either impairs absorption Na+ & water or causes Cl- & water to be secreted\ninto the intestinal lumen can result in diarrhea.\nPathophysiology\nThere are 4 major mechanisms of diarrhea:\n1. Osmotic diarrhea: in which there is increased amounts of poorly absorbable osmotically\nsolutes in the gut lumen.\n2. Secretory diarrhea: in which there is increased Cl- & water secretion with or without\ninhibition of normal active Na+ and water absorption.\n3. Exudative diarrhea: exudation of mucus, blood and protein from sites of the bowel lumen.\n4. Abnormal intestinal motility: with increased or decreased contact between luminal\ncontents and mucosal surface.",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "SMALL INTESTINAL DISEASES"
+        },
+        {
+          "type": "paragraph",
+          "text": "Diarrhea"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Definition: Diarrhea can be defined as an increase in the fluidity, frequency and volume of"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "daily stool output."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Any process that either impairs absorption Na+ & water or causes Cl- & water to be secreted"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "into the intestinal lumen can result in diarrhea."
+        },
+        {
+          "type": "paragraph",
+          "text": "Pathophysiology"
+        },
+        {
+          "type": "heading",
+          "text": "There are 4 major mechanisms of diarrhea"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Osmotic diarrhea: in which there is increased amounts of poorly absorbable osmotically"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "solutes in the gut lumen."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Secretory diarrhea: in which there is increased Cl- & water secretion with or without"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "inhibition of normal active Na+ and water absorption."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Exudative diarrhea: exudation of mucus, blood and protein from sites of the bowel lumen.",
+            "Abnormal intestinal motility: with increased or decreased contact between luminal"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "contents and mucosal surface."
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "small-source-1",
+        "sourceOrder": 1,
+        "originalLabel": "Lecture page 1",
+        "originalSourceHash": "33ba89be0b99d5018939229d3b638ac70d8c049710e01c96f8de641df0feb3ce"
+      },
+      "sourceHash": "3d96a9a129fc17c1b38c402b6465de5f88463ec04070fbdb1ed14a025a3e3625"
+    },
+    {
+      "id": "med401-git-small-source-2",
+      "order": 2,
+      "title": "Causes of Osmotic Diarrhea:",
+      "text": "Causes of Osmotic Diarrhea:\n1. Carbohydrate malabsorption:\no Disaccharidase deficiency in the small mucosa.\nPrimary: e.g: idiopathic lactose, sucrase a maltase deficiency.\nSecondary: e.g. after infectious gastroenteritis and with mucosal inflammation.\no Ingestion of mannitol and Sorbitol.\no Lactulose therapy.\n2. General malabsorption:\no Sprue > Idiopathic > Gluten enteropathy > Tropical sprue.\no Post radiation, Post ischemic Colitis.\n3. Ingestion of sodium sulfate, sodium phosphate, magnesium sulfate, milk of manganese,\nmagnesium-containing antacid.\nCauses of Secretory Diarrhea:\n• Enterotoxins: Vibrio cholera, Staphylococcus aureus, E Coli, Bacillus cereus.\n• Hormonal secretagogues: Vasoactive intestinal polypeptide, Serotonin, Carcinoid,\nProstaglandins.\n• Gastric Hypersecretion: Zollinger-Ellison syndrome, Systemic mastocytosis.\n• Short bowel syndrome , Small-intestinal mucosal disease.\n• Bile salts (Terminal ileum disease/Bile duct obstruction) → Fatty acids\n• Laxatives (Aloe/Senna), Ricinoleic acid (Castor oil), Danthron, Phenolphthalein.\n• Pancreatic insufficiency.\nExudative Diarrhea:\n1. Idiopathic: Ulcerative colitis, Crohn's Disease.\n2. Infectious from invasive organisms.\n3. Ischemic.\n4. Vasculitis.\n5. Due to radiation injury.\n6. Caused by abscess formation.\nMotility Disturbance:\n• Increased motility of small intestine: Small-intestinal mucosal disease, Hyperthyroidism,\ncarcinoid and postgastrectomy dumping syndrome.\n• Decreased motility of small intestine: D.M (Diabetes Mellitus), Hypoparathyroidism,\nScleroderma, Amyloidosis and post vagotomy states.\n• Increased colonic motility: irritable bowel syndromes.\n• Anal sphincter dysfunction: caused by neuromuscular disease, inflammation scarring and\npost-surgical state.",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "Causes of Osmotic Diarrhea"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Carbohydrate malabsorption:"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "o Disaccharidase deficiency in the small mucosa."
+        },
+        {
+          "type": "paragraph",
+          "text": "Primary: e.g: idiopathic lactose, sucrase a maltase deficiency."
+        },
+        {
+          "type": "paragraph",
+          "text": "Secondary: e.g. after infectious gastroenteritis and with mucosal inflammation."
+        },
+        {
+          "type": "paragraph",
+          "text": "o Ingestion of mannitol and Sorbitol."
+        },
+        {
+          "type": "paragraph",
+          "text": "o Lactulose therapy."
+        },
+        {
+          "type": "list",
+          "items": [
+            "General malabsorption:"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "o Sprue > Idiopathic > Gluten enteropathy > Tropical sprue."
+        },
+        {
+          "type": "paragraph",
+          "text": "o Post radiation, Post ischemic Colitis."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Ingestion of sodium sulfate, sodium phosphate, magnesium sulfate, milk of manganese,"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "magnesium-containing antacid."
+        },
+        {
+          "type": "heading",
+          "text": "Causes of Secretory Diarrhea"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Enterotoxins: Vibrio cholera, Staphylococcus aureus, E Coli, Bacillus cereus.",
+            "Hormonal secretagogues: Vasoactive intestinal polypeptide, Serotonin, Carcinoid,"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Prostaglandins."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Gastric Hypersecretion: Zollinger-Ellison syndrome, Systemic mastocytosis.",
+            "Short bowel syndrome , Small-intestinal mucosal disease.",
+            "Bile salts (Terminal ileum disease/Bile duct obstruction) → Fatty acids",
+            "Laxatives (Aloe/Senna), Ricinoleic acid (Castor oil), Danthron, Phenolphthalein.",
+            "Pancreatic insufficiency."
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "Exudative Diarrhea"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Idiopathic: Ulcerative colitis, Crohn's Disease.",
+            "Infectious from invasive organisms.",
+            "Ischemic.",
+            "Vasculitis.",
+            "Due to radiation injury.",
+            "Caused by abscess formation."
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "Motility Disturbance"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Increased motility of small intestine: Small-intestinal mucosal disease, Hyperthyroidism,"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "carcinoid and postgastrectomy dumping syndrome."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Decreased motility of small intestine: D.M (Diabetes Mellitus), Hypoparathyroidism,"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Scleroderma, Amyloidosis and post vagotomy states."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Increased colonic motility: irritable bowel syndromes.",
+            "Anal sphincter dysfunction: caused by neuromuscular disease, inflammation scarring and"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "post-surgical state."
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "small-source-2",
+        "sourceOrder": 2,
+        "originalLabel": "Lecture page 2",
+        "originalSourceHash": "363aa96c95dc165130cd36e743b04618a934e28c4062704ac7d99c9174edafcc"
+      },
+      "sourceHash": "85b440676ae9064de93c4cb802285b371aed91cf1f912491b298a50671c02125"
+    },
+    {
+      "id": "med401-git-small-source-3",
+      "order": 3,
+      "title": "Clinical Approach:",
+      "text": "Clinical Approach:\n• It is helpful to classify diarrhea into clinical categories taking into consideration the duration\nsetting and sexual preference of the patient.\nHistory:\n• Description : Nature, Volume, Consistency, Frequency, Color, and relation to meal.\n• Duration:\n- Diarrhea of abrupt onset of less than 2 to 3 weeks duration is called \"Acute Diarrhea\".\n- If diarrhea illness lasts longer than 3-4 weeks it is called \"Chronic Diarrhea\".\n• Diurnal variation : Nocturnal? → Persistence of diarrhea at night suggests organic causes.\n• Dietary habits – Drug intake.\n• Diseases : DM , Thyroid disorders , Scleroderma ….\n• Travel history\nIf the stools are:\no Large – soupy or greasy: Possibly containing undigested food particles\no Periumbilical or right lower quadrant pain or intermittent crampy abdominal Pain → Small\nintestine\no If the disease is in the descending colon or rectum, patient usually pass small quantities of\nstool or mucous\n- The stool are mushy and brown and sometimes mixed with mucus and blood\n- Since of urgency and tenesmus\no Blood in stool → Inflammatory ,vascular ,infection or neoplastic disease\no Presence of fecal leucocytes indicate mucosal inflammation\no Diarrhea that stops with fasting suggests Osmotic diarrhea (except secretory diarrhea due to\nfatty acid & bile salt malabsorption). Large volume diarrhea during fasting is most likely\nsecretory.\nPhysical Examination:\n• Includes: General condition, degree of hydration, presence of fever & symptoms of toxicity.\n• Specific signs: Goiter, Skin rash, Peripheral neuropathy, Postural hypotension, Arthritis,\nAbdominal Bruit, Perianal abscess, Rectal mass, Skin rash, Fistula.\n• Presence of fecal leukocyte indicates mucosal inflammation.\nInvestigations:\n• Stool Analysis: Fecal leukocytes (+ve in inflammatory), Stool fat (+ve in fatty diarrhea) →\nQualitative/Quantitative stool fat (Sudan stain), Watery diarrhea if both are negative.\n• Osmotic Gap: >100 indicates Osmotic diarrhea; <50 indicates secretory diarrhea.\n• Tests: Fecal occult blood, Stool sodium and potassium concentration.",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "Clinical Approach"
+        },
+        {
+          "type": "list",
+          "items": [
+            "It is helpful to classify diarrhea into clinical categories taking into consideration the duration"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "setting and sexual preference of the patient."
+        },
+        {
+          "type": "heading",
+          "text": "History"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Description : Nature, Volume, Consistency, Frequency, Color, and relation to meal.",
+            "Duration:",
+            "Diarrhea of abrupt onset of less than 2 to 3 weeks duration is called \"Acute Diarrhea\".",
+            "If diarrhea illness lasts longer than 3-4 weeks it is called \"Chronic Diarrhea\".",
+            "Diurnal variation : Nocturnal? → Persistence of diarrhea at night suggests organic causes.",
+            "Dietary habits – Drug intake.",
+            "Diseases : DM , Thyroid disorders , Scleroderma ….",
+            "Travel history"
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "If the stools are"
+        },
+        {
+          "type": "paragraph",
+          "text": "o Large – soupy or greasy: Possibly containing undigested food particles"
+        },
+        {
+          "type": "paragraph",
+          "text": "o Periumbilical or right lower quadrant pain or intermittent crampy abdominal Pain → Small"
+        },
+        {
+          "type": "paragraph",
+          "text": "intestine"
+        },
+        {
+          "type": "paragraph",
+          "text": "o If the disease is in the descending colon or rectum, patient usually pass small quantities of"
+        },
+        {
+          "type": "paragraph",
+          "text": "stool or mucous"
+        },
+        {
+          "type": "list",
+          "items": [
+            "The stool are mushy and brown and sometimes mixed with mucus and blood",
+            "Since of urgency and tenesmus"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "o Blood in stool → Inflammatory ,vascular ,infection or neoplastic disease"
+        },
+        {
+          "type": "paragraph",
+          "text": "o Presence of fecal leucocytes indicate mucosal inflammation"
+        },
+        {
+          "type": "paragraph",
+          "text": "o Diarrhea that stops with fasting suggests Osmotic diarrhea (except secretory diarrhea due to"
+        },
+        {
+          "type": "paragraph",
+          "text": "fatty acid & bile salt malabsorption). Large volume diarrhea during fasting is most likely"
+        },
+        {
+          "type": "paragraph",
+          "text": "secretory."
+        },
+        {
+          "type": "heading",
+          "text": "Physical Examination"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Includes: General condition, degree of hydration, presence of fever & symptoms of toxicity.",
+            "Specific signs: Goiter, Skin rash, Peripheral neuropathy, Postural hypotension, Arthritis,"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Abdominal Bruit, Perianal abscess, Rectal mass, Skin rash, Fistula."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Presence of fecal leukocyte indicates mucosal inflammation."
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "Investigations"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Stool Analysis: Fecal leukocytes (+ve in inflammatory), Stool fat (+ve in fatty diarrhea) →"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Qualitative/Quantitative stool fat (Sudan stain), Watery diarrhea if both are negative."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Osmotic Gap: >100 indicates Osmotic diarrhea; <50 indicates secretory diarrhea.",
+            "Tests: Fecal occult blood, Stool sodium and potassium concentration."
+          ]
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "small-source-3",
+        "sourceOrder": 3,
+        "originalLabel": "Lecture page 3",
+        "originalSourceHash": "b2f3b0e78135b344df56a70426beefe7992ceb0f4b01be8b97d264e94ff8fffe"
+      },
+      "sourceHash": "dcc793e4ea5f211acc3a85204325f99df22399583e330fdf0b4026e6c85f4be6"
+    },
+    {
+      "id": "med401-git-small-source-4",
+      "order": 4,
+      "title": "MALABSORPTION",
+      "text": "MALABSORPTION\n• Definition: The inadequate transport of one or more of the constituents of the normal diet\nfrom the intestinal lumen across the intestinal epithelium into the portal circulation.\nSites of Nutrient Absorption:\n1. Duodenum: Iron, calcium, Mg, folic acid, water soluble vitamins, amino acids,\nmonosaccharides.\n2. Jejunum: Fatty acids, amino acids, monosaccharides, and water soluble vitamins.\n3. Ileum: Monosaccharides, fatty acids, amino acids, fat soluble vitamins, vitamin B12 and\nconjugated bile salts.\nPhysiology of Absorption (Three Phases):\n1. Intraluminal phase (Digestive phase): Fats, proteins, and carbohydrates are hydrolyzed by\npancreatic and biliary secretions (e.g., lipase, proteases, amylase).\n- Fat by pancreatic lipase\n- Protein by pancreatic proteases Carbohydrates by pancreatic amylase.\n- Pancreatic insufficiency may be due to chronic pancreatitis, cystic fibrosis, pancreatic\ncancer and Zollinger Ellison syndrome leading to malabsorption\n- Decrease bile salt concentrations may be due to biliary obstruction, cholestatic liver\ndisease, bacterial over growth\n- Decrease reabsorption due to ileal disease such as Crohn’s disease\n2. Mucosal phase: Mucosal impairment is the most common cause of malabsorption.\nRequires a sufficient surface area of intact small intestinal epithelium and brush border\nenzymes (hydrolysis of disaccharides/peptides). Impaired by Celiac and Crohn's disease.\n3. Transport phase: Nutrients leave cells through vascular or lymphatic circulation.\nObstruction of lymphatics results in impaired absorption of chylomicrons/lipoproteins,\ncausing steatorrhea.\nClassification of malabsorption\n1. Disorders of the Intraluminal phase\no Gastroenterostomy and partial gastrectomy → Uncoordinated gastric emptying → It\ndelivers gastric chyme too quickly to the intestine",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "MALABSORPTION"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Definition: The inadequate transport of one or more of the constituents of the normal diet"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "from the intestinal lumen across the intestinal epithelium into the portal circulation."
+        },
+        {
+          "type": "heading",
+          "text": "Sites of Nutrient Absorption"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Duodenum: Iron, calcium, Mg, folic acid, water soluble vitamins, amino acids,"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "monosaccharides."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Jejunum: Fatty acids, amino acids, monosaccharides, and water soluble vitamins.",
+            "Ileum: Monosaccharides, fatty acids, amino acids, fat soluble vitamins, vitamin B12 and"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "conjugated bile salts."
+        },
+        {
+          "type": "heading",
+          "text": "Physiology of Absorption (Three Phases)"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Intraluminal phase (Digestive phase): Fats, proteins, and carbohydrates are hydrolyzed by"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "pancreatic and biliary secretions (e.g., lipase, proteases, amylase)."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Fat by pancreatic lipase",
+            "Protein by pancreatic proteases Carbohydrates by pancreatic amylase.",
+            "Pancreatic insufficiency may be due to chronic pancreatitis, cystic fibrosis, pancreatic"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "cancer and Zollinger Ellison syndrome leading to malabsorption"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Decrease bile salt concentrations may be due to biliary obstruction, cholestatic liver"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "disease, bacterial over growth"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Decrease reabsorption due to ileal disease such as Crohn’s disease",
+            "Mucosal phase: Mucosal impairment is the most common cause of malabsorption."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Requires a sufficient surface area of intact small intestinal epithelium and brush border"
+        },
+        {
+          "type": "paragraph",
+          "text": "enzymes (hydrolysis of disaccharides/peptides). Impaired by Celiac and Crohn's disease."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Transport phase: Nutrients leave cells through vascular or lymphatic circulation."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Obstruction of lymphatics results in impaired absorption of chylomicrons/lipoproteins,"
+        },
+        {
+          "type": "paragraph",
+          "text": "causing steatorrhea."
+        },
+        {
+          "type": "paragraph",
+          "text": "Classification of malabsorption"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Disorders of the Intraluminal phase"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "o Gastroenterostomy and partial gastrectomy → Uncoordinated gastric emptying → It"
+        },
+        {
+          "type": "paragraph",
+          "text": "delivers gastric chyme too quickly to the intestine"
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "small-source-4",
+        "sourceOrder": 4,
+        "originalLabel": "Lecture page 4",
+        "originalSourceHash": "6ca57ee79885ee7f5125a215b58040d1a38d8c4be19557f6cea88badce1331b0"
+      },
+      "sourceHash": "f5d34fa9d857a45b8fcac13414b848e4a3f54b0e4e9fddb8866682967908d41d"
+    },
+    {
+      "id": "med401-git-small-source-5",
+      "order": 5,
+      "title": "o Pancreatic insufficiency",
+      "text": "o Pancreatic insufficiency\n- Chronic pancreatitis\n- Cystic fibrosis\n- Carcinoma of pancreas\no Deficiency of bile acids\no Disease or resection of terminal ileum\no Colonization of the small intestine with bacteria ( stagnant loop syndrome)\n2. Disorders of the mucosal phase\no Celiac disease\no Tuberculosis\no Tropical sprue\no Generalized mucosal abnormalities.\no Lymphoma\no Radiation enteritis\no Whipple’s disease\no Malabsorption of specific substances: Lactase deficiency : The mucosa is normal\nhistologically\n3. Disorders of transport phase\no Vascular : vasculitis and atherosclerosis\no Lymphatic : lymphangiectasia, infiltration\nMalabsorption Clinical Presentation:\n•Diarrhea •Steatorrhea\n•Weight loss •Bloating, distension, gas, borborygmi\n•Anorexia or hyperphagia •Nausea, vomiting\n•discomfort •Muscle atrophy\n•Edema •Signs/symptoms of specific vitamin deficiencies\nHistory and Examination\n•Prior GI surgery •h/o chronic pancreatitis\n•h/o liver, GI disorder •h/o CTD, diabetes\n•h/o radiation therapy •Diet and medications\n•Alcohol/drugs •h/o chronic sinus or respiratory infections\n•Recent travel history •Timing of onset\n•Bowel habits/stool characteristics\n•Associated GI and systemic complaints\n•Evidence of malnutrition or micronutrient deficiencies on exam",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "o Pancreatic insufficiency"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Chronic pancreatitis",
+            "Cystic fibrosis",
+            "Carcinoma of pancreas"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "o Deficiency of bile acids"
+        },
+        {
+          "type": "paragraph",
+          "text": "o Disease or resection of terminal ileum"
+        },
+        {
+          "type": "paragraph",
+          "text": "o Colonization of the small intestine with bacteria ( stagnant loop syndrome)"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Disorders of the mucosal phase"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "o Celiac disease"
+        },
+        {
+          "type": "paragraph",
+          "text": "o Tuberculosis"
+        },
+        {
+          "type": "paragraph",
+          "text": "o Tropical sprue"
+        },
+        {
+          "type": "paragraph",
+          "text": "o Generalized mucosal abnormalities."
+        },
+        {
+          "type": "paragraph",
+          "text": "o Lymphoma"
+        },
+        {
+          "type": "paragraph",
+          "text": "o Radiation enteritis"
+        },
+        {
+          "type": "paragraph",
+          "text": "o Whipple’s disease"
+        },
+        {
+          "type": "paragraph",
+          "text": "o Malabsorption of specific substances: Lactase deficiency : The mucosa is normal"
+        },
+        {
+          "type": "paragraph",
+          "text": "histologically"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Disorders of transport phase"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "o Vascular : vasculitis and atherosclerosis"
+        },
+        {
+          "type": "paragraph",
+          "text": "o Lymphatic : lymphangiectasia, infiltration"
+        },
+        {
+          "type": "heading",
+          "text": "Malabsorption Clinical Presentation"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Diarrhea •Steatorrhea",
+            "Weight loss •Bloating, distension, gas, borborygmi",
+            "Anorexia or hyperphagia •Nausea, vomiting",
+            "discomfort •Muscle atrophy",
+            "Edema •Signs/symptoms of specific vitamin deficiencies"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "History and Examination"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Prior GI surgery •h/o chronic pancreatitis",
+            "h/o liver, GI disorder •h/o CTD, diabetes",
+            "h/o radiation therapy •Diet and medications",
+            "Alcohol/drugs •h/o chronic sinus or respiratory infections",
+            "Recent travel history •Timing of onset",
+            "Bowel habits/stool characteristics",
+            "Associated GI and systemic complaints",
+            "Evidence of malnutrition or micronutrient deficiencies on exam"
+          ]
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "small-source-5",
+        "sourceOrder": 5,
+        "originalLabel": "Lecture page 5",
+        "originalSourceHash": "07707c6f931bb4c4b01d7167af5acc7ce42652c8c05bc80bbe1292052ef351eb"
+      },
+      "sourceHash": "6589f43e23e3d046308d15fabf95b6310f94741a149613eb752a5a680e072bd5"
+    },
+    {
+      "id": "med401-git-small-source-6",
+      "order": 6,
+      "title": "Nutrient Results of malabsorption",
+      "text": "Nutrient Results of malabsorption\nFat Steatorrhea, weight loss\nCarbohydrates distension Flatulent dyspepsia, abdominal\nProtein Wasting, edema\nFolic acid anemia Macrocytic, megaloblastic Glossitis\nVitamin B12 Macrocytic, megaloblastic anemia Glossitis\nVitamin C Bleeding tendency\nVitamin A Follicular hyperkeratosis Xerophthalmia\nVitamin D & Ca Osteomalacia & tetany\nVitamin K Hemorrhage\nIron Anemia\nSodium Muscular weakness, cramps\nPotassium Flaccidity, arrhythmias\nMagnesium Muscular weakness\nOverview of Tests for Malabsorption\n- Blood tests - Fecal fat determination\n- Imaging studies - Endoscopy with biopsy and aspirate\n- Breath tests - D-xylose test, Schilling test, Secretin/CCK test\nFecal Fat Determination Quantitative “Gold standard” to diagnose maldigestion\n- 72 hour collection optimal\n- Normal < 7 g/day\n- Limited use in clinical practice due to issues with collection/processing\nFecal Fat Determination Qualitative\n- Random spot sample - Qualitative (Sudan stain)\n- Semi-quantitative (size of droplets) - Acid steatocrit\n- Less sensitive for mild-moderate steatorrhea\n- Variable reproducibility - Helpful only if abnormal",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "Nutrient Results of malabsorption"
+        },
+        {
+          "type": "paragraph",
+          "text": "Fat Steatorrhea, weight loss"
+        },
+        {
+          "type": "paragraph",
+          "text": "Carbohydrates distension Flatulent dyspepsia, abdominal"
+        },
+        {
+          "type": "paragraph",
+          "text": "Protein Wasting, edema"
+        },
+        {
+          "type": "paragraph",
+          "text": "Folic acid anemia Macrocytic, megaloblastic Glossitis"
+        },
+        {
+          "type": "paragraph",
+          "text": "Vitamin B12 Macrocytic, megaloblastic anemia Glossitis"
+        },
+        {
+          "type": "paragraph",
+          "text": "Vitamin C Bleeding tendency"
+        },
+        {
+          "type": "paragraph",
+          "text": "Vitamin A Follicular hyperkeratosis Xerophthalmia"
+        },
+        {
+          "type": "paragraph",
+          "text": "Vitamin D & Ca Osteomalacia & tetany"
+        },
+        {
+          "type": "paragraph",
+          "text": "Vitamin K Hemorrhage"
+        },
+        {
+          "type": "paragraph",
+          "text": "Iron Anemia"
+        },
+        {
+          "type": "paragraph",
+          "text": "Sodium Muscular weakness, cramps"
+        },
+        {
+          "type": "paragraph",
+          "text": "Potassium Flaccidity, arrhythmias"
+        },
+        {
+          "type": "paragraph",
+          "text": "Magnesium Muscular weakness"
+        },
+        {
+          "type": "paragraph",
+          "text": "Overview of Tests for Malabsorption"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Blood tests - Fecal fat determination",
+            "Imaging studies - Endoscopy with biopsy and aspirate",
+            "Breath tests - D-xylose test, Schilling test, Secretin/CCK test"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Fecal Fat Determination Quantitative “Gold standard” to diagnose maldigestion"
+        },
+        {
+          "type": "list",
+          "items": [
+            "72 hour collection optimal",
+            "Normal < 7 g/day",
+            "Limited use in clinical practice due to issues with collection/processing"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Fecal Fat Determination Qualitative"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Random spot sample - Qualitative (Sudan stain)",
+            "Semi-quantitative (size of droplets) - Acid steatocrit",
+            "Less sensitive for mild-moderate steatorrhea",
+            "Variable reproducibility - Helpful only if abnormal"
+          ]
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "small-source-6",
+        "sourceOrder": 6,
+        "originalLabel": "Lecture page 6",
+        "originalSourceHash": "d912182889f11b6e596a9e26770bfa404a0ce7d191d704eb429d9225b52d5998"
+      },
+      "sourceHash": "c1c788bba0d7ba2ad00530de98be07586779e9e3f61f57ae74c8144d913c50c1"
+    },
+    {
+      "id": "med401-git-small-source-7",
+      "order": 7,
+      "title": "D-xylose Test",
+      "text": "D-xylose Test\n• Indicates malabsorption secondary to mucosal dysfunction\n• Oral load with 25 g D-xylose\n- 5 hr urine collection (normal > 4 g)\n- 1 hr and 3 hr serum samples (normal > 20 mg/dl at 1 hr, > 18.5 mg/dl at 3 hr)\n• Numerous factors affect results\n• Role in clinical practice controversial\n- Use in special populations\nVitamin B12 Absorption and Schilling Test\n• Determine etiology of B12 deficiency\n• 1 mcg radiolabeled cyanocobalamin ingested and 1 mg non-labeled B12 administered IM\n• 24 hr urine collection\n• Recovery of < 9% abnormal\n• Numerous causes of false positives/negatives\n• 4 Stages of the Schilling Test\nDirect Pancreatic Function Tests\n• Gold standard\n• Quantitative stimulation tests using either secretin or CCK\n• Requires Dreiling tube placed into duodenum with collection of contents for an hour\n• Analyzed for bicarbonate (secretin) or amylase/lipase/trypsin (CCK)\n• Low concentrations (< 80-90 mEq/L HCO3; < 780 IU/L lipase) consistent with pancr. insuff.\n• Limited by availability, invasiveness, expense\nEndoscopic Pancreatic Function Tests\n• Uses endoscope instead of Dreiling tube → Results not affected by sedation or analgesia\n• Correlates well with conventional test (in healthy subjects)\n• Number of advantages exposure\n- More widely available, less costly/ uncomfortable, no radiation\n• Practicality of 1 hr endoscopy\n- Timed specimens at 30/45 min sufficient",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "D-xylose Test"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Indicates malabsorption secondary to mucosal dysfunction",
+            "Oral load with 25 g D-xylose",
+            "5 hr urine collection (normal > 4 g)",
+            "1 hr and 3 hr serum samples (normal > 20 mg/dl at 1 hr, > 18.5 mg/dl at 3 hr)",
+            "Numerous factors affect results",
+            "Role in clinical practice controversial",
+            "Use in special populations"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Vitamin B12 Absorption and Schilling Test"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Determine etiology of B12 deficiency",
+            "1 mcg radiolabeled cyanocobalamin ingested and 1 mg non-labeled B12 administered IM",
+            "24 hr urine collection",
+            "Recovery of < 9% abnormal",
+            "Numerous causes of false positives/negatives",
+            "4 Stages of the Schilling Test"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Direct Pancreatic Function Tests"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Gold standard",
+            "Quantitative stimulation tests using either secretin or CCK",
+            "Requires Dreiling tube placed into duodenum with collection of contents for an hour",
+            "Analyzed for bicarbonate (secretin) or amylase/lipase/trypsin (CCK)",
+            "Low concentrations (< 80-90 mEq/L HCO3; < 780 IU/L lipase) consistent with pancr. insuff.",
+            "Limited by availability, invasiveness, expense"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Endoscopic Pancreatic Function Tests"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Uses endoscope instead of Dreiling tube → Results not affected by sedation or analgesia",
+            "Correlates well with conventional test (in healthy subjects)",
+            "Number of advantages exposure",
+            "More widely available, less costly/ uncomfortable, no radiation",
+            "Practicality of 1 hr endoscopy",
+            "Timed specimens at 30/45 min sufficient"
+          ]
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "small-source-7",
+        "sourceOrder": 7,
+        "originalLabel": "Lecture page 7",
+        "originalSourceHash": "02d4e8a79642e5b91fbaf3d522d662b7b638eba56e46df88a43cc4cd0da9cd44"
+      },
+      "sourceHash": "cb2ec2b6988a83f5a1be24e1003ff1fc2a7ded41c0d23abb78ef66135b7b5bff"
+    },
+    {
+      "id": "med401-git-small-source-8",
+      "order": 8,
+      "title": "Indirect Pancreatic Function Tests",
+      "text": "Indirect Pancreatic Function Tests\n• Serum trypsinogen/trypsin • Fecal chymotrypsin\n• Fecal elastase-1 • Pancreolauryl test\n• Bentiromide test\n“Tubeless tests”\n• Trial of pancreatic enzymes\nBreath Tests\n• Specific carbohydrate malabsorption\n- Lactose, fructose, sucrose\n- Hydrogen\n• Small intestinal bacterial overgrowth\n- Glucose, lactulose\n- Hydrogen\n• Xylose, glycocholate\n- 14C\n• Fat malabsorption\n- 14C-triolein\nSmall Bowel Culture Gold Standard” test for SIBO (bact. overgrowth)\n- Abnormal > 105 cfu/ml\n• Many limitations\n- Invasive - Expensive\n- Contamination - Many bacterial uncultivatable\nTests of Carbohydrate Malabsorption\n• Oral breath tests • Quantitative analysis of fecal CHO\n• Stool pH • Oral tolerance tests\n• Direct assay of mono- and disaccharidases",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "Indirect Pancreatic Function Tests"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Serum trypsinogen/trypsin • Fecal chymotrypsin",
+            "Fecal elastase-1 • Pancreolauryl test",
+            "Bentiromide test"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "“Tubeless tests”"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Trial of pancreatic enzymes"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Breath Tests"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Specific carbohydrate malabsorption",
+            "Lactose, fructose, sucrose",
+            "Hydrogen",
+            "Small intestinal bacterial overgrowth",
+            "Glucose, lactulose",
+            "Hydrogen",
+            "Xylose, glycocholate",
+            "14C",
+            "Fat malabsorption",
+            "14C-triolein"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Small Bowel Culture Gold Standard” test for SIBO (bact. overgrowth)"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Abnormal > 105 cfu/ml",
+            "Many limitations",
+            "Invasive - Expensive",
+            "Contamination - Many bacterial uncultivatable"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Tests of Carbohydrate Malabsorption"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Oral breath tests • Quantitative analysis of fecal CHO",
+            "Stool pH • Oral tolerance tests",
+            "Direct assay of mono- and disaccharidases"
+          ]
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "small-source-8",
+        "sourceOrder": 8,
+        "originalLabel": "Lecture page 8",
+        "originalSourceHash": "61d6d8ec2fe4347f4e2ce755271386f0760f83d441d352457dbebaf7c639cb10"
+      },
+      "sourceHash": "1bff953bec8d7e8bddbd7fb94e0f86d38a1d2de4b3159634e3eb0a84fbf84edd"
+    },
+    {
+      "id": "med401-git-small-source-9",
+      "order": 9,
+      "title": "Protein-Losing Enteropathy",
+      "text": "Protein-Losing Enteropathy\n▪ Characterized by excessive loss of serum proteins into the gut\n- Hypoproteinemia, hypoalbuminemia, edema, muscle atrophy\n• May occur as isolated phenomenon or part of global malabsorption\n• Need to r/o malnutrition, nephrosis, liver disease\n• Conditions Associated with Protein Losing Enteropathy\nMucosal disease\n- IBD, Celiac, Whipple’s, Tropical sprue, Menetrier’s, GI malignancy, chemotherapy,\neosinophilic dz, SIBO\nLymphatic obstruction\n- Lymphangiectasia, lymphoma, constrictive pericarditis, Crohn’s, radiation, Fontan\nprocedure\nCeliac Disease\n▪ Autoimmune disorder with a prevalence of approximately 0.5 to 1 percent\n▪ Inappropriate immune response to the dietary protein gluten, which is found in rye, wheat,\nand barley.\n▪ After absorption in the small intestine these proteins interact with the antigen presenting\ncells in the lamina propria causing an inflammatory reaction that targets the mucosa of the\nsmall intestine.\n▪ Manifestations range from no symptoms to overt malabsorption with involvement of\nmultiple organ systems and an increased risk of some malignancies.\n▪ Most patients with celiac disease express human leukocyte antigen (HLA)-DQ2 or HLA-DQ8,\nwhich facilitate the immune response against gluten proteins\n▪ Concordance rates of 70 to 75 % among monozygotic twins and 5 to 22 % among first-degree\nrelatives.",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "Protein-Losing Enteropathy"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Characterized by excessive loss of serum proteins into the gut",
+            "Hypoproteinemia, hypoalbuminemia, edema, muscle atrophy",
+            "May occur as isolated phenomenon or part of global malabsorption",
+            "Need to r/o malnutrition, nephrosis, liver disease",
+            "Conditions Associated with Protein Losing Enteropathy"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Mucosal disease"
+        },
+        {
+          "type": "list",
+          "items": [
+            "IBD, Celiac, Whipple’s, Tropical sprue, Menetrier’s, GI malignancy, chemotherapy,"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "eosinophilic dz, SIBO"
+        },
+        {
+          "type": "paragraph",
+          "text": "Lymphatic obstruction"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Lymphangiectasia, lymphoma, constrictive pericarditis, Crohn’s, radiation, Fontan"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "procedure"
+        },
+        {
+          "type": "paragraph",
+          "text": "Celiac Disease"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Autoimmune disorder with a prevalence of approximately 0.5 to 1 percent",
+            "Inappropriate immune response to the dietary protein gluten, which is found in rye, wheat,"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "and barley."
+        },
+        {
+          "type": "list",
+          "items": [
+            "After absorption in the small intestine these proteins interact with the antigen presenting"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "cells in the lamina propria causing an inflammatory reaction that targets the mucosa of the"
+        },
+        {
+          "type": "paragraph",
+          "text": "small intestine."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Manifestations range from no symptoms to overt malabsorption with involvement of"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "multiple organ systems and an increased risk of some malignancies."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Most patients with celiac disease express human leukocyte antigen (HLA)-DQ2 or HLA-DQ8,"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "which facilitate the immune response against gluten proteins"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Concordance rates of 70 to 75 % among monozygotic twins and 5 to 22 % among first-degree"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "relatives."
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "small-source-9",
+        "sourceOrder": 9,
+        "originalLabel": "Lecture page 9",
+        "originalSourceHash": "419a960aa9c2a5339e42a68d359d2eb5ed34d2343649e26c6140f8cf8788c188"
+      },
+      "sourceHash": "dd7f7d743fc451862e8add5b2c3869375d1a0094034d3d11fef4bc2a9c29ac0f"
+    },
+    {
+      "id": "med401-git-small-source-10",
+      "order": 10,
+      "title": "Risk Factors for Celiac Disease",
+      "text": "Risk Factors for Celiac Disease\nPrevalence among Risk factor those with risk factor (%)\nDermatitis herpetiformis 100\nFirst-degree relative with celiac disease 5 to 22\nAutoimmune thyroid disease 1.5 to 14\nDown syndrome 5 to 12\nTurner's syndrome 2 to 10\nType 1 diabetes mellitus\n-Children 3 to 8\n-Adults 2 to 5\nDermatitis Herpetiformis\nDifferential Diagnosis of Celiac Disease\n- Anorexia nervosa - Autoimmune enteropathy\n- Bacterial overgrowth - Collagenous sprue\n- Crohn's disease - Giardiasis\n- Human immunodeficiency virus enteropathy\n- Hypogammaglobulinemia - Infective gastroenteritis\n- Intestinal lymphoma - Irritable bowel syndrome\n- Ischemic enteritis - Lactose intolerance\n- Pancreatic insufficiency - Soy protein intolerance\n- Tropical sprue - Tuberculosis\n- Whipple's disease - Zollinger-Ellison syndrome\nSEROLOGY\n▪ Serum immunoglobulin A (IgA) endomysial antibodies and IgA tissue transglutaminase (tTG)\nantibodies. Sensitivity and specificity > 95%.\n▪ Testing for gliadin antibodies is no longer recommended because of the low sensitivity and\nspecificity for celiac disease.\n▪ The tTG antibody test is less costly because it uses an enzyme-linked immunosorbent assay;\nit is the recommended single serologic test for celiac disease screening in the primary care\nsetting.",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "Risk Factors for Celiac Disease"
+        },
+        {
+          "type": "paragraph",
+          "text": "Prevalence among Risk factor those with risk factor (%)"
+        },
+        {
+          "type": "paragraph",
+          "text": "Dermatitis herpetiformis 100"
+        },
+        {
+          "type": "paragraph",
+          "text": "First-degree relative with celiac disease 5 to 22"
+        },
+        {
+          "type": "paragraph",
+          "text": "Autoimmune thyroid disease 1.5 to 14"
+        },
+        {
+          "type": "paragraph",
+          "text": "Down syndrome 5 to 12"
+        },
+        {
+          "type": "paragraph",
+          "text": "Turner's syndrome 2 to 10"
+        },
+        {
+          "type": "paragraph",
+          "text": "Type 1 diabetes mellitus"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Children 3 to 8",
+            "Adults 2 to 5"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Dermatitis Herpetiformis"
+        },
+        {
+          "type": "paragraph",
+          "text": "Differential Diagnosis of Celiac Disease"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Anorexia nervosa - Autoimmune enteropathy",
+            "Bacterial overgrowth - Collagenous sprue",
+            "Crohn's disease - Giardiasis",
+            "Human immunodeficiency virus enteropathy",
+            "Hypogammaglobulinemia - Infective gastroenteritis",
+            "Intestinal lymphoma - Irritable bowel syndrome",
+            "Ischemic enteritis - Lactose intolerance",
+            "Pancreatic insufficiency - Soy protein intolerance",
+            "Tropical sprue - Tuberculosis",
+            "Whipple's disease - Zollinger-Ellison syndrome"
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "SEROLOGY"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Serum immunoglobulin A (IgA) endomysial antibodies and IgA tissue transglutaminase (tTG)"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "antibodies. Sensitivity and specificity > 95%."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Testing for gliadin antibodies is no longer recommended because of the low sensitivity and"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "specificity for celiac disease."
+        },
+        {
+          "type": "list",
+          "items": [
+            "The tTG antibody test is less costly because it uses an enzyme-linked immunosorbent assay;"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "it is the recommended single serologic test for celiac disease screening in the primary care"
+        },
+        {
+          "type": "paragraph",
+          "text": "setting."
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "small-source-10",
+        "sourceOrder": 10,
+        "originalLabel": "Lecture page 10",
+        "originalSourceHash": "adba1e3287758c363177a5b9f600505bdb0f57f3d87cc7a6fe0983d095c400f1"
+      },
+      "sourceHash": "d39fee8e446764d9114ee41e086aed5d35f23f6f9b4c6b946a85b675f6d9d759"
+    },
+    {
+      "id": "med401-git-small-source-11",
+      "order": 11,
+      "title": "▪ When the prevalence is low, as in the general U.S. population, the risk of a false positive result",
+      "text": "▪ When the prevalence is low, as in the general U.S. population, the risk of a false positive result\nis high even with an accurate test . PPV 49.7%, NPV 99.9%\n▪ Confirmatory testing, including small bowel biopsy\nSMALL BOWEL BIOPSY\n▪ Required to confirm the diagnosis of celiac disease for most patients.\n▪ Should also be considered in patients with negative serologic test results who are at high risk\nor in whom the physician strongly suspects celiac disease.\n▪ Mucosal changes may vary from partial to total villous atrophy, or may be characterized by\nsubtle crypt lengthening or increased epithelial lymphocytes. To avoid false-negative results.\nTreatment\n▪ Avoidance of food products that contain gluten proteins.\n▪ It is essential that the diagnosis be confirmed before submitting patients to this therapy.\n▪ Key elements to successful treatment include the motivation of the patient, the\nattentiveness of the physician to comorbidities that need to be addressed.\n▪ Formal consultation with a trained dietitian is necessary.\n▪ The dietitian plays a vital role in helping the patient successfully adapt to the necessary\nbehavioral changes and may provide much of the required follow-up.\n▪ National celiac disease support organizations can provide patients invaluable resources for\ninformation and support.\nCOMORBIDITIES\n▪ Osteoporosis\n▪ Thyroid dysfunction\n▪ Deficiencies in folic acid, vitamin B12, fat soluble vitamins, and iron\n▪ Increased mortality due to increased risk of malignancy\n▪ Non-Hodgkin's lymphoma (3-6x more likely)\n▪ Oropharyngeal, esophageal, and small intestinal adenocarcinoma.",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "When the prevalence is low, as in the general U.S. population, the risk of a false positive result"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "is high even with an accurate test . PPV 49.7%, NPV 99.9%"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Confirmatory testing, including small bowel biopsy"
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "SMALL BOWEL BIOPSY"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Required to confirm the diagnosis of celiac disease for most patients.",
+            "Should also be considered in patients with negative serologic test results who are at high risk"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "or in whom the physician strongly suspects celiac disease."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Mucosal changes may vary from partial to total villous atrophy, or may be characterized by"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "subtle crypt lengthening or increased epithelial lymphocytes. To avoid false-negative results."
+        },
+        {
+          "type": "paragraph",
+          "text": "Treatment"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Avoidance of food products that contain gluten proteins.",
+            "It is essential that the diagnosis be confirmed before submitting patients to this therapy.",
+            "Key elements to successful treatment include the motivation of the patient, the"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "attentiveness of the physician to comorbidities that need to be addressed."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Formal consultation with a trained dietitian is necessary.",
+            "The dietitian plays a vital role in helping the patient successfully adapt to the necessary"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "behavioral changes and may provide much of the required follow-up."
+        },
+        {
+          "type": "list",
+          "items": [
+            "National celiac disease support organizations can provide patients invaluable resources for"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "information and support."
+        },
+        {
+          "type": "heading",
+          "text": "COMORBIDITIES"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Osteoporosis",
+            "Thyroid dysfunction",
+            "Deficiencies in folic acid, vitamin B12, fat soluble vitamins, and iron",
+            "Increased mortality due to increased risk of malignancy",
+            "Non-Hodgkin's lymphoma (3-6x more likely)",
+            "Oropharyngeal, esophageal, and small intestinal adenocarcinoma."
+          ]
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "small-source-11",
+        "sourceOrder": 11,
+        "originalLabel": "Lecture page 11",
+        "originalSourceHash": "20d50ccab5a785cd8466bdb58e578fc3a15d1b008d03ef96c4e924331d0ca5b2"
+      },
+      "sourceHash": "4e0da9686855c0059314644258cd87c9efbbb44692d897bc488592d591023463"
+    },
+    {
+      "id": "med401-git-small-source-12",
+      "order": 12,
+      "title": "Whipple's Disease & Tropheryma whippelii",
+      "text": "Whipple's Disease & Tropheryma whippelii\nPresentation\nMajor Clinical Features:\n▪ Weight loss 80-90%\n▪ Arthropathy 70-90%\n▪ Diarrhea 70-85%\n▪ Abdominal Pain 50-90%\n▪ Fever Low grade, intermittent 40-60%\n▪ Lymphadenopathy 40-60%\nLess Frequent Clinical Features:\n▪ Cardiac Signs 35-65%\n- Murmurs, Friction Rub, EKG changes\n▪ CNS Signs 20-30\n- Cognitive Changes - Supranuclear Gaze Palsy\n- Altered MS - Oculomasticatory myorhythmia\n▪ Ocular Signs 5-15%\n- Visual disturbances - Uveitis\n- Retinitis\n▪ Splenomegaly 5-10%\nClinical Situations in which to Consider Whipple’s Disease\n▪ Unexplained malabsorption with systemic disease.\n▪ Unexplained systemic granulomatous disease resembling sarcoid.\n▪ Neurological disease characterized by myoclonus, dementia, and supranuclear\nophthalmoplegia.\n▪ Unexplained uveitis.\nWhipple's Disease: Diagnosis\n▪ Histology of small bowel biopsy specimens:\n▪ Foamy histiocytes infiltrating the lamina propria.\n▪ PAS + inclusions.\n▪ Diagnosis is Confirmed by one of two methods:\n▪ Electron microscopy Or PCR",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "Whipple's Disease & Tropheryma whippelii"
+        },
+        {
+          "type": "paragraph",
+          "text": "Presentation"
+        },
+        {
+          "type": "heading",
+          "text": "Major Clinical Features"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Weight loss 80-90%",
+            "Arthropathy 70-90%",
+            "Diarrhea 70-85%",
+            "Abdominal Pain 50-90%",
+            "Fever Low grade, intermittent 40-60%",
+            "Lymphadenopathy 40-60%"
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "Less Frequent Clinical Features"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Cardiac Signs 35-65%",
+            "Murmurs, Friction Rub, EKG changes",
+            "CNS Signs 20-30",
+            "Cognitive Changes - Supranuclear Gaze Palsy",
+            "Altered MS - Oculomasticatory myorhythmia",
+            "Ocular Signs 5-15%",
+            "Visual disturbances - Uveitis",
+            "Retinitis",
+            "Splenomegaly 5-10%"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Clinical Situations in which to Consider Whipple’s Disease"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Unexplained malabsorption with systemic disease.",
+            "Unexplained systemic granulomatous disease resembling sarcoid.",
+            "Neurological disease characterized by myoclonus, dementia, and supranuclear"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "ophthalmoplegia."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Unexplained uveitis."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Whipple's Disease: Diagnosis"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Histology of small bowel biopsy specimens:",
+            "Foamy histiocytes infiltrating the lamina propria.",
+            "PAS + inclusions.",
+            "Diagnosis is Confirmed by one of two methods:",
+            "Electron microscopy Or PCR"
+          ]
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "small-source-12",
+        "sourceOrder": 12,
+        "originalLabel": "Lecture page 12",
+        "originalSourceHash": "054380fdf161e39ca58fe48095d30d921dd8ab05975f8156acd235f03139665c"
+      },
+      "sourceHash": "84d42e31897b4d1520e698fc20079b9ffd5df5604c7361bb700f07a4ff372018"
+    },
+    {
+      "id": "med401-git-small-source-13",
+      "order": 13,
+      "title": "Whipple's Disease: Treatment",
+      "text": "Whipple's Disease: Treatment\n▪ Prior to the 1950s, Whipple's was uniformly fatal.\n▪ Initial IV Therapy:\n- Ceftriaxone2 gm IV BID\n- Streptomycin 1 gm IV QD\n▪ Then PO Therapy for 1 year with:\n- TMP-SMX 1 DS tab PO BID, or\n- Cefixime 400 mg PO QD\n▪ Follow clinically and with duodenal biopsies.\nSmall Bowel Bacterial Overgrowth\nDefinition\n▪ Syndrome caused by proliferation of bacteria in small bowel to concentrations >104\nbacteria/mL of bowel tissue\nEtiology\n▪ Decreased motility:\n- Scleroderma - Diabetes\n- Hypothyroid - Intestinal pseudo-obstruction\n▪ Achlorhydria (often iatrogenic): lack of gastric acid production\n▪ Multifactorial (controversial) in chronic pancreatitis, celiac disease, irritable bowel syndrome\n▪ Described in elderly patients without known etiology\nClinical Features\n▪ Steatorrhea: bacteria deconjugate bile salts impairing micellar lipid formation\n▪ Diarrhea: bowel mucosa damaged by bacterial products, impairing absorption; altered gut\nmotility, free bile acids stimulate colon water secretion\n▪ Megaloblastic anemia due to vitamin B12 malabsorption (bacteria take up B12)\n▪ Bloating, flatulence\n▪ May be asymptomatic",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "Whipple's Disease: Treatment"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Prior to the 1950s, Whipple's was uniformly fatal.",
+            "Initial IV Therapy:",
+            "Ceftriaxone2 gm IV BID",
+            "Streptomycin 1 gm IV QD",
+            "Then PO Therapy for 1 year with:",
+            "TMP-SMX 1 DS tab PO BID, or",
+            "Cefixime 400 mg PO QD",
+            "Follow clinically and with duodenal biopsies."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Small Bowel Bacterial Overgrowth"
+        },
+        {
+          "type": "paragraph",
+          "text": "Definition"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Syndrome caused by proliferation of bacteria in small bowel to concentrations >104"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "bacteria/mL of bowel tissue"
+        },
+        {
+          "type": "paragraph",
+          "text": "Etiology"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Decreased motility:",
+            "Scleroderma - Diabetes",
+            "Hypothyroid - Intestinal pseudo-obstruction",
+            "Achlorhydria (often iatrogenic): lack of gastric acid production",
+            "Multifactorial (controversial) in chronic pancreatitis, celiac disease, irritable bowel syndrome",
+            "Described in elderly patients without known etiology"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Clinical Features"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Steatorrhea: bacteria deconjugate bile salts impairing micellar lipid formation",
+            "Diarrhea: bowel mucosa damaged by bacterial products, impairing absorption; altered gut"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "motility, free bile acids stimulate colon water secretion"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Megaloblastic anemia due to vitamin B12 malabsorption (bacteria take up B12)",
+            "Bloating, flatulence",
+            "May be asymptomatic"
+          ]
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "small-source-13",
+        "sourceOrder": 13,
+        "originalLabel": "Lecture page 13",
+        "originalSourceHash": "eee4646c29e21545e70fed4febbec0a674978c5d5284d120f18e091bbbe33da8"
+      },
+      "sourceHash": "1e967d556b3a20222660239bfff51cf817a278ccff5087ffaf68a625aa12f8b7"
+    },
+    {
+      "id": "med401-git-small-source-14",
+      "order": 14,
+      "title": "Investigations",
+      "text": "Investigations\n▪ Gold standard: mixed bacterial cultures of > 100000 CFU/mL from the jejunum (via\naspiration)\n▪ 72-h fecal fat collection\n▪ Bile acid breath tests\n▪ Positive three-stage Schilling test if done before and after treatment can be diagnostic\n▪ Low serum B12, high serum folate (folate synthesized by GI bacteria)\n▪ CT enterography to look for underlying cause\n▪ Consider small bowel biopsy to rule out primary mucosal disease as cause of malabsorption\nTreatment\n▪ treat underlying etiology if possible (e.g. pro kinetic agents for small bowel motility disorder,\nsurgery or balloon dilatation for strictures)\n▪ correct nutritional deficiencies, especially deficiencies of vitamins A, D, E, K, B12\n▪ often need to restrict lactose since underlying disease often causes lactose intolerance\n▪ eradicate bacteria: 10-14 d trial of antibiotics (best if based on culture results) e.g. amoxicillin\n+ clavulanic acid, norfloxacin, neomycin\n▪ patients may need to be treated with intermittent or continuous antibiotics indefinitely\n▪ rotate antibiotics to decrease development of resistance\n▪ discontinue acid-reducing agents if possible\nIntestinal Lymphangiectasia\nWhat is Intestinal Lymphangiectasia?\n▪ Intestinal lymphangiectasia affects children and young adults. It is an abnormality of\nlymphatic channels (the tubular system of channels that transports fats from the small\nintestine to the liver and other organs). When the lymphatic channels become blocked they\nbecome very dilated and rupture and discharge their contents into the colon.\nWhat are the causes of Intestinal Lymphangiectasia?\n▪ Intestinal lymphangiectasia can be congenital or acquired.\n▪ The acquired forms are usually due to some form of infiltrative or mechanical process such\nas amyloidosis or malignancy.\nSymptoms of Intestinal Lymphangiectasia\n▪ Lower limbs edema\n▪ Mild diarrhea or steatorrhea\n▪ Weight loss, fatigue, and abdominal pain",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "Investigations"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Gold standard: mixed bacterial cultures of > 100000 CFU/mL from the jejunum (via"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "aspiration)"
+        },
+        {
+          "type": "list",
+          "items": [
+            "72-h fecal fat collection",
+            "Bile acid breath tests",
+            "Positive three-stage Schilling test if done before and after treatment can be diagnostic",
+            "Low serum B12, high serum folate (folate synthesized by GI bacteria)",
+            "CT enterography to look for underlying cause",
+            "Consider small bowel biopsy to rule out primary mucosal disease as cause of malabsorption"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Treatment"
+        },
+        {
+          "type": "list",
+          "items": [
+            "treat underlying etiology if possible (e.g. pro kinetic agents for small bowel motility disorder,"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "surgery or balloon dilatation for strictures)"
+        },
+        {
+          "type": "list",
+          "items": [
+            "correct nutritional deficiencies, especially deficiencies of vitamins A, D, E, K, B12",
+            "often need to restrict lactose since underlying disease often causes lactose intolerance",
+            "eradicate bacteria: 10-14 d trial of antibiotics (best if based on culture results) e.g. amoxicillin"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "+ clavulanic acid, norfloxacin, neomycin"
+        },
+        {
+          "type": "list",
+          "items": [
+            "patients may need to be treated with intermittent or continuous antibiotics indefinitely",
+            "rotate antibiotics to decrease development of resistance",
+            "discontinue acid-reducing agents if possible"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Intestinal Lymphangiectasia"
+        },
+        {
+          "type": "paragraph",
+          "text": "What is Intestinal Lymphangiectasia?"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Intestinal lymphangiectasia affects children and young adults. It is an abnormality of"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "lymphatic channels (the tubular system of channels that transports fats from the small"
+        },
+        {
+          "type": "paragraph",
+          "text": "intestine to the liver and other organs). When the lymphatic channels become blocked they"
+        },
+        {
+          "type": "paragraph",
+          "text": "become very dilated and rupture and discharge their contents into the colon."
+        },
+        {
+          "type": "paragraph",
+          "text": "What are the causes of Intestinal Lymphangiectasia?"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Intestinal lymphangiectasia can be congenital or acquired.",
+            "The acquired forms are usually due to some form of infiltrative or mechanical process such"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "as amyloidosis or malignancy."
+        },
+        {
+          "type": "paragraph",
+          "text": "Symptoms of Intestinal Lymphangiectasia"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Lower limbs edema",
+            "Mild diarrhea or steatorrhea",
+            "Weight loss, fatigue, and abdominal pain"
+          ]
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "small-source-14",
+        "sourceOrder": 14,
+        "originalLabel": "Lecture page 14",
+        "originalSourceHash": "1f22a05ecbea14d82c489e1242da43c565ce33d3d561874c88c0c75af793fe76"
+      },
+      "sourceHash": "6eb62cbaf6af7ecd051c02fdafd39b868d375eeaed9577529bd711a78e101e8e"
+    },
+    {
+      "id": "med401-git-small-source-15",
+      "order": 15,
+      "title": "Diagnosis of Intestinal Lymphangiectasia",
+      "text": "Diagnosis of Intestinal Lymphangiectasia\n▪ Endoscopic examination\n▪ Blood tests indicate a significant protein loss.\n▪ Leakage of lymphatic juices into the small bowel\n▪ The diagnosis is confirmed by taking a biopsy from the lining of the small intestine, which\nshows typical gross dilatation of the lymphatic vessels.\nTreatment of Intestinal Lymphangiectasia\n▪ Patients are treated with a low fat diet; normal fat is replaced with medium chain\ntriglycerides.\nIntestinal Lymphoma\nWhat is Intestinal Lymphoma?\n▪ A lymphoma is a cancer that occurs in our body's lymph nodes. Lymph nodes are small organs\nfound throughout the body, including deep inside the abdominal cavity, that aid our immune\nsystem. This lymphatic system, which bears some resemblance to our vascular system, has\nvessels that circulates lymph (a fluid) throughout the body. However, this passage of lymph\noccurs as a result of muscle movement; unlike the heart in the vascular system, there is no\npump to regulate the flow.\nWhat causes intestinal lymphoma?\n• Intestinal lymphoma of the small intestine is a recognized complication of celiac sprue, and\ncan occur in immunodeficiency syndromes.\n• Patients with the human immunodeficiency virus (HIV) infection have a higher risk of\ndeveloping intestinal lymphoma.\n• These lymphocytic tumors are also more common in men, occurring in middle age or later\nyears.",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "Diagnosis of Intestinal Lymphangiectasia"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Endoscopic examination",
+            "Blood tests indicate a significant protein loss.",
+            "Leakage of lymphatic juices into the small bowel",
+            "The diagnosis is confirmed by taking a biopsy from the lining of the small intestine, which"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "shows typical gross dilatation of the lymphatic vessels."
+        },
+        {
+          "type": "paragraph",
+          "text": "Treatment of Intestinal Lymphangiectasia"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Patients are treated with a low fat diet; normal fat is replaced with medium chain"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "triglycerides."
+        },
+        {
+          "type": "paragraph",
+          "text": "Intestinal Lymphoma"
+        },
+        {
+          "type": "paragraph",
+          "text": "What is Intestinal Lymphoma?"
+        },
+        {
+          "type": "list",
+          "items": [
+            "A lymphoma is a cancer that occurs in our body's lymph nodes. Lymph nodes are small organs"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "found throughout the body, including deep inside the abdominal cavity, that aid our immune"
+        },
+        {
+          "type": "paragraph",
+          "text": "system. This lymphatic system, which bears some resemblance to our vascular system, has"
+        },
+        {
+          "type": "paragraph",
+          "text": "vessels that circulates lymph (a fluid) throughout the body. However, this passage of lymph"
+        },
+        {
+          "type": "paragraph",
+          "text": "occurs as a result of muscle movement; unlike the heart in the vascular system, there is no"
+        },
+        {
+          "type": "paragraph",
+          "text": "pump to regulate the flow."
+        },
+        {
+          "type": "paragraph",
+          "text": "What causes intestinal lymphoma?"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Intestinal lymphoma of the small intestine is a recognized complication of celiac sprue, and"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "can occur in immunodeficiency syndromes."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Patients with the human immunodeficiency virus (HIV) infection have a higher risk of"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "developing intestinal lymphoma."
+        },
+        {
+          "type": "list",
+          "items": [
+            "These lymphocytic tumors are also more common in men, occurring in middle age or later"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "years."
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "small-source-15",
+        "sourceOrder": 15,
+        "originalLabel": "Lecture page 15",
+        "originalSourceHash": "41ef8d1b153ae18ef026f40cbb2ae650b4d8749df0b3dba8dcc1b5e15302cd89"
+      },
+      "sourceHash": "d15dec2d717c2566427b609f3a528effd5ff240a558a4b97e9777f75c4d5801e"
+    },
+    {
+      "id": "med401-git-small-source-16",
+      "order": 16,
+      "title": "Lactose Intolerance",
+      "text": "Lactose Intolerance\nWhat is lactose intolerance?\nLactose is a special type of sugar which occurs in dairy products (ex. milk, butter, yoghurt, cheese,\netc.). To be absorbed by the body, the lactose needs to be split into its two component sugars,\nglucose and galactose. This digestion is brought about by lactase enzymes which lie in the microvilli\n→ When there is a deficiency of this lactase enzyme, lactose cannot be broken down.\n• Resulting diarrhea is caused by fluid entering into the small intestine, but also due to lactose\npassing to the colon where it is broken down by bacteria to organic acids and fermented.\n• A significant amount of water can be lost into the intestine following the ingestion of a large\nlactose load.\nSome individuals can develop secondary lactose intolerance. This occurs when the intestinal mucosa\nis injured such as in celiac disease, Crohn's disease or even infections. The inflammation damages\nthe cells that produce lactase.\n• Lactose intolerance is probably one of the most common genetic deficiencies occurring in 5-\n10% of Caucasians of northwestern European ancestry, but in greater than 90% of people of\nAfrican, Chinese or Mediterranean background.\n• However, it is not always clinically significant as this depends on the amount of lactose that\nis ingested.\nWhat are the symptoms of lactose intolerance?\nThe classic clinical features of lactase deficiency are:\n• Diarrhea - bloating and gas\nMany patients are labeled with the diagnosis of irritable bowel syndrome (IBS) before lactase\ndeficiency is considered. Occasionally, patients may develop osteoporosis as they avoid all milk\nproducts and become calcium and vitamin D deficient.\nDiagnosing lactose intolerance\n• An informal diagnosis of lactose intolerance can be made by asking the patient to avoid all\nmilk products. Alleviation of symptoms can occur in a few days on a modified dairy free diet.\n• A more formal way of diagnosing lactose intolerance is to perform a specialized breath test.\nDuring this test the patient ingests radioactively labeled lactose and is then asked to breathe\ninto a bag which measures labeled hydrogen and methane (produced by the breakdown of\nlactose by colonic bacteria). If the patient is truly lactose intolerant they may develop\nsignificant symptoms during this test.\n• Another way for assessing for lactase deficiency is to perform a blood test after lactose\ningestion to measure blood sugar levels, which should rise if it is being digested and absorbed\nnormally.",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "Lactose Intolerance"
+        },
+        {
+          "type": "paragraph",
+          "text": "What is lactose intolerance?"
+        },
+        {
+          "type": "paragraph",
+          "text": "Lactose is a special type of sugar which occurs in dairy products (ex. milk, butter, yoghurt, cheese,"
+        },
+        {
+          "type": "paragraph",
+          "text": "etc.). To be absorbed by the body, the lactose needs to be split into its two component sugars,"
+        },
+        {
+          "type": "paragraph",
+          "text": "glucose and galactose. This digestion is brought about by lactase enzymes which lie in the microvilli"
+        },
+        {
+          "type": "paragraph",
+          "text": "→ When there is a deficiency of this lactase enzyme, lactose cannot be broken down."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Resulting diarrhea is caused by fluid entering into the small intestine, but also due to lactose"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "passing to the colon where it is broken down by bacteria to organic acids and fermented."
+        },
+        {
+          "type": "list",
+          "items": [
+            "A significant amount of water can be lost into the intestine following the ingestion of a large"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "lactose load."
+        },
+        {
+          "type": "paragraph",
+          "text": "Some individuals can develop secondary lactose intolerance. This occurs when the intestinal mucosa"
+        },
+        {
+          "type": "paragraph",
+          "text": "is injured such as in celiac disease, Crohn's disease or even infections. The inflammation damages"
+        },
+        {
+          "type": "paragraph",
+          "text": "the cells that produce lactase."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Lactose intolerance is probably one of the most common genetic deficiencies occurring in 5-"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "10% of Caucasians of northwestern European ancestry, but in greater than 90% of people of"
+        },
+        {
+          "type": "paragraph",
+          "text": "African, Chinese or Mediterranean background."
+        },
+        {
+          "type": "list",
+          "items": [
+            "However, it is not always clinically significant as this depends on the amount of lactose that"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "is ingested."
+        },
+        {
+          "type": "paragraph",
+          "text": "What are the symptoms of lactose intolerance?"
+        },
+        {
+          "type": "heading",
+          "text": "The classic clinical features of lactase deficiency are"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Diarrhea - bloating and gas"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Many patients are labeled with the diagnosis of irritable bowel syndrome (IBS) before lactase"
+        },
+        {
+          "type": "paragraph",
+          "text": "deficiency is considered. Occasionally, patients may develop osteoporosis as they avoid all milk"
+        },
+        {
+          "type": "paragraph",
+          "text": "products and become calcium and vitamin D deficient."
+        },
+        {
+          "type": "paragraph",
+          "text": "Diagnosing lactose intolerance"
+        },
+        {
+          "type": "list",
+          "items": [
+            "An informal diagnosis of lactose intolerance can be made by asking the patient to avoid all"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "milk products. Alleviation of symptoms can occur in a few days on a modified dairy free diet."
+        },
+        {
+          "type": "list",
+          "items": [
+            "A more formal way of diagnosing lactose intolerance is to perform a specialized breath test."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "During this test the patient ingests radioactively labeled lactose and is then asked to breathe"
+        },
+        {
+          "type": "paragraph",
+          "text": "into a bag which measures labeled hydrogen and methane (produced by the breakdown of"
+        },
+        {
+          "type": "paragraph",
+          "text": "lactose by colonic bacteria). If the patient is truly lactose intolerant they may develop"
+        },
+        {
+          "type": "paragraph",
+          "text": "significant symptoms during this test."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Another way for assessing for lactase deficiency is to perform a blood test after lactose"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "ingestion to measure blood sugar levels, which should rise if it is being digested and absorbed"
+        },
+        {
+          "type": "paragraph",
+          "text": "normally."
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "small-source-16",
+        "sourceOrder": 16,
+        "originalLabel": "Lecture page 16",
+        "originalSourceHash": "a6e6fe0843db2b263f271479cd142eaffac2f25a8ffedd367a6181b05546e205"
+      },
+      "sourceHash": "bab26dcd359533bac63552107077084043ac6bab112be8f06f529453c43a6466"
+    },
+    {
+      "id": "med401-git-small-source-17",
+      "order": 17,
+      "title": "Small Bowel Obstruction",
+      "text": "Small Bowel Obstruction\nWhat is Small Bowel Obstruction?\nFrom the moment you swallow food until you release the remains of your meal in a bowel\nmovement, the entire digestive tract performs an amazing feat of moving the food through the\norgans by way of a special set of muscles that contract and expand. In fact, the sound you hear when\nyour stomach growls is a result of the contractions that are going on as you digest food.\nSmall bowel obstruction is a potentially dangerous condition. There are a number of conditions in\nwhich the contractions of the bowel muscles make the process of moving the food very slow. These\ncan be annoying and impact the quality of life.\nThere are also serious conditions which may require immediate intervention:\n• Hernias: probably the most common condition in children and adults, in which a small part\nof the intestine protrudes through another part of the body.\n• Adhesions: may also be a cause. Scar tissue can form that blocks the intestinal canal.\n• Inflammatory Bowel Disease: a condition in which the walls of the of the intestine become\ninflamed\n• Tumors: in the intestine that impede the flow\n• A volvulus: or a twisting of the intestine\n• Intussusception: a condition in which a segment of the intestine collapses into itself\nSymptoms of Small Bowel Obstruction\n• Intermittent pain due to peristalsis\n• Distension of the stomach depending on where the obstruction is located\n• Vomiting\n• Constipation\n• Fever and a racing heart\nWhy you need to see a physician if you suspect you have a small bowel obstruction?\nIf a part of the intestine becomes twisted, blood flow to that portion may be reduced, and the\nblocked part may die. This is a very serious condition. Another serious condition can occur in which\nthe intestine ruptures, leaking contents into the bowel cavity. This causes an infection known as\nperitonitis.\nYour doctor may ask you these questions about your condition:\n• How long have you been experiencing this problem\n• Have you had this condition before? Did it clear up?\n• Did the pain arise quickly?\n• Is the pain constant?\n• Have you ever had surgery in the abdominal area?",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "Small Bowel Obstruction"
+        },
+        {
+          "type": "paragraph",
+          "text": "What is Small Bowel Obstruction?"
+        },
+        {
+          "type": "paragraph",
+          "text": "From the moment you swallow food until you release the remains of your meal in a bowel"
+        },
+        {
+          "type": "paragraph",
+          "text": "movement, the entire digestive tract performs an amazing feat of moving the food through the"
+        },
+        {
+          "type": "paragraph",
+          "text": "organs by way of a special set of muscles that contract and expand. In fact, the sound you hear when"
+        },
+        {
+          "type": "paragraph",
+          "text": "your stomach growls is a result of the contractions that are going on as you digest food."
+        },
+        {
+          "type": "paragraph",
+          "text": "Small bowel obstruction is a potentially dangerous condition. There are a number of conditions in"
+        },
+        {
+          "type": "paragraph",
+          "text": "which the contractions of the bowel muscles make the process of moving the food very slow. These"
+        },
+        {
+          "type": "paragraph",
+          "text": "can be annoying and impact the quality of life."
+        },
+        {
+          "type": "paragraph",
+          "text": "There are also serious conditions which may require immediate intervention:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Hernias: probably the most common condition in children and adults, in which a small part"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "of the intestine protrudes through another part of the body."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Adhesions: may also be a cause. Scar tissue can form that blocks the intestinal canal.",
+            "Inflammatory Bowel Disease: a condition in which the walls of the of the intestine become"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "inflamed"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Tumors: in the intestine that impede the flow",
+            "A volvulus: or a twisting of the intestine",
+            "Intussusception: a condition in which a segment of the intestine collapses into itself"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Symptoms of Small Bowel Obstruction"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Intermittent pain due to peristalsis",
+            "Distension of the stomach depending on where the obstruction is located",
+            "Vomiting",
+            "Constipation",
+            "Fever and a racing heart"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Why you need to see a physician if you suspect you have a small bowel obstruction?"
+        },
+        {
+          "type": "paragraph",
+          "text": "If a part of the intestine becomes twisted, blood flow to that portion may be reduced, and the"
+        },
+        {
+          "type": "paragraph",
+          "text": "blocked part may die. This is a very serious condition. Another serious condition can occur in which"
+        },
+        {
+          "type": "paragraph",
+          "text": "the intestine ruptures, leaking contents into the bowel cavity. This causes an infection known as"
+        },
+        {
+          "type": "paragraph",
+          "text": "peritonitis."
+        },
+        {
+          "type": "paragraph",
+          "text": "Your doctor may ask you these questions about your condition:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "How long have you been experiencing this problem",
+            "Have you had this condition before? Did it clear up?",
+            "Did the pain arise quickly?",
+            "Is the pain constant?",
+            "Have you ever had surgery in the abdominal area?"
+          ]
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "small-source-17",
+        "sourceOrder": 17,
+        "originalLabel": "Lecture page 17",
+        "originalSourceHash": "8bb44a0f104a27c910f346ed3f9b69f3bac7068e3f4ed8b977ac2263d6d3c4d8"
+      },
+      "sourceHash": "a130fca670d038e7c5f37362246a147cf30deae067cde3ff8c8da16521c4e642"
+    },
+    {
+      "id": "med401-git-small-source-18",
+      "order": 18,
+      "title": "Diagnosis of Small Bowel Obstruction",
+      "text": "Diagnosis of Small Bowel Obstruction\nUsually all that is required to diagnose an obstruction of the small bowel is an Xray of the abdomen.\n• Luminal contrast studies\n• computed tomography (CT scan)\n• ultrasonography (US)\nOnce the diagnosis of bowel obstruction is entertained, location, severity and etiology are to be\ndetermined. Most importantly is the differentiation between simple and complicated obstruction.\nTreatment of Small Bowel Obstruction\n• Antiemetics: are medications that keep you from throwing up\n• Analgesics: are mild pain relievers\n• Antibiotics: will attack any infection you may have\n• Bowel decompression: is a procedure in which a tube is guided into the impacted area in an\nattempt to reduce the pressure and address adhesions.\n• Surgery\nComplications of Small Bowel Obstruction\n• Abdominal abscesses: are pockets of infected pus in the abdominal cavity\n• Sepsis: a condition in which the blood becomes infected\n• Short Bowel Syndrome: is a condition that results in malabsorption of nutrients\nQuick intervention is the best medicine for small bowel obstructions. Complications arise quickly,\nand require complex surgery. Early intervention results in favorable outcomes with few\ncomplications. See your doctor if you think you may be having a problem.\nTropical Sprue\n• Tropical sprue is a malabsorptive disorder (like celiac sprue) characterized by abnormalities\nin the lining of the small intestine, resulting in poor absorption of folic acid, salts and\nincreased water loss.\n• It is believed to be infectious in origin, and typically occurs after travel to third world\ncountries.\n• Patients will complain of diarrhea, weight loss, dyspepsia, bloating, and eventually develop\nnutritional deficiencies.\n• Tropical sprue is clinically suspected from the clinical symptoms and history of recent foreign\ntravel.\n• There are no specific blood tests to diagnose tropical sprue.",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "Diagnosis of Small Bowel Obstruction"
+        },
+        {
+          "type": "paragraph",
+          "text": "Usually all that is required to diagnose an obstruction of the small bowel is an Xray of the abdomen."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Luminal contrast studies",
+            "computed tomography (CT scan)",
+            "ultrasonography (US)"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Once the diagnosis of bowel obstruction is entertained, location, severity and etiology are to be"
+        },
+        {
+          "type": "paragraph",
+          "text": "determined. Most importantly is the differentiation between simple and complicated obstruction."
+        },
+        {
+          "type": "paragraph",
+          "text": "Treatment of Small Bowel Obstruction"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Antiemetics: are medications that keep you from throwing up",
+            "Analgesics: are mild pain relievers",
+            "Antibiotics: will attack any infection you may have",
+            "Bowel decompression: is a procedure in which a tube is guided into the impacted area in an"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "attempt to reduce the pressure and address adhesions."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Surgery"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Complications of Small Bowel Obstruction"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Abdominal abscesses: are pockets of infected pus in the abdominal cavity",
+            "Sepsis: a condition in which the blood becomes infected",
+            "Short Bowel Syndrome: is a condition that results in malabsorption of nutrients"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Quick intervention is the best medicine for small bowel obstructions. Complications arise quickly,"
+        },
+        {
+          "type": "paragraph",
+          "text": "and require complex surgery. Early intervention results in favorable outcomes with few"
+        },
+        {
+          "type": "paragraph",
+          "text": "complications. See your doctor if you think you may be having a problem."
+        },
+        {
+          "type": "paragraph",
+          "text": "Tropical Sprue"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Tropical sprue is a malabsorptive disorder (like celiac sprue) characterized by abnormalities"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "in the lining of the small intestine, resulting in poor absorption of folic acid, salts and"
+        },
+        {
+          "type": "paragraph",
+          "text": "increased water loss."
+        },
+        {
+          "type": "list",
+          "items": [
+            "It is believed to be infectious in origin, and typically occurs after travel to third world"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "countries."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Patients will complain of diarrhea, weight loss, dyspepsia, bloating, and eventually develop"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "nutritional deficiencies."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Tropical sprue is clinically suspected from the clinical symptoms and history of recent foreign"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "travel."
+        },
+        {
+          "type": "list",
+          "items": [
+            "There are no specific blood tests to diagnose tropical sprue."
+          ]
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "small-source-18",
+        "sourceOrder": 18,
+        "originalLabel": "Lecture page 18",
+        "originalSourceHash": "375e83c74e74bda44ad08354585ece87b0fe5a526cfe6046f26d82bc75e3e7d4"
+      },
+      "sourceHash": "97b58b134fd6419d773719119e685769cac52e7ff2622ba8907eee8672648a4b"
+    },
+    {
+      "id": "med401-git-small-source-19",
+      "order": 19,
+      "title": "• Upper endoscopy is often performed to obtain a small intestine biopsy sample of the",
+      "text": "• Upper endoscopy is often performed to obtain a small intestine biopsy sample of the\nintestinal lining. The biopsy will show variable degrees of atrophy of the small intestine with\nvillous blunting and inflammation.\n• To treat tropical sprue, patients are prescribed high doses of folic acid, and antibiotics are\noften required. Once treated, tropical sprue does not recur unless the patient is re-exposed\nby returning to tropical areas.\nTumors of the Small Intestine\n• Tumors of the small intestine are rare. They are usually single, but may be multiple\nparticularly in certain syndromes (i.e. intestinal polyposis syndrome).\n• Tumors can be benign or malignant. Some benign tumors can progress and become\nmalignant (i.e. adenomas, leiomyomas).\n• Most small intestine tumors are clinically silent for long periods.\n• Nearly half of all benign small intestine tumors are found only incidentally either during an\noperation or an investigation to visualize the intestine for other reasons.\n• Symptoms can be chronic and/or intermittent and include abdominal pain, nausea, weight\nloss and bleeding.\n• The larger the tumor, the more likely the patient will experience symptoms of bowel\nobstruction. Tumors can also become ulcerated and bleed.\nMalignant Tumors\nAdenocarcinoma\n• Adenocarcinoma of the small intestine probably develops mainly from adenomas.\n• Most tumors occur at the ampulla in the duodenum.\n• Other risk factors for adenocarcinoma include Crohn's disease, celiac sprue, different types\nof previous surgery (i.e. surgery joining the urinary system with the intestines), and\nneurofibromatosis.\n• Patients can present with obstruction or bleeding.\n• The tumor may be diagnosed by radiologic techniques (barium studies), endoscopy or\nsurgery, and confirmed by biopsy sampling.\n• Treatment depends on the location, size and shape of the tumor, and whether it has spread.\nOptions include endoscopic removal and surgery. Chemotherapy and radiation may be\nhelpful.",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Upper endoscopy is often performed to obtain a small intestine biopsy sample of the"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "intestinal lining. The biopsy will show variable degrees of atrophy of the small intestine with"
+        },
+        {
+          "type": "paragraph",
+          "text": "villous blunting and inflammation."
+        },
+        {
+          "type": "list",
+          "items": [
+            "To treat tropical sprue, patients are prescribed high doses of folic acid, and antibiotics are"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "often required. Once treated, tropical sprue does not recur unless the patient is re-exposed"
+        },
+        {
+          "type": "paragraph",
+          "text": "by returning to tropical areas."
+        },
+        {
+          "type": "paragraph",
+          "text": "Tumors of the Small Intestine"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Tumors of the small intestine are rare. They are usually single, but may be multiple"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "particularly in certain syndromes (i.e. intestinal polyposis syndrome)."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Tumors can be benign or malignant. Some benign tumors can progress and become"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "malignant (i.e. adenomas, leiomyomas)."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Most small intestine tumors are clinically silent for long periods.",
+            "Nearly half of all benign small intestine tumors are found only incidentally either during an"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "operation or an investigation to visualize the intestine for other reasons."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Symptoms can be chronic and/or intermittent and include abdominal pain, nausea, weight"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "loss and bleeding."
+        },
+        {
+          "type": "list",
+          "items": [
+            "The larger the tumor, the more likely the patient will experience symptoms of bowel"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "obstruction. Tumors can also become ulcerated and bleed."
+        },
+        {
+          "type": "paragraph",
+          "text": "Malignant Tumors"
+        },
+        {
+          "type": "paragraph",
+          "text": "Adenocarcinoma"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Adenocarcinoma of the small intestine probably develops mainly from adenomas.",
+            "Most tumors occur at the ampulla in the duodenum.",
+            "Other risk factors for adenocarcinoma include Crohn's disease, celiac sprue, different types"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "of previous surgery (i.e. surgery joining the urinary system with the intestines), and"
+        },
+        {
+          "type": "paragraph",
+          "text": "neurofibromatosis."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Patients can present with obstruction or bleeding.",
+            "The tumor may be diagnosed by radiologic techniques (barium studies), endoscopy or"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "surgery, and confirmed by biopsy sampling."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Treatment depends on the location, size and shape of the tumor, and whether it has spread."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Options include endoscopic removal and surgery. Chemotherapy and radiation may be"
+        },
+        {
+          "type": "paragraph",
+          "text": "helpful."
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "small-source-19",
+        "sourceOrder": 19,
+        "originalLabel": "Lecture page 19",
+        "originalSourceHash": "89fe6210ec83164a3aeda5ff195219005d3a70c3585e90f399f93479ff9cbb0f"
+      },
+      "sourceHash": "89127536686d545d1d1fc53ac34598388f875ad6e976115d096a00de65e9aebf"
+    },
+    {
+      "id": "med401-git-small-source-20",
+      "order": 20,
+      "title": "Intestinal Lymphoma",
+      "text": "Intestinal Lymphoma\n• Intestinal lymphoma of the small intestine is a recognized complication of celiac sprue, and\ncan occur in immunodeficiency syndromes.\n• Symptoms include crampy-like abdominal pain, weight loss, features of malabsorption,\nbleeding, or even bowel obstruction.\nLeiomyosarcoma\n• This is a malignant tumor arising from the muscle wall of the intestine and can also arise from\na benign leiomyoma.\n• Whenever possible, complete surgical resection is recommended. Chemotherapy and\nradiation are also used.\nMetastatic Malignancy from Other Organs\n• (i.e. lung, breast or melanoma)\nBenign Tumors\n• Leiomyoma: Leiomyomas are tumors of one of the muscle layers of the intestinal wall. Some\ncan grow into the lumen of the bowel and become ulcerated and cause bleeding or anemia,\nwhich is the most common symptom and finding. They can be very difficult to diagnose,\nespecially when they occur in the small intestine. Endoscopic ultrasound is a useful way to\ndetermine the site of the tumor within the bowel wall. Some leiomyomas do have malignant\npotential. Biopsy sampling and surgical resection is the normal course of action.\n• Adenomas: Adenomas are benign tumors that do have malignant potential. They cause\nsymptoms due to blockage. When they arise in the region of the papilla or the area of the\nduodenum where the bile duct and pancreas drain they can cause jaundice. Because of the\nrisk of malignant degeneration, adenomas are usually removed (by surgery or endoscopy)\n• Lipomas: Lipomas are collections of fatty tissue within the wall of the intestine that, when\nviewed endoscopically, have a mild yellowish appearance. These are completely benign\ntumors with no malignant potential. Lipomas do not need to be removed unless they become\nvery large and cause obstructive symptoms (or bleeding due to ulceration).",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "Intestinal Lymphoma"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Intestinal lymphoma of the small intestine is a recognized complication of celiac sprue, and"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "can occur in immunodeficiency syndromes."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Symptoms include crampy-like abdominal pain, weight loss, features of malabsorption,"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "bleeding, or even bowel obstruction."
+        },
+        {
+          "type": "paragraph",
+          "text": "Leiomyosarcoma"
+        },
+        {
+          "type": "list",
+          "items": [
+            "This is a malignant tumor arising from the muscle wall of the intestine and can also arise from"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "a benign leiomyoma."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Whenever possible, complete surgical resection is recommended. Chemotherapy and"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "radiation are also used."
+        },
+        {
+          "type": "paragraph",
+          "text": "Metastatic Malignancy from Other Organs"
+        },
+        {
+          "type": "list",
+          "items": [
+            "(i.e. lung, breast or melanoma)"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Benign Tumors"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Leiomyoma: Leiomyomas are tumors of one of the muscle layers of the intestinal wall. Some"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "can grow into the lumen of the bowel and become ulcerated and cause bleeding or anemia,"
+        },
+        {
+          "type": "paragraph",
+          "text": "which is the most common symptom and finding. They can be very difficult to diagnose,"
+        },
+        {
+          "type": "paragraph",
+          "text": "especially when they occur in the small intestine. Endoscopic ultrasound is a useful way to"
+        },
+        {
+          "type": "paragraph",
+          "text": "determine the site of the tumor within the bowel wall. Some leiomyomas do have malignant"
+        },
+        {
+          "type": "paragraph",
+          "text": "potential. Biopsy sampling and surgical resection is the normal course of action."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Adenomas: Adenomas are benign tumors that do have malignant potential. They cause"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "symptoms due to blockage. When they arise in the region of the papilla or the area of the"
+        },
+        {
+          "type": "paragraph",
+          "text": "duodenum where the bile duct and pancreas drain they can cause jaundice. Because of the"
+        },
+        {
+          "type": "paragraph",
+          "text": "risk of malignant degeneration, adenomas are usually removed (by surgery or endoscopy)"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Lipomas: Lipomas are collections of fatty tissue within the wall of the intestine that, when"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "viewed endoscopically, have a mild yellowish appearance. These are completely benign"
+        },
+        {
+          "type": "paragraph",
+          "text": "tumors with no malignant potential. Lipomas do not need to be removed unless they become"
+        },
+        {
+          "type": "paragraph",
+          "text": "very large and cause obstructive symptoms (or bleeding due to ulceration)."
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "small-source-20",
+        "sourceOrder": 20,
+        "originalLabel": "Lecture page 20",
+        "originalSourceHash": "289c6754b14dbdba5e2fd04d219e7748316d9f108cdda3e3dc2af145ad5b1de4"
+      },
+      "sourceHash": "4f61b7ba8b8141ee53d0f35cf6fd7ec90672cc255e6d638275c3fcde94d1aa92"
+    },
+    {
+      "id": "med401-git-small-source-21",
+      "order": 21,
+      "title": "• Hemangiomas: Hemangiomas are collections of blood vessels that form a benign vascular",
+      "text": "• Hemangiomas: Hemangiomas are collections of blood vessels that form a benign vascular\ntumor in the wall of the stomach or intestine. They are benign and sometimes found in\nconjunction with other syndromes. Hemangiomas can cause gastrointestinal bleeding and\nanemia. They are detected by endoscopy. They can be treated endoscopically with\napplication of a heater probe to burn the vessels. Patients may need resection of areas of\nintestine heavily involved with hemangiomas if they cause significant bleeding. Various\nmedicinal therapies (i.e. estrogens) have been tried to reduce the amount of bleeding from\nhemangiomas. Reports of success have been variable.\n• Neurogenic Tumors: Neurogenic tumors are benign growths arising from neural (nerve)\ntissue. The most common variety is neurofibroma. These usually solitary tumors can be\nconfirmed by their microscopic appearance after biopsy sampling.\nPolyposis Syndromes Involving the Small\nBowel\nThere are four important polyposis syndromes that involve the small intestine: Familial\nAdenomatous Polyposis; Peutz-Jeghers Syndrome; Generalized Juvenile Polyposis; and, Cronkhite-\nCanada Syndrome. These are a group of disorders characterized by the presence of multiple polyps\naffecting all or parts of the gastrointestinal tract. They are distinguished by the way they can be\ninherited but also by the microscopic appearance of the polyps.\n• Familial Adenomatous Polyposis:\n- Inheritance: It is a very strongly inherited condition with an autosomal dominant\npattern.\n- Colonic Impact: It is characterized by the presence of multiple adenomatous polyps\nin the colon, placing the patient at a high risk for colon cancer.\n- Small Intestine Involvement: Over 80% of patients develop pre-malignant\nadenomas in the small intestine, most commonly in the duodenum (upper part).\n- Post-Colectomy Risk: In patients who have had their colon removed, the most\ncommon cause of cancer-related death is the development of duodenal cancer,\nspecifically in the periampullary region.\n- Management Challenges: Because it is impossible to remove all small intestine\nadenomas, surgical or endoscopic intervention is reserved only for large polyps.\n- Pharmacological & Preventive Care: Aspirin-related medications may help reduce\nor halt the growth of these adenomas, and patients require regular small intestine\nexaminations every few years.",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Hemangiomas: Hemangiomas are collections of blood vessels that form a benign vascular"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "tumor in the wall of the stomach or intestine. They are benign and sometimes found in"
+        },
+        {
+          "type": "paragraph",
+          "text": "conjunction with other syndromes. Hemangiomas can cause gastrointestinal bleeding and"
+        },
+        {
+          "type": "paragraph",
+          "text": "anemia. They are detected by endoscopy. They can be treated endoscopically with"
+        },
+        {
+          "type": "paragraph",
+          "text": "application of a heater probe to burn the vessels. Patients may need resection of areas of"
+        },
+        {
+          "type": "paragraph",
+          "text": "intestine heavily involved with hemangiomas if they cause significant bleeding. Various"
+        },
+        {
+          "type": "paragraph",
+          "text": "medicinal therapies (i.e. estrogens) have been tried to reduce the amount of bleeding from"
+        },
+        {
+          "type": "paragraph",
+          "text": "hemangiomas. Reports of success have been variable."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Neurogenic Tumors: Neurogenic tumors are benign growths arising from neural (nerve)"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "tissue. The most common variety is neurofibroma. These usually solitary tumors can be"
+        },
+        {
+          "type": "paragraph",
+          "text": "confirmed by their microscopic appearance after biopsy sampling."
+        },
+        {
+          "type": "paragraph",
+          "text": "Polyposis Syndromes Involving the Small"
+        },
+        {
+          "type": "paragraph",
+          "text": "Bowel"
+        },
+        {
+          "type": "paragraph",
+          "text": "There are four important polyposis syndromes that involve the small intestine: Familial"
+        },
+        {
+          "type": "paragraph",
+          "text": "Adenomatous Polyposis; Peutz-Jeghers Syndrome; Generalized Juvenile Polyposis; and, Cronkhite-"
+        },
+        {
+          "type": "paragraph",
+          "text": "Canada Syndrome. These are a group of disorders characterized by the presence of multiple polyps"
+        },
+        {
+          "type": "paragraph",
+          "text": "affecting all or parts of the gastrointestinal tract. They are distinguished by the way they can be"
+        },
+        {
+          "type": "paragraph",
+          "text": "inherited but also by the microscopic appearance of the polyps."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Familial Adenomatous Polyposis:",
+            "Inheritance: It is a very strongly inherited condition with an autosomal dominant"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "pattern."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Colonic Impact: It is characterized by the presence of multiple adenomatous polyps"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "in the colon, placing the patient at a high risk for colon cancer."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Small Intestine Involvement: Over 80% of patients develop pre-malignant"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "adenomas in the small intestine, most commonly in the duodenum (upper part)."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Post-Colectomy Risk: In patients who have had their colon removed, the most"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "common cause of cancer-related death is the development of duodenal cancer,"
+        },
+        {
+          "type": "paragraph",
+          "text": "specifically in the periampullary region."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Management Challenges: Because it is impossible to remove all small intestine"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "adenomas, surgical or endoscopic intervention is reserved only for large polyps."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Pharmacological & Preventive Care: Aspirin-related medications may help reduce"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "or halt the growth of these adenomas, and patients require regular small intestine"
+        },
+        {
+          "type": "paragraph",
+          "text": "examinations every few years."
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "small-source-21",
+        "sourceOrder": 21,
+        "originalLabel": "Lecture page 21",
+        "originalSourceHash": "72b3c2b98e1a17f3febe86639e13fefe1949e66512418a9a848427861a5a2884"
+      },
+      "sourceHash": "de3531e538d53153e4ea87519c953bdf4c10601353fd85a358a26cdf55011d9d"
+    },
+    {
+      "id": "med401-git-small-source-22",
+      "order": 22,
+      "title": "• Peutz-Jeghers Syndrome:",
+      "text": "• Peutz-Jeghers Syndrome:\n- Nature of Growths: Characterized by the excessive growth of normal intestinal\ntissue (hamartomatous polyps).\n- Primary Location: Occurs mainly in the jejunum and ileum of the small intestine.\n- Common Complications: Most often presents with problems related to bleeding\nand bowel obstruction.\n- Cancer Risk: * There is a small risk of intestinal cancer (significantly less than in\nFamilial Adenomatous Polyposis).\n- There is a slightly increased incidence of malignancy in the gynecological organs.\n- Dermatological Findings: Presence of pigmentation (dark spots) in the region of\nthe lips and mouth.\n- Pigmentation Distribution: While it may fade after puberty, this pigmentation can\nalso affect the genital areas and limbs.\n• Generalized Juvenile Polyposis: Generalized juvenile polyposis can be inherited or sporadic.\nThe polyps may be found anywhere in the intestinal tract and are characterized by their\nmicroscopic appearance. Large polyps may present with symptoms of obstruction or\nbleeding and there is a small increased risk of developing gastrointestinal cancer.\n• Cronkhite-Canada Syndrome: This is a syndrome characterized by many intestinal polyps,\npigmentation, diarrhea, protein loss from the intestine and alopecia (local hair loss). The\npolyps are most commonly found in the small intestine and usually do not become\nmalignant. The patient's main problem is usually malnutrition. Aggressive nutritional support\nis usually necessary.",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Peutz-Jeghers Syndrome:",
+            "Nature of Growths: Characterized by the excessive growth of normal intestinal"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "tissue (hamartomatous polyps)."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Primary Location: Occurs mainly in the jejunum and ileum of the small intestine.",
+            "Common Complications: Most often presents with problems related to bleeding"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "and bowel obstruction."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Cancer Risk: * There is a small risk of intestinal cancer (significantly less than in"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Familial Adenomatous Polyposis)."
+        },
+        {
+          "type": "list",
+          "items": [
+            "There is a slightly increased incidence of malignancy in the gynecological organs.",
+            "Dermatological Findings: Presence of pigmentation (dark spots) in the region of"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "the lips and mouth."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Pigmentation Distribution: While it may fade after puberty, this pigmentation can"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "also affect the genital areas and limbs."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Generalized Juvenile Polyposis: Generalized juvenile polyposis can be inherited or sporadic."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The polyps may be found anywhere in the intestinal tract and are characterized by their"
+        },
+        {
+          "type": "paragraph",
+          "text": "microscopic appearance. Large polyps may present with symptoms of obstruction or"
+        },
+        {
+          "type": "paragraph",
+          "text": "bleeding and there is a small increased risk of developing gastrointestinal cancer."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Cronkhite-Canada Syndrome: This is a syndrome characterized by many intestinal polyps,"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "pigmentation, diarrhea, protein loss from the intestine and alopecia (local hair loss). The"
+        },
+        {
+          "type": "paragraph",
+          "text": "polyps are most commonly found in the small intestine and usually do not become"
+        },
+        {
+          "type": "paragraph",
+          "text": "malignant. The patient's main problem is usually malnutrition. Aggressive nutritional support"
+        },
+        {
+          "type": "paragraph",
+          "text": "is usually necessary."
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "small-source-22",
+        "sourceOrder": 22,
+        "originalLabel": "Lecture page 22",
+        "originalSourceHash": "feb18f13c5d22c90efaa1cc110e67d4c741a5235ded345df9e043abbe0ee1366"
+      },
+      "sourceHash": "e343628fbc179a856c9d9123b80916a76ee6e05b15b7cb7d2d672e0e1cc9aea0"
+    }
+  ],
+  "sourceVersion": "must401-git-2026-07-27",
+  "status": "published"
+}

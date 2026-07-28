@@ -1,0 +1,55 @@
+{
+  "subjectId": "med401-git",
+  "title": "Gastroenterology & Hepatology",
+  "sourceVersion": "must401-git-2026-07-27",
+  "extractedAt": "2026-07-27T00:00:00.000Z",
+  "provenance": {
+    "inputFile": "MUST401_GIT_Interactive_Study_Platform.html",
+    "inputHash": "36CA1A86B9C4E1E1D0F42F8D90858F2D72584DD2BCC53BEECEB69ED97A0C3688",
+    "extractorVersion": "2.0.0",
+    "topicCount": 6,
+    "sectionCount": 37,
+    "passageCount": 82,
+    "sourceVisualCount": 6,
+    "imageCount": 0,
+    "studentFacingAssetCount": 0
+  },
+  "topics": [
+    {
+      "id": "med401-git-acute-hepatitis",
+      "title": "Acute Hepatitis",
+      "sectionCount": 5,
+      "passageCount": 10
+    },
+    {
+      "id": "med401-git-autoimmune-hepatitis",
+      "title": "Autoimmune Hepatitis",
+      "sectionCount": 5,
+      "passageCount": 7
+    },
+    {
+      "id": "med401-git-nafld-nash",
+      "title": "NAFLD & NASH",
+      "sectionCount": 6,
+      "passageCount": 14
+    },
+    {
+      "id": "med401-git-diseases-of-the-pancreas",
+      "title": "Diseases of the Pancreas",
+      "sectionCount": 6,
+      "passageCount": 17
+    },
+    {
+      "id": "med401-git-portal-hypertension-cirrhosis",
+      "title": "Portal Hypertension & Cirrhosis",
+      "sectionCount": 6,
+      "passageCount": 12
+    },
+    {
+      "id": "med401-git-small-intestinal-diseases",
+      "title": "Small Intestinal Diseases",
+      "sectionCount": 9,
+      "passageCount": 22
+    }
+  ]
+}

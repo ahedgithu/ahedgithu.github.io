@@ -1,0 +1,41 @@
+{
+  "version": "must401-git-2026-07-27",
+  "updatedAt": "2026-07-27",
+  "records": [
+    {
+      "questionId": "med1-kellawi-q011",
+      "topicId": "med401-git-diseases-of-the-pancreas",
+      "sectionId": "med401-git-pan-diagnosis",
+      "passageIds": [
+        "med401-git-pancreas-source-7",
+        "med401-git-pancreas-source-6"
+      ],
+      "subjectTitle": "Gastroenterology & Hepatology",
+      "topicTitle": "Diseases of the Pancreas",
+      "sectionTitle": "Diagnosis, imaging and severity",
+      "sourceVersion": "must401-git-2026-07-27",
+      "reviewStatus": "verified",
+      "reviewedAt": "2026-07-28",
+      "explanation": {
+        "correct": {
+          "choiceId": "c",
+          "text": "The lecture describes CT as the most reliable imaging modality for diagnosis because it defines pancreatic viability and necrosis."
+        },
+        "incorrect": {
+          "a": {
+            "text": "Ultrasound is presented as an initial screening test and may be obscured by overlying bowel gas, so it is not the most reliable modality.",
+            "passageIds": [
+              "med401-git-pancreas-source-7"
+            ]
+          },
+          "d": {
+            "text": "Serum amylase supports the biochemical diagnostic criterion, but it may return to normal within 24–48 hours and is not the most reliable imaging method.",
+            "passageIds": [
+              "med401-git-pancreas-source-6"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

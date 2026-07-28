@@ -1,0 +1,1708 @@
+{
+  "id": "med401-git-nafld-nash",
+  "subjectId": "med401-git",
+  "title": "NAFLD & NASH",
+  "aliases": [],
+  "sectionIds": [
+    "med401-git-nafld-spectrum",
+    "med401-git-nafld-pathogenesis",
+    "med401-git-nafld-screen",
+    "med401-git-nafld-diagnosis",
+    "med401-git-nafld-natural",
+    "med401-git-nafld-treatment"
+  ],
+  "sections": [
+    {
+      "id": "med401-git-nafld-spectrum",
+      "topicId": "med401-git-nafld-nash",
+      "title": "Disease spectrum and definitions",
+      "category": "definition",
+      "keywords": [
+        "NAFLD",
+        "NAFL",
+        "NASH",
+        "fibrosis",
+        "ballooning",
+        "biopsy"
+      ],
+      "contentHtml": "<div><div>NAFLD<br><small>&gt;5% hepatocyte steatosis + insulin resistance, with secondary causes and AFLD excluded</small></div><span>→</span><div>NAFL<br><small>Pure steatosis or steatosis with mild lobular inflammation</small></div><span>→</span><div>NASH<br><small>Steatosis + inflammation + ballooning</small></div><span>→</span><div>Fibrosis / Cirrhosis / HCC</div></div>",
+      "contentHash": "00feb92d52c27d28ac18e76e35f0bb94cc75ca5b630770266cc2c8763f859b1c"
+    },
+    {
+      "id": "med401-git-nafld-pathogenesis",
+      "topicId": "med401-git-nafld-nash",
+      "title": "Multi-organ pathogenesis and risk modifiers",
+      "category": "mechanism",
+      "keywords": [
+        "FFA",
+        "insulin",
+        "resistance",
+        "microbiome",
+        "TLR4",
+        "PNPLA3",
+        "TM6SF2"
+      ],
+      "contentHtml": "<div><div><b>Adipose tissue</b><span>Excess FFAs → lipotoxicity and inflammation</span></div><div><b>Pancreas</b><span>Beta-cell dysfunction and hyperinsulinemia</span></div><div><b>Gut</b><span>Dysbiosis → permeability → endotoxin → TLR4 activation</span></div><div><b>Liver</b><span>Steatosis → necroinflammation → fibrosis → cirrhosis/HCC</span></div></div><div><table><thead><tr><th>Lifestyle / modifier</th><th>Role</th></tr></thead><tbody><tr><td>High caloric intake</td><td>Positive energy balance and hepatic steatosis</td></tr><tr><td>Saturated fat</td><td>Lipotoxicity and hepatic insulin resistance</td></tr><tr><td>Fructose</td><td>De novo lipogenesis and NASH progression</td></tr><tr><td>Sedentary behavior</td><td>Reduced glucose utilization and muscle insulin sensitivity</td></tr><tr><td>Obesity / waist</td><td>Strongest phenotype and predictor of advanced disease</td></tr><tr><td>PNPLA3 I148M / TM6SF2 E167K</td><td>Higher liver fat and increased NASH risk; routine genotyping not recommended</td></tr></tbody></table></div>",
+      "contentHash": "2b0ed5a5e7159a4748eb2e2c98b02b80e98f83fb6bed277216741c4ce374231a"
+    },
+    {
+      "id": "med401-git-nafld-screen",
+      "topicId": "med401-git-nafld-nash",
+      "title": "Prevalence, screening and metabolic associations",
+      "category": "clinical",
+      "keywords": [
+        "screening",
+        "MetS",
+        "T2DM",
+        "lean",
+        "NAFLD",
+        "prevalence"
+      ],
+      "contentHtml": "<div><div><strong>17–46%</strong><span>Western adults</span></div><div><strong>7%</strong><span>Lean individuals</span></div><div><strong>~50%</strong><span>Diagnosed late</span></div><div><strong>12–22%</strong><span>Chronic liver disease patients</span></div></div><ul><li>Screen patients with insulin resistance or metabolic risk factors for NAFLD.</li><li>Evaluate steatosis for secondary causes, alcohol intake and coexisting chronic liver disease.</li><li>Assess metabolic syndrome features independent of liver-enzyme levels.</li><li>In NAFLD, diabetes screening is mandatory; in T2DM, look for NAFLD regardless of liver enzymes.</li><li>Community screening is limited by cost, low predictive value of available tests, biopsy risk and lack of approved specific pharmacotherapy in the source.</li></ul>",
+      "contentHash": "b7b318b60b02fba0d0286627c91f687089ae9657f4fd362734f12952612f1f07"
+    },
+    {
+      "id": "med401-git-nafld-diagnosis",
+      "topicId": "med401-git-nafld-nash",
+      "title": "Diagnosis, biopsy and non-invasive assessment",
+      "category": "investigation",
+      "keywords": [
+        "ultrasound",
+        "elastography",
+        "fibrosis",
+        "biopsy",
+        "MRS",
+        "scores"
+      ],
+      "contentHtml": "<div><ol><li><span>1</span><div>Document steatosis: ultrasonography is the preferred first-line imaging test.</div></li><li><span>2</span><div>Assess metabolic risk and exclude secondary causes, viral hepatitis and other chronic liver diseases.</div></li><li><span>3</span><div>Estimate fibrosis risk using biomarkers/scores and transient elastography.</div></li><li><span>4</span><div>Confirm advanced fibrosis/cirrhosis with biopsy when clinically required.</div></li><li><span>5</span><div>Use liver biopsy for definitive NASH diagnosis.</div></li></ol></div><ul><li>Fibrosis stage is the most important prognostic factor.</li><li>Quantitative liver fat can be obtained by 1H-MRS, but it is expensive and not recommended clinically.</li><li>Combining serum scores with transient elastography may improve diagnostic accuracy and reduce biopsy need.</li><li>Selected high-risk patients may be considered for repeat biopsy after at least 5 years.</li></ul>",
+      "contentHash": "75e153f226a9054fd84eea97e8e61e1397f441e7e0f4c0d150ed24e2b0dcc09e"
+    },
+    {
+      "id": "med401-git-nafld-natural",
+      "topicId": "med401-git-nafld-nash",
+      "title": "Natural history and complications",
+      "category": "complication",
+      "keywords": [
+        "CVD",
+        "HCC",
+        "fibrosis",
+        "progression",
+        "hypertension"
+      ],
+      "contentHtml": "<div><table><thead><tr><th>Transition</th><th>Rate / pace in source</th></tr></thead><tbody><tr><td>Simple steatosis → NASH F1–F2</td><td>12–40% over 8–13 years</td></tr><tr><td>NASH → F3</td><td>5–10%</td></tr><tr><td>NASH → cirrhosis F4</td><td>0–50% depending on population</td></tr><tr><td>Cirrhosis → HCC</td><td>1–8% per year</td></tr><tr><td>NAFL fibrosis progression</td><td>1 stage / 14 years</td></tr><tr><td>NASH fibrosis progression</td><td>1 stage / 7 years</td></tr><tr><td>Hypertension</td><td>Doubles fibrosis-progression rate</td></tr></tbody></table></div><div><b>Major outcome</b><p>Cardiovascular disease is the leading cause of death in NAFLD, except when advanced fibrosis changes the balance. Cardiovascular screening is mandatory in the lecture.</p></div><ul><li>NAFLD is an independent HCC risk factor even before cirrhosis, but systematic surveillance in non-cirrhotic NAFLD is not considered cost-effective.</li><li>Standard 6-monthly ultrasound ± AFP surveillance applies once cirrhosis is present.</li><li>Pediatric NASH-related cirrhosis has been reported as early as 8 years in the source.</li></ul>",
+      "contentHash": "74424063f8cd7428301dc28a666f747d55fbf520de3b3cf0a83dc207991cafe5"
+    },
+    {
+      "id": "med401-git-nafld-treatment",
+      "topicId": "med401-git-nafld-nash",
+      "title": "Lifestyle, pharmacotherapy and surgery",
+      "category": "treatment",
+      "keywords": [
+        "weight",
+        "loss",
+        "Mediterranean",
+        "exercise",
+        "pioglitazone",
+        "vitamin",
+        "E",
+        "bariatric",
+        "transplant"
+      ],
+      "contentHtml": "<div><div><b>Foundation — every patient</b><span>Healthy diet + habitual activity; 7–10% weight-loss target in overweight/obese NAFLD</span></div><div><b>Selected NASH</b><span>Off-label pharmacotherapy, especially F2+ or high progression risk</span></div><div><b>Refractory obesity / advanced disease</b><span>Bariatric surgery or liver transplantation when indicated</span></div></div><div><table><thead><tr><th>Lifestyle component</th><th>Target in source</th></tr></thead><tbody><tr><td>Caloric restriction</td><td>500–1,000 kcal/day deficit</td></tr><tr><td>Weight loss</td><td>7–10% body weight</td></tr><tr><td>Activity</td><td>150–200 min/week moderate intensity in 3–5 sessions; aerobic and resistance training</td></tr><tr><td>Diet quality</td><td>Mediterranean pattern; reduce processed food and added fructose</td></tr><tr><td>Alcohol</td><td>Below 30 g/day in men and 20 g/day in women</td></tr><tr><td>Coffee</td><td>No liver-related restriction</td></tr></tbody></table></div><div><b>Pharmacotherapy status in the uploaded lecture</b><p>No drug is specifically approved for NAFLD/NASH. Pioglitazone or vitamin E may be used in selected NASH; metformin has little histological evidence. Statins may be used for LDL and cardiovascular risk but are not NASH therapy.</p></div>",
+      "contentHash": "5061e56cd6820b7ce5d5ccc77802a11c3ae6ed03ffe954905e504f6f6e3714fd"
+    }
+  ],
+  "passages": [
+    {
+      "id": "med401-git-nafld-source-1",
+      "order": 1,
+      "title": "Non-Alcoholic Fatty Liver Disease & Non-Alcoholic Steatohepatitis",
+      "text": "NAFLD & NASH\nNon-Alcoholic Fatty Liver Disease & Non-Alcoholic Steatohepatitis\nLiver Diseases\n01 Definitions & Disease Spectrum\nNAFLD · NAFL · NASH · Cirrhosis\n1.1 Key Definitions\n1.2 NAFLD Spectrum and concurrent disease",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "NAFLD & NASH"
+        },
+        {
+          "type": "paragraph",
+          "text": "Non-Alcoholic Fatty Liver Disease & Non-Alcoholic Steatohepatitis"
+        },
+        {
+          "type": "paragraph",
+          "text": "Liver Diseases"
+        },
+        {
+          "type": "heading",
+          "text": "01 Definitions & Disease Spectrum"
+        },
+        {
+          "type": "paragraph",
+          "text": "NAFLD · NAFL · NASH · Cirrhosis"
+        },
+        {
+          "type": "list",
+          "items": [
+            "1 Key Definitions",
+            "2 NAFLD Spectrum and concurrent disease"
+          ]
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "nafld-source-1",
+        "sourceOrder": 1,
+        "originalLabel": "Lecture page 1",
+        "originalSourceHash": "53fdcaee4170b80f6029266858c5413835305788c71b931aaf08e3c43963583f"
+      },
+      "sourceHash": "f245fae32a8037d4e8db1279f6b22c9177b4c6f60397f13cf36d7356d71c7ca1"
+    },
+    {
+      "id": "med401-git-nafld-source-2",
+      "order": 2,
+      "title": "1.3 Multi-Organ Crosstalk in NAFLD",
+      "text": "1.3 Multi-Organ Crosstalk in NAFLD\nOrgans Involved in NAFLD Pathogenesis (Inter-Organ Crosstalk)\n› Adipose tissue: excess free fatty acids (FFAs) released → hepatic lipotoxicity and inflammation\n› Pancreas: beta-cell dysfunction and insulin hypersecretion → hyperinsulinemia\n› Gut (microbiome): dysbiosis → increased intestinal permeability → bacterial endotoxin → hepatic\nTLR4 activation → inflammation\n› Liver: central target — steatosis, necroinflammation, fibrosis, and eventually cirrhosis/HCC\n› Lipids accumulating in the liver induce hepatic insulin resistance and inflammation — key driver of\nNASH\n1.4 Lipids induce hepatic IR and inflammation",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "3 Multi-Organ Crosstalk in NAFLD"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Organs Involved in NAFLD Pathogenesis (Inter-Organ Crosstalk)"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Adipose tissue: excess free fatty acids (FFAs) released → hepatic lipotoxicity and inflammation",
+            "Pancreas: beta-cell dysfunction and insulin hypersecretion → hyperinsulinemia",
+            "Gut (microbiome): dysbiosis → increased intestinal permeability → bacterial endotoxin → hepatic"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "TLR4 activation → inflammation"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Liver: central target — steatosis, necroinflammation, fibrosis, and eventually cirrhosis/HCC",
+            "Lipids accumulating in the liver induce hepatic insulin resistance and inflammation — key driver of"
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "NASH"
+        },
+        {
+          "type": "list",
+          "items": [
+            "4 Lipids induce hepatic IR and inflammation"
+          ]
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "nafld-source-2",
+        "sourceOrder": 2,
+        "originalLabel": "Lecture page 2",
+        "originalSourceHash": "b48244ecfefa22ca6087d387f94529cd17efb62f7d07dd829e4365856d768e9c"
+      },
+      "sourceHash": "92bc2f1f3f689d15fbcd34731419c09a278920c58812a1007ad10cfb17a4db6e"
+    },
+    {
+      "id": "med401-git-nafld-source-3",
+      "order": 3,
+      "title": "02 Epidemiology & Prevalence",
+      "text": "02 Epidemiology & Prevalence\nScreening · Incidence · Risk Groups\n2.1 Prevalence & Burden\n17–46% 7% 12–22% ~50%\nLean (normal-weight) Of chronic liver disease Diagnosed late — advanced\nNAFLD in Western adults\nindividuals patients cirrhosis\n• NAFLD parallels the prevalence of Metabolic Syndrome (MetS) and its components, which also\nincrease the risk of more advanced disease\n• Prevalence is rising in parallel with global obesity and T2DM epidemics\n• NAFLD is also found in 7% of lean (normal-weight) individuals — screening must not be based on\nBMI alone\n2.2 Screening Recommendations\nWho to Screen (EASL Guidelines)\n› Screen all patients with insulin resistance (IR) and/or metabolic risk factors (obesity, MetS) →\nevaluate for NAFLD\n› Screen all individuals with steatosis for secondary causes including careful alcohol intake\nassessment\n› Screen all NAFLD patients for coexisting chronic liver diseases that may worsen liver injury\n› Screen all individuals with steatosis for MetS features, independent of liver enzyme levels\n› In obesity / MetS: NAFLD screening should be part of routine work-up\nWhy Community Screening is Limited\n› High direct and indirect costs\n› Low predictive value of available non-invasive tests\n› Risks associated with liver biopsy (required to confirm NASH)\n› Lack of approved specific pharmacological treatments\n→ BUT: Diagnosing NASH is valuable — it identifies patients at risk of fibrosis progression,\ncirrhosis, and HCC\n03 Pathogenesis\nLifestyle · Metabolic Syndrome · Genetics · Multi-organ Crosstalk\n3.1 Lifestyle & Diet (Western Diet Hypothesis)\nLifestyle Factor Mechanism / Role in NAFLD\nHigh caloric intake Positive energy balance → adipose deposition → hepatic steatosis\nExcess saturated fat Direct hepatotoxic lipotoxicity; promotes hepatic IR\nHigh fructose intake De novo lipogenesis in the liver; drives NASH progression\nSedentary behaviour Reduces peripheral glucose utilisation and muscle insulin sensitivity",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "02 Epidemiology & Prevalence"
+        },
+        {
+          "type": "paragraph",
+          "text": "Screening · Incidence · Risk Groups"
+        },
+        {
+          "type": "list",
+          "items": [
+            "1 Prevalence & Burden"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "17–46% 7% 12–22% ~50%"
+        },
+        {
+          "type": "paragraph",
+          "text": "Lean (normal-weight) Of chronic liver disease Diagnosed late — advanced"
+        },
+        {
+          "type": "paragraph",
+          "text": "NAFLD in Western adults"
+        },
+        {
+          "type": "paragraph",
+          "text": "individuals patients cirrhosis"
+        },
+        {
+          "type": "list",
+          "items": [
+            "NAFLD parallels the prevalence of Metabolic Syndrome (MetS) and its components, which also"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "increase the risk of more advanced disease"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Prevalence is rising in parallel with global obesity and T2DM epidemics",
+            "NAFLD is also found in 7% of lean (normal-weight) individuals — screening must not be based on"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "BMI alone"
+        },
+        {
+          "type": "list",
+          "items": [
+            "2 Screening Recommendations"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Who to Screen (EASL Guidelines)"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Screen all patients with insulin resistance (IR) and/or metabolic risk factors (obesity, MetS) →"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "evaluate for NAFLD"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Screen all individuals with steatosis for secondary causes including careful alcohol intake"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "assessment"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Screen all NAFLD patients for coexisting chronic liver diseases that may worsen liver injury",
+            "Screen all individuals with steatosis for MetS features, independent of liver enzyme levels",
+            "In obesity / MetS: NAFLD screening should be part of routine work-up"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Why Community Screening is Limited"
+        },
+        {
+          "type": "list",
+          "items": [
+            "High direct and indirect costs",
+            "Low predictive value of available non-invasive tests",
+            "Risks associated with liver biopsy (required to confirm NASH)",
+            "Lack of approved specific pharmacological treatments"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "→ BUT: Diagnosing NASH is valuable — it identifies patients at risk of fibrosis progression,"
+        },
+        {
+          "type": "paragraph",
+          "text": "cirrhosis, and HCC"
+        },
+        {
+          "type": "heading",
+          "text": "03 Pathogenesis"
+        },
+        {
+          "type": "paragraph",
+          "text": "Lifestyle · Metabolic Syndrome · Genetics · Multi-organ Crosstalk"
+        },
+        {
+          "type": "list",
+          "items": [
+            "1 Lifestyle & Diet (Western Diet Hypothesis)"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Lifestyle Factor Mechanism / Role in NAFLD"
+        },
+        {
+          "type": "paragraph",
+          "text": "High caloric intake Positive energy balance → adipose deposition → hepatic steatosis"
+        },
+        {
+          "type": "paragraph",
+          "text": "Excess saturated fat Direct hepatotoxic lipotoxicity; promotes hepatic IR"
+        },
+        {
+          "type": "paragraph",
+          "text": "High fructose intake De novo lipogenesis in the liver; drives NASH progression"
+        },
+        {
+          "type": "paragraph",
+          "text": "Sedentary behaviour Reduces peripheral glucose utilisation and muscle insulin sensitivity"
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "nafld-source-3",
+        "sourceOrder": 3,
+        "originalLabel": "Lecture page 3",
+        "originalSourceHash": "8e5ed673d5b4afecadacb1a22f86fa942b321b40d6d91e9834d74c5130cdf613"
+      },
+      "sourceHash": "67412bb4df94f4cc1eba784e058dab3f710c81b74c16575f81e884695f65f90a"
+    },
+    {
+      "id": "med401-git-nafld-source-4",
+      "order": 4,
+      "title": "Lifestyle Factor Mechanism / Role in NAFLD",
+      "text": "Lifestyle Factor Mechanism / Role in NAFLD\nStrongest phenotype; major driver of IR; predicts advanced disease\nObesity (BMI / waist ↑)\nespecially in elderly\nAlcohol (even moderate) Interacts with metabolic risk factors; NAFLD and AFLD may coexist\n★ Recommendation: Unhealthy lifestyles play a role in the development and\nprogression of NAFLD. Assessment of dietary and physical activity habits is part of A 1\nevidence rec. grade\ncomprehensive NAFLD screening\n3.2 Genetic Modifiers\n• Several genetic modifiers of NAFLD have been identified\n– A minority have been robustly validated\n• PNPLA3 I148M and TM6SF2 E167K carriers have a higher liver fat content\n– Increased risk of NASH\n– NAFLD not systematically associated with features of IR\n★ Recommendation: Genotyping may be considered in selected patients and B 2\nclinical studies but is NOT recommended routinely evidence rec. grade\n3.3 Progressive liver disease in NAFLD",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "Lifestyle Factor Mechanism / Role in NAFLD"
+        },
+        {
+          "type": "paragraph",
+          "text": "Strongest phenotype; major driver of IR; predicts advanced disease"
+        },
+        {
+          "type": "paragraph",
+          "text": "Obesity (BMI / waist ↑)"
+        },
+        {
+          "type": "paragraph",
+          "text": "especially in elderly"
+        },
+        {
+          "type": "paragraph",
+          "text": "Alcohol (even moderate) Interacts with metabolic risk factors; NAFLD and AFLD may coexist"
+        },
+        {
+          "type": "paragraph",
+          "text": "★ Recommendation: Unhealthy lifestyles play a role in the development and"
+        },
+        {
+          "type": "paragraph",
+          "text": "progression of NAFLD. Assessment of dietary and physical activity habits is part of A 1"
+        },
+        {
+          "type": "paragraph",
+          "text": "evidence rec. grade"
+        },
+        {
+          "type": "paragraph",
+          "text": "comprehensive NAFLD screening"
+        },
+        {
+          "type": "list",
+          "items": [
+            "2 Genetic Modifiers",
+            "Several genetic modifiers of NAFLD have been identified"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "– A minority have been robustly validated"
+        },
+        {
+          "type": "list",
+          "items": [
+            "PNPLA3 I148M and TM6SF2 E167K carriers have a higher liver fat content"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "– Increased risk of NASH"
+        },
+        {
+          "type": "paragraph",
+          "text": "– NAFLD not systematically associated with features of IR"
+        },
+        {
+          "type": "paragraph",
+          "text": "★ Recommendation: Genotyping may be considered in selected patients and B 2"
+        },
+        {
+          "type": "paragraph",
+          "text": "clinical studies but is NOT recommended routinely evidence rec. grade"
+        },
+        {
+          "type": "list",
+          "items": [
+            "3 Progressive liver disease in NAFLD"
+          ]
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "nafld-source-4",
+        "sourceOrder": 4,
+        "originalLabel": "Lecture page 4",
+        "originalSourceHash": "485774020e7bb7d951b6fa81e1aaf4fe42ccb2362b48be2743c112b8a78bd1ae"
+      },
+      "sourceHash": "5815c7407f80849b22625035558ade4971f40a1ce7bdf981eaf92f82b4a1e972"
+    },
+    {
+      "id": "med401-git-nafld-source-5",
+      "order": 5,
+      "title": "3.4 Natural history of NAFLD over 8–13 years",
+      "text": "3.4 Natural history of NAFLD over 8–13 years\nNAFLD Natural History at 8–13 Years (Key Numbers)\nTransition Rate\nSimple steatosis → NASH (F1–F2 fibrosis) 12–40%\nNASH → Advanced fibrosis (F3) 5–10%\nNASH → Cirrhosis (F4) 0–50% (variable by population)\nCirrhosis → HCC 1–8% per year\nCirrhosis → Liver-related death / LTx ~13%\n3.5 Liver Biopsy\n• Liver biopsy is essential for the diagnosis of NASH\n– Clinical, biochemical or imaging measures cannot distinguish NASH from steatosis\n• NAFL encompasses\n– Steatosis alone plus ONE of lobular or portal inflammation OR ballooning\n• NASH requires\n– Steatosis AND\n– Lobular or portal inflammation AND\n– Ballooning\n• NAS scoring indicates disease severity\n★ Recommendation: NASH must be diagnosed by liver biopsy showing steatosis +\nhepatocyte ballooning + lobular inflammation. No non-invasive method can replace A 1\nevidence rec. grade\nthis for diagnostic certainty",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "4 Natural history of NAFLD over 8–13 years"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "NAFLD Natural History at 8–13 Years (Key Numbers)"
+        },
+        {
+          "type": "paragraph",
+          "text": "Transition Rate"
+        },
+        {
+          "type": "paragraph",
+          "text": "Simple steatosis → NASH (F1–F2 fibrosis) 12–40%"
+        },
+        {
+          "type": "paragraph",
+          "text": "NASH → Advanced fibrosis (F3) 5–10%"
+        },
+        {
+          "type": "paragraph",
+          "text": "NASH → Cirrhosis (F4) 0–50% (variable by population)"
+        },
+        {
+          "type": "paragraph",
+          "text": "Cirrhosis → HCC 1–8% per year"
+        },
+        {
+          "type": "paragraph",
+          "text": "Cirrhosis → Liver-related death / LTx ~13%"
+        },
+        {
+          "type": "list",
+          "items": [
+            "5 Liver Biopsy",
+            "Liver biopsy is essential for the diagnosis of NASH"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "– Clinical, biochemical or imaging measures cannot distinguish NASH from steatosis"
+        },
+        {
+          "type": "list",
+          "items": [
+            "NAFL encompasses"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "– Steatosis alone plus ONE of lobular or portal inflammation OR ballooning"
+        },
+        {
+          "type": "list",
+          "items": [
+            "NASH requires"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "– Steatosis AND"
+        },
+        {
+          "type": "paragraph",
+          "text": "– Lobular or portal inflammation AND"
+        },
+        {
+          "type": "paragraph",
+          "text": "– Ballooning"
+        },
+        {
+          "type": "list",
+          "items": [
+            "NAS scoring indicates disease severity"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "★ Recommendation: NASH must be diagnosed by liver biopsy showing steatosis +"
+        },
+        {
+          "type": "paragraph",
+          "text": "hepatocyte ballooning + lobular inflammation. No non-invasive method can replace A 1"
+        },
+        {
+          "type": "paragraph",
+          "text": "evidence rec. grade"
+        },
+        {
+          "type": "paragraph",
+          "text": "this for diagnostic certainty"
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "nafld-source-5",
+        "sourceOrder": 5,
+        "originalLabel": "Lecture page 5",
+        "originalSourceHash": "652184a50239b2a0567d620d929c7f761d422fcca13bb7cadb66bba73a5324ad"
+      },
+      "sourceHash": "85c64c4558704a683bd6161ce10f61653db17a0270bc36e6684b167a2e90c57d"
+    },
+    {
+      "id": "med401-git-nafld-source-6",
+      "order": 6,
+      "title": "3.6 Role of non-invasive assessments",
+      "text": "3.6 Role of non-invasive assessments\n• Non-invasive markers should aim to:\n– Identify the risk of NAFLD among individuals with increased metabolic risk in primary\ncare\n– Identify those with a worse prognosis in secondary and tertiary care, E.g. severe NASH\n– Monitor disease progression\n– Predict response to therapeutic interventions\n→ Achieving these aims could reduce the need for liver biopsy\n3.7 Non-Invasive Assessment of Steatosis\n• Steatosis should be documented whenever NAFLD is suspected\n– Predicts future T2DM, cardiovascular events and arterial hypertension\n– Quantification of fat content is of limited clinical relevance\n• Except as a surrogate of treatment effectiveness\n★ Recommendation: US is the preferred first-line diagnostic procedure for A 1\nimaging of NAFLD, as it provides additional diagnostic information evidence rec. grade\nWhenever imaging tools are not available or feasible serum biomarkers and scores\nare an acceptable alternative for the diagnosis of steatosis\nB 2\nA quantitative estimation of liver fat can only be obtained by 1H-MRS. This technique\nis of value in clinical trials and experimental studies, but is expensive and not A 1\nrecommended in the clinical setting\n3.8 Non-Invasive Assessment of Fibrosis\nWhy Fibrosis Assessment Is the Priority\n› Fibrosis stage is the MOST IMPORTANT prognostic factor in NAFLD\n› Correlates directly with liver-related outcomes (decompensation, HCC) and all-cause mortality\n› Advanced fibrosis indicates thorough investigation\n★ Recommendation: Biomarkers, fibrosis scores, and transient elastography, are\nacceptable non-invasive procedures to identify those at low risk of advanced A 2\nevidence rec. grade\nfibrosis/cirrhosis\nBiomarkers/scores PLUS transient elastography might confer additional diagnostic\naccuracy and reduce need for liver biopsy\nB 2\nMonitoring of fibrosis progression may rely on biomarkers/scores and transient\nelastography, although this strategy requires validation\nC 1\nThe identification of advanced fibrosis or cirrhosis by serum biomarkers/scores and/or\nelastography is less accurate and needs to be confirmed by liver biopsy, according to B 2\nthe clinical context\nIn selected patients at high risk of liver disease progression, monitoring should include\nC 2\na repeat biopsy after 5-year follow-up",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "6 Role of non-invasive assessments",
+            "Non-invasive markers should aim to:"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "– Identify the risk of NAFLD among individuals with increased metabolic risk in primary"
+        },
+        {
+          "type": "paragraph",
+          "text": "care"
+        },
+        {
+          "type": "paragraph",
+          "text": "– Identify those with a worse prognosis in secondary and tertiary care, E.g. severe NASH"
+        },
+        {
+          "type": "paragraph",
+          "text": "– Monitor disease progression"
+        },
+        {
+          "type": "paragraph",
+          "text": "– Predict response to therapeutic interventions"
+        },
+        {
+          "type": "paragraph",
+          "text": "→ Achieving these aims could reduce the need for liver biopsy"
+        },
+        {
+          "type": "list",
+          "items": [
+            "7 Non-Invasive Assessment of Steatosis",
+            "Steatosis should be documented whenever NAFLD is suspected"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "– Predicts future T2DM, cardiovascular events and arterial hypertension"
+        },
+        {
+          "type": "paragraph",
+          "text": "– Quantification of fat content is of limited clinical relevance"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Except as a surrogate of treatment effectiveness"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "★ Recommendation: US is the preferred first-line diagnostic procedure for A 1"
+        },
+        {
+          "type": "paragraph",
+          "text": "imaging of NAFLD, as it provides additional diagnostic information evidence rec. grade"
+        },
+        {
+          "type": "paragraph",
+          "text": "Whenever imaging tools are not available or feasible serum biomarkers and scores"
+        },
+        {
+          "type": "paragraph",
+          "text": "are an acceptable alternative for the diagnosis of steatosis"
+        },
+        {
+          "type": "heading",
+          "text": "B 2"
+        },
+        {
+          "type": "paragraph",
+          "text": "A quantitative estimation of liver fat can only be obtained by 1H-MRS. This technique"
+        },
+        {
+          "type": "paragraph",
+          "text": "is of value in clinical trials and experimental studies, but is expensive and not A 1"
+        },
+        {
+          "type": "paragraph",
+          "text": "recommended in the clinical setting"
+        },
+        {
+          "type": "list",
+          "items": [
+            "8 Non-Invasive Assessment of Fibrosis"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Why Fibrosis Assessment Is the Priority"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Fibrosis stage is the MOST IMPORTANT prognostic factor in NAFLD",
+            "Correlates directly with liver-related outcomes (decompensation, HCC) and all-cause mortality",
+            "Advanced fibrosis indicates thorough investigation"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "★ Recommendation: Biomarkers, fibrosis scores, and transient elastography, are"
+        },
+        {
+          "type": "paragraph",
+          "text": "acceptable non-invasive procedures to identify those at low risk of advanced A 2"
+        },
+        {
+          "type": "paragraph",
+          "text": "evidence rec. grade"
+        },
+        {
+          "type": "paragraph",
+          "text": "fibrosis/cirrhosis"
+        },
+        {
+          "type": "paragraph",
+          "text": "Biomarkers/scores PLUS transient elastography might confer additional diagnostic"
+        },
+        {
+          "type": "paragraph",
+          "text": "accuracy and reduce need for liver biopsy"
+        },
+        {
+          "type": "heading",
+          "text": "B 2"
+        },
+        {
+          "type": "paragraph",
+          "text": "Monitoring of fibrosis progression may rely on biomarkers/scores and transient"
+        },
+        {
+          "type": "paragraph",
+          "text": "elastography, although this strategy requires validation"
+        },
+        {
+          "type": "heading",
+          "text": "C 1"
+        },
+        {
+          "type": "paragraph",
+          "text": "The identification of advanced fibrosis or cirrhosis by serum biomarkers/scores and/or"
+        },
+        {
+          "type": "paragraph",
+          "text": "elastography is less accurate and needs to be confirmed by liver biopsy, according to B 2"
+        },
+        {
+          "type": "paragraph",
+          "text": "the clinical context"
+        },
+        {
+          "type": "paragraph",
+          "text": "In selected patients at high risk of liver disease progression, monitoring should include"
+        },
+        {
+          "type": "heading",
+          "text": "C 2"
+        },
+        {
+          "type": "paragraph",
+          "text": "a repeat biopsy after 5-year follow-up"
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "nafld-source-6",
+        "sourceOrder": 6,
+        "originalLabel": "Lecture page 6",
+        "originalSourceHash": "532785c923d89879909bc579d82b0681e711c19fbdee4bfb3296f37f73b60a04"
+      },
+      "sourceHash": "b40bec8ee10fd3e54b816f6233d25b31365d034bb6cd4d48ba6b78421a8f726a"
+    },
+    {
+      "id": "med401-git-nafld-source-7",
+      "order": 7,
+      "title": "3.9 Potential algorithm for non-invasive assessment: prediction rules and",
+      "text": "3.9 Potential algorithm for non-invasive assessment: prediction rules and\nblood-based biomarkers\n3.10 Non-invasive assessment of paediatric NAFLD\n• NAFLD should always be suspected in obese children\n– Exclude other causes\n– Evaluate elevated aminotransferase levels and liver hyperechogenicity\n• Due to the poor sensitivity in overweight/obese children, non-invasive markers\nand imaging techniques are the first diagnostic step\n★ Recommendation: In children, predictors of fibrosis, including elastometry, ARFI B 2\nimaging and serum biomarkers might help reduce the number of biopsies evidence rec. grade\n04 Metabolic Associations\nMetS · Obesity · T2DM · HOMA-IR\n• NAFLD is closely associated with:\n– IR in the liver as well as adipose and muscle tissue\n– MetS\n• Three of: impaired fasting glucose or T2DM, hypertriglyceridaemia, low HDL-C,\nincreased waist circumference,† high blood pressure\n• All components of MetS correlate with liver fat content:\n• Evaluate risk of NAFLD in patients with MetS\n• Evaluate MetS in patients with NAFLD",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "9 Potential algorithm for non-invasive assessment: prediction rules and"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "blood-based biomarkers"
+        },
+        {
+          "type": "list",
+          "items": [
+            "10 Non-invasive assessment of paediatric NAFLD",
+            "NAFLD should always be suspected in obese children"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "– Exclude other causes"
+        },
+        {
+          "type": "paragraph",
+          "text": "– Evaluate elevated aminotransferase levels and liver hyperechogenicity"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Due to the poor sensitivity in overweight/obese children, non-invasive markers"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "and imaging techniques are the first diagnostic step"
+        },
+        {
+          "type": "paragraph",
+          "text": "★ Recommendation: In children, predictors of fibrosis, including elastometry, ARFI B 2"
+        },
+        {
+          "type": "paragraph",
+          "text": "imaging and serum biomarkers might help reduce the number of biopsies evidence rec. grade"
+        },
+        {
+          "type": "heading",
+          "text": "04 Metabolic Associations"
+        },
+        {
+          "type": "paragraph",
+          "text": "MetS · Obesity · T2DM · HOMA-IR"
+        },
+        {
+          "type": "list",
+          "items": [
+            "NAFLD is closely associated with:"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "– IR in the liver as well as adipose and muscle tissue"
+        },
+        {
+          "type": "paragraph",
+          "text": "– MetS"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Three of: impaired fasting glucose or T2DM, hypertriglyceridaemia, low HDL-C,"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "increased waist circumference,† high blood pressure"
+        },
+        {
+          "type": "list",
+          "items": [
+            "All components of MetS correlate with liver fat content:",
+            "Evaluate risk of NAFLD in patients with MetS",
+            "Evaluate MetS in patients with NAFLD"
+          ]
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "nafld-source-7",
+        "sourceOrder": 7,
+        "originalLabel": "Lecture page 7",
+        "originalSourceHash": "b368070961baa3d20e579393cccc90403e759488093e1fe1760c118ef6cc7052"
+      },
+      "sourceHash": "77f2f46864fe4b8779191ca652f054304ef5ae63fe6fd0168662df2d1c899789"
+    },
+    {
+      "id": "med401-git-nafld-source-8",
+      "order": 8,
+      "title": "4.1 Insulin Resistance (IR) Assessment — HOMA-IR",
+      "text": "4.1 Insulin Resistance (IR) Assessment — HOMA-IR\nHOMA-IR Clinical Use:\n› Used in individuals WITHOUT\nHOMA-IR Formula diabetes as IR surrogate\n› Confirms IR-associated NAFLD\nFasting glucose (mmol/L) × Fasting insulin (mU/mL) in diagnostic uncertainty\n───────────────────────────────────────── › During weight loss follow-up:\nimprovement indicates\n22.5 metabolic response\n› Limited use for NAFLD\ndiagnosis in patients already\nwith metabolic risk factors\n4.2 BMI and waist circumference and NAFLD\n• BMI and waist circumference are positively related to NAFLD\n– Predictors of advanced disease, particularly in the elderly\n★ Recommendation: Follow up is mandatory in obesity, which is the major\nphenotype and risk condition for NAFLD, driven by IR, and also increases the risk of A 1\nevidence rec. grade\nadvanced disease\nMost lean individuals with NAFLD display IR and altered body fat distribution even\nthough they have less severe metabolic disturbance than overweight NAFLD. Follow- B 2\nup is nonetheless required because of possible disease progression\n4.3 T2DM and NAFLD — Bidirectional Relationship\n• Irrespective of liver enzymes, diabetes risk and T2DM are closely associated with:\n– Severity of NAFLD\n– Progression to NASH\n– Presence of advanced fibrosis\n– Development of HCC\n★ Recommendation: In individuals with NAFLD, screening for diabetes is A 1\nmandatory, by fasting or random blood glucose or HbA1c… evidence rec. grade\n…and if available, by the standardized 75 g OGTT in high-risk groups B 1\nLook for NAFLD in patients with T2DM, irrespective of liver enzyme levels, due to\nhigh risk of disease progression\nA 2",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "1 Insulin Resistance (IR) Assessment — HOMA-IR"
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "HOMA-IR Clinical Use"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Used in individuals WITHOUT"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "HOMA-IR Formula diabetes as IR surrogate"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Confirms IR-associated NAFLD"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Fasting glucose (mmol/L) × Fasting insulin (mU/mL) in diagnostic uncertainty"
+        },
+        {
+          "type": "heading",
+          "text": "───────────────────────────────────────── › During weight loss follow-up"
+        },
+        {
+          "type": "paragraph",
+          "text": "improvement indicates"
+        },
+        {
+          "type": "list",
+          "items": [
+            "5 metabolic response",
+            "Limited use for NAFLD"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "diagnosis in patients already"
+        },
+        {
+          "type": "paragraph",
+          "text": "with metabolic risk factors"
+        },
+        {
+          "type": "list",
+          "items": [
+            "2 BMI and waist circumference and NAFLD",
+            "BMI and waist circumference are positively related to NAFLD"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "– Predictors of advanced disease, particularly in the elderly"
+        },
+        {
+          "type": "paragraph",
+          "text": "★ Recommendation: Follow up is mandatory in obesity, which is the major"
+        },
+        {
+          "type": "paragraph",
+          "text": "phenotype and risk condition for NAFLD, driven by IR, and also increases the risk of A 1"
+        },
+        {
+          "type": "paragraph",
+          "text": "evidence rec. grade"
+        },
+        {
+          "type": "paragraph",
+          "text": "advanced disease"
+        },
+        {
+          "type": "paragraph",
+          "text": "Most lean individuals with NAFLD display IR and altered body fat distribution even"
+        },
+        {
+          "type": "paragraph",
+          "text": "though they have less severe metabolic disturbance than overweight NAFLD. Follow- B 2"
+        },
+        {
+          "type": "paragraph",
+          "text": "up is nonetheless required because of possible disease progression"
+        },
+        {
+          "type": "list",
+          "items": [
+            "3 T2DM and NAFLD — Bidirectional Relationship",
+            "Irrespective of liver enzymes, diabetes risk and T2DM are closely associated with:"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "– Severity of NAFLD"
+        },
+        {
+          "type": "paragraph",
+          "text": "– Progression to NASH"
+        },
+        {
+          "type": "paragraph",
+          "text": "– Presence of advanced fibrosis"
+        },
+        {
+          "type": "paragraph",
+          "text": "– Development of HCC"
+        },
+        {
+          "type": "paragraph",
+          "text": "★ Recommendation: In individuals with NAFLD, screening for diabetes is A 1"
+        },
+        {
+          "type": "paragraph",
+          "text": "mandatory, by fasting or random blood glucose or HbA1c… evidence rec. grade"
+        },
+        {
+          "type": "paragraph",
+          "text": "…and if available, by the standardized 75 g OGTT in high-risk groups B 1"
+        },
+        {
+          "type": "paragraph",
+          "text": "Look for NAFLD in patients with T2DM, irrespective of liver enzyme levels, due to"
+        },
+        {
+          "type": "paragraph",
+          "text": "high risk of disease progression"
+        },
+        {
+          "type": "heading",
+          "text": "A 2"
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "nafld-source-8",
+        "sourceOrder": 8,
+        "originalLabel": "Lecture page 8",
+        "originalSourceHash": "cb0a73e28bfed4cdb7372a391f35a5689f9c63199c9310a7c00cf1f6c8f51061"
+      },
+      "sourceHash": "ea8c7323bfd938372cb9b1b51fd7416af5bfc94db178bd14bdcb9c25c601a8a6"
+    },
+    {
+      "id": "med401-git-nafld-source-9",
+      "order": 9,
+      "title": "05 Diagnosis & Evaluation",
+      "text": "05 Diagnosis & Evaluation\n• Incidental discovery of steatosis indicates comprehensive evaluation\n– Family and personal history of NAFLD-associated diseases\n– Exclusion of secondary causes of steatosis\n5.1 Initial Evaluation Protocol\nLevel Variable\nInitial 1. Alcohol intake: <20 g/day (women), <30 g/day (men)\n2. Personal and family history of diabetes, hypertension and CVD\n3. BMI, waist circumference, change in body weight\n4. Hepatitis B/hepatitis C virus infection\n5. History of steatosis-associated drugs\n6. Liver enzymes (ALT, AST, GGT)\n7. Fasting blood glucose, HbA1c, OGTT, (fasting insulin [HOMA-IR])\n8. Complete blood count\n9. Serum total and HDL cholesterol, triacylglycerol, uric acid\n10. Ultrasonography (if suspected for raised liver enzymes)\nExtended 1. Ferritin and transferrin saturation\n2. Tests for coeliac and thyroid diseases, polycystic ovary syndrome\n3. Tests for rare liver diseases (Wilson, autoimmune disease, AATD)\n5.2 Diagnostic Flowchart Summary\n• Metabolic work-up must carefully assess all components of MetS\n• Obesity/T2DM or raised liver enzymes in patients with metabolic risk factors should prompt non-\ninvasive screening to predict steatosis, NASH and fibrosis",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "05 Diagnosis & Evaluation"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Incidental discovery of steatosis indicates comprehensive evaluation"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "– Family and personal history of NAFLD-associated diseases"
+        },
+        {
+          "type": "paragraph",
+          "text": "– Exclusion of secondary causes of steatosis"
+        },
+        {
+          "type": "list",
+          "items": [
+            "1 Initial Evaluation Protocol"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Level Variable"
+        },
+        {
+          "type": "paragraph",
+          "text": "Initial 1. Alcohol intake: <20 g/day (women), <30 g/day (men)"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Personal and family history of diabetes, hypertension and CVD",
+            "BMI, waist circumference, change in body weight",
+            "Hepatitis B/hepatitis C virus infection",
+            "History of steatosis-associated drugs",
+            "Liver enzymes (ALT, AST, GGT)",
+            "Fasting blood glucose, HbA1c, OGTT, (fasting insulin [HOMA-IR])",
+            "Complete blood count",
+            "Serum total and HDL cholesterol, triacylglycerol, uric acid",
+            "Ultrasonography (if suspected for raised liver enzymes)"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Extended 1. Ferritin and transferrin saturation"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Tests for coeliac and thyroid diseases, polycystic ovary syndrome",
+            "Tests for rare liver diseases (Wilson, autoimmune disease, AATD)",
+            "2 Diagnostic Flowchart Summary",
+            "Metabolic work-up must carefully assess all components of MetS",
+            "Obesity/T2DM or raised liver enzymes in patients with metabolic risk factors should prompt non-"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "invasive screening to predict steatosis, NASH and fibrosis"
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "nafld-source-9",
+        "sourceOrder": 9,
+        "originalLabel": "Lecture page 9",
+        "originalSourceHash": "46e40853711376c1e2ce7b579ca8608103091bcfb02f53b977c80661411cce51"
+      },
+      "sourceHash": "c01754c3738265c59acce9674011138ed41ab680a9288521648ba91f5fc18d86"
+    },
+    {
+      "id": "med401-git-nafld-source-10",
+      "order": 10,
+      "title": "06 Natural History & Complications",
+      "text": "06 Natural History & Complications\nProgression · CVD · HCC\n• In general, NAFLD is a slowly progressive disease, both in adults and in children\n6.1 Fibrosis Progression Rates\n1 stage / 14 Cirrhosis age\n1 stage / 7 yrs x2 faster ~20% of cases\nyrs NASH Progression HTN: Doubles rate Rapid Progressors 8\nNAFL Progression Paediatric NASH\n★ Recommendation: NASH patients with fibrosis and hypertension should receive B 1\ncloser monitoring — arterial hypertension doubles the rate of fibrosis progression evidence rec. grade\n• Pediatric NAFLD is of concern\n– Potential for severe liver-related complications later in life\n– NASH-related cirrhosis has been reported as early as 8 years of age\n6.2 Cardiovascular Disease (CVD)\n• Prevalence and incidence of CVD is HIGHER in NAFLD than in matched controls\n→ Driven by the strong association between NAFLD and MetS components\n• CVD is the leading cause of death in NAFLD — more common than liver-related death (except in\nadvanced fibrosis)\n• CVD risk must be assessed in all NAFLD patients regardless of traditional risk factors\n• CVD and metabolic risk factors are reported even in adolescents and children with NAFLD\n★ Recommendation: Cardiovascular system screening is MANDATORY in all A 1\nindividuals with NAFLD — CV complications frequently dictate overall outcome evidence rec. grade",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "06 Natural History & Complications"
+        },
+        {
+          "type": "paragraph",
+          "text": "Progression · CVD · HCC"
+        },
+        {
+          "type": "list",
+          "items": [
+            "In general, NAFLD is a slowly progressive disease, both in adults and in children",
+            "1 Fibrosis Progression Rates"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "1 stage / 14 Cirrhosis age"
+        },
+        {
+          "type": "paragraph",
+          "text": "1 stage / 7 yrs x2 faster ~20% of cases"
+        },
+        {
+          "type": "paragraph",
+          "text": "yrs NASH Progression HTN: Doubles rate Rapid Progressors 8"
+        },
+        {
+          "type": "paragraph",
+          "text": "NAFL Progression Paediatric NASH"
+        },
+        {
+          "type": "paragraph",
+          "text": "★ Recommendation: NASH patients with fibrosis and hypertension should receive B 1"
+        },
+        {
+          "type": "paragraph",
+          "text": "closer monitoring — arterial hypertension doubles the rate of fibrosis progression evidence rec. grade"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Pediatric NAFLD is of concern"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "– Potential for severe liver-related complications later in life"
+        },
+        {
+          "type": "paragraph",
+          "text": "– NASH-related cirrhosis has been reported as early as 8 years of age"
+        },
+        {
+          "type": "list",
+          "items": [
+            "2 Cardiovascular Disease (CVD)",
+            "Prevalence and incidence of CVD is HIGHER in NAFLD than in matched controls"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "→ Driven by the strong association between NAFLD and MetS components"
+        },
+        {
+          "type": "list",
+          "items": [
+            "CVD is the leading cause of death in NAFLD — more common than liver-related death (except in"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "advanced fibrosis)"
+        },
+        {
+          "type": "list",
+          "items": [
+            "CVD risk must be assessed in all NAFLD patients regardless of traditional risk factors",
+            "CVD and metabolic risk factors are reported even in adolescents and children with NAFLD"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "★ Recommendation: Cardiovascular system screening is MANDATORY in all A 1"
+        },
+        {
+          "type": "paragraph",
+          "text": "individuals with NAFLD — CV complications frequently dictate overall outcome evidence rec. grade"
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "nafld-source-10",
+        "sourceOrder": 10,
+        "originalLabel": "Lecture page 10",
+        "originalSourceHash": "56cbb7c2c9d5d7eba1933319cc046ae033a3122cfbfdc4abfc2e80c0b5d2fb01"
+      },
+      "sourceHash": "77e9c41466332f3c8264d80f960a69dc5530f75a22b8a29762b431a41570ca7c"
+    },
+    {
+      "id": "med401-git-nafld-source-11",
+      "order": 11,
+      "title": "6.3 Hepatocellular Carcinoma (HCC)",
+      "text": "6.3 Hepatocellular Carcinoma (HCC)\n• NAFLD is a recognised independent risk factor for HCC, even in the pre-cirrhotic stage\n• PNPLA3 rs738409 C>G gene polymorphism significantly increases HCC risk in NAFLD\n• HCC surveillance in non-cirrhotic NAFLD is NOT yet considered cost-effective\n• Large NAFLD population makes systematic HCC surveillance largely impracticable\nNote on HCC Surveillance\n› No formal recommendation on timing or cost-effectiveness of HCC surveillance in NAFLD can\ncurrently be made\n› Standard HCC surveillance (6-monthly USS ± AFP) applies to NAFLD patients who have reached\ncirrhosis (F4)\n› PNPLA3 polymorphism carriers may warrant enhanced surveillance — under study\n07 Treatment\nLifestyle · Pharmacotherapy · Surgery · Liver Transplantation\n• Epidemiology suggests a close relationship between an unhealthy lifestyle and NAFLD\n7.1 Diet & Lifestyle Changes (Mandatory in ALL Patients)\nLifestyle is First-Line Treatment for Every Patient with NAFLD\n› Modest weight loss reduces liver fat, improves hepatic IR, and produces NASH regression\n› Weight loss of ≥7% body weight is associated with significant histological improvement\n› A pragmatic, individually tailored approach: dietary restriction PLUS progressive aerobic\nexercise/resistance training\n› Patients without NASH or fibrosis: lifestyle counselling only — no pharmacotherapy\n★ Recommendation: Structured programmes aimed at lifestyle changes towards C 2\nhealthy diet and habitual physical activity are advisable in NAFLD evidence rec. grade\nPatients without NASH or fibrosis should receive counselling for healthy diet and\nphysical activity but no pharmacotherapy\nB 2\nIn overweight/obese NAFLD, a 7–10% weight loss is the target of most lifestyle\ninterventions, and results in improvement of liver enzymes and histology\nB 1\nDietary recommendations should consider energy restriction and exclusion of NAFLD-\npromoting components (processed food, and food and beverages high in added\nfructose). The macronutrient composition should be adjusted according to the\nB 1\nMediterranean diet\nBoth aerobic exercise and resistance training effectively reduce liver fat. The choice\nof training should be tailored based on patients’ preferences to be maintained in the B 2\nlong-term",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "3 Hepatocellular Carcinoma (HCC)",
+            "NAFLD is a recognised independent risk factor for HCC, even in the pre-cirrhotic stage",
+            "PNPLA3 rs738409 C>G gene polymorphism significantly increases HCC risk in NAFLD",
+            "HCC surveillance in non-cirrhotic NAFLD is NOT yet considered cost-effective",
+            "Large NAFLD population makes systematic HCC surveillance largely impracticable"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Note on HCC Surveillance"
+        },
+        {
+          "type": "list",
+          "items": [
+            "No formal recommendation on timing or cost-effectiveness of HCC surveillance in NAFLD can"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "currently be made"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Standard HCC surveillance (6-monthly USS ± AFP) applies to NAFLD patients who have reached"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "cirrhosis (F4)"
+        },
+        {
+          "type": "list",
+          "items": [
+            "PNPLA3 polymorphism carriers may warrant enhanced surveillance — under study"
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "07 Treatment"
+        },
+        {
+          "type": "paragraph",
+          "text": "Lifestyle · Pharmacotherapy · Surgery · Liver Transplantation"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Epidemiology suggests a close relationship between an unhealthy lifestyle and NAFLD",
+            "1 Diet & Lifestyle Changes (Mandatory in ALL Patients)"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Lifestyle is First-Line Treatment for Every Patient with NAFLD"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Modest weight loss reduces liver fat, improves hepatic IR, and produces NASH regression",
+            "Weight loss of ≥7% body weight is associated with significant histological improvement",
+            "A pragmatic, individually tailored approach: dietary restriction PLUS progressive aerobic"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "exercise/resistance training"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Patients without NASH or fibrosis: lifestyle counselling only — no pharmacotherapy"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "★ Recommendation: Structured programmes aimed at lifestyle changes towards C 2"
+        },
+        {
+          "type": "paragraph",
+          "text": "healthy diet and habitual physical activity are advisable in NAFLD evidence rec. grade"
+        },
+        {
+          "type": "paragraph",
+          "text": "Patients without NASH or fibrosis should receive counselling for healthy diet and"
+        },
+        {
+          "type": "paragraph",
+          "text": "physical activity but no pharmacotherapy"
+        },
+        {
+          "type": "heading",
+          "text": "B 2"
+        },
+        {
+          "type": "paragraph",
+          "text": "In overweight/obese NAFLD, a 7–10% weight loss is the target of most lifestyle"
+        },
+        {
+          "type": "paragraph",
+          "text": "interventions, and results in improvement of liver enzymes and histology"
+        },
+        {
+          "type": "heading",
+          "text": "B 1"
+        },
+        {
+          "type": "paragraph",
+          "text": "Dietary recommendations should consider energy restriction and exclusion of NAFLD-"
+        },
+        {
+          "type": "paragraph",
+          "text": "promoting components (processed food, and food and beverages high in added"
+        },
+        {
+          "type": "paragraph",
+          "text": "fructose). The macronutrient composition should be adjusted according to the"
+        },
+        {
+          "type": "heading",
+          "text": "B 1"
+        },
+        {
+          "type": "paragraph",
+          "text": "Mediterranean diet"
+        },
+        {
+          "type": "paragraph",
+          "text": "Both aerobic exercise and resistance training effectively reduce liver fat. The choice"
+        },
+        {
+          "type": "paragraph",
+          "text": "of training should be tailored based on patients’ preferences to be maintained in the B 2"
+        },
+        {
+          "type": "paragraph",
+          "text": "long-term"
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "nafld-source-11",
+        "sourceOrder": 11,
+        "originalLabel": "Lecture page 11",
+        "originalSourceHash": "98748d4a7abeaa84fbc971323f3e799b073ffb225e2c5acc0b9036be5a4df606"
+      },
+      "sourceHash": "f5bdf80718429bd79c3b571eb12663984ee4228f0b3bf8e6b3a0d9278ce580d7"
+    },
+    {
+      "id": "med401-git-nafld-source-12",
+      "order": 12,
+      "title": "Components of a lifestyle approach to NAFLD",
+      "text": "Components of a lifestyle approach to NAFLD\nComponent Target / Recommendation\n500–1,000 kcal/day deficit;\nCaloric restriction\n7–10% body weight loss target with long-term maintenance\nCoffee consumption No liver-related limitations — coffee is NOT restricted in NAFLD\nLow-to-moderate fat;\nMacronutrient composition moderate-to-high carbohydrate;\nOR low-carbohydrate ketogenic / high-protein diet — tailored to patient\nFructose intake Actively AVOID fructose-containing foods and sugar-sweetened beverages\nAlcohol Strictly below 30 g/day (men) and 20 g/day (women)\nMediterranean diet — reduce processed foods and fructose-containing\nDiet quality\nfoods/beverages\n150-200 min/week moderate intensity in 3-5 sessions\nPhysical activity Resistance training to promote musculoskeletal fitness and improve\nmetabolic factors\n★ Recommendation: Both aerobic exercise and resistance training effectively\nreduce liver fat. In overweight/obese NAFLD, 7–10% weight loss improves liver B 1\nevidence rec. grade\nenzymes and histology\n7.2 Pharmacotherapy\nIndications for Drug Treatment\n› Progressive NASH\n› Early-stage NASH with risk of fibrosis progression (age >50 yrs + T2DM + MetS + elevated ALT)\n› Active NASH with high necroinflammatory activity\n› Significant fibrosis: stage F2 and higher → preferred candidates\n⚠ Critical Point — Current Pharmacotherapy Status\n› NO drugs are specifically approved for NAFLD / NASH\n› NO specific therapy can be formally recommended — all drug use is OFF-LABEL\n› Treatment goal: reduce NASH-related mortality and prevent progression to cirrhosis or HCC\n› Safety and tolerability are prerequisites given significant polypharmacy burden in these patients\n★ Recommendation: Pharmacotherapy should be reserved for patients with\nNASH, particularly for those with significant fibrosis (stage F2 and higher). Patients B 1\nwith less severe disease, but at high risk of disease progression could also be evidence rec. grade\ncandidates for treatment",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "Components of a lifestyle approach to NAFLD"
+        },
+        {
+          "type": "paragraph",
+          "text": "Component Target / Recommendation"
+        },
+        {
+          "type": "paragraph",
+          "text": "500–1,000 kcal/day deficit;"
+        },
+        {
+          "type": "paragraph",
+          "text": "Caloric restriction"
+        },
+        {
+          "type": "paragraph",
+          "text": "7–10% body weight loss target with long-term maintenance"
+        },
+        {
+          "type": "paragraph",
+          "text": "Coffee consumption No liver-related limitations — coffee is NOT restricted in NAFLD"
+        },
+        {
+          "type": "paragraph",
+          "text": "Low-to-moderate fat;"
+        },
+        {
+          "type": "paragraph",
+          "text": "Macronutrient composition moderate-to-high carbohydrate;"
+        },
+        {
+          "type": "paragraph",
+          "text": "OR low-carbohydrate ketogenic / high-protein diet — tailored to patient"
+        },
+        {
+          "type": "paragraph",
+          "text": "Fructose intake Actively AVOID fructose-containing foods and sugar-sweetened beverages"
+        },
+        {
+          "type": "paragraph",
+          "text": "Alcohol Strictly below 30 g/day (men) and 20 g/day (women)"
+        },
+        {
+          "type": "paragraph",
+          "text": "Mediterranean diet — reduce processed foods and fructose-containing"
+        },
+        {
+          "type": "paragraph",
+          "text": "Diet quality"
+        },
+        {
+          "type": "paragraph",
+          "text": "foods/beverages"
+        },
+        {
+          "type": "paragraph",
+          "text": "150-200 min/week moderate intensity in 3-5 sessions"
+        },
+        {
+          "type": "paragraph",
+          "text": "Physical activity Resistance training to promote musculoskeletal fitness and improve"
+        },
+        {
+          "type": "paragraph",
+          "text": "metabolic factors"
+        },
+        {
+          "type": "paragraph",
+          "text": "★ Recommendation: Both aerobic exercise and resistance training effectively"
+        },
+        {
+          "type": "paragraph",
+          "text": "reduce liver fat. In overweight/obese NAFLD, 7–10% weight loss improves liver B 1"
+        },
+        {
+          "type": "paragraph",
+          "text": "evidence rec. grade"
+        },
+        {
+          "type": "paragraph",
+          "text": "enzymes and histology"
+        },
+        {
+          "type": "list",
+          "items": [
+            "2 Pharmacotherapy"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Indications for Drug Treatment"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Progressive NASH",
+            "Early-stage NASH with risk of fibrosis progression (age >50 yrs + T2DM + MetS + elevated ALT)",
+            "Active NASH with high necroinflammatory activity",
+            "Significant fibrosis: stage F2 and higher → preferred candidates"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "⚠ Critical Point — Current Pharmacotherapy Status"
+        },
+        {
+          "type": "list",
+          "items": [
+            "NO drugs are specifically approved for NAFLD / NASH",
+            "NO specific therapy can be formally recommended — all drug use is OFF-LABEL",
+            "Treatment goal: reduce NASH-related mortality and prevent progression to cirrhosis or HCC",
+            "Safety and tolerability are prerequisites given significant polypharmacy burden in these patients"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "★ Recommendation: Pharmacotherapy should be reserved for patients with"
+        },
+        {
+          "type": "paragraph",
+          "text": "NASH, particularly for those with significant fibrosis (stage F2 and higher). Patients B 1"
+        },
+        {
+          "type": "paragraph",
+          "text": "with less severe disease, but at high risk of disease progression could also be evidence rec. grade"
+        },
+        {
+          "type": "paragraph",
+          "text": "candidates for treatment"
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "nafld-source-12",
+        "sourceOrder": 12,
+        "originalLabel": "Lecture page 12",
+        "originalSourceHash": "6e4357c5ea6283a4f7c31437b3b792247063203e512a57276bbe57a480da7be9"
+      },
+      "sourceHash": "2946641f77edd00a6652ffaece5326a065f13a4aea71d0f3c35e61b66f305704"
+    },
+    {
+      "id": "med401-git-nafld-source-13",
+      "order": 13,
+      "title": "Available Agents and Evidence",
+      "text": "Available Agents and Evidence\n• Insulin sensitizers\n– Little evidence of histological efficacy with metformin\n– PPAR agonist pioglitazone better than placebo\n• Improved all histological features except fibrosis\n• Achieved resolution of NASH more often\n• Antioxidants\n– Vitamin E may improve steatosis, inflammation and ballooning and resolve NASH in\nsome patients\n• Concerns about long-term safety exist\n★ Recommendation: While no firm recommendations can be made, pioglitazone* or B 2\nvitamin E† or their combination could be used for NASH evidence rec. grade\nThe optimal duration of therapy is unknown; in patients with increased ALT at\nbaseline, treatment should be stopped if there is no reduction in aminotransferases C 2\nafter 6 months of therapy\n• Lipid-lowering agents\n– Statins have not been adequately tested in NASH\n★ Recommendation: Statins may be confidently used to reduce LDL cholesterol and\nprevent cardiovascular risk, with no benefits or harm to liver disease. B 1\nSimilarly, n-3 polyunsaturated fatty acids reduce both plasma and liver lipids, but evidence rec. grade\nthere are no data to support their use specifically for NASH\nMOA of pharmacological treatments for NAFLD",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "Available Agents and Evidence"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Insulin sensitizers"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "– Little evidence of histological efficacy with metformin"
+        },
+        {
+          "type": "paragraph",
+          "text": "– PPAR agonist pioglitazone better than placebo"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Improved all histological features except fibrosis",
+            "Achieved resolution of NASH more often",
+            "Antioxidants"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "– Vitamin E may improve steatosis, inflammation and ballooning and resolve NASH in"
+        },
+        {
+          "type": "paragraph",
+          "text": "some patients"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Concerns about long-term safety exist"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "★ Recommendation: While no firm recommendations can be made, pioglitazone* or B 2"
+        },
+        {
+          "type": "paragraph",
+          "text": "vitamin E† or their combination could be used for NASH evidence rec. grade"
+        },
+        {
+          "type": "paragraph",
+          "text": "The optimal duration of therapy is unknown; in patients with increased ALT at"
+        },
+        {
+          "type": "paragraph",
+          "text": "baseline, treatment should be stopped if there is no reduction in aminotransferases C 2"
+        },
+        {
+          "type": "paragraph",
+          "text": "after 6 months of therapy"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Lipid-lowering agents"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "– Statins have not been adequately tested in NASH"
+        },
+        {
+          "type": "paragraph",
+          "text": "★ Recommendation: Statins may be confidently used to reduce LDL cholesterol and"
+        },
+        {
+          "type": "paragraph",
+          "text": "prevent cardiovascular risk, with no benefits or harm to liver disease. B 1"
+        },
+        {
+          "type": "paragraph",
+          "text": "Similarly, n-3 polyunsaturated fatty acids reduce both plasma and liver lipids, but evidence rec. grade"
+        },
+        {
+          "type": "paragraph",
+          "text": "there are no data to support their use specifically for NASH"
+        },
+        {
+          "type": "paragraph",
+          "text": "MOA of pharmacological treatments for NAFLD"
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "nafld-source-13",
+        "sourceOrder": 13,
+        "originalLabel": "Lecture page 13",
+        "originalSourceHash": "ce65be76591d57177432b5eed2ead31a7f80174f6a1e440f7a335d7cc6c5757b"
+      },
+      "sourceHash": "c25a273cb10da503cce3e66089c1f390b1f7cc6eb20191aba2dc7700d6641d5f"
+    },
+    {
+      "id": "med401-git-nafld-source-14",
+      "order": 14,
+      "title": "Paediatric NAFLD",
+      "text": "Paediatric NAFLD\n• Diet and exercise training reduce steatosis, but do not affect ballooning, inflammation,\nand fibrosis\n• The long-term outcome of paediatric NASH remains poor\n– Drugs have shown beneficial effects but fibrotic lesions are refractory to treatment\n★ Recommendation: Diet and physical activity improve steatosis and hepatic\ninflammation in paediatric NAFLD, but no beneficial effects on fibrosis have ever been B 1\ndemonstrated. No safe drug treatment has proven effective on fibrosis in evidence rec. grade\npaediatric NAFLD\n7.3 Surgical Treatment\nA. Bariatric Surgery\n• Indicated in patients UNRESPONSIVE to lifestyle changes and pharmacotherapy\n• Significantly reduces weight and metabolic complications\n• Prospective data show improvement in ALL histological lesions of NASH, including fibrosis\n• Results are stable in the long term\n★ Recommendation: Bariatric surgery reduces liver fat and likely reduces NASH\nprogression. Prospective data show improvement in all NASH histological lesions B 1\nevidence rec. grade\nincluding fibrosis\nB. Liver Transplantation (LTx)\n★ Recommendation: LTx is an accepted procedure in patients with NASH and end-\nstage liver disease. Overall survival is comparable to other indications, despite a A 1\nhigher cardiovascular mortality. Patients with NASH and liver failure and/or HCC evidence rec. grade\nare candidates for liver transplantation",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "Paediatric NAFLD"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Diet and exercise training reduce steatosis, but do not affect ballooning, inflammation,"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "and fibrosis"
+        },
+        {
+          "type": "list",
+          "items": [
+            "The long-term outcome of paediatric NASH remains poor"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "– Drugs have shown beneficial effects but fibrotic lesions are refractory to treatment"
+        },
+        {
+          "type": "paragraph",
+          "text": "★ Recommendation: Diet and physical activity improve steatosis and hepatic"
+        },
+        {
+          "type": "paragraph",
+          "text": "inflammation in paediatric NAFLD, but no beneficial effects on fibrosis have ever been B 1"
+        },
+        {
+          "type": "paragraph",
+          "text": "demonstrated. No safe drug treatment has proven effective on fibrosis in evidence rec. grade"
+        },
+        {
+          "type": "paragraph",
+          "text": "paediatric NAFLD"
+        },
+        {
+          "type": "list",
+          "items": [
+            "3 Surgical Treatment"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "A. Bariatric Surgery"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Indicated in patients UNRESPONSIVE to lifestyle changes and pharmacotherapy",
+            "Significantly reduces weight and metabolic complications",
+            "Prospective data show improvement in ALL histological lesions of NASH, including fibrosis",
+            "Results are stable in the long term"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "★ Recommendation: Bariatric surgery reduces liver fat and likely reduces NASH"
+        },
+        {
+          "type": "paragraph",
+          "text": "progression. Prospective data show improvement in all NASH histological lesions B 1"
+        },
+        {
+          "type": "paragraph",
+          "text": "evidence rec. grade"
+        },
+        {
+          "type": "paragraph",
+          "text": "including fibrosis"
+        },
+        {
+          "type": "paragraph",
+          "text": "B. Liver Transplantation (LTx)"
+        },
+        {
+          "type": "paragraph",
+          "text": "★ Recommendation: LTx is an accepted procedure in patients with NASH and end-"
+        },
+        {
+          "type": "paragraph",
+          "text": "stage liver disease. Overall survival is comparable to other indications, despite a A 1"
+        },
+        {
+          "type": "paragraph",
+          "text": "higher cardiovascular mortality. Patients with NASH and liver failure and/or HCC evidence rec. grade"
+        },
+        {
+          "type": "paragraph",
+          "text": "are candidates for liver transplantation"
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "nafld-source-14",
+        "sourceOrder": 14,
+        "originalLabel": "Lecture page 14",
+        "originalSourceHash": "7ae0a9f2894fbdf18c62998363428b2bb026cd2bd53e67a423176e0747559a02"
+      },
+      "sourceHash": "c4d0fe9450941482fe63b7a9a93b81806688c538e125d1df21af0b6571439cfd"
+    }
+  ],
+  "sourceVersion": "must401-git-2026-07-27",
+  "status": "published"
+}

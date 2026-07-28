@@ -1,0 +1,1631 @@
+{
+  "id": "med401-git-diseases-of-the-pancreas",
+  "subjectId": "med401-git",
+  "title": "Diseases of the Pancreas",
+  "aliases": [],
+  "sectionIds": [
+    "med401-git-pan-anatomy",
+    "med401-git-pan-acute",
+    "med401-git-pan-clinical",
+    "med401-git-pan-diagnosis",
+    "med401-git-pan-management",
+    "med401-git-pan-chronic"
+  ],
+  "sections": [
+    {
+      "id": "med401-git-pan-anatomy",
+      "topicId": "med401-git-diseases-of-the-pancreas",
+      "title": "Pancreatic anatomy and two jobs",
+      "category": "definition",
+      "keywords": [
+        "pancreas",
+        "anatomy",
+        "exocrine",
+        "endocrine",
+        "bicarbonate"
+      ],
+      "contentHtml": "<div><table><thead><tr><th>Component</th><th>Function</th></tr></thead><tbody><tr><td>Exocrine tissue</td><td>Digestive enzymes enter the duct system and main pancreatic duct; bicarbonate neutralizes gastric acid in the duodenum</td></tr><tr><td>Endocrine islets</td><td>Insulin and glucagon regulate blood glucose; somatostatin prevents release of the other two hormones</td></tr></tbody></table></div>",
+      "contentHash": "e359fb08017b9667935999b88b51b2311f009b89b684f20fd8875cd0a0ee0fc5"
+    },
+    {
+      "id": "med401-git-pan-acute",
+      "topicId": "med401-git-diseases-of-the-pancreas",
+      "title": "Acute pancreatitis: definition, types and causes",
+      "category": "classification",
+      "keywords": [
+        "autodigestion",
+        "gallstones",
+        "alcohol",
+        "ERCP",
+        "necrotizing"
+      ],
+      "contentHtml": "<div><p>Acute pancreatitis is acute inflammation caused by intrapancreatic activation of digestive enzymes, producing autodigestion.</p></div><div><table><thead><tr><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>Acute edematous</td><td>Usually mild and self-limited; peripancreatic fat necrosis with sparing of acinar cells</td></tr><tr><td>Hemorrhagic / necrotizing</td><td>Extensive inflammation with coagulative necrosis of the gland and surrounding tissues</td></tr></tbody></table></div><ul><li>Common causes (90%): gallstones, alcohol, idiopathic and post-ERCP.</li><li>Rare causes: surgery, trauma, drugs such as azathioprine/thiazides, hypercalcemia, hypertriglyceridemia, pancreas divisum, hereditary disease, renal failure, transplantation, mumps/coxsackie, sphincter of Oddi dysfunction, severe hypothermia and petrochemical exposure.</li></ul>",
+      "contentHash": "ddd5058588bf19cd49d2b7fb8fa58c37b0b2f9573eaaf9a6f79f6580108e98f2"
+    },
+    {
+      "id": "med401-git-pan-clinical",
+      "topicId": "med401-git-diseases-of-the-pancreas",
+      "title": "Clinical features, differential and complications",
+      "category": "clinical",
+      "keywords": [
+        "Grey",
+        "Turner",
+        "Cullen",
+        "ARDS",
+        "pseudocyst",
+        "hypocalcemia"
+      ],
+      "contentHtml": "<div><b>Classic presentation</b><p>Severe, constant upper abdominal pain radiating to the back, building over 15–60 minutes; nausea/vomiting; marked epigastric tenderness; quiet or absent bowel sounds as paralytic ileus develops.</p></div><ul><li>Early guarding and rebound may be absent because inflammation is retroperitoneal.</li><li>Severe disease may cause hypoxia, hypovolemic shock and oliguria.</li><li>Grey Turner sign: flank discoloration; Cullen sign: periumbilical discoloration—features of hemorrhagic pancreatitis.</li><li>Differential diagnosis: perforated viscus, myocardial infarction and acute cholecystitis.</li></ul><div><table><thead><tr><th>Complication</th><th>Mechanism in source</th></tr></thead><tbody><tr><td>SIRS / shock</td><td>Cytokines, kinins, PAF, increased permeability, vomiting, ileus and renal failure</td></tr><tr><td>Hypoxia</td><td>ARDS due to pulmonary microthrombi</td></tr><tr><td>Hyperglycemia</td><td>Islet disruption</td></tr><tr><td>Hypocalcemia</td><td>Calcium sequestration in fat necrosis</td></tr><tr><td>Abscess</td><td>Infection of necrotic tissue</td></tr><tr><td>Ascites / pleural effusion / pseudocyst</td><td>Pancreatic-duct disruption</td></tr><tr><td>Variceal hemorrhage</td><td>Splenic or portal-vein thrombosis</td></tr><tr><td>Duodenal obstruction / obstructive jaundice</td><td>Compression by pancreatic mass / common bile duct compression</td></tr></tbody></table></div>",
+      "contentHash": "86f496df2525388ab2d982ca8ce0f08e30c116d8716e9a37d2ce2173edd44bd7"
+    },
+    {
+      "id": "med401-git-pan-diagnosis",
+      "topicId": "med401-git-diseases-of-the-pancreas",
+      "title": "Diagnosis, imaging and severity",
+      "category": "investigation",
+      "keywords": [
+        "2",
+        "of",
+        "3",
+        "amylase",
+        "lipase",
+        "CT",
+        "MRI",
+        "MRCP",
+        "Ranson"
+      ],
+      "contentHtml": "<div><b>Diagnosis: at least 2 of 3</b><ol><li><span>1</span><div>Characteristic upper abdominal pain</div></li><li><span>2</span><div>Amylase and/or lipase at least 3× the upper limit of normal</div></li><li><span>3</span><div>Characteristic imaging findings</div></li></ol></div><div><table><thead><tr><th>Modality</th><th>Role / limitation</th></tr></thead><tbody><tr><td>Ultrasound</td><td>Initial screening, especially gallstones and biliary obstruction; may be obscured by bowel gas</td></tr><tr><td>Contrast CT</td><td>Preferred for defining necrosis, complications and severity; ideal after 48–72 hours in severe/equivocal cases</td></tr><tr><td>MRI / MRCP</td><td>Biliary and ductal detail without radiation; useful when CT contrast is unsuitable</td></tr><tr><td>ERCP</td><td>Diagnostic and therapeutic in obstructive biliary pancreatitis; invasive</td></tr></tbody></table></div><div><b>Severity</b><p>Ranson scoring uses admission and 48-hour criteria. The lecture also emphasizes organ failure, shock, hypoxia, renal dysfunction and necrosis as severe features.</p></div>",
+      "contentHash": "5e636486570b1756da8fce6a29c88189886138fe840a7b82d1d2588940ea67b7"
+    },
+    {
+      "id": "med401-git-pan-management",
+      "topicId": "med401-git-diseases-of-the-pancreas",
+      "title": "Acute pancreatitis management",
+      "category": "treatment",
+      "keywords": [
+        "NPO",
+        "fluids",
+        "analgesia",
+        "oxygen",
+        "antibiotics",
+        "biliary"
+      ],
+      "contentHtml": "<div><ol><li><span>1</span><div>NPO in severe disease and provide nutrition as indicated in the lecture</div></li><li><span>2</span><div>Analgesia</div></li><li><span>3</span><div>Aggressive correction of hypovolemia with saline and/or colloids</div></li><li><span>4</span><div>Correct electrolytes, especially calcium, magnesium and potassium</div></li><li><span>5</span><div>Oxygen and ventilatory support if needed</div></li><li><span>6</span><div>Treat complications; antibiotics for infected necrosis rather than routine sterile disease</div></li><li><span>7</span><div>Address the cause, including biliary intervention when appropriate</div></li></ol></div><div><b>Monitoring</b><p>Observe hemodynamics, urine output, oxygenation, organ failure, necrosis, abscess, pseudocyst and duct-related collections.</p></div>",
+      "contentHash": "4d1b4115583cf8fe7d4bb9ce2051884ddbbd1b987b08031983a6050a55cc8a8d"
+    },
+    {
+      "id": "med401-git-pan-chronic",
+      "topicId": "med401-git-diseases-of-the-pancreas",
+      "title": "Chronic pancreatitis and exocrine insufficiency",
+      "category": "clinical",
+      "keywords": [
+        "chronic",
+        "pancreatitis",
+        "calcification",
+        "fecal",
+        "elastase",
+        "exocrine",
+        "insufficiency"
+      ],
+      "contentHtml": "<div><p>Chronic pancreatitis is a chronic inflammatory disease with fibrosis and destruction of exocrine tissue; diabetes occurs in advanced disease when the islets are involved.</p></div><ul><li>Pain: recurrent acute-pancreatitis episodes in about 50%, or slowly progressive chronic pain in about 35%; may improve leaning forward and worsen with alcohol.</li><li>Exocrine failure: steatorrhea and maldigestion, usually after extensive loss of function.</li><li>Endocrine failure: diabetes in advanced disease.</li><li>Complications include pseudocyst, biliary/duodenal obstruction, portal or splenic-vein thrombosis, pancreatic ascites/effusion and malignancy risk noted in the lecture.</li></ul><div><table><thead><tr><th>Assessment</th><th>Source role</th></tr></thead><tbody><tr><td>CT / ultrasound / abdominal X-ray</td><td>Atrophy, calcification, duct dilatation and pseudocyst</td></tr><tr><td>MRCP / ERCP / EUS</td><td>Ductal and parenchymal assessment; EUS is sensitive for detailed change</td></tr><tr><td>Fecal elastase-1</td><td>Most sensitive and specific indirect stool test in the lecture</td></tr><tr><td>Direct secretin/CCK tests</td><td>Assess bicarbonate and enzyme secretion; reference standard but invasive</td></tr><tr><td>72-hour fecal fat</td><td>Documents steatorrhea / maldigestion</td></tr></tbody></table></div>",
+      "contentHash": "a421335382ae702842b0d752fdc973ea3024b55129365eaf428e05027c1dd5a1"
+    }
+  ],
+  "passages": [
+    {
+      "id": "med401-git-pancreas-source-1",
+      "order": 1,
+      "title": "Pancreas Anatomy",
+      "text": "DISEASES OF THE PANCREAS\nPancreas Anatomy\n✓ The pancreas is an elongated, tapered organ located across the back of the abdomen, behind\nthe stomach.\n✓ The right side of the organ (called the head) is the widest part of the organ and lies in the\ncurve of the duodenum.\n✓ The tapered left side extends slightly upward (called the body of the pancreas) and ends near\nthe spleen (called the tail)\n✓ The pancreas is made up of two types of tissue:\n▪ Exocrine tissue\nThe exocrine tissue secretes digestive enzymes. These are secreted into a network\nof ducts that join the main pancreatic duct, which runs the length of the pancreas.\n▪ Endocrine tissue\nThe endocrine tissue, which consists of the islets of Langerhans, secretes\nhormones into the bloodstream.",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "DISEASES OF THE PANCREAS"
+        },
+        {
+          "type": "paragraph",
+          "text": "Pancreas Anatomy"
+        },
+        {
+          "type": "list",
+          "items": [
+            "The pancreas is an elongated, tapered organ located across the back of the abdomen, behind"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "the stomach."
+        },
+        {
+          "type": "list",
+          "items": [
+            "The right side of the organ (called the head) is the widest part of the organ and lies in the"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "curve of the duodenum."
+        },
+        {
+          "type": "list",
+          "items": [
+            "The tapered left side extends slightly upward (called the body of the pancreas) and ends near"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "the spleen (called the tail)"
+        },
+        {
+          "type": "list",
+          "items": [
+            "The pancreas is made up of two types of tissue:",
+            "Exocrine tissue"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The exocrine tissue secretes digestive enzymes. These are secreted into a network"
+        },
+        {
+          "type": "paragraph",
+          "text": "of ducts that join the main pancreatic duct, which runs the length of the pancreas."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Endocrine tissue"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The endocrine tissue, which consists of the islets of Langerhans, secretes"
+        },
+        {
+          "type": "paragraph",
+          "text": "hormones into the bloodstream."
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "pancreas-source-1",
+        "sourceOrder": 1,
+        "originalLabel": "Lecture page 1",
+        "originalSourceHash": "c5e28ec33ebfd3b1565555a17d6e40eb5482ec7a176f2c4f2159041f2ceb047d"
+      },
+      "sourceHash": "8ac44dc5dddd3845f058b5e99d5aec991320716d20f7d54bd30bab1d4afe10e5"
+    },
+    {
+      "id": "med401-git-pancreas-source-2",
+      "order": 2,
+      "title": "✓ The pancreas has digestive and hormonal functions:",
+      "text": "✓ The pancreas has digestive and hormonal functions:\n• The enzymes secreted by the exocrine tissue in the pancreas help break down\ncarbohydrates, fats, and proteins in the duodenum → These enzymes travel down\nthe pancreatic duct into the bile duct in an inactive form → When they enter the\nduodenum, they are activated.\n• The exocrine tissue also secretes bicarbonate to neutralize stomach acid in the\nduodenum.\n✓ The hormones secreted by the endocrine tissue in the pancreas are\n• Insulin, glucagon (which regulate the level of glucose in the blood),\n• Somatostatin (which prevents the release of the other two hormones), and many\nothers",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "The pancreas has digestive and hormonal functions:",
+            "The enzymes secreted by the exocrine tissue in the pancreas help break down"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "carbohydrates, fats, and proteins in the duodenum → These enzymes travel down"
+        },
+        {
+          "type": "paragraph",
+          "text": "the pancreatic duct into the bile duct in an inactive form → When they enter the"
+        },
+        {
+          "type": "paragraph",
+          "text": "duodenum, they are activated."
+        },
+        {
+          "type": "list",
+          "items": [
+            "The exocrine tissue also secretes bicarbonate to neutralize stomach acid in the"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "duodenum."
+        },
+        {
+          "type": "list",
+          "items": [
+            "The hormones secreted by the endocrine tissue in the pancreas are",
+            "Insulin, glucagon (which regulate the level of glucose in the blood),",
+            "Somatostatin (which prevents the release of the other two hormones), and many"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "others"
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "pancreas-source-2",
+        "sourceOrder": 2,
+        "originalLabel": "Lecture page 2",
+        "originalSourceHash": "e15221c54609a79807571ffe9232a4c903eb6868f136dfbc2135e05321df518e"
+      },
+      "sourceHash": "61a0e3f1fce6b38b3e0a695c2f4b7b9584d4040dd39a41d21b79ad0e24968e0d"
+    },
+    {
+      "id": "med401-git-pancreas-source-3",
+      "order": 3,
+      "title": "WHAT IS PANCREATITIS?",
+      "text": "WHAT IS PANCREATITIS?\nPancreatitis is an inflammatory process in which pancreatic enzymes auto digest the gland\nNormally, digestive enzymes do not become active until they reach the small intestine, where\nthey begin digesting food.\n✓ But if these enzymes become active inside the pancreas, they start \"digesting\" the pancreas\nitself\n✓ The gland can sometimes heal without any impairment of function or any morphologic\nchanges.\no This process is known as acute pancreatitis.\no It can recur intermittently, contributing to the functional and morphologic loss of\nthe gland → Recurrent attacks are referred to as chronic pancreatitis.\n✓ Acute pancreatitis occurs suddenly and lasts for a short period of time and usually resolves.\n✓ Chronic pancreatitis does not resolve itself and results in a slow destruction of the pancreas.\nAcute pancreatitis\nDefinition\n• Acute inflammation resulting from intrapancreatic activation of digestive enzymes\nTYPES:\n1. Acute edematous pancreatitis:\nThe pancreatic inflammation and disease is mild & self-limited in most patients with\nperipancreatic fat necrosis but sparing acinar cells.\n2. Hemorrhagic or necrotizing pancreatitis:\nThe inflammation may be extensive & progressing to coagulation necrosis of the\ngland & the surrounding tissues\nEpidemiology\n✓ About 80,000 cases occur in the United States each year; some 20 percent of them are\nsevere.\n✓ Acute pancreatitis occurs more often in men than women.",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "WHAT IS PANCREATITIS?"
+        },
+        {
+          "type": "paragraph",
+          "text": "Pancreatitis is an inflammatory process in which pancreatic enzymes auto digest the gland"
+        },
+        {
+          "type": "paragraph",
+          "text": "Normally, digestive enzymes do not become active until they reach the small intestine, where"
+        },
+        {
+          "type": "paragraph",
+          "text": "they begin digesting food."
+        },
+        {
+          "type": "list",
+          "items": [
+            "But if these enzymes become active inside the pancreas, they start \"digesting\" the pancreas"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "itself"
+        },
+        {
+          "type": "list",
+          "items": [
+            "The gland can sometimes heal without any impairment of function or any morphologic"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "changes."
+        },
+        {
+          "type": "paragraph",
+          "text": "o This process is known as acute pancreatitis."
+        },
+        {
+          "type": "paragraph",
+          "text": "o It can recur intermittently, contributing to the functional and morphologic loss of"
+        },
+        {
+          "type": "paragraph",
+          "text": "the gland → Recurrent attacks are referred to as chronic pancreatitis."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Acute pancreatitis occurs suddenly and lasts for a short period of time and usually resolves.",
+            "Chronic pancreatitis does not resolve itself and results in a slow destruction of the pancreas."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Acute pancreatitis"
+        },
+        {
+          "type": "paragraph",
+          "text": "Definition"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Acute inflammation resulting from intrapancreatic activation of digestive enzymes"
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "TYPES"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Acute edematous pancreatitis:"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The pancreatic inflammation and disease is mild & self-limited in most patients with"
+        },
+        {
+          "type": "paragraph",
+          "text": "peripancreatic fat necrosis but sparing acinar cells."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Hemorrhagic or necrotizing pancreatitis:"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The inflammation may be extensive & progressing to coagulation necrosis of the"
+        },
+        {
+          "type": "paragraph",
+          "text": "gland & the surrounding tissues"
+        },
+        {
+          "type": "paragraph",
+          "text": "Epidemiology"
+        },
+        {
+          "type": "list",
+          "items": [
+            "About 80,000 cases occur in the United States each year; some 20 percent of them are"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "severe."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Acute pancreatitis occurs more often in men than women."
+          ]
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "pancreas-source-3",
+        "sourceOrder": 3,
+        "originalLabel": "Lecture page 3",
+        "originalSourceHash": "228f91a09172137d90ec58a80aaeee5e2e170340a80fcb391988fa0bbc628d23"
+      },
+      "sourceHash": "efc4a27b5c7e13e5438fec3b23b2cb8a772e3a7c4a0c7331a4568f51cd05ecdd"
+    },
+    {
+      "id": "med401-git-pancreas-source-4",
+      "order": 4,
+      "title": "CAUSES:",
+      "text": "CAUSES:\nA) Common (90% of cases)\n1.Gallstones\n2.Alcohol\n3.Idiopathic\n4.Post ERCP\nB) Rare\n1.Post surgical (abdominal and\ncardiopulmonary bypass)\n2.Trauma\n3.Drugs (azathioprine , thiazide diuretics)\n4.Metabolic ( ↑Ca , ↑TG)\n5.Pancreas divisum\n6.Hereditary\n7.Renal failure\n8.Organ transplantation (kidney , liver)\n9.Infection (mumps , coxsackie virus)\n10.Sphincter of Oddi dysfunction\n11.Severe hypothermia\n12.Petrochemical exposure\nClinical features:\n1. Abdominal pain :Severe constant upper abdominal pain may radiate to back , usually\nbuild up over 15-60 mins\n2. N & V\n3. Marked epigastric tenderness\nN.B in the early stages and in contrast to perforated P.U , guarding and\nrebound tenderness are absent because the inflammation is retro\nperitoneal\n4. Bowel sounds become quite or absent as paracletic ileus develops\n5. In severe cases the patient becomes hypoxic and develops hypovolemic shock with\noliguria\n6. Discoloration of the flanks (Grey Turner’s sign) or the periumbilical region (Cullen’s sign)\nare features of hemorrhagic pancreatitis.",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "CAUSES"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Common (90% of cases)",
+            "Gallstones",
+            "Alcohol",
+            "Idiopathic",
+            "Post ERCP",
+            "Rare",
+            "Post surgical (abdominal and"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "cardiopulmonary bypass)"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Trauma",
+            "Drugs (azathioprine , thiazide diuretics)",
+            "Metabolic ( ↑Ca , ↑TG)",
+            "Pancreas divisum",
+            "Hereditary",
+            "Renal failure",
+            "Organ transplantation (kidney , liver)",
+            "Infection (mumps , coxsackie virus)",
+            "Sphincter of Oddi dysfunction",
+            "Severe hypothermia",
+            "Petrochemical exposure"
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "Clinical features"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Abdominal pain :Severe constant upper abdominal pain may radiate to back , usually"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "build up over 15-60 mins"
+        },
+        {
+          "type": "list",
+          "items": [
+            "N & V",
+            "Marked epigastric tenderness"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "N.B in the early stages and in contrast to perforated P.U , guarding and"
+        },
+        {
+          "type": "paragraph",
+          "text": "rebound tenderness are absent because the inflammation is retro"
+        },
+        {
+          "type": "paragraph",
+          "text": "peritoneal"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Bowel sounds become quite or absent as paracletic ileus develops",
+            "In severe cases the patient becomes hypoxic and develops hypovolemic shock with"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "oliguria"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Discoloration of the flanks (Grey Turner’s sign) or the periumbilical region (Cullen’s sign)"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "are features of hemorrhagic pancreatitis."
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "pancreas-source-4",
+        "sourceOrder": 4,
+        "originalLabel": "Lecture page 4",
+        "originalSourceHash": "58139250b3112d91ea611c3adfce90b6dcecb63b5825c956462d4f4f5ce8b8ef"
+      },
+      "sourceHash": "883700c97ca5b8b1d8c3d0720b441c04cd37bcd225087e3a64b8e76a8655b464"
+    },
+    {
+      "id": "med401-git-pancreas-source-5",
+      "order": 5,
+      "title": "D.D:",
+      "text": "D.D:\n1. Perforated viscus\n2. M.I\n3. Acute cholecystitis\nThis is Grey-Turner's sign with hemorrhage appearing in both flanks.\nIt is due to extensive retro-peritoneal bleeding and typically occurs in\nhemorrhagic pancreatitis\nComplication\nComplication Cause\n(A) Systemic Increased vascular permeability d.t\n1. SIRS Cytokine , Kinin release, PAF , Paralytic\nileus, vomiting & RF\n2. Hypoxia ARDS due to microthrombi in pulm. Vs\n3. Hyperglycemia Disruption of islets of Langerhans\n4. hypocalcaemia. Sequestration of Ca in fat necrosis\n5. Hypoalbuminemia Increased capillary permeability\nB) Pancreatic\n1.Abscess Infection of necrotic pancreatic tissue\n2.Pancreatic ascites or pleural Disruption of pancreatic ducts\neffusion\n3.Pseudocyst\n(C) GIT\n1. UGI bleeding Gastric or duodenal erosions\n2. Variceal hge Splenic or PVT\n3. Duodenal obstruction Compression by pancreatic mass\n4. Obstructive jaundice Compression of CBD",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "D.D"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Perforated viscus",
+            "M.I",
+            "Acute cholecystitis"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "This is Grey-Turner's sign with hemorrhage appearing in both flanks."
+        },
+        {
+          "type": "paragraph",
+          "text": "It is due to extensive retro-peritoneal bleeding and typically occurs in"
+        },
+        {
+          "type": "paragraph",
+          "text": "hemorrhagic pancreatitis"
+        },
+        {
+          "type": "paragraph",
+          "text": "Complication"
+        },
+        {
+          "type": "paragraph",
+          "text": "Complication Cause"
+        },
+        {
+          "type": "paragraph",
+          "text": "(A) Systemic Increased vascular permeability d.t"
+        },
+        {
+          "type": "list",
+          "items": [
+            "SIRS Cytokine , Kinin release, PAF , Paralytic"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "ileus, vomiting & RF"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Hypoxia ARDS due to microthrombi in pulm. Vs",
+            "Hyperglycemia Disruption of islets of Langerhans",
+            "hypocalcaemia. Sequestration of Ca in fat necrosis",
+            "Hypoalbuminemia Increased capillary permeability",
+            "Pancreatic",
+            "Abscess Infection of necrotic pancreatic tissue",
+            "Pancreatic ascites or pleural Disruption of pancreatic ducts"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "effusion"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Pseudocyst"
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "(C) GIT"
+        },
+        {
+          "type": "list",
+          "items": [
+            "UGI bleeding Gastric or duodenal erosions",
+            "Variceal hge Splenic or PVT",
+            "Duodenal obstruction Compression by pancreatic mass",
+            "Obstructive jaundice Compression of CBD"
+          ]
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "pancreas-source-5",
+        "sourceOrder": 5,
+        "originalLabel": "Lecture page 5",
+        "originalSourceHash": "ba6aa5ddde91cee3c8e53616c520365112c0bba57bbef097d1e22c3ba2a264a0"
+      },
+      "sourceHash": "5feca344460b0c96eec876a47285057815b5b09dc628782e21c8cb2cf93420bb"
+    },
+    {
+      "id": "med401-git-pancreas-source-6",
+      "order": 6,
+      "title": "Diagnosis of Acute Pancreatitis: Clinical Guidelines",
+      "text": "Diagnosis of Acute Pancreatitis: Clinical Guidelines\n1. The Diagnostic Criteria\nA definitive diagnosis is generally made when at least two of the following are present:\n1. Clinical: Characteristic upper abdominal pain.\n2. Biochemical: Serum amylase or lipase ≥ 3 times the upper limit of normal.\n3. Radiological: Evidence of pancreatic swelling or necrosis on Ultrasound or CT.\n2. Laboratory Investigations\nEnzyme Profiles\n• Serum Amylase: Rises rapidly but may return to normal within 24–48 hours.\no Clinical Pearl: Persistent elevation suggests pseudocyst formation.\no Pancreatic Ascites: Amylase will be present in peritoneal fluid.\n• Serum Lipase: More specific than amylase. It remains elevated for up to 12 days, making\nit the preferred marker for late presentations or chronic-on-acute episodes.\n• Urinary Amylase/Creatinine Ratio: Useful if serum amylase has already normalized.\nMetabolic & Hematologic Markers\n• CBC: Expect Leukocytosis (WBC > 12,000) with a shift to segmented polymorphs.\n• CRP: Used for serial assessment to monitor the severity and inflammatory response.\n• Hyperglycemia: Occurs due to beta-cell injury within the pancreatic islets.\n• KFTs and Electrolytes (Na, K, Cl, Ca, P, Mg): Expect significant disturbances due to \"third\nspacing\" of fluids.\n• Calcium & Magnesium: Often decreased; monitoring is vital for prognosis.\n• Liver Function Tests (ALT, AST, Alk Phos, Bilirubin): Transiently elevated, especially if\nthe etiology is biliary (gallstones).",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "Diagnosis of Acute Pancreatitis: Clinical Guidelines"
+        },
+        {
+          "type": "list",
+          "items": [
+            "The Diagnostic Criteria"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "A definitive diagnosis is generally made when at least two of the following are present:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Clinical: Characteristic upper abdominal pain.",
+            "Biochemical: Serum amylase or lipase ≥ 3 times the upper limit of normal.",
+            "Radiological: Evidence of pancreatic swelling or necrosis on Ultrasound or CT.",
+            "Laboratory Investigations"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Enzyme Profiles"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Serum Amylase: Rises rapidly but may return to normal within 24–48 hours."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "o Clinical Pearl: Persistent elevation suggests pseudocyst formation."
+        },
+        {
+          "type": "paragraph",
+          "text": "o Pancreatic Ascites: Amylase will be present in peritoneal fluid."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Serum Lipase: More specific than amylase. It remains elevated for up to 12 days, making"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "it the preferred marker for late presentations or chronic-on-acute episodes."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Urinary Amylase/Creatinine Ratio: Useful if serum amylase has already normalized."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Metabolic & Hematologic Markers"
+        },
+        {
+          "type": "list",
+          "items": [
+            "CBC: Expect Leukocytosis (WBC > 12,000) with a shift to segmented polymorphs.",
+            "CRP: Used for serial assessment to monitor the severity and inflammatory response.",
+            "Hyperglycemia: Occurs due to beta-cell injury within the pancreatic islets.",
+            "KFTs and Electrolytes (Na, K, Cl, Ca, P, Mg): Expect significant disturbances due to \"third"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "spacing\" of fluids."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Calcium & Magnesium: Often decreased; monitoring is vital for prognosis.",
+            "Liver Function Tests (ALT, AST, Alk Phos, Bilirubin): Transiently elevated, especially if"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "the etiology is biliary (gallstones)."
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "pancreas-source-6",
+        "sourceOrder": 6,
+        "originalLabel": "Lecture page 6",
+        "originalSourceHash": "5866721c247826b57262ffe36073711a3df45e89446410be2f32d6a18ea99d29"
+      },
+      "sourceHash": "6b7f6504e60bfb5e7bdfbcaaadc2f32add644e02c25612fd210a01b8fe7944bb"
+    },
+    {
+      "id": "med401-git-pancreas-source-7",
+      "order": 7,
+      "title": "3. Imaging Modalities",
+      "text": "3. Imaging Modalities\nModality Clinical Utility Limitations\nUltrasound Initial screening; best for detecting Often obscured by overlying bowel\n(U/S) gallstones, biliary obstruction, or gas (ileus) secondary to\npseudocysts. inflammation.\nThe most reliable modality for Best performed after 48–72 hours to\nCT Scan diagnosis. Defines pancreatic viability fully assess the extent of necrosis.\nand necrosis.\n4. Clinical Management Notes\n• Fluid Status: Due to massive fluid shifts (third spacing), strict monitoring of BUN and\nCreatinine is required to track renal perfusion.\n• Hemorrhagic Pancreatitis: In severe cases, blood transfusion may be necessary; always\nobtain Type and Crossmatch early.\n• Viability: CT is essential to differentiate between interstitial (edematous) and necrotizing\npancreatitis.",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Imaging Modalities"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Modality Clinical Utility Limitations"
+        },
+        {
+          "type": "paragraph",
+          "text": "Ultrasound Initial screening; best for detecting Often obscured by overlying bowel"
+        },
+        {
+          "type": "paragraph",
+          "text": "(U/S) gallstones, biliary obstruction, or gas (ileus) secondary to"
+        },
+        {
+          "type": "paragraph",
+          "text": "pseudocysts. inflammation."
+        },
+        {
+          "type": "paragraph",
+          "text": "The most reliable modality for Best performed after 48–72 hours to"
+        },
+        {
+          "type": "paragraph",
+          "text": "CT Scan diagnosis. Defines pancreatic viability fully assess the extent of necrosis."
+        },
+        {
+          "type": "paragraph",
+          "text": "and necrosis."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Clinical Management Notes",
+            "Fluid Status: Due to massive fluid shifts (third spacing), strict monitoring of BUN and"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Creatinine is required to track renal perfusion."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Hemorrhagic Pancreatitis: In severe cases, blood transfusion may be necessary; always"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "obtain Type and Crossmatch early."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Viability: CT is essential to differentiate between interstitial (edematous) and necrotizing"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "pancreatitis."
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "pancreas-source-7",
+        "sourceOrder": 7,
+        "originalLabel": "Lecture page 7",
+        "originalSourceHash": "43c11525354006ad465c4a1775ce9efea87f8643c350b5ae4bda1973466a924e"
+      },
+      "sourceHash": "37b1a6226ba05cf16879e31632f221176e003178350cf0e357ee19ce3a296117"
+    },
+    {
+      "id": "med401-git-pancreas-source-8",
+      "order": 8,
+      "title": "RANSON SCALE",
+      "text": "RANSON SCALE\n• Ranson developed a series of different criteria for the severity of acute pancreatitis\n• For the following categories answer each question regarding the patient then add up\ntotal score for prognosis\no If answer is no (o point)\no If answer is yes (1 point)\nPresent on admission\n• Older than 55 years\n• WBC higher than 16,000 per mcL\n• Blood glucose higher than 200 mg/dL\n• Serum lactate dehydrogenase (LDH) more than 350 IU/L\n• SGOT (ie, aspartate aminotransferase [AST]) greater than 250 IU/L\nDeveloping during the first 48 hours\n• Hematocrit fall more than 10%\n• BUN increase more than 8 mg/dL\n• Serum calcium less than 8 mg/dL\n• Arterial oxygen saturation less than 60 mm Hg\n• Base deficit higher than 4 mEq/L\n• Estimated fluid sequestration higher than 600 mL\n✓ A Ranson score of 0-2 has a minimal mortality rate.\n✓ A Ranson score of 3-5 has a 10%-20% mortality rate.\n✓ A Ranson score higher than 5 has a mortality rate of more than 50% and is associated with\nmore systemic complications.",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "RANSON SCALE"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Ranson developed a series of different criteria for the severity of acute pancreatitis",
+            "For the following categories answer each question regarding the patient then add up"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "total score for prognosis"
+        },
+        {
+          "type": "paragraph",
+          "text": "o If answer is no (o point)"
+        },
+        {
+          "type": "paragraph",
+          "text": "o If answer is yes (1 point)"
+        },
+        {
+          "type": "paragraph",
+          "text": "Present on admission"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Older than 55 years",
+            "WBC higher than 16,000 per mcL",
+            "Blood glucose higher than 200 mg/dL",
+            "Serum lactate dehydrogenase (LDH) more than 350 IU/L",
+            "SGOT (ie, aspartate aminotransferase [AST]) greater than 250 IU/L"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Developing during the first 48 hours"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Hematocrit fall more than 10%",
+            "BUN increase more than 8 mg/dL",
+            "Serum calcium less than 8 mg/dL",
+            "Arterial oxygen saturation less than 60 mm Hg",
+            "Base deficit higher than 4 mEq/L",
+            "Estimated fluid sequestration higher than 600 mL",
+            "A Ranson score of 0-2 has a minimal mortality rate.",
+            "A Ranson score of 3-5 has a 10%-20% mortality rate.",
+            "A Ranson score higher than 5 has a mortality rate of more than 50% and is associated with"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "more systemic complications."
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "pancreas-source-8",
+        "sourceOrder": 8,
+        "originalLabel": "Lecture page 8",
+        "originalSourceHash": "79f27e876f3b0618a674d0b4fddaad405f978aa21845850e3f843541b2c89c38"
+      },
+      "sourceHash": "16a2b2f01b24bee347a33020f666ccf0cffc87b8439a04e43d2a83fca177df56"
+    },
+    {
+      "id": "med401-git-pancreas-source-9",
+      "order": 9,
+      "title": "Management of Severe Acute Pancreatitis",
+      "text": "Management of Severe Acute Pancreatitis\n1. NPO (Nil Per Os) – Nothing by mouth. Provide parenteral nutrition.\n2. Analgesia – Administer pethidine for pain control.\n3. Fluid Resuscitation – Correct hypovolemia with normal saline and/or colloids.\n4. Monitoring – Insert CVP line and urinary catheter to monitor shocked patients.\n5. Oxygen Therapy – Administer O₂ for hypoxia.\n6. Respiratory Support – ARDS may require ventilatory support.\n7. Glycemic Control – Use insulin for hyperglycemia.\n8. Calcium Supplementation – IV calcium if tetany occurs.\n9. GI Decompression – Nasogastric aspiration for paralytic ileus.\n10. Thromboembolism Prophylaxis – Low-dose SC heparin.\n11. Biliary Obstruction – If cholangitis or jaundice present, perform urgent ERCP to\nremove stones and drain biliary system.\n12. Antibiotics – Administer prophylactic antibiotics as indicated.\nTTT of complications:\n1. Necrotizing pancreatitis or pancreatic abscess urgent surgical debridement of the\npancreas\n2. Pancreatic pseudocysts drainage into stomach or duodenum\n3. Pancreatic ascites is indication for distal pancreatectomy",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "Management of Severe Acute Pancreatitis"
+        },
+        {
+          "type": "list",
+          "items": [
+            "NPO (Nil Per Os) – Nothing by mouth. Provide parenteral nutrition.",
+            "Analgesia – Administer pethidine for pain control.",
+            "Fluid Resuscitation – Correct hypovolemia with normal saline and/or colloids.",
+            "Monitoring – Insert CVP line and urinary catheter to monitor shocked patients.",
+            "Oxygen Therapy – Administer O₂ for hypoxia.",
+            "Respiratory Support – ARDS may require ventilatory support.",
+            "Glycemic Control – Use insulin for hyperglycemia.",
+            "Calcium Supplementation – IV calcium if tetany occurs.",
+            "GI Decompression – Nasogastric aspiration for paralytic ileus.",
+            "Thromboembolism Prophylaxis – Low-dose SC heparin.",
+            "Biliary Obstruction – If cholangitis or jaundice present, perform urgent ERCP to"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "remove stones and drain biliary system."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Antibiotics – Administer prophylactic antibiotics as indicated."
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "TTT of complications"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Necrotizing pancreatitis or pancreatic abscess urgent surgical debridement of the"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "pancreas"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Pancreatic pseudocysts drainage into stomach or duodenum",
+            "Pancreatic ascites is indication for distal pancreatectomy"
+          ]
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "pancreas-source-9",
+        "sourceOrder": 9,
+        "originalLabel": "Lecture page 9",
+        "originalSourceHash": "6b23c6e9661c76eb5e851acc73042f88ca2350ce1b07543bfe667a48ec6e16ad"
+      },
+      "sourceHash": "dd2bc215e8b0de6c2807d19f8dd6474e7be50bf33931b62dbaa85bdea2b344ed"
+    },
+    {
+      "id": "med401-git-pancreas-source-10",
+      "order": 10,
+      "title": "Chronic Pancreatitis",
+      "text": "Chronic Pancreatitis\nDefinition:\nChronic inflammatory disease complicated by: Fibrosis & destruction of exocrine pancreatic\ntissue D.M occurs in advanced cases because the islets of Langerhans are involved.\nClassification :\n1. Obstructive CP\n2. Calcific CP\nCAUSES OF CHRONIC PANCREATITIS\n1. Toxic-Metabolic\n• Alcohol\n• Tobacco\n• Ca\n• CRF\n2. Idiopathic\n• Tropical : early/ late onset types\n3.Genetic\n• Hereditary Pancreatitis\n4.Autoimmune\n• Isolated or as part of multi-organ problem\n5. Recurrent and severe acute pancreatitis\n6.Obstructive\n• Ductal adenocarcinoma\n• Pancreas divisum\n• IPMN\n• Sphincter of Oddi dysfunction",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "Chronic Pancreatitis"
+        },
+        {
+          "type": "heading",
+          "text": "Definition"
+        },
+        {
+          "type": "paragraph",
+          "text": "Chronic inflammatory disease complicated by: Fibrosis & destruction of exocrine pancreatic"
+        },
+        {
+          "type": "paragraph",
+          "text": "tissue D.M occurs in advanced cases because the islets of Langerhans are involved."
+        },
+        {
+          "type": "heading",
+          "text": "Classification "
+        },
+        {
+          "type": "list",
+          "items": [
+            "Obstructive CP",
+            "Calcific CP"
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "CAUSES OF CHRONIC PANCREATITIS"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Toxic-Metabolic",
+            "Alcohol",
+            "Tobacco",
+            "Ca",
+            "CRF",
+            "Idiopathic",
+            "Tropical : early/ late onset types",
+            "Genetic",
+            "Hereditary Pancreatitis",
+            "Autoimmune",
+            "Isolated or as part of multi-organ problem",
+            "Recurrent and severe acute pancreatitis",
+            "Obstructive",
+            "Ductal adenocarcinoma",
+            "Pancreas divisum",
+            "IPMN",
+            "Sphincter of Oddi dysfunction"
+          ]
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "pancreas-source-10",
+        "sourceOrder": 10,
+        "originalLabel": "Lecture page 10",
+        "originalSourceHash": "f8d1cbf6a083d971d3f16261903bc8cb6ac5b6077d51c8956ce3cd0e89e5ecb4"
+      },
+      "sourceHash": "3e3f314abfa51aea1931af429a196c631b414fc0997e722be82c0fe18d844f97"
+    },
+    {
+      "id": "med401-git-pancreas-source-11",
+      "order": 11,
+      "title": "Clinical features:",
+      "text": "Clinical features:\n1. Abdominal pain\n• In 50% occurs as episodes of acute pancreatitis\n• In 35% occurs as slowly progressive chronic pain without acute exacerbation.\n• pain may relieved by leaning forwards and worsened by drinking alcohol.\n2. Epigastric tenderness\n3. Diarrhea & steatorrhea ( malabsorption)\n4. Wt. loss due to\n• Anorexia\n• Avoidance of food ( d.t PP pain)\n• Malabsorption\n• D.M\n5. D.M ( 30 % of pts)\nCOMPLICATIONS OF CHRONIC PANCREATITIS\n• Pseudocysts and pancreatic ascites, which occur in both acute and chronic\npancreatitis\n• Extrahepatic obstructive jaundice due to a benign stricture of the CBD as it passes\nthrough the diseased pancreas\n• Duodenal stenosis\n• Portal or splenic vein thrombosis leading to segmental portal hypertension and\ngastric varices\n• Peptic ulcer",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "Clinical features"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Abdominal pain",
+            "In 50% occurs as episodes of acute pancreatitis",
+            "In 35% occurs as slowly progressive chronic pain without acute exacerbation.",
+            "pain may relieved by leaning forwards and worsened by drinking alcohol.",
+            "Epigastric tenderness",
+            "Diarrhea & steatorrhea ( malabsorption)",
+            "Wt. loss due to",
+            "Anorexia",
+            "Avoidance of food ( d.t PP pain)",
+            "Malabsorption",
+            "D.M",
+            "D.M ( 30 % of pts)"
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "COMPLICATIONS OF CHRONIC PANCREATITIS"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Pseudocysts and pancreatic ascites, which occur in both acute and chronic"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "pancreatitis"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Extrahepatic obstructive jaundice due to a benign stricture of the CBD as it passes"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "through the diseased pancreas"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Duodenal stenosis",
+            "Portal or splenic vein thrombosis leading to segmental portal hypertension and"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "gastric varices"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Peptic ulcer"
+          ]
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "pancreas-source-11",
+        "sourceOrder": 11,
+        "originalLabel": "Lecture page 11",
+        "originalSourceHash": "588a8eb5f8b4540548a1eac1ed43d14b203aa7d8deaaf25eec3c8d7654ca543e"
+      },
+      "sourceHash": "2cfaaddc2351b42524b286715b28b058feaad088dcb5eb6845ca999f1ef43ba9"
+    },
+    {
+      "id": "med401-git-pancreas-source-12",
+      "order": 12,
+      "title": "INVESTIGATIONS",
+      "text": "INVESTIGATIONS\n✓ Tests to establish diagnosis\n• U/S\n• C.T scan: May show atrophy, calcification, ductal dilatation\n• Abd. X-ray: may show calcification\n• MRCP if non-invasive tests are –ve\n• Endoscopic U/S (EUS)\n✓ Tests of pancreatic function\n• Collection of pure pancreatic juice after secretin injection\n• Pancreolauryl or PABA test ( pancreatic esterases cleave fluorescein dilaurate\nafter oral ingestion. Fluoroscein is absorbed & quantified in urine)\n• Faecal pancreatic chymotrypsin or elastase\n• Oral glucose tolerance test (OGTT)\n• Stool fat (72 hrs collection) …. N 10 gm/d….. Advanced insufficiency → 30-\n40gm/d\n✓ Tests of anatomy prior to surgery\n• MRCP\nMANAGEMENT\n✓ Stop alcohol & tobacco\n✓ Pain relief\n• NSAIDs, opiate (tramadol)\n• Pancreatic enzymes: Tab or capsule 2000 unit or 10,000-12,000 lipase units / meal\n• Endoscopic stenting of main pancreatic duct\n• Surgical: partial pancreatic resection.. pancreatico-jejunostomy\n✓ Steatorrhea\n• Oral fat restriction\n• Oral pancreatic enzyme supplements + proton pump inhibitor (PPI) to optimize\nduodenal pH for pancreatic enzyme activity\n✓ D.M:- CHO restriction & insulin therapy\n✓ Management of complications : Surgical or endoscopic therapy for:\n• Pseudocyst\n• pancreatic ascites\n• CBD or duodenal stricture",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "INVESTIGATIONS"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Tests to establish diagnosis",
+            "U/S",
+            "C.T scan: May show atrophy, calcification, ductal dilatation",
+            "Abd. X-ray: may show calcification",
+            "MRCP if non-invasive tests are –ve",
+            "Endoscopic U/S (EUS)",
+            "Tests of pancreatic function",
+            "Collection of pure pancreatic juice after secretin injection",
+            "Pancreolauryl or PABA test ( pancreatic esterases cleave fluorescein dilaurate"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "after oral ingestion. Fluoroscein is absorbed & quantified in urine)"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Faecal pancreatic chymotrypsin or elastase",
+            "Oral glucose tolerance test (OGTT)",
+            "Stool fat (72 hrs collection) …. N 10 gm/d….. Advanced insufficiency → 30-"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "40gm/d"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Tests of anatomy prior to surgery",
+            "MRCP"
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "MANAGEMENT"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Stop alcohol & tobacco",
+            "Pain relief",
+            "NSAIDs, opiate (tramadol)",
+            "Pancreatic enzymes: Tab or capsule 2000 unit or 10,000-12,000 lipase units / meal",
+            "Endoscopic stenting of main pancreatic duct",
+            "Surgical: partial pancreatic resection.. pancreatico-jejunostomy",
+            "Steatorrhea",
+            "Oral fat restriction",
+            "Oral pancreatic enzyme supplements + proton pump inhibitor (PPI) to optimize"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "duodenal pH for pancreatic enzyme activity"
+        },
+        {
+          "type": "list",
+          "items": [
+            "D.M:- CHO restriction & insulin therapy",
+            "Management of complications : Surgical or endoscopic therapy for:",
+            "Pseudocyst",
+            "pancreatic ascites",
+            "CBD or duodenal stricture"
+          ]
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "pancreas-source-12",
+        "sourceOrder": 12,
+        "originalLabel": "Lecture page 12",
+        "originalSourceHash": "e1e48b6939da0e0d64faa882c48aa7eb62aa387ee67d7d5b5e0b05695ec09e02"
+      },
+      "sourceHash": "663892694cfc0784bd6789de98aa855057c09b11721b492d5e493c2f765ace63"
+    },
+    {
+      "id": "med401-git-pancreas-source-13",
+      "order": 13,
+      "title": "DIAGNOSIS OF EXOCRINE PANCREATIC INSUFFICIENCY",
+      "text": "DIAGNOSIS OF EXOCRINE PANCREATIC INSUFFICIENCY\nExocrine pancreatic function is assessed by measuring the organ's ability to secrete bicarbonate\nand digestive enzymes (lipase, amylase, and proteases) in response to hormonal stimulation or\nfood intake.\n1. Direct Functional Testing (The Gold Standard)\nDirect tests involve the administration of exogenous hormones to stimulate the pancreas,\nfollowed by the collection of duodenal juice via a tube.\n• Secretin Stimulation: Secretin is introduced to observe the production of pancreatic\njuice. A healthy response shows an increased volume of secretion and high bicarbonate\nlevels.\n• Pancreozymin (CCK) Stimulation: This stimulates acinar cells to release enzymes. A\nhealthy response shows an increased concentration of enzymes (lipase, amylase,\ntrypsin).\n• Clinical Significance: In cases of severe exocrine insufficiency, these tests show\npathological changes in 85–90% of patients.\n2. Indirect Testing: Breath Tests (13C-Labeled)\nThese non-invasive tests measure the digestion and absorption of specific substrates by tracking\nthe exhalation of labeled CO2.\nTest Type Substrate Used Mechanism Diagnostic Indicator\nLipid 13C-Triglycerides Measures Lipase Reduced production of 13CO2 indicates\nDigestion activity. lipase deficiency.\nMeasures Total 13CO2 concentration < 10% after 4\nCarbohydrate Corn Starch Test\nAmylase activity. hours indicates amylase deficiency.\n13CO2 levels are\n13C -Labeled Egg Measures Trypsin In chronic pancreatitis,\nProtein 2–3x lower than healthy controls over 6\nWhite activity.\nhours.",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "DIAGNOSIS OF EXOCRINE PANCREATIC INSUFFICIENCY"
+        },
+        {
+          "type": "paragraph",
+          "text": "Exocrine pancreatic function is assessed by measuring the organ's ability to secrete bicarbonate"
+        },
+        {
+          "type": "paragraph",
+          "text": "and digestive enzymes (lipase, amylase, and proteases) in response to hormonal stimulation or"
+        },
+        {
+          "type": "paragraph",
+          "text": "food intake."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Direct Functional Testing (The Gold Standard)"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Direct tests involve the administration of exogenous hormones to stimulate the pancreas,"
+        },
+        {
+          "type": "paragraph",
+          "text": "followed by the collection of duodenal juice via a tube."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Secretin Stimulation: Secretin is introduced to observe the production of pancreatic"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "juice. A healthy response shows an increased volume of secretion and high bicarbonate"
+        },
+        {
+          "type": "paragraph",
+          "text": "levels."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Pancreozymin (CCK) Stimulation: This stimulates acinar cells to release enzymes. A"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "healthy response shows an increased concentration of enzymes (lipase, amylase,"
+        },
+        {
+          "type": "paragraph",
+          "text": "trypsin)."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Clinical Significance: In cases of severe exocrine insufficiency, these tests show"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "pathological changes in 85–90% of patients."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Indirect Testing: Breath Tests (13C-Labeled)"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "These non-invasive tests measure the digestion and absorption of specific substrates by tracking"
+        },
+        {
+          "type": "paragraph",
+          "text": "the exhalation of labeled CO2."
+        },
+        {
+          "type": "paragraph",
+          "text": "Test Type Substrate Used Mechanism Diagnostic Indicator"
+        },
+        {
+          "type": "paragraph",
+          "text": "Lipid 13C-Triglycerides Measures Lipase Reduced production of 13CO2 indicates"
+        },
+        {
+          "type": "paragraph",
+          "text": "Digestion activity. lipase deficiency."
+        },
+        {
+          "type": "paragraph",
+          "text": "Measures Total 13CO2 concentration < 10% after 4"
+        },
+        {
+          "type": "paragraph",
+          "text": "Carbohydrate Corn Starch Test"
+        },
+        {
+          "type": "paragraph",
+          "text": "Amylase activity. hours indicates amylase deficiency."
+        },
+        {
+          "type": "paragraph",
+          "text": "13CO2 levels are"
+        },
+        {
+          "type": "paragraph",
+          "text": "13C -Labeled Egg Measures Trypsin In chronic pancreatitis,"
+        },
+        {
+          "type": "paragraph",
+          "text": "Protein 2–3x lower than healthy controls over 6"
+        },
+        {
+          "type": "paragraph",
+          "text": "White activity."
+        },
+        {
+          "type": "paragraph",
+          "text": "hours."
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "pancreas-source-13",
+        "sourceOrder": 13,
+        "originalLabel": "Lecture page 13",
+        "originalSourceHash": "b908b97a59cf3ea188bac628ce577a6d5ec0566f61136306809c937d19e78c85"
+      },
+      "sourceHash": "9d9e4e443dd736a353f1192644e31177e033ec14dc265fc73d3cd17a5c2a626e"
+    },
+    {
+      "id": "med401-git-pancreas-source-14",
+      "order": 14,
+      "title": "3. Laboratory & Stool Analysis",
+      "text": "3. Laboratory & Stool Analysis\nThese methods are commonly used for initial screening and routine monitoring.\n• Fecal Elastase-1: This is the most sensitive and specific indirect test. Unlike other\nenzymes, elastase-1 is not degraded during intestinal transit, making it an accurate\nmarker of pancreatic output.\n• Coprogram (Stool Microscopy): A visual and chemical analysis of the stool. Signs of\nmaldigestion include:\no Steatorrhea: Presence of neutral fats.\no Creatorrhea: High content of undigested muscle fibers, indicating a failure to\ndigest protein.\no Amylorrhea: Presence of undigested starch/fiber.\nSTANDARD OF NONINVASIVE DIAGNOSIS OF CHRONIC PANCREATITIS\nDegrees of severity of external secretory of Activity of fecal pancreatic elastase -1\npancreatic insufficiency\nmild 150-200 mg / g\nmoderate 100 - 150 mg / g\nsevere less than 100 mg / g\nTHE DIFFERENTIAL DIAGNOSIS\n1. Chronic cholecystitis ;\n2. Bile gallstones disease ;\n3. Chronic gastroduodenitis ;\n4. Ulcer disease ;\n5. Chronic hepatitis ;\n6. Pancreas cancer ;\n7. Left-sided renal colic ;\n8. Angina pectoris .\nTREATMENT\n• Antisecretory drugs (H2 blocking):\no Famotidine 20mg 2 Times A day\no Omeprazole 20mg\no Lansoprazole 30 Mg\no Pantoprazole 40 Mg",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Laboratory & Stool Analysis"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "These methods are commonly used for initial screening and routine monitoring."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Fecal Elastase-1: This is the most sensitive and specific indirect test. Unlike other"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "enzymes, elastase-1 is not degraded during intestinal transit, making it an accurate"
+        },
+        {
+          "type": "paragraph",
+          "text": "marker of pancreatic output."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Coprogram (Stool Microscopy): A visual and chemical analysis of the stool. Signs of"
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "maldigestion include"
+        },
+        {
+          "type": "paragraph",
+          "text": "o Steatorrhea: Presence of neutral fats."
+        },
+        {
+          "type": "paragraph",
+          "text": "o Creatorrhea: High content of undigested muscle fibers, indicating a failure to"
+        },
+        {
+          "type": "paragraph",
+          "text": "digest protein."
+        },
+        {
+          "type": "paragraph",
+          "text": "o Amylorrhea: Presence of undigested starch/fiber."
+        },
+        {
+          "type": "heading",
+          "text": "STANDARD OF NONINVASIVE DIAGNOSIS OF CHRONIC PANCREATITIS"
+        },
+        {
+          "type": "paragraph",
+          "text": "Degrees of severity of external secretory of Activity of fecal pancreatic elastase -1"
+        },
+        {
+          "type": "paragraph",
+          "text": "pancreatic insufficiency"
+        },
+        {
+          "type": "paragraph",
+          "text": "mild 150-200 mg / g"
+        },
+        {
+          "type": "paragraph",
+          "text": "moderate 100 - 150 mg / g"
+        },
+        {
+          "type": "paragraph",
+          "text": "severe less than 100 mg / g"
+        },
+        {
+          "type": "heading",
+          "text": "THE DIFFERENTIAL DIAGNOSIS"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Chronic cholecystitis ;",
+            "Bile gallstones disease ;",
+            "Chronic gastroduodenitis ;",
+            "Ulcer disease ;",
+            "Chronic hepatitis ;",
+            "Pancreas cancer ;",
+            "Left-sided renal colic ;",
+            "Angina pectoris ."
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "TREATMENT"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Antisecretory drugs (H2 blocking):"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "o Famotidine 20mg 2 Times A day"
+        },
+        {
+          "type": "paragraph",
+          "text": "o Omeprazole 20mg"
+        },
+        {
+          "type": "paragraph",
+          "text": "o Lansoprazole 30 Mg"
+        },
+        {
+          "type": "paragraph",
+          "text": "o Pantoprazole 40 Mg"
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "pancreas-source-14",
+        "sourceOrder": 14,
+        "originalLabel": "Lecture page 14",
+        "originalSourceHash": "1fc5f1bc04925a73e98d6b01cac3ddd74d78a689e75013bb9a7d31b0fd6f71d4"
+      },
+      "sourceHash": "c819bc1b6b2b564371402e5852870d352ac09c720e6758d27997a1132acc647e"
+    },
+    {
+      "id": "med401-git-pancreas-source-15",
+      "order": 15,
+      "title": "• Somatostatin (sandostatyn) ;central action drugs (dalargin 0,001 mg intravenous or",
+      "text": "• Somatostatin (sandostatyn) ;central action drugs (dalargin 0,001 mg intravenous or\nintramus. 2 times a day)\n• Therapy of secretory enzyme deficiency (penkreatin, Creon, pangrol, mezym)\n• Elimination of duodenal statis, dyskinetic disorders of biliferous and pancreatic ducts\no Domperidone (Motilium) 10mg - 3 Times A Day)\nULTRASOUND INVESTIGATION - CHRONIC PANCREATITIS\n1. Calcifications in the head of pancreas;\n2. Wirsung's duct;\n3. Pseudocyst of pancreas;\n4. Increase of the head of pancreas;\n5. Spleen vein\nULTRASOUND INVESTIGATION. CHRONIC CALCIFIED PANCREATITIS\nА) WIRSUNGOLITHIASIS\nБ) DILATED Wirsung's duct",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Somatostatin (sandostatyn) ;central action drugs (dalargin 0,001 mg intravenous or"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "intramus. 2 times a day)"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Therapy of secretory enzyme deficiency (penkreatin, Creon, pangrol, mezym)",
+            "Elimination of duodenal statis, dyskinetic disorders of biliferous and pancreatic ducts"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "o Domperidone (Motilium) 10mg - 3 Times A Day)"
+        },
+        {
+          "type": "heading",
+          "text": "ULTRASOUND INVESTIGATION - CHRONIC PANCREATITIS"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Calcifications in the head of pancreas;",
+            "Wirsung's duct;",
+            "Pseudocyst of pancreas;",
+            "Increase of the head of pancreas;",
+            "Spleen vein"
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "ULTRASOUND INVESTIGATION. CHRONIC CALCIFIED PANCREATITIS"
+        },
+        {
+          "type": "heading",
+          "text": "А) WIRSUNGOLITHIASIS"
+        },
+        {
+          "type": "paragraph",
+          "text": "Б) DILATED Wirsung's duct"
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "pancreas-source-15",
+        "sourceOrder": 15,
+        "originalLabel": "Lecture page 15",
+        "originalSourceHash": "7a72abf1844b816405ca192b61732934beab159c5ed9cd94f43a4f7d8c727ff8"
+      },
+      "sourceHash": "91f749e4cdae623ea4a321a414c59892442317b9fcae140fb3861ec288160ac2"
+    },
+    {
+      "id": "med401-git-pancreas-source-16",
+      "order": 16,
+      "title": "PANCREATITIS, CHRONIC - CT SCAN",
+      "text": "PANCREATITIS, CHRONIC - CT SCAN\nPlain X-ray of abdomen showing calcific pancreatitis\nCT SCAN WITH CENTRAL PSEUDOCYST\nEndoscopic ultrasound overcomes some of the visualization problems and is probably more\nsensitive and specific. CT has a sensitivity of up to 90% and specificity of the same order. It will\ndetect variation in ductal diameter, and ectatic side branches, changes in the parenchyma,\ncalcification and complications of chronic pancreatitis such as pseudocyst formation",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "PANCREATITIS, CHRONIC - CT SCAN"
+        },
+        {
+          "type": "paragraph",
+          "text": "Plain X-ray of abdomen showing calcific pancreatitis"
+        },
+        {
+          "type": "heading",
+          "text": "CT SCAN WITH CENTRAL PSEUDOCYST"
+        },
+        {
+          "type": "paragraph",
+          "text": "Endoscopic ultrasound overcomes some of the visualization problems and is probably more"
+        },
+        {
+          "type": "paragraph",
+          "text": "sensitive and specific. CT has a sensitivity of up to 90% and specificity of the same order. It will"
+        },
+        {
+          "type": "paragraph",
+          "text": "detect variation in ductal diameter, and ectatic side branches, changes in the parenchyma,"
+        },
+        {
+          "type": "paragraph",
+          "text": "calcification and complications of chronic pancreatitis such as pseudocyst formation"
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "pancreas-source-16",
+        "sourceOrder": 16,
+        "originalLabel": "Lecture page 16",
+        "originalSourceHash": "94b0afe3adeaff3523d639f3f709b5f7746fc33fc1b60b0ac7a653cdf09d351a"
+      },
+      "sourceHash": "679aec1e349f47fecb3dce7291e1877c65e806754784c3ae3d1ee09566330a7f"
+    },
+    {
+      "id": "med401-git-pancreas-source-17",
+      "order": 17,
+      "title": "AN ENDOSCOPIC ULTRASOUND IMAGE DEMONSTRATING A DILATED PANCREATIC DUCT",
+      "text": "AN ENDOSCOPIC ULTRASOUND IMAGE DEMONSTRATING A DILATED PANCREATIC DUCT\n(MARKERS) IN A PATIENT WITH ADVANCED CHRONIC PANCREATITIS\nAn endoscopic ultrasound, which allows a highly detailed examination of\nthe pancreatic parenchyma and pancreatic duct, routinely detects\nabnormalities in patients with chronic pancreatitis (high sensitivity), but\nthe specificity and reproducibility of the test requires further study\nINSTRUMENTAL DIAGNOSTICS\n✓ Endoscopic retrograde cholangiopancreatography (ERCP): reveals impaired patency of\nthe main and secondary ducts. “Chain of lakes\" is a classic symptom of chronic\npancreatitis (areas of constriction and expansion of Wirsung's ducts). It is also possible\nthe segmental or total obstruction of a ductal system of pancreas.\n✓ Biopsy of pancreas.\nAN ENDOSCOPIC RETROGRADE\nCHOLANGIOPANCREATOGRAPHY IMAGE\nDEMONSTRATING MINIMAL PANCREATIC DUCT\nABNORMALITIES IN A PATIENT WITH PAINFUL SMALL-\nDUCT CHRONIC PANCREATITIS.\nAN ENDOSCOPIC RETROGRADE\nCHOLANGIOPANCREATOGRAPHY IMAGE\nDEMONSTRATING MASSIVE PANCREATIC DUCT\nDILATATION IN A PATIENT WITH BIGDUCT CHRONIC\nPANCREATITIS.",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "AN ENDOSCOPIC ULTRASOUND IMAGE DEMONSTRATING A DILATED PANCREATIC DUCT"
+        },
+        {
+          "type": "heading",
+          "text": "(MARKERS) IN A PATIENT WITH ADVANCED CHRONIC PANCREATITIS"
+        },
+        {
+          "type": "paragraph",
+          "text": "An endoscopic ultrasound, which allows a highly detailed examination of"
+        },
+        {
+          "type": "paragraph",
+          "text": "the pancreatic parenchyma and pancreatic duct, routinely detects"
+        },
+        {
+          "type": "paragraph",
+          "text": "abnormalities in patients with chronic pancreatitis (high sensitivity), but"
+        },
+        {
+          "type": "paragraph",
+          "text": "the specificity and reproducibility of the test requires further study"
+        },
+        {
+          "type": "heading",
+          "text": "INSTRUMENTAL DIAGNOSTICS"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Endoscopic retrograde cholangiopancreatography (ERCP): reveals impaired patency of"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "the main and secondary ducts. “Chain of lakes\" is a classic symptom of chronic"
+        },
+        {
+          "type": "paragraph",
+          "text": "pancreatitis (areas of constriction and expansion of Wirsung's ducts). It is also possible"
+        },
+        {
+          "type": "paragraph",
+          "text": "the segmental or total obstruction of a ductal system of pancreas."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Biopsy of pancreas."
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "AN ENDOSCOPIC RETROGRADE"
+        },
+        {
+          "type": "heading",
+          "text": "CHOLANGIOPANCREATOGRAPHY IMAGE"
+        },
+        {
+          "type": "heading",
+          "text": "DEMONSTRATING MINIMAL PANCREATIC DUCT"
+        },
+        {
+          "type": "heading",
+          "text": "ABNORMALITIES IN A PATIENT WITH PAINFUL SMALL-"
+        },
+        {
+          "type": "heading",
+          "text": "DUCT CHRONIC PANCREATITIS."
+        },
+        {
+          "type": "heading",
+          "text": "AN ENDOSCOPIC RETROGRADE"
+        },
+        {
+          "type": "heading",
+          "text": "CHOLANGIOPANCREATOGRAPHY IMAGE"
+        },
+        {
+          "type": "heading",
+          "text": "DEMONSTRATING MASSIVE PANCREATIC DUCT"
+        },
+        {
+          "type": "heading",
+          "text": "DILATATION IN A PATIENT WITH BIGDUCT CHRONIC"
+        },
+        {
+          "type": "heading",
+          "text": "PANCREATITIS."
+        }
+      ],
+      "provenance": {
+        "sourceElementId": "pancreas-source-17",
+        "sourceOrder": 17,
+        "originalLabel": "Lecture page 17",
+        "originalSourceHash": "a7d13e0f5dd968eb001dcdfe8846bd2ab94466f46195ebda741fe8d46b2054cf"
+      },
+      "sourceHash": "057b1a466eaff15e89201bc18e0565e3351e99c66567ca602931dc2c5f96b964"
+    }
+  ],
+  "sourceVersion": "must401-git-2026-07-27",
+  "status": "published"
+}

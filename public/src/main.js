@@ -1,6 +1,14 @@
 import confetti from 'canvas-confetti'
 
 import { calculatePercent, calculateQuizProgress } from './progress.js'
+import {
+  initKnowledgeLibrary,
+  getManifest,
+  searchSources,
+  resolveCitation,
+  resolvePassage,
+  renderSourceReaderMarkup
+} from './knowledgeLibrary.js'
 
 import {
   completeProfileSetup,
@@ -3856,8 +3864,232 @@ function renderMcqSearchResults() {
   `
 }
 
+function renderSourceSearchResults() {
+  if (!mcqSearchResults) return
+
+  const query = trackerSearch?.value.trim() || ''
+  const isSourcesMode = trackerSearchMode === 'sources'
+  mcqSearchResults.hidden = !isSourcesMode
+
+  if (!isSourcesMode) {
+    renderedSourceSearchResults = []
+    return
+  }
+
+  if (!query) {
+    renderedSourceSearchResults = []
+    const manifest = getManifest()
+    const topicsList = (manifest && manifest.topics) ? manifest.topics : []
+
+    let topicsBrowseHtml = ''
+    if (topicsList.length > 0) {
+      topicsBrowseHtml = `
+        <div class="mcq-search-results__top">
+          <strong>Medical Sources (${topicsList.length} topics)</strong>
+          <span>Select a topic to browse.</span>
+        </div>
+        <div class="mcq-search-results__list">
+          ${topicsList.map((t) => `
+            <button class="mcq-search-result source-search-result" type="button" data-source-topic-id="${escapeHtml(t.id)}">
+              <span class="mcq-search-result__topic">Gastroenterology</span>
+              <strong>${escapeHtml(t.title)}</strong>
+              <small>${t.sectionCount} sections · ${t.passageCount} source passages</small>
+            </button>
+          `).join('')}
+        </div>
+      `
+    } else {
+      topicsBrowseHtml = `
+        <div class="sources-search-results__empty">
+          <p>Search topics, section titles, keywords, and lecture passages.</p>
+          <button type="button" class="sources-browse-all-btn" data-open-sources-browser>Browse all sources</button>
+        </div>
+      `
+    }
+    mcqSearchResults.innerHTML = topicsBrowseHtml
+    return
+  }
+
+  renderedSourceSearchResults = searchSources(query)
+  if (!renderedSourceSearchResults.length) {
+    mcqSearchResults.innerHTML = '<p class="mcq-search-results__empty">No medical sources match this search.</p>'
+    return
+  }
+
+  mcqSearchResults.innerHTML = `
+    <div class="mcq-search-results__top">
+      <strong>${renderedSourceSearchResults.length} Source match${renderedSourceSearchResults.length === 1 ? '' : 'es'}</strong>
+      <span>Click to open in source reader.</span>
+    </div>
+    <div class="mcq-search-results__list">
+      ${renderedSourceSearchResults.map((result) => `
+        <button class="mcq-search-result source-search-result" type="button" data-source-topic-id="${escapeHtml(result.topicId)}" data-source-section-id="${escapeHtml(result.sectionId || '')}" data-source-passage-id="${escapeHtml(result.passageId || '')}">
+          <span class="mcq-search-result__topic">${escapeHtml(result.breadcrumb)}</span>
+          <strong>${escapeHtml(result.title)}</strong>
+          ${result.snippet ? `<small class="sources-search-snippet">${result.snippet}</small>` : ''}
+        </button>
+      `).join('')}
+    </div>
+  `
+}
+
+let renderedSourceSearchResults = []
+let activeSourceReaderState = null
+let lastSourceReaderOpener = null
+let previousModalDisplayState = null
+
+async function openSourceReader({ topicId, sectionId, passageId, openerElement = null } = {}) {
+  const readerWasOpen = Boolean(activeSourceReaderState)
+  if (openerElement) {
+    lastSourceReaderOpener = openerElement
+  } else if (document.activeElement && document.activeElement !== document.body) {
+    lastSourceReaderOpener = document.activeElement
+  }
+
+  const resolved = await resolvePassage(topicId, sectionId, passageId)
+  if (!resolved) return
+
+  const modal = ensureQuizModal()
+  const panel = modal.querySelector('.quiz-modal__panel')
+  if (!panel) return
+  const modalWasOpen = modal.getAttribute('aria-hidden') !== 'true'
+
+  let readerContainer = panel.querySelector('.source-reader-container')
+  if (!readerContainer) {
+    readerContainer = document.createElement('div')
+    readerContainer.className = 'source-reader-container'
+    readerContainer.id = 'source-reader-container'
+    const bodyEl = panel.querySelector('.quiz-modal__body')
+    if (bodyEl) {
+      bodyEl.insertAdjacentElement('afterend', readerContainer)
+    } else {
+      panel.appendChild(readerContainer)
+    }
+  }
+
+  const hasActiveQuiz = Boolean(
+    getCurrentQuiz().length > 0
+    && (modalWasOpen || openerElement?.closest('.quiz-question-card'))
+  )
+  const isDesktop = window.innerWidth > 900
+
+  activeSourceReaderState = {
+    topicId,
+    sectionId: resolved.section ? resolved.section.id : sectionId,
+    passageId,
+    resolved,
+    hasActiveQuiz,
+    quizPanelScrollTop: panel.scrollTop
+  }
+
+  const quizBody = panel.querySelector('.quiz-modal__body')
+  const quizActions = panel.querySelector('.quiz-modal__actions')
+  const quizHeading = panel.querySelector('.quiz-modal__heading')
+  const shouldHideQuizShell = !hasActiveQuiz || !isDesktop
+
+  if (shouldHideQuizShell && !readerWasOpen) {
+    previousModalDisplayState = {
+      bodyHidden: quizBody ? quizBody.hidden : false,
+      actionsHidden: quizActions ? quizActions.hidden : false,
+      headingHidden: quizHeading ? quizHeading.hidden : false
+    }
+    if (quizBody) quizBody.hidden = true
+    if (quizActions) quizActions.hidden = true
+    if (quizHeading) quizHeading.hidden = true
+  } else if (!shouldHideQuizShell) {
+    previousModalDisplayState = null
+  }
+
+  if (hasActiveQuiz && isDesktop) {
+    panel.classList.add('quiz-modal__panel--split-view')
+  }
+
+  let htmlMarkup = '<div class="source-reader__controls">'
+  if (isDesktop && hasActiveQuiz) {
+    htmlMarkup += `<button type="button" class="source-reader__close-btn" data-close-source-reader aria-label="Close source reader">✕ Close source</button>`
+  } else {
+    htmlMarkup += `<button type="button" class="source-reader__back-btn" data-close-source-reader>← Back to ${hasActiveQuiz ? 'question' : 'search'}</button>`
+  }
+  htmlMarkup += '</div>'
+  htmlMarkup += renderSourceReaderMarkup(resolved, passageId)
+
+  readerContainer.innerHTML = htmlMarkup
+  readerContainer.hidden = false
+
+  modal.setAttribute('aria-hidden', 'false')
+  document.body.classList.add('panel-open')
+
+  if (passageId) {
+    setTimeout(() => {
+      const passEl = readerContainer.querySelector(`#p-${passageId}`)
+      if (passEl) {
+        readerContainer.scrollTo({
+          top: Math.max(passEl.offsetTop - readerContainer.offsetTop - 24, 0),
+          behavior: prefersReducedMotion ? 'auto' : 'smooth'
+        })
+        passEl.classList.add('source-reader__passage--highlight')
+      }
+    }, 50)
+  }
+}
+
+function closeSourceReader() {
+  const modal = document.getElementById('quiz-modal')
+  if (!modal) return
+
+  const panel = modal.querySelector('.quiz-modal__panel')
+  const readerState = activeSourceReaderState
+  if (panel) {
+    panel.classList.remove('quiz-modal__panel--split-view')
+
+    const quizBody = panel.querySelector('.quiz-modal__body')
+    const quizActions = panel.querySelector('.quiz-modal__actions')
+    const quizHeading = panel.querySelector('.quiz-modal__heading')
+
+    if (previousModalDisplayState) {
+      if (quizBody) quizBody.hidden = previousModalDisplayState.bodyHidden
+      if (quizActions) quizActions.hidden = previousModalDisplayState.actionsHidden
+      if (quizHeading) quizHeading.hidden = previousModalDisplayState.headingHidden
+      previousModalDisplayState = null
+    }
+  }
+
+  const readerContainer = modal.querySelector('.source-reader-container')
+  if (readerContainer) {
+    readerContainer.hidden = true
+    readerContainer.innerHTML = ''
+  }
+
+  const hasActiveQuiz = Boolean(readerState?.hasActiveQuiz)
+
+  if (!hasActiveQuiz) {
+    modal.setAttribute('aria-hidden', 'true')
+    document.body.classList.remove('panel-open')
+  }
+
+  activeSourceReaderState = null
+
+  if (panel && hasActiveQuiz && Number.isFinite(readerState?.quizPanelScrollTop)) {
+    requestAnimationFrame(() => {
+      panel.scrollTop = readerState.quizPanelScrollTop
+    })
+  }
+
+  if (lastSourceReaderOpener && typeof lastSourceReaderOpener.focus === 'function') {
+    lastSourceReaderOpener.focus()
+    lastSourceReaderOpener = null
+  }
+}
+
 function setTrackerSearchMode(mode = 'topics') {
-  trackerSearchMode = mode === 'mcqs' ? 'mcqs' : 'topics'
+  if (mode === 'mcqs') {
+    trackerSearchMode = 'mcqs'
+  } else if (mode === 'sources') {
+    trackerSearchMode = 'sources'
+  } else {
+    trackerSearchMode = 'topics'
+  }
+
   trackerSearchModeButtons.forEach((button) => {
     const isActive = button.dataset.searchMode === trackerSearchMode
     button.classList.toggle('filter-panel__mode-btn--active', isActive)
@@ -3865,12 +4097,20 @@ function setTrackerSearchMode(mode = 'topics') {
   })
 
   if (trackerSearch) {
-    trackerSearch.placeholder = trackerSearchMode === 'mcqs'
-      ? 'Search MCQ questions...'
-      : activeAcademicSectionData.trackerSearchPlaceholder
+    if (trackerSearchMode === 'mcqs') {
+      trackerSearch.placeholder = 'Search MCQ questions...'
+    } else if (trackerSearchMode === 'sources') {
+      trackerSearch.placeholder = 'Search medical sources, topics, sections...'
+    } else {
+      trackerSearch.placeholder = activeAcademicSectionData.trackerSearchPlaceholder
+    }
   }
 
-  renderMcqSearchResults()
+  if (trackerSearchMode === 'sources') {
+    renderSourceSearchResults()
+  } else {
+    renderMcqSearchResults()
+  }
 }
 
 function openMcqSearchResult(index, event = null) {
@@ -5413,6 +5653,14 @@ function renderQuizMeta() {
   }
 }
 
+function getStudentFacingQuizSection(question) {
+  const label = question.organ || question.category || question.section || ''
+  return String(label)
+    .split(/\s+[·|]\s+/)[0]
+    .replace(/\s*[-–—]\s*(?:p(?:age)?\.?\s*)?\d+.*$/i, '')
+    .trim()
+}
+
 function renderQuizQuestion() {
   const modal = ensureQuizModal()
   const body = modal.querySelector('#quiz-body')
@@ -5442,6 +5690,17 @@ function renderQuizQuestion() {
     const missed = missedIds.has(question.id)
     const isAnswered = selectedOptionId !== undefined
     const shouldReveal = quizState.completed || isAnswered
+    const citation = resolveCitation(question.id)
+    const citedPassageId = citation?.passageIds?.[0] || ''
+    const sourceAction = citation?.verified ? `
+      <div class="quiz-question__source-row">
+        <button type="button" class="quiz-action--source-link"
+          data-open-source="${escapeHtml(question.id)}"
+          data-topic-id="${escapeHtml(citation.topicId)}"
+          data-section-id="${escapeHtml(citation.sectionId || '')}"
+          data-passage-id="${escapeHtml(citedPassageId)}">Open Source</button>
+      </div>
+    ` : ''
 
     const choices = optionOrder.map((optionId, optionIndex) => {
       const option = getOptionById(question, optionId)
@@ -5465,20 +5724,49 @@ function renderQuizQuestion() {
     }).join('')
 
     const correctOption = getOptionById(question, question.correctOptionId)
+    const studentFacingSection = getStudentFacingQuizSection(question)
 
     return `
       <article class="quiz-card quiz-question-card${missed ? ' quiz-question-card--missed' : ''}" data-quiz-card="${escapeHtml(question.id)}">
-        ${question.section ? `<p class="quiz-question__section">${escapeHtml(question.section)}</p>` : ''}
+        ${studentFacingSection ? `<p class="quiz-question__section">${escapeHtml(studentFacingSection)}</p>` : ''}
         <p class="quiz-question"><strong>Q${questionIndex + 1}.</strong> ${escapeHtml(question.question)}</p>
+        ${sourceAction}
         ${missed ? '<p class="quiz-missed-note">Answer this question before submitting.</p>' : ''}
         <div class="quiz-choices">${choices}</div>
-        ${shouldReveal ? `
-          <div class="quiz-explanation">
-            <strong>${selectedOptionId === question.correctOptionId ? 'Correct.' : 'Correct answer: ' + escapeHtml(correctOption?.text || '')}</strong>
-            <p>${escapeHtml(question.explanation)}</p>
-            ${question.source ? `<p class="quiz-explanation__source">${escapeHtml(question.source)}</p>` : ''}
-          </div>
-        ` : ''}
+        ${shouldReveal ? (() => {
+          if (citation && citation.verified) {
+            const isCorrect = selectedOptionId === question.correctOptionId
+            const correctText = citation.explanation?.correct?.text || question.explanation
+            const wrongText = (!isCorrect && citation.explanation?.incorrect?.[selectedOptionId]?.text) ? citation.explanation.incorrect[selectedOptionId].text : null
+            const sourceBreadcrumb = [citation.subjectTitle, citation.topicTitle, citation.sectionTitle].filter(Boolean).join(' › ')
+
+            return `
+              <div class="quiz-feedback-block">
+                <div class="quiz-feedback-block__status ${isCorrect ? 'quiz-feedback-block__status--correct' : 'quiz-feedback-block__status--wrong'}">
+                  ${isCorrect ? '✓ Correct' : '✕ Incorrect'}
+                </div>
+                <div class="quiz-feedback-block__rationale">
+                  <strong>Why the correct answer is right:</strong>
+                  <p>${escapeHtml(correctText)}</p>
+                  ${wrongText ? `
+                    <strong>Why your answer is wrong:</strong>
+                    <p>${escapeHtml(wrongText)}</p>
+                  ` : ''}
+                </div>
+                <div class="quiz-feedback-block__footer">
+                  <span class="quiz-feedback-block__breadcrumb">${escapeHtml(sourceBreadcrumb)}</span>
+                </div>
+              </div>
+            `
+          }
+          return `
+            <div class="quiz-explanation">
+              <strong>${selectedOptionId === question.correctOptionId ? 'Correct.' : 'Correct answer: ' + escapeHtml(correctOption?.text || '')}</strong>
+              <p>${escapeHtml(question.explanation)}</p>
+              ${question.source ? `<p class="quiz-explanation__source">${escapeHtml(question.source)}</p>` : ''}
+            </div>
+          `
+        })() : ''}
       </article>
     `
   }).join('')
@@ -6032,6 +6320,9 @@ function openQuiz(topicLabel, sourceId = 'current', event = null, launchOptions 
 
 function closeQuiz() {
   const modal = ensureQuizModal()
+  if (activeSourceReaderState) {
+    closeSourceReader()
+  }
   if (quizState.topicLabel && !quizState.completed && !quizState.showResumePrompt && !quizState.transient) {
     pauseQuizCountupTimer()
     saveQuizState()
@@ -8040,6 +8331,54 @@ if (isStandaloneProfilePage) {
 }
 
 document.addEventListener('click', (event) => {
+  const openSourceBtn = event.target.closest('[data-open-source]')
+  if (openSourceBtn) {
+    event.preventDefault()
+    openSourceReader({
+      topicId: openSourceBtn.dataset.topicId,
+      sectionId: openSourceBtn.dataset.sectionId,
+      passageId: openSourceBtn.dataset.passageId,
+      openerElement: openSourceBtn
+    })
+    return
+  }
+
+  if (event.target.closest('[data-close-source-reader]')) {
+    event.preventDefault()
+    closeSourceReader()
+    return
+  }
+
+  const sourceResultBtn = event.target.closest('.source-search-result')
+  if (sourceResultBtn) {
+    event.preventDefault()
+    openSourceReader({
+      topicId: sourceResultBtn.dataset.sourceTopicId,
+      sectionId: sourceResultBtn.dataset.sourceSectionId,
+      passageId: sourceResultBtn.dataset.sourcePassageId,
+      openerElement: sourceResultBtn
+    })
+    return
+  }
+
+  const openSourcesBrowseBtn = event.target.closest('[data-open-sources-browser]')
+  if (openSourcesBrowseBtn) {
+    event.preventDefault()
+    openSourceReader({ topicId: 'med401-git-acute-hepatitis', openerElement: openSourcesBrowseBtn })
+    return
+  }
+
+  const sourceTab = event.target.closest('.source-reader__tab')
+  if (sourceTab) {
+    event.preventDefault()
+    openSourceReader({
+      topicId: sourceTab.dataset.topicId,
+      sectionId: sourceTab.dataset.sectionId,
+      openerElement: sourceTab
+    })
+    return
+  }
+
   if (event.target.closest('[data-auth-login]')) {
     event.preventDefault()
     studentProgressState.lastError = ''
@@ -9188,3 +9527,16 @@ function initBottomSectionNav() {
 
 initFullHistoryTool()
 initBottomSectionNav()
+initKnowledgeLibrary().then(() => {
+  if (trackerSearchMode === 'sources') {
+    renderSourceSearchResults()
+  }
+})
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && activeSourceReaderState) {
+    event.preventDefault()
+    event.stopPropagation()
+    closeSourceReader()
+  }
+})
