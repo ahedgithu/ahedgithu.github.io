@@ -19,15 +19,16 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&display=swap" rel="stylesheet" />
   <meta name="theme-color" content="#315f72" />
-  <link rel="stylesheet" href="/src/style.css?v=20260726-profile-single-nickname-v2" />
+  <link rel="stylesheet" href="/src/style.css?v=20260728-today-cockpit-v1" />
 
 </head>
 <body data-auth-state="checking">
+  <a class="skip-link" href="#tracker-main-content">Skip to Study Tracker</a>
   <section class="auth-gate" id="auth-gate" aria-live="polite" aria-busy="true">
     <div class="auth-gate__layout">
       <div class="auth-gate__card">
       <div class="auth-gate__brand">
-        <img src="/assets/must-university-logo.png" alt="Misr University for Science and Technology" width="1280" height="1280" />
+        <img src="/assets/must-university-logo.png" alt="Misr University for Science and Technology" width="1280" height="1280" fetchpriority="high" />
       </div>
 
       <div class="auth-gate__panel" data-auth-panel="checking">
@@ -69,22 +70,22 @@
 
       <section class="home-review-marquee auth-gate__reviews" aria-label="Student WhatsApp reviews">
         <div class="home-review-marquee__track">
-          <img src="/assets/reviews/review1.jpg" class="home-review-screenshot" alt="Student WhatsApp review screenshot" />
-          <img src="/assets/reviews/review2.jpg" class="home-review-screenshot" alt="Student WhatsApp review screenshot" />
-          <img src="/assets/reviews/review3.jpg" class="home-review-screenshot" alt="Student WhatsApp review screenshot" />
-          <img src="/assets/reviews/review4.jpg" class="home-review-screenshot" alt="Student WhatsApp review screenshot" />
-          <img src="/assets/reviews/review5.jpg" class="home-review-screenshot home-review-screenshot--fit" alt="Student WhatsApp review screenshot" />
-          <img src="/assets/reviews/review6.png" class="home-review-screenshot" alt="Student WhatsApp review screenshot" />
-          <img src="/assets/reviews/review7.png" class="home-review-screenshot" alt="Student WhatsApp review screenshot" />
-          <img src="/assets/reviews/review8.png" class="home-review-screenshot" alt="Student WhatsApp review screenshot" />
-          <img src="/assets/reviews/review1.jpg" class="home-review-screenshot" alt="" aria-hidden="true" />
-          <img src="/assets/reviews/review2.jpg" class="home-review-screenshot" alt="" aria-hidden="true" />
-          <img src="/assets/reviews/review3.jpg" class="home-review-screenshot" alt="" aria-hidden="true" />
-          <img src="/assets/reviews/review4.jpg" class="home-review-screenshot" alt="" aria-hidden="true" />
-          <img src="/assets/reviews/review5.jpg" class="home-review-screenshot home-review-screenshot--fit" alt="" aria-hidden="true" />
-          <img src="/assets/reviews/review6.png" class="home-review-screenshot" alt="" aria-hidden="true" />
-          <img src="/assets/reviews/review7.png" class="home-review-screenshot" alt="" aria-hidden="true" />
-          <img src="/assets/reviews/review8.png" class="home-review-screenshot" alt="" aria-hidden="true" />
+          <img src="/assets/reviews/review1.jpg" class="home-review-screenshot" alt="Student WhatsApp review screenshot" width="1024" height="855" loading="lazy" decoding="async" />
+          <img src="/assets/reviews/review2.jpg" class="home-review-screenshot" alt="Student WhatsApp review screenshot" width="851" height="456" loading="lazy" decoding="async" />
+          <img src="/assets/reviews/review3.jpg" class="home-review-screenshot" alt="Student WhatsApp review screenshot" width="1024" height="309" loading="lazy" decoding="async" />
+          <img src="/assets/reviews/review4.jpg" class="home-review-screenshot" alt="Student WhatsApp review screenshot" width="1024" height="607" loading="lazy" decoding="async" />
+          <img src="/assets/reviews/review5.jpg" class="home-review-screenshot home-review-screenshot--fit" alt="Student WhatsApp review screenshot" width="1024" height="237" loading="lazy" decoding="async" />
+          <img src="/assets/reviews/review6.png" class="home-review-screenshot" alt="Student WhatsApp review screenshot" width="1024" height="837" loading="lazy" decoding="async" />
+          <img src="/assets/reviews/review7.png" class="home-review-screenshot" alt="Student WhatsApp review screenshot" width="1024" height="346" loading="lazy" decoding="async" />
+          <img src="/assets/reviews/review8.png" class="home-review-screenshot" alt="Student WhatsApp review screenshot" width="1024" height="339" loading="lazy" decoding="async" />
+          <img src="/assets/reviews/review1.jpg" class="home-review-screenshot" alt="" aria-hidden="true" width="1024" height="855" loading="lazy" decoding="async" />
+          <img src="/assets/reviews/review2.jpg" class="home-review-screenshot" alt="" aria-hidden="true" width="851" height="456" loading="lazy" decoding="async" />
+          <img src="/assets/reviews/review3.jpg" class="home-review-screenshot" alt="" aria-hidden="true" width="1024" height="309" loading="lazy" decoding="async" />
+          <img src="/assets/reviews/review4.jpg" class="home-review-screenshot" alt="" aria-hidden="true" width="1024" height="607" loading="lazy" decoding="async" />
+          <img src="/assets/reviews/review5.jpg" class="home-review-screenshot home-review-screenshot--fit" alt="" aria-hidden="true" width="1024" height="237" loading="lazy" decoding="async" />
+          <img src="/assets/reviews/review6.png" class="home-review-screenshot" alt="" aria-hidden="true" width="1024" height="837" loading="lazy" decoding="async" />
+          <img src="/assets/reviews/review7.png" class="home-review-screenshot" alt="" aria-hidden="true" width="1024" height="346" loading="lazy" decoding="async" />
+          <img src="/assets/reviews/review8.png" class="home-review-screenshot" alt="" aria-hidden="true" width="1024" height="339" loading="lazy" decoding="async" />
         </div>
       </section>
     </div>
@@ -130,7 +131,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="tracker-main-content" tabindex="-1">
     <section class="section-selector" id="section-selector" aria-labelledby="section-selector-title">
       <div class="section-selector__header">
         <p class="eyebrow">Clinical Hub</p>
@@ -187,6 +188,69 @@
       </div>
       <h1 class="sr-only" id="tracker-title">401</h1>
 
+      <section class="today-cockpit" id="today-cockpit" aria-labelledby="today-cockpit-title">
+        <header class="today-cockpit__header">
+          <div>
+            <p class="today-cockpit__eyebrow">Today's Clinical Round</p>
+            <h2 id="today-cockpit-title">Your Next Study Move</h2>
+          </div>
+          <div class="today-cockpit__status">
+            <time id="today-cockpit-date"></time>
+            <span id="today-cockpit-freshness" role="status" aria-live="polite">Checking study data…</span>
+          </div>
+        </header>
+
+        <button class="today-primary-action" id="today-primary-action" type="button" data-today-action="quiz">
+          <span class="today-primary-action__marker" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M8 5v14l11-7Z"></path>
+            </svg>
+          </span>
+          <span class="today-primary-action__body">
+            <small id="today-primary-kicker">Recommended Next Step</small>
+            <strong id="today-primary-title">Find Your Next Practice Session</strong>
+            <span id="today-primary-copy">Your saved progress will choose the most useful action.</span>
+            <span class="today-primary-action__progress" aria-hidden="true">
+              <span id="today-primary-progress-fill"></span>
+            </span>
+          </span>
+          <span class="today-primary-action__cta" id="today-primary-cta">Start Practice</span>
+        </button>
+
+        <div class="today-cockpit__support" aria-label="Today's study context">
+          <a class="today-context-card today-context-card--exam" href="#schedule">
+            <span class="today-context-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M7 3v3M17 3v3M4 9h16M5 5h14a1 1 0 0 1 1 1v14H4V6a1 1 0 0 1 1-1Z"></path></svg>
+            </span>
+            <span>
+              <small>Next Checkpoint</small>
+              <strong id="today-exam-title">Checking Schedule</strong>
+              <span id="today-exam-copy">Finding the next listed exam.</span>
+            </span>
+          </a>
+          <a class="today-context-card today-context-card--coverage" href="/profile.html">
+            <span class="today-context-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M5 19V9M12 19V5M19 19v-7"></path></svg>
+            </span>
+            <span>
+              <small>Section Coverage</small>
+              <strong id="today-coverage-title">0% Complete</strong>
+              <span id="today-coverage-copy">0 of 0 tracked topics completed.</span>
+            </span>
+          </a>
+          <a class="today-context-card today-context-card--update" href="#news" data-today-news-link>
+            <span class="today-context-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M5 5h14v14H5zM8 9h8M8 13h6"></path></svg>
+            </span>
+            <span>
+              <small id="today-update-kicker">Class Board</small>
+              <strong id="today-update-title">Review Class Updates</strong>
+              <span id="today-update-copy">Open the board for announcements and deadlines.</span>
+            </span>
+          </a>
+        </div>
+      </section>
+
       <div class="semester-timeline" aria-label="Semester exam timeline">
         <div class="global-progress" id="global-progress" aria-label="Section progress">
           <div class="global-progress__metrics">
@@ -208,7 +272,7 @@
               <time datetime="2026-07-08">8/7</time>
               <span class="exam-card__meta">10 MARKS</span>
               <button class="exam-card__quiz-action" type="button" data-quiz-topic="NUT Quiz">
-                <img class="exam-card__quiz-icon" src="/assets/past-exams-vip-icon.png" alt="" />
+                <img class="exam-card__quiz-icon" src="/assets/past-exams-vip-icon.png" alt="" width="256" height="256" decoding="async" />
                 <span>PAST EXAMS</span>
               </button>
             </div>
@@ -274,6 +338,7 @@
           <button class="filter-panel__mode-btn" type="button" data-search-mode="mcqs" aria-pressed="false">MCQs</button>
         </div>
         <div class="filter-panel__search">
+          <label class="sr-only" for="tracker-search">Search tracker topics or MCQs</label>
           <svg class="filter-panel__search-icon" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
           <input id="tracker-search" type="search" placeholder="Search topics or subjects…" autocomplete="off" />
         </div>
@@ -343,7 +408,7 @@
           aria-label="Contact Mohamed Kellawi on WhatsApp"
         >
           <span class="class-rep__avatar" aria-hidden="true">
-            <img src="/assets/mohamed-kellawi-avatar.jpg" alt="" />
+            <img src="/assets/mohamed-kellawi-avatar.jpg" alt="" width="420" height="420" loading="lazy" decoding="async" />
           </span>
           <strong>Mohamed Kellawi</strong>
           <small>Anaesthesia, Nutrition, Lab</small>
@@ -585,7 +650,7 @@
         <div class="leaderboard__your-rank" id="leaderboard-your-rank" hidden>
           <div class="leaderboard__your-rank-inner">
             <span class="leaderboard__your-rank-pos" id="leaderboard-your-rank-pos"></span>
-            <img class="leaderboard__your-rank-avatar" id="leaderboard-your-rank-avatar" alt="" hidden>
+            <img class="leaderboard__your-rank-avatar" id="leaderboard-your-rank-avatar" alt="" width="420" height="420" loading="lazy" decoding="async" hidden>
             <span class="leaderboard__your-rank-initials" id="leaderboard-your-rank-initials" hidden></span>
             <div class="leaderboard__your-rank-info">
               <strong id="leaderboard-your-rank-name"></strong>
@@ -615,7 +680,7 @@
             </div>
           </header>
 
-          <main class="layout">
+          <div class="layout">
             <aside class="sidebar" aria-label="History navigation">
               <p class="small-title">Clinical system</p>
               <div class="system-grid" id="systemGrid"></div>
@@ -883,7 +948,7 @@
               <div class="missing-list" id="missingBox"></div>
               <p class="footer-note">Tip: in Presentation Mode, the right panel focuses on the clean case presentation.</p>
             </aside>
-          </main>
+          </div>
         </div>
       <div class="toast" id="toast">Copied.</div>
     </section>
@@ -911,63 +976,63 @@
           <div class="skills-grid">
 
             <div class="skill-card">
-              <div class="skill-icon icon-blender"><img src="/assets/tools/blender-gen.jpg" alt="Blender" /></div>
+              <div class="skill-icon icon-blender"><img src="/assets/tools/blender-gen.jpg" alt="Blender" width="1024" height="1024" loading="lazy" decoding="async" /></div>
               <span class="skill-name">Blender</span>
               <span class="skill-pct">60%</span>
               <div class="skill-bar-wrap"><div class="skill-bar-fill" style="width:60%"></div></div>
             </div>
 
             <div class="skill-card">
-              <div class="skill-icon icon-ps"><img src="/assets/tools/photoshop-gen.jpg" alt="Photoshop" /></div>
+              <div class="skill-icon icon-ps"><img src="/assets/tools/photoshop-gen.jpg" alt="Photoshop" width="1024" height="1024" loading="lazy" decoding="async" /></div>
               <span class="skill-name">Photoshop</span>
               <span class="skill-pct">60%</span>
               <div class="skill-bar-wrap"><div class="skill-bar-fill" style="width:60%"></div></div>
             </div>
 
             <div class="skill-card">
-              <div class="skill-icon icon-au"><img src="/assets/tools/audition-gen.jpg" alt="Audition" /></div>
+              <div class="skill-icon icon-au"><img src="/assets/tools/audition-gen.jpg" alt="Audition" width="1024" height="1024" loading="lazy" decoding="async" /></div>
               <span class="skill-name">Audition</span>
               <span class="skill-pct">40%</span>
               <div class="skill-bar-wrap"><div class="skill-bar-fill" style="width:40%"></div></div>
             </div>
 
             <div class="skill-card">
-              <div class="skill-icon icon-pr"><img src="/assets/tools/premiere-gen.jpg" alt="Premiere Pro" /></div>
+              <div class="skill-icon icon-pr"><img src="/assets/tools/premiere-gen.jpg" alt="Premiere Pro" width="1024" height="1024" loading="lazy" decoding="async" /></div>
               <span class="skill-name">Premiere Pro</span>
               <span class="skill-pct">90%</span>
               <div class="skill-bar-wrap"><div class="skill-bar-fill" style="width:90%"></div></div>
             </div>
 
             <div class="skill-card">
-              <div class="skill-icon icon-ai"><img src="/assets/tools/illustrator-gen.jpg" alt="Illustrator" /></div>
+              <div class="skill-icon icon-ai"><img src="/assets/tools/illustrator-gen.jpg" alt="Illustrator" width="1024" height="1024" loading="lazy" decoding="async" /></div>
               <span class="skill-name">Illustrator</span>
               <span class="skill-pct">40%</span>
               <div class="skill-bar-wrap"><div class="skill-bar-fill" style="width:40%"></div></div>
             </div>
 
             <div class="skill-card">
-              <div class="skill-icon icon-ae"><img src="/assets/tools/after-effects-gen.jpg" alt="After Effects" /></div>
+              <div class="skill-icon icon-ae"><img src="/assets/tools/after-effects-gen.jpg" alt="After Effects" width="1024" height="1024" loading="lazy" decoding="async" /></div>
               <span class="skill-name">After Effects</span>
               <span class="skill-pct">95%</span>
               <div class="skill-bar-wrap"><div class="skill-bar-fill" style="width:95%"></div></div>
             </div>
 
             <div class="skill-card">
-              <div class="skill-icon icon-notion"><img src="/assets/tools/notion-gen.jpg" alt="Notion" /></div>
+              <div class="skill-icon icon-notion"><img src="/assets/tools/notion-gen.jpg" alt="Notion" width="1024" height="1024" loading="lazy" decoding="async" /></div>
               <span class="skill-name">Notion</span>
               <span class="skill-pct">90%</span>
               <div class="skill-bar-wrap"><div class="skill-bar-fill" style="width:90%"></div></div>
             </div>
 
             <div class="skill-card">
-              <div class="skill-icon icon-obsidian"><img src="/assets/tools/obsidian-gen.jpg" alt="Obsidian" /></div>
+              <div class="skill-icon icon-obsidian"><img src="/assets/tools/obsidian-gen.jpg" alt="Obsidian" width="1024" height="1024" loading="lazy" decoding="async" /></div>
               <span class="skill-name">Obsidian</span>
               <span class="skill-pct">90%</span>
               <div class="skill-bar-wrap"><div class="skill-bar-fill" style="width:90%"></div></div>
             </div>
 
             <div class="skill-card">
-              <div class="skill-icon icon-word"><img src="/assets/tools/word-gen.jpg" alt="Microsoft Word" /></div>
+              <div class="skill-icon icon-word"><img src="/assets/tools/word-gen.jpg" alt="Microsoft Word" width="1024" height="1024" loading="lazy" decoding="async" /></div>
               <span class="skill-name">Microsoft Word</span>
               <span class="skill-pct">83%</span>
               <div class="skill-bar-wrap"><div class="skill-bar-fill" style="width:83%"></div></div>
@@ -1194,7 +1259,7 @@
       }
     }
   </script>
-  <script type="module" src="/src/main.js?v=20260726-profile-single-nickname-v2"></script>
+  <script type="module" src="/src/main.js?v=20260728-today-cockpit-v1"></script>
 
   <script defer src="/pwa.js?v=20260712-pwa-cleanup-v1"></script>
 </body>
