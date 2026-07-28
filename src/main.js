@@ -1019,10 +1019,14 @@ const studentSyncStatus = document.getElementById('student-sync-status')
 const studentSyncEmail = document.getElementById('student-sync-email')
 const authGate = document.getElementById('auth-gate')
 const authGateStatus = document.getElementById('auth-gate-status')
+const authGateContext = document.querySelector('[data-auth-gate-context]')
+const authGateDelay = document.querySelector('[data-auth-gate-delay]')
+const authLoadingSteps = [...document.querySelectorAll('.auth-gate__rail-step[data-auth-loading-step]')]
 const authSectionTitle = document.getElementById('auth-section-title')
 const authSectionCopy = document.getElementById('auth-section-copy')
 const authSectionCancel = document.querySelector('[data-auth-section-cancel]')
 const isStandaloneProfilePage = document.body.classList.contains('profile-page') || window.location.pathname.endsWith('/profile.html')
+let authGateDelayTimer = 0
 let profileNicknameEditOpened = false
 let profileNicknameEditorOpen = false
 const trackerAdminToolbar = document.getElementById('tracker-admin-toolbar')
@@ -7779,9 +7783,43 @@ function renderNewsFilters() {
   }
 }
 
+function setAuthLoadingStep(step = 'account', section = '') {
+  const safeStep = ['account', 'section', 'progress'].includes(step) ? step : 'account'
+  if (authGate) authGate.dataset.authLoadingStep = safeStep
+  authLoadingSteps.forEach((item) => {
+    if (item.dataset.authLoadingStep === safeStep) {
+      item.setAttribute('aria-current', 'step')
+    } else {
+      item.removeAttribute('aria-current')
+    }
+  })
+  if (authGateContext) {
+    const showSection = isSavedAcademicSection(section)
+    authGateContext.textContent = showSection ? `MED ${section}` : ''
+    authGateContext.hidden = !showSection
+  }
+}
+
 function setAuthGateState(state, message = '') {
+  const wasChecking = document.body.dataset.authState === 'checking'
   document.body.dataset.authState = state
   if (authGate) authGate.setAttribute('aria-busy', String(state === 'checking'))
+  if (state === 'checking') {
+    if (authGateDelay && (!wasChecking || !authGateDelayTimer)) {
+      window.clearTimeout(authGateDelayTimer)
+      authGateDelay.hidden = true
+      authGateDelayTimer = window.setTimeout(() => {
+        if (document.body.dataset.authState === 'checking') {
+          authGateDelay.hidden = false
+        }
+        authGateDelayTimer = 0
+      }, 2500)
+    }
+  } else {
+    window.clearTimeout(authGateDelayTimer)
+    authGateDelayTimer = 0
+    if (authGateDelay) authGateDelay.hidden = true
+  }
   if (authGateStatus) {
     authGateStatus.textContent = message
     authGateStatus.hidden = !message
@@ -7887,6 +7925,7 @@ async function handleStudentAuthUser(user) {
     return
   }
 
+  setAuthLoadingStep('section')
   setAuthGateState('checking')
   claimAndMigrateLocalProgress(user.id)
 
@@ -7905,6 +7944,7 @@ async function handleStudentAuthUser(user) {
     }
 
     studentProgressState.selectedSection = selectedSection
+    setAuthLoadingStep('progress', selectedSection)
     routeAuthenticatedUser(selectedSection)
   } catch (error) {
     if (requestId !== studentProgressState.authRequestId) return
@@ -7929,7 +7969,10 @@ async function saveSelectedSection(section, options = {}) {
 
   const sectionButtons = [...document.querySelectorAll('[data-auth-section]')]
   sectionButtons.forEach((button) => { button.disabled = true })
-  if (options.showGate !== false) setAuthGateState('checking')
+  if (options.showGate !== false) {
+    setAuthLoadingStep('section', section)
+    setAuthGateState('checking')
+  }
 
   try {
     const preference = await upsertUserPreference({
@@ -8000,6 +8043,8 @@ function initStudentSync() {
     return
   }
 
+  setAuthLoadingStep('account')
+  setAuthGateState('checking')
   getCurrentUser()
     .then(handleStudentAuthUser)
     .catch((error) => {
@@ -8043,6 +8088,7 @@ document.addEventListener('click', (event) => {
   if (event.target.closest('[data-auth-login]')) {
     event.preventDefault()
     studentProgressState.lastError = ''
+    setAuthLoadingStep('account')
     setAuthGateState('checking')
     signInWithGoogle({ redirectTo: window.location.href }).catch((error) => {
       studentProgressState.lastError = error.message
@@ -8073,6 +8119,7 @@ document.addEventListener('click', (event) => {
 
   if (event.target.closest('[data-student-sync-logout]')) {
     event.preventDefault()
+    setAuthLoadingStep('account')
     setAuthGateState('checking')
     signOutUser().catch((error) => {
       studentProgressState.lastError = error.message
