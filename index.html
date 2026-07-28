@@ -19,23 +19,58 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&display=swap" rel="stylesheet" />
   <meta name="theme-color" content="#315f72" />
-  <link rel="stylesheet" href="/src/style.css?v=20260728-today-cockpit-v1" />
+  <link rel="stylesheet" href="/src/style.css?v=20260728-combined-local-v1" />
 
 </head>
 <body data-auth-state="checking">
   <a class="skip-link" href="#tracker-main-content">Skip to Study Tracker</a>
-  <section class="auth-gate" id="auth-gate" aria-live="polite" aria-busy="true">
+  <section class="auth-gate" id="auth-gate" data-auth-loading-step="account" aria-live="polite" aria-busy="true">
     <div class="auth-gate__layout">
       <div class="auth-gate__card">
-      <div class="auth-gate__brand">
-        <img src="/assets/must-university-logo.png" alt="Misr University for Science and Technology" width="1280" height="1280" fetchpriority="high" />
+      <div class="auth-gate__brandbar">
+        <div class="auth-gate__identity">
+          <div class="auth-gate__brand">
+            <img src="/assets/must-university-logo.png" alt="Misr University for Science and Technology" width="1280" height="1280" fetchpriority="high" />
+          </div>
+          <div class="auth-gate__wordmark" aria-label="MUST Hub">
+            <span>Clinical learning</span>
+            <strong>MUST HUB</strong>
+          </div>
+        </div>
+        <span class="auth-gate__context" data-auth-gate-context hidden></span>
       </div>
 
       <div class="auth-gate__panel" data-auth-panel="checking">
-        <span class="auth-gate__spinner" aria-hidden="true"></span>
-        <p class="eyebrow">MUST Hub</p>
-        <h1>Checking your account</h1>
-        <p>Restoring your secure Google session...</p>
+        <p class="eyebrow">Secure account sync</p>
+        <h1>Getting your study space ready</h1>
+        <p class="auth-gate__loading-copy">Restoring your section and latest progress…</p>
+
+        <div class="auth-gate__rail" aria-label="Loading account, section, and progress">
+          <div class="auth-gate__rail-track" aria-hidden="true">
+            <span class="auth-gate__rail-fill"></span>
+            <span class="auth-gate__rail-scan"></span>
+          </div>
+          <div class="auth-gate__rail-steps">
+            <span class="auth-gate__rail-step" data-auth-loading-step="account">
+              <span class="auth-gate__rail-node" aria-hidden="true"></span>
+              <span>Account</span>
+            </span>
+            <span class="auth-gate__rail-step" data-auth-loading-step="section">
+              <span class="auth-gate__rail-node" aria-hidden="true"></span>
+              <span>Section</span>
+            </span>
+            <span class="auth-gate__rail-step" data-auth-loading-step="progress">
+              <span class="auth-gate__rail-node" aria-hidden="true"></span>
+              <span>Progress</span>
+            </span>
+          </div>
+        </div>
+
+        <p class="auth-gate__trust">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 5.5 6v5.2c0 4.2 2.5 7.7 6.5 9.3 4-1.6 6.5-5.1 6.5-9.3V6L12 3Z"/><path d="m9.2 12 1.8 1.8 3.9-4"/></svg>
+          <span>Your progress stays linked to your Google account.</span>
+        </p>
+        <p class="auth-gate__delay" data-auth-gate-delay hidden>Still loading—your progress is safe.</p>
       </div>
 
       <div class="auth-gate__panel" data-auth-panel="signed-out">
@@ -1260,7 +1295,7 @@
       }
     }
   </script>
-  <script type="module" src="/src/main.js?v=20260728-today-cockpit-v1"></script>
+  <script type="module" src="/src/main.js?v=20260728-combined-local-v1"></script>
 
   <script defer src="/pwa.js?v=20260712-pwa-cleanup-v1"></script>
 </body>

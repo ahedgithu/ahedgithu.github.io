@@ -123,7 +123,7 @@ test('all canonical sections and passages are clean text-only student content', 
     path.join(ROOT_DIR, 'content', 'medical', 'med401-git', 'assets'),
     path.join(ROOT_DIR, 'public', 'data', 'medical', 'assets')
   ]) {
-    assert.deepEqual(readdirSync(assetDir), []);
+    assert.deepEqual(existsSync(assetDir) ? readdirSync(assetDir) : [], []);
   }
 });
 

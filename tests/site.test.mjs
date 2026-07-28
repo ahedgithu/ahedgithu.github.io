@@ -66,8 +66,8 @@ test('tracker search splits topics and MCQs with focused question launch', () =>
   assert.match(html, /data-search-mode="topics"[^>]*aria-pressed="true"/)
   assert.match(html, /data-search-mode="mcqs"[^>]*aria-pressed="false"/)
   assert.match(html, /id="mcq-search-results"[^>]*aria-live="polite"[^>]*hidden/)
-  assert.match(html, /style\.css\?v=20260728-today-cockpit-v1/)
-  assert.match(html, /main\.js\?v=20260728-today-cockpit-v1/)
+  assert.match(html, /style\.css\?v=20260728-combined-local-v1/)
+  assert.match(html, /main\.js\?v=20260728-combined-local-v1/)
 
   for (const helper of [
     'normalizeMcqSearchText',
@@ -96,6 +96,24 @@ test('tracker search splits topics and MCQs with focused question launch', () =>
   assert.match(style, /\.filter-panel__mode-btn--active\s*\{/)
   assert.match(style, /\.mcq-search-results\[hidden\]\s*\{[^}]*display:\s*none\s*!important;/s)
   assert.match(style, /\.mcq-search-result\s*\{/)
+})
+
+test('account loading gate uses the staged Clinical Sync experience', () => {
+  const html = read('index.html')
+  const mainSource = read('src/main.js')
+  const style = read('src/style.css')
+
+  assert.match(html, /Getting your study space ready/)
+  assert.match(html, /Restoring your section and latest progress…/)
+  assert.match(html, /data-auth-loading-step="account"/)
+  assert.match(html, /data-auth-loading-step="section"/)
+  assert.match(html, /data-auth-loading-step="progress"/)
+  assert.match(html, /Still loading—your progress is safe\./)
+  assert.match(mainSource, /function setAuthLoadingStep\s*\(/)
+  assert.match(mainSource, /setAuthLoadingStep\('progress', selectedSection\)/)
+  assert.match(mainSource, /}, 2500\)/)
+  assert.match(style, /\.auth-gate__rail-scan/)
+  assert.doesNotMatch(html, /auth-gate__spinner/)
 })
 
 test('SUR 401-1 Kellawi MCQ bank is complete and wired', () => {
@@ -860,8 +878,8 @@ test('Google login is mandatory and the academic section is account-bound', () =
   assert.match(mainSource, /\$\{QUIZ_STORAGE_PREFIX\}::\$\{getProgressStorageOwnerId\(\)\}::\$\{section\}/)
   assert.match(mainSource, /\$\{TOPIC_COMPLETION_STORAGE_PREFIX\}::\$\{getProgressStorageOwnerId\(\)\}::\$\{section\}/)
   assert.match(schedule, /window\.location\.replace\('\/#schedule'\)/)
-  assert.match(html, /style\.css\?v=20260728-today-cockpit-v1/)
-  assert.match(html, /main\.js\?v=20260728-today-cockpit-v1/)
+  assert.match(html, /style\.css\?v=20260728-combined-local-v1/)
+  assert.match(html, /main\.js\?v=20260728-combined-local-v1/)
 })
 
 test('student profile opens as a standalone gamified page', () => {
@@ -906,8 +924,8 @@ test('student profile opens as a standalone gamified page', () => {
   assert.equal((profileHtml.match(/type="submit">Save profile/g) || []).length, 1)
   assert.match(html, /data-profile-open/)
   assert.match(html, /data-profile-edit-nickname/)
-  assert.match(profileHtml, /style\.css\?v=20260728-today-cockpit-v1/)
-  assert.match(profileHtml, /main\.js\?v=20260728-today-cockpit-v1/)
+  assert.match(profileHtml, /style\.css\?v=20260728-combined-local-v1/)
+  assert.match(profileHtml, /main\.js\?v=20260728-combined-local-v1/)
   assert.ok(readBytes('public/assets/profile-avatars-faceless-v3.webp').length > 50_000)
   assert.match(viteConfig, /profile:\s*resolve\(__dirname,\s*'profile\.html'\)/)
 
@@ -1148,8 +1166,8 @@ test('section selector is centered and the wide review remains fully visible', (
   assert.match(style, /\.home-review-screenshot\s*\{[\s\S]*?aspect-ratio:\s*1\.9\s*\/\s*1;[\s\S]*?object-fit:\s*cover;/s)
   assert.match(style, /\.home-review-screenshot--fit\s*\{[^}]*object-fit:\s*contain;[^}]*object-position:\s*left center;/s)
   assert.equal((html.match(/review5\.jpg" class="home-review-screenshot home-review-screenshot--fit"/g) || []).length, 2)
-  assert.match(html, /style\.css\?v=20260728-today-cockpit-v1/)
-  assert.match(html, /main\.js\?v=20260728-today-cockpit-v1/)
+  assert.match(html, /style\.css\?v=20260728-combined-local-v1/)
+  assert.match(html, /main\.js\?v=20260728-combined-local-v1/)
   assert.match(style, /body\[data-site-mode="selector"\] > main > \.site-footer/)
 
   for (const file of ['review1.jpg', 'review2.jpg', 'review3.jpg', 'review4.jpg', 'review5.jpg', 'review6.png', 'review7.png', 'review8.png']) {
