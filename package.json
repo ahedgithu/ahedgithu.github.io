@@ -19,6 +19,7 @@
     "build:med2-cardio-chest": "node scripts/build-med2-cardio-chest-mcqs.mjs",
     "build:med1-kellawi": "node scripts/build-med1-kellawi-mcqs.mjs",
     "build:med1-mw-ragab": "node scripts/build-med1-mw-ragab-mcqs.mjs",
+    "build:med1-hepatology-final-review": "node scripts/build-med1-hepatology-final-review-mcqs.mjs",
     "extract:medical-library": "node scripts/extract-med401-git-source.mjs",
     "build:medical-library": "node scripts/build-medical-library.mjs",
     "validate:medical-library": "node scripts/validate-medical-library.mjs",

@@ -30,6 +30,7 @@ test('application modules are valid and mirrored', () => {
     'src/med2-cardio-chest-mcqs.js',
     'src/med1-kellawi-mcqs.js',
     'src/med1-mw-ragab-mcqs.js',
+    'src/med1-hepatology-final-review-mcqs.js',
     'src/progress.js',
     'src/supabaseClient.js'
   ]
@@ -38,7 +39,7 @@ test('application modules are valid and mirrored', () => {
     execFileSync(process.execPath, ['--check', file], { cwd: new URL('..', import.meta.url) })
   }
 
-  const mirroredFiles = ['main.js', 'admin.js', 'analytics.js', 'knowledgeLibrary.js', 'mcqs.js', 'sur1-kellawi-mcqs.js', 'sur1-past-exam-mcqs.js', 'sur1-matching-questions.js', 'sur402-past-exam-mcqs.js', 'sur402-textbook-mcqs.js', 'sur402-amr-beshry-mcqs.js', 'med402-endocrine-mcqs.js', 'med402-neurology-mcqs.js', 'med402-neuro-extra-mcqs.js', 'med402-old-psychiatry-mcqs.js', 'med402-zatoona-psychiatry-mcqs.js', 'med2-cardio-chest-mcqs.js', 'med1-kellawi-mcqs.js', 'med1-mw-ragab-mcqs.js', 'progress.js', 'style.css', 'supabaseClient.js']
+  const mirroredFiles = ['main.js', 'admin.js', 'analytics.js', 'knowledgeLibrary.js', 'mcqs.js', 'sur1-kellawi-mcqs.js', 'sur1-past-exam-mcqs.js', 'sur1-matching-questions.js', 'sur402-past-exam-mcqs.js', 'sur402-textbook-mcqs.js', 'sur402-amr-beshry-mcqs.js', 'med402-endocrine-mcqs.js', 'med402-neurology-mcqs.js', 'med402-neuro-extra-mcqs.js', 'med402-old-psychiatry-mcqs.js', 'med402-zatoona-psychiatry-mcqs.js', 'med2-cardio-chest-mcqs.js', 'med1-kellawi-mcqs.js', 'med1-mw-ragab-mcqs.js', 'med1-hepatology-final-review-mcqs.js', 'progress.js', 'style.css', 'supabaseClient.js']
   for (const file of mirroredFiles) {
     assert.equal(read(`src/${file}`), read(`public/src/${file}`), `${file} mirror is out of sync`)
   }
@@ -636,6 +637,32 @@ test('MED 401-1 Mw ragab comperhensive bank is source-faithful, grouped, and wir
 
   const html = read('index.html')
   assert.match(html, /med1-mw-ragab-mcqs\.js\?v=20260728-med1-mw-ragab-v2/)
+})
+
+test('MED 401-1 hepatology final review is source-faithful and added without replacing existing sources', () => {
+  const context = { window: { mcqQuizzes: {} } }
+  vm.runInNewContext(read('src/med1-kellawi-mcqs.js'), context)
+  vm.runInNewContext(read('src/med1-mw-ragab-mcqs.js'), context)
+  vm.runInNewContext(read('src/med1-hepatology-final-review-mcqs.js'), context)
+
+  const quiz = context.window.mcqQuizzes['MED 401-1 MCQs']
+  assert.equal(quiz.sources.length, 3)
+
+  const source = quiz.sources.find((item) => item.id === 'med1-hepatology-final-review')
+  assert.ok(source, 'hepatology final review source is missing')
+  assert.equal(source.label, 'Hepatology & Liver Diseases - Final Review')
+  assert.equal(source.sourceFile, 'Hepatology_Liver_Diseases_Final_Review.json')
+  assert.equal(source.mcqs.length, 54)
+  assert.equal(new Set(source.mcqs.map((question) => question.id)).size, 54)
+  assert.ok(source.mcqs.every((question) => question.choices.length === 4))
+  assert.ok(source.mcqs.every((question) => Number.isInteger(question.answerIndex) && question.choices[question.answerIndex]))
+  assert.ok(source.mcqs.every((question) => question.question && question.source && question.explanation))
+
+  const indexHtml = read('index.html')
+  const profileHtml = read('profile.html')
+  assert.match(indexHtml, /med1-hepatology-final-review-mcqs\.js\?v=20260728-hepatology-final-review-v1/)
+  assert.match(profileHtml, /med1-hepatology-final-review-mcqs\.js\?v=20260728-hepatology-final-review-v1/)
+  assert.match(profileHtml, /med1-mw-ragab-mcqs\.js\?v=20260728-med1-mw-ragab-v2/)
 })
 
 test('SUR 401-1 past-exam bank is answer-safe, grouped, and wired', () => {
