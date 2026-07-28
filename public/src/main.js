@@ -1051,9 +1051,11 @@ const authSectionTitle = document.getElementById('auth-section-title')
 const authSectionCopy = document.getElementById('auth-section-copy')
 const authSectionCancel = document.querySelector('[data-auth-section-cancel]')
 const isStandaloneProfilePage = document.body.classList.contains('profile-page') || window.location.pathname.endsWith('/profile.html')
+const profileAvatarDialog = document.getElementById('profile-avatar-dialog')
 let authGateDelayTimer = 0
 let profileNicknameEditOpened = false
 let profileNicknameEditorOpen = false
+let profileAvatarDialogOpener = null
 const trackerAdminToolbar = document.getElementById('tracker-admin-toolbar')
 const trackerAdminEmail = document.getElementById('tracker-admin-email')
 const trackerAdminSubject = document.getElementById('tracker-admin-subject')
@@ -2289,6 +2291,7 @@ function showProfileOnboardingStep(stepIndex) {
   if (!profileOnboardingTourState.active) return
   const root = ensureProfileOnboardingTour()
   const step = PROFILE_ONBOARDING_STEPS[stepIndex]
+  if (stepIndex === 1) openProfileAvatarDialog()
   const target = step ? document.querySelector(step.target) : null
   if (!step || !target) return
 
@@ -2353,7 +2356,11 @@ function selectProfileAvatar(rawAvatarId) {
   renderProfileAvatarPicker()
   const help = document.getElementById('profile-avatar-help')
   if (help) help.textContent = `${avatar.label} selected. Save your profile to confirm it.`
-  if (profileOnboardingTourState.active && profileOnboardingTourState.stepIndex === 1) {
+  const advanceOnboarding = profileOnboardingTourState.active && profileOnboardingTourState.stepIndex === 1
+  if (profileAvatarDialog?.open) {
+    closeProfileAvatarDialog({ restoreFocus: !advanceOnboarding })
+  }
+  if (advanceOnboarding) {
     showProfileOnboardingStep(2)
   }
   return true
@@ -2445,6 +2452,27 @@ function openProfileNicknameEditor() {
     input.focus()
     input.select()
   }
+}
+
+function openProfileAvatarDialog() {
+  if (!profileAvatarDialog || profileAvatarDialog.open) return
+  profileAvatarDialogOpener = document.activeElement instanceof HTMLElement ? document.activeElement : null
+  profileAvatarDialog.showModal()
+  document.body.classList.add('profile-avatar-dialog-open')
+  window.requestAnimationFrame(() => {
+    const selected = profileAvatarDialog.querySelector('.profile-avatar-option.is-selected')
+    const first = profileAvatarDialog.querySelector('[data-profile-avatar]')
+    ;(selected || first)?.focus({ preventScroll: true })
+  })
+}
+
+function closeProfileAvatarDialog(options = {}) {
+  if (!profileAvatarDialog?.open) return
+  const restoreFocus = options.restoreFocus !== false
+  profileAvatarDialog.close()
+  document.body.classList.remove('profile-avatar-dialog-open')
+  if (restoreFocus) profileAvatarDialogOpener?.focus({ preventScroll: true })
+  profileAvatarDialogOpener = null
 }
 
 function isLeaderboardActive() {
@@ -8801,6 +8829,18 @@ document.addEventListener('click', (event) => {
     return
   }
 
+  if (event.target.closest('[data-profile-avatar-open]')) {
+    event.preventDefault()
+    openProfileAvatarDialog()
+    return
+  }
+
+  if (event.target.closest('[data-profile-avatar-close]') || event.target === profileAvatarDialog) {
+    event.preventDefault()
+    closeProfileAvatarDialog()
+    return
+  }
+
   const todayActionButton = event.target.closest('[data-today-action]')
   if (todayActionButton) {
     event.preventDefault()
@@ -8977,6 +9017,10 @@ document.getElementById('profile-nickname-input')?.addEventListener('input', () 
   if (profileOnboardingTourState.active && profileOnboardingTourState.stepIndex === 0) {
     updateProfileOnboardingAction()
   }
+})
+
+profileAvatarDialog?.addEventListener('close', () => {
+  document.body.classList.remove('profile-avatar-dialog-open')
 })
 
 trackerAdminEditPanel?.addEventListener('change', (event) => {

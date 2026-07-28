@@ -17,20 +17,61 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&display=swap" rel="stylesheet" />
   <meta name="theme-color" content="#315f72" />
-  <link rel="stylesheet" href="/src/style.css?v=20260728-combined-local-v1" />
+  <link rel="stylesheet" href="/src/style.css?v=20260728-profile-avatar-dialog-v3" />
 </head>
 <body class="profile-page" data-auth-state="checking" data-site-mode="profile">
   <a class="skip-link" href="#profile-main-content">Skip to Profile</a>
-  <div class="auth-gate" id="auth-gate" aria-live="polite">
-    <div class="auth-gate__card">
-      <img class="auth-gate__logo" src="/assets/must-university-logo.png" alt="MUST University logo" width="1280" height="1280" fetchpriority="high">
-      <p class="eyebrow">Student profile</p>
-      <h1>Sign in to view your profile</h1>
-      <p>Your score, trophies, nickname, and progress are connected to your Google account.</p>
-      <button class="auth-gate__google" type="button" data-auth-login>Continue with Google</button>
-      <p class="auth-gate__status" id="auth-gate-status" hidden></p>
+  <section class="auth-gate profile-auth-gate" id="auth-gate" data-auth-loading-step="account" aria-live="polite" aria-busy="true">
+    <div class="auth-gate__card profile-auth-card">
+      <div class="profile-auth-visual" aria-hidden="true">
+        <span class="profile-auth-visual__orbit profile-auth-visual__orbit--outer"></span>
+        <span class="profile-auth-visual__orbit profile-auth-visual__orbit--inner"></span>
+        <span class="profile-auth-visual__pulse-line">
+          <svg viewBox="0 0 180 56" focusable="false">
+            <path d="M2 30h42l9-16 13 31 14-24 10 9h88"></path>
+          </svg>
+        </span>
+        <span class="profile-auth-visual__seal">
+          <img src="/assets/must-university-logo.png" alt="" width="1280" height="1280" fetchpriority="high">
+        </span>
+      </div>
+
+      <div class="auth-gate__panel profile-auth-panel" data-auth-panel="checking">
+        <p class="eyebrow">Student profile</p>
+        <h1>Preparing your profile</h1>
+        <p class="profile-auth-panel__copy">Restoring your account, section, and latest progress.</p>
+        <div class="profile-auth-steps" aria-label="Loading account, section, and progress">
+          <span data-auth-loading-step="account">Account</span>
+          <span data-auth-loading-step="section">Section</span>
+          <span data-auth-loading-step="progress">Progress</span>
+        </div>
+        <p class="auth-gate__delay" data-auth-gate-delay hidden>Your progress is safe. This is taking a little longer than usual.</p>
+      </div>
+
+      <div class="auth-gate__panel profile-auth-panel" data-auth-panel="signed-out">
+        <p class="eyebrow">Student profile</p>
+        <h1>Sign in to view your profile</h1>
+        <p class="profile-auth-panel__copy">Your score, trophies, nickname, and progress stay connected to your Google account.</p>
+        <button class="auth-gate__google" type="button" data-auth-login>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285f4" d="M21.6 12.2c0-.7-.1-1.4-.2-2H12v3.9h5.4a4.6 4.6 0 0 1-2 3v2.5h3.2c1.9-1.8 3-4.3 3-7.4Z"/><path fill="#34a853" d="M12 22c2.7 0 5-.9 6.6-2.4l-3.2-2.5c-.9.6-2 1-3.4 1a5.8 5.8 0 0 1-5.5-4H3.2v2.6A10 10 0 0 0 12 22Z"/><path fill="#fbbc05" d="M6.5 14.1a6 6 0 0 1 0-4.2V7.3H3.2a10 10 0 0 0 0 9.4l3.3-2.6Z"/><path fill="#ea4335" d="M12 5.9c1.6 0 3 .5 4.1 1.6l3.1-3A10 10 0 0 0 3.2 7.3l3.3 2.6a5.8 5.8 0 0 1 5.5-4Z"/></svg>
+          <span>Continue with Google</span>
+        </button>
+      </div>
+
+      <div class="auth-gate__panel profile-auth-panel" data-auth-panel="needs-section">
+        <p class="eyebrow">One last step</p>
+        <h1 id="auth-section-title">Choose your section</h1>
+        <p class="profile-auth-panel__copy" id="auth-section-copy">We will save this choice to your account and open it automatically next time.</p>
+        <div class="auth-gate__sections" aria-labelledby="auth-section-title">
+          <button type="button" data-auth-section="401"><strong>401</strong><span>Clinical semester 401</span></button>
+          <button type="button" data-auth-section="402"><strong>402</strong><span>Clinical semester 402</span></button>
+        </div>
+        <button class="auth-gate__cancel" type="button" data-auth-section-cancel hidden>Cancel</button>
+      </div>
+
+      <p class="auth-gate__status" id="auth-gate-status" role="alert" hidden></p>
     </div>
-  </div>
+  </section>
 
   <header class="site-header profile-page__header">
     <a class="brand" href="/#tracker" aria-label="Back to Tracker">
@@ -44,7 +85,7 @@
   </header>
 
   <main class="profile-page__main" id="profile-main-content" tabindex="-1">
-    <section class="profile-section hub-section" id="profile" aria-labelledby="profile-title">
+    <section class="profile-section hub-section" id="profile" aria-label="Your profile">
       <div class="profile-page-hero">
         <div>
           <p class="eyebrow">Profile</p>
@@ -70,17 +111,42 @@
               </svg>
             </button>
           </div>
+          <button class="profile-nickname-form__change-avatar" type="button" data-profile-avatar-open aria-haspopup="dialog" aria-controls="profile-avatar-dialog">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="8" r="3.25"></circle>
+              <path d="M5.5 19c.8-4 3-6 6.5-6s5.7 2 6.5 6"></path>
+              <path d="M18.5 4.5v4M16.5 6.5h4"></path>
+            </svg>
+            <span>Change avatar</span>
+          </button>
           <div class="profile-nickname-form__editor" id="profile-nickname-editor" hidden>
             <label for="profile-nickname-input">Nickname</label>
             <input id="profile-nickname-input" name="nickname" minlength="2" maxlength="24" autocomplete="nickname" placeholder="Choose a unique nickname" required>
             <p id="profile-nickname-help">2-24 characters. Nicknames are unique; emails and links are not allowed.</p>
           </div>
-          <fieldset class="profile-avatar-picker">
-            <legend>Avatar</legend>
-            <div class="profile-avatar-options" id="profile-avatar-options" aria-label="Available profile avatars"></div>
-            <p id="profile-avatar-help" aria-live="polite"></p>
-          </fieldset>
-          <button class="profile-nickname-form__save" type="submit">Save profile</button>
+          <dialog class="profile-avatar-dialog" id="profile-avatar-dialog" aria-labelledby="profile-avatar-dialog-title" aria-describedby="profile-avatar-dialog-copy">
+            <div class="profile-avatar-dialog__surface">
+              <header class="profile-avatar-dialog__header">
+                <div>
+                  <p class="eyebrow">Profile identity</p>
+                  <h2 id="profile-avatar-dialog-title">Choose your avatar</h2>
+                  <p id="profile-avatar-dialog-copy">Pick the portrait that feels most like you.</p>
+                </div>
+                <button class="profile-avatar-dialog__close" type="button" data-profile-avatar-close aria-label="Close avatar picker">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7 10 10M17 7 7 17"></path></svg>
+                </button>
+              </header>
+              <fieldset class="profile-avatar-picker">
+                <legend class="sr-only">Available avatars</legend>
+                <div class="profile-avatar-options" id="profile-avatar-options" aria-label="Available profile avatars"></div>
+                <p id="profile-avatar-help" aria-live="polite"></p>
+              </fieldset>
+            </div>
+          </dialog>
+          <button class="profile-nickname-form__save" type="submit">
+            <span>Save profile</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 12 3 3 7-7"></path></svg>
+          </button>
         </form>
 
         <article class="profile-mastery-card">
@@ -184,6 +250,6 @@
       }
     }
   </script>
-  <script type="module" src="/src/main.js?v=20260728-combined-local-v1"></script>
+  <script type="module" src="/src/main.js?v=20260728-profile-avatar-dialog-v3"></script>
 </body>
 </html>
