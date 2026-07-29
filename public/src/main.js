@@ -995,7 +995,7 @@ const midtermExamSchedule402 = [
   { code: 'SUR 402-1', subjectCode: 'SUR402-1', subjectName: 'Surgery 402-1', date: '2026-07-22', dayLabel: 'Wed', time: '11:30-12:30', quizTopicKey: 'SUR 402-1 MCQs', quizActionLabel: 'MCQs' },
   { code: 'MED 402-1', subjectCode: 'MED402-1', subjectName: 'Medicine 402-1', date: '2026-07-25', dayLabel: 'Sat', time: '11:30-12:30', quizTopicKey: 'MED 402-1 MCQs', quizActionLabel: 'MCQs' },
   { code: 'MED 402-2', subjectCode: 'MED402-2', subjectName: 'Medicine 402-2', date: '2026-07-29', dayLabel: 'Wed', time: '11:30-12:30', quizTopicKey: 'MED 402-2 MCQs', quizActionLabel: 'MCQs' },
-  { code: 'GYN 402', subjectCode: 'GYNA402', subjectName: 'Gynecology & Obstetrics 402', date: '2026-08-01', dayLabel: 'Sat', time: '11:30-12:30' }
+  { code: 'GYN 402', subjectCode: 'GYNA402', subjectName: 'Gynecology & Obstetrics 402', date: '2026-08-01', dayLabel: 'Sat', time: '11:30-12:30', quizTopicKey: 'GYN 402 MCQs', quizActionLabel: 'MCQs' }
 ]
 
 const academicSections = {

@@ -28,6 +28,7 @@ test('application modules are valid and mirrored', () => {
     'src/med402-neuro-extra-mcqs.js',
     'src/med402-old-psychiatry-mcqs.js',
     'src/med402-zatoona-psychiatry-mcqs.js',
+    'src/gyn402-nadine-vip-midterm-mcqs.js',
     'src/med2-cardio-chest-mcqs.js',
     'src/med1-kellawi-mcqs.js',
     'src/med1-mw-ragab-mcqs.js',
@@ -41,7 +42,7 @@ test('application modules are valid and mirrored', () => {
     execFileSync(process.execPath, ['--check', file], { cwd: new URL('..', import.meta.url) })
   }
 
-  const mirroredFiles = ['main.js', 'audioFeedback.js', 'admin.js', 'analytics.js', 'knowledgeLibrary.js', 'mcqs.js', 'sur1-kellawi-mcqs.js', 'sur1-past-exam-mcqs.js', 'sur1-matching-questions.js', 'sur402-past-exam-mcqs.js', 'sur402-textbook-mcqs.js', 'sur402-amr-beshry-mcqs.js', 'med402-endocrine-mcqs.js', 'med402-neurology-mcqs.js', 'med402-neuro-extra-mcqs.js', 'med402-old-psychiatry-mcqs.js', 'med402-zatoona-psychiatry-mcqs.js', 'med2-cardio-chest-mcqs.js', 'med1-kellawi-mcqs.js', 'med1-mw-ragab-mcqs.js', 'med1-hepatology-final-review-mcqs.js', 'med1-alshamel-mcqs.js', 'progress.js', 'style.css', 'supabaseClient.js']
+  const mirroredFiles = ['main.js', 'audioFeedback.js', 'admin.js', 'analytics.js', 'knowledgeLibrary.js', 'mcqs.js', 'sur1-kellawi-mcqs.js', 'sur1-past-exam-mcqs.js', 'sur1-matching-questions.js', 'sur402-past-exam-mcqs.js', 'sur402-textbook-mcqs.js', 'sur402-amr-beshry-mcqs.js', 'med402-endocrine-mcqs.js', 'med402-neurology-mcqs.js', 'med402-neuro-extra-mcqs.js', 'med402-old-psychiatry-mcqs.js', 'med402-zatoona-psychiatry-mcqs.js', 'gyn402-nadine-vip-midterm-mcqs.js', 'med2-cardio-chest-mcqs.js', 'med1-kellawi-mcqs.js', 'med1-mw-ragab-mcqs.js', 'med1-hepatology-final-review-mcqs.js', 'med1-alshamel-mcqs.js', 'progress.js', 'style.css', 'supabaseClient.js']
   for (const file of mirroredFiles) {
     assert.equal(read(`src/${file}`), read(`public/src/${file}`), `${file} mirror is out of sync`)
   }
@@ -462,6 +463,33 @@ test('MED 402-2 neurology bank is answer-safe, grouped, and wired to the exam ca
   assert.match(html, /med402-zatoona-psychiatry-mcqs\.js\?v=20260727-med402-zatoona-psychiatry-v1/)
   assert.match(html, /med402-psychiatry-question-bank\.js\?v=20260728-med402-psychiatry-question-bank-v1/)
   assert.match(mainSource, /code:\s*'MED 402-2'[\s\S]{0,260}quizTopicKey:\s*'MED 402-2 MCQs'/)
+})
+
+test('GYN 402 Dr Nadine VIP midterm bank is complete and wired to the exam card', () => {
+  const context = { window: { mcqQuizzes402: {} } }
+  vm.runInNewContext(read('src/gyn402-nadine-vip-midterm-mcqs.js'), context)
+
+  const quiz = context.window.mcqQuizzes402['GYN 402 MCQs']
+  assert.equal(quiz.alwaysShowSourcePicker, true)
+  assert.equal(quiz.sources.length, 1)
+
+  const source = quiz.sources[0]
+  assert.equal(source.id, 'gyn402-nadine-vip-midterm')
+  assert.equal(source.label, 'Dr Nadine VIP Midterm')
+  assert.equal(source.mcqs.length, 100)
+  assert.equal(source.heldForReview.length, 0)
+  assert.equal(new Set(source.mcqs.map((question) => question.id)).size, 100)
+  assert.ok(source.mcqs.every((question) => question.choices.length >= 2))
+  assert.ok(source.mcqs.every((question) => Number.isInteger(question.answerIndex) && question.choices[question.answerIndex]))
+  assert.ok(source.mcqs.every((question) => question.question && question.source && question.explanation))
+  assert.equal(source.mcqs[1].question.includes('A 24-year-old G3P0'), true)
+  assert.deepEqual(Array.from(source.collection.mixedSizes, (mode) => mode.size), [20, 30, 100])
+  assert.equal(source.collection.wrongReviewId, 'gyn402-nadine-vip-wrong-review')
+
+  const html = read('index.html')
+  const mainSource = read('src/main.js')
+  assert.match(html, /gyn402-nadine-vip-midterm-mcqs\.js\?v=20260729-gyn402-nadine-vip-v1/)
+  assert.match(mainSource, /code:\s*'GYN 402'[\s\S]{0,260}quizTopicKey:\s*'GYN 402 MCQs'/)
 })
 
 test('MED 401-2 Cardio, Chest, Past Exams, Mo.ragab, and Final Exam 80 banks are source-faithful, grouped, and wired to the exam card', () => {
@@ -1255,11 +1283,12 @@ test('mandatory profile onboarding guides each required control and cannot be sk
   assert.match(style, /\.profile-page\s*\{[\s\S]*overflow-x:\s*hidden/)
 })
 
-test('MED-1 season points require fresh attempts while lifetime points remain durable', () => {
+test('course points use fresh seasons and the post-midterm reset preserves study history', () => {
   const mainSource = read('src/main.js')
   const supabaseClient = read('src/supabaseClient.js')
   const migration = read('supabase/migrations/20260726130240_mandatory_profiles_med1_season.sql')
   const med402SeasonMigration = read('supabase/migrations/20260726163747_med402_2_fresh_season.sql')
+  const postMidtermResetMigration = read('supabase/migrations/20260729162836_reset_course_dashboard_points.sql')
 
   assert.match(mainSource, /attemptId:\s*null/)
   assert.match(mainSource, /attemptStartedAt:\s*null/)
@@ -1289,6 +1318,12 @@ test('MED-1 season points require fresh attempts while lifetime points remain du
   assert.match(med402SeasonMigration, /'MED 402-2 Midterm'/)
   assert.match(med402SeasonMigration, /'MED 402-2 MCQs'/)
   assert.doesNotMatch(med402SeasonMigration, /DELETE FROM public\.user_mcq_progress/i)
+  assert.match(postMidtermResetMigration, /WHERE section IN \('401', '402'\)\s+AND active/i)
+  assert.match(postMidtermResetMigration, /DELETE FROM public\.user_lifetime_scores\s+WHERE section IN \('401', '402'\)/i)
+  assert.match(postMidtermResetMigration, /'MED 401 Post-Midterm', 'MED 401-1 MCQs'/)
+  assert.match(postMidtermResetMigration, /'MED 402 Post-Midterm', 'MED 402-2 MCQs'/)
+  assert.doesNotMatch(postMidtermResetMigration, /(?:DELETE FROM|UPDATE) public\.user_mcq_progress/i)
+  assert.doesNotMatch(postMidtermResetMigration, /DELETE FROM public\.user_season_scores/i)
 })
 
 test('topic actions are accessible boxless premium icons and legacy PWA state is cleaned up', () => {

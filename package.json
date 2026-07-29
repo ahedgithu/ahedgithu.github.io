@@ -16,6 +16,7 @@
     "build:med402-old-psychiatry": "node scripts/build-med402-old-psychiatry-mcqs.mjs",
     "build:med402-zatoona-psychiatry": "node scripts/build-med402-zatoona-psychiatry-mcqs.mjs",
     "build:med402-psychiatry-question-bank": "node scripts/build-med402-psychiatry-question-bank.mjs",
+    "build:gyn402-nadine-vip-midterm": "node scripts/build-gyn402-nadine-vip-midterm-mcqs.mjs",
     "build:med2-cardio-chest": "node scripts/build-med2-cardio-chest-mcqs.mjs",
     "build:med1-kellawi": "node scripts/build-med1-kellawi-mcqs.mjs",
     "build:med1-mw-ragab": "node scripts/build-med1-mw-ragab-mcqs.mjs",
