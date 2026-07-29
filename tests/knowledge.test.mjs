@@ -14,6 +14,7 @@ import {
   stripStudentFacingMetadata,
   structureMedicalText
 } from '../scripts/extract-med401-git-source.mjs';
+import { DEFAULT_ALSHAMEL_QUESTION_PATH } from '../scripts/build-med1-alshamel-evidence.mjs';
 import { validateMedicalLibrary } from '../scripts/validate-medical-library.mjs';
 import {
   escapeHtml,
@@ -327,17 +328,18 @@ test('extract and build are byte-deterministic and preserve evidence', () => {
 
 function runLibraryGeneration() {
   const sourcePath = process.env.MED401_GIT_SOURCE_PATH || DEFAULT_SOURCE_PATH;
-  if (existsSync(sourcePath)) {
+  const alshamelSourcePath = process.env.MED1_ALSHAMEL_SOURCE_PATH || DEFAULT_ALSHAMEL_QUESTION_PATH;
+  if (existsSync(sourcePath) && existsSync(alshamelSourcePath)) {
     execFileSync(process.execPath, ['scripts/extract-med401-git-source.mjs'], {
       cwd: ROOT_DIR,
       env: { ...process.env, MED401_GIT_SOURCE_PATH: sourcePath },
       stdio: 'pipe'
     });
+    execFileSync(process.execPath, ['scripts/build-med1-alshamel-evidence.mjs', alshamelSourcePath], {
+      cwd: ROOT_DIR,
+      stdio: 'pipe'
+    });
   }
-  execFileSync(process.execPath, ['scripts/build-med1-alshamel-evidence.mjs'], {
-    cwd: ROOT_DIR,
-    stdio: 'pipe'
-  });
   execFileSync(process.execPath, ['scripts/build-medical-library.mjs'], {
     cwd: ROOT_DIR,
     stdio: 'pipe'

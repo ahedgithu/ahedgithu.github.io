@@ -9,8 +9,12 @@ const topicsDir = path.join(canonicalDir, 'topics')
 const evidencePath = path.join(canonicalDir, 'evidence', 'mcq-evidence.json')
 const manifestPath = path.join(canonicalDir, 'manifest.json')
 const sourceExtractsDir = path.join(canonicalDir, 'source-extracts')
-const defaultQuestionPath = 'C:\\Users\\ahmed\\Downloads\\Telegram Desktop\\gastroenterology_mcqs_verified.json'
-const questionPath = path.resolve(process.argv[2] || defaultQuestionPath)
+export const DEFAULT_ALSHAMEL_QUESTION_PATH = 'C:\\Users\\ahmed\\Downloads\\Telegram Desktop\\gastroenterology_mcqs_verified.json'
+const questionPath = path.resolve(
+  process.argv[2]
+  || process.env.MED1_ALSHAMEL_SOURCE_PATH
+  || DEFAULT_ALSHAMEL_QUESTION_PATH
+)
 const stableDate = '2026-07-29'
 const sourceVersion = 'university-source-2026-07-29-v1'
 
