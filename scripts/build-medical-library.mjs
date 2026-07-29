@@ -25,7 +25,7 @@ export function buildMedicalLibrary() {
   // Read manifest
   const manifestPath = path.join(contentDir, 'manifest.json');
   const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
-  fs.writeFileSync(path.join(deployDir, 'manifest.json'), JSON.stringify(manifest, null, 2), 'utf8');
+  fs.copyFileSync(manifestPath, path.join(deployDir, 'manifest.json'));
 
   // Copy evidence if present
   const evidencePath = path.join(contentDir, 'evidence', 'mcq-evidence.json');
@@ -43,9 +43,9 @@ export function buildMedicalLibrary() {
     const topicData = JSON.parse(fs.readFileSync(path.join(topicsContentDir, tFile), 'utf8'));
 
     // Copy topic to public/data/medical/topics/
-    fs.writeFileSync(path.join(deployTopicsDir, tFile), JSON.stringify(topicData, null, 2), 'utf8');
+    fs.copyFileSync(path.join(topicsContentDir, tFile), path.join(deployTopicsDir, tFile));
 
-    const subjectBreadcrumb = 'Gastroenterology';
+    const subjectBreadcrumb = 'University Source';
     const topicBreadcrumb = `${subjectBreadcrumb} › ${topicData.title}`;
 
     // Index topic

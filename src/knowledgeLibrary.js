@@ -156,6 +156,7 @@ export function resolveCitation(questionId) {
     topicId: rec.topicId,
     sectionId: rec.sectionId || null,
     passageIds: rec.passageIds || [],
+    highlightText: rec.highlightText || '',
     explanation: rec.explanation || null,
     sourceVersion: rec.sourceVersion || '',
     subjectTitle: rec.subjectTitle || '',
@@ -179,7 +180,7 @@ export async function resolvePassage(topicId, sectionId, passageId) {
     foundPassage = topic.passages.find(p => p.id === passageId);
   }
 
-  const breadcrumb = `Gastroenterology › ${topic.title}${foundSection ? ' › ' + foundSection.title : ''}`;
+  const breadcrumb = `University Source › ${topic.title}${foundSection ? ' › ' + foundSection.title : ''}`;
 
   return {
     topic,
@@ -189,7 +190,7 @@ export async function resolvePassage(topicId, sectionId, passageId) {
   };
 }
 
-export function renderSourceReaderMarkup(resolvedData, targetPassageId = null) {
+export function renderSourceReaderMarkup(resolvedData, targetPassageId = null, highlightText = '') {
   if (!resolvedData || !resolvedData.topic) {
     return '<div class="source-reader__error">Source topic content unavailable.</div>';
   }
@@ -200,7 +201,7 @@ export function renderSourceReaderMarkup(resolvedData, targetPassageId = null) {
     <div class="source-reader__header">
       <nav class="source-reader__breadcrumb" aria-label="Source location">${escapeHtml(breadcrumb)}</nav>
       <h2 class="source-reader__topic-title">${escapeHtml(topic.title)}</h2>
-      <p class="source-reader__intro">Clean medical text extracted from the verified course source.</p>
+      <p class="source-reader__intro">Verified passage from University Source.</p>
     </div>
   `;
 
@@ -244,7 +245,7 @@ export function renderSourceReaderMarkup(resolvedData, targetPassageId = null) {
       html += `
         <section class="source-reader__passage ${highlightClass}" id="p-${escapeHtml(p.id)}" data-passage-id="${escapeHtml(p.id)}">
           <h4 class="source-reader__passage-title">${escapeHtml(p.title || 'Source detail')}</h4>
-          <div class="source-reader__passage-text">${renderPassageBlocks(p.blocks, p.text)}</div>
+          <div class="source-reader__passage-text">${renderPassageBlocks(p.blocks, p.text, isTarget ? highlightText : '')}</div>
         </section>
       `;
     });
@@ -254,19 +255,33 @@ export function renderSourceReaderMarkup(resolvedData, targetPassageId = null) {
   return html;
 }
 
-function renderPassageBlocks(blocks, fallbackText = '') {
+function renderPassageBlocks(blocks, fallbackText = '', highlightText = '') {
   if (!Array.isArray(blocks) || blocks.length === 0) {
-    return `<p>${escapeHtml(fallbackText)}</p>`;
+    return `<p>${renderHighlightedText(fallbackText, highlightText)}</p>`;
   }
 
   return blocks.map(block => {
     if (block.type === 'heading') {
-      return `<h5>${escapeHtml(block.text)}</h5>`;
+      return `<h5>${renderHighlightedText(block.text, highlightText)}</h5>`;
     }
     if (block.type === 'list') {
       const items = Array.isArray(block.items) ? block.items : [];
-      return `<ul>${items.map(item => `<li>${escapeHtml(item)}</li>`).join('')}</ul>`;
+      return `<ul>${items.map(item => `<li>${renderHighlightedText(item, highlightText)}</li>`).join('')}</ul>`;
     }
-    return `<p>${escapeHtml(block.text)}</p>`;
+    return `<p>${renderHighlightedText(block.text, highlightText)}</p>`;
   }).join('');
+}
+
+function renderHighlightedText(value = '', highlightText = '') {
+  const text = String(value);
+  const target = String(highlightText || '').trim();
+  if (!target) return escapeHtml(text);
+
+  const index = text.toLocaleLowerCase().indexOf(target.toLocaleLowerCase());
+  if (index < 0) return escapeHtml(text);
+
+  const before = text.slice(0, index);
+  const match = text.slice(index, index + target.length);
+  const after = text.slice(index + target.length);
+  return `${escapeHtml(before)}<mark class="source-reader__evidence">${escapeHtml(match)}</mark>${escapeHtml(after)}`;
 }

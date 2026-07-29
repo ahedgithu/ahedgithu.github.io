@@ -16452,6 +16452,15 @@ body[data-site-mode="402"] .tracker-home {
   line-height: 1.58;
 }
 
+.source-reader__evidence {
+  padding: 0.08em 0.2em;
+  color: inherit;
+  background: rgba(226, 184, 74, 0.32);
+  border-radius: 0.22em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
 .source-reader__passage-text h5 {
   margin: 16px 0 7px;
   color: var(--gold);

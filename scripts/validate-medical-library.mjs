@@ -34,14 +34,14 @@ export function validateMedicalLibrary() {
     throw new Error(`Manifest input hash mismatch: expected ${EXPECTED_INPUT_HASH}, got ${manifest.provenance.inputHash}`);
   }
 
-  if (manifest.provenance.topicCount !== 6) {
-    throw new Error(`Expected 6 topics, got ${manifest.provenance.topicCount}`);
+  if (manifest.provenance.topicCount !== 8) {
+    throw new Error(`Expected 8 topics, got ${manifest.provenance.topicCount}`);
   }
-  if (manifest.provenance.sectionCount !== 37) {
-    throw new Error(`Expected 37 sections, got ${manifest.provenance.sectionCount}`);
+  if (manifest.provenance.sectionCount !== 59) {
+    throw new Error(`Expected 59 sections, got ${manifest.provenance.sectionCount}`);
   }
-  if (manifest.provenance.passageCount !== 82) {
-    throw new Error(`Expected 82 passages, got ${manifest.provenance.passageCount}`);
+  if (manifest.provenance.passageCount !== 93) {
+    throw new Error(`Expected 93 passages, got ${manifest.provenance.passageCount}`);
   }
   if (manifest.provenance.sourceVisualCount !== 6) {
     throw new Error(`Expected 6 converted source visuals, got ${manifest.provenance.sourceVisualCount}`);
@@ -61,13 +61,14 @@ export function validateMedicalLibrary() {
   const topicsContentDir = path.join(contentDir, 'topics');
   const topicFiles = fs.readdirSync(topicsContentDir).filter(f => f.endsWith('.json')).sort();
 
-  if (topicFiles.length !== 6) {
-    throw new Error(`Expected 6 topic files in ${topicsContentDir}, got ${topicFiles.length}`);
+  if (topicFiles.length !== manifest.provenance.topicCount) {
+    throw new Error(`Expected ${manifest.provenance.topicCount} topic files in ${topicsContentDir}, got ${topicFiles.length}`);
   }
 
   const registeredTopicIds = new Set();
   const registeredSectionIds = new Set();
   const registeredPassageIds = new Set();
+  const registeredPassageText = new Map();
   const topicTitles = new Map();
   const sectionMetadata = new Map();
   let actualSectionCount = 0;
@@ -114,7 +115,7 @@ export function validateMedicalLibrary() {
       if (/<(?:img|svg|canvas|iframe)\b/i.test(sec.contentHtml)) {
         throw new Error(`Section ${sec.id} contains a forbidden visual reproduction`);
       }
-      if (/\b(?:Dr\.?\s+Kamal\s+Mokbel|MUST\s*401|uploaded lecture visual)\b/i.test(sec.contentHtml)) {
+      if (/\b(?:Dr\.?\s+Kamal\s+Mokbel|Omar\s+Heikal|Hisham\s+Samy|MUST\s*401|Faculty\s+of\s+Medicine|Internal\s+Medicine\s+Department|uploaded lecture visual|Compact\s+MED401|supplied lecture slides)\b/i.test(sec.contentHtml)) {
         throw new Error(`Section ${sec.id} exposes author, branding, or source-visual metadata`);
       }
       const computedContentHash = crypto.createHash('sha256').update(sec.contentHtml).digest('hex').toLowerCase();
@@ -128,6 +129,7 @@ export function validateMedicalLibrary() {
         throw new Error(`Duplicate passage ID: ${pass.id}`);
       }
       registeredPassageIds.add(pass.id);
+      registeredPassageText.set(pass.id, pass.text);
       actualPassageCount += 1;
 
       if (!pass.sourceHash) {
@@ -136,7 +138,7 @@ export function validateMedicalLibrary() {
       if (!pass.title || !Array.isArray(pass.blocks) || pass.blocks.length === 0) {
         throw new Error(`Passage ${pass.id} is missing a clean title or structured text blocks`);
       }
-      if (/\b(?:Dr\.?\s+Kamal\s+Mokbel|MUST\s*401|uploaded lecture visual)\b/i.test(pass.text)) {
+      if (/\b(?:Dr\.?\s+Kamal\s+Mokbel|Omar\s+Heikal|Hisham\s+Samy|MUST\s*401|Faculty\s+of\s+Medicine|Internal\s+Medicine\s+Department|uploaded lecture visual|Compact\s+MED401|supplied lecture slides)\b/i.test(pass.text)) {
         throw new Error(`Passage ${pass.id} exposes author, branding, or source-visual metadata`);
       }
 
@@ -220,30 +222,51 @@ export function validateMedicalLibrary() {
             throw new Error(`Evidence record ${rec.questionId} cites unknown passageId: ${pId}`);
           }
         });
-        if (!rec.explanation || !rec.explanation.correct || !rec.explanation.correct.text) {
-          throw new Error(`Verified evidence record ${rec.questionId} missing correct rationale text`);
-        }
-        if (!rec.explanation.correct.choiceId) {
-          throw new Error(`Verified evidence record ${rec.questionId} missing correct choiceId`);
-        }
-        Object.values(rec.explanation.incorrect || {}).forEach((rationale) => {
-          if (!rationale.text) {
-            throw new Error(`Evidence record ${rec.questionId} has an empty incorrect-choice rationale`);
+        if (rec.explanation) {
+          if (!rec.explanation.correct || !rec.explanation.correct.text || !rec.explanation.correct.choiceId) {
+            throw new Error(`Verified evidence record ${rec.questionId} has an incomplete reviewed rationale`);
           }
-          if (!Array.isArray(rationale.passageIds) || rationale.passageIds.length === 0) {
-            throw new Error(`Evidence record ${rec.questionId} incorrect-choice rationale has no passage citation`);
-          }
-          rationale.passageIds.forEach((pId) => {
-            if (!registeredPassageIds.has(pId)) {
-              throw new Error(`Evidence record ${rec.questionId} incorrect rationale cites unknown passageId: ${pId}`);
+          Object.values(rec.explanation.incorrect || {}).forEach((rationale) => {
+            if (!rationale.text) {
+              throw new Error(`Evidence record ${rec.questionId} has an empty incorrect-choice rationale`);
             }
+            if (!Array.isArray(rationale.passageIds) || rationale.passageIds.length === 0) {
+              throw new Error(`Evidence record ${rec.questionId} incorrect-choice rationale has no passage citation`);
+            }
+            rationale.passageIds.forEach((pId) => {
+              if (!registeredPassageIds.has(pId)) {
+                throw new Error(`Evidence record ${rec.questionId} incorrect rationale cites unknown passageId: ${pId}`);
+              }
+            });
           });
-        });
+        } else {
+          if (!rec.highlightText) {
+            throw new Error(`Source-only evidence record ${rec.questionId} is missing exact highlightText`);
+          }
+          const highlightFound = rec.passageIds.some((pId) => registeredPassageText.get(pId)?.includes(rec.highlightText));
+          if (!highlightFound) {
+            throw new Error(`Evidence record ${rec.questionId} highlightText is not present in a cited passage`);
+          }
+        }
         if (rec.sourceVersion !== manifest.sourceVersion) {
           throw new Error(`Evidence record ${rec.questionId} sourceVersion mismatch: expected ${manifest.sourceVersion}, got ${rec.sourceVersion}`);
         }
       }
     });
+  }
+
+  const alshamelEvidence = JSON.parse(fs.readFileSync(evidencePath, 'utf8'));
+  const alshamelRecords = alshamelEvidence.records
+    .filter((record) => String(record.questionId).startsWith('med1-alshamel-'));
+  const alshamelUnsupported = alshamelEvidence.unsupportedAlshamel || [];
+  if (alshamelRecords.length !== manifest.provenance.alshamelSupportedCount || alshamelRecords.length !== 341) {
+    throw new Error(`Expected 341 source-backed الشامل records, got ${alshamelRecords.length}`);
+  }
+  if (alshamelUnsupported.length !== manifest.provenance.alshamelUnsupportedCount || alshamelUnsupported.length !== 49) {
+    throw new Error(`Expected 49 unsupported الشامل records, got ${alshamelUnsupported.length}`);
+  }
+  if (new Set(alshamelRecords.map((record) => record.questionId)).size !== alshamelRecords.length) {
+    throw new Error('Duplicate الشامل evidence question IDs detected');
   }
 
   // 6. Verify deploy search index
@@ -252,8 +275,9 @@ export function validateMedicalLibrary() {
     throw new Error(`Deploy search-index.json missing at: ${searchIndexPath}`);
   }
   const searchIndex = JSON.parse(fs.readFileSync(searchIndexPath, 'utf8'));
-  if (searchIndex.totalItems !== 125) {
-    throw new Error(`Expected 125 search index items, got ${searchIndex.totalItems}`);
+  const expectedSearchItems = manifest.provenance.topicCount + manifest.provenance.sectionCount + manifest.provenance.passageCount;
+  if (searchIndex.totalItems !== expectedSearchItems) {
+    throw new Error(`Expected ${expectedSearchItems} search index items, got ${searchIndex.totalItems}`);
   }
   if (searchIndex.version !== manifest.sourceVersion) {
     throw new Error(`Search index source version does not match manifest`);

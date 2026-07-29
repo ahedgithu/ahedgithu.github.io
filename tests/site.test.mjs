@@ -31,6 +31,7 @@ test('application modules are valid and mirrored', () => {
     'src/med1-kellawi-mcqs.js',
     'src/med1-mw-ragab-mcqs.js',
     'src/med1-hepatology-final-review-mcqs.js',
+    'src/med1-alshamel-mcqs.js',
     'src/progress.js',
     'src/supabaseClient.js'
   ]
@@ -39,7 +40,7 @@ test('application modules are valid and mirrored', () => {
     execFileSync(process.execPath, ['--check', file], { cwd: new URL('..', import.meta.url) })
   }
 
-  const mirroredFiles = ['main.js', 'admin.js', 'analytics.js', 'knowledgeLibrary.js', 'mcqs.js', 'sur1-kellawi-mcqs.js', 'sur1-past-exam-mcqs.js', 'sur1-matching-questions.js', 'sur402-past-exam-mcqs.js', 'sur402-textbook-mcqs.js', 'sur402-amr-beshry-mcqs.js', 'med402-endocrine-mcqs.js', 'med402-neurology-mcqs.js', 'med402-neuro-extra-mcqs.js', 'med402-old-psychiatry-mcqs.js', 'med402-zatoona-psychiatry-mcqs.js', 'med2-cardio-chest-mcqs.js', 'med1-kellawi-mcqs.js', 'med1-mw-ragab-mcqs.js', 'med1-hepatology-final-review-mcqs.js', 'progress.js', 'style.css', 'supabaseClient.js']
+  const mirroredFiles = ['main.js', 'admin.js', 'analytics.js', 'knowledgeLibrary.js', 'mcqs.js', 'sur1-kellawi-mcqs.js', 'sur1-past-exam-mcqs.js', 'sur1-matching-questions.js', 'sur402-past-exam-mcqs.js', 'sur402-textbook-mcqs.js', 'sur402-amr-beshry-mcqs.js', 'med402-endocrine-mcqs.js', 'med402-neurology-mcqs.js', 'med402-neuro-extra-mcqs.js', 'med402-old-psychiatry-mcqs.js', 'med402-zatoona-psychiatry-mcqs.js', 'med2-cardio-chest-mcqs.js', 'med1-kellawi-mcqs.js', 'med1-mw-ragab-mcqs.js', 'med1-hepatology-final-review-mcqs.js', 'med1-alshamel-mcqs.js', 'progress.js', 'style.css', 'supabaseClient.js']
   for (const file of mirroredFiles) {
     assert.equal(read(`src/${file}`), read(`public/src/${file}`), `${file} mirror is out of sync`)
   }
@@ -663,6 +664,46 @@ test('MED 401-1 hepatology final review is source-faithful and added without rep
   assert.match(indexHtml, /med1-hepatology-final-review-mcqs\.js\?v=20260728-hepatology-final-review-v1/)
   assert.match(profileHtml, /med1-hepatology-final-review-mcqs\.js\?v=20260728-hepatology-final-review-v1/)
   assert.match(profileHtml, /med1-mw-ragab-mcqs\.js\?v=20260728-med1-mw-ragab-v2/)
+})
+
+test('MED 401-1 الشامل bank preserves answer-safe records, five-choice questions, and held records', () => {
+  const context = { window: { mcqQuizzes: {} } }
+  vm.runInNewContext(read('src/med1-kellawi-mcqs.js'), context)
+  vm.runInNewContext(read('src/med1-mw-ragab-mcqs.js'), context)
+  vm.runInNewContext(read('src/med1-hepatology-final-review-mcqs.js'), context)
+  vm.runInNewContext(read('src/med1-alshamel-mcqs.js'), context)
+
+  const quiz = context.window.mcqQuizzes['MED 401-1 MCQs']
+  assert.equal(quiz.sources.length, 4)
+
+  const source = quiz.sources.find((item) => item.id === 'med1-alshamel-gastroenterology')
+  assert.ok(source, 'الشامل source is missing')
+  assert.equal(source.label, 'الشامل')
+  assert.equal(source.sourceFile, 'University Source')
+  assert.equal(source.mcqs.length, 390)
+  assert.equal(source.heldForReview.length, 14)
+  assert.equal(new Set(source.mcqs.map((question) => question.id)).size, 390)
+  assert.equal(source.mcqs.filter((question) => question.choices.length === 5).length, 2)
+  assert.ok(source.mcqs.every((question) => question.choices.length >= 2))
+  assert.ok(source.mcqs.every((question) => Number.isInteger(question.answerIndex) && question.choices[question.answerIndex]))
+  assert.ok(source.mcqs.every((question) => question.source === 'University Source'))
+  assert.ok(source.heldForReview.every((question) => question.sourceDocument === 'University Source'))
+  assert.deepEqual(
+    Array.from(source.collection.groups, (group) => [group.label, group.questionCount]),
+    [
+      ['Liver Investigations & LFTs', 56],
+      ['Cirrhosis & Portal Hypertension', 58],
+      ['Esophageal Diseases', 52],
+      ['Acute Viral Hepatitis', 55],
+      ['Autoimmune Hepatitis', 51],
+      ['Small Intestinal Diseases', 118]
+    ]
+  )
+
+  const indexHtml = read('index.html')
+  const profileHtml = read('profile.html')
+  assert.match(indexHtml, /med1-alshamel-mcqs\.js\?v=20260729-university-source-v1/)
+  assert.match(profileHtml, /med1-alshamel-mcqs\.js\?v=20260729-university-source-v1/)
 })
 
 test('SUR 401-1 past-exam bank is answer-safe, grouped, and wired', () => {

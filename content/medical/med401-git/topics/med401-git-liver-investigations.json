@@ -1,0 +1,629 @@
+{
+  "id": "med401-git-liver-investigations",
+  "subjectId": "med401-git",
+  "title": "Liver Investigations & LFTs",
+  "aliases": [],
+  "sectionIds": [
+    "med401-git-liver-investigations-liver-function-tests-lfts",
+    "med401-git-liver-investigations-alp-ggt",
+    "med401-git-liver-investigations-synthetic-function",
+    "med401-git-liver-investigations-bilirubin",
+    "med401-git-liver-investigations-lft-patterns",
+    "med401-git-liver-investigations-vitamin-k-test",
+    "med401-git-liver-investigations-viral-serology",
+    "med401-git-liver-investigations-autoimmune-liver-disease",
+    "med401-git-liver-investigations-metabolic-diseases",
+    "med401-git-liver-investigations-imaging",
+    "med401-git-liver-investigations-endoscopy-ercp",
+    "med401-git-liver-investigations-clinical-cases"
+  ],
+  "sections": [
+    {
+      "id": "med401-git-liver-investigations-liver-function-tests-lfts",
+      "topicId": "med401-git-liver-investigations",
+      "title": "Liver Function Tests (LFTs)",
+      "category": "University Source",
+      "keywords": [
+        "liver",
+        "function",
+        "test",
+        "lfts"
+      ],
+      "contentHtml": "<p>Verified evidence is available in the linked University Source passage below.</p>",
+      "contentHash": "29d0a16455b72febae62ac6e7d44bf791034c749b84f01a556ed5278f5ef6be1",
+      "order": 1
+    },
+    {
+      "id": "med401-git-liver-investigations-alp-ggt",
+      "topicId": "med401-git-liver-investigations",
+      "title": "ALP & GGT",
+      "category": "University Source",
+      "keywords": [
+        "alp",
+        "ggt"
+      ],
+      "contentHtml": "<p>Verified evidence is available in the linked University Source passage below.</p>",
+      "contentHash": "29d0a16455b72febae62ac6e7d44bf791034c749b84f01a556ed5278f5ef6be1",
+      "order": 2
+    },
+    {
+      "id": "med401-git-liver-investigations-synthetic-function",
+      "topicId": "med401-git-liver-investigations",
+      "title": "Synthetic Function",
+      "category": "University Source",
+      "keywords": [
+        "synthetic",
+        "function"
+      ],
+      "contentHtml": "<p>Verified evidence is available in the linked University Source passage below.</p>",
+      "contentHash": "29d0a16455b72febae62ac6e7d44bf791034c749b84f01a556ed5278f5ef6be1",
+      "order": 3
+    },
+    {
+      "id": "med401-git-liver-investigations-bilirubin",
+      "topicId": "med401-git-liver-investigations",
+      "title": "Bilirubin",
+      "category": "University Source",
+      "keywords": [
+        "bilirubin"
+      ],
+      "contentHtml": "<p>Verified evidence is available in the linked University Source passage below.</p>",
+      "contentHash": "29d0a16455b72febae62ac6e7d44bf791034c749b84f01a556ed5278f5ef6be1",
+      "order": 4
+    },
+    {
+      "id": "med401-git-liver-investigations-lft-patterns",
+      "topicId": "med401-git-liver-investigations",
+      "title": "LFT Patterns",
+      "category": "University Source",
+      "keywords": [
+        "lft",
+        "pattern"
+      ],
+      "contentHtml": "<p>Verified evidence is available in the linked University Source passage below.</p>",
+      "contentHash": "29d0a16455b72febae62ac6e7d44bf791034c749b84f01a556ed5278f5ef6be1",
+      "order": 5
+    },
+    {
+      "id": "med401-git-liver-investigations-vitamin-k-test",
+      "topicId": "med401-git-liver-investigations",
+      "title": "Vitamin K Test",
+      "category": "University Source",
+      "keywords": [
+        "vitamin",
+        "test"
+      ],
+      "contentHtml": "<p>Verified evidence is available in the linked University Source passage below.</p>",
+      "contentHash": "29d0a16455b72febae62ac6e7d44bf791034c749b84f01a556ed5278f5ef6be1",
+      "order": 6
+    },
+    {
+      "id": "med401-git-liver-investigations-viral-serology",
+      "topicId": "med401-git-liver-investigations",
+      "title": "Viral Serology",
+      "category": "University Source",
+      "keywords": [
+        "viral",
+        "serology"
+      ],
+      "contentHtml": "<p>Verified evidence is available in the linked University Source passages below.</p>",
+      "contentHash": "96a3bd6a9c75cc215fbb04388daa6b653f2300ae90fc6f7cbcb172a4c3c0669a",
+      "order": 7
+    },
+    {
+      "id": "med401-git-liver-investigations-autoimmune-liver-disease",
+      "topicId": "med401-git-liver-investigations",
+      "title": "Autoimmune Liver Disease",
+      "category": "University Source",
+      "keywords": [
+        "autoimmune",
+        "liver"
+      ],
+      "contentHtml": "<p>Verified evidence is available in the linked University Source passage below.</p>",
+      "contentHash": "29d0a16455b72febae62ac6e7d44bf791034c749b84f01a556ed5278f5ef6be1",
+      "order": 8
+    },
+    {
+      "id": "med401-git-liver-investigations-metabolic-diseases",
+      "topicId": "med401-git-liver-investigations",
+      "title": "Metabolic Diseases",
+      "category": "University Source",
+      "keywords": [
+        "metabolic",
+        "diseas"
+      ],
+      "contentHtml": "<p>Verified evidence is available in the linked University Source passage below.</p>",
+      "contentHash": "29d0a16455b72febae62ac6e7d44bf791034c749b84f01a556ed5278f5ef6be1",
+      "order": 9
+    },
+    {
+      "id": "med401-git-liver-investigations-imaging",
+      "topicId": "med401-git-liver-investigations",
+      "title": "Imaging",
+      "category": "University Source",
+      "keywords": [
+        "imag"
+      ],
+      "contentHtml": "<p>Verified evidence is available in the linked University Source passages below.</p>",
+      "contentHash": "96a3bd6a9c75cc215fbb04388daa6b653f2300ae90fc6f7cbcb172a4c3c0669a",
+      "order": 10
+    },
+    {
+      "id": "med401-git-liver-investigations-endoscopy-ercp",
+      "topicId": "med401-git-liver-investigations",
+      "title": "Endoscopy & ERCP",
+      "category": "University Source",
+      "keywords": [
+        "endoscopy",
+        "ercp"
+      ],
+      "contentHtml": "<p>Verified evidence is available in the linked University Source passage below.</p>",
+      "contentHash": "29d0a16455b72febae62ac6e7d44bf791034c749b84f01a556ed5278f5ef6be1",
+      "order": 11
+    },
+    {
+      "id": "med401-git-liver-investigations-clinical-cases",
+      "topicId": "med401-git-liver-investigations",
+      "title": "Clinical Cases",
+      "category": "University Source",
+      "keywords": [
+        "cas"
+      ],
+      "contentHtml": "<p>Verified evidence is available in the linked University Source passages below.</p>",
+      "contentHash": "96a3bd6a9c75cc215fbb04388daa6b653f2300ae90fc6f7cbcb172a4c3c0669a",
+      "order": 12
+    }
+  ],
+  "passages": [
+    {
+      "id": "med401-git-liver-investigations-source-1",
+      "order": 1,
+      "title": "University Source · Passage 1",
+      "text": "1.\nIntroduction & Clinical Context The investigation of hepatobiliary disorders requires a logical, stepwise approach combining clinical presentation with laboratory, radiological, and histopathological evaluations.\nIn clinical practice, liver diseases usually manifest as acute hepatitis, chronic liver disease/cirrhosis, cholestasis (obstructive or hepatocellular), or incidental abnormalities discovered on routine screening.\nInvestigations are systematically designed to determine the presence of liver disease, classify the type of injury (hepatocellular vs. cholestatic), evaluate synthetic function, and identify the specific etiology.\n2.\nLaboratory Investigations: Liver Function Tests (LFTs) Standard \"Liver Function Tests\" is a broad term that includes enzymes reflecting hepatocyte integrity or biliary clearance, as well as true markers of hepatic synthetic capacity.\nA.\nMarkers of Hepatocellular Injury (Aminotransferases) Alanine Aminotransferase (ALT): Primarily localized to the liver cytosol; highly specific for hepatic parenchymal injury.\nAspartate Aminotransferase (AST): Present in liver (cytosol and mitochondria), cardiac muscle, skeletal muscle, kidneys, and brain.\nLess specific than ALT.\nClinical Interpretation of Aminotransferase Elevations: Marked elevation (>1000 U/L): Suggests acute ischemic injury (shock liver), acute viral hepatitis, or toxin/ drug-induced liver injury (e.g., acetaminophen toxicity).\nMild-to-moderate elevation (<300 U/L): Common in Chronic Hepatitis B/C, Non-Alcoholic Fatty Liver Disease (NAFLD/MASLD), and Alcoholic Liver Disease.\nAST:ALT Ratio (De Ritis Ratio): An AST:ALT ratio > 2:1 is highly suggestive of alcoholic liver disease, driven by pyridoxal-5-phosphate deficiency in alcoholics which selectively suppresses ALT.\nA ratio > 1 in chronic viral hepatitis suggests progression to cirrhosis.\nB.\nMarkers of Cholestasis and Biliary Secretory Function Alkaline Phosphatase (ALP): Synthesized by canalicular membranes of hepatocytes and bone, placenta, and intestine.\nTo confirm hepatic origin, pair it with Gamma-Glutamyl Transferase (GGT) or fractionate isoenzymes.\nIsolated high ALP with normal GGT points to bone pathology.\nGamma-Glutamyl Transferase (GGT): Highly sensitive for hepatobiliary disease but lacks specificity (induced by alcohol ingestion, phenytoin, and various microsomal-inducing drugs).\n◦ ◦ ◦",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "1."
+        },
+        {
+          "type": "paragraph",
+          "text": "Introduction & Clinical Context The investigation of hepatobiliary disorders requires a logical, stepwise approach combining clinical presentation with laboratory, radiological, and histopathological evaluations."
+        },
+        {
+          "type": "paragraph",
+          "text": "In clinical practice, liver diseases usually manifest as acute hepatitis, chronic liver disease/cirrhosis, cholestasis (obstructive or hepatocellular), or incidental abnormalities discovered on routine screening."
+        },
+        {
+          "type": "paragraph",
+          "text": "Investigations are systematically designed to determine the presence of liver disease, classify the type of injury (hepatocellular vs. cholestatic), evaluate synthetic function, and identify the specific etiology."
+        },
+        {
+          "type": "paragraph",
+          "text": "2."
+        },
+        {
+          "type": "paragraph",
+          "text": "Laboratory Investigations: Liver Function Tests (LFTs) Standard \"Liver Function Tests\" is a broad term that includes enzymes reflecting hepatocyte integrity or biliary clearance, as well as true markers of hepatic synthetic capacity."
+        },
+        {
+          "type": "paragraph",
+          "text": "A."
+        },
+        {
+          "type": "paragraph",
+          "text": "Markers of Hepatocellular Injury (Aminotransferases) Alanine Aminotransferase (ALT): Primarily localized to the liver cytosol; highly specific for hepatic parenchymal injury."
+        },
+        {
+          "type": "paragraph",
+          "text": "Aspartate Aminotransferase (AST): Present in liver (cytosol and mitochondria), cardiac muscle, skeletal muscle, kidneys, and brain."
+        },
+        {
+          "type": "paragraph",
+          "text": "Less specific than ALT."
+        },
+        {
+          "type": "paragraph",
+          "text": "Clinical Interpretation of Aminotransferase Elevations: Marked elevation (>1000 U/L): Suggests acute ischemic injury (shock liver), acute viral hepatitis, or toxin/ drug-induced liver injury (e.g., acetaminophen toxicity)."
+        },
+        {
+          "type": "paragraph",
+          "text": "Mild-to-moderate elevation (<300 U/L): Common in Chronic Hepatitis B/C, Non-Alcoholic Fatty Liver Disease (NAFLD/MASLD), and Alcoholic Liver Disease."
+        },
+        {
+          "type": "paragraph",
+          "text": "AST:ALT Ratio (De Ritis Ratio): An AST:ALT ratio > 2:1 is highly suggestive of alcoholic liver disease, driven by pyridoxal-5-phosphate deficiency in alcoholics which selectively suppresses ALT."
+        },
+        {
+          "type": "paragraph",
+          "text": "A ratio > 1 in chronic viral hepatitis suggests progression to cirrhosis."
+        },
+        {
+          "type": "paragraph",
+          "text": "B."
+        },
+        {
+          "type": "paragraph",
+          "text": "Markers of Cholestasis and Biliary Secretory Function Alkaline Phosphatase (ALP): Synthesized by canalicular membranes of hepatocytes and bone, placenta, and intestine."
+        },
+        {
+          "type": "paragraph",
+          "text": "To confirm hepatic origin, pair it with Gamma-Glutamyl Transferase (GGT) or fractionate isoenzymes."
+        },
+        {
+          "type": "paragraph",
+          "text": "Isolated high ALP with normal GGT points to bone pathology."
+        },
+        {
+          "type": "paragraph",
+          "text": "Gamma-Glutamyl Transferase (GGT): Highly sensitive for hepatobiliary disease but lacks specificity (induced by alcohol ingestion, phenytoin, and various microsomal-inducing drugs)."
+        },
+        {
+          "type": "paragraph",
+          "text": "◦ ◦ ◦"
+        }
+      ],
+      "provenance": {
+        "label": "University Source",
+        "sourceOrder": 1,
+        "sourceSha256": "ee43d938a0d36b34aa36f7467726ccc048f3cb4dbf2e8db282b3826fa2d1e2bb"
+      },
+      "sourceHash": "eb00878a917605cc3709acce0ac0d4176cb643b3c19f67b7823e7c1ec30d9ca2"
+    },
+    {
+      "id": "med401-git-liver-investigations-source-2",
+      "order": 2,
+      "title": "University Source · Passage 2",
+      "text": "C.\nTrue Markers of Hepatic Synthetic Capacity Serum Albumin: Synthesized exclusively by the liver.\nBecause it has a long half-life (~20 days), low serum albumin is characteristic of chronic liver disease (e.g., cirrhosis) or severe protein-losing states, rather than acute liver injury.\nProthrombin Time (PT) and INR: Measures the extrinsic clotting pathway dependent on factors I, II, V, VII, and X.\nFactor VII has the shortest half-life (~6 hours), making PT/INR an excellent, highly sensitive indicator of acute hepatic synthetic failure (e.g., fulminant hepatic failure) as well as chronic dysfunction.\nD.\nExcretory Markers: Serum Bilirubin Unconjugated (Indirect) Bilirubinemia: Driven by overproduction (hemolysis) or impaired hepatic conjugation (e.g., Gilbert’s syndrome).\nConjugated (Direct) Bilirubinemia: Indicates parenchymal liver damage or biliary tree obstruction (cholestasis).\nDirect bilirubin fraction > 50% confirms a conjugated pattern.\nDiagnostic Pattern Typical LFT Profiles Common Differential Diagnoses Hepatocellular Disproportionate elevation of ALT & AST compared to ALP.\nBilirubin may be elevated.\nAcute or Chronic Viral Hepatitis, Toxin/Drug injury, Autoimmune Hepatitis, Ischemic Liver Injury.\nCholestatic / Obstructive Disproportionate elevation of ALP & GGT compared to ALT & AST.\nMarked Conjugated Bilirubinemia.\nCholedocholithiasis, Pancreatic Malignancy, Primary Biliary Cholangitis (PBC), Primary Sclerosing Cholangitis (PSC).\nInfiltrative Elevated ALP (often marked) with near-normal or mildly elevated aminotransferases and bilirubin.\nHepatic Granulomas (Sarcoidosis, TB), Metastatic Malignancies, Hepatic Abscesses.\n4th Year Exam Note: Vitamin K vs.\nParenchymal Dysfunction To differentiate prolonged PT caused by prolonged biliary obstruction (impaired fat-soluble Vitamin K absorption due to lack of bile salts) from severe parenchymal failure, administer parenteral Vitamin K.\nIf PT normalizes or improves by >30% within 24–48 hours, the defect is obstructive/absorptive.\nIf it fails to correct, it indicates severe parenchymal synthetic failure.\n3.\nEtiological Investigations Once a pattern of liver injury is established, specific serological, immunological, and metabolic profiles are requested to ascertain the underlying etiology.\nA.\nViral Hepatitis Serology Suspected VirusPrimary Screening Test Confirmatory / Supplementary Tests Hepatitis A (HAV)Anti-HAV IgM (indicates acute infection)Anti-HAV IgG (indicates immunity via past exposure or vaccination)",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "C."
+        },
+        {
+          "type": "paragraph",
+          "text": "True Markers of Hepatic Synthetic Capacity Serum Albumin: Synthesized exclusively by the liver."
+        },
+        {
+          "type": "paragraph",
+          "text": "Because it has a long half-life (~20 days), low serum albumin is characteristic of chronic liver disease (e.g., cirrhosis) or severe protein-losing states, rather than acute liver injury."
+        },
+        {
+          "type": "paragraph",
+          "text": "Prothrombin Time (PT) and INR: Measures the extrinsic clotting pathway dependent on factors I, II, V, VII, and X."
+        },
+        {
+          "type": "paragraph",
+          "text": "Factor VII has the shortest half-life (~6 hours), making PT/INR an excellent, highly sensitive indicator of acute hepatic synthetic failure (e.g., fulminant hepatic failure) as well as chronic dysfunction."
+        },
+        {
+          "type": "paragraph",
+          "text": "D."
+        },
+        {
+          "type": "paragraph",
+          "text": "Excretory Markers: Serum Bilirubin Unconjugated (Indirect) Bilirubinemia: Driven by overproduction (hemolysis) or impaired hepatic conjugation (e.g., Gilbert’s syndrome)."
+        },
+        {
+          "type": "paragraph",
+          "text": "Conjugated (Direct) Bilirubinemia: Indicates parenchymal liver damage or biliary tree obstruction (cholestasis)."
+        },
+        {
+          "type": "paragraph",
+          "text": "Direct bilirubin fraction > 50% confirms a conjugated pattern."
+        },
+        {
+          "type": "paragraph",
+          "text": "Diagnostic Pattern Typical LFT Profiles Common Differential Diagnoses Hepatocellular Disproportionate elevation of ALT & AST compared to ALP."
+        },
+        {
+          "type": "paragraph",
+          "text": "Bilirubin may be elevated."
+        },
+        {
+          "type": "paragraph",
+          "text": "Acute or Chronic Viral Hepatitis, Toxin/Drug injury, Autoimmune Hepatitis, Ischemic Liver Injury."
+        },
+        {
+          "type": "paragraph",
+          "text": "Cholestatic / Obstructive Disproportionate elevation of ALP & GGT compared to ALT & AST."
+        },
+        {
+          "type": "paragraph",
+          "text": "Marked Conjugated Bilirubinemia."
+        },
+        {
+          "type": "paragraph",
+          "text": "Choledocholithiasis, Pancreatic Malignancy, Primary Biliary Cholangitis (PBC), Primary Sclerosing Cholangitis (PSC)."
+        },
+        {
+          "type": "paragraph",
+          "text": "Infiltrative Elevated ALP (often marked) with near-normal or mildly elevated aminotransferases and bilirubin."
+        },
+        {
+          "type": "paragraph",
+          "text": "Hepatic Granulomas (Sarcoidosis, TB), Metastatic Malignancies, Hepatic Abscesses."
+        },
+        {
+          "type": "paragraph",
+          "text": "4th Year Exam Note: Vitamin K vs."
+        },
+        {
+          "type": "paragraph",
+          "text": "Parenchymal Dysfunction To differentiate prolonged PT caused by prolonged biliary obstruction (impaired fat-soluble Vitamin K absorption due to lack of bile salts) from severe parenchymal failure, administer parenteral Vitamin K."
+        },
+        {
+          "type": "paragraph",
+          "text": "If PT normalizes or improves by >30% within 24–48 hours, the defect is obstructive/absorptive."
+        },
+        {
+          "type": "paragraph",
+          "text": "If it fails to correct, it indicates severe parenchymal synthetic failure."
+        },
+        {
+          "type": "paragraph",
+          "text": "3."
+        },
+        {
+          "type": "paragraph",
+          "text": "Etiological Investigations Once a pattern of liver injury is established, specific serological, immunological, and metabolic profiles are requested to ascertain the underlying etiology."
+        },
+        {
+          "type": "paragraph",
+          "text": "A."
+        },
+        {
+          "type": "paragraph",
+          "text": "Viral Hepatitis Serology Suspected VirusPrimary Screening Test Confirmatory / Supplementary Tests Hepatitis A (HAV)Anti-HAV IgM (indicates acute infection)Anti-HAV IgG (indicates immunity via past exposure or vaccination)"
+        }
+      ],
+      "provenance": {
+        "label": "University Source",
+        "sourceOrder": 2,
+        "sourceSha256": "ee43d938a0d36b34aa36f7467726ccc048f3cb4dbf2e8db282b3826fa2d1e2bb"
+      },
+      "sourceHash": "3bdf3a6ecf9315e4dd3b60ee6d51c2263ed105879a9fa92f18d9b8deb7f98d6e"
+    },
+    {
+      "id": "med401-git-liver-investigations-source-3",
+      "order": 3,
+      "title": "University Source · Passage 3",
+      "text": "Suspected VirusPrimary Screening Test Confirmatory / Supplementary Tests Hepatitis B (HBV)HBsAg (Current infection) Anti-HBc IgM (Acute window period marker) HBV DNA via PCR (Viral load) HBeAg / Anti-HBe (Replication status) Anti-HBs (Immunity) Hepatitis C (HCV)Anti-HCV Antibody HCV RNA via PCR (Confirms active replication vs. resolved infection) Hepatitis E (HEV)Anti-HEV IgM HEV RNA in blood/stool (used in immunosuppressed cases) B.\nAutoimmune Liver Diseases Autoimmune Hepatitis (AIH): Characterized by hypergammaglobulinemia (elevated IgG) and positive autoantibodies: Type 1 AIH: Anti-Nuclear Antibody (ANA) and/or Anti-Smooth Muscle Antibody (ASMA).\nType 2 AIH: Anti-Liver Kidney Microsome type 1 (Anti-LKM-1) antibodies; typically seen in pediatric populations.\nPrimary Biliary Cholangitis (PBC): Chronic cholestatic disease destroying intrahepatic small bile ducts.\nScreening marker of choice is Anti-Mitochondrial Antibody (AMA), highly sensitive and specific (>95%).\nPrimary Sclerosing Cholangitis (PSC): Fibrosing inflammation of intrahepatic and extrahepatic bile ducts, strongly linked to Inflammatory Bowel Disease (IBD/Ulcerative Colitis).\nAssociated with Perinuclear Anti- Neutrophil Cytoplasmic Antibodies (p-ANCA), though diagnosis depends primarily on imaging.\nC.\nMetabolic and Genetic Inquiries Hereditary Hemochromatosis: Screen via Transferrin Saturation (elevated, often >45-50%) and Serum Ferritin.\nConfirmed via HFE gene mutation analysis (C282Y/H63D).\nWilson's Disease: Disorder of copper excretion, presenting with neuropsychiatric symptoms and liver disease in young patients.\nScreen via reduced Serum Ceruloplasmin (<20 mg/dL) and elevated 24-hour Urinary Copper Excretion.\nSlit-lamp exam reveals Kayser-Fleischer (KF) rings.\nAlpha-1 Antitrypsin (A1AT) Deficiency: Suspected in patients presenting with concomitant early-onset emphysema and liver cirrhosis.\nInvestigated via serum A1AT levels and Pi-phenotyping.\n4.\nImaging Modalities A.\nTransabdominal Ultrasonography (US) The indispensable first-line, non-invasive imaging modality for nearly all suspected liver diseases.\nEvaluates liver size, echogenicity (e.g., diffusely increased echogenicity indicating \"fatty liver\" / steatosis), and surface contour (nodularity suggests cirrhosis).\nDetects dilated intrahepatic and extrahepatic bile ducts to differentiate intrahepatic cholestasis from mechanical extrahepatic biliary obstruction.\nEvaluates for ascites, splenomegaly, and portal vein patency/flow direction using Doppler imaging.\n◦ ◦",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Suspected VirusPrimary Screening Test Confirmatory / Supplementary Tests Hepatitis B (HBV)HBsAg (Current infection) Anti-HBc IgM (Acute window period marker) HBV DNA via PCR (Viral load) HBeAg / Anti-HBe (Replication status) Anti-HBs (Immunity) Hepatitis C (HCV)Anti-HCV Antibody HCV RNA via PCR (Confirms active replication vs. resolved infection) Hepatitis E (HEV)Anti-HEV IgM HEV RNA in blood/stool (used in immunosuppressed cases) B."
+        },
+        {
+          "type": "paragraph",
+          "text": "Autoimmune Liver Diseases Autoimmune Hepatitis (AIH): Characterized by hypergammaglobulinemia (elevated IgG) and positive autoantibodies: Type 1 AIH: Anti-Nuclear Antibody (ANA) and/or Anti-Smooth Muscle Antibody (ASMA)."
+        },
+        {
+          "type": "paragraph",
+          "text": "Type 2 AIH: Anti-Liver Kidney Microsome type 1 (Anti-LKM-1) antibodies; typically seen in pediatric populations."
+        },
+        {
+          "type": "paragraph",
+          "text": "Primary Biliary Cholangitis (PBC): Chronic cholestatic disease destroying intrahepatic small bile ducts."
+        },
+        {
+          "type": "paragraph",
+          "text": "Screening marker of choice is Anti-Mitochondrial Antibody (AMA), highly sensitive and specific (>95%)."
+        },
+        {
+          "type": "paragraph",
+          "text": "Primary Sclerosing Cholangitis (PSC): Fibrosing inflammation of intrahepatic and extrahepatic bile ducts, strongly linked to Inflammatory Bowel Disease (IBD/Ulcerative Colitis)."
+        },
+        {
+          "type": "paragraph",
+          "text": "Associated with Perinuclear Anti- Neutrophil Cytoplasmic Antibodies (p-ANCA), though diagnosis depends primarily on imaging."
+        },
+        {
+          "type": "paragraph",
+          "text": "C."
+        },
+        {
+          "type": "paragraph",
+          "text": "Metabolic and Genetic Inquiries Hereditary Hemochromatosis: Screen via Transferrin Saturation (elevated, often >45-50%) and Serum Ferritin."
+        },
+        {
+          "type": "paragraph",
+          "text": "Confirmed via HFE gene mutation analysis (C282Y/H63D)."
+        },
+        {
+          "type": "paragraph",
+          "text": "Wilson's Disease: Disorder of copper excretion, presenting with neuropsychiatric symptoms and liver disease in young patients."
+        },
+        {
+          "type": "paragraph",
+          "text": "Screen via reduced Serum Ceruloplasmin (<20 mg/dL) and elevated 24-hour Urinary Copper Excretion."
+        },
+        {
+          "type": "paragraph",
+          "text": "Slit-lamp exam reveals Kayser-Fleischer (KF) rings."
+        },
+        {
+          "type": "paragraph",
+          "text": "Alpha-1 Antitrypsin (A1AT) Deficiency: Suspected in patients presenting with concomitant early-onset emphysema and liver cirrhosis."
+        },
+        {
+          "type": "paragraph",
+          "text": "Investigated via serum A1AT levels and Pi-phenotyping."
+        },
+        {
+          "type": "paragraph",
+          "text": "4."
+        },
+        {
+          "type": "paragraph",
+          "text": "Imaging Modalities A."
+        },
+        {
+          "type": "paragraph",
+          "text": "Transabdominal Ultrasonography (US) The indispensable first-line, non-invasive imaging modality for nearly all suspected liver diseases."
+        },
+        {
+          "type": "paragraph",
+          "text": "Evaluates liver size, echogenicity (e.g., diffusely increased echogenicity indicating \"fatty liver\" / steatosis), and surface contour (nodularity suggests cirrhosis)."
+        },
+        {
+          "type": "paragraph",
+          "text": "Detects dilated intrahepatic and extrahepatic bile ducts to differentiate intrahepatic cholestasis from mechanical extrahepatic biliary obstruction."
+        },
+        {
+          "type": "paragraph",
+          "text": "Evaluates for ascites, splenomegaly, and portal vein patency/flow direction using Doppler imaging."
+        },
+        {
+          "type": "paragraph",
+          "text": "◦ ◦"
+        }
+      ],
+      "provenance": {
+        "label": "University Source",
+        "sourceOrder": 3,
+        "sourceSha256": "ee43d938a0d36b34aa36f7467726ccc048f3cb4dbf2e8db282b3826fa2d1e2bb"
+      },
+      "sourceHash": "939744cd994132890c9be388212c7a3084e8d534bee98b17d67afbaadd8c99bd"
+    },
+    {
+      "id": "med401-git-liver-investigations-source-4",
+      "order": 4,
+      "title": "University Source · Passage 4",
+      "text": "B.\nComputed Tomography (CT) & Magnetic Resonance Imaging (MRI) Contrast-Enhanced Multi-phase CT/MRI: Critical for characterizing focal liver lesions (e.g., Hemangioma, Adenoma, Focal Nodular Hyperplasia, and Hepatocellular Carcinoma [HCC]).\nHCC demonstrates a classic dynamic pattern: arterial phase hyperenhancement followed by venous/delayed phase washout.\nMagnetic Resonance Cholangiopancreatography (MRCP): Non-invasive T2-weighted MRI protocol optimal for visualizing biliary tree anatomy.\nIt is the gold standard for diagnosing PSC, showing a classic \"beaded appearance\" of intrahepatic and extrahepatic bile ducts.\nC.\nNon-Invasive Fibrosis Assessment: Transient Elastography (FibroScan) Measures liver stiffness by calculating the velocity of a low-frequency shear wave passing through the parenchyma.\nIt has largely replaced diagnostic liver biopsies for staging fibrosis in chronic hepatitis B and C and metabolic dysfunction-associated steatotic liver disease (MASLD).\n5.\nEndoscopic and Invasive Investigations A.\nUpper Gastrointestinal Endoscopy (Esophagogastroduodenoscopy - EGD) Essential screening tool in patients diagnosed with cirrhosis and portal hypertension.\nIt aims to identify, grade, and prophylactically manage esophageal and gastric varices or portal hypertensive gastropathy to prevent catastrophic variceal hemorrhage.\nB.\nEndoscopic Retrograde Cholangiopancreatography (ERCP) An invasive endoscopic-radiological tool.\nDue to procedural risks (e.g., post-ERCP pancreatitis, cholangitis), its role has evolved to be primarily therapeutic rather than purely diagnostic.\nIt is utilized for common bile duct stone extraction, sphincterotomy, and biliary stenting across malignant or benign strictures.\nC.\nHistopathological Investigation: Liver Biopsy Historically the absolute gold standard; currently reserved for cases where non-invasive testing yields ambiguous or conflicting results.\nIndications: Staging and grading chronic viral hepatitis when non-invasive tools are unavailable; diagnosing seronegative autoimmune hepatitis; evaluating unexplained hepatomegaly or persistent abnormal LFTs.\nAbsolute Contraindications: Severe uncorrectable coagulopathy (INR > 1.5), profound thrombocytopenia (Platelets < 50,000/µL), suspected vascular tumors or echinococcal (hydatid) cysts, and uncooperative patients.\n6.\nDiagnostic Algorithm: Summary Framework Step 1: Identify clinical syndrome (Acute liver failure, Jaundice, or Incidental abnormal LFTs).\nStep 2: Evaluate standard LFTs.\nCategorize into Hepatocellular (ALT/AST dominant) or Cholestatic (ALP/ GGT dominant).\nConfirm synthetic reserve using PT/INR and Albumin.\nStep 3: Order first-line Abdominal Ultrasound alongside initial baseline serologies (Viral markers for hepatocellular; biliary evaluation for cholestasis).\nStep 4: Advance to specific autoantibodies, metabolic screens, or specialized dynamic cross-sectional imaging (MRCP/CT) based on Step 2 and 3 results.\n1.\n2.\n3.\n4.",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "B."
+        },
+        {
+          "type": "paragraph",
+          "text": "Computed Tomography (CT) & Magnetic Resonance Imaging (MRI) Contrast-Enhanced Multi-phase CT/MRI: Critical for characterizing focal liver lesions (e.g., Hemangioma, Adenoma, Focal Nodular Hyperplasia, and Hepatocellular Carcinoma [HCC])."
+        },
+        {
+          "type": "paragraph",
+          "text": "HCC demonstrates a classic dynamic pattern: arterial phase hyperenhancement followed by venous/delayed phase washout."
+        },
+        {
+          "type": "paragraph",
+          "text": "Magnetic Resonance Cholangiopancreatography (MRCP): Non-invasive T2-weighted MRI protocol optimal for visualizing biliary tree anatomy."
+        },
+        {
+          "type": "paragraph",
+          "text": "It is the gold standard for diagnosing PSC, showing a classic \"beaded appearance\" of intrahepatic and extrahepatic bile ducts."
+        },
+        {
+          "type": "paragraph",
+          "text": "C."
+        },
+        {
+          "type": "paragraph",
+          "text": "Non-Invasive Fibrosis Assessment: Transient Elastography (FibroScan) Measures liver stiffness by calculating the velocity of a low-frequency shear wave passing through the parenchyma."
+        },
+        {
+          "type": "paragraph",
+          "text": "It has largely replaced diagnostic liver biopsies for staging fibrosis in chronic hepatitis B and C and metabolic dysfunction-associated steatotic liver disease (MASLD)."
+        },
+        {
+          "type": "paragraph",
+          "text": "5."
+        },
+        {
+          "type": "paragraph",
+          "text": "Endoscopic and Invasive Investigations A."
+        },
+        {
+          "type": "paragraph",
+          "text": "Upper Gastrointestinal Endoscopy (Esophagogastroduodenoscopy - EGD) Essential screening tool in patients diagnosed with cirrhosis and portal hypertension."
+        },
+        {
+          "type": "paragraph",
+          "text": "It aims to identify, grade, and prophylactically manage esophageal and gastric varices or portal hypertensive gastropathy to prevent catastrophic variceal hemorrhage."
+        },
+        {
+          "type": "paragraph",
+          "text": "B."
+        },
+        {
+          "type": "paragraph",
+          "text": "Endoscopic Retrograde Cholangiopancreatography (ERCP) An invasive endoscopic-radiological tool."
+        },
+        {
+          "type": "paragraph",
+          "text": "Due to procedural risks (e.g., post-ERCP pancreatitis, cholangitis), its role has evolved to be primarily therapeutic rather than purely diagnostic."
+        },
+        {
+          "type": "paragraph",
+          "text": "It is utilized for common bile duct stone extraction, sphincterotomy, and biliary stenting across malignant or benign strictures."
+        },
+        {
+          "type": "paragraph",
+          "text": "C."
+        },
+        {
+          "type": "paragraph",
+          "text": "Histopathological Investigation: Liver Biopsy Historically the absolute gold standard; currently reserved for cases where non-invasive testing yields ambiguous or conflicting results."
+        },
+        {
+          "type": "paragraph",
+          "text": "Indications: Staging and grading chronic viral hepatitis when non-invasive tools are unavailable; diagnosing seronegative autoimmune hepatitis; evaluating unexplained hepatomegaly or persistent abnormal LFTs."
+        },
+        {
+          "type": "paragraph",
+          "text": "Absolute Contraindications: Severe uncorrectable coagulopathy (INR > 1.5), profound thrombocytopenia (Platelets < 50,000/µL), suspected vascular tumors or echinococcal (hydatid) cysts, and uncooperative patients."
+        },
+        {
+          "type": "paragraph",
+          "text": "6."
+        },
+        {
+          "type": "paragraph",
+          "text": "Diagnostic Algorithm: Summary Framework Step 1: Identify clinical syndrome (Acute liver failure, Jaundice, or Incidental abnormal LFTs)."
+        },
+        {
+          "type": "paragraph",
+          "text": "Step 2: Evaluate standard LFTs."
+        },
+        {
+          "type": "paragraph",
+          "text": "Categorize into Hepatocellular (ALT/AST dominant) or Cholestatic (ALP/ GGT dominant)."
+        },
+        {
+          "type": "paragraph",
+          "text": "Confirm synthetic reserve using PT/INR and Albumin."
+        },
+        {
+          "type": "paragraph",
+          "text": "Step 3: Order first-line Abdominal Ultrasound alongside initial baseline serologies (Viral markers for hepatocellular; biliary evaluation for cholestasis)."
+        },
+        {
+          "type": "paragraph",
+          "text": "Step 4: Advance to specific autoantibodies, metabolic screens, or specialized dynamic cross-sectional imaging (MRCP/CT) based on Step 2 and 3 results."
+        },
+        {
+          "type": "paragraph",
+          "text": "1."
+        },
+        {
+          "type": "paragraph",
+          "text": "2."
+        },
+        {
+          "type": "paragraph",
+          "text": "3."
+        },
+        {
+          "type": "paragraph",
+          "text": "4."
+        }
+      ],
+      "provenance": {
+        "label": "University Source",
+        "sourceOrder": 4,
+        "sourceSha256": "ee43d938a0d36b34aa36f7467726ccc048f3cb4dbf2e8db282b3826fa2d1e2bb"
+      },
+      "sourceHash": "d0a513e06654220f32fe3c3acf77b4c7123d5fc2d020408ad1a804a5b96c6897"
+    }
+  ],
+  "sourceVersion": "university-source-2026-07-29-v1",
+  "status": "published"
+}

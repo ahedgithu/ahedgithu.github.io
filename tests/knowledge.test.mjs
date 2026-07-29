@@ -37,9 +37,12 @@ test('canonical manifest provenance matches expected input source and counts', (
   const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
   assert.equal(manifest.subjectId, 'med401-git');
   assert.equal(manifest.provenance.inputHash, '36CA1A86B9C4E1E1D0F42F8D90858F2D72584DD2BCC53BEECEB69ED97A0C3688');
-  assert.equal(manifest.provenance.topicCount, 6);
-  assert.equal(manifest.provenance.sectionCount, 37);
-  assert.equal(manifest.provenance.passageCount, 82);
+  assert.equal(manifest.provenance.topicCount, 8);
+  assert.equal(manifest.provenance.sectionCount, 59);
+  assert.equal(manifest.provenance.passageCount, 93);
+  assert.equal(manifest.provenance.alshamelSupportedCount, 341);
+  assert.equal(manifest.provenance.alshamelUnsupportedCount, 49);
+  assert.equal(manifest.provenance.studentFacingSourceLabel, 'University Source');
   assert.equal(manifest.provenance.sourceVisualCount, 6);
   assert.equal(manifest.provenance.imageCount, 0);
   assert.equal(manifest.provenance.studentFacingAssetCount, 0);
@@ -55,7 +58,7 @@ test('deploy bundles exist under public/data/medical/', () => {
   assert.equal(existsSync(deployEvidencePath), true, 'deploy evidence.json must exist');
 
   const searchIndex = JSON.parse(readFileSync(deployIndexPath, 'utf8'));
-  assert.equal(searchIndex.totalItems, 125);
+  assert.equal(searchIndex.totalItems, 160);
 });
 
 test('source extraction decodes HTML entities exactly once', () => {
@@ -118,8 +121,8 @@ test('all canonical sections and passages are clean text-only student content', 
     }
   }
 
-  assert.equal(sectionCount, 37);
-  assert.equal(passageCount, 82);
+  assert.equal(sectionCount, 59);
+  assert.equal(passageCount, 93);
   for (const assetDir of [
     path.join(ROOT_DIR, 'content', 'medical', 'med401-git', 'assets'),
     path.join(ROOT_DIR, 'public', 'data', 'medical', 'assets')
@@ -145,7 +148,7 @@ test('source pages remain topic-level and are never assigned by fuzzy section ma
     }
   }
 
-  assert.equal(passageCount, 82);
+  assert.equal(passageCount, 93);
 });
 
 test('source search ranks titles and returns escaped plain-text snippets', () => {
@@ -205,6 +208,49 @@ test('supported MCQs expose Open Source before answer feedback is rendered', () 
   assert.ok(actionIndex > -1, 'supported question source action must be defined');
   assert.ok(revealIndex > actionIndex, 'Open Source must be created outside answer-only feedback');
   assert.match(mainSource.slice(actionIndex, revealIndex), />Open Source<\/button>/);
+});
+
+test('الشامل evidence is exact, private, and source-only', () => {
+  const evidence = JSON.parse(readFileSync(
+    path.join(ROOT_DIR, 'content', 'medical', 'med401-git', 'evidence', 'mcq-evidence.json'),
+    'utf8'
+  ));
+  const records = evidence.records.filter((record) => record.questionId.startsWith('med1-alshamel-'));
+  assert.equal(records.length, 341);
+  assert.equal(evidence.unsupportedAlshamel.length, 49);
+
+  const topics = new Map(
+    readdirSync(path.join(ROOT_DIR, 'content', 'medical', 'med401-git', 'topics'))
+      .filter((file) => file.endsWith('.json'))
+      .map((file) => {
+        const topic = JSON.parse(readFileSync(
+          path.join(ROOT_DIR, 'content', 'medical', 'med401-git', 'topics', file),
+          'utf8'
+        ));
+        return [topic.id, topic];
+      })
+  );
+
+  for (const record of records) {
+    assert.equal(record.subjectTitle, 'University Source');
+    assert.equal('explanation' in record, false);
+    assert.ok(record.highlightText);
+    const topic = topics.get(record.topicId);
+    assert.ok(topic);
+    const citedText = topic.passages
+      .filter((passage) => record.passageIds.includes(passage.id))
+      .map((passage) => passage.text)
+      .join('\n');
+    assert.ok(citedText.includes(record.highlightText), `${record.questionId} highlight must be an exact source substring`);
+  }
+
+  const publicData = [
+    readFileSync(path.join(ROOT_DIR, 'public', 'data', 'medical', 'manifest.json'), 'utf8'),
+    readFileSync(path.join(ROOT_DIR, 'public', 'data', 'medical', 'evidence.json'), 'utf8'),
+    ...readdirSync(path.join(ROOT_DIR, 'public', 'data', 'medical', 'topics'))
+      .map((file) => readFileSync(path.join(ROOT_DIR, 'public', 'data', 'medical', 'topics', file), 'utf8'))
+  ].join('\n');
+  assert.doesNotMatch(publicData, /Omar\s+Heikal|Hisham\s+Samy|Kamal\s+Mokbel|Document \(34\)|\.docx|lecture slides/i);
 });
 
 test('source reader preserves active quiz state and hides raw source-page labels', () => {
@@ -288,6 +334,10 @@ function runLibraryGeneration() {
       stdio: 'pipe'
     });
   }
+  execFileSync(process.execPath, ['scripts/build-med1-alshamel-evidence.mjs'], {
+    cwd: ROOT_DIR,
+    stdio: 'pipe'
+  });
   execFileSync(process.execPath, ['scripts/build-medical-library.mjs'], {
     cwd: ROOT_DIR,
     stdio: 'pipe'

@@ -4287,7 +4287,7 @@ let activeSourceReaderState = null
 let lastSourceReaderOpener = null
 let previousModalDisplayState = null
 
-async function openSourceReader({ topicId, sectionId, passageId, openerElement = null } = {}) {
+async function openSourceReader({ topicId, sectionId, passageId, highlightText = '', openerElement = null } = {}) {
   const readerWasOpen = Boolean(activeSourceReaderState)
   if (openerElement) {
     lastSourceReaderOpener = openerElement
@@ -4326,6 +4326,7 @@ async function openSourceReader({ topicId, sectionId, passageId, openerElement =
     topicId,
     sectionId: resolved.section ? resolved.section.id : sectionId,
     passageId,
+    highlightText,
     resolved,
     hasActiveQuiz,
     quizPanelScrollTop: panel.scrollTop
@@ -4360,7 +4361,7 @@ async function openSourceReader({ topicId, sectionId, passageId, openerElement =
     htmlMarkup += `<button type="button" class="source-reader__back-btn" data-close-source-reader>← Back to ${hasActiveQuiz ? 'question' : 'search'}</button>`
   }
   htmlMarkup += '</div>'
-  htmlMarkup += renderSourceReaderMarkup(resolved, passageId)
+  htmlMarkup += renderSourceReaderMarkup(resolved, passageId, highlightText)
 
   readerContainer.innerHTML = htmlMarkup
   readerContainer.hidden = false
@@ -6157,7 +6158,8 @@ function renderQuizQuestion() {
           data-open-source="${escapeHtml(question.id)}"
           data-topic-id="${escapeHtml(citation.topicId)}"
           data-section-id="${escapeHtml(citation.sectionId || '')}"
-          data-passage-id="${escapeHtml(citedPassageId)}">Open Source</button>
+          data-passage-id="${escapeHtml(citedPassageId)}"
+          data-highlight-text="${escapeHtml(citation.highlightText || '')}">Open Source</button>
       </div>
     ` : ''
 
@@ -8860,6 +8862,7 @@ document.addEventListener('click', (event) => {
       topicId: openSourceBtn.dataset.topicId,
       sectionId: openSourceBtn.dataset.sectionId,
       passageId: openSourceBtn.dataset.passageId,
+      highlightText: openSourceBtn.dataset.highlightText,
       openerElement: openSourceBtn
     })
     return
