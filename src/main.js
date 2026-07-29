@@ -813,7 +813,7 @@ const QUIZ_SOUND_PACKS = {
     label: 'Duolingo',
     iconUrl: '/assets/icons/mcq-sound-pack-study-b445547bb66e.svg',
     correctUrls: ['/assets/audio/mcq-study-correct-f8ff6b8abb11.mp3'],
-    completionUrl: '/assets/audio/mcq-study-complete-48f99f05a862.mp3',
+    completionUrl: '/assets/audio/mcq-study-complete-a3ace815cf43.mp3',
     levelUpUrl: QUIZ_LEVEL_UP_AUDIO_URL
   }
 }
