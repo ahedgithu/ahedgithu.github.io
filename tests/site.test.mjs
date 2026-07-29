@@ -667,7 +667,7 @@ test('MED 401-1 hepatology final review is source-faithful and added without rep
   assert.match(profileHtml, /med1-mw-ragab-mcqs\.js\?v=20260728-med1-mw-ragab-v2/)
 })
 
-test('MED 401-1 الشامل bank preserves answer-safe records, five-choice questions, and held records', () => {
+test('MED 401-1 الشامل bank preserves answer-safe records, doctor notes, five-choice questions, and held records', () => {
   const context = { window: { mcqQuizzes: {} } }
   vm.runInNewContext(read('src/med1-kellawi-mcqs.js'), context)
   vm.runInNewContext(read('src/med1-mw-ragab-mcqs.js'), context)
@@ -681,14 +681,21 @@ test('MED 401-1 الشامل bank preserves answer-safe records, five-choice que
   assert.ok(source, 'الشامل source is missing')
   assert.equal(source.label, 'الشامل')
   assert.equal(source.sourceFile, 'University Source')
-  assert.equal(source.mcqs.length, 390)
+  assert.equal(source.mcqs.length, 419)
   assert.equal(source.heldForReview.length, 14)
-  assert.equal(new Set(source.mcqs.map((question) => question.id)).size, 390)
+  assert.equal(new Set(source.mcqs.map((question) => question.id)).size, 419)
   assert.equal(source.mcqs.filter((question) => question.choices.length === 5).length, 2)
   assert.ok(source.mcqs.every((question) => question.choices.length >= 2))
   assert.ok(source.mcqs.every((question) => Number.isInteger(question.answerIndex) && question.choices[question.answerIndex]))
-  assert.ok(source.mcqs.every((question) => question.source === 'University Source'))
+  assert.equal(source.mcqs.filter((question) => question.source === 'University Source').length, 390)
   assert.ok(source.heldForReview.every((question) => question.sourceDocument === 'University Source'))
+  const doctorNotesQuestions = source.mcqs.filter((question) => question.source === 'Document (16).docx')
+  assert.equal(doctorNotesQuestions.length, 29)
+  assert.ok(doctorNotesQuestions.every((question) => question.sourceHash === 'd00d68f340c24c0b6348d974cf089f3c050d0451fb95afe1634070ee216eca06'))
+  assert.equal(doctorNotesQuestions.filter((question) => question.additionalNote).length, 4)
+  assert.ok(doctorNotesQuestions.some((question) => question.additionalNote.includes('نقطة الدكتور المهمة 📌')))
+  assert.ok(doctorNotesQuestions.some((question) => question.additionalNote.includes('متوقعة جدًا')))
+  assert.ok(doctorNotesQuestions.some((question) => question.additionalNote.includes('High Yield 📌')))
   assert.deepEqual(
     Array.from(source.collection.groups, (group) => [group.label, group.questionCount]),
     [
@@ -697,14 +704,18 @@ test('MED 401-1 الشامل bank preserves answer-safe records, five-choice que
       ['Esophageal Diseases', 52],
       ['Acute Viral Hepatitis', 55],
       ['Autoimmune Hepatitis', 51],
-      ['Small Intestinal Diseases', 118]
+      ['Small Intestinal Diseases', 118],
+      ['نقاط مهمه الدكتور قال عليها', 29]
     ]
   )
+  const doctorNotesGroup = source.collection.groups.find((group) => group.id === 'doctor-important-points')
+  assert.equal(doctorNotesGroup.sourceFile, 'Document (16).docx')
+  assert.equal(doctorNotesGroup.parts.length, 2)
 
   const indexHtml = read('index.html')
   const profileHtml = read('profile.html')
-  assert.match(indexHtml, /med1-alshamel-mcqs\.js\?v=20260729-university-source-v1/)
-  assert.match(profileHtml, /med1-alshamel-mcqs\.js\?v=20260729-university-source-v1/)
+  assert.match(indexHtml, /med1-alshamel-mcqs\.js\?v=20260729-doctor-notes-v2/)
+  assert.match(profileHtml, /med1-alshamel-mcqs\.js\?v=20260729-doctor-notes-v2/)
 })
 
 test('SUR 401-1 past-exam bank is answer-safe, grouped, and wired', () => {
