@@ -67,8 +67,8 @@ test('tracker search splits topics and MCQs with focused question launch', () =>
   assert.match(html, /data-search-mode="topics"[^>]*aria-pressed="true"/)
   assert.match(html, /data-search-mode="mcqs"[^>]*aria-pressed="false"/)
   assert.match(html, /id="mcq-search-results"[^>]*aria-live="polite"[^>]*hidden/)
-  assert.match(html, /style\.css\?v=20260728-profile-avatar-dialog-v3/)
-  assert.match(html, /main\.js\?v=20260728-profile-avatar-dialog-v3/)
+  assert.match(html, /style\.css\?v=20260729-mcq-answer-audio-v2/)
+  assert.match(html, /main\.js\?v=20260729-mcq-answer-audio-v2/)
 
   for (const helper of [
     'normalizeMcqSearchText',
@@ -803,6 +803,29 @@ test('quiz timer is a native responsive robot with answer moods', () => {
   assert.match(style, /@media \(prefers-reduced-motion: reduce\)[\s\S]*?\.quiz-timer/)
 })
 
+test('quiz answer sounds advance through five kills and reset the streak', () => {
+  const mainSource = read('src/main.js')
+  const correctSoundUrls = Array.from(
+    mainSource.matchAll(/'(\/assets\/audio\/mcq-correct-kill-\d-[^']+\.mp3)'/g),
+    (match) => match[1]
+  )
+
+  assert.equal(correctSoundUrls.length, 5)
+  assert.deepEqual(
+    correctSoundUrls.map((url) => Number(url.match(/kill-(\d)-/)?.[1])),
+    [1, 2, 3, 4, 5]
+  )
+  correctSoundUrls.forEach((url) => {
+    assert.ok(readBytes(`public${url}`).length > 1000, `${url} is missing or empty`)
+  })
+
+  assert.match(mainSource, /const soundIndex = feedbackAudio\.correctStreak % feedbackAudio\.correct\.length/)
+  assert.match(mainSource, /feedbackAudio\.correctStreak = soundIndex \+ 1/)
+  assert.match(mainSource, /else \{\s*feedbackAudio\.correctStreak = 0\s*\}/)
+  assert.match(mainSource, /function resetQuizFeedbackSequence\s*\(/)
+  assert.match(mainSource, /const isCorrect = question\.correctOptionId === selectedOptionId\s*playQuizFeedbackSound\(isCorrect\)/)
+})
+
 test('quiz and global progress calculations are correct', () => {
   assert.equal(calculatePercent(0, 0), 0)
   assert.equal(calculatePercent(2, 5), 40)
@@ -936,8 +959,8 @@ test('Google login is mandatory and the academic section is account-bound', () =
   assert.match(mainSource, /\$\{QUIZ_STORAGE_PREFIX\}::\$\{getProgressStorageOwnerId\(\)\}::\$\{section\}/)
   assert.match(mainSource, /\$\{TOPIC_COMPLETION_STORAGE_PREFIX\}::\$\{getProgressStorageOwnerId\(\)\}::\$\{section\}/)
   assert.match(schedule, /window\.location\.replace\('\/#schedule'\)/)
-  assert.match(html, /style\.css\?v=20260728-profile-avatar-dialog-v3/)
-  assert.match(html, /main\.js\?v=20260728-profile-avatar-dialog-v3/)
+  assert.match(html, /style\.css\?v=20260729-mcq-answer-audio-v2/)
+  assert.match(html, /main\.js\?v=20260729-mcq-answer-audio-v2/)
 })
 
 test('student profile opens as a standalone gamified page', () => {
@@ -1249,8 +1272,8 @@ test('section selector is centered and the wide review remains fully visible', (
   assert.match(style, /\.home-review-screenshot\s*\{[\s\S]*?aspect-ratio:\s*1\.9\s*\/\s*1;[\s\S]*?object-fit:\s*cover;/s)
   assert.match(style, /\.home-review-screenshot--fit\s*\{[^}]*object-fit:\s*contain;[^}]*object-position:\s*left center;/s)
   assert.equal((html.match(/review5\.jpg" class="home-review-screenshot home-review-screenshot--fit"/g) || []).length, 2)
-  assert.match(html, /style\.css\?v=20260728-profile-avatar-dialog-v3/)
-  assert.match(html, /main\.js\?v=20260728-profile-avatar-dialog-v3/)
+  assert.match(html, /style\.css\?v=20260729-mcq-answer-audio-v2/)
+  assert.match(html, /main\.js\?v=20260729-mcq-answer-audio-v2/)
   assert.match(style, /body\[data-site-mode="selector"\] > main > \.site-footer/)
 
   for (const file of ['review1.jpg', 'review2.jpg', 'review3.jpg', 'review4.jpg', 'review5.jpg', 'review6.png', 'review7.png', 'review8.png']) {

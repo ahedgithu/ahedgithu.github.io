@@ -771,6 +771,15 @@ const quizRobotCompactQuery = window.matchMedia('(max-width: 640px)')
 const QUIZ_STICKY_OFFSET = 68
 const QUIZ_STORAGE_PREFIX = 'quizState'
 const LEGACY_QUIZ_STORAGE_PREFIX = 'mcq-progress-'
+const QUIZ_SOUND_STORAGE_KEY = 'quizAnswerSoundsEnabled'
+const QUIZ_CORRECT_AUDIO_URLS = [
+  '/assets/audio/mcq-correct-kill-1-8cca0cb32228.mp3',
+  '/assets/audio/mcq-correct-kill-2-a686ab1cbea6.mp3',
+  '/assets/audio/mcq-correct-kill-3-c0096467cee7.mp3',
+  '/assets/audio/mcq-correct-kill-4-4d794c8bc942.mp3',
+  '/assets/audio/mcq-correct-kill-5-0a24c8292ac4.mp3'
+]
+const QUIZ_INCORRECT_AUDIO_URL = '/assets/audio/mcq-incorrect-subtle-v1.wav'
 const TOPIC_COMPLETION_STORAGE_PREFIX = 'topicCompletion'
 const LEGACY_TOPIC_COMPLETION_STORAGE_PREFIX = 'med401-topic-progress-v1::'
 const LOCAL_PROGRESS_OWNER_KEY = 'mustHubLocalProgressOwner'
@@ -832,6 +841,14 @@ const quizState = {
 }
 let quizTimerInterval = null
 let quizRobotMoodTimeout = null
+let quizSoundEnabled = getSavedQuizSoundEnabled()
+const quizFeedbackAudio = {
+  correct: [],
+  incorrect: null,
+  active: null,
+  playbackId: 0,
+  correctStreak: 0
+}
 const studentProgressState = {
   user: null,
   ready: false,
@@ -5149,6 +5166,16 @@ function ensureQuizModal() {
             <span class="quiz-robot__foot quiz-robot__foot--right"></span>
           </span>
         </span>
+        <button class="icon-button quiz-sound-toggle" type="button" data-quiz-sound-toggle aria-pressed="true">
+          <svg class="quiz-sound-toggle__on" aria-hidden="true" viewBox="0 0 24 24">
+            <path d="M11 5 6.5 9H3v6h3.5l4.5 4V5Z" />
+            <path d="M15 9.5c1.3 1.4 1.3 3.6 0 5M18 7c2.7 2.8 2.7 7.2 0 10" />
+          </svg>
+          <svg class="quiz-sound-toggle__off" aria-hidden="true" viewBox="0 0 24 24">
+            <path d="M11 5 6.5 9H3v6h3.5l4.5 4V5Z" />
+            <path d="m15.5 10 5 5M20.5 10l-5 5" />
+          </svg>
+        </button>
         <button class="icon-button" type="button" data-quiz-close aria-label="Close quiz">X</button>
       </div>
       <div class="quiz-modal__heading">
@@ -5165,6 +5192,8 @@ function ensureQuizModal() {
     </section>
   `
   document.body.appendChild(modal)
+  ensureQuizFeedbackAudio()
+  syncQuizSoundToggle()
   const panel = modal.querySelector('.quiz-modal__panel')
   if (panel) panel.addEventListener('scroll', updateQuizRobotCompactMode, { passive: true })
   if (typeof quizRobotCompactQuery.addEventListener === 'function') {
@@ -5419,6 +5448,103 @@ function clearQuizRobotMoodTimeout() {
   quizRobotMoodTimeout = null
 }
 
+function getSavedQuizSoundEnabled() {
+  try {
+    return localStorage.getItem(QUIZ_SOUND_STORAGE_KEY) !== 'false'
+  } catch {
+    return true
+  }
+}
+
+function ensureQuizFeedbackAudio() {
+  if (typeof window.Audio !== 'function') return quizFeedbackAudio
+
+  if (!quizFeedbackAudio.correct.length) {
+    quizFeedbackAudio.correct = QUIZ_CORRECT_AUDIO_URLS.map((url) => {
+      const audio = new window.Audio(url)
+      audio.preload = 'auto'
+      audio.volume = 0.65
+      return audio
+    })
+  }
+
+  if (!quizFeedbackAudio.incorrect) {
+    quizFeedbackAudio.incorrect = new window.Audio(QUIZ_INCORRECT_AUDIO_URL)
+    quizFeedbackAudio.incorrect.preload = 'auto'
+    quizFeedbackAudio.incorrect.volume = 0.75
+  }
+
+  return quizFeedbackAudio
+}
+
+function stopQuizFeedbackAudio() {
+  quizFeedbackAudio.playbackId += 1
+  const activeAudio = quizFeedbackAudio.active
+  if (!activeAudio) return
+
+  activeAudio.pause()
+  activeAudio.currentTime = 0
+  quizFeedbackAudio.active = null
+}
+
+function resetQuizFeedbackSequence() {
+  stopQuizFeedbackAudio()
+  quizFeedbackAudio.correctStreak = 0
+}
+
+function syncQuizSoundToggle() {
+  const button = document.querySelector('[data-quiz-sound-toggle]')
+  if (!button) return
+
+  const label = quizSoundEnabled ? 'Mute answer sounds' : 'Turn on answer sounds'
+  button.setAttribute('aria-pressed', String(quizSoundEnabled))
+  button.setAttribute('aria-label', label)
+  button.setAttribute('title', label)
+}
+
+function setQuizSoundEnabled(enabled) {
+  quizSoundEnabled = Boolean(enabled)
+  try {
+    localStorage.setItem(QUIZ_SOUND_STORAGE_KEY, String(quizSoundEnabled))
+  } catch {
+    // The in-memory preference still applies when local storage is unavailable.
+  }
+  if (!quizSoundEnabled) resetQuizFeedbackSequence()
+  syncQuizSoundToggle()
+}
+
+function playQuizFeedbackSound(isCorrect) {
+  if (!quizSoundEnabled) return
+
+  const feedbackAudio = ensureQuizFeedbackAudio()
+  let audio = feedbackAudio.incorrect
+
+  if (isCorrect) {
+    if (!feedbackAudio.correct.length) return
+    const soundIndex = feedbackAudio.correctStreak % feedbackAudio.correct.length
+    feedbackAudio.correctStreak = soundIndex + 1
+    audio = feedbackAudio.correct[soundIndex]
+  } else {
+    feedbackAudio.correctStreak = 0
+  }
+  if (!audio) return
+
+  stopQuizFeedbackAudio()
+  const playbackId = quizFeedbackAudio.playbackId
+  audio.currentTime = 0
+  quizFeedbackAudio.active = audio
+  audio.onended = () => {
+    if (quizFeedbackAudio.active === audio && quizFeedbackAudio.playbackId === playbackId) {
+      quizFeedbackAudio.active = null
+    }
+  }
+  audio.play().catch(() => {
+    if (quizFeedbackAudio.active === audio && quizFeedbackAudio.playbackId === playbackId) {
+      quizFeedbackAudio.active = null
+    }
+  })
+}
+
 function resetQuizRobotMood(timer = document.getElementById('quiz-timer')) {
   clearQuizRobotMoodTimeout()
   if (timer) timer.dataset.mood = 'neutral'
@@ -5654,6 +5780,7 @@ function initializeQuiz(topicLabel, {
   shuffleQuestionsOverride = null,
   promptOnSaved = true
 } = {}) {
+  resetQuizFeedbackSequence()
   const config = getQuizConfig(topicLabel, sourceId)
   if (!config || !config.mcqs.length) return false
 
@@ -6665,6 +6792,7 @@ function closeQuiz() {
   deactivateManagedModal(modal)
   modal.setAttribute('aria-hidden', 'true')
   document.body.classList.remove('panel-open')
+  resetQuizFeedbackSequence()
   clearQuizTimerInterval()
   resetQuizRobotMood()
   sendStudentPresence(true)
@@ -6927,6 +7055,11 @@ function handleQuizClick(event) {
     return
   }
 
+  if (event.target.closest('[data-quiz-sound-toggle]')) {
+    setQuizSoundEnabled(!quizSoundEnabled)
+    return
+  }
+
   if (event.target.closest('[data-quiz-resume]')) {
     quizState.showResumePrompt = false
     if (!quizState.timeLimitMinutes && !quizState.timerStartedAt) {
@@ -7016,6 +7149,7 @@ function handleQuizClick(event) {
   }
 
   if (event.target.closest('[data-quiz-reset]')) {
+    resetQuizFeedbackSequence()
     if (quizState.mode === 'wrong-review') {
       quizState.answers = {}
       quizState.index = 0
@@ -7059,9 +7193,11 @@ function handleQuizClick(event) {
     quizState.answers[question.id] = selectedOptionId
     quizState.missingQuestionIds = (quizState.missingQuestionIds || []).filter((questionId) => questionId !== question.id)
     saveQuizState()
+    const isCorrect = question.correctOptionId === selectedOptionId
+    playQuizFeedbackSound(isCorrect)
     renderQuizQuestion()
 
-    if (question.correctOptionId === selectedOptionId) {
+    if (isCorrect) {
       if (quizState.mode === 'wrong-review' && !quizState.masteredQuestionIds.includes(question.id)) {
         quizState.masteredQuestionIds.push(question.id)
         saveQuizState()

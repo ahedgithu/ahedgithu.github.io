@@ -4101,11 +4101,34 @@ body.admin-modal-open {
 }
 
 .quiz-modal__heading {
-  margin: 0 112px 18px 0;
+  margin: 0 160px 18px 0;
 }
 
 .quiz-modal__heading .quiz-modal__meta {
   margin-top: 7px;
+}
+
+.quiz-sound-toggle {
+  color: var(--text);
+}
+
+.quiz-sound-toggle svg {
+  width: 21px;
+  height: 21px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+.quiz-sound-toggle__off,
+.quiz-sound-toggle[aria-pressed="false"] .quiz-sound-toggle__on {
+  display: none;
+}
+
+.quiz-sound-toggle[aria-pressed="false"] .quiz-sound-toggle__off {
+  display: block;
 }
 
 .pdf-preview-modal__top {
@@ -4583,7 +4606,7 @@ body.admin-modal-open {
   }
 
   .quiz-modal__heading {
-    margin: 0 92px 14px 0;
+    margin: 0 140px 14px 0;
   }
 
   .quiz-modal h2 {
