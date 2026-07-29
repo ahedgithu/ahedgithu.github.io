@@ -1,6 +1,18 @@
 import confetti from 'canvas-confetti'
 
-import { calculatePercent, calculateQuizProgress } from './progress.js'
+import {
+  playExclusiveAudioPlayback,
+  soundPackAllowsPlayback,
+  stopExclusiveAudioPlayback
+} from './audioFeedback.js'
+import {
+  calculatePercent,
+  calculateQuizProgress,
+  calculateMasteryLevel,
+  claimProfileLevelTransition,
+  enqueueSerialTask,
+  getConfirmedProfileLevelTransition
+} from './progress.js'
 import {
   initKnowledgeLibrary,
   getManifest,
@@ -771,15 +783,40 @@ const quizRobotCompactQuery = window.matchMedia('(max-width: 640px)')
 const QUIZ_STICKY_OFFSET = 68
 const QUIZ_STORAGE_PREFIX = 'quizState'
 const LEGACY_QUIZ_STORAGE_PREFIX = 'mcq-progress-'
-const QUIZ_SOUND_STORAGE_KEY = 'quizAnswerSoundsEnabled'
-const QUIZ_CORRECT_AUDIO_URLS = [
-  '/assets/audio/mcq-correct-kill-1-8cca0cb32228.mp3',
-  '/assets/audio/mcq-correct-kill-2-a686ab1cbea6.mp3',
-  '/assets/audio/mcq-correct-kill-3-c0096467cee7.mp3',
-  '/assets/audio/mcq-correct-kill-4-4d794c8bc942.mp3',
-  '/assets/audio/mcq-correct-kill-5-0a24c8292ac4.mp3'
-]
-const QUIZ_INCORRECT_AUDIO_URL = '/assets/audio/mcq-incorrect-subtle-v1.wav'
+const LEGACY_QUIZ_SOUND_STORAGE_KEY = 'quizAnswerSoundsEnabled'
+const QUIZ_SOUND_PACK_STORAGE_KEY = 'quizAnswerSoundPack'
+const QUIZ_SHARED_INCORRECT_AUDIO_URL = '/assets/audio/mcq-study-incorrect-7fccb7f6586f.mp3'
+const QUIZ_LEVEL_UP_AUDIO_URL = '/assets/audio/mcq-level-up-2d2abd9fd850.mp3'
+const LEVEL_UP_SEEN_STORAGE_PREFIX = 'seenProfileLevelUps'
+const QUIZ_SOUND_PACKS = {
+  muted: {
+    label: 'Muted',
+    iconUrl: '',
+    correctUrls: [],
+    completionUrl: '',
+    levelUpUrl: ''
+  },
+  valorant: {
+    label: 'Valorant',
+    iconUrl: '/assets/icons/mcq-sound-pack-tactical-8dab919cc5ca.svg',
+    correctUrls: [
+      '/assets/audio/mcq-correct-kill-1-8cca0cb32228.mp3',
+      '/assets/audio/mcq-correct-kill-2-a686ab1cbea6.mp3',
+      '/assets/audio/mcq-correct-kill-3-c0096467cee7.mp3',
+      '/assets/audio/mcq-correct-kill-4-4d794c8bc942.mp3',
+      '/assets/audio/mcq-correct-kill-5-0a24c8292ac4.mp3'
+    ],
+    completionUrl: '',
+    levelUpUrl: QUIZ_LEVEL_UP_AUDIO_URL
+  },
+  duolingo: {
+    label: 'Duolingo',
+    iconUrl: '/assets/icons/mcq-sound-pack-study-b445547bb66e.svg',
+    correctUrls: ['/assets/audio/mcq-study-correct-f8ff6b8abb11.mp3'],
+    completionUrl: '/assets/audio/mcq-study-complete-48f99f05a862.mp3',
+    levelUpUrl: QUIZ_LEVEL_UP_AUDIO_URL
+  }
+}
 const TOPIC_COMPLETION_STORAGE_PREFIX = 'topicCompletion'
 const LEGACY_TOPIC_COMPLETION_STORAGE_PREFIX = 'med401-topic-progress-v1::'
 const LOCAL_PROGRESS_OWNER_KEY = 'mustHubLocalProgressOwner'
@@ -837,18 +874,27 @@ const quizState = {
   timerElapsedMs: 0,
   attemptId: null,
   attemptStartedAt: null,
+  validatedInSession: false,
   transient: false
 }
 let quizTimerInterval = null
 let quizRobotMoodTimeout = null
-let quizSoundEnabled = getSavedQuizSoundEnabled()
+let quizSessionGeneration = 0
+let quizSoundPack = getSavedQuizSoundPack()
+let quizSoundMenuOpen = false
 const quizFeedbackAudio = {
-  correct: [],
+  packs: new Map(),
   incorrect: null,
   active: null,
   playbackId: 0,
   correctStreak: 0
 }
+const quizLevelUpCelebration = {
+  timeoutId: null,
+  seenTransitions: new Set()
+}
+const quizProgressSyncQueues = new Map()
+const quizLevelUpSyncQueues = new Map()
 const studentProgressState = {
   user: null,
   ready: false,
@@ -3685,23 +3731,95 @@ const PROFILE_LEVEL_THRESHOLDS = [0, 50, 100, 250, 500, 1000, 2000, 3500, 5000]
 const PROFILE_TROPHY_CATEGORIES = ['Getting started', 'Mastery', 'Completion', 'Accuracy', 'Coverage', 'Review']
 
 function getProfileMasteryLevel(totalScore) {
-  const points = Math.max(0, Number(totalScore) || 0)
-  let thresholdIndex = 0
-  PROFILE_LEVEL_THRESHOLDS.forEach((threshold, index) => {
-    if (points >= threshold) thresholdIndex = index
-  })
+  return calculateMasteryLevel(totalScore, PROFILE_LEVEL_THRESHOLDS)
+}
 
-  const currentThreshold = PROFILE_LEVEL_THRESHOLDS[thresholdIndex]
-  const fallbackStep = Math.max(1000, currentThreshold || 1000)
-  const nextThreshold = PROFILE_LEVEL_THRESHOLDS[thresholdIndex + 1] ?? currentThreshold + fallbackStep
+function getSeenLevelUpStorageKey(userId, section) {
+  return `${LEVEL_UP_SEEN_STORAGE_PREFIX}::${userId}::${section}`
+}
 
-  return {
-    level: thresholdIndex + 1,
-    nextLevel: thresholdIndex + 2,
-    nextThreshold,
-    remaining: Math.max(0, nextThreshold - points),
-    progress: calculatePercent(points - currentThreshold, nextThreshold - currentThreshold)
+function getSeenLevelUpTransitions(userId, section) {
+  try {
+    const stored = JSON.parse(localStorage.getItem(getSeenLevelUpStorageKey(userId, section)) || '[]')
+    return new Set(Array.isArray(stored) ? stored : [])
+  } catch {
+    localStorage.removeItem(getSeenLevelUpStorageKey(userId, section))
+    return new Set()
   }
+}
+
+function claimLevelUpTransition(userId, section, transition) {
+  const transitionKey = `${transition.previousLevel}-${transition.newLevel}-${transition.newPoints}`
+  const storageKey = `${userId}::${section}::${transitionKey}`
+  const storedTransitions = getSeenLevelUpTransitions(userId, section)
+
+  storedTransitions.forEach((key) => quizLevelUpCelebration.seenTransitions.add(`${userId}::${section}::${key}`))
+  if (!claimProfileLevelTransition(quizLevelUpCelebration.seenTransitions, storageKey)) return false
+
+  try {
+    storedTransitions.add(transitionKey)
+    localStorage.setItem(
+      getSeenLevelUpStorageKey(userId, section),
+      JSON.stringify([...storedTransitions].slice(-32))
+    )
+  } catch {
+    // The in-memory guard still prevents duplicate celebrations for this session.
+  }
+  return true
+}
+
+function dismissQuizLevelUpCelebration() {
+  if (quizLevelUpCelebration.timeoutId) {
+    clearTimeout(quizLevelUpCelebration.timeoutId)
+    quizLevelUpCelebration.timeoutId = null
+  }
+
+  const celebration = document.getElementById('quiz-level-up')
+  if (!celebration) return
+  celebration.classList.remove('quiz-level-up--visible')
+  celebration.hidden = true
+}
+
+function showQuizLevelUpCelebration(transition, context) {
+  const modal = document.getElementById('quiz-modal')
+  if (
+    !modal
+    || modal.getAttribute('aria-hidden') === 'true'
+    || !studentProgressState.user
+    || studentProgressState.user.id !== context.userId
+    || activeAcademicSection !== context.section
+    || quizSessionGeneration !== context.sessionGeneration
+    || quizState.topicLabel !== context.topicLabel
+    || quizState.sourceId !== context.sourceId
+    || (context.attemptKey && (quizState.attemptId || quizState.attemptStartedAt) !== context.attemptKey)
+  ) {
+    return
+  }
+  if (!claimLevelUpTransition(context.userId, context.section, transition)) return
+
+  const celebration = modal.querySelector('#quiz-level-up')
+  if (!celebration) return
+
+  dismissQuizLevelUpCelebration()
+  celebration.hidden = false
+  requestAnimationFrame(() => {
+    if (celebration.hidden || quizSessionGeneration !== context.sessionGeneration) return
+    const previousLevel = celebration.querySelector('[data-level-up-previous]')
+    const newLevel = celebration.querySelector('[data-level-up-new]')
+    const levels = celebration.querySelector('.quiz-level-up__levels')
+    const detail = celebration.querySelector('[data-level-up-detail]')
+    if (previousLevel) previousLevel.textContent = transition.previousLevel
+    if (newLevel) newLevel.textContent = transition.newLevel
+    if (levels) levels.setAttribute('aria-label', `Level ${transition.previousLevel} to Level ${transition.newLevel}`)
+    if (detail) {
+      detail.textContent = `${transition.newPoints} lifetime points · ${transition.remaining} to Level ${transition.nextLevel}`
+    }
+
+    void celebration.offsetWidth
+    celebration.classList.add('quiz-level-up--visible')
+    playQuizLevelUpSound()
+    quizLevelUpCelebration.timeoutId = setTimeout(dismissQuizLevelUpCelebration, 2700)
+  })
 }
 
 function createTrophy(id, title, description, icon, unlocked, current, target, category = 'Mastery') {
@@ -4355,11 +4473,11 @@ async function openSourceReader({ topicId, sectionId, passageId, highlightText =
   }
 
   let htmlMarkup = '<div class="source-reader__controls">'
-  if (isDesktop && hasActiveQuiz) {
-    htmlMarkup += `<button type="button" class="source-reader__close-btn" data-close-source-reader aria-label="Close source reader">✕ Close source</button>`
-  } else {
-    htmlMarkup += `<button type="button" class="source-reader__back-btn" data-close-source-reader>← Back to ${hasActiveQuiz ? 'question' : 'search'}</button>`
-  }
+  htmlMarkup += `
+    <button type="button" class="source-reader__back-btn source-reader__return-btn" data-close-source-reader>
+      ← ${hasActiveQuiz ? 'Return to quiz' : 'Back to Sources'}
+    </button>
+  `
   htmlMarkup += '</div>'
   htmlMarkup += renderSourceReaderMarkup(resolved, passageId, highlightText)
 
@@ -5167,16 +5285,37 @@ function ensureQuizModal() {
             <span class="quiz-robot__foot quiz-robot__foot--right"></span>
           </span>
         </span>
-        <button class="icon-button quiz-sound-toggle" type="button" data-quiz-sound-toggle aria-pressed="true">
-          <svg class="quiz-sound-toggle__on" aria-hidden="true" viewBox="0 0 24 24">
-            <path d="M11 5 6.5 9H3v6h3.5l4.5 4V5Z" />
-            <path d="M15 9.5c1.3 1.4 1.3 3.6 0 5M18 7c2.7 2.8 2.7 7.2 0 10" />
-          </svg>
-          <svg class="quiz-sound-toggle__off" aria-hidden="true" viewBox="0 0 24 24">
-            <path d="M11 5 6.5 9H3v6h3.5l4.5 4V5Z" />
-            <path d="m15.5 10 5 5M20.5 10l-5 5" />
-          </svg>
-        </button>
+        <div class="quiz-sound-picker">
+          <button class="icon-button quiz-sound-toggle" type="button" data-quiz-sound-toggle
+            aria-expanded="false" aria-haspopup="true" aria-controls="quiz-sound-menu">
+            <img class="quiz-sound-toggle__pack-icon" data-quiz-sound-current-icon alt="" width="28" height="28">
+            <svg class="quiz-sound-toggle__off" data-quiz-sound-muted-icon aria-hidden="true" viewBox="0 0 24 24">
+              <path d="M11 5 6.5 9H3v6h3.5l4.5 4V5Z" />
+              <path d="m15.5 10 5 5M20.5 10l-5 5" />
+            </svg>
+          </button>
+          <div class="quiz-sound-menu" id="quiz-sound-menu" data-quiz-sound-menu
+            role="radiogroup" aria-label="Answer sound pack" hidden>
+            <p class="quiz-sound-menu__label">Answer sounds</p>
+            <button class="quiz-sound-option" type="button" role="radio" data-quiz-sound-pack="muted">
+              <span class="quiz-sound-option__muted" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M11 5 6.5 9H3v6h3.5l4.5 4V5Z" />
+                  <path d="m15.5 10 5 5M20.5 10l-5 5" />
+                </svg>
+              </span>
+              <span><strong>Muted</strong><small>No answer sounds</small></span>
+            </button>
+            <button class="quiz-sound-option" type="button" role="radio" data-quiz-sound-pack="valorant">
+              <img src="/assets/icons/mcq-sound-pack-tactical-8dab919cc5ca.svg" alt="" width="36" height="36">
+              <span><strong>Valorant</strong><small>Five-kill reward</small></span>
+            </button>
+            <button class="quiz-sound-option" type="button" role="radio" data-quiz-sound-pack="duolingo">
+              <img src="/assets/icons/mcq-sound-pack-study-b445547bb66e.svg" alt="" width="36" height="36">
+              <span><strong>Duolingo</strong><small>Study chimes</small></span>
+            </button>
+          </div>
+        </div>
         <button class="icon-button" type="button" data-quiz-close aria-label="Close quiz">X</button>
       </div>
       <div class="quiz-modal__heading">
@@ -5191,10 +5330,26 @@ function ensureQuizModal() {
       </div>
       <div class="quiz-confetti" aria-hidden="true" id="quiz-confetti"></div>
     </section>
+    <aside class="quiz-level-up" id="quiz-level-up" role="status" aria-live="polite" aria-atomic="true" hidden>
+      <button class="quiz-level-up__dismiss" type="button" data-quiz-level-up-dismiss
+        aria-label="Dismiss level-up celebration">×</button>
+      <div class="quiz-level-up__particles" aria-hidden="true">
+        <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+      </div>
+      <p class="quiz-level-up__eyebrow">LEVEL UP</p>
+      <div class="quiz-level-up__levels">
+        <span data-level-up-previous>1</span>
+        <svg viewBox="0 0 44 20" aria-hidden="true">
+          <path d="M3 10h34M30 3l7 7-7 7"></path>
+        </svg>
+        <strong data-level-up-new>2</strong>
+      </div>
+      <p class="quiz-level-up__detail" data-level-up-detail></p>
+    </aside>
   `
   document.body.appendChild(modal)
   ensureQuizFeedbackAudio()
-  syncQuizSoundToggle()
+  syncQuizSoundPicker()
   const panel = modal.querySelector('.quiz-modal__panel')
   if (panel) panel.addEventListener('scroll', updateQuizRobotCompactMode, { passive: true })
   if (typeof quizRobotCompactQuery.addEventListener === 'function') {
@@ -5276,49 +5431,129 @@ function buildQuizProgressPayload() {
   }
 }
 
-function saveQuizState() {
-  if (quizState.transient) return
+function getLifetimePointsFromLeaderboardRows(rows, userId) {
+  const lifetimePoints = Number((rows || []).find((row) => row.user_id === userId)?.lifetime_score)
+  return Number.isFinite(lifetimePoints) ? lifetimePoints : null
+}
+
+async function fetchLifetimePointsSnapshot(section, userId, { syncLeaderboard = false } = {}) {
+  const rows = await fetchLeaderboard(section)
+  if (
+    syncLeaderboard
+    && section === activeAcademicSection
+    && studentProgressState.user?.id === userId
+  ) {
+    leaderboardState.requestId += 1
+    leaderboardState.loading = false
+    leaderboardState.rows = rows
+    leaderboardState.section = section
+    leaderboardState.lastFetched = Date.now()
+    leaderboardState.error = ''
+    renderLeaderboardHtml()
+  }
+  return getLifetimePointsFromLeaderboardRows(rows, userId)
+}
+
+function saveQuizState({ confirmLevelUp = false } = {}) {
+  if (quizState.transient) return Promise.resolve(null)
 
   const payload = buildQuizProgressPayload()
-  if (!payload) return
+  if (!payload) return Promise.resolve(null)
 
   localStorage.setItem(getQuizStorageKey(quizState.topicLabel), JSON.stringify(payload))
   studentProgressState.quizRows.set(getQuizProgressRecordKey(activeAcademicSection, quizState.topicLabel, quizState.sourceId), payload)
   updateGlobalProgress()
 
-  if (studentProgressState.user) {
-    upsertUserQuizProgress({
-      user_id: studentProgressState.user.id,
-      section: activeAcademicSection,
-      topic_label: quizState.topicLabel,
-      source_id: quizState.sourceId || 'current',
-      source_label: quizState.sourceLabel,
+  if (!studentProgressState.user) return Promise.resolve(payload)
+
+  const scoringContext = {
+    userId: studentProgressState.user.id,
+    section: activeAcademicSection,
+    topicLabel: quizState.topicLabel,
+    sourceId: quizState.sourceId || 'current',
+    attemptKey: quizState.attemptId || quizState.attemptStartedAt,
+    sessionGeneration: quizSessionGeneration
+  }
+  const shouldConfirmLevelUp = Boolean(confirmLevelUp && payload.completed)
+  const progressSyncKey = `${scoringContext.userId}::${scoringContext.section}::${scoringContext.topicLabel}::${scoringContext.sourceId}`
+  const levelUpSyncKey = `${scoringContext.userId}::${scoringContext.section}`
+
+  const performSync = async () => {
+    let previousLifetimePoints = null
+    if (shouldConfirmLevelUp) {
+      try {
+        previousLifetimePoints = await fetchLifetimePointsSnapshot(scoringContext.section, scoringContext.userId)
+      } catch (error) {
+        console.warn('Could not capture the pre-score lifetime points. Level-up feedback will be skipped.', error)
+      }
+    }
+
+    const savedProgress = await upsertUserQuizProgress({
+      user_id: scoringContext.userId,
+      section: scoringContext.section,
+      topic_label: scoringContext.topicLabel,
+      source_id: scoringContext.sourceId,
+      source_label: payload.sourceLabel,
       progress: payload,
-      completed: !!quizState.completed,
+      completed: !!payload.completed,
       score: payload.score,
       total_questions: payload.totalQuestions,
       answered_count: payload.answeredCount,
       wrong_question_ids: payload.wrongQuestionIds,
       attempt_id: payload.attemptId,
       attempt_started_at: payload.attemptStartedAt,
-      completed_at: quizState.completed ? new Date().toISOString() : null
+      completed_at: payload.completed ? new Date().toISOString() : null
     })
-      .then(() => {
-        leaderboardState.lastFetched = 0
-        liveActivityState.lastFetched = 0
-        onlineStudentsState.lastFetched = 0
-        return Promise.all([
-          refreshLeaderboardIfActive(true),
-          fetchAndRenderLiveActivity(true),
-          sendStudentPresence(true)
-        ])
-      })
-      .catch((error) => {
-        studentProgressState.lastError = error.message
-        renderStudentSyncUi()
-        console.warn('MCQ progress cloud sync failed.', error)
-      })
+
+    leaderboardState.lastFetched = 0
+    liveActivityState.lastFetched = 0
+    onlineStudentsState.lastFetched = 0
+
+    let levelTransition = null
+    if (shouldConfirmLevelUp && Number.isFinite(previousLifetimePoints)) {
+      try {
+        const nextLifetimePoints = await fetchLifetimePointsSnapshot(
+          scoringContext.section,
+          scoringContext.userId,
+          { syncLeaderboard: true }
+        )
+        levelTransition = getConfirmedProfileLevelTransition({
+          confirmed: true,
+          completed: payload.completed,
+          transient: false,
+          previousPoints: previousLifetimePoints,
+          nextPoints: nextLifetimePoints,
+          resolveLevel: getProfileMasteryLevel
+        })
+      } catch (error) {
+        console.warn('Could not confirm the updated lifetime points. Level-up feedback will be skipped.', error)
+      }
+    } else {
+      await refreshLeaderboardIfActive(true)
+    }
+
+    if (levelTransition) showQuizLevelUpCelebration(levelTransition, scoringContext)
+
+    await Promise.all([
+      fetchAndRenderLiveActivity(true),
+      sendStudentPresence(true)
+    ])
+
+    return savedProgress
   }
+
+  const queuedSync = () => shouldConfirmLevelUp
+    ? enqueueSerialTask(quizLevelUpSyncQueues, levelUpSyncKey, performSync)
+    : performSync()
+
+  const syncPromise = enqueueSerialTask(quizProgressSyncQueues, progressSyncKey, queuedSync).catch((error) => {
+    studentProgressState.lastError = error.message
+    renderStudentSyncUi()
+    console.warn('MCQ progress cloud sync failed.', error)
+    return null
+  })
+
+  return syncPromise
 }
 
 function clearSavedQuizState(topicLabel, sourceId = quizState.sourceId || 'current') {
@@ -5449,43 +5684,53 @@ function clearQuizRobotMoodTimeout() {
   quizRobotMoodTimeout = null
 }
 
-function getSavedQuizSoundEnabled() {
+function getSavedQuizSoundPack() {
   try {
-    return localStorage.getItem(QUIZ_SOUND_STORAGE_KEY) !== 'false'
+    const savedPack = localStorage.getItem(QUIZ_SOUND_PACK_STORAGE_KEY)
+    if (savedPack && QUIZ_SOUND_PACKS[savedPack]) return savedPack
+
+    const migratedPack = localStorage.getItem(LEGACY_QUIZ_SOUND_STORAGE_KEY) === 'false'
+      ? 'muted'
+      : 'valorant'
+    localStorage.setItem(QUIZ_SOUND_PACK_STORAGE_KEY, migratedPack)
+    return migratedPack
   } catch {
-    return true
+    return 'valorant'
   }
 }
 
-function ensureQuizFeedbackAudio() {
-  if (typeof window.Audio !== 'function') return quizFeedbackAudio
+function createQuizFeedbackAudio(url) {
+  const audio = new window.Audio(url)
+  audio.preload = 'auto'
+  audio.volume = 0.65
+  return audio
+}
 
-  if (!quizFeedbackAudio.correct.length) {
-    quizFeedbackAudio.correct = QUIZ_CORRECT_AUDIO_URLS.map((url) => {
-      const audio = new window.Audio(url)
-      audio.preload = 'auto'
-      audio.volume = 0.65
-      return audio
+function ensureQuizFeedbackAudio(packId = quizSoundPack) {
+  if (typeof window.Audio !== 'function' || packId === 'muted') return null
+
+  if (!quizFeedbackAudio.incorrect) {
+    quizFeedbackAudio.incorrect = createQuizFeedbackAudio(QUIZ_SHARED_INCORRECT_AUDIO_URL)
+  }
+
+  if (!quizFeedbackAudio.packs.has(packId)) {
+    const pack = QUIZ_SOUND_PACKS[packId]
+    if (!pack) return null
+    quizFeedbackAudio.packs.set(packId, {
+      correct: pack.correctUrls.map(createQuizFeedbackAudio),
+      completion: pack.completionUrl ? createQuizFeedbackAudio(pack.completionUrl) : null,
+      levelUp: pack.levelUpUrl ? createQuizFeedbackAudio(pack.levelUpUrl) : null
     })
   }
 
-  if (!quizFeedbackAudio.incorrect) {
-    quizFeedbackAudio.incorrect = new window.Audio(QUIZ_INCORRECT_AUDIO_URL)
-    quizFeedbackAudio.incorrect.preload = 'auto'
-    quizFeedbackAudio.incorrect.volume = 0.75
+  return {
+    ...quizFeedbackAudio.packs.get(packId),
+    incorrect: quizFeedbackAudio.incorrect
   }
-
-  return quizFeedbackAudio
 }
 
 function stopQuizFeedbackAudio() {
-  quizFeedbackAudio.playbackId += 1
-  const activeAudio = quizFeedbackAudio.active
-  if (!activeAudio) return
-
-  activeAudio.pause()
-  activeAudio.currentTime = 0
-  quizFeedbackAudio.active = null
+  stopExclusiveAudioPlayback(quizFeedbackAudio)
 }
 
 function resetQuizFeedbackSequence() {
@@ -5493,57 +5738,90 @@ function resetQuizFeedbackSequence() {
   quizFeedbackAudio.correctStreak = 0
 }
 
-function syncQuizSoundToggle() {
+function syncQuizSoundPicker() {
   const button = document.querySelector('[data-quiz-sound-toggle]')
   if (!button) return
 
-  const label = quizSoundEnabled ? 'Mute answer sounds' : 'Turn on answer sounds'
-  button.setAttribute('aria-pressed', String(quizSoundEnabled))
+  const pack = QUIZ_SOUND_PACKS[quizSoundPack] || QUIZ_SOUND_PACKS.valorant
+  const label = `Answer sounds: ${pack.label}. Choose sound pack`
+  const currentIcon = button.querySelector('[data-quiz-sound-current-icon]')
+  const mutedIcon = button.querySelector('[data-quiz-sound-muted-icon]')
+  const menu = document.querySelector('[data-quiz-sound-menu]')
+
+  if (currentIcon) {
+    currentIcon.hidden = quizSoundPack === 'muted'
+    currentIcon.src = pack.iconUrl || ''
+  }
+  if (mutedIcon) mutedIcon.hidden = quizSoundPack !== 'muted'
+
+  button.setAttribute('aria-expanded', String(quizSoundMenuOpen))
   button.setAttribute('aria-label', label)
   button.setAttribute('title', label)
+  if (menu) menu.hidden = !quizSoundMenuOpen
+
+  document.querySelectorAll('[data-quiz-sound-pack]').forEach((option) => {
+    const selected = option.dataset.quizSoundPack === quizSoundPack
+    option.setAttribute('aria-checked', String(selected))
+    option.classList.toggle('quiz-sound-option--selected', selected)
+  })
 }
 
-function setQuizSoundEnabled(enabled) {
-  quizSoundEnabled = Boolean(enabled)
+function setQuizSoundMenuOpen(open) {
+  quizSoundMenuOpen = Boolean(open)
+  syncQuizSoundPicker()
+}
+
+function setQuizSoundPack(packId) {
+  if (!QUIZ_SOUND_PACKS[packId]) return
+
+  if (packId !== quizSoundPack) {
+    stopQuizFeedbackAudio()
+    quizSoundPack = packId
+  }
+  quizSoundMenuOpen = false
+
   try {
-    localStorage.setItem(QUIZ_SOUND_STORAGE_KEY, String(quizSoundEnabled))
+    localStorage.setItem(QUIZ_SOUND_PACK_STORAGE_KEY, quizSoundPack)
   } catch {
     // The in-memory preference still applies when local storage is unavailable.
   }
-  if (!quizSoundEnabled) resetQuizFeedbackSequence()
-  syncQuizSoundToggle()
+
+  ensureQuizFeedbackAudio()
+  syncQuizSoundPicker()
+}
+
+function playQuizFeedbackAudio(audio) {
+  return playExclusiveAudioPlayback(quizFeedbackAudio, audio)
 }
 
 function playQuizFeedbackSound(isCorrect) {
-  if (!quizSoundEnabled) return
+  if (isCorrect) quizFeedbackAudio.correctStreak += 1
+  else quizFeedbackAudio.correctStreak = 0
+  if (!soundPackAllowsPlayback(quizSoundPack)) return
 
   const feedbackAudio = ensureQuizFeedbackAudio()
+  if (!feedbackAudio) return
   let audio = feedbackAudio.incorrect
 
   if (isCorrect) {
     if (!feedbackAudio.correct.length) return
-    const soundIndex = feedbackAudio.correctStreak % feedbackAudio.correct.length
-    feedbackAudio.correctStreak = soundIndex + 1
+    const soundIndex = quizSoundPack === 'valorant'
+      ? Math.min(quizFeedbackAudio.correctStreak, feedbackAudio.correct.length) - 1
+      : 0
     audio = feedbackAudio.correct[soundIndex]
-  } else {
-    feedbackAudio.correctStreak = 0
   }
-  if (!audio) return
 
-  stopQuizFeedbackAudio()
-  const playbackId = quizFeedbackAudio.playbackId
-  audio.currentTime = 0
-  quizFeedbackAudio.active = audio
-  audio.onended = () => {
-    if (quizFeedbackAudio.active === audio && quizFeedbackAudio.playbackId === playbackId) {
-      quizFeedbackAudio.active = null
-    }
-  }
-  audio.play().catch(() => {
-    if (quizFeedbackAudio.active === audio && quizFeedbackAudio.playbackId === playbackId) {
-      quizFeedbackAudio.active = null
-    }
-  })
+  playQuizFeedbackAudio(audio)
+}
+
+function playQuizCompletionSound() {
+  if (!soundPackAllowsPlayback(quizSoundPack)) return
+  playQuizFeedbackAudio(ensureQuizFeedbackAudio()?.completion)
+}
+
+function playQuizLevelUpSound() {
+  if (!soundPackAllowsPlayback(quizSoundPack)) return
+  playQuizFeedbackAudio(ensureQuizFeedbackAudio()?.levelUp)
 }
 
 function resetQuizRobotMood(timer = document.getElementById('quiz-timer')) {
@@ -5621,7 +5899,7 @@ function updateQuizTimerDisplay({ allowExpire = false } = {}) {
   quizState.completed = true
   quizState.showResumePrompt = false
   quizState.missingQuestionIds = []
-  saveQuizState()
+  saveQuizState({ confirmLevelUp: quizState.validatedInSession })
   clearQuizTimerInterval()
   renderQuizQuestion()
 }
@@ -5781,6 +6059,8 @@ function initializeQuiz(topicLabel, {
   shuffleQuestionsOverride = null,
   promptOnSaved = true
 } = {}) {
+  dismissQuizLevelUpCelebration()
+  quizSessionGeneration += 1
   resetQuizFeedbackSequence()
   const config = getQuizConfig(topicLabel, sourceId)
   if (!config || !config.mcqs.length) return false
@@ -5849,6 +6129,7 @@ function initializeQuiz(topicLabel, {
   quizState.timerElapsedMs = 0
   quizState.attemptId = savedState && !fresh ? (savedState.attemptId || null) : createQuizAttemptId()
   quizState.attemptStartedAt = savedState && !fresh ? (savedState.attemptStartedAt || null) : new Date().toISOString()
+  quizState.validatedInSession = false
   quizState.transient = !!config.transient
 
   if (quizState.timeLimitMinutes && !completed) {
@@ -6784,6 +7065,9 @@ function openQuiz(topicLabel, sourceId = 'current', event = null, launchOptions 
 
 function closeQuiz() {
   const modal = ensureQuizModal()
+  quizSoundMenuOpen = false
+  dismissQuizLevelUpCelebration()
+  quizSessionGeneration += 1
   if (activeSourceReaderState) {
     closeSourceReader()
   }
@@ -6872,6 +7156,10 @@ function closePdfPreview() {
 }
 
 function handleQuizClick(event) {
+  if (quizSoundMenuOpen && !event.target.closest('.quiz-sound-picker')) {
+    setQuizSoundMenuOpen(false)
+  }
+
   const topicCompletionInput = event.target.closest('[data-topic-completion]')
   if (topicCompletionInput) {
     const subjectCode = topicCompletionInput.dataset.subjectCode
@@ -7057,8 +7345,20 @@ function handleQuizClick(event) {
     return
   }
 
+  if (event.target.closest('[data-quiz-level-up-dismiss]')) {
+    dismissQuizLevelUpCelebration()
+    return
+  }
+
+  const soundPackOption = event.target.closest('[data-quiz-sound-pack]')
+  if (soundPackOption) {
+    setQuizSoundPack(soundPackOption.dataset.quizSoundPack)
+    document.querySelector('[data-quiz-sound-toggle]')?.focus()
+    return
+  }
+
   if (event.target.closest('[data-quiz-sound-toggle]')) {
-    setQuizSoundEnabled(!quizSoundEnabled)
+    setQuizSoundMenuOpen(!quizSoundMenuOpen)
     return
   }
 
@@ -7132,6 +7432,7 @@ function handleQuizClick(event) {
   }
 
   if (event.target.closest('[data-quiz-submit]')) {
+    if (quizState.completed) return
     const missedQuestions = getMissedQuestions()
     if (missedQuestions.length) {
       quizState.missingQuestionIds = missedQuestions.map((question) => question.id)
@@ -7144,7 +7445,8 @@ function handleQuizClick(event) {
 
     quizState.completed = true
     quizState.missingQuestionIds = []
-    saveQuizState()
+    saveQuizState({ confirmLevelUp: true })
+    playQuizCompletionSound()
     renderQuizQuestion()
     updateQuizTimerDisplay()
     return
@@ -7193,6 +7495,7 @@ function handleQuizClick(event) {
     if (quizState.answers[question.id] !== undefined) return
 
     quizState.answers[question.id] = selectedOptionId
+    quizState.validatedInSession = true
     quizState.missingQuestionIds = (quizState.missingQuestionIds || []).filter((questionId) => questionId !== question.id)
     saveQuizState()
     const isCorrect = question.correctOptionId === selectedOptionId
@@ -10101,9 +10404,27 @@ initKnowledgeLibrary().then(() => {
 })
 
 document.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape' && activeSourceReaderState) {
+  if (event.key !== 'Escape') return
+
+  const levelUpCelebration = document.getElementById('quiz-level-up')
+  if (levelUpCelebration && !levelUpCelebration.hidden) {
+    event.preventDefault()
+    event.stopPropagation()
+    dismissQuizLevelUpCelebration()
+    return
+  }
+
+  if (quizSoundMenuOpen) {
+    event.preventDefault()
+    event.stopPropagation()
+    setQuizSoundMenuOpen(false)
+    document.querySelector('[data-quiz-sound-toggle]')?.focus()
+    return
+  }
+
+  if (activeSourceReaderState) {
     event.preventDefault()
     event.stopPropagation()
     closeSourceReader()
   }
-})
+}, { capture: true })

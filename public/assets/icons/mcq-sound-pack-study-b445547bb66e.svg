@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">Study sound pack</title>
+  <rect width="64" height="64" rx="16" fill="#58cc02"/>
+  <path d="M13 19.5c7.2-1.8 13.5-.2 19 4.8v26c-5.5-5-11.8-6.6-19-4.8v-26Z" fill="#fff"/>
+  <path d="M51 19.5c-7.2-1.8-13.5-.2-19 4.8v26c5.5-5 11.8-6.6 19-4.8v-26Z" fill="#edf8e8"/>
+  <path d="M32 24.3v26" stroke="#2f8700" stroke-linecap="round" stroke-width="2.5"/>
+  <path d="m45 10.5 1.8 4.2 4.2 1.8-4.2 1.8-1.8 4.2-1.8-4.2-4.2-1.8 4.2-1.8 1.8-4.2Z" fill="#ffd900"/>
+  <path d="M18.5 29c3.3-.4 6.2.3 8.8 2M18.5 35c3.3-.4 6.2.3 8.8 2M45.5 29c-3.3-.4-6.2.3-8.8 2M45.5 35c-3.3-.4-6.2.3-8.8 2" fill="none" stroke="#89e219" stroke-linecap="round" stroke-width="2.5"/>
+</svg>

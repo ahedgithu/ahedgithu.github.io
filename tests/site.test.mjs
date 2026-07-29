@@ -12,6 +12,7 @@ const readBytes = (path) => readFileSync(new URL(`../${path}`, import.meta.url))
 test('application modules are valid and mirrored', () => {
   const moduleFiles = [
     'src/main.js',
+    'src/audioFeedback.js',
     'src/admin.js',
     'src/analytics.js',
     'src/knowledgeLibrary.js',
@@ -40,7 +41,7 @@ test('application modules are valid and mirrored', () => {
     execFileSync(process.execPath, ['--check', file], { cwd: new URL('..', import.meta.url) })
   }
 
-  const mirroredFiles = ['main.js', 'admin.js', 'analytics.js', 'knowledgeLibrary.js', 'mcqs.js', 'sur1-kellawi-mcqs.js', 'sur1-past-exam-mcqs.js', 'sur1-matching-questions.js', 'sur402-past-exam-mcqs.js', 'sur402-textbook-mcqs.js', 'sur402-amr-beshry-mcqs.js', 'med402-endocrine-mcqs.js', 'med402-neurology-mcqs.js', 'med402-neuro-extra-mcqs.js', 'med402-old-psychiatry-mcqs.js', 'med402-zatoona-psychiatry-mcqs.js', 'med2-cardio-chest-mcqs.js', 'med1-kellawi-mcqs.js', 'med1-mw-ragab-mcqs.js', 'med1-hepatology-final-review-mcqs.js', 'med1-alshamel-mcqs.js', 'progress.js', 'style.css', 'supabaseClient.js']
+  const mirroredFiles = ['main.js', 'audioFeedback.js', 'admin.js', 'analytics.js', 'knowledgeLibrary.js', 'mcqs.js', 'sur1-kellawi-mcqs.js', 'sur1-past-exam-mcqs.js', 'sur1-matching-questions.js', 'sur402-past-exam-mcqs.js', 'sur402-textbook-mcqs.js', 'sur402-amr-beshry-mcqs.js', 'med402-endocrine-mcqs.js', 'med402-neurology-mcqs.js', 'med402-neuro-extra-mcqs.js', 'med402-old-psychiatry-mcqs.js', 'med402-zatoona-psychiatry-mcqs.js', 'med2-cardio-chest-mcqs.js', 'med1-kellawi-mcqs.js', 'med1-mw-ragab-mcqs.js', 'med1-hepatology-final-review-mcqs.js', 'med1-alshamel-mcqs.js', 'progress.js', 'style.css', 'supabaseClient.js']
   for (const file of mirroredFiles) {
     assert.equal(read(`src/${file}`), read(`public/src/${file}`), `${file} mirror is out of sync`)
   }
@@ -68,8 +69,8 @@ test('tracker search splits topics and MCQs with focused question launch', () =>
   assert.match(html, /data-search-mode="topics"[^>]*aria-pressed="true"/)
   assert.match(html, /data-search-mode="mcqs"[^>]*aria-pressed="false"/)
   assert.match(html, /id="mcq-search-results"[^>]*aria-live="polite"[^>]*hidden/)
-  assert.match(html, /style\.css\?v=20260729-401-overflow-v1/)
-  assert.match(html, /main\.js\?v=20260729-mcq-answer-audio-v2/)
+  assert.match(html, /style\.css\?v=20260729-mcq-level-up-v1/)
+  assert.match(html, /main\.js\?v=20260729-mcq-level-up-v1/)
 
   for (const helper of [
     'normalizeMcqSearchText',
@@ -844,7 +845,7 @@ test('quiz timer is a native responsive robot with answer moods', () => {
   assert.match(style, /@media \(prefers-reduced-motion: reduce\)[\s\S]*?\.quiz-timer/)
 })
 
-test('quiz answer sounds advance through five kills and reset the streak', () => {
+test('quiz sound packs persist, share wrong feedback, and hold the Valorant Ace after five', () => {
   const mainSource = read('src/main.js')
   const correctSoundUrls = Array.from(
     mainSource.matchAll(/'(\/assets\/audio\/mcq-correct-kill-\d-[^']+\.mp3)'/g),
@@ -860,10 +861,36 @@ test('quiz answer sounds advance through five kills and reset the streak', () =>
     assert.ok(readBytes(`public${url}`).length > 1000, `${url} is missing or empty`)
   })
 
-  assert.match(mainSource, /const soundIndex = feedbackAudio\.correctStreak % feedbackAudio\.correct\.length/)
-  assert.match(mainSource, /feedbackAudio\.correctStreak = soundIndex \+ 1/)
-  assert.match(mainSource, /else \{\s*feedbackAudio\.correctStreak = 0\s*\}/)
+  const studySoundUrls = Array.from(
+    mainSource.matchAll(/'(\/assets\/audio\/mcq-study-(?:correct|incorrect|complete)-[^']+\.mp3)'/g),
+    (match) => match[1]
+  )
+  assert.equal(new Set(studySoundUrls).size, 3)
+  studySoundUrls.forEach((url) => {
+    assert.ok(readBytes(`public${url}`).length > 1000, `${url} is missing or empty`)
+  })
+
+  const packIconUrls = Array.from(
+    mainSource.matchAll(/'(\/assets\/icons\/mcq-sound-pack-[^']+\.svg)'/g),
+    (match) => match[1]
+  )
+  assert.equal(new Set(packIconUrls).size, 2)
+  packIconUrls.forEach((url) => {
+    assert.ok(readBytes(`public${url}`).length > 100, `${url} is missing or empty`)
+  })
+
+  assert.match(mainSource, /const QUIZ_SOUND_PACK_STORAGE_KEY = 'quizAnswerSoundPack'/)
+  assert.match(mainSource, /localStorage\.getItem\(LEGACY_QUIZ_SOUND_STORAGE_KEY\) === 'false'/)
+  assert.match(mainSource, /data-quiz-sound-pack="muted"/)
+  assert.match(mainSource, /data-quiz-sound-pack="valorant"/)
+  assert.match(mainSource, /data-quiz-sound-pack="duolingo"/)
+  assert.match(mainSource, /quizFeedbackAudio\.correctStreak \+= 1/)
+  assert.match(mainSource, /Math\.min\(quizFeedbackAudio\.correctStreak, feedbackAudio\.correct\.length\) - 1/)
+  assert.match(mainSource, /if \(isCorrect\) quizFeedbackAudio\.correctStreak \+= 1\s*else quizFeedbackAudio\.correctStreak = 0/)
+  assert.match(mainSource, /if \(packId !== quizSoundPack\) \{\s*stopQuizFeedbackAudio\(\)/)
+  assert.match(mainSource, /const QUIZ_SHARED_INCORRECT_AUDIO_URL = '\/assets\/audio\/mcq-study-incorrect-/)
   assert.match(mainSource, /function resetQuizFeedbackSequence\s*\(/)
+  assert.match(mainSource, /quizState\.completed = true\s*quizState\.missingQuestionIds = \[\]\s*saveQuizState\(\{ confirmLevelUp: true \}\)\s*playQuizCompletionSound\(\)/)
   assert.match(mainSource, /const isCorrect = question\.correctOptionId === selectedOptionId\s*playQuizFeedbackSound\(isCorrect\)/)
 })
 
@@ -1000,8 +1027,8 @@ test('Google login is mandatory and the academic section is account-bound', () =
   assert.match(mainSource, /\$\{QUIZ_STORAGE_PREFIX\}::\$\{getProgressStorageOwnerId\(\)\}::\$\{section\}/)
   assert.match(mainSource, /\$\{TOPIC_COMPLETION_STORAGE_PREFIX\}::\$\{getProgressStorageOwnerId\(\)\}::\$\{section\}/)
   assert.match(schedule, /window\.location\.replace\('\/#schedule'\)/)
-  assert.match(html, /style\.css\?v=20260729-401-overflow-v1/)
-  assert.match(html, /main\.js\?v=20260729-mcq-answer-audio-v2/)
+  assert.match(html, /style\.css\?v=20260729-mcq-level-up-v1/)
+  assert.match(html, /main\.js\?v=20260729-mcq-level-up-v1/)
 })
 
 test('student profile opens as a standalone gamified page', () => {
@@ -1313,8 +1340,8 @@ test('section selector is centered and the wide review remains fully visible', (
   assert.match(style, /\.home-review-screenshot\s*\{[\s\S]*?aspect-ratio:\s*1\.9\s*\/\s*1;[\s\S]*?object-fit:\s*cover;/s)
   assert.match(style, /\.home-review-screenshot--fit\s*\{[^}]*object-fit:\s*contain;[^}]*object-position:\s*left center;/s)
   assert.equal((html.match(/review5\.jpg" class="home-review-screenshot home-review-screenshot--fit"/g) || []).length, 2)
-  assert.match(html, /style\.css\?v=20260729-401-overflow-v1/)
-  assert.match(html, /main\.js\?v=20260729-mcq-answer-audio-v2/)
+  assert.match(html, /style\.css\?v=20260729-mcq-level-up-v1/)
+  assert.match(html, /main\.js\?v=20260729-mcq-level-up-v1/)
   assert.match(style, /body\[data-site-mode="selector"\] > main > \.site-footer/)
 
   for (const file of ['review1.jpg', 'review2.jpg', 'review3.jpg', 'review4.jpg', 'review5.jpg', 'review6.png', 'review7.png', 'review8.png']) {

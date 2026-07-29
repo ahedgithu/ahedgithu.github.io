@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">Tactical sound pack</title>
+  <rect width="64" height="64" rx="16" fill="#101923"/>
+  <path d="M32 10 50 17v13c0 11.8-7.4 19.8-18 24-10.6-4.2-18-12.2-18-24V17l18-7Z" fill="#ff5864"/>
+  <path d="M32 17v30c7.5-3.5 11.5-9.3 11.5-17.3v-8.1L32 17Z" fill="#d93e4c"/>
+  <circle cx="32" cy="30" r="7.5" fill="none" stroke="#fff" stroke-width="3"/>
+  <path d="M32 17.5v6M32 36.5v6M19.5 30h6M38.5 30h6" stroke="#fff" stroke-linecap="round" stroke-width="3"/>
+</svg>

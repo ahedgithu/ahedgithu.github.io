@@ -256,7 +256,13 @@ test('الشامل evidence is exact, private, and source-only', () => {
 
 test('source reader preserves active quiz state and hides raw source-page labels', () => {
   const mainSource = readFileSync(path.join(ROOT_DIR, 'src', 'main.js'), 'utf8');
+  const styleSource = readFileSync(path.join(ROOT_DIR, 'src', 'style.css'), 'utf8');
   assert.match(mainSource, /getCurrentQuiz\(\)\.length > 0[\s\S]+openerElement\?\.closest\('\.quiz-question-card'\)/);
+  assert.match(mainSource, /hasActiveQuiz \? 'Return to quiz' : 'Back to Sources'/);
+  assert.match(mainSource, /quizBody\.hidden = previousModalDisplayState\.bodyHidden/);
+  assert.match(mainSource, /readerContainer\.hidden = true/);
+  assert.match(mainSource, /panel\.scrollTop = readerState\.quizPanelScrollTop/);
+  assert.match(styleSource, /\.source-reader__controls\s*\{[^}]*position:\s*sticky;[^}]*z-index:\s*6;/s);
   assert.match(mainSource, /const studentFacingSection = getStudentFacingQuizSection\(question\)/);
   assert.doesNotMatch(
     mainSource,
