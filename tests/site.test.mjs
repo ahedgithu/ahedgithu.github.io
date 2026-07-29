@@ -68,7 +68,7 @@ test('tracker search splits topics and MCQs with focused question launch', () =>
   assert.match(html, /data-search-mode="topics"[^>]*aria-pressed="true"/)
   assert.match(html, /data-search-mode="mcqs"[^>]*aria-pressed="false"/)
   assert.match(html, /id="mcq-search-results"[^>]*aria-live="polite"[^>]*hidden/)
-  assert.match(html, /style\.css\?v=20260729-mcq-answer-audio-v2/)
+  assert.match(html, /style\.css\?v=20260729-401-overflow-v1/)
   assert.match(html, /main\.js\?v=20260729-mcq-answer-audio-v2/)
 
   for (const helper of [
@@ -1000,7 +1000,7 @@ test('Google login is mandatory and the academic section is account-bound', () =
   assert.match(mainSource, /\$\{QUIZ_STORAGE_PREFIX\}::\$\{getProgressStorageOwnerId\(\)\}::\$\{section\}/)
   assert.match(mainSource, /\$\{TOPIC_COMPLETION_STORAGE_PREFIX\}::\$\{getProgressStorageOwnerId\(\)\}::\$\{section\}/)
   assert.match(schedule, /window\.location\.replace\('\/#schedule'\)/)
-  assert.match(html, /style\.css\?v=20260729-mcq-answer-audio-v2/)
+  assert.match(html, /style\.css\?v=20260729-401-overflow-v1/)
   assert.match(html, /main\.js\?v=20260729-mcq-answer-audio-v2/)
 })
 
@@ -1313,7 +1313,7 @@ test('section selector is centered and the wide review remains fully visible', (
   assert.match(style, /\.home-review-screenshot\s*\{[\s\S]*?aspect-ratio:\s*1\.9\s*\/\s*1;[\s\S]*?object-fit:\s*cover;/s)
   assert.match(style, /\.home-review-screenshot--fit\s*\{[^}]*object-fit:\s*contain;[^}]*object-position:\s*left center;/s)
   assert.equal((html.match(/review5\.jpg" class="home-review-screenshot home-review-screenshot--fit"/g) || []).length, 2)
-  assert.match(html, /style\.css\?v=20260729-mcq-answer-audio-v2/)
+  assert.match(html, /style\.css\?v=20260729-401-overflow-v1/)
   assert.match(html, /main\.js\?v=20260729-mcq-answer-audio-v2/)
   assert.match(style, /body\[data-site-mode="selector"\] > main > \.site-footer/)
 
@@ -1442,6 +1442,7 @@ test('mobile entry pages lock the viewport to the phone screen', () => {
 
 test('the shared tracker locks 402 without changing 401 phone behavior', () => {
   const html = read('index.html')
+  const styles = read('src/style.css')
   const viewport = html.match(/<meta[^>]+name="viewport"[^>]*>/i)?.[0] || ''
 
   assert.match(viewport, /width=device-width, initial-scale=1\.0/)
@@ -1449,4 +1450,6 @@ test('the shared tracker locks 402 without changing 401 phone behavior', () => {
   assert.match(html, /const lockedViewport = `\$\{normalViewport\}, minimum-scale=1\.0, maximum-scale=1\.0, user-scalable=no`/)
   assert.match(html, /viewport\.content = section === '402' \? lockedViewport : normalViewport/)
   assert.match(html, /new MutationObserver\(syncSectionViewport\)/)
+  assert.match(styles, /\.race-marker--finals\s*\{[^}]*translateX\(calc\(-50% - 4px\)\)/)
+  assert.match(styles, /@media \(max-width: 860px\)[\s\S]*?\.race-marker--finals\s*\{[^}]*translateX\(calc\(-50% - 10px\)\)/)
 })

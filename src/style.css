@@ -1583,6 +1583,10 @@ body[data-site-mode="402"] .site-header {
   gap: 3px;
 }
 
+.race-marker--finals {
+  transform: translateX(calc(-50% - 4px));
+}
+
 .race-marker--midterm b,
 .race-marker--midterm time,
 .race-marker--finals b,
@@ -9279,6 +9283,10 @@ body.admin-modal-open {
   .race-marker--finals {
     top: -28px;
     min-width: 48px;
+  }
+
+  .race-marker--finals {
+    transform: translateX(calc(-50% - 10px));
   }
 
   .race-marker--midterm b,
