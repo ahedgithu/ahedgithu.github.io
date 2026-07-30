@@ -1,5 +1,5 @@
 // MUST 302 static configuration module
-// Primary Drive folder: https://drive.google.com/drive/folders/15830_L9kXG_lSNDk23_5P_q4b73243z
+// Primary integrated archive: https://drive.google.com/drive/folders/1L4LmUNvaRunNa_WbvtJmeK6dNQiwiLql
 
 const subjects302 = [
   {
@@ -12,9 +12,9 @@ const subjects302 = [
         label: 'ENT Overview',
         state: 'taken',
         art: 0,
-        note: 'Theoretical books, practical materials, and MCQs.',
+        note: 'Theoretical files, practical files, books, and exam materials.',
         driveSelector: [
-          { label: 'Primary 302 Folder', source: 'Google Drive Archive', url: 'https://drive.google.com/drive/folders/15830_L9kXG_lSNDk23_5P_q4b73243z' }
+          { label: 'Primary 302 Archive', source: 'Google Drive Archive', url: 'https://drive.google.com/drive/folders/1L4LmUNvaRunNa_WbvtJmeK6dNQiwiLql' }
         ]
       }
     ]
@@ -29,9 +29,26 @@ const subjects302 = [
         label: 'Ophthalmology Overview',
         state: 'taken',
         art: 1,
-        note: 'Theoretical books, practical materials, and MCQs.',
+        note: 'Theoretical files, practical files, books, and exam materials.',
         driveSelector: [
-          { label: 'Primary 302 Folder', source: 'Google Drive Archive', url: 'https://drive.google.com/drive/folders/15830_L9kXG_lSNDk23_5P_q4b73243z' }
+          { label: 'Primary 302 Archive', source: 'Google Drive Archive', url: 'https://drive.google.com/drive/folders/1L4LmUNvaRunNa_WbvtJmeK6dNQiwiLql' }
+        ]
+      }
+    ]
+  },
+  {
+    code: 'LMT302',
+    name: 'Legal Medicine & Toxicology 302',
+    totalCount: 1,
+    examNote: 'Year 3 curriculum.',
+    topics: [
+      {
+        label: 'Legal Medicine & Toxicology Overview',
+        state: 'taken',
+        art: 2,
+        note: 'Forensic medicine, toxicology, and practical materials.',
+        driveSelector: [
+          { label: 'Primary 302 Archive', source: 'Google Drive Archive', url: 'https://drive.google.com/drive/folders/1L4LmUNvaRunNa_WbvtJmeK6dNQiwiLql' }
         ]
       }
     ]
@@ -45,10 +62,10 @@ const subjects302 = [
       {
         label: 'Community Medicine Overview',
         state: 'taken',
-        art: 2,
-        note: 'Theoretical books, practical materials, and MCQs.',
+        art: 3,
+        note: 'Theoretical files, practical files, books, and 302 plan PDF.',
         driveSelector: [
-          { label: 'Primary 302 Folder', source: 'Google Drive Archive', url: 'https://drive.google.com/drive/folders/15830_L9kXG_lSNDk23_5P_q4b73243z' }
+          { label: 'Primary 302 Archive', source: 'Google Drive Archive', url: 'https://drive.google.com/drive/folders/1L4LmUNvaRunNa_WbvtJmeK6dNQiwiLql' }
         ]
       }
     ]

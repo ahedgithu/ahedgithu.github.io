@@ -1,4 +1,4 @@
-// MUST Section Registry and Academic Year Groupings
+// MUST Section Registry, Capabilities, and Academic Year Groupings
 
 import { subjects401, subjectExamNotes, midtermExamSchedule, courseSchedule } from '../must-401.js'
 import { subjects402, midtermExamSchedule402 } from '../must-402.js'
@@ -16,13 +16,21 @@ const mustAcademicYears = [
   { year: 4, label: 'Year 4', sections: ['401', '402'] }
 ]
 
+const resourceCapabilities = {
+  hasMcqs: false,
+  hasAssignments: false,
+  hasTimeline: false,
+  hasSchedule: false,
+  resourceFirst: true
+}
+
 const mustSections = {
-  '101': section101Data,
-  '102': section102Data,
-  '201': section201Data,
-  '202': section202Data,
-  '301': section301Data,
-  '302': section302Data,
+  '101': { ...section101Data, capabilities: { ...resourceCapabilities } },
+  '102': { ...section102Data, capabilities: { ...resourceCapabilities } },
+  '201': { ...section201Data, capabilities: { ...resourceCapabilities } },
+  '202': { ...section202Data, capabilities: { ...resourceCapabilities } },
+  '301': { ...section301Data, capabilities: { ...resourceCapabilities } },
+  '302': { ...section302Data, capabilities: { ...resourceCapabilities } },
   '401': {
     id: '401',
     title: '401',
@@ -35,7 +43,14 @@ const mustSections = {
       start: '2026-05-25',
       finals: '2026-09-19'
     },
-    scheduleLocation: 'Lectures: SS 116B - Clinical rounds: Hospital, fourth floor'
+    scheduleLocation: 'Lectures: SS 116B - Clinical rounds: Hospital, fourth floor',
+    capabilities: {
+      hasMcqs: true,
+      hasAssignments: true,
+      hasTimeline: true,
+      hasSchedule: true,
+      resourceFirst: false
+    }
   },
   '402': {
     id: '402',
@@ -49,7 +64,14 @@ const mustSections = {
       start: '2026-05-25',
       finals: '2026-09-19'
     },
-    scheduleLocation: ''
+    scheduleLocation: '',
+    capabilities: {
+      hasMcqs: true,
+      hasAssignments: true,
+      hasTimeline: true,
+      hasSchedule: false,
+      resourceFirst: false
+    }
   }
 }
 

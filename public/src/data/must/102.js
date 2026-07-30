@@ -1,5 +1,6 @@
 // MUST 102 static configuration module
 // Primary Drive folder: https://drive.google.com/drive/folders/10CzMmVFNYeN1qB-pD6akyLy5Rj-6RCjS
+// Practical archive: https://drive.google.com/drive/folders/1rOfIxW96_gNcGJHciz5lzuBukZgLgAgx
 
 const subjects102 = [
   {
@@ -14,7 +15,8 @@ const subjects102 = [
         art: 0,
         note: 'Theoretical data and department materials.',
         driveSelector: [
-          { label: 'Primary 102 Folder', source: 'Google Drive Archive', url: 'https://drive.google.com/drive/folders/10CzMmVFNYeN1qB-pD6akyLy5Rj-6RCjS' }
+          { label: 'Primary 102 Folder', source: 'Google Drive Archive', url: 'https://drive.google.com/drive/folders/10CzMmVFNYeN1qB-pD6akyLy5Rj-6RCjS' },
+          { label: '102 Practical Archive', source: 'Google Drive Archive', url: 'https://drive.google.com/drive/folders/1rOfIxW96_gNcGJHciz5lzuBukZgLgAgx' }
         ]
       }
     ]
@@ -31,7 +33,8 @@ const subjects102 = [
         art: 1,
         note: 'Theoretical data and department materials.',
         driveSelector: [
-          { label: 'Primary 102 Folder', source: 'Google Drive Archive', url: 'https://drive.google.com/drive/folders/10CzMmVFNYeN1qB-pD6akyLy5Rj-6RCjS' }
+          { label: 'Primary 102 Folder', source: 'Google Drive Archive', url: 'https://drive.google.com/drive/folders/10CzMmVFNYeN1qB-pD6akyLy5Rj-6RCjS' },
+          { label: '102 Practical Archive', source: 'Google Drive Archive', url: 'https://drive.google.com/drive/folders/1rOfIxW96_gNcGJHciz5lzuBukZgLgAgx' }
         ]
       }
     ]
@@ -48,7 +51,8 @@ const subjects102 = [
         art: 2,
         note: 'Theoretical books and recordings.',
         driveSelector: [
-          { label: 'Primary 102 Folder', source: 'Google Drive Archive', url: 'https://drive.google.com/drive/folders/10CzMmVFNYeN1qB-pD6akyLy5Rj-6RCjS' }
+          { label: 'Primary 102 Folder', source: 'Google Drive Archive', url: 'https://drive.google.com/drive/folders/10CzMmVFNYeN1qB-pD6akyLy5Rj-6RCjS' },
+          { label: '102 Practical Archive', source: 'Google Drive Archive', url: 'https://drive.google.com/drive/folders/1rOfIxW96_gNcGJHciz5lzuBukZgLgAgx' }
         ]
       }
     ]
@@ -65,7 +69,8 @@ const subjects102 = [
         art: 3,
         note: 'Theoretical books and recordings.',
         driveSelector: [
-          { label: 'Primary 102 Folder', source: 'Google Drive Archive', url: 'https://drive.google.com/drive/folders/10CzMmVFNYeN1qB-pD6akyLy5Rj-6RCjS' }
+          { label: 'Primary 102 Folder', source: 'Google Drive Archive', url: 'https://drive.google.com/drive/folders/10CzMmVFNYeN1qB-pD6akyLy5Rj-6RCjS' },
+          { label: '102 Practical Archive', source: 'Google Drive Archive', url: 'https://drive.google.com/drive/folders/1rOfIxW96_gNcGJHciz5lzuBukZgLgAgx' }
         ]
       }
     ]
@@ -82,7 +87,8 @@ const subjects102 = [
         art: 4,
         note: 'Enzymes parts 1-3, department books, and practical materials.',
         driveSelector: [
-          { label: 'Primary 102 Folder', source: 'Google Drive Archive', url: 'https://drive.google.com/drive/folders/10CzMmVFNYeN1qB-pD6akyLy5Rj-6RCjS' }
+          { label: 'Primary 102 Folder', source: 'Google Drive Archive', url: 'https://drive.google.com/drive/folders/10CzMmVFNYeN1qB-pD6akyLy5Rj-6RCjS' },
+          { label: '102 Practical Archive', source: 'Google Drive Archive', url: 'https://drive.google.com/drive/folders/1rOfIxW96_gNcGJHciz5lzuBukZgLgAgx' }
         ]
       }
     ]
