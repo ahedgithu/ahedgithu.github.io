@@ -777,6 +777,45 @@ const subjects402 = [
   }
 ]
 
+const subjectsO6uPhysicalTherapy = [
+  {
+    code: 'PT-PHYS',
+    name: 'Physiology of Exercise',
+    totalCount: 1,
+    examNote: 'Next midterm: Mon Aug 3, 2026.',
+    topics: [
+      {
+        label: 'Physiological Adaptation to Regular Physical Training',
+        state: 'taken',
+        art: 9,
+        note: 'Currently the only confirmed covered lecture.'
+      }
+    ]
+  },
+  {
+    code: 'PT-PATH2',
+    name: 'Pathology 2',
+    totalCount: 4,
+    examNote: 'Next midterm: Mon Aug 3, 2026.',
+    topics: [1, 2, 3, 4].map((lectureNumber, index) => ({
+      label: `Lecture ${lectureNumber} — Title pending`,
+      state: 'taken',
+      art: 10 + index,
+      note: 'Covered lecture. Official title pending.'
+    }))
+  }
+]
+
+const subjectsDeltaPhysicalTherapy = [
+  {
+    code: 'DELTA-IM',
+    name: 'Internal Medicine',
+    totalCount: 0,
+    examNote: '',
+    topics: []
+  }
+]
+
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 const mobileQuery = window.matchMedia('(max-width: 860px)')
 const quizRobotCompactQuery = window.matchMedia('(max-width: 640px)')
@@ -833,22 +872,28 @@ const PROFILE_AVATARS = [
   { id: 'anatomy', label: 'Anatomy', position: '100% 100%' }
 ]
 const TOPIC_UPDATE_STORAGE_KEY_PREFIX = 'tracker-seen-topic-updates-v1'
-let TOPIC_UPDATE_STORAGE_KEY = `${TOPIC_UPDATE_STORAGE_KEY_PREFIX}::401`
+let TOPIC_UPDATE_STORAGE_KEY = `${TOPIC_UPDATE_STORAGE_KEY_PREFIX}::must::401`
 const UNIVERSITY_WEEK_START_DAY = 0 // Sunday
 const NEWS_SEEN_STORAGE_KEY_PREFIX = 'newsSeen'
-let NEWS_SEEN_STORAGE_KEY = `${NEWS_SEEN_STORAGE_KEY_PREFIX}::401`
+let NEWS_SEEN_STORAGE_KEY = `${NEWS_SEEN_STORAGE_KEY_PREFIX}::must::401`
 const NEWS_EXPIRY_HOURS = 6
 const DRIVE_ICON_URL = '/assets/icons/drive-icon.png'
 const PLAY_ICON_URL = '/assets/icons/play-button-v1.png'
-const mcqQuizzes = window.mcqQuizzes || {}
-const mcqQuizzesBySection = {
-  '401': mcqQuizzes,
-  '402': window.mcqQuizzes402 || {}
+const mcqQuizzesByUniversity = {
+  must: {
+    '401': window.mcqQuizzes || {},
+    '402': window.mcqQuizzes402 || {}
+  },
+  o6u: {
+    'physical-therapy': {}
+  },
+  delta: {
+    'physical-therapy': {}
+  }
 }
 
-function getMcqQuizzesForSection(section = activeAcademicSection) {
-  if (section === '402') return window.mcqQuizzes402 || mcqQuizzesBySection['402'] || {}
-  return window.mcqQuizzes || mcqQuizzesBySection['401'] || {}
+function getMcqQuizzesForSection(section = activeAcademicSection, universityId = activeUniversityId) {
+  return mcqQuizzesByUniversity[universityId]?.[section] || {}
 }
 
 const dynamicQuizConfigs = new Map()
@@ -900,7 +945,9 @@ const studentProgressState = {
   ready: false,
   loading: false,
   authRequestId: 0,
+  selectedUniversity: '',
   selectedSection: '',
+  pendingUniversity: '',
   sectionSelectionMode: 'onboarding',
   topicRows: new Map(),
   quizRows: new Map(),
@@ -998,24 +1045,100 @@ const midtermExamSchedule402 = [
   { code: 'GYN 402', subjectCode: 'GYNA402', subjectName: 'Gynecology & Obstetrics 402', date: '2026-08-01', dayLabel: 'Sat', time: '11:30-12:30', quizTopicKey: 'GYN 402 MCQs', quizActionLabel: 'MCQs' }
 ]
 
-const academicSections = {
-  '401': {
-    id: '401',
-    title: '401',
-    newsTitle: 'MED 401 news',
-    trackerSearchPlaceholder: 'Search 401 topics or subjects…',
-    subjects: subjects401,
-    midtermExamSchedule,
-    courseSchedule
+const midtermExamScheduleO6uPhysicalTherapy = [
+  {
+    code: 'Physical Therapy Midterm',
+    subjectCode: 'PT-PHYS',
+    subjectName: 'Physical Therapy',
+    date: '2026-08-03',
+    dayLabel: 'Mon',
+    time: 'Time pending'
+  }
+]
+
+const academicSectionsByUniversity = {
+  must: {
+    '401': {
+      id: '401',
+      title: '401',
+      newsTitle: 'MED 401 news',
+      trackerSearchPlaceholder: 'Search 401 topics or subjects…',
+      subjects: subjects401,
+      midtermExamSchedule,
+      courseSchedule,
+      semesterTimeline: {
+        start: '2026-05-25',
+        finals: '2026-09-19'
+      },
+      scheduleLocation: 'Lectures: SS 116B - Clinical rounds: Hospital, fourth floor'
+    },
+    '402': {
+      id: '402',
+      title: '402',
+      newsTitle: 'MED 402 news',
+      trackerSearchPlaceholder: 'Search 402 topics or subjects…',
+      subjects: subjects402,
+      midtermExamSchedule: midtermExamSchedule402,
+      courseSchedule: [],
+      semesterTimeline: {
+        start: '2026-05-25',
+        finals: '2026-09-19'
+      },
+      scheduleLocation: ''
+    }
   },
-  '402': {
-    id: '402',
-    title: '402',
-    newsTitle: 'MED 402 news',
-    trackerSearchPlaceholder: 'Search 402 topics or subjects…',
-    subjects: subjects402,
-    midtermExamSchedule: midtermExamSchedule402,
-    courseSchedule: []
+  o6u: {
+    'physical-therapy': {
+      id: 'physical-therapy',
+      title: 'Physical Therapy',
+      newsTitle: 'O6U Physical Therapy news',
+      trackerSearchPlaceholder: 'Search Physical Therapy topics or subjects…',
+      subjects: subjectsO6uPhysicalTherapy,
+      midtermExamSchedule: midtermExamScheduleO6uPhysicalTherapy,
+      courseSchedule: [],
+      semesterTimeline: null,
+      scheduleLocation: ''
+    }
+  },
+  delta: {
+    'physical-therapy': {
+      id: 'physical-therapy',
+      title: 'Physical Therapy',
+      newsTitle: 'Delta Physical Therapy news',
+      trackerSearchPlaceholder: 'Search Physical Therapy subjects…',
+      subjects: subjectsDeltaPhysicalTherapy,
+      midtermExamSchedule: [],
+      courseSchedule: [],
+      semesterTimeline: null,
+      scheduleLocation: ''
+    }
+  }
+}
+
+const universities = {
+  must: {
+    id: 'must',
+    name: 'Misr University for Science and Technology',
+    shortName: 'MUST',
+    hubName: 'MUST HUB',
+    logoUrl: '/assets/must-university-logo.png',
+    sections: ['401', '402']
+  },
+  o6u: {
+    id: 'o6u',
+    name: '6th of October University',
+    shortName: 'O6U',
+    hubName: 'O6U HUB',
+    logoUrl: '/assets/o6u-university-logo.jpg',
+    sections: ['physical-therapy']
+  },
+  delta: {
+    id: 'delta',
+    name: 'Delta University',
+    shortName: 'Delta',
+    hubName: 'DELTA HUB',
+    logoUrl: '/assets/delta-university-logo.png',
+    sections: ['physical-therapy']
   }
 }
 
@@ -1099,20 +1222,28 @@ const trackerTitle = document.getElementById('tracker-title')
 const newsTitle = document.getElementById('news-title')
 const classRepsGrid = document.querySelector('.class-reps__grid')
 const scheduleTitle = document.getElementById('schedule-title')
+const scheduleLocation = document.getElementById('schedule-location')
 const studentSync = document.getElementById('student-sync')
 const studentSyncButton = document.getElementById('student-sync-button')
 const studentSyncMenu = document.getElementById('student-sync-menu')
 const studentSyncAvatar = document.getElementById('student-sync-avatar')
 const studentSyncStatus = document.getElementById('student-sync-status')
 const studentSyncEmail = document.getElementById('student-sync-email')
-const authGate = document.getElementById('auth-gate')
+const authGate = document.querySelector('[data-auth-gate]')
 const authGateStatus = document.getElementById('auth-gate-status')
 const authGateContext = document.querySelector('[data-auth-gate-context]')
 const authGateDelay = document.querySelector('[data-auth-gate-delay]')
 const authLoadingSteps = [...document.querySelectorAll('.auth-gate__rail-step[data-auth-loading-step]')]
+const authSigninTitle = document.getElementById('auth-signin-title')
+const authSigninCopy = document.getElementById('auth-signin-copy')
+const authUniversityTitle = document.getElementById('auth-university-title')
+const authUniversityCopy = document.getElementById('auth-university-copy')
+const authUniversityCancel = document.querySelector('[data-auth-university-cancel]')
 const authSectionTitle = document.getElementById('auth-section-title')
 const authSectionCopy = document.getElementById('auth-section-copy')
 const authSectionCancel = document.querySelector('[data-auth-section-cancel]')
+const authSectionChoices = document.querySelector('[data-auth-section-choices]')
+const semesterTimeline = document.getElementById('semester-timeline')
 const isStandaloneProfilePage = document.body.classList.contains('profile-page') || window.location.pathname.endsWith('/profile.html')
 const profileAvatarDialog = document.getElementById('profile-avatar-dialog')
 let authGateDelayTimer = 0
@@ -1132,6 +1263,10 @@ const adminLoginStatus = document.getElementById('tracker-admin-login-status')
 const trackerAdminEditPanel = document.getElementById('tracker-admin-edit-panel')
 
 const initialParams = new URLSearchParams(window.location.search)
+const LOCAL_TEST_SELECTION_KEY = 'universityLocalTestSelection'
+const isLocalTestMode = ['127.0.0.1', 'localhost'].includes(window.location.hostname)
+  && initialParams.get('local-test') === '1'
+const isLocalOnboardingTestMode = isLocalTestMode && initialParams.get('onboarding') === '1'
 let initialAdminLoginHandled = false
 subjects = subjects.map((subject) => ({
   ...subject,
@@ -1143,9 +1278,16 @@ subjects401.forEach((subject) => {
 subjects402.forEach((subject) => {
   subject.clinicalTopics = Array.isArray(subject.clinicalTopics) ? subject.clinicalTopics : []
 })
+subjectsO6uPhysicalTherapy.forEach((subject) => {
+  subject.clinicalTopics = Array.isArray(subject.clinicalTopics) ? subject.clinicalTopics : []
+})
+subjectsDeltaPhysicalTherapy.forEach((subject) => {
+  subject.clinicalTopics = Array.isArray(subject.clinicalTopics) ? subject.clinicalTopics : []
+})
+let activeUniversityId = 'must'
 let activeAcademicSection = '401'
 let activeSiteMode = 'selector'
-let activeAcademicSectionData = academicSections[activeAcademicSection]
+let activeAcademicSectionData = academicSectionsByUniversity.must[activeAcademicSection]
 const newsCardsState = {
   rowsBySection: new Map(),
   remoteSections: new Set(),
@@ -1158,6 +1300,26 @@ let activeSubjectCode = initialParams.get('tracker') === '1' && initialSubject ?
 let expandedSubjectCode = mobileQuery.matches && activeSubjectCode ? activeSubjectCode : null
 let activeSubjectTrack = 'theoretical'
 const managedModalStates = new WeakMap()
+
+function getUniversity(universityId = activeUniversityId) {
+  return universities[universityId] || universities.must
+}
+
+function getUniversitySectionKey(universityId = activeUniversityId, sectionId = activeAcademicSection) {
+  return `${universityId}::${sectionId}`
+}
+
+function isSavedUniversity(universityId) {
+  return Object.prototype.hasOwnProperty.call(universities, universityId)
+}
+
+function isUniversitySection(universityId, sectionId) {
+  return isSavedUniversity(universityId) && getUniversity(universityId).sections.includes(sectionId)
+}
+
+function getDefaultSectionForUniversity(universityId) {
+  return getUniversity(universityId).sections[0]
+}
 
 function getFocusableElements(container) {
   if (!container) return []
@@ -1240,8 +1402,12 @@ function deactivateManagedModal(modal) {
   })
 }
 
-function getAcademicSection(sectionId = activeAcademicSection) {
-  return academicSections[sectionId] || academicSections['401']
+function getAcademicSection(sectionId = activeAcademicSection, universityId = activeUniversityId) {
+  const safeUniversityId = isSavedUniversity(universityId) ? universityId : 'must'
+  const safeSectionId = isUniversitySection(safeUniversityId, sectionId)
+    ? sectionId
+    : getDefaultSectionForUniversity(safeUniversityId)
+  return academicSectionsByUniversity[safeUniversityId][safeSectionId]
 }
 
 function isValidRemoteTopicState(state) {
@@ -1283,6 +1449,7 @@ function applyTrackerTopicRows(rows) {
   let changed = false
 
   rows.forEach((row) => {
+    if ((row.university_id || 'must') !== activeUniversityId) return
     const section = getAcademicSection(row.section)
     const subject = section.subjects.find((item) => item.code === row.subject_code)
     if (!subject) return
@@ -1359,7 +1526,7 @@ function applyTrackerTopicRows(rows) {
     existingTopic.createdAt = row.created_at || undefined
   })
 
-  Object.values(academicSections).forEach(section => {
+  Object.values(academicSectionsByUniversity).flatMap(sectionMap => Object.values(sectionMap)).forEach(section => {
     section.subjects.forEach(subject => {
       ;[subject.topics, subject.clinicalTopics].forEach(collection => {
         if (!Array.isArray(collection)) return
@@ -1382,40 +1549,55 @@ function refreshTrackerAfterRemoteUpdate() {
   if (activeSubjectCode) setActiveSubject(activeSubjectCode, 'open')
 }
 
-let remoteTrackerRefreshPromise = null
+const remoteTrackerRefreshPromises = new Map()
 
 function refreshRemoteTrackerData() {
   if (!isSupabaseConfigured()) return Promise.resolve()
-  if (remoteTrackerRefreshPromise) return remoteTrackerRefreshPromise
+  const requestedUniversity = activeUniversityId
+  const existingPromise = remoteTrackerRefreshPromises.get(requestedUniversity)
+  if (existingPromise) return existingPromise
 
-  remoteTrackerRefreshPromise = fetchTrackerTopicRows()
+  const refreshPromise = fetchTrackerTopicRows(requestedUniversity)
     .then((rows) => {
-      if (applyTrackerTopicRows(rows)) refreshTrackerAfterRemoteUpdate()
+      const changed = applyTrackerTopicRows(rows)
+      if (changed && requestedUniversity === activeUniversityId) refreshTrackerAfterRemoteUpdate()
     })
     .catch((error) => {
       console.warn('Remote tracker data unavailable; using local fallback.', error)
     })
     .finally(() => {
-      remoteTrackerRefreshPromise = null
+      if (remoteTrackerRefreshPromises.get(requestedUniversity) === refreshPromise) {
+        remoteTrackerRefreshPromises.delete(requestedUniversity)
+      }
     })
 
-  return remoteTrackerRefreshPromise
+  remoteTrackerRefreshPromises.set(requestedUniversity, refreshPromise)
+  return refreshPromise
 }
 
 function isTrackerAdmin() {
-  return Boolean(trackerAdminState.profile && trackerAdminState.enabled)
+  return Boolean(
+    trackerAdminState.profile
+    && trackerAdminState.enabled
+    && String(trackerAdminState.profile.allowed_university_id || 'must') === activeUniversityId
+    && String(trackerAdminState.profile.allowed_section || '') === activeAcademicSection
+  )
 }
 
 function hasTrackerAdminAccess() {
-  return Boolean(trackerAdminState.profile)
+  return Boolean(
+    trackerAdminState.profile
+    && String(trackerAdminState.profile.allowed_university_id || 'must') === activeUniversityId
+    && String(trackerAdminState.profile.allowed_section || '') === activeAcademicSection
+  )
 }
 
 function getAdminCollectionKey(subjectCode = activeSubjectCode, track = activeSubjectTrack) {
-  return `${activeAcademicSection}::${subjectCode || ''}::${track}`
+  return `${activeUniversityId}::${activeAcademicSection}::${subjectCode || ''}::${track}`
 }
 
 function getAdminTopicKey(subject, topic, track = activeSubjectTrack) {
-  return `${activeAcademicSection}::${subject.code}::${track}::${topic.label}`
+  return `${activeUniversityId}::${activeAcademicSection}::${subject.code}::${track}::${topic.label}`
 }
 
 function getAdminTopicContext(subjectCode, track, topicLabel) {
@@ -1427,6 +1609,7 @@ function getAdminTopicContext(subjectCode, track, topicLabel) {
 
 function makeAdminTopicPayload(subject, topic, track = activeSubjectTrack, overrides = {}) {
   return {
+    university_id: activeUniversityId,
     section: activeAcademicSection,
     subject_code: subject.code,
     subject_name: subject.name,
@@ -1457,7 +1640,7 @@ function openAdminLogin() {
     renderTrackerAdminUi()
     renderSubjects()
     if (activeSubjectCode) setActiveSubject(activeSubjectCode, 'open')
-    if (newsCardsState.remoteSections.has(activeAcademicSection)) {
+    if (newsCardsState.remoteSections.has(getUniversitySectionKey())) {
       replaceNewsFeedWithRemoteRows()
       renderNewsFilters()
     }
@@ -1535,7 +1718,7 @@ async function refreshTrackerAdminProfile(user) {
     renderProfileSection()
     return
   }
-  if (newsCardsState.remoteSections.has(activeAcademicSection)) {
+  if (newsCardsState.remoteSections.has(getUniversitySectionKey())) {
     replaceNewsFeedWithRemoteRows()
     renderNewsFilters()
   } else {
@@ -1665,6 +1848,7 @@ async function saveAdminArrangement() {
 function getDefaultUserPreferences() {
   return {
     anonymous: false,
+    selected_university: null,
     selected_section: null,
     nickname: '',
     avatar_id: '',
@@ -1755,7 +1939,7 @@ function getLeaderboardAvatarId(entry, fallbackIndex = 0) {
 
 function canUseLegacyLocalProgress() {
   const userId = getProgressStorageOwnerId()
-  if (!userId) return false
+  if (!userId || activeUniversityId !== 'must') return false
   try {
     return localStorage.getItem(LOCAL_PROGRESS_OWNER_KEY) === userId
   } catch {
@@ -1849,11 +2033,9 @@ function renderStudentSyncUi() {
   studentSync.classList.toggle('is-loading', studentProgressState.loading)
   if (studentSyncButton) studentSyncButton.hidden = !signedIn
   const logoutButton = studentSync.querySelector('[data-student-sync-logout]')
-  const switchSectionButton = studentSync.querySelector('[data-student-switch-section]')
   const profileButtons = studentSync.querySelectorAll('[data-profile-open], [data-profile-edit-nickname]')
   const adminModeButton = studentSync.querySelector('[data-tracker-admin-toggle]')
   if (logoutButton) logoutButton.hidden = !signedIn
-  if (switchSectionButton) switchSectionButton.hidden = !signedIn
   profileButtons.forEach((button) => { button.hidden = !signedIn })
   if (adminModeButton) adminModeButton.hidden = !signedIn || !hasTrackerAdminAccess()
 
@@ -1884,7 +2066,7 @@ function renderStudentSyncUi() {
       studentSyncStatus.hidden = true
     } else {
       studentSyncStatus.hidden = false
-      studentSyncStatus.textContent = 'Google login is required to use MUST Hub.'
+      studentSyncStatus.textContent = `Google login is required to use ${getUniversity().hubName}.`
     }
   }
   renderProfileSection()
@@ -1896,6 +2078,7 @@ const leaderboardState = {
   rows: [],
   preferences: getDefaultUserPreferences(),
   lastFetched: 0,
+  university: '',
   section: '',
   requestId: 0
 }
@@ -1934,6 +2117,7 @@ const liveActivityState = {
   loading: false,
   rows: [],
   lastFetched: 0,
+  university: '',
   section: '',
   timer: null,
   unavailable: false
@@ -1943,6 +2127,7 @@ const onlineStudentsState = {
   loading: false,
   rows: [],
   lastFetched: 0,
+  university: '',
   section: '',
   timer: null,
   heartbeatTimer: null,
@@ -2050,6 +2235,7 @@ function getPresencePayload() {
   const modal = document.getElementById('quiz-modal')
   const isQuizOpen = Boolean(modal && modal.getAttribute('aria-hidden') === 'false' && quizState.topicLabel && !quizState.showResumePrompt)
   return {
+    universityId: activeUniversityId,
     section: activeAcademicSection,
     page: isQuizOpen ? 'mcqs' : getPresencePage(),
     isMcqActive: isQuizOpen,
@@ -2066,6 +2252,7 @@ async function refreshOnlineStudents(force = false) {
   const now = Date.now()
   if (
     !force
+    && onlineStudentsState.university === activeUniversityId
     && onlineStudentsState.section === activeAcademicSection
     && now - onlineStudentsState.lastFetched < 15000
   ) {
@@ -2075,7 +2262,8 @@ async function refreshOnlineStudents(force = false) {
 
   onlineStudentsState.loading = true
   try {
-    onlineStudentsState.rows = await fetchOnlineStudents(activeAcademicSection, 10)
+    onlineStudentsState.rows = await fetchOnlineStudents(activeUniversityId, activeAcademicSection, 10)
+    onlineStudentsState.university = activeUniversityId
     onlineStudentsState.section = activeAcademicSection
     onlineStudentsState.lastFetched = Date.now()
     renderOnlineStudents()
@@ -2090,6 +2278,10 @@ async function refreshOnlineStudents(force = false) {
 }
 
 async function sendStudentPresence(forceRefresh = false) {
+  if (isLocalTestMode) {
+    renderOnlineStudents()
+    return
+  }
   if (!studentProgressState.user || onlineStudentsState.unavailable) {
     renderOnlineStudents()
     return
@@ -2118,6 +2310,10 @@ function initOnlineStudents() {
 }
 
 async function fetchAndRenderLiveActivity(force = false) {
+  if (isLocalTestMode) {
+    renderLiveActivity()
+    return
+  }
   if (!studentProgressState.user || liveActivityState.loading || liveActivityState.unavailable) {
     renderLiveActivity()
     return
@@ -2125,6 +2321,7 @@ async function fetchAndRenderLiveActivity(force = false) {
   const now = Date.now()
   if (
     !force
+    && liveActivityState.university === activeUniversityId
     && liveActivityState.section === activeAcademicSection
     && now - liveActivityState.lastFetched < 20000
   ) {
@@ -2134,7 +2331,8 @@ async function fetchAndRenderLiveActivity(force = false) {
 
   liveActivityState.loading = true
   try {
-    liveActivityState.rows = await fetchRecentMcqActivity(activeAcademicSection, 8)
+    liveActivityState.rows = await fetchRecentMcqActivity(activeUniversityId, activeAcademicSection, 8)
+    liveActivityState.university = activeUniversityId
     liveActivityState.section = activeAcademicSection
     liveActivityState.lastFetched = Date.now()
     renderLiveActivity()
@@ -2455,6 +2653,7 @@ async function saveProfileSetup(rawValue) {
     if (help) help.textContent = 'Saving your public profile...'
     leaderboardState.preferences = {
       ...getDefaultUserPreferences(),
+      ...leaderboardState.preferences,
       ...(await completeProfileSetup(nickname, avatarId))
     }
     pendingProfileAvatarId = ''
@@ -2464,7 +2663,7 @@ async function saveProfileSetup(rawValue) {
     stopProfileOnboardingTour()
     renderStudentSyncUi()
     renderProfileSection()
-    invalidateLeaderboard(activeAcademicSection)
+    invalidateLeaderboard(activeUniversityId, activeAcademicSection)
     await fetchAndRenderLeaderboard(true)
     if (help) help.textContent = 'Profile saved.'
     if (avatarHelp) avatarHelp.textContent = 'Avatar saved.'
@@ -2490,6 +2689,7 @@ function openProfileSection(options = {}) {
   setStudentSyncMenu(false)
   if (!isStandaloneProfilePage) {
     const url = new URL('/profile.html', window.location.origin)
+    url.searchParams.set('university', activeUniversityId)
     if (activeAcademicSection) url.searchParams.set('section', activeAcademicSection)
     window.location.href = url.toString()
     return
@@ -2502,6 +2702,7 @@ function openProfileNicknameEditor() {
   if (!studentProgressState.user) return
   if (!isStandaloneProfilePage) {
     const url = new URL('/profile.html', window.location.origin)
+    url.searchParams.set('university', activeUniversityId)
     if (activeAcademicSection) url.searchParams.set('section', activeAcademicSection)
     url.searchParams.set('edit', 'nickname')
     window.location.href = url.toString()
@@ -2551,11 +2752,12 @@ function isLeaderboardNearViewport() {
   return bounds.top < window.innerHeight + 240 && bounds.bottom > -240
 }
 
-function invalidateLeaderboard(section = activeAcademicSection) {
+function invalidateLeaderboard(universityId = activeUniversityId, section = activeAcademicSection) {
   leaderboardState.loading = false
   leaderboardState.error = ''
   leaderboardState.rows = []
   leaderboardState.lastFetched = 0
+  leaderboardState.university = universityId
   leaderboardState.section = section
   leaderboardState.requestId += 1
 }
@@ -2624,11 +2826,19 @@ function showGlobalToast(text) {
 
 async function fetchAndRenderLeaderboard(force = false) {
   if (leaderboardState.loading) return
+  if (isLocalTestMode) {
+    leaderboardState.rows = []
+    leaderboardState.lastFetched = Date.now()
+    renderLeaderboardHtml()
+    return
+  }
 
+  const requestedUniversity = activeUniversityId
   const requestedSection = activeAcademicSection
   const now = Date.now()
   if (
     !force
+    && leaderboardState.university === requestedUniversity
     && leaderboardState.section === requestedSection
     && leaderboardState.rows.length > 0
     && (now - leaderboardState.lastFetched < 60000)
@@ -2658,15 +2868,24 @@ async function fetchAndRenderLeaderboard(force = false) {
   leaderboardState.loading = true
   const requestId = ++leaderboardState.requestId
   try {
-    const rows = await fetchLeaderboard(requestedSection)
-    if (requestId !== leaderboardState.requestId || requestedSection !== activeAcademicSection) return
+    const rows = await fetchLeaderboard(requestedUniversity, requestedSection)
+    if (
+      requestId !== leaderboardState.requestId
+      || requestedUniversity !== activeUniversityId
+      || requestedSection !== activeAcademicSection
+    ) return
     leaderboardState.rows = rows
+    leaderboardState.university = requestedUniversity
     leaderboardState.section = requestedSection
     leaderboardState.lastFetched = Date.now()
     leaderboardState.error = ''
     renderLeaderboardHtml()
   } catch (err) {
-    if (requestId !== leaderboardState.requestId || requestedSection !== activeAcademicSection) return
+    if (
+      requestId !== leaderboardState.requestId
+      || requestedUniversity !== activeUniversityId
+      || requestedSection !== activeAcademicSection
+    ) return
     console.error('Leaderboard fetch failed:', err)
     leaderboardState.error = err.message || 'Failed to load leaderboard.'
     if (loadingEl) loadingEl.hidden = true
@@ -2826,7 +3045,7 @@ async function syncLocalProgressToCloud(section = activeAcademicSection) {
   for (const subject of sectionSubjects) {
     const topicGroups = [subject.topics || [], subject.clinicalTopics || []]
     for (const topic of topicGroups.flat()) {
-      const key = getTopicProgressRecordKey(section, subject.code, topic.label)
+      const key = getTopicProgressRecordKey(activeUniversityId, section, subject.code, topic.label)
       if (studentProgressState.topicRows.has(key)) continue
       const localState = getLocalTopicCompletionState(subject.code, topic.label, section)
       if (!localState.studied && !localState.mcqs) continue
@@ -2834,6 +3053,7 @@ async function syncLocalProgressToCloud(section = activeAcademicSection) {
       studentProgressState.topicRows.set(key, localState)
       await upsertUserTopicProgress({
         user_id: studentProgressState.user.id,
+        university_id: activeUniversityId,
         section,
         subject_code: subject.code,
         topic_label: topic.label,
@@ -2844,15 +3064,15 @@ async function syncLocalProgressToCloud(section = activeAcademicSection) {
   }
 
   const userId = getProgressStorageOwnerId()
-  const quizPrefix = `${QUIZ_STORAGE_PREFIX}::${userId}::${section}::`
+  const quizPrefix = `${QUIZ_STORAGE_PREFIX}::${userId}::${activeUniversityId}::${section}::`
   for (let index = 0; index < localStorage.length; index += 1) {
     const storageKey = localStorage.key(index)
     if (!storageKey?.startsWith(quizPrefix)) continue
-    const [, , , encodedTopicLabel, encodedSourceId] = storageKey.split('::')
+    const [, , , , encodedTopicLabel, encodedSourceId] = storageKey.split('::')
     const topicLabel = decodeURIComponent(encodedTopicLabel || '')
     const sourceId = decodeURIComponent(encodedSourceId || 'current')
     if (!topicLabel) continue
-    const key = getQuizProgressRecordKey(section, topicLabel, sourceId)
+    const key = getQuizProgressRecordKey(activeUniversityId, section, topicLabel, sourceId)
     if (studentProgressState.quizRows.has(key)) continue
 
     const payload = getLocalQuizState(topicLabel, sourceId, section)
@@ -2861,6 +3081,7 @@ async function syncLocalProgressToCloud(section = activeAcademicSection) {
     studentProgressState.quizRows.set(key, payload)
     await upsertUserQuizProgress({
       user_id: studentProgressState.user.id,
+      university_id: activeUniversityId,
       section,
       topic_label: topicLabel,
       source_id: sourceId,
@@ -2879,6 +3100,14 @@ async function syncLocalProgressToCloud(section = activeAcademicSection) {
 }
 
 async function loadStudentProgress(section = activeAcademicSection) {
+  if (isLocalTestMode) {
+    studentProgressState.ready = true
+    studentProgressState.loading = false
+    refreshTrackerFilters()
+    updateGlobalProgress()
+    renderStudentSyncUi()
+    return
+  }
   if (!studentProgressState.user || !isSupabaseConfigured()) {
     studentProgressState.ready = false
     renderStudentSyncUi()
@@ -2891,30 +3120,32 @@ async function loadStudentProgress(section = activeAcademicSection) {
 
   try {
     const [topicRows, quizRows, pref] = await Promise.all([
-      fetchUserTopicProgressRows(section),
-      fetchUserQuizProgressRows(section),
-      fetchUserPreference().catch(() => null)
+      fetchUserTopicProgressRows(activeUniversityId, section),
+      fetchUserQuizProgressRows(activeUniversityId, section),
+      fetchUserPreference()
     ])
 
-    leaderboardState.preferences = { ...getDefaultUserPreferences(), ...(pref || {}) }
+    if (pref) {
+      leaderboardState.preferences = { ...getDefaultUserPreferences(), ...pref }
+    }
 
     ;[...studentProgressState.topicRows.keys()]
-      .filter((key) => key.startsWith(`${section}::`))
+      .filter((key) => key.startsWith(`${activeUniversityId}::${section}::`))
       .forEach((key) => studentProgressState.topicRows.delete(key))
     ;[...studentProgressState.quizRows.keys()]
-      .filter((key) => key.startsWith(`${section}::`))
+      .filter((key) => key.startsWith(`${activeUniversityId}::${section}::`))
       .forEach((key) => studentProgressState.quizRows.delete(key))
 
     topicRows.forEach((row) => {
       studentProgressState.topicRows.set(
-        getTopicProgressRecordKey(row.section, row.subject_code, row.topic_label),
+        getTopicProgressRecordKey(row.university_id || 'must', row.section, row.subject_code, row.topic_label),
         row
       )
     })
 
     quizRows.forEach((row) => {
       studentProgressState.quizRows.set(
-        getQuizProgressRecordKey(row.section, row.topic_label, row.source_id),
+        getQuizProgressRecordKey(row.university_id || 'must', row.section, row.topic_label, row.source_id),
         row.progress || row
       )
     })
@@ -2941,27 +3172,54 @@ async function loadStudentProgress(section = activeAcademicSection) {
 
 function getInitialSiteMode() {
   const hash = window.location.hash.replace('#', '')
-  if (initialParams.get('section') === '402') return '402'
-  if (initialParams.get('section') === '401') return '401'
+  if (isUniversitySection(activeUniversityId, initialParams.get('section'))) return initialParams.get('section')
   if (initialParams.get('section') === 'tools' || hash === 'history') return 'tools'
   if (initialParams.get('section') === 'work' || hash === 'work') return 'work'
   return 'selector'
 }
 
 function setSectionStorageKeys(sectionId) {
-  TOPIC_UPDATE_STORAGE_KEY = `${TOPIC_UPDATE_STORAGE_KEY_PREFIX}::${sectionId}`
-  NEWS_SEEN_STORAGE_KEY = `${NEWS_SEEN_STORAGE_KEY_PREFIX}::${sectionId}`
+  TOPIC_UPDATE_STORAGE_KEY = `${TOPIC_UPDATE_STORAGE_KEY_PREFIX}::${activeUniversityId}::${sectionId}`
+  NEWS_SEEN_STORAGE_KEY = `${NEWS_SEEN_STORAGE_KEY_PREFIX}::${activeUniversityId}::${sectionId}`
+}
+
+function updateUniversityBranding() {
+  const university = getUniversity()
+  document.body.dataset.university = university.id
+  document.querySelectorAll('[data-university-logo]').forEach((image) => {
+    image.src = university.logoUrl
+    image.alt = image.closest('[aria-hidden="true"]') ? '' : university.name
+  })
+  document.querySelectorAll('[data-university-wordmark]').forEach((element) => {
+    element.textContent = university.hubName
+    element.parentElement?.setAttribute('aria-label', university.hubName)
+  })
+  document.querySelectorAll('[data-university-short-name]').forEach((element) => {
+    element.textContent = university.shortName
+  })
+  document.querySelectorAll('[data-university-footer-brand]').forEach((element) => {
+    element.textContent = `${university.shortName} Hub`
+  })
+  document.querySelectorAll('[data-university-feedback]').forEach((link) => {
+    const message = `Hi Ahmed, I have feedback about ${university.shortName} Hub.`
+    link.href = `https://wa.me/201030469634?text=${encodeURIComponent(message)}`
+  })
 }
 
 function updateAcademicSectionUi() {
   activeAcademicSectionData = getAcademicSection()
   subjects = activeAcademicSectionData.subjects
   setSectionStorageKeys(activeAcademicSection)
+  updateUniversityBranding()
 
   if (trackerTitle) trackerTitle.textContent = activeAcademicSectionData.title
   if (newsTitle) newsTitle.textContent = activeAcademicSectionData.newsTitle
   renderClassRepresentatives()
   if (scheduleTitle) scheduleTitle.textContent = `${activeAcademicSectionData.title} schedule`
+  if (scheduleLocation) {
+    scheduleLocation.textContent = activeAcademicSectionData.scheduleLocation || ''
+    scheduleLocation.hidden = !activeAcademicSectionData.scheduleLocation
+  }
   if (trackerSearch) setTrackerSearchMode(trackerSearchMode)
   if (examScheduleCards) {
     examScheduleCards.setAttribute('aria-label', `${activeAcademicSectionData.title} subject exam dates`)
@@ -3110,7 +3368,7 @@ function renderRepresentativeAvatar(rep) {
 function renderClassRepresentatives() {
   if (!classRepsGrid) return
 
-  const reps = classRepresentativesBySection[activeAcademicSection] || classRepresentativesBySection['401']
+  const reps = classRepresentativesBySection[activeAcademicSection] || []
   classRepsGrid.innerHTML = reps.map((rep) => {
     const avatar = renderRepresentativeAvatar(rep)
     if (rep.phone) {
@@ -3152,6 +3410,7 @@ function resetActiveSubjectForSection(preferredCode = '') {
 
 function syncModeToBody() {
   document.body.dataset.siteMode = activeSiteMode
+  document.body.dataset.university = activeUniversityId
   document.body.dataset.academicSection = activeAcademicSection
 }
 
@@ -3162,9 +3421,11 @@ function updateSiteHistory(url, historyMode = 'push') {
 }
 
 function showAcademicSection(sectionId, options = {}) {
-  const nextAcademicSection = sectionId === '402' ? '402' : '401'
+  const nextAcademicSection = isUniversitySection(activeUniversityId, sectionId)
+    ? sectionId
+    : getDefaultSectionForUniversity(activeUniversityId)
   if (nextAcademicSection !== activeAcademicSection) {
-    invalidateLeaderboard(nextAcademicSection)
+    invalidateLeaderboard(activeUniversityId, nextAcademicSection)
   }
   activeAcademicSection = nextAcademicSection
   activeSiteMode = activeAcademicSection
@@ -3183,6 +3444,7 @@ function showAcademicSection(sectionId, options = {}) {
 
   const targetHash = options.hash || window.location.hash || '#tracker'
   const url = new URL(window.location.href)
+  url.searchParams.set('university', activeUniversityId)
   url.searchParams.set('section', activeAcademicSection)
   if (!url.hash) url.hash = targetHash
   updateSiteHistory(url, options.historyMode || 'push')
@@ -3219,10 +3481,16 @@ function showWorkSection(options = {}) {
 }
 
 function showSelector(options = {}) {
+  if (studentProgressState.user && document.body.dataset.authState === 'ready') {
+    openSectionSwitcher()
+    return
+  }
   activeSiteMode = 'selector'
+  updateUniversityBranding()
   syncModeToBody()
 
   const url = new URL(window.location.href)
+  url.searchParams.set('university', activeUniversityId)
   url.searchParams.delete('section')
   url.searchParams.delete('subject')
   url.searchParams.delete('tracker')
@@ -3261,8 +3529,8 @@ function restoreSiteModeFromLocation() {
   const params = new URLSearchParams(window.location.search)
   const hash = window.location.hash.replace('#', '')
   const section = params.get('section')
-  if (section === '401' || section === '402') {
-    showAcademicSection(studentProgressState.selectedSection || activeAcademicSection, {
+  if (isUniversitySection(activeUniversityId, section)) {
+    showAcademicSection(section, {
       subjectCode: params.get('subject') || '',
       hash: hash ? `#${hash}` : '#tracker',
       scroll: false,
@@ -3340,7 +3608,7 @@ function getSubjectSummary(subject) {
 
 function getTopicUpdateId(subject, topic) {
   if (!topic.updatedAt) return ''
-  return `${activeAcademicSection}::${subject.code}::${topic.label}::${topic.updateBatch || topic.updatedAt}`
+  return `${activeUniversityId}::${activeAcademicSection}::${subject.code}::${topic.label}::${topic.updateBatch || topic.updatedAt}`
 }
 
 function getSeenTopicUpdates() {
@@ -3361,18 +3629,18 @@ function saveSeenTopicUpdates(seenUpdates) {
 }
 
 function getTopicCompletionKey(subjectCode, topicLabel, section = activeAcademicSection) {
-  return `${TOPIC_COMPLETION_STORAGE_PREFIX}::${getProgressStorageOwnerId()}::${section}::${encodeURIComponent(subjectCode)}::${encodeURIComponent(topicLabel)}`
+  return `${TOPIC_COMPLETION_STORAGE_PREFIX}::${getProgressStorageOwnerId()}::${activeUniversityId}::${section}::${encodeURIComponent(subjectCode)}::${encodeURIComponent(topicLabel)}`
 }
 
 function hasCompletedQuizProgress(topic) {
   const topicLabels = new Set([topic.label, topic.mcqTopicKey].filter(Boolean))
   for (const [key, payload] of studentProgressState.quizRows) {
-    if (!key.startsWith(`${activeAcademicSection}::`) || !payload?.completed) continue
+    if (!key.startsWith(`${activeUniversityId}::${activeAcademicSection}::`) || !payload?.completed) continue
     if ([...topicLabels].some((label) => key.includes(`::${label}::`))) return true
   }
 
   for (const label of topicLabels) {
-    const sectionPrefix = `${QUIZ_STORAGE_PREFIX}::${getProgressStorageOwnerId()}::${activeAcademicSection}::${encodeURIComponent(label)}::`
+    const sectionPrefix = `${QUIZ_STORAGE_PREFIX}::${getProgressStorageOwnerId()}::${activeUniversityId}::${activeAcademicSection}::${encodeURIComponent(label)}::`
     for (let index = 0; index < localStorage.length; index += 1) {
       const key = localStorage.key(index)
       if (!key?.startsWith(sectionPrefix)) continue
@@ -3453,10 +3721,10 @@ function getTodayContinueCandidate() {
   }
 
   studentProgressState.quizRows.forEach((payload, key) => {
-    if (key.startsWith(`${activeAcademicSection}::`)) addCandidate(payload)
+    if (key.startsWith(`${activeUniversityId}::${activeAcademicSection}::`)) addCandidate(payload)
   })
 
-  const localPrefix = `${QUIZ_STORAGE_PREFIX}::${getProgressStorageOwnerId()}::${activeAcademicSection}::`
+  const localPrefix = `${QUIZ_STORAGE_PREFIX}::${getProgressStorageOwnerId()}::${activeUniversityId}::${activeAcademicSection}::`
   try {
     for (let index = 0; index < localStorage.length; index += 1) {
       const key = localStorage.key(index)
@@ -3520,13 +3788,13 @@ function renderTodayFreshnessStatus() {
   } else if (studentProgressState.loading) {
     state = 'syncing'
     message = 'Syncing your saved progress…'
-  } else if (newsCardsState.errorSections.has(activeAcademicSection)) {
+  } else if (newsCardsState.errorSections.has(getUniversitySectionKey())) {
     state = 'saved'
     message = `Class Board unavailable · showing built-in updates · checked ${checkedAt}`
-  } else if (newsCardsState.loadingSections.has(activeAcademicSection)) {
+  } else if (newsCardsState.loadingSections.has(getUniversitySectionKey())) {
     state = 'syncing'
     message = 'Checking the Class Board…'
-  } else if (newsCardsState.remoteSections.has(activeAcademicSection)) {
+  } else if (newsCardsState.remoteSections.has(getUniversitySectionKey())) {
     state = 'live'
     message = `Class Board synced · checked ${checkedAt}`
   } else {
@@ -3647,7 +3915,7 @@ function getProfileMcqBankProgressStats() {
 }
 
 function getSeenTrophiesStorageKey() {
-  return `${SEEN_TROPHIES_STORAGE_PREFIX}::${getProgressStorageOwnerId()}::${activeAcademicSection}`
+  return `${SEEN_TROPHIES_STORAGE_PREFIX}::${getProgressStorageOwnerId()}::${activeUniversityId}::${activeAcademicSection}`
 }
 
 function getSeenTrophyIds() {
@@ -3669,7 +3937,7 @@ function saveSeenTrophyIds(ids) {
 
 function getStudentProfileStats() {
   const rows = [...studentProgressState.quizRows.entries()]
-    .filter(([key]) => key.startsWith(`${activeAcademicSection}::`))
+    .filter(([key]) => key.startsWith(`${activeUniversityId}::${activeAcademicSection}::`))
     .map(([, payload]) => normalizeSavedQuizState(payload))
     .filter(Boolean)
 
@@ -3723,7 +3991,9 @@ function getStudentProfileStats() {
     topicProgress,
     mcqBankProgress,
     rank: rankIndex >= 0 ? rankIndex + 1 : null,
-    leaderboardSynced: leaderboardState.lastFetched > 0 && leaderboardState.section === activeAcademicSection
+    leaderboardSynced: leaderboardState.lastFetched > 0
+      && leaderboardState.university === activeUniversityId
+      && leaderboardState.section === activeAcademicSection
   }
 }
 
@@ -3734,8 +4004,8 @@ function getProfileMasteryLevel(totalScore) {
   return calculateMasteryLevel(totalScore, PROFILE_LEVEL_THRESHOLDS)
 }
 
-function getSeenLevelUpStorageKey(userId, section) {
-  return `${LEVEL_UP_SEEN_STORAGE_PREFIX}::${userId}::${section}`
+function getSeenLevelUpStorageKey(userId, section, universityId = activeUniversityId) {
+  return `${LEVEL_UP_SEEN_STORAGE_PREFIX}::${userId}::${universityId}::${section}`
 }
 
 function getSeenLevelUpTransitions(userId, section) {
@@ -3750,10 +4020,10 @@ function getSeenLevelUpTransitions(userId, section) {
 
 function claimLevelUpTransition(userId, section, transition) {
   const transitionKey = `${transition.previousLevel}-${transition.newLevel}-${transition.newPoints}`
-  const storageKey = `${userId}::${section}::${transitionKey}`
+  const storageKey = `${userId}::${activeUniversityId}::${section}::${transitionKey}`
   const storedTransitions = getSeenLevelUpTransitions(userId, section)
 
-  storedTransitions.forEach((key) => quizLevelUpCelebration.seenTransitions.add(`${userId}::${section}::${key}`))
+  storedTransitions.forEach((key) => quizLevelUpCelebration.seenTransitions.add(`${userId}::${activeUniversityId}::${section}::${key}`))
   if (!claimProfileLevelTransition(quizLevelUpCelebration.seenTransitions, storageKey)) return false
 
   try {
@@ -4067,17 +4337,17 @@ function getLegacyTopicCompletionKey(subjectCode, topicLabel) {
   return `${LEGACY_TOPIC_COMPLETION_STORAGE_PREFIX}${encodeURIComponent(subjectCode)}::${encodeURIComponent(topicLabel)}`
 }
 
-function getTopicProgressRecordKey(section, subjectCode, topicLabel) {
-  return `${section}::${subjectCode}::${topicLabel}`
+function getTopicProgressRecordKey(universityId, section, subjectCode, topicLabel) {
+  return `${universityId}::${section}::${subjectCode}::${topicLabel}`
 }
 
-function getQuizProgressRecordKey(section, topicLabel, sourceId = 'current') {
-  return `${section}::${topicLabel}::${sourceId || 'current'}`
+function getQuizProgressRecordKey(universityId, section, topicLabel, sourceId = 'current') {
+  return `${universityId}::${section}::${topicLabel}::${sourceId || 'current'}`
 }
 
 function getTopicCompletionState(subjectCode, topicLabel) {
   const emptyState = { studied: false, mcqs: false }
-  const cloudState = studentProgressState.topicRows.get(getTopicProgressRecordKey(activeAcademicSection, subjectCode, topicLabel))
+  const cloudState = studentProgressState.topicRows.get(getTopicProgressRecordKey(activeUniversityId, activeAcademicSection, subjectCode, topicLabel))
   if (studentProgressState.user && cloudState) {
     return {
       ...emptyState,
@@ -4093,7 +4363,7 @@ function getTopicCompletionState(subjectCode, topicLabel) {
     const subject = subjects.find((item) => item.code === subjectCode)
     const topic = [...(subject?.topics || []), ...(subject?.clinicalTopics || [])].find((item) => item.label === topicLabel)
     const aliasStates = (topic?.progressAliases || []).map((alias) => {
-      const aliasCloudState = studentProgressState.topicRows.get(getTopicProgressRecordKey(activeAcademicSection, subjectCode, alias))
+      const aliasCloudState = studentProgressState.topicRows.get(getTopicProgressRecordKey(activeUniversityId, activeAcademicSection, subjectCode, alias))
       if (studentProgressState.user && aliasCloudState) return aliasCloudState
       return getLocalTopicCompletionState(subjectCode, alias)
     })
@@ -4114,7 +4384,7 @@ function saveTopicCompletionState(subjectCode, topicLabel, state) {
     studied: !!state.studied,
     mcqs: !!state.mcqs
   }
-  const recordKey = getTopicProgressRecordKey(activeAcademicSection, subjectCode, topicLabel)
+  const recordKey = getTopicProgressRecordKey(activeUniversityId, activeAcademicSection, subjectCode, topicLabel)
   studentProgressState.topicRows.set(recordKey, normalizedState)
 
   try {
@@ -4126,6 +4396,7 @@ function saveTopicCompletionState(subjectCode, topicLabel, state) {
   if (studentProgressState.user) {
     upsertUserTopicProgress({
       user_id: studentProgressState.user.id,
+      university_id: activeUniversityId,
       section: activeAcademicSection,
       subject_code: subjectCode,
       topic_label: topicLabel,
@@ -4907,7 +5178,7 @@ function renderResourceLinks(topic, breakdownExpanded = false) {
 }
 
 function getTopicBreakdownKey(subjectCode, topicLabel) {
-  return `${activeAcademicSection}::${subjectCode}::${topicLabel}`
+  return `${activeUniversityId}::${activeAcademicSection}::${subjectCode}::${topicLabel}`
 }
 
 function renderTopicBreakdownAction({ type, label, url = '', quizKey = '', available = false }) {
@@ -5361,7 +5632,7 @@ function ensureQuizModal() {
 }
 
 function getQuizStorageKey(topicLabel, sourceId = quizState.sourceId || 'current', section = activeAcademicSection) {
-  return `${QUIZ_STORAGE_PREFIX}::${getProgressStorageOwnerId()}::${section}::${encodeURIComponent(topicLabel)}::${encodeURIComponent(sourceId)}`
+  return `${QUIZ_STORAGE_PREFIX}::${getProgressStorageOwnerId()}::${activeUniversityId}::${section}::${encodeURIComponent(topicLabel)}::${encodeURIComponent(sourceId)}`
 }
 
 function createQuizAttemptId() {
@@ -5383,7 +5654,7 @@ function normalizeSavedQuizState(savedState) {
 }
 
 function getSavedQuizState(topicLabel, sourceId = 'current') {
-  const cloudState = studentProgressState.quizRows.get(getQuizProgressRecordKey(activeAcademicSection, topicLabel, sourceId))
+  const cloudState = studentProgressState.quizRows.get(getQuizProgressRecordKey(activeUniversityId, activeAcademicSection, topicLabel, sourceId))
   if (studentProgressState.user && cloudState) return normalizeSavedQuizState(cloudState)
 
   try {
@@ -5436,16 +5707,18 @@ function getLifetimePointsFromLeaderboardRows(rows, userId) {
   return Number.isFinite(lifetimePoints) ? lifetimePoints : null
 }
 
-async function fetchLifetimePointsSnapshot(section, userId, { syncLeaderboard = false } = {}) {
-  const rows = await fetchLeaderboard(section)
+async function fetchLifetimePointsSnapshot(universityId, section, userId, { syncLeaderboard = false } = {}) {
+  const rows = await fetchLeaderboard(universityId, section)
   if (
     syncLeaderboard
+    && universityId === activeUniversityId
     && section === activeAcademicSection
     && studentProgressState.user?.id === userId
   ) {
     leaderboardState.requestId += 1
     leaderboardState.loading = false
     leaderboardState.rows = rows
+    leaderboardState.university = universityId
     leaderboardState.section = section
     leaderboardState.lastFetched = Date.now()
     leaderboardState.error = ''
@@ -5461,13 +5734,14 @@ function saveQuizState({ confirmLevelUp = false } = {}) {
   if (!payload) return Promise.resolve(null)
 
   localStorage.setItem(getQuizStorageKey(quizState.topicLabel), JSON.stringify(payload))
-  studentProgressState.quizRows.set(getQuizProgressRecordKey(activeAcademicSection, quizState.topicLabel, quizState.sourceId), payload)
+  studentProgressState.quizRows.set(getQuizProgressRecordKey(activeUniversityId, activeAcademicSection, quizState.topicLabel, quizState.sourceId), payload)
   updateGlobalProgress()
 
   if (!studentProgressState.user) return Promise.resolve(payload)
 
   const scoringContext = {
     userId: studentProgressState.user.id,
+    universityId: activeUniversityId,
     section: activeAcademicSection,
     topicLabel: quizState.topicLabel,
     sourceId: quizState.sourceId || 'current',
@@ -5475,14 +5749,18 @@ function saveQuizState({ confirmLevelUp = false } = {}) {
     sessionGeneration: quizSessionGeneration
   }
   const shouldConfirmLevelUp = Boolean(confirmLevelUp && payload.completed)
-  const progressSyncKey = `${scoringContext.userId}::${scoringContext.section}::${scoringContext.topicLabel}::${scoringContext.sourceId}`
-  const levelUpSyncKey = `${scoringContext.userId}::${scoringContext.section}`
+  const progressSyncKey = `${scoringContext.userId}::${scoringContext.universityId}::${scoringContext.section}::${scoringContext.topicLabel}::${scoringContext.sourceId}`
+  const levelUpSyncKey = `${scoringContext.userId}::${scoringContext.universityId}::${scoringContext.section}`
 
   const performSync = async () => {
     let previousLifetimePoints = null
     if (shouldConfirmLevelUp) {
       try {
-        previousLifetimePoints = await fetchLifetimePointsSnapshot(scoringContext.section, scoringContext.userId)
+        previousLifetimePoints = await fetchLifetimePointsSnapshot(
+          scoringContext.universityId,
+          scoringContext.section,
+          scoringContext.userId
+        )
       } catch (error) {
         console.warn('Could not capture the pre-score lifetime points. Level-up feedback will be skipped.', error)
       }
@@ -5490,6 +5768,7 @@ function saveQuizState({ confirmLevelUp = false } = {}) {
 
     const savedProgress = await upsertUserQuizProgress({
       user_id: scoringContext.userId,
+      university_id: scoringContext.universityId,
       section: scoringContext.section,
       topic_label: scoringContext.topicLabel,
       source_id: scoringContext.sourceId,
@@ -5513,6 +5792,7 @@ function saveQuizState({ confirmLevelUp = false } = {}) {
     if (shouldConfirmLevelUp && Number.isFinite(previousLifetimePoints)) {
       try {
         const nextLifetimePoints = await fetchLifetimePointsSnapshot(
+          scoringContext.universityId,
           scoringContext.section,
           scoringContext.userId,
           { syncLeaderboard: true }
@@ -5558,12 +5838,13 @@ function saveQuizState({ confirmLevelUp = false } = {}) {
 
 function clearSavedQuizState(topicLabel, sourceId = quizState.sourceId || 'current') {
   localStorage.removeItem(getQuizStorageKey(topicLabel, sourceId))
-  studentProgressState.quizRows.delete(getQuizProgressRecordKey(activeAcademicSection, topicLabel, sourceId))
+  studentProgressState.quizRows.delete(getQuizProgressRecordKey(activeUniversityId, activeAcademicSection, topicLabel, sourceId))
   updateGlobalProgress()
 
   if (studentProgressState.user) {
     deleteUserQuizProgress({
       user_id: studentProgressState.user.id,
+      university_id: activeUniversityId,
       section: activeAcademicSection,
       topic_label: topicLabel,
       source_id: sourceId || 'current'
@@ -5989,7 +6270,7 @@ function getQuizSources(topicLabel) {
 
 function getQuizConfig(topicLabel, sourceId = 'current') {
   const sources = getQuizSources(topicLabel)
-  const dynamicConfig = dynamicQuizConfigs.get(`${topicLabel}::${sourceId}`)
+  const dynamicConfig = dynamicQuizConfigs.get(`${activeUniversityId}::${activeAcademicSection}::${topicLabel}::${sourceId}`)
   if (dynamicConfig) return dynamicConfig
 
   const directSource = sources.find((source) => source.id === sourceId)
@@ -6007,7 +6288,7 @@ function getQuizSource(topicLabel, sourceId) {
 }
 
 function registerDynamicQuizConfig(topicLabel, config) {
-  dynamicQuizConfigs.set(`${topicLabel}::${config.id}`, config)
+  dynamicQuizConfigs.set(`${activeUniversityId}::${activeAcademicSection}::${topicLabel}::${config.id}`, config)
   return config
 }
 
@@ -7732,6 +8013,16 @@ function render401ExamSchedule() {
     return { ...exam, examDate, daysUntil }
   })
 
+  if (!scheduleWithState.length) {
+    if (nextCheckpoint) {
+      nextCheckpoint.innerHTML = '<span class="checkpoint-code">No exam dates</span><span class="checkpoint-meta">Schedule pending</span>'
+    }
+    if (next401Exam) next401Exam.textContent = `No ${activeAcademicSectionData.title} exam dates have been added yet`
+    if (next401Countdown) next401Countdown.textContent = 'Confirmed dates will appear here when available.'
+    examScheduleCards.innerHTML = '<p class="empty-state">No confirmed exam dates have been added for this section yet.</p>'
+    return
+  }
+
   const nextExam = scheduleWithState.find((exam) => exam.daysUntil >= 0)
 
   if (nextExam) {
@@ -7746,7 +8037,10 @@ function render401ExamSchedule() {
     }
   } else {
     if (nextCheckpoint) {
-      nextCheckpoint.innerHTML = '<span class="checkpoint-code">Finals</span><span class="checkpoint-meta">Sep 19, 2026</span>'
+      const finalsDate = activeAcademicSectionData.semesterTimeline?.finals
+      nextCheckpoint.innerHTML = finalsDate
+        ? `<span class="checkpoint-code">Finals</span><span class="checkpoint-meta">${escapeHtml(formatExamDate(finalsDate))}</span>`
+        : '<span class="checkpoint-code">Schedule complete</span><span class="checkpoint-meta">No later exam date confirmed</span>'
     }
     if (next401Exam) next401Exam.textContent = `${activeAcademicSectionData.title} midterm schedule complete`
     if (next401Countdown) next401Countdown.textContent = `All listed ${activeAcademicSectionData.title} midterm exams have passed.`
@@ -7818,14 +8112,21 @@ function formatTimelineDate(date) {
 function renderSemesterTimeline() {
   if (!semesterFill || !todayMarker || !midtermMarker || !finalsMarker) return
 
+  const timeline = activeAcademicSectionData.semesterTimeline
+  if (!timeline?.start || !timeline?.finals) {
+    if (semesterTimeline) semesterTimeline.hidden = true
+    return
+  }
+  if (semesterTimeline) semesterTimeline.hidden = false
+
   const today = new Date()
-  const semesterStart = new Date('2026-05-25T00:00:00')
+  const semesterStart = getLocalDate(timeline.start)
   const activeExamSchedule = activeAcademicSectionData.midtermExamSchedule || []
   const midtermExam = activeExamSchedule.find((exam) => exam.type !== 'quiz') || activeExamSchedule[0]
-  const midterm = midtermExam ? getLocalDate(midtermExam.date) : new Date('2026-07-22T00:00:00')
-  const finals = new Date('2026-09-19T00:00:00')
+  const midterm = midtermExam ? getLocalDate(midtermExam.date) : null
+  const finals = getLocalDate(timeline.finals)
   const todayPercent = getTimelinePercent(today, semesterStart, finals)
-  const midtermPercent = getTimelinePercent(midterm, semesterStart, finals)
+  const midtermPercent = midterm ? getTimelinePercent(midterm, semesterStart, finals) : 0
 
   const shouldAnimateTimeline = !prefersReducedMotion && !semesterFill.dataset.motionPlayed
   const raceTrack = semesterFill.closest('.race-track')
@@ -7844,15 +8145,16 @@ function renderSemesterTimeline() {
     semesterFill.style.width = `${todayPercent}%`
     todayMarker.style.left = `${todayPercent}%`
   }
-  midtermMarker.style.left = `${midtermPercent}%`
+  midtermMarker.hidden = !midterm
+  if (midterm) midtermMarker.style.left = `${midtermPercent}%`
   finalsMarker.style.left = '100%'
 
   const midtermLabel = midtermMarker.querySelector('b')
   const midtermDateLabel = midtermMarker.querySelector('time')
   const finalsLabel = finalsMarker.querySelector('b')
   const finalsDateLabel = finalsMarker.querySelector('time')
-  if (midtermLabel) midtermLabel.textContent = 'Midterm'
-  if (midtermDateLabel) {
+  if (midtermLabel && midterm) midtermLabel.textContent = 'Midterm'
+  if (midtermDateLabel && midterm) {
     midtermDateLabel.dateTime = midterm.toISOString().slice(0, 10)
     midtermDateLabel.textContent = formatShortDate(midterm)
   }
@@ -7865,7 +8167,7 @@ function renderSemesterTimeline() {
   if (semesterDateScale) {
     const ticks = [
       { label: 'Start', date: semesterStart },
-      { label: 'Midterm', date: midterm },
+      ...(midterm ? [{ label: 'Midterm', date: midterm }] : []),
       { label: 'Finals', date: finals }
     ]
 
@@ -8526,8 +8828,8 @@ function markNewsCardsSeen(cards = []) {
 }
 
 function ensureSectionNewsCard() {
-  if (newsCardsState.remoteSections.has(activeAcademicSection)) return
-  if (!newsFeed || activeAcademicSection !== '402') return
+  if (newsCardsState.remoteSections.has(getUniversitySectionKey())) return
+  if (!newsFeed || activeUniversityId !== 'must' || activeAcademicSection !== '402') return
   if (newsFeed.querySelector('[data-news-id="402-tracker-launch"]')) return
 
   const card = document.createElement('article')
@@ -8554,12 +8856,14 @@ function ensureSectionNewsCard() {
   newsFeed.prepend(card)
 }
 
-function getNewsRows(section = activeAcademicSection) {
-  return newsCardsState.rowsBySection.get(section) || []
+function getNewsRows(section = activeAcademicSection, universityId = activeUniversityId) {
+  return newsCardsState.rowsBySection.get(getUniversitySectionKey(universityId, section)) || []
 }
 
-function isNewsAdminForSection(section = activeAcademicSection) {
-  return isTrackerAdmin() && String(trackerAdminState.profile?.allowed_section || '') === String(section)
+function isNewsAdminForSection(section = activeAcademicSection, universityId = activeUniversityId) {
+  return isTrackerAdmin()
+    && String(trackerAdminState.profile?.allowed_university_id || 'must') === String(universityId)
+    && String(trackerAdminState.profile?.allowed_section || '') === String(section)
 }
 
 function getSafeExternalUrl(value = '') {
@@ -8589,6 +8893,7 @@ function renderRemoteNewsCard(row) {
   const pinned = row.card_group === 'pinned'
   card.className = `update-panel${pinned ? ' update-panel--primary' : ''}${row.is_wide ? ' update-panel--wide' : ''}${row.published ? '' : ' news-card--draft'}`
   card.dataset.newsId = row.id
+  card.dataset.university = row.university_id || 'must'
   card.dataset.section = row.section
   card.dataset.course = row.course || 'all'
   card.dataset.date = row.card_date || ''
@@ -8601,47 +8906,48 @@ function renderRemoteNewsCard(row) {
 
   const facts = Array.isArray(row.facts) ? row.facts.filter((fact) => fact?.label && fact?.value) : []
   const paragraphs = String(row.body || '').split(/\n{2,}/).filter(Boolean)
-  const groupRows = getNewsRows(row.section).filter((item) => item.card_group === row.card_group)
+  const groupRows = getNewsRows(row.section, row.university_id || 'must').filter((item) => item.card_group === row.card_group)
   const groupIndex = groupRows.findIndex((item) => item.id === row.id)
   const body = paragraphs.map((paragraph) => `<p>${escapeHtml(paragraph).replace(/\n/g, '<br>')}</p>`).join('')
   const factsHtml = facts.length ? `<dl class="update-facts${facts.length === 3 ? ' update-facts--three' : ''}">${facts.map((fact) => `<div><dt>${escapeHtml(fact.label)}</dt><dd>${escapeHtml(fact.value)}</dd></div>`).join('')}</dl>` : ''
   const safeActionUrl = getSafeExternalUrl(row.action_url)
   const action = safeActionUrl && row.action_label ? `<a class="news-action" href="${escapeHtml(safeActionUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(row.action_label)}</a>` : ''
   const deadline = row.deadline_start && row.deadline_due ? `<div class="assignment-progress assignment-progress--top" data-deadline-progress data-progress-mode="remaining" data-start-date="${escapeHtml(row.deadline_start)}" data-due-date="${escapeHtml(row.deadline_due)}" data-due-label="${escapeHtml(row.deadline_label || row.deadline_due)}"><div class="assignment-progress__top"><strong data-deadline-days>${escapeHtml(row.deadline_label || row.deadline_due)}</strong></div><div class="assignment-progress__bar" aria-hidden="true"><span data-deadline-fill></span></div></div>` : ''
-  const adminControls = isNewsAdminForSection(row.section) ? `<div class="news-admin-card-controls"><button type="button" data-news-move="up" aria-label="Move up" ${groupIndex <= 0 ? 'disabled' : ''}>↑</button><button type="button" data-news-move="down" aria-label="Move down" ${groupIndex >= groupRows.length - 1 ? 'disabled' : ''}>↓</button><button type="button" data-news-toggle-pin>${pinned ? 'Unpin' : 'Pin'}</button><button type="button" data-news-toggle-publish>${row.published ? 'Unpublish' : 'Publish'}</button><button type="button" data-news-edit>Edit</button><button type="button" data-news-delete>Delete</button></div>` : ''
+  const adminControls = isNewsAdminForSection(row.section, row.university_id || 'must') ? `<div class="news-admin-card-controls"><button type="button" data-news-move="up" aria-label="Move up" ${groupIndex <= 0 ? 'disabled' : ''}>↑</button><button type="button" data-news-move="down" aria-label="Move down" ${groupIndex >= groupRows.length - 1 ? 'disabled' : ''}>↓</button><button type="button" data-news-toggle-pin>${pinned ? 'Unpin' : 'Pin'}</button><button type="button" data-news-toggle-publish>${row.published ? 'Unpublish' : 'Publish'}</button><button type="button" data-news-edit>Edit</button><button type="button" data-news-delete>Delete</button></div>` : ''
 
   card.innerHTML = `${adminControls}${deadline}<div class="update-panel__top"><p class="card__kicker">${escapeHtml(row.kicker || row.course || '')}</p>${row.tag ? `<span class="news-tag news-tag--${getNewsTagClass(row.tag)}">${escapeHtml(row.tag)}</span>` : ''}${row.badge ? `<span class="status-pill status-pill--open">${escapeHtml(row.badge)}</span>` : ''}</div><h2>${escapeHtml(row.title)}</h2><div class="news-card__body">${body}</div>${factsHtml}${action}`
   return card
 }
 
 function replaceNewsFeedWithRemoteRows() {
-  if (!newsFeed || !newsCardsState.remoteSections.has(activeAcademicSection)) return
+  if (!newsFeed || !newsCardsState.remoteSections.has(getUniversitySectionKey())) return
   newsFeed.querySelectorAll('.update-panel, .news-group, [data-news-empty]').forEach((item) => item.remove())
   getNewsRows().forEach((row) => newsFeed.append(renderRemoteNewsCard(row)))
 }
 
-async function refreshRemoteNewsCards(section = activeAcademicSection) {
-  if (!newsFeed || !isSupabaseConfigured() || newsCardsState.loadingSections.has(section)) return
-  newsCardsState.loadingSections.add(section)
+async function refreshRemoteNewsCards(section = activeAcademicSection, universityId = activeUniversityId) {
+  const stateKey = getUniversitySectionKey(universityId, section)
+  if (!newsFeed || !isSupabaseConfigured() || newsCardsState.loadingSections.has(stateKey)) return
+  newsCardsState.loadingSections.add(stateKey)
   renderTodayFreshnessStatus()
   try {
-    const rows = await fetchNewsCards(section)
-    newsCardsState.errorSections.delete(section)
-    if (rows.length || newsCardsState.remoteSections.has(section)) {
-      newsCardsState.rowsBySection.set(section, rows)
-      newsCardsState.remoteSections.add(section)
-      if (section === activeAcademicSection) {
+    const rows = await fetchNewsCards(universityId, section)
+    newsCardsState.errorSections.delete(stateKey)
+    if (rows.length || newsCardsState.remoteSections.has(stateKey)) {
+      newsCardsState.rowsBySection.set(stateKey, rows)
+      newsCardsState.remoteSections.add(stateKey)
+      if (universityId === activeUniversityId && section === activeAcademicSection) {
         replaceNewsFeedWithRemoteRows()
         renderNewsFilters()
         renderAssignmentProgress()
       }
     }
   } catch (error) {
-    newsCardsState.errorSections.add(section)
+    newsCardsState.errorSections.add(stateKey)
     console.warn('Remote news data unavailable; using static fallback.', error)
     if (newsAdminStatus && isNewsAdminForSection(section)) newsAdminStatus.textContent = `News sync unavailable: ${error.message}`
   } finally {
-    newsCardsState.loadingSections.delete(section)
+    newsCardsState.loadingSections.delete(stateKey)
     renderTodayCockpit()
   }
 }
@@ -8669,6 +8975,7 @@ function getNewsFormRow(form) {
   const groupRows = getNewsRows().filter((row) => row.card_group === group)
   return {
     id: id || `news-${Date.now().toString(36)}`,
+    university_id: activeUniversityId,
     section: activeAcademicSection,
     title,
     body,
@@ -8742,8 +9049,11 @@ async function moveNewsCard(row, direction) {
   const targetIndex = direction === 'up' ? index - 1 : index + 1
   if (index < 0 || targetIndex < 0 || targetIndex >= groupRows.length) return
   const target = groupRows[targetIndex]
-  await updateNewsCardOrder([{ id: row.id, section: row.section, display_order: target.display_order }, { id: target.id, section: target.section, display_order: row.display_order }])
-  await refreshRemoteNewsCards(row.section)
+  await updateNewsCardOrder([
+    { id: row.id, university_id: row.university_id, section: row.section, display_order: target.display_order },
+    { id: target.id, university_id: target.university_id, section: target.section, display_order: row.display_order }
+  ])
+  await refreshRemoteNewsCards(row.section, row.university_id)
 }
 
 function renderNewsFilters() {
@@ -8867,7 +9177,7 @@ function setAuthLoadingStep(step = 'account', section = '') {
     }
   })
   if (authGateContext) {
-    const showSection = isSavedAcademicSection(section)
+    const showSection = isUniversitySection(activeUniversityId, section)
     authGateContext.textContent = showSection ? `MED ${section}` : ''
     authGateContext.hidden = !showSection
   }
@@ -8876,7 +9186,21 @@ function setAuthLoadingStep(step = 'account', section = '') {
 function setAuthGateState(state, message = '') {
   const wasChecking = document.body.dataset.authState === 'checking'
   document.body.dataset.authState = state
-  if (authGate) authGate.setAttribute('aria-busy', String(state === 'checking'))
+  if (authGate) {
+    authGate.setAttribute('aria-busy', String(state === 'checking'))
+    const titleIds = {
+      checking: 'auth-checking-title',
+      'signed-out': 'auth-signin-title',
+      'needs-university': 'auth-university-title',
+      'needs-section': 'auth-section-title'
+    }
+    const titleId = titleIds[state]
+    if (titleId && document.getElementById(titleId)) {
+      authGate.setAttribute('aria-labelledby', titleId)
+    } else {
+      authGate.removeAttribute('aria-labelledby')
+    }
+  }
   if (state === 'checking') {
     if (authGateDelay && (!wasChecking || !authGateDelayTimer)) {
       window.clearTimeout(authGateDelayTimer)
@@ -8900,37 +9224,124 @@ function setAuthGateState(state, message = '') {
   window.requestAnimationFrame(syncProfileOnboardingTour)
 }
 
+function setUniversitySelectionMode(mode = 'onboarding') {
+  studentProgressState.sectionSelectionMode = mode
+  const switching = mode === 'switch'
+  if (authGate) authGate.dataset.universitySelectionMode = mode
+  if (authUniversityTitle) authUniversityTitle.textContent = switching ? 'Switch your university' : 'Choose your university'
+  if (authUniversityCopy) {
+    authUniversityCopy.textContent = isLocalTestMode
+      ? 'Local preview only. Your choice stays in this browser and does not change your Google account.'
+      : (switching
+          ? 'Choose a university, then confirm its academic section.'
+          : 'Your university and academic section will be saved to your account.')
+  }
+  if (authUniversityCancel) authUniversityCancel.hidden = !switching
+}
+
+function renderAuthSectionChoices(universityId) {
+  if (!authSectionChoices) return
+  const university = getUniversity(universityId)
+  authSectionChoices.dataset.university = university.id
+  const sectionButtons = university.sections.map((sectionId) => {
+    const section = getAcademicSection(sectionId, university.id)
+    if ((university.id === 'o6u' || university.id === 'delta') && sectionId === 'physical-therapy') {
+      const facultyLogoUrl = university.id === 'o6u'
+        ? '/assets/o6u-physical-therapy-logo.jpg'
+        : university.logoUrl
+      return `
+        <button class="auth-gate__faculty-card" type="button" data-auth-section="${escapeHtml(sectionId)}">
+          <span class="auth-gate__faculty-logo">
+            <img src="${escapeHtml(facultyLogoUrl)}" alt="" width="480" height="640">
+          </span>
+          <span class="auth-gate__faculty-copy">
+            <small>Faculty</small>
+            <strong>${escapeHtml(section.title)}</strong>
+            <span>${escapeHtml(university.name)}</span>
+          </span>
+          <span class="auth-gate__faculty-arrow" aria-hidden="true">→</span>
+        </button>
+      `
+    }
+    return `
+      <button type="button" data-auth-section="${escapeHtml(sectionId)}">
+        <strong>${escapeHtml(section.title)}</strong>
+        <span>${escapeHtml(university.id === 'must' ? 'Clinical semester' : university.name)}</span>
+      </button>
+    `
+  }).join('')
+  const historyButton = university.id === 'must'
+    ? `
+      <button class="auth-gate__tool-card" type="button" data-auth-history>
+        <strong>History Taking</strong>
+        <span>Clinical history tool</span>
+      </button>
+    `
+    : ''
+  authSectionChoices.innerHTML = `${sectionButtons}${historyButton}`
+}
+
 function setSectionSelectionMode(mode = 'onboarding') {
   studentProgressState.sectionSelectionMode = mode
   const switching = mode === 'switch'
-  if (authSectionTitle) authSectionTitle.textContent = switching ? 'Switch your section' : 'Choose your section'
+  const university = getUniversity(studentProgressState.pendingUniversity || activeUniversityId)
+  if (authSectionTitle) {
+    authSectionTitle.textContent = switching
+      ? `Switch your ${university.shortName} section`
+      : `Choose your ${university.shortName} section`
+  }
   if (authSectionCopy) {
-    authSectionCopy.textContent = switching
-      ? 'Your new choice will be saved to your Google account.'
-      : 'We will save this choice to your account and open it automatically next time.'
+    authSectionCopy.textContent = isLocalTestMode
+      ? 'Local preview only. This selection is stored on this device without cloud writes.'
+      : (switching
+          ? 'Your new university and section will be saved to your Google account.'
+          : 'We will save both choices and open them automatically next time.')
   }
   if (authSectionCancel) authSectionCancel.hidden = !switching
+  renderAuthSectionChoices(university.id)
 }
 
 function isSavedAcademicSection(section) {
-  return section === '401' || section === '402'
+  return isUniversitySection(activeUniversityId, section)
 }
 
-function redirectToRequiredProfile(section) {
+function redirectToRequiredProfile(universityId, section) {
   const profileUrl = new URL('/profile.html', window.location.origin)
   profileUrl.searchParams.set('setup', 'required')
-  profileUrl.searchParams.set('section', isSavedAcademicSection(section) ? section : '401')
+  const safeUniversity = isSavedUniversity(universityId) ? universityId : 'must'
+  const safeSection = isUniversitySection(safeUniversity, section)
+    ? section
+    : getDefaultSectionForUniversity(safeUniversity)
+  profileUrl.searchParams.set('university', safeUniversity)
+  profileUrl.searchParams.set('section', safeSection)
   window.location.replace(profileUrl.toString())
 }
 
-function routeAuthenticatedUser(section, options = {}) {
+function routeAuthenticatedUser(universityId, section, options = {}) {
+  const safeUniversity = isSavedUniversity(universityId) ? universityId : 'must'
+  const safeSection = isUniversitySection(safeUniversity, section)
+    ? section
+    : getDefaultSectionForUniversity(safeUniversity)
+  const scopeChanged = safeUniversity !== activeUniversityId || safeSection !== activeAcademicSection
+  activeUniversityId = safeUniversity
+  studentProgressState.selectedUniversity = safeUniversity
+  studentProgressState.selectedSection = safeSection
+  if (scopeChanged) {
+    liveActivityState.rows = []
+    liveActivityState.lastFetched = 0
+    liveActivityState.unavailable = false
+    onlineStudentsState.rows = []
+    onlineStudentsState.lastFetched = 0
+    onlineStudentsState.unavailable = false
+  }
+
   if (!isStandaloneProfilePage && !isProfileSetupComplete()) {
-    redirectToRequiredProfile(section)
+    redirectToRequiredProfile(safeUniversity, safeSection)
     return
   }
 
   if (isStandaloneProfilePage) {
-    activeAcademicSection = isSavedAcademicSection(section) ? section : '401'
+    activeAcademicSection = safeSection
     activeSiteMode = 'profile'
     updateAcademicSectionUi()
     syncModeToBody()
@@ -8938,6 +9349,7 @@ function routeAuthenticatedUser(section, options = {}) {
       .then(() => fetchAndRenderLeaderboard(true))
       .catch((error) => console.warn('Profile progress refresh failed.', error))
     const url = new URL(window.location.href)
+    url.searchParams.set('university', activeUniversityId)
     url.searchParams.set('section', activeAcademicSection)
     updateSiteHistory(url, options.historyMode || 'replace')
     renderProfileSection()
@@ -8953,7 +9365,7 @@ function routeAuthenticatedUser(section, options = {}) {
     showWorkSection({ scroll: false, historyMode: 'replace' })
   } else {
     const safeHash = ['#tracker', '#news', '#schedule', '#leaderboard'].includes(hash) ? hash : '#tracker'
-    showAcademicSection(section, {
+    showAcademicSection(safeSection, {
       subjectCode: preserveDestination ? initialParams.get('subject') || '' : '',
       hash: safeHash,
       scroll: false,
@@ -8974,7 +9386,9 @@ function clearAuthenticatedProgressState() {
   studentProgressState.quizRows.clear()
   studentProgressState.ready = false
   studentProgressState.loading = false
+  studentProgressState.selectedUniversity = ''
   studentProgressState.selectedSection = ''
+  studentProgressState.pendingUniversity = ''
   pendingProfileAvatarId = ''
   leaderboardState.preferences = getDefaultUserPreferences()
   onlineStudentsState.rows = []
@@ -8992,7 +9406,8 @@ async function handleStudentAuthUser(user) {
 
   if (!user) {
     setStudentSyncMenu(false)
-    setAuthGateState('signed-out')
+    setUniversitySelectionMode('onboarding')
+    setAuthGateState('needs-university')
     updateGlobalProgress()
     refreshTrackerAdminProfile(null)
     return
@@ -9008,37 +9423,169 @@ async function handleStudentAuthUser(user) {
 
     leaderboardState.preferences = { ...getDefaultUserPreferences(), ...(preference || {}) }
     const selectedSection = preference?.selected_section || ''
+    const selectedUniversity = preference?.selected_university
+      || (selectedSection === '401' || selectedSection === '402' ? 'must' : '')
+    const requestedUniversity = initialParams.get('university')
     refreshTrackerAdminProfile(user)
 
-    if (!isSavedAcademicSection(selectedSection)) {
+    if (!isSavedUniversity(selectedUniversity)) {
+      if (isSavedUniversity(requestedUniversity)) {
+        studentProgressState.pendingUniversity = requestedUniversity
+        activeUniversityId = requestedUniversity
+        updateUniversityBranding()
+        setSectionSelectionMode('onboarding')
+        setAuthGateState('needs-section')
+        return
+      }
+      setUniversitySelectionMode('onboarding')
+      setAuthGateState('needs-university')
+      return
+    }
+
+    if (!isUniversitySection(selectedUniversity, selectedSection)) {
+      studentProgressState.pendingUniversity = selectedUniversity
+      activeUniversityId = selectedUniversity
       setSectionSelectionMode('onboarding')
       setAuthGateState('needs-section')
       return
     }
 
+    studentProgressState.selectedUniversity = selectedUniversity
     studentProgressState.selectedSection = selectedSection
+    activeUniversityId = selectedUniversity
     setAuthLoadingStep('progress', selectedSection)
-    routeAuthenticatedUser(selectedSection)
+    routeAuthenticatedUser(selectedUniversity, selectedSection)
   } catch (error) {
     if (requestId !== studentProgressState.authRequestId) return
     studentProgressState.lastError = error.message
-    const fallbackSection = isSavedAcademicSection(initialParams.get('section'))
-      ? initialParams.get('section')
-      : (isSavedAcademicSection(studentProgressState.selectedSection) ? studentProgressState.selectedSection : '401')
-    if (fallbackSection) {
+    const requestedUniversity = initialParams.get('university')
+    const fallbackUniversity = isSavedUniversity(requestedUniversity) ? requestedUniversity : 'must'
+    const requestedSection = initialParams.get('section')
+    const fallbackSection = isUniversitySection(fallbackUniversity, requestedSection)
+      ? requestedSection
+      : getDefaultSectionForUniversity(fallbackUniversity)
+    if (isUniversitySection(fallbackUniversity, fallbackSection)) {
+      studentProgressState.selectedUniversity = fallbackUniversity
       studentProgressState.selectedSection = fallbackSection
-      routeAuthenticatedUser(fallbackSection)
+      routeAuthenticatedUser(fallbackUniversity, fallbackSection)
       renderStudentSyncUi()
       return
     }
-    setSectionSelectionMode('onboarding')
-    setAuthGateState('needs-section', 'We could not load your saved section. Choose it again to finish account setup.')
+    setUniversitySelectionMode('onboarding')
+    setAuthGateState('needs-university', 'We could not load your saved university. Choose it again to finish account setup.')
     renderStudentSyncUi()
   }
 }
 
+function saveSelectedUniversity(universityId) {
+  if (!isSavedUniversity(universityId)) return
+  studentProgressState.pendingUniversity = universityId
+  activeUniversityId = universityId
+  updateUniversityBranding()
+  const university = getUniversity(universityId)
+  const url = new URL(window.location.href)
+  url.searchParams.set('university', universityId)
+  url.searchParams.delete('section')
+  url.hash = ''
+  updateSiteHistory(`${url.pathname}${url.search}`, 'replace')
+
+  if (!studentProgressState.user) {
+    if (authSigninTitle) authSigninTitle.textContent = `Continue to ${university.shortName} Hub`
+    if (authSigninCopy) {
+      authSigninCopy.textContent = `Sign in to see ${university.name} sections and keep your study progress connected to your account.`
+    }
+    setAuthGateState('signed-out')
+    return
+  }
+
+  setSectionSelectionMode(studentProgressState.sectionSelectionMode)
+  setAuthGateState('needs-section')
+}
+
+async function openHistoryFromOnboarding() {
+  const universityId = studentProgressState.pendingUniversity
+    || studentProgressState.selectedUniversity
+    || activeUniversityId
+  if (!studentProgressState.user || universityId !== 'must') return
+
+  const historyButton = document.querySelector('[data-auth-history]')
+  if (historyButton) historyButton.disabled = true
+
+  try {
+    const savedSection = leaderboardState.preferences?.selected_university === 'must'
+      && isUniversitySection('must', leaderboardState.preferences?.selected_section)
+      ? leaderboardState.preferences.selected_section
+      : (studentProgressState.selectedUniversity === 'must'
+          && isUniversitySection('must', studentProgressState.selectedSection)
+          ? studentProgressState.selectedSection
+          : getDefaultSectionForUniversity('must'))
+    if (isLocalTestMode) {
+      leaderboardState.preferences = {
+        ...getDefaultUserPreferences(),
+        ...leaderboardState.preferences,
+        anonymous: false,
+        selected_university: universityId,
+        selected_section: savedSection,
+        nickname: 'Local Tester',
+        avatar_id: 'pulse',
+        profile_setup_version: 1
+      }
+    } else {
+      leaderboardState.preferences = await upsertUserPreference({
+        user_id: studentProgressState.user.id,
+        anonymous: false,
+        selected_university: universityId,
+        selected_section: savedSection,
+        nickname: getStudentNickname() || null,
+        avatar_id: getSavedProfileAvatarId() || null,
+        profile_setup_version: Number(leaderboardState.preferences.profile_setup_version) || 0
+      })
+    }
+    studentProgressState.selectedUniversity = universityId
+    studentProgressState.selectedSection = savedSection
+    studentProgressState.pendingUniversity = ''
+    setAuthGateState('ready')
+    showToolsSection({ scroll: false, historyMode: 'replace' })
+  } catch (error) {
+    studentProgressState.lastError = error.message
+    setAuthGateState('needs-section', 'History Taking could not open. Choose 401 or 402 to finish account setup.')
+  } finally {
+    if (historyButton) historyButton.disabled = false
+  }
+}
+
 async function saveSelectedSection(section, options = {}) {
-  if (!studentProgressState.user || !isSavedAcademicSection(section)) return false
+  const universityId = studentProgressState.pendingUniversity
+    || studentProgressState.selectedUniversity
+    || activeUniversityId
+  if (!studentProgressState.user || !isUniversitySection(universityId, section)) return false
+
+  if (isLocalTestMode) {
+    leaderboardState.preferences = {
+      ...getDefaultUserPreferences(),
+      ...leaderboardState.preferences,
+      anonymous: false,
+      selected_university: universityId,
+      selected_section: section,
+      nickname: 'Local Tester',
+      avatar_id: 'pulse',
+      profile_setup_version: 1
+    }
+    activeUniversityId = universityId
+    studentProgressState.selectedUniversity = universityId
+    studentProgressState.selectedSection = section
+    studentProgressState.pendingUniversity = ''
+    try {
+      localStorage.setItem(LOCAL_TEST_SELECTION_KEY, JSON.stringify({ universityId, section }))
+    } catch {
+      // The URL remains a deterministic preview fallback when storage is unavailable.
+    }
+    routeAuthenticatedUser(universityId, section, {
+      preserveDestination: options.preserveDestination === true
+    })
+    setStudentSyncMenu(false)
+    return true
+  }
 
   const sectionButtons = [...document.querySelectorAll('[data-auth-section]')]
   sectionButtons.forEach((button) => { button.disabled = true })
@@ -9051,15 +9598,20 @@ async function saveSelectedSection(section, options = {}) {
     const preference = await upsertUserPreference({
       user_id: studentProgressState.user.id,
       anonymous: false,
+      selected_university: universityId,
       selected_section: section,
       nickname: getStudentNickname() || null,
       avatar_id: getSavedProfileAvatarId() || null,
       profile_setup_version: Number(leaderboardState.preferences.profile_setup_version) || 0
     })
     leaderboardState.preferences = preference
+    activeUniversityId = universityId
+    studentProgressState.selectedUniversity = universityId
     studentProgressState.selectedSection = section
+    studentProgressState.pendingUniversity = ''
     studentProgressState.lastError = ''
-    routeAuthenticatedUser(section, { preserveDestination: options.preserveDestination === true })
+    invalidateLeaderboard(universityId, section)
+    routeAuthenticatedUser(universityId, section, { preserveDestination: options.preserveDestination === true })
     setStudentSyncMenu(false)
     return true
   } catch (error) {
@@ -9077,7 +9629,7 @@ async function saveSelectedSection(section, options = {}) {
 }
 
 async function requestSiteSection(sectionId, options = {}) {
-  if (!isSavedAcademicSection(sectionId)) {
+  if (!isUniversitySection(activeUniversityId, sectionId)) {
     selectSiteSection(sectionId, options)
     return
   }
@@ -9094,25 +9646,77 @@ async function requestSiteSection(sectionId, options = {}) {
 
 function openSectionSwitcher() {
   if (!studentProgressState.user) return
-  setSectionSelectionMode('switch')
-  setAuthGateState('needs-section')
+  studentProgressState.pendingUniversity = ''
+  setUniversitySelectionMode('switch')
+  setAuthGateState('needs-university')
   setStudentSyncMenu(false)
 }
 
 function cancelSectionSwitcher() {
   if (studentProgressState.sectionSelectionMode !== 'switch') return
+  studentProgressState.pendingUniversity = ''
+  activeUniversityId = studentProgressState.selectedUniversity || activeUniversityId
+  updateUniversityBranding()
   setAuthGateState('ready')
 }
 
 function initStudentSync() {
+  if (isLocalOnboardingTestMode) {
+    studentProgressState.user = null
+    setUniversitySelectionMode('onboarding')
+    setAuthGateState('needs-university')
+    renderStudentSyncUi()
+    return
+  }
+  if (isLocalTestMode) {
+    let savedSelection = null
+    try {
+      savedSelection = JSON.parse(localStorage.getItem(LOCAL_TEST_SELECTION_KEY) || 'null')
+    } catch {
+      savedSelection = null
+    }
+    const requestedUniversity = initialParams.get('university')
+    const savedUniversity = savedSelection?.universityId
+    const universityId = isSavedUniversity(requestedUniversity)
+      ? requestedUniversity
+      : (isSavedUniversity(savedUniversity) ? savedUniversity : 'must')
+    const requestedSection = initialParams.get('section')
+    const savedSection = savedSelection?.section
+    const section = isUniversitySection(universityId, requestedSection)
+      ? requestedSection
+      : (isUniversitySection(universityId, savedSection)
+          ? savedSection
+          : getDefaultSectionForUniversity(universityId))
+
+    studentProgressState.user = {
+      id: 'local-test-user',
+      email: 'local-test@localhost'
+    }
+    studentProgressState.selectedUniversity = universityId
+    studentProgressState.selectedSection = section
+    leaderboardState.preferences = {
+      ...getDefaultUserPreferences(),
+      anonymous: false,
+      selected_university: universityId,
+      selected_section: section,
+      nickname: 'Local Tester',
+      avatar_id: 'pulse',
+      profile_setup_version: 1
+    }
+    routeAuthenticatedUser(universityId, section)
+    renderStudentSyncUi()
+    return
+  }
   if (!isSupabaseConfigured()) {
     renderStudentSyncUi()
-    setAuthGateState('signed-out', 'Google login is temporarily unavailable.')
+    setUniversitySelectionMode('onboarding')
+    setAuthGateState('needs-university', 'Google login is temporarily unavailable.')
     return
   }
   if (!studentSync && !isStandaloneProfilePage) {
     renderStudentSyncUi()
-    setAuthGateState('signed-out', 'Google login is temporarily unavailable.')
+    setUniversitySelectionMode('onboarding')
+    setAuthGateState('needs-university', 'Google login is temporarily unavailable.')
     return
   }
 
@@ -9123,7 +9727,8 @@ function initStudentSync() {
     .catch((error) => {
       studentProgressState.lastError = error.message
       renderStudentSyncUi()
-      setAuthGateState('signed-out', 'We could not check your Google session. Please try again.')
+      setUniversitySelectionMode('onboarding')
+      setAuthGateState('needs-university', 'We could not check your Google session. Please try again.')
     })
 
   onAuthStateChange((user) => {
@@ -9144,8 +9749,10 @@ if (subjectList) {
 }
 
 if (isStandaloneProfilePage) {
+  const requestedUniversity = initialParams.get('university')
   const requestedSection = initialParams.get('section')
-  if (isSavedAcademicSection(requestedSection)) activeAcademicSection = requestedSection
+  if (isSavedUniversity(requestedUniversity)) activeUniversityId = requestedUniversity
+  if (isUniversitySection(activeUniversityId, requestedSection)) activeAcademicSection = requestedSection
   activeSiteMode = 'profile'
   updateAcademicSectionUi()
   syncModeToBody()
@@ -9210,12 +9817,36 @@ document.addEventListener('click', (event) => {
   if (event.target.closest('[data-auth-login]')) {
     event.preventDefault()
     studentProgressState.lastError = ''
+    if (isLocalOnboardingTestMode) {
+      studentProgressState.user = {
+        id: 'local-onboarding-test-user',
+        email: 'local-onboarding@localhost'
+      }
+      leaderboardState.preferences = {
+        ...getDefaultUserPreferences(),
+        anonymous: false,
+        nickname: 'Local Tester',
+        avatar_id: 'pulse',
+        profile_setup_version: 1
+      }
+      renderStudentSyncUi()
+      setSectionSelectionMode('onboarding')
+      setAuthGateState('needs-section')
+      return
+    }
     setAuthLoadingStep('account')
     setAuthGateState('checking')
     signInWithGoogle({ redirectTo: window.location.href }).catch((error) => {
       studentProgressState.lastError = error.message
       setAuthGateState('signed-out', 'Google sign-in did not start. Please try again.')
     })
+    return
+  }
+
+  const authUniversityButton = event.target.closest('[data-auth-university]')
+  if (authUniversityButton) {
+    event.preventDefault()
+    saveSelectedUniversity(authUniversityButton.dataset.authUniversity)
     return
   }
 
@@ -9226,7 +9857,27 @@ document.addEventListener('click', (event) => {
     return
   }
 
+  if (event.target.closest('[data-auth-history]')) {
+    event.preventDefault()
+    openHistoryFromOnboarding()
+    return
+  }
+
+  if (event.target.closest('[data-auth-university-back]')) {
+    event.preventDefault()
+    studentProgressState.pendingUniversity = ''
+    setUniversitySelectionMode('onboarding')
+    setAuthGateState('needs-university')
+    return
+  }
+
   if (event.target.closest('[data-auth-section-cancel]')) {
+    event.preventDefault()
+    cancelSectionSwitcher()
+    return
+  }
+
+  if (event.target.closest('[data-auth-university-cancel]')) {
     event.preventDefault()
     cancelSectionSwitcher()
     return
@@ -9250,12 +9901,6 @@ document.addEventListener('click', (event) => {
       showGlobalToast('Sign out failed. Please try again.')
     })
     setStudentSyncMenu(false)
-    return
-  }
-
-  if (event.target.closest('[data-student-switch-section]')) {
-    event.preventDefault()
-    openSectionSwitcher()
     return
   }
 
@@ -9362,8 +10007,8 @@ document.addEventListener('click', (event) => {
   if (newsRow && event.target.closest('[data-news-delete]')) {
     if (!window.confirm(`Delete “${newsRow.title}”? This cannot be undone.`)) return
     newsAdminStatus.textContent = 'Deleting...'
-    deleteNewsCard(newsRow.id, newsRow.section)
-      .then(() => refreshRemoteNewsCards(newsRow.section))
+    deleteNewsCard(newsRow.id, newsRow.university_id, newsRow.section)
+      .then(() => refreshRemoteNewsCards(newsRow.section, newsRow.university_id))
       .then(() => { newsAdminStatus.textContent = 'News card deleted.' })
       .catch((error) => { newsAdminStatus.textContent = error.message })
     return
@@ -9372,13 +10017,13 @@ document.addEventListener('click', (event) => {
     const nextGroup = newsRow.card_group === 'pinned' ? 'regular' : 'pinned'
     const groupRows = getNewsRows().filter((row) => row.card_group === nextGroup)
     upsertNewsCard({ ...newsRow, card_group: nextGroup, display_order: (groupRows.at(-1)?.display_order || 0) + 10 })
-      .then(() => refreshRemoteNewsCards(newsRow.section))
+      .then(() => refreshRemoteNewsCards(newsRow.section, newsRow.university_id))
       .catch((error) => { newsAdminStatus.textContent = error.message })
     return
   }
   if (newsRow && event.target.closest('[data-news-toggle-publish]')) {
     upsertNewsCard({ ...newsRow, published: !newsRow.published })
-      .then(() => refreshRemoteNewsCards(newsRow.section))
+      .then(() => refreshRemoteNewsCards(newsRow.section, newsRow.university_id))
       .catch((error) => { newsAdminStatus.textContent = error.message })
     return
   }
@@ -9548,10 +10193,10 @@ window.addEventListener('beforeunload', (event) => {
 window.addEventListener('hashchange', handleLegacyHashRoute)
 window.addEventListener('popstate', restoreSiteModeFromLocation)
 window.addEventListener('focus', () => {
-  if (activeSiteMode === '401' || activeSiteMode === '402') refreshRemoteTrackerData()
+  if (isUniversitySection(activeUniversityId, activeSiteMode)) refreshRemoteTrackerData()
 })
 document.addEventListener('visibilitychange', () => {
-  if (!document.hidden && (activeSiteMode === '401' || activeSiteMode === '402')) refreshRemoteTrackerData()
+  if (!document.hidden && isUniversitySection(activeUniversityId, activeSiteMode)) refreshRemoteTrackerData()
 })
 
 

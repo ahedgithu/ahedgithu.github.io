@@ -8,6 +8,7 @@ let userPreferencesIncludeNickname = true
 let userPreferencesIncludeAvatar = true
 let userPreferencesIncludeProfileSetup = true
 let userQuizProgressIncludesAttemptMetadata = true
+let universityIsolationAvailable = true
 
 export function getSupabaseConfig() {
   const windowConfig = window.SUPABASE_CONFIG || {}
@@ -86,6 +87,23 @@ function isMissingQuizAttemptMetadataError(error) {
   return /attempt_id|attempt_started_at/i.test(message) && /user_mcq_progress|schema cache|column/i.test(message)
 }
 
+function isMissingUniversityIsolationError(error) {
+  const message = `${error?.message || ''} ${error?.details || ''} ${error?.hint || ''}`
+  return /university_id|selected_university|p_university_id/i.test(message)
+    && /schema cache|column|function|parameter|argument/i.test(message)
+}
+
+function assertUniversityWriteAvailable(universityId) {
+  if (!universityIsolationAvailable && universityId !== 'must') {
+    throw new Error('The local university-isolation migration must be applied before non-MUST cloud data can be saved.')
+  }
+}
+
+function stripUniversityField(row) {
+  const { university_id, selected_university, ...basicRow } = row
+  return basicRow
+}
+
 function stripOptionalColumns(row) {
   const { drive_url, audio_url, display_order, ...basicRow } = row
   return basicRow
@@ -111,9 +129,10 @@ function stripUserPreferenceProfileSetup(row) {
   return basicRow
 }
 
-function getUserPreferenceSelectFields() {
+function getUserPreferenceSelectFields(includeUniversityIsolation = universityIsolationAvailable) {
   return [
     'anonymous',
+    ...(includeUniversityIsolation ? ['selected_university'] : []),
     'selected_section',
     ...(userPreferencesIncludeNickname ? ['nickname'] : []),
     ...(userPreferencesIncludeAvatar ? ['avatar_id'] : []),
@@ -126,37 +145,46 @@ function stripUnsupportedUserPreferenceFields(row) {
   let payload = userPreferencesIncludeNickname ? row : stripUserPreferenceNickname(row)
   payload = userPreferencesIncludeAvatar ? payload : stripUserPreferenceAvatar(payload)
   payload = userPreferencesIncludeProfileSetup ? payload : stripUserPreferenceProfileSetup(payload)
+  payload = universityIsolationAvailable ? payload : stripUniversityField(payload)
   return payload
 }
 
-export async function fetchTrackerTopicRows() {
+export async function fetchTrackerTopicRows(universityId = 'must') {
   const supabase = getSupabaseClient()
   if (!supabase) return []
+  if (!universityIsolationAvailable && universityId !== 'must') return []
 
   const optionalFields = trackerTopicsIncludeOptionalColumns ? ', drive_url, audio_url, display_order' : ''
   const midtermFields = trackerTopicsIncludeMidtermColumns ? ', midterm_scope, midterm_scope_note' : ''
   const createdAtField = trackerTopicsIncludeCreatedAt ? ', created_at' : ''
-  const selectFields = `section, subject_code, subject_name, track, topic_label, state, stop_note${optionalFields}${midtermFields}${createdAtField}, updated_at`
+  const universityField = universityIsolationAvailable ? 'university_id, ' : ''
+  const selectFields = `${universityField}section, subject_code, subject_name, track, topic_label, state, stop_note${optionalFields}${midtermFields}${createdAtField}, updated_at`
 
-  const { data, error } = await supabase
+  let query = supabase
     .from('tracker_topics')
     .select(selectFields)
     .order('subject_code', { ascending: true })
     .order('track', { ascending: true })
     .order('display_order', { ascending: true, nullsFirst: false })
     .order('topic_label', { ascending: true })
+  if (universityIsolationAvailable) query = query.eq('university_id', universityId)
+  const { data, error } = await query
 
   if (error && trackerTopicsIncludeMidtermColumns && isMissingMidtermColumnError(error)) {
     trackerTopicsIncludeMidtermColumns = false
-    return fetchTrackerTopicRows()
+    return fetchTrackerTopicRows(universityId)
   }
   if (error && trackerTopicsIncludeOptionalColumns && isMissingOptionalColumnError(error)) {
     trackerTopicsIncludeOptionalColumns = false
-    return fetchTrackerTopicRows()
+    return fetchTrackerTopicRows(universityId)
   }
   if (error && trackerTopicsIncludeCreatedAt && isMissingCreatedAtError(error)) {
     trackerTopicsIncludeCreatedAt = false
-    return fetchTrackerTopicRows()
+    return fetchTrackerTopicRows(universityId)
+  }
+  if (error && universityIsolationAvailable && isMissingUniversityIsolationError(error)) {
+    universityIsolationAvailable = false
+    return fetchTrackerTopicRows(universityId)
   }
 
   if (error) throw error
@@ -169,93 +197,133 @@ export async function fetchAdminProfile() {
 
   const { data, error } = await supabase
     .from('admin_users')
-    .select('role, allowed_section')
+    .select(universityIsolationAvailable ? 'role, allowed_university_id, allowed_section' : 'role, allowed_section')
     .maybeSingle()
 
+  if (error && universityIsolationAvailable && isMissingUniversityIsolationError(error)) {
+    universityIsolationAvailable = false
+    return fetchAdminProfile()
+  }
   if (error) throw error
   return data
 }
 
 const NEWS_CARD_FIELDS = 'id, section, title, body, text_direction, course, card_date, kicker, tag, badge, deadline_start, deadline_due, deadline_label, facts, action_label, action_url, card_group, display_order, is_wide, published, created_at, updated_at'
 
-export async function fetchNewsCards(section) {
+export async function fetchNewsCards(universityId, section) {
   const supabase = getSupabaseClient()
   if (!supabase) return []
+  if (!universityIsolationAvailable && universityId !== 'must') return []
+  const selectFields = universityIsolationAvailable ? `university_id, ${NEWS_CARD_FIELDS}` : NEWS_CARD_FIELDS
 
-  const { data, error } = await supabase
+  let query = supabase
     .from('news_cards')
-    .select(NEWS_CARD_FIELDS)
+    .select(selectFields)
     .eq('section', section)
     .order('card_group', { ascending: true })
     .order('display_order', { ascending: true })
+  if (universityIsolationAvailable) query = query.eq('university_id', universityId)
+  const { data, error } = await query
 
+  if (error && universityIsolationAvailable && isMissingUniversityIsolationError(error)) {
+    universityIsolationAvailable = false
+    return fetchNewsCards(universityId, section)
+  }
   if (error) throw error
-  return data || []
+  return (data || []).map((row) => ({ university_id: universityId, ...row }))
 }
 
 export async function upsertNewsCard(row) {
   const supabase = getSupabaseClient()
   if (!supabase) throw new Error('Supabase is not configured.')
 
+  assertUniversityWriteAvailable(row.university_id || 'must')
+  const payload = universityIsolationAvailable ? row : stripUniversityField(row)
+  const selectFields = universityIsolationAvailable ? `university_id, ${NEWS_CARD_FIELDS}` : NEWS_CARD_FIELDS
   const { data, error } = await supabase
     .from('news_cards')
-    .upsert(row, { onConflict: 'id' })
-    .select(NEWS_CARD_FIELDS)
+    .upsert(payload, { onConflict: universityIsolationAvailable ? 'university_id,id' : 'id' })
+    .select(selectFields)
     .single()
 
+  if (error && universityIsolationAvailable && isMissingUniversityIsolationError(error)) {
+    universityIsolationAvailable = false
+    return upsertNewsCard(row)
+  }
   if (error) throw error
-  return data
+  return { university_id: row.university_id || 'must', ...data }
 }
 
 export async function updateNewsCardOrder(rows) {
   const supabase = getSupabaseClient()
   if (!supabase) throw new Error('Supabase is not configured.')
 
-  const results = await Promise.all(rows.map(async (row) => {
-    const { data, error } = await supabase
-      .from('news_cards')
-      .update({ display_order: row.display_order })
-      .eq('id', row.id)
-      .eq('section', row.section)
-      .select('id, section, display_order')
-      .single()
-    if (error) throw error
-    return data
-  }))
-
-  return results
+  try {
+    return await Promise.all(rows.map(async (row) => {
+      assertUniversityWriteAvailable(row.university_id || 'must')
+      let query = supabase
+        .from('news_cards')
+        .update({ display_order: row.display_order })
+        .eq('id', row.id)
+        .eq('section', row.section)
+      if (universityIsolationAvailable) query = query.eq('university_id', row.university_id || 'must')
+      const { data, error } = await query
+        .select(universityIsolationAvailable ? 'id, university_id, section, display_order' : 'id, section, display_order')
+        .single()
+      if (error) throw error
+      return { university_id: row.university_id || 'must', ...data }
+    }))
+  } catch (error) {
+    if (universityIsolationAvailable && isMissingUniversityIsolationError(error)) {
+      universityIsolationAvailable = false
+      return updateNewsCardOrder(rows)
+    }
+    throw error
+  }
 }
 
-export async function deleteNewsCard(id, section) {
+export async function deleteNewsCard(id, universityId, section) {
   const supabase = getSupabaseClient()
   if (!supabase) throw new Error('Supabase is not configured.')
 
-  const { data, error } = await supabase
+  assertUniversityWriteAvailable(universityId)
+  let query = supabase
     .from('news_cards')
     .delete()
     .eq('id', id)
     .eq('section', section)
-    .select('id, section')
+  if (universityIsolationAvailable) query = query.eq('university_id', universityId)
+  const { data, error } = await query.select(universityIsolationAvailable ? 'id, university_id, section' : 'id, section')
 
+  if (error && universityIsolationAvailable && isMissingUniversityIsolationError(error)) {
+    universityIsolationAvailable = false
+    return deleteNewsCard(id, universityId, section)
+  }
   if (error) throw error
-  return data || []
+  return (data || []).map((row) => ({ university_id: universityId, ...row }))
 }
 
 export async function upsertTrackerTopics(rows, options = {}) {
   const supabase = getSupabaseClient()
   if (!supabase) throw new Error('Supabase is not configured.')
+  const universityId = rows[0]?.university_id || 'must'
+  assertUniversityWriteAvailable(universityId)
 
   let payloadRows = trackerTopicsIncludeMidtermColumns ? rows : rows.map(stripMidtermColumns)
   payloadRows = trackerTopicsIncludeOptionalColumns ? payloadRows : payloadRows.map(stripOptionalColumns)
+  payloadRows = universityIsolationAvailable ? payloadRows : payloadRows.map(stripUniversityField)
   const optionalFields = trackerTopicsIncludeOptionalColumns ? ', drive_url, audio_url, display_order' : ''
   const midtermFields = trackerTopicsIncludeMidtermColumns ? ', midterm_scope, midterm_scope_note' : ''
   const createdAtField = trackerTopicsIncludeCreatedAt ? ', created_at' : ''
-  const selectFields = `section, subject_code, subject_name, track, topic_label, state, stop_note${optionalFields}${midtermFields}${createdAtField}, updated_at`
+  const universityField = universityIsolationAvailable ? 'university_id, ' : ''
+  const selectFields = `${universityField}section, subject_code, subject_name, track, topic_label, state, stop_note${optionalFields}${midtermFields}${createdAtField}, updated_at`
 
   const { data, error } = await supabase
     .from('tracker_topics')
     .upsert(payloadRows, {
-      onConflict: 'section,subject_code,track,topic_label',
+      onConflict: universityIsolationAvailable
+        ? 'university_id,section,subject_code,track,topic_label'
+        : 'section,subject_code,track,topic_label',
       ignoreDuplicates: Boolean(options.ignoreDuplicates)
     })
     .select(selectFields)
@@ -274,6 +342,10 @@ export async function upsertTrackerTopics(rows, options = {}) {
     trackerTopicsIncludeCreatedAt = false
     return upsertTrackerTopics(rows, options)
   }
+  if (error && universityIsolationAvailable && isMissingUniversityIsolationError(error)) {
+    universityIsolationAvailable = false
+    return upsertTrackerTopics(rows, options)
+  }
 
   if (error) throw error
 
@@ -289,158 +361,236 @@ export async function deleteTrackerTopic(row) {
   const supabase = getSupabaseClient()
   if (!supabase) throw new Error('Supabase is not configured.')
 
-  const { data, error } = await supabase
+  assertUniversityWriteAvailable(row.university_id || 'must')
+  let query = supabase
     .from('tracker_topics')
     .delete()
     .eq('section', row.section)
     .eq('subject_code', row.subject_code)
     .eq('track', row.track)
     .eq('topic_label', row.topic_label)
-    .select('section, subject_code, subject_name, track, topic_label')
+  if (universityIsolationAvailable) query = query.eq('university_id', row.university_id || 'must')
+  const selectFields = universityIsolationAvailable
+    ? 'university_id, section, subject_code, subject_name, track, topic_label'
+    : 'section, subject_code, subject_name, track, topic_label'
+  const { data, error } = await query.select(selectFields)
 
+  if (error && universityIsolationAvailable && isMissingUniversityIsolationError(error)) {
+    universityIsolationAvailable = false
+    return deleteTrackerTopic(row)
+  }
   if (error) throw error
-  return data || []
+  return (data || []).map((item) => ({ university_id: row.university_id || 'must', ...item }))
 }
 
-export async function fetchUserTopicProgressRows(section) {
+export async function fetchUserTopicProgressRows(universityId, section) {
   const supabase = getSupabaseClient()
   if (!supabase) return []
+  if (!universityIsolationAvailable && universityId !== 'must') return []
 
-  const { data, error } = await supabase
+  let query = supabase
     .from('user_topic_progress')
-    .select('section, subject_code, topic_label, studied, mcqs, updated_at')
+    .select(universityIsolationAvailable
+      ? 'university_id, section, subject_code, topic_label, studied, mcqs, updated_at'
+      : 'section, subject_code, topic_label, studied, mcqs, updated_at')
     .eq('section', section)
+  if (universityIsolationAvailable) query = query.eq('university_id', universityId)
+  const { data, error } = await query
 
+  if (error && universityIsolationAvailable && isMissingUniversityIsolationError(error)) {
+    universityIsolationAvailable = false
+    return fetchUserTopicProgressRows(universityId, section)
+  }
   if (error) throw error
-  return data || []
+  return (data || []).map((row) => ({ university_id: universityId, ...row }))
 }
 
 export async function upsertUserTopicProgress(row) {
   const supabase = getSupabaseClient()
   if (!supabase) throw new Error('Supabase is not configured.')
 
+  assertUniversityWriteAvailable(row.university_id || 'must')
+  const payload = universityIsolationAvailable ? row : stripUniversityField(row)
   const { data, error } = await supabase
     .from('user_topic_progress')
-    .upsert(row, {
-      onConflict: 'user_id,section,subject_code,topic_label'
+    .upsert(payload, {
+      onConflict: universityIsolationAvailable
+        ? 'user_id,university_id,section,subject_code,topic_label'
+        : 'user_id,section,subject_code,topic_label'
     })
-    .select('section, subject_code, topic_label, studied, mcqs, updated_at')
+    .select(universityIsolationAvailable
+      ? 'university_id, section, subject_code, topic_label, studied, mcqs, updated_at'
+      : 'section, subject_code, topic_label, studied, mcqs, updated_at')
     .single()
 
+  if (error && universityIsolationAvailable && isMissingUniversityIsolationError(error)) {
+    universityIsolationAvailable = false
+    return upsertUserTopicProgress(row)
+  }
   if (error) throw error
-  return data
+  return { university_id: row.university_id || 'must', ...data }
 }
 
-export async function fetchUserQuizProgressRows(section) {
+export async function fetchUserQuizProgressRows(universityId, section) {
   const supabase = getSupabaseClient()
   if (!supabase) return []
+  if (!universityIsolationAvailable && universityId !== 'must') return []
   const attemptFields = userQuizProgressIncludesAttemptMetadata ? ', attempt_id, attempt_started_at' : ''
+  const universityField = universityIsolationAvailable ? 'university_id, ' : ''
 
-  const { data, error } = await supabase
+  let query = supabase
     .from('user_mcq_progress')
-    .select(`section, topic_label, source_id, source_label, progress, completed, score, total_questions, answered_count, wrong_question_ids${attemptFields}, completed_at, updated_at`)
+    .select(`${universityField}section, topic_label, source_id, source_label, progress, completed, score, total_questions, answered_count, wrong_question_ids${attemptFields}, completed_at, updated_at`)
     .eq('section', section)
+  if (universityIsolationAvailable) query = query.eq('university_id', universityId)
+  const { data, error } = await query
 
   if (error && userQuizProgressIncludesAttemptMetadata && isMissingQuizAttemptMetadataError(error)) {
     userQuizProgressIncludesAttemptMetadata = false
-    return fetchUserQuizProgressRows(section)
+    return fetchUserQuizProgressRows(universityId, section)
+  }
+  if (error && universityIsolationAvailable && isMissingUniversityIsolationError(error)) {
+    universityIsolationAvailable = false
+    return fetchUserQuizProgressRows(universityId, section)
   }
   if (error) throw error
-  return data || []
+  return (data || []).map((row) => ({ university_id: universityId, ...row }))
 }
 
 export async function upsertUserQuizProgress(row) {
   const supabase = getSupabaseClient()
   if (!supabase) throw new Error('Supabase is not configured.')
+  assertUniversityWriteAvailable(row.university_id || 'must')
   const payload = userQuizProgressIncludesAttemptMetadata
     ? row
     : (({ attempt_id, attempt_started_at, ...basicRow }) => basicRow)(row)
+  const isolatedPayload = universityIsolationAvailable ? payload : stripUniversityField(payload)
   const attemptFields = userQuizProgressIncludesAttemptMetadata ? ', attempt_id, attempt_started_at' : ''
+  const universityField = universityIsolationAvailable ? 'university_id, ' : ''
 
   const { data, error } = await supabase
     .from('user_mcq_progress')
-    .upsert(payload, {
-      onConflict: 'user_id,section,topic_label,source_id'
+    .upsert(isolatedPayload, {
+      onConflict: universityIsolationAvailable
+        ? 'user_id,university_id,section,topic_label,source_id'
+        : 'user_id,section,topic_label,source_id'
     })
-    .select(`section, topic_label, source_id, source_label, progress, completed, score, total_questions, answered_count, wrong_question_ids${attemptFields}, completed_at, updated_at`)
+    .select(`${universityField}section, topic_label, source_id, source_label, progress, completed, score, total_questions, answered_count, wrong_question_ids${attemptFields}, completed_at, updated_at`)
     .single()
 
   if (error && userQuizProgressIncludesAttemptMetadata && isMissingQuizAttemptMetadataError(error)) {
     userQuizProgressIncludesAttemptMetadata = false
     return upsertUserQuizProgress(row)
   }
+  if (error && universityIsolationAvailable && isMissingUniversityIsolationError(error)) {
+    universityIsolationAvailable = false
+    return upsertUserQuizProgress(row)
+  }
   if (error) throw error
-  return data
+  return { university_id: row.university_id || 'must', ...data }
 }
 
 export async function deleteUserQuizProgress(row) {
   const supabase = getSupabaseClient()
   if (!supabase) return []
 
-  const { data, error } = await supabase
+  assertUniversityWriteAvailable(row.university_id || 'must')
+  let query = supabase
     .from('user_mcq_progress')
     .delete()
     .eq('user_id', row.user_id)
     .eq('section', row.section)
     .eq('topic_label', row.topic_label)
     .eq('source_id', row.source_id)
-    .select('section, topic_label, source_id')
+  if (universityIsolationAvailable) query = query.eq('university_id', row.university_id || 'must')
+  const { data, error } = await query.select(universityIsolationAvailable
+    ? 'university_id, section, topic_label, source_id'
+    : 'section, topic_label, source_id')
 
+  if (error && universityIsolationAvailable && isMissingUniversityIsolationError(error)) {
+    universityIsolationAvailable = false
+    return deleteUserQuizProgress(row)
+  }
   if (error) throw error
-  return data || []
+  return (data || []).map((item) => ({ university_id: row.university_id || 'must', ...item }))
 }
 
-export async function fetchLeaderboard(section = '401') {
+export async function fetchLeaderboard(universityId = 'must', section = '401') {
   const supabase = getSupabaseClient()
   if (!supabase) return []
 
-  const { data, error } = await supabase
-    .rpc('get_leaderboard', { p_section: section })
+  const params = universityIsolationAvailable
+    ? { p_university_id: universityId, p_section: section }
+    : { p_section: section }
+  const { data, error } = await supabase.rpc('get_leaderboard', params)
 
+  if (error && universityIsolationAvailable && isMissingUniversityIsolationError(error)) {
+    universityIsolationAvailable = false
+    return universityId === 'must' ? fetchLeaderboard(universityId, section) : []
+  }
   if (error) throw error
   return data || []
 }
 
-export async function fetchRecentMcqActivity(section = '401', limit = 8) {
+export async function fetchRecentMcqActivity(universityId = 'must', section = '401', limit = 8) {
   const supabase = getSupabaseClient()
   if (!supabase) return []
 
+  const params = {
+    ...(universityIsolationAvailable ? { p_university_id: universityId } : {}),
+    p_section: section,
+    p_limit: Math.max(1, Math.min(Number(limit) || 8, 12))
+  }
   const { data, error } = await supabase
-    .rpc('get_recent_mcq_activity', {
-      p_section: section,
-      p_limit: Math.max(1, Math.min(Number(limit) || 8, 12))
-    })
+    .rpc('get_recent_mcq_activity', params)
 
+  if (error && universityIsolationAvailable && isMissingUniversityIsolationError(error)) {
+    universityIsolationAvailable = false
+    return universityId === 'must' ? fetchRecentMcqActivity(universityId, section, limit) : []
+  }
   if (error) throw error
   return data || []
 }
 
-export async function markStudentOnline({ section = '401', page = 'tracker', isMcqActive = false, topicLabel = null, sourceLabel = null } = {}) {
+export async function markStudentOnline({ universityId = 'must', section = '401', page = 'tracker', isMcqActive = false, topicLabel = null, sourceLabel = null } = {}) {
   const supabase = getSupabaseClient()
   if (!supabase) return
 
+  const params = {
+    ...(universityIsolationAvailable ? { p_university_id: universityId } : {}),
+    p_section: section,
+    p_page: page,
+    p_is_mcq_active: isMcqActive,
+    p_topic_label: topicLabel,
+    p_source_label: sourceLabel
+  }
   const { error } = await supabase
-    .rpc('mark_student_online', {
-      p_section: section,
-      p_page: page,
-      p_is_mcq_active: isMcqActive,
-      p_topic_label: topicLabel,
-      p_source_label: sourceLabel
-    })
+    .rpc('mark_student_online', params)
 
+  if (error && universityIsolationAvailable && isMissingUniversityIsolationError(error)) {
+    universityIsolationAvailable = false
+    if (universityId === 'must') return markStudentOnline({ universityId, section, page, isMcqActive, topicLabel, sourceLabel })
+    return
+  }
   if (error) throw error
 }
 
-export async function fetchOnlineStudents(section = '401', limit = 10) {
+export async function fetchOnlineStudents(universityId = 'must', section = '401', limit = 10) {
   const supabase = getSupabaseClient()
   if (!supabase) return []
 
+  const params = {
+    ...(universityIsolationAvailable ? { p_university_id: universityId } : {}),
+    p_section: section,
+    p_limit: Math.max(1, Math.min(Number(limit) || 10, 20))
+  }
   const { data, error } = await supabase
-    .rpc('get_online_students', {
-      p_section: section,
-      p_limit: Math.max(1, Math.min(Number(limit) || 10, 20))
-    })
+    .rpc('get_online_students', params)
 
+  if (error && universityIsolationAvailable && isMissingUniversityIsolationError(error)) {
+    universityIsolationAvailable = false
+    return universityId === 'must' ? fetchOnlineStudents(universityId, section, limit) : []
+  }
   if (error) throw error
   return data || []
 }
@@ -449,7 +599,8 @@ export async function fetchUserPreference() {
   const supabase = getSupabaseClient()
   if (!supabase) return null
 
-  const selectFields = getUserPreferenceSelectFields()
+  const includeUniversityIsolation = universityIsolationAvailable
+  const selectFields = getUserPreferenceSelectFields(includeUniversityIsolation)
 
   const { data, error } = await supabase
     .from('user_preferences')
@@ -468,15 +619,22 @@ export async function fetchUserPreference() {
     userPreferencesIncludeProfileSetup = false
     return fetchUserPreference()
   }
+  if (error && includeUniversityIsolation && isMissingUniversityIsolationError(error)) {
+    universityIsolationAvailable = false
+    return fetchUserPreference()
+  }
 
   if (error) throw error
-  return data
+  return data && !universityIsolationAvailable
+    ? { selected_university: data.selected_section === '401' || data.selected_section === '402' ? 'must' : null, ...data }
+    : data
 }
 
 export async function upsertUserPreference(row) {
   const supabase = getSupabaseClient()
   if (!supabase) throw new Error('Supabase is not configured.')
 
+  assertUniversityWriteAvailable(row.selected_university || 'must')
   const payload = stripUnsupportedUserPreferenceFields(row)
   const selectFields = getUserPreferenceSelectFields()
 
@@ -498,15 +656,20 @@ export async function upsertUserPreference(row) {
     userPreferencesIncludeProfileSetup = false
     return upsertUserPreference(row)
   }
+  if (error && universityIsolationAvailable && isMissingUniversityIsolationError(error)) {
+    universityIsolationAvailable = false
+    return upsertUserPreference(row)
+  }
 
   if (error) throw error
-  return data
+  return { selected_university: row.selected_university || 'must', ...data }
 }
 
 export async function updateUserPreference(userId, changes) {
   const supabase = getSupabaseClient()
   if (!supabase) throw new Error('Supabase is not configured.')
 
+  assertUniversityWriteAvailable(changes.selected_university || 'must')
   const payload = stripUnsupportedUserPreferenceFields(changes)
   if (!Object.keys(payload).length) {
     throw new Error('This profile preference is not enabled for cloud sync yet.')
@@ -532,9 +695,13 @@ export async function updateUserPreference(userId, changes) {
     userPreferencesIncludeProfileSetup = false
     return updateUserPreference(userId, changes)
   }
+  if (error && universityIsolationAvailable && isMissingUniversityIsolationError(error)) {
+    universityIsolationAvailable = false
+    return updateUserPreference(userId, changes)
+  }
 
   if (error) throw error
-  return data
+  return { selected_university: changes.selected_university || data.selected_university || 'must', ...data }
 }
 
 export async function completeProfileSetup(nickname, avatarId) {
