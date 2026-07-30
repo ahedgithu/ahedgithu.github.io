@@ -975,15 +975,9 @@ body[data-site-mode="tools"] #leaderboard,
 body[data-site-mode="tools"] #profile,
 body[data-site-mode="tools"] #work,
 body[data-site-mode="tools"] .bottom-nav-wrap,
-body[data-site-mode="401"] .section-selector,
-body[data-site-mode="402"] .section-selector,
-body[data-site-mode="physical-therapy"] .section-selector,
-body[data-site-mode="401"] #history,
-body[data-site-mode="402"] #history,
-body[data-site-mode="physical-therapy"] #history,
-body[data-site-mode="401"] #work,
-body[data-site-mode="402"] #work,
-body[data-site-mode="physical-therapy"] #work,
+body:not([data-site-mode="selector"]):not([data-site-mode="tools"]):not([data-site-mode="work"]) .section-selector,
+body:not([data-site-mode="selector"]):not([data-site-mode="tools"]):not([data-site-mode="work"]) #history,
+body:not([data-site-mode="selector"]):not([data-site-mode="tools"]):not([data-site-mode="work"]) #work,
 body[data-site-mode="tools"] .section-selector {
   display: none;
 }
@@ -1007,9 +1001,7 @@ body[data-site-mode="tools"] .section-selector {
   -webkit-backdrop-filter: blur(22px);
 }
 
-body[data-site-mode="401"] .site-header,
-body[data-site-mode="402"] .site-header,
-body[data-site-mode="physical-therapy"] .site-header {
+body:not([data-site-mode="selector"]):not([data-site-mode="tools"]):not([data-site-mode="work"]) .site-header {
   display: grid;
 }
 
@@ -16086,9 +16078,7 @@ textarea {
 }
 
 /* Final tracker header cleanup: float the controls without a header panel. */
-body[data-site-mode="401"] .site-header,
-body[data-site-mode="402"] .site-header,
-body[data-site-mode="physical-therapy"] .site-header {
+body:not([data-site-mode="selector"]):not([data-site-mode="tools"]):not([data-site-mode="work"]) .site-header {
   position: absolute;
   top: 0;
   left: 50%;
@@ -16103,9 +16093,7 @@ body[data-site-mode="physical-therapy"] .site-header {
   pointer-events: none;
 }
 
-body[data-site-mode="401"] .tracker-home,
-body[data-site-mode="402"] .tracker-home,
-body[data-site-mode="physical-therapy"] .tracker-home {
+body:not([data-site-mode="selector"]):not([data-site-mode="tools"]):not([data-site-mode="work"]) .tracker-home {
   padding-top: 92px;
 }
 
@@ -16181,31 +16169,23 @@ body[data-site-mode="physical-therapy"] .tracker-home {
 }
 
 @media (max-width: 700px) {
-  body[data-site-mode="401"] .site-header,
-  body[data-site-mode="402"] .site-header,
-  body[data-site-mode="physical-therapy"] .site-header {
+  body:not([data-site-mode="selector"]):not([data-site-mode="tools"]):not([data-site-mode="work"]) .site-header {
     width: min(100% - 28px, 640px);
     padding: 12px 0;
   }
 
-  body[data-site-mode="401"] .tracker-home,
-  body[data-site-mode="402"] .tracker-home,
-  body[data-site-mode="physical-therapy"] .tracker-home {
+  body:not([data-site-mode="selector"]):not([data-site-mode="tools"]):not([data-site-mode="work"]) .tracker-home {
     padding-top: 78px;
   }
 }
 
 @media (max-width: 520px) {
-  body[data-site-mode="401"] .site-header,
-  body[data-site-mode="402"] .site-header,
-  body[data-site-mode="physical-therapy"] .site-header {
+  body:not([data-site-mode="selector"]):not([data-site-mode="tools"]):not([data-site-mode="work"]) .site-header {
     width: min(100% - 14px, 640px);
     padding: 7px 0;
   }
 
-  body[data-site-mode="401"] .tracker-home,
-  body[data-site-mode="402"] .tracker-home,
-  body[data-site-mode="physical-therapy"] .tracker-home {
+  body:not([data-site-mode="selector"]):not([data-site-mode="tools"]):not([data-site-mode="work"]) .tracker-home {
     padding-top: 66px;
   }
 }

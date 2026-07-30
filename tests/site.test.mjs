@@ -1142,7 +1142,7 @@ test('O6U Physical Therapy is selectable, isolated, branded, and has PT-PHYS MCQ
   assert.match(html, /\/assets\/o6u-university-logo\.jpg/)
   assert.ok(o6uLogo.length > 10_000 && o6uLogo.length < 100_000, 'O6U logo should be present and web-optimized')
   assert.match(style, /body\[data-auth-state="needs-university"\] \[data-auth-panel="needs-university"\]/)
-  assert.match(style, /body\[data-site-mode="physical-therapy"\] \.site-header/)
+  assert.match(style, /body:not\(\[data-site-mode="selector"\]\):not\(\[data-site-mode="tools"\]\):not\(\[data-site-mode="work"\]\) \.site-header/)
 
   assert.match(mainSource, /id:\s*'o6u'[\s\S]*sections:\s*\['physical-therapy'\]/)
   assert.match(mainSource, /id:\s*'physical-therapy'[\s\S]*title:\s*'Physical Therapy'/)
