@@ -52,6 +52,7 @@ import {
 
 import { subjects401, subjectExamNotes, midtermExamSchedule, courseSchedule } from './data/must-401.js'
 import { subjects402, midtermExamSchedule402 } from './data/must-402.js'
+import { mustAcademicYears, mustSections } from './data/must/sections.js'
 
 
 
@@ -275,36 +276,7 @@ const midtermExamScheduleO6uPhysicalTherapy = [
 ]
 
 const academicSectionsByUniversity = {
-  must: {
-    '401': {
-      id: '401',
-      title: '401',
-      newsTitle: 'MED 401 news',
-      trackerSearchPlaceholder: 'Search 401 topics or subjects…',
-      subjects: subjects401,
-      midtermExamSchedule,
-      courseSchedule,
-      semesterTimeline: {
-        start: '2026-05-25',
-        finals: '2026-09-19'
-      },
-      scheduleLocation: 'Lectures: SS 116B - Clinical rounds: Hospital, fourth floor'
-    },
-    '402': {
-      id: '402',
-      title: '402',
-      newsTitle: 'MED 402 news',
-      trackerSearchPlaceholder: 'Search 402 topics or subjects…',
-      subjects: subjects402,
-      midtermExamSchedule: midtermExamSchedule402,
-      courseSchedule: [],
-      semesterTimeline: {
-        start: '2026-05-25',
-        finals: '2026-09-19'
-      },
-      scheduleLocation: ''
-    }
-  },
+  must: mustSections,
   o6u: {
     'physical-therapy': {
       id: 'physical-therapy',
@@ -340,7 +312,7 @@ const universities = {
     shortName: 'MUST',
     hubName: 'MUST HUB',
     logoUrl: '/assets/must-university-logo.png',
-    sections: ['401', '402']
+    sections: ['101', '201', '202', '401', '402']
   },
   o6u: {
     id: 'o6u',

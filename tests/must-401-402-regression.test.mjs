@@ -67,23 +67,22 @@ function extractSubjectCodes(arrayBody) {
 // 1. Section order: MUST university exposes exactly ['401', '402'] in that order
 // ---------------------------------------------------------------------------
 
-test('MUST university section order is 401 then 402', () => {
+test('MUST university section order includes 401 and 402', () => {
   const src = read('src/main.js')
+  const sectionsSrc = read('src/data/must/sections.js')
 
-  // The universities object must declare must.sections as ['401', '402']
+  // The universities object must include '401' and '402' in sections
   assert.match(
     src,
-    /must:\s*\{[^}]*sections:\s*\[\s*'401'\s*,\s*'402'\s*\]/s,
-    "universities.must.sections must be ['401', '402'] in that order"
+    /must:\s*\{[^}]*sections:\s*\[[\s\S]*?'401'[\s\S]*?'402'[\s\S]*?\]/s,
+    "universities.must.sections must contain '401' and '402'"
   )
 
-  // academicSectionsByUniversity.must must have '401' defined before '402'
-  const mustBlock = src.match(/academicSectionsByUniversity\s*=\s*\{[\s\S]*?must:\s*\{([\s\S]*?)\},\s*o6u:/)?.[1] || ''
-  assert.ok(mustBlock, 'Could not extract academicSectionsByUniversity.must block')
-  const pos401 = mustBlock.indexOf("'401'")
-  const pos402 = mustBlock.indexOf("'402'")
-  assert.ok(pos401 >= 0 && pos402 >= 0, "Both '401' and '402' must appear in academicSectionsByUniversity.must")
-  assert.ok(pos401 < pos402, "'401' section must be declared before '402' in academicSectionsByUniversity.must")
+  // mustSections must have '401' defined before '402'
+  const pos401 = sectionsSrc.indexOf("'401'")
+  const pos402 = sectionsSrc.indexOf("'402'")
+  assert.ok(pos401 >= 0 && pos402 >= 0, "Both '401' and '402' must appear in mustSections")
+  assert.ok(pos401 < pos402, "'401' section must be declared before '402' in mustSections")
 })
 
 // ---------------------------------------------------------------------------
@@ -124,41 +123,41 @@ test('MUST 402 subjects array contains exactly the expected codes in order', () 
 // ---------------------------------------------------------------------------
 
 test('MUST 401 section metadata is unchanged', () => {
-  const src = read('src/main.js')
+  const sectionsSrc = read('src/data/must/sections.js')
 
-  // Title and newsTitle (still in academicSectionsByUniversity in main.js)
-  assert.match(src, /id:\s*'401'[\s\S]{0,200}title:\s*'401'/,
+  // Title and newsTitle (now in src/data/must/sections.js)
+  assert.match(sectionsSrc, /id:\s*'401'[\s\S]{0,200}title:\s*'401'/,
     "Section 401 must have title '401'")
-  assert.match(src, /newsTitle:\s*'MED 401 news'/,
+  assert.match(sectionsSrc, /newsTitle:\s*'MED 401 news'/,
     "Section 401 newsTitle must be 'MED 401 news'")
 
-  // Semester timeline (still in academicSectionsByUniversity in main.js)
-  assert.match(src, /'401':[\s\S]{0,600}semesterTimeline:\s*\{[\s\S]{0,80}start:\s*'2026-05-25'[\s\S]{0,80}finals:\s*'2026-09-19'/s,
+  // Semester timeline (now in src/data/must/sections.js)
+  assert.match(sectionsSrc, /'401':[\s\S]{0,600}semesterTimeline:\s*\{[\s\S]{0,80}start:\s*'2026-05-25'[\s\S]{0,80}finals:\s*'2026-09-19'/s,
     'Section 401 semesterTimeline must have start 2026-05-25 and finals 2026-09-19')
 
-  // Schedule location (still in academicSectionsByUniversity in main.js)
-  assert.match(src, /scheduleLocation:\s*'Lectures: SS 116B - Clinical rounds: Hospital, fourth floor'/,
+  // Schedule location (now in src/data/must/sections.js)
+  assert.match(sectionsSrc, /scheduleLocation:\s*'Lectures: SS 116B - Clinical rounds: Hospital, fourth floor'/,
     "Section 401 scheduleLocation must be 'Lectures: SS 116B - Clinical rounds: Hospital, fourth floor'")
 
-  // courseSchedule is now extracted to src/data/must-401.js
+  // courseSchedule is extracted to src/data/must-401.js
   assert.match(src401, /type:\s*'lecture'[\s\S]{0,120}dayLabel:\s*'Sunday'[\s\S]{0,120}room:\s*'SS 116B'/s,
     'Section 401 courseSchedule must contain a Sunday lecture in SS 116B')
 })
 
 test('MUST 402 section metadata is unchanged', () => {
-  const src = read('src/main.js')
+  const sectionsSrc = read('src/data/must/sections.js')
 
-  assert.match(src, /id:\s*'402'[\s\S]{0,200}title:\s*'402'/,
+  assert.match(sectionsSrc, /id:\s*'402'[\s\S]{0,200}title:\s*'402'/,
     "Section 402 must have title '402'")
-  assert.match(src, /newsTitle:\s*'MED 402 news'/,
+  assert.match(sectionsSrc, /newsTitle:\s*'MED 402 news'/,
     "Section 402 newsTitle must be 'MED 402 news'")
 
   // Semester timeline (same dates as 401)
-  assert.match(src, /'402':[\s\S]{0,600}semesterTimeline:\s*\{[\s\S]{0,80}start:\s*'2026-05-25'[\s\S]{0,80}finals:\s*'2026-09-19'/s,
+  assert.match(sectionsSrc, /'402':[\s\S]{0,600}semesterTimeline:\s*\{[\s\S]{0,80}start:\s*'2026-05-25'[\s\S]{0,80}finals:\s*'2026-09-19'/s,
     'Section 402 semesterTimeline must have start 2026-05-25 and finals 2026-09-19')
 
   // scheduleLocation is empty string for 402
-  assert.match(src, /'402':[\s\S]{0,800}scheduleLocation:\s*''/s,
+  assert.match(sectionsSrc, /'402':[\s\S]{0,800}scheduleLocation:\s*''/s,
     "Section 402 scheduleLocation must be empty string ''")
 })
 
