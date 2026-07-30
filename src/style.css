@@ -468,9 +468,38 @@ body[data-auth-state="checking"] .onboarding-landing .section-selector__footer {
   margin-top: 4px;
 }
 
-.auth-gate__universities,
-.auth-gate__sections[data-university="must"] {
+.auth-gate__universities {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.auth-gate__sections[data-university="must"] {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.auth-gate__year-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.auth-gate__year-label {
+  font-size: 0.74rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  text-align: left;
+  padding-left: 2px;
+}
+
+.auth-gate__year-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  width: 100%;
 }
 
 .auth-gate__sections button,

@@ -1583,7 +1583,7 @@ test('section selector is the responsive university-first onboarding landing', (
   const html = read('index.html')
   assert.match(html, /<section class="auth-gate onboarding-landing" id="section-selector"/)
   assert.match(html, /data-auth-university="must"[\s\S]*data-auth-university="o6u"[\s\S]*data-auth-university="delta"/)
-  assert.match(style, /\.auth-gate__universities,[\s\S]*?\.auth-gate__sections\[data-university="must"\]\s*\{[^}]*grid-template-columns:\s*repeat\(3,/s)
+  assert.match(style, /\.auth-gate__universities\s*\{[^}]*grid-template-columns:\s*repeat\(3,/s)
   assert.match(style, /\.onboarding-landing \.section-selector__footer\s*\{[^}]*text-align:\s*center;/s)
   assert.match(style, /\.home-review-screenshot\s*\{[\s\S]*?aspect-ratio:\s*1\.9\s*\/\s*1;[\s\S]*?object-fit:\s*cover;/s)
   assert.match(style, /\.home-review-screenshot--fit\s*\{[^}]*object-fit:\s*contain;[^}]*object-position:\s*left center;/s)

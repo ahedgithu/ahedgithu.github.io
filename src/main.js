@@ -8463,6 +8463,43 @@ function renderAuthSectionChoices(universityId) {
   if (!authSectionChoices) return
   const university = getUniversity(universityId)
   authSectionChoices.dataset.university = university.id
+
+  if (university.id === 'must') {
+    const yearGroups = mustAcademicYears.map((yearGroup) => {
+      const availableSections = yearGroup.sections.filter((sectionId) => university.sections.includes(sectionId))
+      if (!availableSections.length) return ''
+      const buttons = availableSections.map((sectionId) => {
+        const section = getAcademicSection(sectionId, university.id)
+        return `
+          <button type="button" data-auth-section="${escapeHtml(sectionId)}">
+            <strong>${escapeHtml(section.title)}</strong>
+            <span>${escapeHtml('Clinical semester')}</span>
+          </button>
+        `
+      }).join('')
+      return `
+        <div class="auth-gate__year-group">
+          <span class="auth-gate__year-label">${escapeHtml(yearGroup.label)}</span>
+          <div class="auth-gate__year-grid">${buttons}</div>
+        </div>
+      `
+    }).join('')
+
+    const historyButton = `
+      <div class="auth-gate__year-group">
+        <span class="auth-gate__year-label">Clinical Tool</span>
+        <div class="auth-gate__year-grid">
+          <button class="auth-gate__tool-card" type="button" data-auth-history>
+            <strong>History Taking</strong>
+            <span>Clinical history tool</span>
+          </button>
+        </div>
+      </div>
+    `
+    authSectionChoices.innerHTML = `${yearGroups}${historyButton}`
+    return
+  }
+
   const sectionButtons = university.sections.map((sectionId) => {
     const section = getAcademicSection(sectionId, university.id)
     if ((university.id === 'o6u' || university.id === 'delta') && sectionId === 'physical-therapy') {
@@ -8486,19 +8523,11 @@ function renderAuthSectionChoices(universityId) {
     return `
       <button type="button" data-auth-section="${escapeHtml(sectionId)}">
         <strong>${escapeHtml(section.title)}</strong>
-        <span>${escapeHtml(university.id === 'must' ? 'Clinical semester' : university.name)}</span>
+        <span>${escapeHtml(university.name)}</span>
       </button>
     `
   }).join('')
-  const historyButton = university.id === 'must'
-    ? `
-      <button class="auth-gate__tool-card" type="button" data-auth-history>
-        <strong>History Taking</strong>
-        <span>Clinical history tool</span>
-      </button>
-    `
-    : ''
-  authSectionChoices.innerHTML = `${sectionButtons}${historyButton}`
+  authSectionChoices.innerHTML = sectionButtons
 }
 
 function setSectionSelectionMode(mode = 'onboarding') {
@@ -8644,7 +8673,7 @@ async function handleStudentAuthUser(user) {
     leaderboardState.preferences = { ...getDefaultUserPreferences(), ...(preference || {}) }
     const selectedSection = preference?.selected_section || ''
     const selectedUniversity = preference?.selected_university
-      || (selectedSection === '401' || selectedSection === '402' ? 'must' : '')
+      || (mustSections[selectedSection] ? 'must' : '')
     const requestedUniversity = initialParams.get('university')
     refreshTrackerAdminProfile(user)
 

@@ -432,8 +432,8 @@ test('URL parameter handling infers must university from section 401 or 402', ()
   // the code infers 'must' as the university
   assert.match(
     src,
-    /selectedSection === '401' \|\| selectedSection === '402' \? 'must' : ''/,
-    "Section '401' or '402' without a university must infer 'must'"
+    /mustSections\[selectedSection\] \? 'must' : ''/,
+    "A valid MUST section without a university must infer 'must'"
   )
 })
 
