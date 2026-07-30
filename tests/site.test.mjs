@@ -84,7 +84,7 @@ test('tracker search splits topics and MCQs with focused question launch', () =>
   assert.match(html, /data-search-mode="mcqs"[^>]*aria-pressed="false"/)
   assert.match(html, /id="mcq-search-results"[^>]*aria-live="polite"[^>]*hidden/)
   assert.match(html, /style\.css\?v=20260730-neutral-loading-v1/)
-  assert.match(html, /main\.js\?v=20260730-part-wrong-review-v1/)
+  assert.match(html, /main\.js\?v=20260731-must-resource-runtime-v1/)
 
   for (const helper of [
     'normalizeMcqSearchText',
@@ -1124,7 +1124,7 @@ test('Google login is mandatory and the academic section is account-bound', () =
   assert.match(mainSource, /\$\{TOPIC_COMPLETION_STORAGE_PREFIX\}::\$\{getProgressStorageOwnerId\(\)\}::\$\{activeUniversityId\}::\$\{section\}/)
   assert.match(schedule, /window\.location\.replace\('\/#schedule'\)/)
   assert.match(html, /style\.css\?v=20260730-neutral-loading-v1/)
-  assert.match(html, /main\.js\?v=20260730-part-wrong-review-v1/)
+  assert.match(html, /main\.js\?v=20260731-must-resource-runtime-v1/)
 })
 
 test('O6U Physical Therapy is selectable, isolated, branded, and has PT-PHYS MCQs', () => {
@@ -1593,7 +1593,7 @@ test('section selector is the responsive university-first onboarding landing', (
   assert.match(style, /\.home-review-screenshot--fit\s*\{[^}]*object-fit:\s*contain;[^}]*object-position:\s*left center;/s)
   assert.equal((html.match(/review5\.jpg" class="home-review-screenshot home-review-screenshot--fit"/g) || []).length, 2)
   assert.match(html, /style\.css\?v=20260730-neutral-loading-v1/)
-  assert.match(html, /main\.js\?v=20260730-part-wrong-review-v1/)
+  assert.match(html, /main\.js\?v=20260731-must-resource-runtime-v1/)
   assert.match(style, /body\[data-site-mode="selector"\] > main > \.site-footer/)
 
   for (const file of ['review1.jpg', 'review2.jpg', 'review3.jpg', 'review4.jpg', 'review5.jpg', 'review6.png', 'review7.png', 'review8.png']) {
@@ -1804,6 +1804,8 @@ test('MUST multi-class section registration, capabilities, provenance, progress 
 
   // 5. Code runtime checks for capabilities in main.js
   assert.match(mainSource, /function updateSectionCapabilitiesUi\s*\(/)
+  assert.match(mainSource, /let subjects = activeAcademicSectionData\.subjects/)
+  assert.doesNotMatch(mainSource, /\nsubjects = subjects\.map\(/)
   assert.match(mainSource, /function isResourceFirstSection\s*\(/)
   assert.match(mainSource, /if \(!isSupabaseConfigured\(\) \|\| isResourceFirstSection\(\)\) return Promise\.resolve\(\)/)
   assert.match(mainSource, /if \(!studentProgressState\.user \|\| isResourceFirstSection\(section\)\) return/)

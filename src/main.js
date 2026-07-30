@@ -458,21 +458,10 @@ const isLocalTestMode = ['127.0.0.1', 'localhost'].includes(window.location.host
   && initialParams.get('local-test') === '1'
 const isLocalOnboardingTestMode = isLocalTestMode && initialParams.get('onboarding') === '1'
 let initialAdminLoginHandled = false
-subjects = subjects.map((subject) => ({
-  ...subject,
-  clinicalTopics: Array.isArray(subject.clinicalTopics) ? subject.clinicalTopics : []
-}))
-subjects401.forEach((subject) => {
-  subject.clinicalTopics = Array.isArray(subject.clinicalTopics) ? subject.clinicalTopics : []
-})
-subjects402.forEach((subject) => {
-  subject.clinicalTopics = Array.isArray(subject.clinicalTopics) ? subject.clinicalTopics : []
-})
-subjectsO6uPhysicalTherapy.forEach((subject) => {
-  subject.clinicalTopics = Array.isArray(subject.clinicalTopics) ? subject.clinicalTopics : []
-})
-subjectsDeltaPhysicalTherapy.forEach((subject) => {
-  subject.clinicalTopics = Array.isArray(subject.clinicalTopics) ? subject.clinicalTopics : []
+Object.values(academicSectionsByUniversity).flatMap((sectionMap) => Object.values(sectionMap)).forEach((section) => {
+  section.subjects.forEach((subject) => {
+    subject.clinicalTopics = Array.isArray(subject.clinicalTopics) ? subject.clinicalTopics : []
+  })
 })
 let activeUniversityId = 'must'
 let activeAcademicSection = '401'
@@ -484,7 +473,7 @@ const newsCardsState = {
   loadingSections: new Set(),
   errorSections: new Set()
 }
-subjects = activeAcademicSectionData.subjects
+let subjects = activeAcademicSectionData.subjects
 const initialSubject = subjects.find((subject) => subject.code === initialParams.get('subject'))
 let activeSubjectCode = initialParams.get('tracker') === '1' && initialSubject ? initialSubject.code : null
 let expandedSubjectCode = mobileQuery.matches && activeSubjectCode ? activeSubjectCode : null
