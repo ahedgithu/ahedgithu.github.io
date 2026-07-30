@@ -1104,7 +1104,7 @@ test('O6U Physical Therapy is selectable, isolated, branded, and has PT-PHYS MCQ
   assert.match(mainSource, /date:\s*'2026-08-03'/)
   assert.match(mainSource, /mcqTopicKey:\s*'PT-PHYS::Physiological Adaptation to Regular Physical Training'/)
   assert.match(mainSource, /o6u:\s*\{\s*'physical-therapy':\s*window\.mcqQuizzesO6u \|\| \{\}/)
-  assert.match(html, /o6u-physical-therapy-mcqs\.js\?v=20260730-pt-phys-adaptations-v1/)
+  assert.match(html, /o6u-physical-therapy-mcqs\.js\?v=20260730-pt-phys-adaptations-v2/)
   assert.match(mainSource, /class="auth-gate__faculty-card"/)
   assert.match(mainSource, /\/assets\/o6u-physical-therapy-logo\.jpg/)
   assert.match(mainSource, /selected_university:\s*universityId/)
