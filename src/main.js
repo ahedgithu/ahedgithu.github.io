@@ -312,7 +312,7 @@ const universities = {
     shortName: 'MUST',
     hubName: 'MUST HUB',
     logoUrl: '/assets/must-university-logo.png',
-    sections: ['101', '201', '202', '401', '402']
+    sections: ['101', '102', '201', '202', '401', '402']
   },
   o6u: {
     id: 'o6u',
