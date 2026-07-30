@@ -4180,6 +4180,9 @@ function getFilteredSubjects() {
 
 function getResourceItems(topic) {
   const lectureUrls = topic.lectureUrls || []
+  const driveSelectorItems = (topic.driveSelector || [])
+    .filter((item) => item.url)
+    .map((item) => ({ ...item, type: 'lecture' }))
   const driveLectureItems = lectureUrls.filter((item) => isDriveUrl(item.url))
   const otherLectureItems = lectureUrls
     .filter((item) => !isDriveUrl(item.url))
@@ -4189,7 +4192,7 @@ function getResourceItems(topic) {
     : driveLectureItems.map((item) => ({ ...item, type: 'lecture' }))
   const pdfItems = (topic.pdfUrls || []).map((item) => ({ ...item, type: 'pdf' }))
   const audioItem = topic.audioUrl ? [{ label: 'Lecture record', url: topic.audioUrl, type: 'audio' }] : []
-  return [...driveItems, ...otherLectureItems, ...pdfItems, ...audioItem]
+  return [...driveSelectorItems, ...driveItems, ...otherLectureItems, ...pdfItems, ...audioItem]
 }
 
 function getCompactResourceLabel(item) {

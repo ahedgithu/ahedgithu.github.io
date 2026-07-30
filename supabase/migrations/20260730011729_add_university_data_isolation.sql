@@ -19,7 +19,7 @@ ALTER TABLE public.user_preferences
   ADD CONSTRAINT user_preferences_selected_section_check
     CHECK (
       selected_section IS NULL
-      OR (selected_university = 'must' AND selected_section IN ('401', '402'))
+      OR (selected_university = 'must' AND selected_section IN ('101', '102', '201', '202', '301', '302', '401', '402'))
       OR (selected_university = 'o6u' AND selected_section = 'physical-therapy')
       OR (selected_university = 'delta' AND selected_section = 'physical-therapy')
     );

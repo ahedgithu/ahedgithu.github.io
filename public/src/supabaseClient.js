@@ -626,7 +626,7 @@ export async function fetchUserPreference() {
 
   if (error) throw error
   return data && !universityIsolationAvailable
-    ? { selected_university: data.selected_section === '401' || data.selected_section === '402' ? 'must' : null, ...data }
+    ? { selected_university: ['101', '102', '201', '202', '301', '302', '401', '402'].includes(data.selected_section) ? 'must' : null, ...data }
     : data
 }
 
