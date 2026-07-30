@@ -29,6 +29,7 @@ const readBytes = (path) => readFileSync(new URL(`../${path}`, import.meta.url))
 
 // Source files used by multiple tests
 const src401 = read('src/data/must-401.js')
+const src402 = read('src/data/must-402.js')
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -107,8 +108,7 @@ test('MUST 401 subjects array contains exactly the expected codes in order', () 
 // ---------------------------------------------------------------------------
 
 test('MUST 402 subjects array contains exactly the expected codes in order', () => {
-  const src = read('src/main.js')
-  const body402 = extractArrayBody(src.slice(src.indexOf('const subjects402 = [')), 'subjects402')
+  const body402 = extractArrayBody(src402, 'subjects402')
   const codes = extractSubjectCodes(body402)
 
   assert.deepEqual(
@@ -185,25 +185,23 @@ test('MUST 401 midterm exam schedule entries are unchanged', () => {
 })
 
 test('MUST 402 midterm exam schedule entries are unchanged', () => {
-  const src = read('src/main.js')
-
   // SUR 402-1 – Wed Jul 22, 2026, 11:30-12:30
-  assert.match(src,
+  assert.match(src402,
     /code:\s*'SUR 402-1'[\s\S]{0,200}subjectCode:\s*'SUR402-1'[\s\S]{0,200}date:\s*'2026-07-22'[\s\S]{0,200}time:\s*'11:30-12:30'/s,
     'SUR 402-1 midterm exam entry must be present with date 2026-07-22 and time 11:30-12:30')
 
   // MED 402-1 – Sat Jul 25, 2026, 11:30-12:30
-  assert.match(src,
+  assert.match(src402,
     /code:\s*'MED 402-1'[\s\S]{0,200}subjectCode:\s*'MED402-1'[\s\S]{0,200}date:\s*'2026-07-25'[\s\S]{0,200}time:\s*'11:30-12:30'/s,
     'MED 402-1 midterm exam entry must be present with date 2026-07-25 and time 11:30-12:30')
 
   // MED 402-2 – Wed Jul 29, 2026, 11:30-12:30
-  assert.match(src,
+  assert.match(src402,
     /code:\s*'MED 402-2'[\s\S]{0,200}subjectCode:\s*'MED402-2'[\s\S]{0,200}date:\s*'2026-07-29'[\s\S]{0,200}time:\s*'11:30-12:30'/s,
     'MED 402-2 midterm exam entry must be present with date 2026-07-29 and time 11:30-12:30')
 
   // GYN 402 – Sat Aug 1, 2026, 11:30-12:30
-  assert.match(src,
+  assert.match(src402,
     /code:\s*'GYN 402'[\s\S]{0,200}subjectCode:\s*'GYNA402'[\s\S]{0,200}date:\s*'2026-08-01'[\s\S]{0,200}time:\s*'11:30-12:30'/s,
     'GYN 402 midterm exam entry must be present with date 2026-08-01 and time 11:30-12:30')
 })
@@ -234,7 +232,6 @@ test('MUST 401 subject names are unchanged', () => {
 })
 
 test('MUST 402 subject names are unchanged', () => {
-  const src = read('src/main.js')
   const expectedNames = {
     'SUR402-1': 'Surgery 402-1',
     'SUR402-2': 'Surgery 402-2',
@@ -247,7 +244,7 @@ test('MUST 402 subject names are unchanged', () => {
   for (const [code, name] of Object.entries(expectedNames)) {
     const escapedName = name.replace(/[&()/]/g, '\\$&')
     assert.match(
-      src,
+      src402,
       new RegExp(`code:\\s*'${code}'[\\s\\S]{0,60}name:\\s*'${escapedName}'`),
       `Subject ${code} must have name '${name}'`
     )
@@ -302,8 +299,6 @@ test('SUR-1 Stomach topic mcqTopicKey is unchanged', () => {
 // ---------------------------------------------------------------------------
 
 test('MUST 402 mcqTopicKey values follow the 402::<code>::<topic> pattern', () => {
-  const src = read('src/main.js')
-
   // A representative set of 402 mcqTopicKey entries that must not change format
   const expectedKeys = [
     "402::SUR402-1::Thyroid",
@@ -327,9 +322,9 @@ test('MUST 402 mcqTopicKey values follow the 402::<code>::<topic> pattern', () =
 
   for (const key of expectedKeys) {
     assert.match(
-      src,
+      src402,
       new RegExp(`mcqTopicKey:\\s*'${key.replace(/[.+?^${}()|[\]\\]/g, '\\$&')}'`),
-      `mcqTopicKey '${key}' must be present in main.js`
+      `mcqTopicKey '${key}' must be present in src/data/must-402.js`
     )
   }
 })
@@ -357,18 +352,16 @@ test('SUR-1 representative resource URLs are present', () => {
 })
 
 test('SUR402-1 representative resource URLs are present', () => {
-  const src = read('src/main.js')
-
-  // Thyroid 2026 presentation (still in subjects402 in main.js)
+  // Thyroid 2026 presentation (in src/data/must-402.js)
   assert.match(
-    src,
+    src402,
     /https:\/\/docs\.google\.com\/presentation\/d\/1fpmXmkNcEH_HBg8n-R3eD0-9wp_D4er7/,
     'SUR402-1 Thyroid 2026 presentation URL must be present'
   )
 
-  // Parathyroid presentation (still in subjects402 in main.js)
+  // Parathyroid presentation (in src/data/must-402.js)
   assert.match(
-    src,
+    src402,
     /https:\/\/docs\.google\.com\/presentation\/d\/1LlqKUnMnJXLDfb2oOlhxP6HLi3Qm0p7o/,
     'SUR402-1 Parathyroid presentation URL must be present'
   )
@@ -523,20 +516,18 @@ test('MUST 401 exam card quiz action buttons link to correct MCQ topic keys', ()
   )
 })
 
-test('MUST 402 quizTopicKey wiring appears in main.js for every 402 subject with a midterm exam card', () => {
-  const src = read('src/main.js')
-
+test('MUST 402 quizTopicKey wiring appears in must-402.js for every 402 subject with a midterm exam card', () => {
   // midtermExamSchedule402 entries must reference the correct quizTopicKey values
-  assert.match(src,
+  assert.match(src402,
     /quizTopicKey:\s*'SUR 402-1 MCQs'/,
     "midtermExamSchedule402 must wire SUR402-1 to 'SUR 402-1 MCQs'")
-  assert.match(src,
+  assert.match(src402,
     /quizTopicKey:\s*'MED 402-1 MCQs'/,
     "midtermExamSchedule402 must wire MED402-1 to 'MED 402-1 MCQs'")
-  assert.match(src,
+  assert.match(src402,
     /quizTopicKey:\s*'MED 402-2 MCQs'/,
     "midtermExamSchedule402 must wire MED402-2 to 'MED 402-2 MCQs'")
-  assert.match(src,
+  assert.match(src402,
     /quizTopicKey:\s*'GYN 402 MCQs'/,
     "midtermExamSchedule402 must wire GYNA402 to 'GYN 402 MCQs'")
 })

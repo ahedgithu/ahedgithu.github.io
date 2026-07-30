@@ -13,6 +13,7 @@ test('application modules are valid and mirrored', () => {
   const moduleFiles = [
     'src/main.js',
     'src/data/must-401.js',
+    'src/data/must-402.js',
     'src/audioFeedback.js',
     'src/admin.js',
     'src/analytics.js',
@@ -46,7 +47,7 @@ test('application modules are valid and mirrored', () => {
     execFileSync(process.execPath, ['--check', file], { cwd: new URL('..', import.meta.url) })
   }
 
-  const mirroredFiles = ['main.js', 'data/must-401.js', 'audioFeedback.js', 'admin.js', 'analytics.js', 'knowledgeLibrary.js', 'mcqs.js', 'sur1-kellawi-mcqs.js', 'sur1-past-exam-mcqs.js', 'sur1-matching-questions.js', 'sur402-past-exam-mcqs.js', 'sur402-textbook-mcqs.js', 'sur402-amr-beshry-mcqs.js', 'med402-endocrine-mcqs.js', 'med402-neurology-mcqs.js', 'med402-neuro-extra-mcqs.js', 'med402-old-psychiatry-mcqs.js', 'med402-zatoona-psychiatry-mcqs.js', 'gyn402-nadine-vip-midterm-mcqs.js', 'gyn402-question-bank-mcqs.js', 'gyn402-filtered-master-bank.js', 'med2-cardio-chest-mcqs.js', 'med1-kellawi-mcqs.js', 'med1-mw-ragab-mcqs.js', 'med1-hepatology-final-review-mcqs.js', 'med1-alshamel-mcqs.js', 'o6u-physical-therapy-mcqs.js', 'progress.js', 'style.css', 'supabaseClient.js']
+  const mirroredFiles = ['main.js', 'data/must-401.js', 'data/must-402.js', 'audioFeedback.js', 'admin.js', 'analytics.js', 'knowledgeLibrary.js', 'mcqs.js', 'sur1-kellawi-mcqs.js', 'sur1-past-exam-mcqs.js', 'sur1-matching-questions.js', 'sur402-past-exam-mcqs.js', 'sur402-textbook-mcqs.js', 'sur402-amr-beshry-mcqs.js', 'med402-endocrine-mcqs.js', 'med402-neurology-mcqs.js', 'med402-neuro-extra-mcqs.js', 'med402-old-psychiatry-mcqs.js', 'med402-zatoona-psychiatry-mcqs.js', 'gyn402-nadine-vip-midterm-mcqs.js', 'gyn402-question-bank-mcqs.js', 'gyn402-filtered-master-bank.js', 'med2-cardio-chest-mcqs.js', 'med1-kellawi-mcqs.js', 'med1-mw-ragab-mcqs.js', 'med1-hepatology-final-review-mcqs.js', 'med1-alshamel-mcqs.js', 'o6u-physical-therapy-mcqs.js', 'progress.js', 'style.css', 'supabaseClient.js']
   for (const file of mirroredFiles) {
     assert.equal(read(`src/${file}`), read(`public/src/${file}`), `${file} mirror is out of sync`)
   }
@@ -239,9 +240,9 @@ test('SUR 402-1 topic-organized past-exam MCQs are complete and wired', () => {
   assert.equal(source.collection.wrongReviewId, 'sur402-past-exams-wrong-review')
 
   const html = read('index.html')
-  const mainSource = read('src/main.js')
+  const must402Source = read('src/data/must-402.js')
   assert.match(html, /sur402-past-exam-mcqs\.js\?v=20260719-sur402-past-exams-v1/)
-  assert.match(mainSource, /code:\s*'SUR 402-1'[\s\S]{0,220}quizTopicKey:\s*'SUR 402-1 MCQs'/)
+  assert.match(must402Source, /code:\s*'SUR 402-1'[\s\S]{0,220}quizTopicKey:\s*'SUR 402-1 MCQs'/)
 })
 
 test('SUR 402-1 textbook MCQs appear beside the past-exam source', () => {
@@ -337,9 +338,9 @@ test('MED 402-1 endocrine bank is answer-safe, grouped, and wired to the exam ca
   assert.equal(source.collection.wrongReviewId, 'med402-endocrine-wrong-review')
 
   const html = read('index.html')
-  const mainSource = read('src/main.js')
+  const must402Source = read('src/data/must-402.js')
   assert.match(html, /med402-endocrine-mcqs\.js\?v=20260723-med402-endocrine-v1/)
-  assert.match(mainSource, /code:\s*'MED 402-1'[\s\S]{0,240}quizTopicKey:\s*'MED 402-1 MCQs'/)
+  assert.match(must402Source, /code:\s*'MED 402-1'[\s\S]{0,240}quizTopicKey:\s*'MED 402-1 MCQs'/)
 })
 
 test('MED 402-2 neurology bank is answer-safe, grouped, and wired to the exam card', () => {
@@ -469,13 +470,13 @@ test('MED 402-2 neurology bank is answer-safe, grouped, and wired to the exam ca
   assert.equal(psychiatryQuestionBank.collection.wrongReviewId, 'med402-psychiatry-question-bank-wrong-review')
 
   const html = read('index.html')
-  const mainSource = read('src/main.js')
+  const must402Source = read('src/data/must-402.js')
   assert.match(html, /med402-neurology-mcqs\.js\?v=20260727-med402-neurology-v2/)
   assert.match(html, /med402-neuro-extra-mcqs\.js\?v=20260726-med402-neuro-extra-v1/)
   assert.match(html, /med402-old-psychiatry-mcqs\.js\?v=20260726-med402-old-psychiatry-v1/)
   assert.match(html, /med402-zatoona-psychiatry-mcqs\.js\?v=20260727-med402-zatoona-psychiatry-v1/)
   assert.match(html, /med402-psychiatry-question-bank\.js\?v=20260728-med402-psychiatry-question-bank-v1/)
-  assert.match(mainSource, /code:\s*'MED 402-2'[\s\S]{0,260}quizTopicKey:\s*'MED 402-2 MCQs'/)
+  assert.match(must402Source, /code:\s*'MED 402-2'[\s\S]{0,260}quizTopicKey:\s*'MED 402-2 MCQs'/)
 })
 
 test('GYN 402 Dr Nadine VIP midterm bank is complete and wired to the exam card', () => {
@@ -525,11 +526,11 @@ test('GYN 402 Dr Nadine VIP midterm bank is complete and wired to the exam card'
   assert.equal(filteredMaster.collection.wrongReviewId, 'gyn402-filtered-master-bank-wrong-review')
 
   const html = read('index.html')
-  const mainSource = read('src/main.js')
+  const must402Source = read('src/data/must-402.js')
   assert.match(html, /gyn402-nadine-vip-midterm-mcqs\.js\?v=20260729-gyn402-nadine-vip-v1/)
   assert.match(html, /gyn402-question-bank-mcqs\.js\?v=20260730-gyn402-question-bank-v1/)
   assert.match(html, /gyn402-filtered-master-bank\.js\?v=20260730-gyn402-filtered-master-v1/)
-  assert.match(mainSource, /code:\s*'GYN 402'[\s\S]{0,260}quizTopicKey:\s*'GYN 402 MCQs'/)
+  assert.match(must402Source, /code:\s*'GYN 402'[\s\S]{0,260}quizTopicKey:\s*'GYN 402 MCQs'/)
 })
 
 test('MED 401-2 Cardio, Chest, Past Exams, Mo.ragab, and Final Exam 80 banks are source-faithful, grouped, and wired to the exam card', () => {
