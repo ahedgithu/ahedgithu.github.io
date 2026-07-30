@@ -25,12 +25,12 @@ const resourceCapabilities = {
 }
 
 const mustSections = {
-  '101': { ...section101Data, capabilities: { ...resourceCapabilities } },
-  '102': { ...section102Data, capabilities: { ...resourceCapabilities } },
-  '201': { ...section201Data, capabilities: { ...resourceCapabilities } },
-  '202': { ...section202Data, capabilities: { ...resourceCapabilities } },
-  '301': { ...section301Data, capabilities: { ...resourceCapabilities } },
-  '302': { ...section302Data, capabilities: { ...resourceCapabilities } },
+  '101': { ...section101Data, capabilities: { ...resourceCapabilities }, representatives: [] },
+  '102': { ...section102Data, capabilities: { ...resourceCapabilities }, representatives: [] },
+  '201': { ...section201Data, capabilities: { ...resourceCapabilities }, representatives: [] },
+  '202': { ...section202Data, capabilities: { ...resourceCapabilities }, representatives: [] },
+  '301': { ...section301Data, capabilities: { ...resourceCapabilities }, representatives: [] },
+  '302': { ...section302Data, capabilities: { ...resourceCapabilities }, representatives: [] },
   '401': {
     id: '401',
     title: '401',
@@ -44,6 +44,22 @@ const mustSections = {
       finals: '2026-09-19'
     },
     scheduleLocation: 'Lectures: SS 116B - Clinical rounds: Hospital, fourth floor',
+    representatives: [
+      {
+        name: 'Mohamed Kellawi',
+        role: 'Anaesthesia, Nutrition, Lab',
+        phone: '201151672255',
+        image: '/assets/mohamed-kellawi-avatar.jpg'
+      },
+      {
+        name: 'Mohamed Ragab',
+        role: 'Medicine'
+      },
+      {
+        name: 'Yousef El Rouby',
+        role: 'Surgery, Oncology'
+      }
+    ],
     capabilities: {
       hasMcqs: true,
       hasAssignments: true,
@@ -65,6 +81,28 @@ const mustSections = {
       finals: '2026-09-19'
     },
     scheduleLocation: '',
+    representatives: [
+      {
+        name: 'Shahd Sedky',
+        role: 'MED 402 representative',
+        phone: '201014245576'
+      }
+    ],
+    fallbackNewsCard: {
+      id: '402-tracker-launch',
+      kicker: '402',
+      badge: 'Now',
+      title: 'MED 402 tracker shell is live locally',
+      body: 'The 402 hub now tracks covered Weekly Reports topics. Midterm badges are hidden until the scope is confirmed, and MCQs are not active until answer-key-backed sources are added.',
+      date: '2026-07-06',
+      priority: 1,
+      persistent: true,
+      facts: [
+        { label: 'Source', value: 'Weekly Reports Weeks 1-6' },
+        { label: 'Midterm', value: 'Not confirmed yet' },
+        { label: 'MCQs', value: 'Pending answer keys' }
+      ]
+    },
     capabilities: {
       hasMcqs: true,
       hasAssignments: true,

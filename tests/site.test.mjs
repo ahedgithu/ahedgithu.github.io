@@ -20,6 +20,7 @@ test('application modules are valid and mirrored', () => {
     'src/data/must/202.js',
     'src/data/must/301.js',
     'src/data/must/302.js',
+    'src/data/must/drive-manifest.js',
     'src/data/must/sections.js',
     'src/audioFeedback.js',
     'src/admin.js',
@@ -54,7 +55,7 @@ test('application modules are valid and mirrored', () => {
     execFileSync(process.execPath, ['--check', file], { cwd: new URL('..', import.meta.url) })
   }
 
-  const mirroredFiles = ['main.js', 'data/must-401.js', 'data/must-402.js', 'data/must/101.js', 'data/must/102.js', 'data/must/201.js', 'data/must/202.js', 'data/must/301.js', 'data/must/302.js', 'data/must/sections.js', 'audioFeedback.js', 'admin.js', 'analytics.js', 'knowledgeLibrary.js', 'mcqs.js', 'sur1-kellawi-mcqs.js', 'sur1-past-exam-mcqs.js', 'sur1-matching-questions.js', 'sur402-past-exam-mcqs.js', 'sur402-textbook-mcqs.js', 'sur402-amr-beshry-mcqs.js', 'med402-endocrine-mcqs.js', 'med402-neurology-mcqs.js', 'med402-neuro-extra-mcqs.js', 'med402-old-psychiatry-mcqs.js', 'med402-zatoona-psychiatry-mcqs.js', 'gyn402-nadine-vip-midterm-mcqs.js', 'gyn402-question-bank-mcqs.js', 'gyn402-filtered-master-bank.js', 'med2-cardio-chest-mcqs.js', 'med1-kellawi-mcqs.js', 'med1-mw-ragab-mcqs.js', 'med1-hepatology-final-review-mcqs.js', 'med1-alshamel-mcqs.js', 'o6u-physical-therapy-mcqs.js', 'progress.js', 'style.css', 'supabaseClient.js']
+  const mirroredFiles = ['main.js', 'data/must-401.js', 'data/must-402.js', 'data/must/101.js', 'data/must/102.js', 'data/must/201.js', 'data/must/202.js', 'data/must/301.js', 'data/must/302.js', 'data/must/drive-manifest.js', 'data/must/sections.js', 'audioFeedback.js', 'admin.js', 'analytics.js', 'knowledgeLibrary.js', 'mcqs.js', 'sur1-kellawi-mcqs.js', 'sur1-past-exam-mcqs.js', 'sur1-matching-questions.js', 'sur402-past-exam-mcqs.js', 'sur402-textbook-mcqs.js', 'sur402-amr-beshry-mcqs.js', 'med402-endocrine-mcqs.js', 'med402-neurology-mcqs.js', 'med402-neuro-extra-mcqs.js', 'med402-old-psychiatry-mcqs.js', 'med402-zatoona-psychiatry-mcqs.js', 'gyn402-nadine-vip-midterm-mcqs.js', 'gyn402-question-bank-mcqs.js', 'gyn402-filtered-master-bank.js', 'med2-cardio-chest-mcqs.js', 'med1-kellawi-mcqs.js', 'med1-mw-ragab-mcqs.js', 'med1-hepatology-final-review-mcqs.js', 'med1-alshamel-mcqs.js', 'o6u-physical-therapy-mcqs.js', 'progress.js', 'style.css', 'supabaseClient.js']
   for (const file of mirroredFiles) {
     assert.equal(read(`src/${file}`), read(`public/src/${file}`), `${file} mirror is out of sync`)
   }
@@ -1730,4 +1731,90 @@ test('the shared tracker locks 402 without changing 401 phone behavior', () => {
   assert.match(html, /new MutationObserver\(syncSectionViewport\)/)
   assert.match(styles, /\.race-marker--finals\s*\{[^}]*translateX\(calc\(-50% - 4px\)\)/)
   assert.match(styles, /@media \(max-width: 860px\)[\s\S]*?\.race-marker--finals\s*\{[^}]*translateX\(calc\(-50% - 10px\)\)/)
+})
+
+test('MUST multi-class section registration, capabilities, provenance, progress isolation, and 401/402 preservation', async () => {
+  const { mustSections, mustAcademicYears } = await import('../src/data/must/sections.js')
+  const { mustDriveManifest } = await import('../src/data/must/drive-manifest.js')
+  const mainSource = read('src/main.js')
+
+  // 1. All 8 MUST sections registered
+  const expectedSections = ['101', '102', '201', '202', '301', '302', '401', '402']
+  assert.deepEqual(Object.keys(mustSections).sort(), expectedSections.sort())
+
+  // 2. Academic year groupings
+  assert.equal(mustAcademicYears.length, 4)
+  assert.deepEqual(mustAcademicYears[0].sections, ['101', '102'])
+  assert.deepEqual(mustAcademicYears[1].sections, ['201', '202'])
+  assert.deepEqual(mustAcademicYears[2].sections, ['301', '302'])
+  assert.deepEqual(mustAcademicYears[3].sections, ['401', '402'])
+
+  // 3. Provenance manifest distinguishes selected sources from unresolved candidates
+  const expectedPrimaryFolders = {
+    '101': 'https://drive.google.com/drive/folders/1k1lnWPHG70vQd7nv-QSsorgtXcwyoFfp',
+    '102': 'https://drive.google.com/drive/folders/10CzMmVFNYeN1qB-pD6akyLy5Rj-6RCjS',
+    '201': 'https://drive.google.com/drive/folders/11pVhv6h-prfNVBivoR6EmfH3wtiicL3H',
+    '202': 'https://drive.google.com/drive/folders/1UBcPhUqJ2oS7u5igmTlvEinI5Y9usRGs',
+    '301': 'https://drive.google.com/drive/folders/10165aTyzXB0LgMl25HXZs46JBh1_TriN',
+    '302': 'https://drive.google.com/drive/folders/1L4LmUNvaRunNa_WbvtJmeK6dNQiwiLql',
+    '402': 'https://drive.google.com/drive/folders/1XVKqceAmQNvRhN5J5Ip_tHnntdbCQkIP'
+  }
+  for (const [id, primaryFolder] of Object.entries(expectedPrimaryFolders)) {
+    assert.ok(mustDriveManifest[id], `Manifest missing for section ${id}`)
+    assert.equal(mustDriveManifest[id].primaryFolder, primaryFolder)
+    assert.equal(mustDriveManifest[id].publicAccess, 'unverified')
+    assert.ok(mustDriveManifest[id].sourceSubjectLabels.length > 0)
+  }
+  assert.equal(mustDriveManifest['401'].primaryFolder, null)
+  assert.equal(mustDriveManifest['401'].candidateFolders.length, 2)
+  assert.equal(mustDriveManifest['401'].curriculumStatus, 'canonical-source-unresolved')
+
+  // 4. Capability flags honor resourceFirst vs full capabilities
+  for (const id of ['101', '102', '201', '202', '301', '302']) {
+    const caps = mustSections[id].capabilities
+    assert.equal(caps.resourceFirst, true, `Section ${id} must be resourceFirst`)
+    assert.equal(caps.hasMcqs, false, `Section ${id} must not enable unverified MCQs`)
+    assert.equal(caps.hasAssignments, false, `Section ${id} must not enable assignments`)
+    assert.equal(caps.hasTimeline, false, `Section ${id} must not enable timeline`)
+    assert.equal(caps.hasSchedule, false, `Section ${id} must not enable schedule`)
+    assert.deepEqual(mustSections[id].representatives, [])
+  }
+
+  assert.equal(mustSections['401'].capabilities.resourceFirst, false)
+  assert.equal(mustSections['401'].capabilities.hasMcqs, true)
+  assert.equal(mustSections['401'].capabilities.hasSchedule, true)
+  assert.deepEqual(mustSections['401'].representatives, [
+    {
+      name: 'Mohamed Kellawi',
+      role: 'Anaesthesia, Nutrition, Lab',
+      phone: '201151672255',
+      image: '/assets/mohamed-kellawi-avatar.jpg'
+    },
+    { name: 'Mohamed Ragab', role: 'Medicine' },
+    { name: 'Yousef El Rouby', role: 'Surgery, Oncology' }
+  ])
+
+  assert.equal(mustSections['402'].capabilities.resourceFirst, false)
+  assert.equal(mustSections['402'].capabilities.hasMcqs, true)
+  assert.equal(mustSections['402'].capabilities.hasSchedule, false)
+  assert.deepEqual(mustSections['402'].representatives, [
+    { name: 'Shahd Sedky', role: 'MED 402 representative', phone: '201014245576' }
+  ])
+  assert.equal(mustSections['402'].fallbackNewsCard.id, '402-tracker-launch')
+
+  // 5. Code runtime checks for capabilities in main.js
+  assert.match(mainSource, /function updateSectionCapabilitiesUi\s*\(/)
+  assert.match(mainSource, /function isResourceFirstSection\s*\(/)
+  assert.match(mainSource, /if \(!isSupabaseConfigured\(\) \|\| isResourceFirstSection\(\)\) return Promise\.resolve\(\)/)
+  assert.match(mainSource, /if \(!studentProgressState\.user \|\| isResourceFirstSection\(section\)\) return/)
+  assert.match(mainSource, /if \(isResourceFirstSection\(\)\) return ''/)
+  assert.match(mainSource, /caps\.resourceFirst \|\| caps\.hasTimeline === false/)
+  assert.match(mainSource, /caps\.hasMcqs === false \|\| caps\.resourceFirst/)
+  assert.match(mainSource, /globalProgress\.hidden = isResourceFirst \|\| caps\.hasMcqs === false/)
+  assert.match(mainSource, /getAcademicSection\(section, universityId\)/)
+  assert.doesNotMatch(mainSource, /const classRepresentativesBySection\s*=/)
+  assert.match(mainSource, /activeAcademicSectionData\?\.fallbackNewsCard/)
+  assert.match(mainSource, /activeAcademicSectionData\?\.representatives/)
+  assert.match(mainSource, /function getTopicCompletionKey\s*\(/)
+  assert.match(mainSource, /TOPIC_COMPLETION_STORAGE_PREFIX.*activeUniversityId.*section/)
 })

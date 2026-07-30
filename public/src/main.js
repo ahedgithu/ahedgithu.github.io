@@ -600,6 +600,10 @@ function getAcademicSection(sectionId = activeAcademicSection, universityId = ac
   return academicSectionsByUniversity[safeUniversityId][safeSectionId]
 }
 
+function isResourceFirstSection(sectionId = activeAcademicSection, universityId = activeUniversityId) {
+  return !!getAcademicSection(sectionId, universityId)?.capabilities?.resourceFirst
+}
+
 function isValidRemoteTopicState(state) {
   return ['taken', 'partial', 'announced', 'remaining'].includes(state)
 }
@@ -742,7 +746,7 @@ function refreshTrackerAfterRemoteUpdate() {
 const remoteTrackerRefreshPromises = new Map()
 
 function refreshRemoteTrackerData() {
-  if (!isSupabaseConfigured()) return Promise.resolve()
+  if (!isSupabaseConfigured() || isResourceFirstSection()) return Promise.resolve()
   const requestedUniversity = activeUniversityId
   const existingPromise = remoteTrackerRefreshPromises.get(requestedUniversity)
   if (existingPromise) return existingPromise
@@ -1435,6 +1439,11 @@ function getPresencePayload() {
 }
 
 async function refreshOnlineStudents(force = false) {
+  if (isResourceFirstSection()) {
+    onlineStudentsState.rows = []
+    renderOnlineStudents()
+    return
+  }
   if (!studentProgressState.user || onlineStudentsState.loading || onlineStudentsState.unavailable) {
     renderOnlineStudents()
     return
@@ -1468,6 +1477,11 @@ async function refreshOnlineStudents(force = false) {
 }
 
 async function sendStudentPresence(forceRefresh = false) {
+  if (isResourceFirstSection()) {
+    onlineStudentsState.rows = []
+    renderOnlineStudents()
+    return
+  }
   if (isLocalTestMode) {
     renderOnlineStudents()
     return
@@ -1500,6 +1514,11 @@ function initOnlineStudents() {
 }
 
 async function fetchAndRenderLiveActivity(force = false) {
+  if (isResourceFirstSection()) {
+    liveActivityState.rows = []
+    renderLiveActivity()
+    return
+  }
   if (isLocalTestMode) {
     renderLiveActivity()
     return
@@ -2015,6 +2034,12 @@ function showGlobalToast(text) {
 }
 
 async function fetchAndRenderLeaderboard(force = false) {
+  if (isResourceFirstSection()) {
+    leaderboardState.loading = false
+    leaderboardState.rows = []
+    leaderboardState.lastFetched = 0
+    return
+  }
   if (leaderboardState.loading) return
   if (isLocalTestMode) {
     leaderboardState.rows = []
@@ -2229,7 +2254,7 @@ function setStudentSyncMenu(open) {
 }
 
 async function syncLocalProgressToCloud(section = activeAcademicSection) {
-  if (!studentProgressState.user) return
+  if (!studentProgressState.user || isResourceFirstSection(section)) return
 
   const sectionSubjects = getAcademicSection(section).subjects || []
   for (const subject of sectionSubjects) {
@@ -2290,6 +2315,14 @@ async function syncLocalProgressToCloud(section = activeAcademicSection) {
 }
 
 async function loadStudentProgress(section = activeAcademicSection) {
+  if (isResourceFirstSection(section)) {
+    studentProgressState.ready = true
+    studentProgressState.loading = false
+    refreshTrackerFilters()
+    updateGlobalProgress()
+    renderStudentSyncUi()
+    return
+  }
   if (isLocalTestMode) {
     studentProgressState.ready = true
     studentProgressState.loading = false
@@ -2396,6 +2429,41 @@ function updateUniversityBranding() {
   })
 }
 
+function updateSectionCapabilitiesUi() {
+  const caps = activeAcademicSectionData?.capabilities || {}
+  const isResourceFirst = !!caps.resourceFirst
+
+  document.querySelectorAll('[data-section-nav="news"]').forEach((el) => {
+    el.hidden = isResourceFirst
+  })
+  document.querySelectorAll('[data-section-nav="schedule"]').forEach((el) => {
+    el.hidden = isResourceFirst || (!caps.hasSchedule && !activeAcademicSectionData?.midtermExamSchedule?.length)
+  })
+  document.querySelectorAll('[data-section-nav="leaderboard"]').forEach((el) => {
+    el.hidden = isResourceFirst
+  })
+
+  const newsSection = document.getElementById('news')
+  if (newsSection) newsSection.hidden = isResourceFirst
+
+  const scheduleSection = document.getElementById('schedule')
+  if (scheduleSection) {
+    scheduleSection.hidden = isResourceFirst || (!caps.hasSchedule && !activeAcademicSectionData?.midtermExamSchedule?.length)
+  }
+
+  const leaderboardSection = document.getElementById('leaderboard')
+  if (leaderboardSection) leaderboardSection.hidden = isResourceFirst
+
+  const todayCockpit = document.getElementById('today-cockpit')
+  if (todayCockpit) todayCockpit.hidden = isResourceFirst
+
+  const globalProgress = document.getElementById('global-progress')
+  if (globalProgress) globalProgress.hidden = isResourceFirst || caps.hasMcqs === false
+
+  const semesterTimeline = document.getElementById('semester-timeline')
+  if (semesterTimeline) semesterTimeline.hidden = isResourceFirst || !caps.hasTimeline
+}
+
 function updateAcademicSectionUi() {
   activeAcademicSectionData = getAcademicSection()
   subjects = activeAcademicSectionData.subjects
@@ -2415,6 +2483,8 @@ function updateAcademicSectionUi() {
     examScheduleCards.setAttribute('aria-label', `${activeAcademicSectionData.title} subject exam dates`)
   }
 
+  updateSectionCapabilitiesUi()
+  renderAssignmentProgress()
   updateMiniDashboard()
   updateGlobalProgress()
 }
@@ -2512,35 +2582,15 @@ function updateMiniDashboard() {
   dashCoveredTopicsSub.textContent = 'taken in university'
 
   // 4. MCQs Available
-  const stats = getActiveSectionQuizStats()
-  dashMcqsVal.textContent = `${stats.quizzesCount} Quizzes`
-  dashMcqsSub.textContent = `${stats.mcqsCount} questions`
-}
-
-const classRepresentativesBySection = {
-  '401': [
-    {
-      name: 'Mohamed Kellawi',
-      role: 'Anaesthesia, Nutrition, Lab',
-      phone: '201151672255',
-      image: '/assets/mohamed-kellawi-avatar.jpg'
-    },
-    {
-      name: 'Mohamed Ragab',
-      role: 'Medicine'
-    },
-    {
-      name: 'Yousef El Rouby',
-      role: 'Surgery, Oncology'
-    }
-  ],
-  '402': [
-    {
-      name: 'Shahd Sedky',
-      role: 'MED 402 representative',
-      phone: '201014245576'
-    }
-  ]
+  const caps = activeAcademicSectionData?.capabilities || {}
+  if (!caps.hasMcqs || caps.resourceFirst) {
+    dashMcqsVal.textContent = 'N/A'
+    dashMcqsSub.textContent = 'Resource-first class'
+  } else {
+    const stats = getActiveSectionQuizStats()
+    dashMcqsVal.textContent = `${stats.quizzesCount} Quizzes`
+    dashMcqsSub.textContent = `${stats.mcqsCount} questions`
+  }
 }
 
 function renderRepresentativeAvatar(rep) {
@@ -2558,7 +2608,7 @@ function renderRepresentativeAvatar(rep) {
 function renderClassRepresentatives() {
   if (!classRepsGrid) return
 
-  const reps = classRepresentativesBySection[activeAcademicSection] || []
+  const reps = activeAcademicSectionData?.representatives || []
   classRepsGrid.innerHTML = reps.map((rep) => {
     const avatar = renderRepresentativeAvatar(rep)
     if (rep.phone) {
@@ -2632,11 +2682,27 @@ function showAcademicSection(sectionId, options = {}) {
   refreshRemoteTrackerData()
   loadStudentProgress(activeAcademicSection)
 
-  const targetHash = options.hash || window.location.hash || '#tracker'
+  const caps = activeAcademicSectionData?.capabilities || {}
+  let targetHash = options.hash || window.location.hash || '#tracker'
+  if (caps.resourceFirst) {
+    if (['#schedule', '#news', '#leaderboard', '#mcqs'].includes(targetHash)) {
+      targetHash = '#tracker'
+    }
+  } else {
+    if (targetHash === '#schedule' && !caps.hasSchedule && !activeAcademicSectionData?.midtermExamSchedule?.length) {
+      targetHash = '#tracker'
+    }
+    if (targetHash === '#mcqs' && !caps.hasMcqs) {
+      targetHash = '#tracker'
+    }
+  }
+
   const url = new URL(window.location.href)
   url.searchParams.set('university', activeUniversityId)
   url.searchParams.set('section', activeAcademicSection)
-  if (!url.hash) url.hash = targetHash
+  if (!url.hash || ['#schedule', '#news', '#leaderboard', '#mcqs'].includes(url.hash)) {
+    url.hash = targetHash
+  }
   updateSiteHistory(url, options.historyMode || 'push')
   const targetSection = document.getElementById(targetHash.replace('#', '')) || document.getElementById('tracker')
   if (targetSection && options.scroll !== false) {
@@ -3570,6 +3636,8 @@ function getTopicCompletionState(subjectCode, topicLabel) {
 }
 
 function saveTopicCompletionState(subjectCode, topicLabel, state) {
+  if (isResourceFirstSection()) return
+
   const normalizedState = {
     studied: !!state.studied,
     mcqs: !!state.mcqs
@@ -3583,7 +3651,7 @@ function saveTopicCompletionState(subjectCode, topicLabel, state) {
     // Local checklist controls should not break topic rendering if storage is blocked.
   }
 
-  if (studentProgressState.user) {
+  if (studentProgressState.user && !activeAcademicSectionData?.capabilities?.resourceFirst) {
     upsertUserTopicProgress({
       user_id: studentProgressState.user.id,
       university_id: activeUniversityId,
@@ -3601,6 +3669,8 @@ function saveTopicCompletionState(subjectCode, topicLabel, state) {
 }
 
 function renderTopicCompletionControls(subject, topic) {
+  if (isResourceFirstSection()) return ''
+
   const state = getTopicCompletionState(subject.code, topic.label)
   const controls = [{ key: 'studied', label: 'Completed' }]
 
@@ -4352,16 +4422,23 @@ function renderStudyActionCard(topic) {
 }
 
 function renderResourceLinks(topic, breakdownExpanded = false) {
+  const caps = activeAcademicSectionData?.capabilities || {}
   const quizTopicKey = topic.mcqTopicKey || topic.label
   const quizSources = getQuizSources(quizTopicKey)
   const quizCount = quizSources.reduce((total, source) => total + source.mcqs.length, 0)
   const resources = getResourceItems(topic)
+  const mcqAction = caps.hasMcqs === false || caps.resourceFirst
+    ? ''
+    : renderMcqActionCard(quizTopicKey, quizCount)
+  const audioAction = caps.resourceFirst && !topic.audioUrl
+    ? ''
+    : renderLectureRecordActionCard(topic)
 
   return `
     <div class="topic-action-row${topic.studyUrl ? ' topic-action-row--has-study' : ''}" aria-label="Topic resources">
       ${renderDriveActionCard(resources, topic, breakdownExpanded)}
-      ${renderMcqActionCard(quizTopicKey, quizCount)}
-      ${renderLectureRecordActionCard(topic)}
+      ${mcqAction}
+      ${audioAction}
       ${renderStudyActionCard(topic)}
     </div>
   `
@@ -7332,6 +7409,12 @@ function formatTimelineDate(date) {
 function renderSemesterTimeline() {
   if (!semesterFill || !todayMarker || !midtermMarker || !finalsMarker) return
 
+  const caps = activeAcademicSectionData?.capabilities || {}
+  if (caps.resourceFirst || caps.hasTimeline === false) {
+    if (semesterTimeline) semesterTimeline.hidden = true
+    return
+  }
+
   const timeline = activeAcademicSectionData.semesterTimeline
   if (!timeline?.start || !timeline?.finals) {
     if (semesterTimeline) semesterTimeline.hidden = true
@@ -7425,6 +7508,25 @@ function renderSemesterTimeline() {
 function renderAssignmentProgress() {
   const items = document.querySelectorAll('[data-assignment-progress], [data-deadline-progress]')
   if (!items.length) return
+
+  const caps = activeAcademicSectionData?.capabilities || {}
+  const assignmentsDisabled = caps.resourceFirst || caps.hasAssignments === false
+  items.forEach((item) => {
+    if (assignmentsDisabled) {
+      if (item.dataset.capabilityOriginalHidden === undefined) {
+        item.dataset.capabilityOriginalHidden = String(item.hidden)
+      }
+      item.hidden = true
+      return
+    }
+    if (item.dataset.capabilityOriginalHidden !== undefined) {
+      item.hidden = item.dataset.capabilityOriginalHidden === 'true'
+      delete item.dataset.capabilityOriginalHidden
+    }
+  })
+  if (assignmentsDisabled) {
+    return
+  }
 
   items.forEach((progress) => {
     const startDate = getLocalDate(progress.dataset.startDate)
@@ -8049,29 +8151,34 @@ function markNewsCardsSeen(cards = []) {
 
 function ensureSectionNewsCard() {
   if (newsCardsState.remoteSections.has(getUniversitySectionKey())) return
-  if (!newsFeed || activeUniversityId !== 'must' || activeAcademicSection !== '402') return
-  if (newsFeed.querySelector('[data-news-id="402-tracker-launch"]')) return
+  if (!newsFeed) return
+
+  const fallback = activeAcademicSectionData?.fallbackNewsCard
+  if (!fallback) return
+
+  if (newsFeed.querySelector(`[data-news-id="${fallback.id}"]`)) return
 
   const card = document.createElement('article')
   card.className = 'update-panel update-panel--primary update-panel--wide'
-  card.dataset.newsId = '402-tracker-launch'
-  card.dataset.section = '402'
+  card.dataset.newsId = fallback.id
+  card.dataset.section = activeAcademicSection
   card.dataset.course = 'all'
-  card.dataset.date = '2026-07-06'
-  card.dataset.priority = '1'
-  card.dataset.persistent = 'true'
+  card.dataset.date = fallback.date || '2026-07-06'
+  card.dataset.priority = String(fallback.priority || 1)
+  card.dataset.persistent = String(!!fallback.persistent)
+
+  const factsHtml = fallback.facts?.length
+    ? `<dl class="update-facts update-facts--three">${fallback.facts.map((f) => `<div><dt>${escapeHtml(f.label)}</dt><dd>${escapeHtml(f.value)}</dd></div>`).join('')}</dl>`
+    : ''
+
   card.innerHTML = `
     <div class="update-panel__top">
-      <p class="card__kicker">402</p>
-      <span class="status-pill status-pill--open">Now</span>
+      <p class="card__kicker">${escapeHtml(fallback.kicker || activeAcademicSection)}</p>
+      ${fallback.badge ? `<span class="status-pill status-pill--open">${escapeHtml(fallback.badge)}</span>` : ''}
     </div>
-    <h2>MED 402 tracker shell is live locally</h2>
-    <p>The 402 hub now tracks covered Weekly Reports topics. Midterm badges are hidden until the scope is confirmed, and MCQs are not active until answer-key-backed sources are added.</p>
-    <dl class="update-facts update-facts--three">
-      <div><dt>Source</dt><dd>Weekly Reports Weeks 1-6</dd></div>
-      <div><dt>Midterm</dt><dd>Not confirmed yet</dd></div>
-      <div><dt>MCQs</dt><dd>Pending answer keys</dd></div>
-    </dl>
+    <h2>${escapeHtml(fallback.title)}</h2>
+    <p>${escapeHtml(fallback.body)}</p>
+    ${factsHtml}
   `
   newsFeed.prepend(card)
 }
@@ -8146,6 +8253,10 @@ function replaceNewsFeedWithRemoteRows() {
 }
 
 async function refreshRemoteNewsCards(section = activeAcademicSection, universityId = activeUniversityId) {
+  const targetSectionData = isUniversitySection(universityId, section) ? getAcademicSection(section, universityId) : null
+  const caps = targetSectionData?.capabilities || {}
+  if (caps.resourceFirst) return
+
   const stateKey = getUniversitySectionKey(universityId, section)
   if (!newsFeed || !isSupabaseConfigured() || newsCardsState.loadingSections.has(stateKey)) return
   newsCardsState.loadingSections.add(stateKey)
