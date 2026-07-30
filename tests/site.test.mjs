@@ -34,6 +34,7 @@ test('application modules are valid and mirrored', () => {
     'src/med1-mw-ragab-mcqs.js',
     'src/med1-hepatology-final-review-mcqs.js',
     'src/med1-alshamel-mcqs.js',
+    'src/o6u-physical-therapy-mcqs.js',
     'src/progress.js',
     'src/supabaseClient.js'
   ]
@@ -42,7 +43,7 @@ test('application modules are valid and mirrored', () => {
     execFileSync(process.execPath, ['--check', file], { cwd: new URL('..', import.meta.url) })
   }
 
-  const mirroredFiles = ['main.js', 'audioFeedback.js', 'admin.js', 'analytics.js', 'knowledgeLibrary.js', 'mcqs.js', 'sur1-kellawi-mcqs.js', 'sur1-past-exam-mcqs.js', 'sur1-matching-questions.js', 'sur402-past-exam-mcqs.js', 'sur402-textbook-mcqs.js', 'sur402-amr-beshry-mcqs.js', 'med402-endocrine-mcqs.js', 'med402-neurology-mcqs.js', 'med402-neuro-extra-mcqs.js', 'med402-old-psychiatry-mcqs.js', 'med402-zatoona-psychiatry-mcqs.js', 'gyn402-nadine-vip-midterm-mcqs.js', 'med2-cardio-chest-mcqs.js', 'med1-kellawi-mcqs.js', 'med1-mw-ragab-mcqs.js', 'med1-hepatology-final-review-mcqs.js', 'med1-alshamel-mcqs.js', 'progress.js', 'style.css', 'supabaseClient.js']
+  const mirroredFiles = ['main.js', 'audioFeedback.js', 'admin.js', 'analytics.js', 'knowledgeLibrary.js', 'mcqs.js', 'sur1-kellawi-mcqs.js', 'sur1-past-exam-mcqs.js', 'sur1-matching-questions.js', 'sur402-past-exam-mcqs.js', 'sur402-textbook-mcqs.js', 'sur402-amr-beshry-mcqs.js', 'med402-endocrine-mcqs.js', 'med402-neurology-mcqs.js', 'med402-neuro-extra-mcqs.js', 'med402-old-psychiatry-mcqs.js', 'med402-zatoona-psychiatry-mcqs.js', 'gyn402-nadine-vip-midterm-mcqs.js', 'med2-cardio-chest-mcqs.js', 'med1-kellawi-mcqs.js', 'med1-mw-ragab-mcqs.js', 'med1-hepatology-final-review-mcqs.js', 'med1-alshamel-mcqs.js', 'o6u-physical-therapy-mcqs.js', 'progress.js', 'style.css', 'supabaseClient.js']
   for (const file of mirroredFiles) {
     assert.equal(read(`src/${file}`), read(`public/src/${file}`), `${file} mirror is out of sync`)
   }
@@ -71,7 +72,7 @@ test('tracker search splits topics and MCQs with focused question launch', () =>
   assert.match(html, /data-search-mode="mcqs"[^>]*aria-pressed="false"/)
   assert.match(html, /id="mcq-search-results"[^>]*aria-live="polite"[^>]*hidden/)
   assert.match(html, /style\.css\?v=20260730-neutral-loading-v1/)
-  assert.match(html, /main\.js\?v=20260730-university-onboarding-v4/)
+  assert.match(html, /main\.js\?v=20260730-o6u-pt-phys-mcqs-v1/)
 
   for (const helper of [
     'normalizeMcqSearchText',
@@ -1075,10 +1076,10 @@ test('Google login is mandatory and the academic section is account-bound', () =
   assert.match(mainSource, /\$\{TOPIC_COMPLETION_STORAGE_PREFIX\}::\$\{getProgressStorageOwnerId\(\)\}::\$\{activeUniversityId\}::\$\{section\}/)
   assert.match(schedule, /window\.location\.replace\('\/#schedule'\)/)
   assert.match(html, /style\.css\?v=20260730-neutral-loading-v1/)
-  assert.match(html, /main\.js\?v=20260730-university-onboarding-v4/)
+  assert.match(html, /main\.js\?v=20260730-o6u-pt-phys-mcqs-v1/)
 })
 
-test('O6U Physical Therapy is selectable, isolated, branded, and ready for future MCQs', () => {
+test('O6U Physical Therapy is selectable, isolated, branded, and has PT-PHYS MCQs', () => {
   const html = read('index.html')
   const profileHtml = read('profile.html')
   const mainSource = read('src/main.js')
@@ -1101,7 +1102,9 @@ test('O6U Physical Therapy is selectable, isolated, branded, and ready for futur
   assert.match(mainSource, /name:\s*'Pathology 2'[\s\S]*topics:\s*\[1,\s*2,\s*3,\s*4\]\.map/)
   assert.equal((mainSource.match(/Title pending/g) || []).length, 1)
   assert.match(mainSource, /date:\s*'2026-08-03'/)
-  assert.match(mainSource, /o6u:\s*\{\s*'physical-therapy':\s*\{\}\s*\}/)
+  assert.match(mainSource, /mcqTopicKey:\s*'PT-PHYS::Physiological Adaptation to Regular Physical Training'/)
+  assert.match(mainSource, /o6u:\s*\{\s*'physical-therapy':\s*window\.mcqQuizzesO6u \|\| \{\}/)
+  assert.match(html, /o6u-physical-therapy-mcqs\.js\?v=20260730-pt-phys-adaptations-v1/)
   assert.match(mainSource, /class="auth-gate__faculty-card"/)
   assert.match(mainSource, /\/assets\/o6u-physical-therapy-logo\.jpg/)
   assert.match(mainSource, /selected_university:\s*universityId/)
@@ -1124,6 +1127,29 @@ test('O6U Physical Therapy is selectable, isolated, branded, and ready for futur
   assert.match(migration, /presence\.university_id = p_university_id/)
   assert.match(migration, /\('o6u', 'physical-therapy', 'PT-PHYS'/)
   assert.match(migration, /\('o6u', 'physical-therapy', 'PT-PATH2'/)
+})
+
+test('O6U PT-PHYS physiological adaptations bank is complete and answer-safe', () => {
+  const context = { window: {} }
+  vm.runInNewContext(read('src/o6u-physical-therapy-mcqs.js'), context)
+
+  const quiz = context.window.mcqQuizzesO6u['PT-PHYS::Physiological Adaptation to Regular Physical Training']
+  assert.equal(quiz.alwaysShowSourcePicker, true)
+  assert.equal(quiz.sources.length, 1)
+
+  const source = quiz.sources[0]
+  assert.equal(source.id, 'o6u-pt-phys-physiological-adaptations-part-1')
+  assert.equal(source.mcqs.length, 65)
+  assert.equal(new Set(source.mcqs.map((question) => question.id)).size, 65)
+  assert.ok(source.mcqs.every((question) => (
+    question.question &&
+    question.choices.length === 4 &&
+    Number.isInteger(question.answerIndex) &&
+    question.answerIndex >= 0 &&
+    question.answerIndex < question.choices.length &&
+    question.explanation &&
+    question.source
+  )))
 })
 
 test('Delta Physical Therapy is selectable and isolated with Internal Medicine only', () => {
@@ -1518,7 +1544,7 @@ test('section selector is the responsive university-first onboarding landing', (
   assert.match(style, /\.home-review-screenshot--fit\s*\{[^}]*object-fit:\s*contain;[^}]*object-position:\s*left center;/s)
   assert.equal((html.match(/review5\.jpg" class="home-review-screenshot home-review-screenshot--fit"/g) || []).length, 2)
   assert.match(html, /style\.css\?v=20260730-neutral-loading-v1/)
-  assert.match(html, /main\.js\?v=20260730-university-onboarding-v4/)
+  assert.match(html, /main\.js\?v=20260730-o6u-pt-phys-mcqs-v1/)
   assert.match(style, /body\[data-site-mode="selector"\] > main > \.site-footer/)
 
   for (const file of ['review1.jpg', 'review2.jpg', 'review3.jpg', 'review4.jpg', 'review5.jpg', 'review6.png', 'review7.png', 'review8.png']) {

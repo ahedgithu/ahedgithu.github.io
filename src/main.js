@@ -788,7 +788,8 @@ const subjectsO6uPhysicalTherapy = [
         label: 'Physiological Adaptation to Regular Physical Training',
         state: 'taken',
         art: 9,
-        note: 'Currently the only confirmed covered lecture.'
+        note: 'Currently the only confirmed covered lecture.',
+        mcqTopicKey: 'PT-PHYS::Physiological Adaptation to Regular Physical Training'
       }
     ]
   },
@@ -885,7 +886,7 @@ const mcqQuizzesByUniversity = {
     '402': window.mcqQuizzes402 || {}
   },
   o6u: {
-    'physical-therapy': {}
+    'physical-therapy': window.mcqQuizzesO6u || {}
   },
   delta: {
     'physical-therapy': {}
