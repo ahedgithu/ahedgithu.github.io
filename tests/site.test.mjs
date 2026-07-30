@@ -83,8 +83,8 @@ test('tracker search splits topics and MCQs with focused question launch', () =>
   assert.match(html, /data-search-mode="topics"[^>]*aria-pressed="true"/)
   assert.match(html, /data-search-mode="mcqs"[^>]*aria-pressed="false"/)
   assert.match(html, /id="mcq-search-results"[^>]*aria-live="polite"[^>]*hidden/)
-  assert.match(html, /style\.css\?v=20260730-neutral-loading-v1/)
-  assert.match(html, /main\.js\?v=20260731-must-resource-runtime-v2/)
+  assert.match(html, /style\.css\?v=202607/)
+  assert.match(html, /main\.js\?v=202607/)
 
   for (const helper of [
     'normalizeMcqSearchText',
@@ -1123,8 +1123,8 @@ test('Google login is mandatory and the academic section is account-bound', () =
   assert.match(mainSource, /\$\{QUIZ_STORAGE_PREFIX\}::\$\{getProgressStorageOwnerId\(\)\}::\$\{activeUniversityId\}::\$\{section\}/)
   assert.match(mainSource, /\$\{TOPIC_COMPLETION_STORAGE_PREFIX\}::\$\{getProgressStorageOwnerId\(\)\}::\$\{activeUniversityId\}::\$\{section\}/)
   assert.match(schedule, /window\.location\.replace\('\/#schedule'\)/)
-  assert.match(html, /style\.css\?v=20260730-neutral-loading-v1/)
-  assert.match(html, /main\.js\?v=20260731-must-resource-runtime-v2/)
+  assert.match(html, /style\.css\?v=202607/)
+  assert.match(html, /main\.js\?v=202607/)
 })
 
 test('O6U Physical Therapy is selectable, isolated, branded, and has PT-PHYS MCQs', () => {
@@ -1319,8 +1319,8 @@ test('student profile opens as a standalone gamified page', () => {
   assert.match(profileHtml, /class="profile-nickname-form__save" type="submit">[\s\S]*<span>Save profile<\/span>/)
   assert.match(html, /data-profile-open/)
   assert.match(html, /data-profile-edit-nickname/)
-  assert.match(profileHtml, /style\.css\?v=20260730-university-onboarding-v4/)
-  assert.match(profileHtml, /main\.js\?v=20260730-university-onboarding-v4/)
+  assert.match(profileHtml, /style\.css\?v=202607/)
+  assert.match(profileHtml, /main\.js\?v=202607/)
   assert.match(profileHtml, /class="profile-auth-visual"/)
   assert.match(profileHtml, /data-auth-panel="checking"[\s\S]*Preparing your profile/)
   assert.match(profileHtml, /data-auth-panel="signed-out"[\s\S]*data-auth-login/)
@@ -1592,8 +1592,8 @@ test('section selector is the responsive university-first onboarding landing', (
   assert.match(style, /\.home-review-screenshot\s*\{[\s\S]*?aspect-ratio:\s*1\.9\s*\/\s*1;[\s\S]*?object-fit:\s*cover;/s)
   assert.match(style, /\.home-review-screenshot--fit\s*\{[^}]*object-fit:\s*contain;[^}]*object-position:\s*left center;/s)
   assert.equal((html.match(/review5\.jpg" class="home-review-screenshot home-review-screenshot--fit"/g) || []).length, 2)
-  assert.match(html, /style\.css\?v=20260730-neutral-loading-v1/)
-  assert.match(html, /main\.js\?v=20260731-must-resource-runtime-v2/)
+  assert.match(html, /style\.css\?v=202607/)
+  assert.match(html, /main\.js\?v=202607/)
   assert.match(style, /body\[data-site-mode="selector"\] > main > \.site-footer/)
 
   for (const file of ['review1.jpg', 'review2.jpg', 'review3.jpg', 'review4.jpg', 'review5.jpg', 'review6.png', 'review7.png', 'review8.png']) {

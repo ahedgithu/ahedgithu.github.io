@@ -8567,16 +8567,35 @@ function renderAuthSectionChoices(universityId) {
   const university = getUniversity(universityId)
   authSectionChoices.dataset.university = university.id
 
+  const activeSectionId = studentProgressState.selectedSection || activeAcademicSection
+
   if (university.id === 'must') {
+    const sectionMeta = {
+      '401': { badge: '⭐ Active Tracker', badgeClass: 'badge--active', desc: 'Internal Med 1 • Surgery 1 • Schedule & MCQs' },
+      '402': { badge: '⭐ Active Tracker', badgeClass: 'badge--active', desc: 'Internal Med 2 • Surgery 2 • Gyn & MCQs' },
+      '301': { badge: '📁 Resources', badgeClass: 'badge--resource', desc: 'Clinical & Basic Modules' },
+      '302': { badge: '📁 Resources', badgeClass: 'badge--resource', desc: 'Clinical & Basic Modules' },
+      '201': { badge: '📁 Resources', badgeClass: 'badge--resource', desc: 'Pre-clinical Modules' },
+      '202': { badge: '📁 Resources', badgeClass: 'badge--resource', desc: 'Pre-clinical Modules' },
+      '101': { badge: '📁 Resources', badgeClass: 'badge--resource', desc: 'Foundations & MSK 1' },
+      '102': { badge: '📁 Resources', badgeClass: 'badge--resource', desc: 'Pre-clinical Modules' }
+    }
+
     const yearGroups = mustAcademicYears.map((yearGroup) => {
       const availableSections = yearGroup.sections.filter((sectionId) => university.sections.includes(sectionId))
       if (!availableSections.length) return ''
       const buttons = availableSections.map((sectionId) => {
         const section = getAcademicSection(sectionId, university.id)
+        const meta = sectionMeta[sectionId] || { badge: 'Semester', badgeClass: '', desc: 'Clinical Semester' }
+        const isCurrent = sectionId === activeSectionId
         return `
-          <button type="button" data-auth-section="${escapeHtml(sectionId)}">
-            <strong>${escapeHtml(section.title)}</strong>
-            <span>${escapeHtml('Clinical semester')}</span>
+          <button type="button" class="auth-gate__section-card${isCurrent ? ' auth-gate__section-card--active' : ''}" data-auth-section="${escapeHtml(sectionId)}">
+            <div class="auth-gate__section-card-header">
+              <span class="auth-gate__section-badge ${meta.badgeClass}">${escapeHtml(meta.badge)}</span>
+              ${isCurrent ? '<span class="auth-gate__section-current">Active</span>' : ''}
+            </div>
+            <strong class="auth-gate__section-title">${escapeHtml(section.title)}</strong>
+            <span class="auth-gate__section-desc">${escapeHtml(meta.desc)}</span>
           </button>
         `
       }).join('')
@@ -8589,14 +8608,16 @@ function renderAuthSectionChoices(universityId) {
     }).join('')
 
     const historyButton = `
-      <div class="auth-gate__year-group">
-        <span class="auth-gate__year-label">Clinical Tool</span>
-        <div class="auth-gate__year-grid">
-          <button class="auth-gate__tool-card" type="button" data-auth-history>
-            <strong>History Taking</strong>
-            <span>Clinical history tool</span>
-          </button>
-        </div>
+      <div class="auth-gate__tool-wrapper">
+        <span class="auth-gate__year-label">Clinical Utilities</span>
+        <button class="auth-gate__tool-card" type="button" data-auth-history>
+          <div class="auth-gate__tool-icon">🩺</div>
+          <div class="auth-gate__tool-info">
+            <strong>History Taking Tool</strong>
+            <span>Interactive OSCE & clerkship history generator</span>
+          </div>
+          <span class="auth-gate__tool-arrow" aria-hidden="true">→</span>
+        </button>
       </div>
     `
     authSectionChoices.innerHTML = `${yearGroups}${historyButton}`
@@ -8624,9 +8645,9 @@ function renderAuthSectionChoices(universityId) {
       `
     }
     return `
-      <button type="button" data-auth-section="${escapeHtml(sectionId)}">
-        <strong>${escapeHtml(section.title)}</strong>
-        <span>${escapeHtml(university.name)}</span>
+      <button type="button" class="auth-gate__section-card" data-auth-section="${escapeHtml(sectionId)}">
+        <strong class="auth-gate__section-title">${escapeHtml(section.title)}</strong>
+        <span class="auth-gate__section-desc">${escapeHtml(university.name)}</span>
       </button>
     `
   }).join('')
