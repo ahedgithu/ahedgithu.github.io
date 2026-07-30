@@ -6534,6 +6534,27 @@ function createWrongReviewQuizConfig(topicLabel, source) {
   })
 }
 
+function createPartWrongReviewQuizConfig() {
+  const wrongIds = new Set(getCurrentWrongQuestionIds())
+  const questions = getCurrentQuiz().filter((question) => wrongIds.has(question.id))
+  return registerDynamicQuizConfig(quizState.topicLabel, {
+    id: `${quizState.sourceId}-${quizState.attemptId || 'current'}-wrong-review`,
+    label: 'Review Wrong Answers',
+    description: 'Questions answered incorrectly in this completed part.',
+    parentSourceId: quizState.parentSourceId,
+    groupId: quizState.groupId,
+    groupLabel: quizState.groupLabel,
+    partIndex: quizState.partIndex,
+    partCount: quizState.partCount,
+    mode: 'part-wrong-review',
+    mcqs: questions,
+    shuffleQuestions: false,
+    shuffleOptions: false,
+    timeLimitMinutes: null,
+    transient: true
+  })
+}
+
 function getCurrentCollectionSource() {
   if (!quizState.topicLabel || !quizState.parentSourceId) return null
   return getQuizSource(quizState.topicLabel, quizState.parentSourceId)
@@ -6608,13 +6629,13 @@ function renderQuizActions() {
     const groupNoun = collectionSource?.collection?.groupNoun || 'organ'
     const collectionLabel = collectionSource?.label || 'collection'
     const wrongReviewCount = collectionSource
-      ? getCollectionWrongQuestionIds(quizState.topicLabel, collectionSource).length
+      ? getCurrentWrongQuestionIds().length
       : 0
 
     actions.innerHTML = `
       ${quizState.groupId ? `<button class="quiz-action" type="button" data-quiz-back-group>Back to ${escapeHtml(groupNoun)}</button>` : ''}
       ${collectionSource && !quizState.groupId ? `<button class="quiz-action" type="button" data-quiz-back-collection>Back to ${escapeHtml(collectionLabel)}</button>` : ''}
-      ${wrongReviewCount && quizState.mode !== 'wrong-review' ? `<button class="quiz-action" type="button" data-quiz-review-wrong>Wrong answers (${wrongReviewCount})</button>` : ''}
+      ${wrongReviewCount && !['wrong-review', 'part-wrong-review'].includes(quizState.mode) ? `<button class="quiz-action" type="button" data-quiz-review-wrong>Wrong answers (${wrongReviewCount})</button>` : ''}
       <button class="quiz-action" type="button" data-quiz-retake>Retake quiz</button>
       ${nextPart ? '<button class="quiz-action quiz-action--primary" type="button" data-quiz-next-part>Next part</button>' : ''}
       <button class="quiz-action${nextPart ? '' : ' quiz-action--primary'}" type="button" data-quiz-close>Close</button>
@@ -7676,6 +7697,15 @@ function handleQuizClick(event) {
     initializeQuiz(topicLabel, { sourceId, fresh: true })
     renderQuizQuestion()
     startQuizTimer()
+    return
+  }
+
+  if (event.target.closest('[data-quiz-review-wrong]')) {
+    const topicLabel = quizState.topicLabel
+    const config = createPartWrongReviewQuizConfig()
+    if (config.mcqs.length) {
+      openQuiz(topicLabel, config.id, event, { skipSaved: true })
+    }
     return
   }
 
