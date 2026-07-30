@@ -27,6 +27,9 @@ import vm from 'node:vm'
 const read = (path) => readFileSync(new URL(`../${path}`, import.meta.url), 'utf8')
 const readBytes = (path) => readFileSync(new URL(`../${path}`, import.meta.url))
 
+// Source files used by multiple tests
+const src401 = read('src/data/must-401.js')
+
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
@@ -87,12 +90,9 @@ test('MUST university section order is 401 then 402', () => {
 // ---------------------------------------------------------------------------
 
 test('MUST 401 subjects array contains exactly the expected codes in order', () => {
-  const src = read('src/main.js')
-
-  // subjects401 is assigned from `subjects` at the point it is populated
-  // Verify by extracting `subjects` (which feeds subjects401) up to the 402 declaration
-  const subjectsSrc = src.slice(0, src.indexOf('const subjects401 = subjects'))
-  const subjectsBody = extractArrayBody(subjectsSrc, 'subjects')
+  // subjects401 is now defined in src/data/must-401.js; extract from `let subjects = [`
+  // up to `const subjects401 = subjects` which appears at the end of the same file.
+  const subjectsBody = extractArrayBody(src401, 'subjects')
   const codes = extractSubjectCodes(subjectsBody)
 
   assert.deepEqual(
@@ -126,22 +126,22 @@ test('MUST 402 subjects array contains exactly the expected codes in order', () 
 test('MUST 401 section metadata is unchanged', () => {
   const src = read('src/main.js')
 
-  // Title and newsTitle
+  // Title and newsTitle (still in academicSectionsByUniversity in main.js)
   assert.match(src, /id:\s*'401'[\s\S]{0,200}title:\s*'401'/,
     "Section 401 must have title '401'")
   assert.match(src, /newsTitle:\s*'MED 401 news'/,
     "Section 401 newsTitle must be 'MED 401 news'")
 
-  // Semester timeline
+  // Semester timeline (still in academicSectionsByUniversity in main.js)
   assert.match(src, /'401':[\s\S]{0,600}semesterTimeline:\s*\{[\s\S]{0,80}start:\s*'2026-05-25'[\s\S]{0,80}finals:\s*'2026-09-19'/s,
     'Section 401 semesterTimeline must have start 2026-05-25 and finals 2026-09-19')
 
-  // Schedule location
+  // Schedule location (still in academicSectionsByUniversity in main.js)
   assert.match(src, /scheduleLocation:\s*'Lectures: SS 116B - Clinical rounds: Hospital, fourth floor'/,
     "Section 401 scheduleLocation must be 'Lectures: SS 116B - Clinical rounds: Hospital, fourth floor'")
 
-  // courseSchedule must have at least one lecture in SS 116B on Sunday
-  assert.match(src, /type:\s*'lecture'[\s\S]{0,120}dayLabel:\s*'Sunday'[\s\S]{0,120}room:\s*'SS 116B'/s,
+  // courseSchedule is now extracted to src/data/must-401.js
+  assert.match(src401, /type:\s*'lecture'[\s\S]{0,120}dayLabel:\s*'Sunday'[\s\S]{0,120}room:\s*'SS 116B'/s,
     'Section 401 courseSchedule must contain a Sunday lecture in SS 116B')
 })
 
@@ -167,20 +167,19 @@ test('MUST 402 section metadata is unchanged', () => {
 // ---------------------------------------------------------------------------
 
 test('MUST 401 midterm exam schedule entries are unchanged', () => {
-  const src = read('src/main.js')
-
+  // midtermExamSchedule (401) is now in src/data/must-401.js
   // SUR 401-1 – Wed Jul 22, 2026, 2:30-3:30
-  assert.match(src,
+  assert.match(src401,
     /code:\s*'SUR 401-1'[\s\S]{0,200}subjectCode:\s*'SUR-1'[\s\S]{0,200}date:\s*'2026-07-22'[\s\S]{0,200}time:\s*'2:30-3:30'/s,
     'SUR 401-1 midterm exam entry must be present with date 2026-07-22 and time 2:30-3:30')
 
   // MED 401-2 – Sat Jul 25, 2026, 2:30-3:30
-  assert.match(src,
+  assert.match(src401,
     /code:\s*'MED 401-2'[\s\S]{0,200}subjectCode:\s*'MED-2'[\s\S]{0,200}date:\s*'2026-07-25'[\s\S]{0,200}time:\s*'2:30-3:30'/s,
     'MED 401-2 midterm exam entry must be present with date 2026-07-25 and time 2:30-3:30')
 
   // MED 401-1 – Wed Jul 29, 2026, 2:30-3:30
-  assert.match(src,
+  assert.match(src401,
     /code:\s*'MED 401-1'[\s\S]{0,200}subjectCode:\s*'MED-1'[\s\S]{0,200}date:\s*'2026-07-29'[\s\S]{0,200}time:\s*'2:30-3:30'/s,
     'MED 401-1 midterm exam entry must be present with date 2026-07-29 and time 2:30-3:30')
 })
@@ -214,7 +213,7 @@ test('MUST 402 midterm exam schedule entries are unchanged', () => {
 // ---------------------------------------------------------------------------
 
 test('MUST 401 subject names are unchanged', () => {
-  const src = read('src/main.js')
+  // Subject names are in src/data/must-401.js after extraction
   const expectedNames = {
     'SUR-1': 'Surgery 1',
     'SUR-2': 'Surgery 2',
@@ -227,7 +226,7 @@ test('MUST 401 subject names are unchanged', () => {
   }
   for (const [code, name] of Object.entries(expectedNames)) {
     assert.match(
-      src,
+      src401,
       new RegExp(`code:\\s*'${code}'[\\s\\S]{0,60}name:\\s*'${name.replace(/[()]/g, '\\$&')}'`),
       `Subject ${code} must have name '${name}'`
     )
@@ -260,39 +259,39 @@ test('MUST 402 subject names are unchanged', () => {
 // ---------------------------------------------------------------------------
 
 test('SUR-1 representative topic labels and progressAliases are unchanged', () => {
-  const src = read('src/main.js')
+  // SUR-1 topics are now in src/data/must-401.js after extraction
 
   // Liver topic must be present with its four progressAliases
-  assert.match(src, /label:\s*'Liver'/, "SUR-1 must have a 'Liver' topic")
+  assert.match(src401, /label:\s*'Liver'/, "SUR-1 must have a 'Liver' topic")
   assert.match(
-    src,
+    src401,
     /progressAliases:\s*\[\s*'Liver Introduction'\s*,\s*'Liver Trauma and Infections'\s*,\s*'Liver Tumors'\s*,\s*'Cirrhosis, portal hypertension and hepatic vascular disease'\s*\]/,
     'SUR-1 Liver topic progressAliases must be unchanged'
   )
 
   // Stomach topic with its progressAliases
-  assert.match(src, /label:\s*'Stomach'/, "SUR-1 must have a 'Stomach' topic")
+  assert.match(src401, /label:\s*'Stomach'/, "SUR-1 must have a 'Stomach' topic")
   assert.match(
-    src,
+    src401,
     /progressAliases:\s*\[\s*'Stomach anatomy, physiology, histology and peptic ulcers'\s*\]/,
     'SUR-1 Stomach topic progressAliases must be unchanged'
   )
 
   // Esophagus topics
-  assert.match(src, /label:\s*'Esophagus topics'/, "SUR-1 must have an 'Esophagus topics' topic")
+  assert.match(src401, /label:\s*'Esophagus topics'/, "SUR-1 must have an 'Esophagus topics' topic")
 
   // Spleen – has mcqTopicKey (it's a top-level topic property, not inside driveSelector)
-  assert.match(src,
+  assert.match(src401,
     /mcqTopicKey:\s*'Spleen'/,
     "SUR-1 Spleen topic must have mcqTopicKey 'Spleen'")
 })
 
 test('SUR-1 Stomach topic mcqTopicKey is unchanged', () => {
-  const src = read('src/main.js')
+  // SUR-1 data is now in src/data/must-401.js after extraction
   // The Stomach topic's progressAliases and mcqTopicKey share the same value;
   // match on progressAliases first, then mcqTopicKey nearby (they appear on consecutive lines)
   assert.match(
-    src,
+    src401,
     /progressAliases:\s*\['Stomach anatomy, physiology, histology and peptic ulcers'\][\s\S]{0,80}mcqTopicKey:\s*'Stomach anatomy, physiology, histology and peptic ulcers'/s,
     "SUR-1 Stomach topic mcqTopicKey must be 'Stomach anatomy, physiology, histology and peptic ulcers'"
   )
@@ -340,18 +339,18 @@ test('MUST 402 mcqTopicKey values follow the 402::<code>::<topic> pattern', () =
 // ---------------------------------------------------------------------------
 
 test('SUR-1 representative resource URLs are present', () => {
-  const src = read('src/main.js')
+  // SUR-1 resources are now in src/data/must-401.js after extraction
 
   // Liver Introduction Drive URL
   assert.match(
-    src,
+    src401,
     /https:\/\/docs\.google\.com\/presentation\/d\/12BIYR9r2h_fwkUQpXQI0xOyPy-lSI9D_/,
     'SUR-1 Liver Introduction presentation URL must be present'
   )
 
   // Spleen lecture slides
   assert.match(
-    src,
+    src401,
     /https:\/\/docs\.google\.com\/presentation\/d\/1GfFE2goGP1WRw5D14YqQHW9ptEuJkBMz/,
     'SUR-1 Spleen lecture slides URL must be present'
   )
@@ -360,14 +359,14 @@ test('SUR-1 representative resource URLs are present', () => {
 test('SUR402-1 representative resource URLs are present', () => {
   const src = read('src/main.js')
 
-  // Thyroid 2026 presentation
+  // Thyroid 2026 presentation (still in subjects402 in main.js)
   assert.match(
     src,
     /https:\/\/docs\.google\.com\/presentation\/d\/1fpmXmkNcEH_HBg8n-R3eD0-9wp_D4er7/,
     'SUR402-1 Thyroid 2026 presentation URL must be present'
   )
 
-  // Parathyroid presentation
+  // Parathyroid presentation (still in subjects402 in main.js)
   assert.match(
     src,
     /https:\/\/docs\.google\.com\/presentation\/d\/1LlqKUnMnJXLDfb2oOlhxP6HLi3Qm0p7o/,
@@ -798,12 +797,10 @@ test('TOPIC_UPDATE_STORAGE_KEY and NEWS_SEEN_STORAGE_KEY initialise with must::4
 // ---------------------------------------------------------------------------
 
 test('MUST 401 courseSchedule lecture room is SS 116B throughout', () => {
-  const src = read('src/main.js')
-
-  // Extract the courseSchedule literal
-  const scheduleBodyStart = src.indexOf('const courseSchedule = [')
-  assert.ok(scheduleBodyStart >= 0, 'courseSchedule array must be present in main.js')
-  const scheduleBody = extractArrayBody(src.slice(scheduleBodyStart), 'courseSchedule')
+  // courseSchedule is now in src/data/must-401.js after extraction
+  const scheduleBodyStart = src401.indexOf('const courseSchedule = [')
+  assert.ok(scheduleBodyStart >= 0, 'courseSchedule array must be present in src/data/must-401.js')
+  const scheduleBody = extractArrayBody(src401.slice(scheduleBodyStart), 'courseSchedule')
 
   // All lecture-type entries must name room SS 116B
   const lectureEntries = Array.from(scheduleBody.matchAll(/type:\s*'lecture'[^}]+}/gs), (m) => m[0])
@@ -828,4 +825,52 @@ test('sur1-stomach-master-mcqs.js targets window.mcqQuizzes (401 registry)', () 
   const src = read('src/sur1-stomach-master-mcqs.js')
   assert.match(src, /window\.mcqQuizzes\b/, 'sur1-stomach-master-mcqs.js must write to window.mcqQuizzes')
   assert.doesNotMatch(src, /window\.mcqQuizzes402\b/, 'sur1-stomach-master-mcqs.js must NOT write to window.mcqQuizzes402')
+})
+
+// ---------------------------------------------------------------------------
+// 21. src/data/must-401.js module boundary
+// ---------------------------------------------------------------------------
+
+test('src/data/must-401.js exports the expected four names and nothing more', () => {
+  // The module must export exactly subjects401, subjectExamNotes, midtermExamSchedule, courseSchedule
+  assert.match(
+    src401,
+    /export\s*\{\s*subjects401\s*,\s*subjectExamNotes\s*,\s*midtermExamSchedule\s*,\s*courseSchedule\s*\}/,
+    'must-401.js export statement must list all four names in order'
+  )
+})
+
+test('src/data/must-401.js does not contain any 402 data', () => {
+  assert.doesNotMatch(src401, /subjects402/, 'must-401.js must not contain subjects402')
+  assert.doesNotMatch(src401, /midtermExamSchedule402/, 'must-401.js must not contain midtermExamSchedule402')
+  assert.doesNotMatch(src401, /SUR402|MED402|GYNA402|PED402|RAD402/, 'must-401.js must not contain 402 subject codes')
+})
+
+test('src/main.js imports all four exports from ./data/must-401.js', () => {
+  const src = read('src/main.js')
+  assert.match(
+    src,
+    /import\s*\{\s*subjects401\s*,\s*subjectExamNotes\s*,\s*midtermExamSchedule\s*,\s*courseSchedule\s*\}\s*from\s*'\.\/data\/must-401\.js'/,
+    'src/main.js must import all four names from ./data/must-401.js'
+  )
+})
+
+test('src/data/must-401.js and public/src/data/must-401.js are byte-identical', () => {
+  const srcBytes = readBytes('src/data/must-401.js')
+  const pubBytes = readBytes('public/src/data/must-401.js')
+  assert.equal(
+    srcBytes.equals(pubBytes),
+    true,
+    'src/data/must-401.js and public/src/data/must-401.js must be byte-identical'
+  )
+})
+
+test('src/main.js and public/src/main.js remain byte-identical after extraction', () => {
+  const srcBytes = readBytes('src/main.js')
+  const pubBytes = readBytes('public/src/main.js')
+  assert.equal(
+    srcBytes.equals(pubBytes),
+    true,
+    'src/main.js and public/src/main.js must be byte-identical'
+  )
 })
