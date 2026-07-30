@@ -18,6 +18,8 @@ test('application modules are valid and mirrored', () => {
     'src/data/must/102.js',
     'src/data/must/201.js',
     'src/data/must/202.js',
+    'src/data/must/301.js',
+    'src/data/must/302.js',
     'src/data/must/sections.js',
     'src/audioFeedback.js',
     'src/admin.js',
@@ -52,7 +54,7 @@ test('application modules are valid and mirrored', () => {
     execFileSync(process.execPath, ['--check', file], { cwd: new URL('..', import.meta.url) })
   }
 
-  const mirroredFiles = ['main.js', 'data/must-401.js', 'data/must-402.js', 'data/must/101.js', 'data/must/102.js', 'data/must/201.js', 'data/must/202.js', 'data/must/sections.js', 'audioFeedback.js', 'admin.js', 'analytics.js', 'knowledgeLibrary.js', 'mcqs.js', 'sur1-kellawi-mcqs.js', 'sur1-past-exam-mcqs.js', 'sur1-matching-questions.js', 'sur402-past-exam-mcqs.js', 'sur402-textbook-mcqs.js', 'sur402-amr-beshry-mcqs.js', 'med402-endocrine-mcqs.js', 'med402-neurology-mcqs.js', 'med402-neuro-extra-mcqs.js', 'med402-old-psychiatry-mcqs.js', 'med402-zatoona-psychiatry-mcqs.js', 'gyn402-nadine-vip-midterm-mcqs.js', 'gyn402-question-bank-mcqs.js', 'gyn402-filtered-master-bank.js', 'med2-cardio-chest-mcqs.js', 'med1-kellawi-mcqs.js', 'med1-mw-ragab-mcqs.js', 'med1-hepatology-final-review-mcqs.js', 'med1-alshamel-mcqs.js', 'o6u-physical-therapy-mcqs.js', 'progress.js', 'style.css', 'supabaseClient.js']
+  const mirroredFiles = ['main.js', 'data/must-401.js', 'data/must-402.js', 'data/must/101.js', 'data/must/102.js', 'data/must/201.js', 'data/must/202.js', 'data/must/301.js', 'data/must/302.js', 'data/must/sections.js', 'audioFeedback.js', 'admin.js', 'analytics.js', 'knowledgeLibrary.js', 'mcqs.js', 'sur1-kellawi-mcqs.js', 'sur1-past-exam-mcqs.js', 'sur1-matching-questions.js', 'sur402-past-exam-mcqs.js', 'sur402-textbook-mcqs.js', 'sur402-amr-beshry-mcqs.js', 'med402-endocrine-mcqs.js', 'med402-neurology-mcqs.js', 'med402-neuro-extra-mcqs.js', 'med402-old-psychiatry-mcqs.js', 'med402-zatoona-psychiatry-mcqs.js', 'gyn402-nadine-vip-midterm-mcqs.js', 'gyn402-question-bank-mcqs.js', 'gyn402-filtered-master-bank.js', 'med2-cardio-chest-mcqs.js', 'med1-kellawi-mcqs.js', 'med1-mw-ragab-mcqs.js', 'med1-hepatology-final-review-mcqs.js', 'med1-alshamel-mcqs.js', 'o6u-physical-therapy-mcqs.js', 'progress.js', 'style.css', 'supabaseClient.js']
   for (const file of mirroredFiles) {
     assert.equal(read(`src/${file}`), read(`public/src/${file}`), `${file} mirror is out of sync`)
   }
