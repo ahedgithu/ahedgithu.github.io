@@ -30,6 +30,7 @@ test('application modules are valid and mirrored', () => {
     'src/med402-zatoona-psychiatry-mcqs.js',
     'src/gyn402-nadine-vip-midterm-mcqs.js',
     'src/gyn402-question-bank-mcqs.js',
+    'src/gyn402-filtered-master-bank.js',
     'src/med2-cardio-chest-mcqs.js',
     'src/med1-kellawi-mcqs.js',
     'src/med1-mw-ragab-mcqs.js',
@@ -44,7 +45,7 @@ test('application modules are valid and mirrored', () => {
     execFileSync(process.execPath, ['--check', file], { cwd: new URL('..', import.meta.url) })
   }
 
-  const mirroredFiles = ['main.js', 'audioFeedback.js', 'admin.js', 'analytics.js', 'knowledgeLibrary.js', 'mcqs.js', 'sur1-kellawi-mcqs.js', 'sur1-past-exam-mcqs.js', 'sur1-matching-questions.js', 'sur402-past-exam-mcqs.js', 'sur402-textbook-mcqs.js', 'sur402-amr-beshry-mcqs.js', 'med402-endocrine-mcqs.js', 'med402-neurology-mcqs.js', 'med402-neuro-extra-mcqs.js', 'med402-old-psychiatry-mcqs.js', 'med402-zatoona-psychiatry-mcqs.js', 'gyn402-nadine-vip-midterm-mcqs.js', 'gyn402-question-bank-mcqs.js', 'med2-cardio-chest-mcqs.js', 'med1-kellawi-mcqs.js', 'med1-mw-ragab-mcqs.js', 'med1-hepatology-final-review-mcqs.js', 'med1-alshamel-mcqs.js', 'o6u-physical-therapy-mcqs.js', 'progress.js', 'style.css', 'supabaseClient.js']
+  const mirroredFiles = ['main.js', 'audioFeedback.js', 'admin.js', 'analytics.js', 'knowledgeLibrary.js', 'mcqs.js', 'sur1-kellawi-mcqs.js', 'sur1-past-exam-mcqs.js', 'sur1-matching-questions.js', 'sur402-past-exam-mcqs.js', 'sur402-textbook-mcqs.js', 'sur402-amr-beshry-mcqs.js', 'med402-endocrine-mcqs.js', 'med402-neurology-mcqs.js', 'med402-neuro-extra-mcqs.js', 'med402-old-psychiatry-mcqs.js', 'med402-zatoona-psychiatry-mcqs.js', 'gyn402-nadine-vip-midterm-mcqs.js', 'gyn402-question-bank-mcqs.js', 'gyn402-filtered-master-bank.js', 'med2-cardio-chest-mcqs.js', 'med1-kellawi-mcqs.js', 'med1-mw-ragab-mcqs.js', 'med1-hepatology-final-review-mcqs.js', 'med1-alshamel-mcqs.js', 'o6u-physical-therapy-mcqs.js', 'progress.js', 'style.css', 'supabaseClient.js']
   for (const file of mirroredFiles) {
     assert.equal(read(`src/${file}`), read(`public/src/${file}`), `${file} mirror is out of sync`)
   }
@@ -472,10 +473,11 @@ test('GYN 402 Dr Nadine VIP midterm bank is complete and wired to the exam card'
   const context = { window: { mcqQuizzes402: {} } }
   vm.runInNewContext(read('src/gyn402-nadine-vip-midterm-mcqs.js'), context)
   vm.runInNewContext(read('src/gyn402-question-bank-mcqs.js'), context)
+  vm.runInNewContext(read('src/gyn402-filtered-master-bank.js'), context)
 
   const quiz = context.window.mcqQuizzes402['GYN 402 MCQs']
   assert.equal(quiz.alwaysShowSourcePicker, true)
-  assert.equal(quiz.sources.length, 2)
+  assert.equal(quiz.sources.length, 3)
 
   const source = quiz.sources.find((item) => item.id === 'gyn402-nadine-vip-midterm')
   assert.equal(source.id, 'gyn402-nadine-vip-midterm')
@@ -501,10 +503,23 @@ test('GYN 402 Dr Nadine VIP midterm bank is complete and wired to the exam card'
   assert.equal(questionBank.collection.groups.length, 17)
   assert.equal(questionBank.collection.wrongReviewId, 'gyn402-question-bank-wrong-review')
 
+  const filteredMaster = quiz.sources.find((item) => item.id === 'gyn402-filtered-master-bank')
+  assert.equal(filteredMaster.label, 'Filtered Master Bank')
+  assert.equal(filteredMaster.mcqs.length, 484)
+  assert.equal(filteredMaster.heldForReview.length, 40)
+  assert.equal(new Set(filteredMaster.mcqs.map((question) => question.id)).size, 484)
+  assert.ok(filteredMaster.mcqs.every((question) => question.choices.length >= 2))
+  assert.ok(filteredMaster.mcqs.every((question) => Number.isInteger(question.answerIndex) && question.choices[question.answerIndex]))
+  assert.equal(filteredMaster.mcqs.filter((question) => question.isJuly2026).length, 83)
+  assert.deepEqual(Array.from(filteredMaster.collection.mixedSizes, (mode) => mode.size), [20, 30, 83, 484])
+  assert.equal(filteredMaster.collection.groups.length, 16)
+  assert.equal(filteredMaster.collection.wrongReviewId, 'gyn402-filtered-master-bank-wrong-review')
+
   const html = read('index.html')
   const mainSource = read('src/main.js')
   assert.match(html, /gyn402-nadine-vip-midterm-mcqs\.js\?v=20260729-gyn402-nadine-vip-v1/)
   assert.match(html, /gyn402-question-bank-mcqs\.js\?v=20260730-gyn402-question-bank-v1/)
+  assert.match(html, /gyn402-filtered-master-bank\.js\?v=20260730-gyn402-filtered-master-v1/)
   assert.match(mainSource, /code:\s*'GYN 402'[\s\S]{0,260}quizTopicKey:\s*'GYN 402 MCQs'/)
 })
 
