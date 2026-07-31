@@ -5231,11 +5231,11 @@ function getSavedQuizSoundPack() {
 
     const migratedPack = localStorage.getItem(LEGACY_QUIZ_SOUND_STORAGE_KEY) === 'false'
       ? 'muted'
-      : 'valorant'
+      : 'duolingo'
     localStorage.setItem(QUIZ_SOUND_PACK_STORAGE_KEY, migratedPack)
     return migratedPack
   } catch {
-    return 'valorant'
+    return 'duolingo'
   }
 }
 
@@ -5282,7 +5282,7 @@ function syncQuizSoundPicker() {
   const button = document.querySelector('[data-quiz-sound-toggle]')
   if (!button) return
 
-  const pack = QUIZ_SOUND_PACKS[quizSoundPack] || QUIZ_SOUND_PACKS.valorant
+  const pack = QUIZ_SOUND_PACKS[quizSoundPack] || QUIZ_SOUND_PACKS.duolingo
   const label = `Answer sounds: ${pack.label}. Choose sound pack`
   const currentIcon = button.querySelector('[data-quiz-sound-current-icon]')
   const mutedIcon = button.querySelector('[data-quiz-sound-muted-icon]')
