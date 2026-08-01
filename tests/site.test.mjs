@@ -83,8 +83,8 @@ test('tracker search splits topics and MCQs with focused question launch', () =>
   assert.match(html, /data-search-mode="topics"[^>]*aria-pressed="true"/)
   assert.match(html, /data-search-mode="mcqs"[^>]*aria-pressed="false"/)
   assert.match(html, /id="mcq-search-results"[^>]*aria-live="polite"[^>]*hidden/)
-  assert.match(html, /style\.css\?v=202607/)
-  assert.match(html, /main\.js\?v=20260801-lifetime-leaderboard-v1/)
+  assert.match(html, /style\.css\?v=20260[78]/)
+  assert.match(html, /main\.js\?v=20260801-mcq-control-biliary-v1/)
 
   for (const helper of [
     'normalizeMcqSearchText',
@@ -1123,8 +1123,8 @@ test('Google login is mandatory and the academic section is account-bound', () =
   assert.match(mainSource, /\$\{QUIZ_STORAGE_PREFIX\}::\$\{getProgressStorageOwnerId\(\)\}::\$\{activeUniversityId\}::\$\{section\}/)
   assert.match(mainSource, /\$\{TOPIC_COMPLETION_STORAGE_PREFIX\}::\$\{getProgressStorageOwnerId\(\)\}::\$\{activeUniversityId\}::\$\{section\}/)
   assert.match(schedule, /window\.location\.replace\('\/#schedule'\)/)
-  assert.match(html, /style\.css\?v=202607/)
-  assert.match(html, /main\.js\?v=20260801-lifetime-leaderboard-v1/)
+  assert.match(html, /style\.css\?v=20260[78]/)
+  assert.match(html, /main\.js\?v=20260801-mcq-control-biliary-v1/)
 })
 
 test('O6U Physical Therapy is selectable, isolated, branded, and has PT-PHYS MCQs', () => {
@@ -1319,8 +1319,8 @@ test('student profile opens as a standalone gamified page', () => {
   assert.match(profileHtml, /class="profile-nickname-form__save" type="submit">[\s\S]*<span>Save profile<\/span>/)
   assert.match(html, /data-profile-open/)
   assert.match(html, /data-profile-edit-nickname/)
-  assert.match(profileHtml, /style\.css\?v=202607/)
-  assert.match(profileHtml, /main\.js\?v=20260801-lifetime-leaderboard-v1/)
+  assert.match(profileHtml, /style\.css\?v=20260[78]/)
+  assert.match(profileHtml, /main\.js\?v=20260801-mcq-control-biliary-v1/)
   assert.match(profileHtml, /class="profile-auth-visual"/)
   assert.match(profileHtml, /data-auth-panel="checking"[\s\S]*Preparing your profile/)
   assert.match(profileHtml, /data-auth-panel="signed-out"[\s\S]*data-auth-login/)
@@ -1572,14 +1572,14 @@ test('lifetime leaderboard repair rebuilds section-wide scores without touching 
   assert.match(mainSource, /All-time MCQ points/)
   assert.match(mainSource, /Lifetime scores update automatically/)
   assert.equal(mainSource, publicMainSource)
-  assert.match(indexHtml, /main\.js\?v=20260801-lifetime-leaderboard-v1/)
-  assert.match(profileHtml, /main\.js\?v=20260801-lifetime-leaderboard-v1/)
+  assert.match(indexHtml, /main\.js\?v=20260801-mcq-control-biliary-v1/)
+  assert.match(profileHtml, /main\.js\?v=20260801-mcq-control-biliary-v1/)
 })
 
 test('topic actions are accessible boxless premium icons and legacy PWA state is cleaned up', () => {
   const style = read('src/style.css')
   const mainSource = read('src/main.js')
-  assert.match(style, /\.topic-action-row\s*\{[^}]*grid-template-columns:\s*repeat\(3,\s*48px\)/s)
+  assert.match(style, /\.topic-action-row\s*\{[^}]*grid-template-columns:\s*48px max-content 48px/s)
   assert.match(style, /\.topic-action-card\s*\{[^}]*border:\s*0;[^}]*background:\s*transparent;[^}]*box-shadow:\s*none;/s)
   assert.match(style, /\.topic-action-card__icon\s*\{[^}]*border:\s*0;[^}]*background:\s*transparent;[^}]*box-shadow:\s*none;/s)
   assert.match(style, /\.topic-action-card--drive:hover \.topic-action-card__icon,[\s\S]*?drop-shadow/s)
@@ -1636,8 +1636,8 @@ test('section selector is the responsive university-first onboarding landing', (
   assert.match(style, /\.home-review-screenshot\s*\{[\s\S]*?aspect-ratio:\s*1\.9\s*\/\s*1;[\s\S]*?object-fit:\s*cover;/s)
   assert.match(style, /\.home-review-screenshot--fit\s*\{[^}]*object-fit:\s*contain;[^}]*object-position:\s*left center;/s)
   assert.equal((html.match(/review5\.jpg" class="home-review-screenshot home-review-screenshot--fit"/g) || []).length, 2)
-  assert.match(html, /style\.css\?v=202607/)
-  assert.match(html, /main\.js\?v=20260801-lifetime-leaderboard-v1/)
+  assert.match(html, /style\.css\?v=20260[78]/)
+  assert.match(html, /main\.js\?v=20260801-mcq-control-biliary-v1/)
   assert.match(style, /body\[data-site-mode="selector"\] > main > \.site-footer/)
 
   for (const file of ['review1.jpg', 'review2.jpg', 'review3.jpg', 'review4.jpg', 'review5.jpg', 'review6.png', 'review7.png', 'review8.png']) {

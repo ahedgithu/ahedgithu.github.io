@@ -59,6 +59,10 @@ the current request is ambiguous in a way history can resolve.
 - Read only the handoff or task note it points to that is relevant now.
 - Read `00-start-here.md` only when vault routing, source locations, or general
   operating rules are actually needed. Never read every handoff at startup.
+- For related historical decisions, open `Agent-Codex/wiki/index.md`, choose one
+  relevant hub, then follow only the minimum handoff links needed.
+- Treat existing handoff bodies as historical evidence. Do not mass-link,
+  rewrite, or load all handoffs or hubs.
 - Use the ASCII-safe junction path above. If it is missing, report that context
   could not be loaded; do not rename OneDrive folders or recreate the junction
   unless Ahmed asks.
@@ -179,9 +183,22 @@ configuration edits, external-system writes, commits/releases, major audits or
 decision-complete plans, and substantial blocked investigations with reusable
 findings.
 
-Create one dated note under `Agent-Codex/handoffs/`, then make it the first
-resume pointer in `working-context.md`. Record the actual branch/worktree and
+Create one dated note under `Agent-Codex/handoffs/`. Record the actual branch,
 dirty state, completed work, validation, remaining issues, and whether anything
 was committed, pushed, deployed, or changed live. Do not save secrets, private
 study information, simple questions, status reads, tiny checks, or casual
 conversation.
+
+Maintain `working-context.md`; never use it as an append-only log:
+
+- Keep only current resumable state and at most three independent active tasks.
+- Continuing the same task replaces its older pointer.
+- Completed, canceled, or superseded tasks leave current context and remain in
+  dated handoffs or history hubs.
+- Keep each active pointer short: status, current boundary, next action, and
+  handoff link. Do not copy full handoff details into current context.
+- Re-check Git/source/live state before saving. Current evidence overrides old
+  handoffs.
+- Refresh only the relevant existing history hub when work creates a durable
+  multi-handoff decision chain or repeated decision surface. Do not create or
+  update a hub for every routine save.

@@ -4371,6 +4371,7 @@ function renderMcqActionCard(quizTopicKey, quizCount) {
     return `
       <span class="topic-action-card topic-action-card--mcq topic-action-card--disabled" aria-disabled="true" aria-label="MCQs: Not uploaded yet" title="MCQs: Not uploaded yet">
         ${renderTopicActionContent('mcq')}
+        <span class="topic-action-card__label">MCQs</span>
       </span>
     `
   }
@@ -4378,6 +4379,7 @@ function renderMcqActionCard(quizTopicKey, quizCount) {
   return `
     <button class="topic-action-card topic-action-card--mcq" type="button" data-quiz-topic="${escapeHtml(quizTopicKey)}" aria-label="Open ${escapeHtml(label)}" title="${escapeHtml(label)}">
       ${renderTopicActionContent('mcq')}
+      <span class="topic-action-card__label">MCQs</span>
     </button>
   `
 }

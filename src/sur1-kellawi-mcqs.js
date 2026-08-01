@@ -17159,4 +17159,21 @@
       }
     })
   }
+
+  const BILIARY_SECTIONS = new Set([
+    "Biliary Tract Pathology & Gallstones",
+    "Biliary Strictures & Interventions",
+    "Gallbladder Pathology & Management",
+    "Pancreatic Conditions Involving Biliary Tract",
+    "General Biliary Diagnostics & Interventions"
+  ])
+
+  const biliaryQuestions = bankSource.mcqs.filter((question) => BILIARY_SECTIONS.has(question.section))
+
+  quizzes["Biliary tract"] = {
+    label: "Biliary tract",
+    shuffleQuestions: false,
+    shuffleOptions: false,
+    mcqs: biliaryQuestions
+  }
 })()

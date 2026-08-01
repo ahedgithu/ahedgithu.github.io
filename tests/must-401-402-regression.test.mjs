@@ -864,3 +864,105 @@ test('src/main.js and public/src/main.js remain byte-identical after extraction'
     'src/main.js and public/src/main.js must be byte-identical'
   )
 })
+
+// ---------------------------------------------------------------------------
+// 22. Tracker MCQ Pill Control and Biliary Tract Quiz contract
+// ---------------------------------------------------------------------------
+
+test('rendered MCQ controls contain the visible "MCQs" label in both enabled and disabled paths while keeping accessibility state', () => {
+  const mainSrc = read('src/main.js')
+  assert.match(mainSrc, /function renderMcqActionCard\(quizTopicKey, quizCount\)/)
+  assert.match(mainSrc, /<span class="topic-action-card topic-action-card--mcq topic-action-card--disabled"[^>]*aria-disabled="true"[^>]*aria-label="MCQs: Not uploaded yet"[^>]*title="MCQs: Not uploaded yet"[^>]*>[\s\S]*?<span class="topic-action-card__label">MCQs<\/span>/)
+  assert.match(mainSrc, /<button class="topic-action-card topic-action-card--mcq"[^>]*data-quiz-topic="\$\{escapeHtml\(quizTopicKey\)\}"[^>]*aria-label="Open \$\{escapeHtml\(label\)\}"[^>]*title="\$\{escapeHtml\(label\)\}"[^>]*>[\s\S]*?<span class="topic-action-card__label">MCQs<\/span>/)
+})
+
+test('Biliary tract configuration exists, directly resolves to exactly 36 unique existing questions from explicit five-section allowlist, and SUR 401-1 source is unchanged', () => {
+  const kellawiSrc = read('src/sur1-kellawi-mcqs.js')
+  const context = { window: {} }
+  vm.createContext(context)
+  vm.runInContext(kellawiSrc, context)
+
+  const masterBank = context.window.mcqQuizzes['SUR 401-1 MCQs'].sources[0].mcqs
+  assert.equal(masterBank.length, 1064, 'Master SUR 401-1 bank must maintain 1,064 questions')
+
+  const biliaryQuiz = context.window.mcqQuizzes['Biliary tract']
+  assert.ok(biliaryQuiz, 'quizzes["Biliary tract"] must be registered')
+  assert.equal(biliaryQuiz.label, 'Biliary tract')
+  assert.equal(biliaryQuiz.mcqs.length, 36, 'Biliary tract quiz must contain exactly 36 questions')
+
+  const allowedSections = new Set([
+    'Biliary Tract Pathology & Gallstones',
+    'Biliary Strictures & Interventions',
+    'Gallbladder Pathology & Management',
+    'Pancreatic Conditions Involving Biliary Tract',
+    'General Biliary Diagnostics & Interventions'
+  ])
+
+  const questionSet = new Set()
+  for (const q of biliaryQuiz.mcqs) {
+    assert.ok(allowedSections.has(q.section), `Question section "${q.section}" must be in explicit allowlist`)
+    assert.ok(masterBank.includes(q), 'Question object must be an exact reference from the master SUR 401-1 bank')
+    questionSet.add(q.id)
+  }
+  assert.equal(questionSet.size, 36, 'All 36 questions must have unique IDs')
+})
+
+test('Mahmoud Reda biliary source divides all 100 questions into six complete topic-based parts', () => {
+  const context = { window: {} }
+  vm.createContext(context)
+  vm.runInContext(read('src/sur1-kellawi-mcqs.js'), context)
+  vm.runInContext(read('src/sur1-biliary-lecture-mcqs.js'), context)
+
+  const source = context.window.mcqQuizzes['Biliary tract'].sources
+    .find((item) => item.id === 'mahmoud-reda-biliary')
+  const group = source.collection.groups[0]
+  const flattenedQuestions = group.parts.flatMap((part) => part.mcqs)
+
+  assert.equal(source.mcqs.length, 100)
+  assert.equal(group.label, 'Biliary System')
+  assert.equal(group.questionCount, 100)
+  assert.deepEqual(Array.from(group.parts, (part) => part.mcqs.length), [19, 12, 20, 15, 20, 14])
+  assert.deepEqual(Array.from(group.parts, (part) => [part.questionStart, part.questionEnd]), [
+    [1, 19],
+    [20, 31],
+    [32, 51],
+    [52, 66],
+    [67, 86],
+    [87, 100]
+  ])
+  assert.equal(new Set(group.parts.map((part) => part.id)).size, 6)
+  assert.equal(flattenedQuestions.length, 100)
+  flattenedQuestions.forEach((question, index) => {
+    assert.equal(question, source.mcqs[index], `Part question ${index + 1} must retain source order and object identity`)
+  })
+})
+
+test('responsive/final CSS defines wider MCQ pill and compatible three-/four-action layouts', () => {
+  const css = read('src/style.css')
+  assert.match(css, /\.topic-action-row\s*\{[^}]*grid-template-columns:\s*48px max-content 48px/s)
+  assert.match(css, /\.topic-action-row--has-study\s*\{[^}]*grid-template-columns:\s*48px max-content 48px 48px/s)
+  assert.match(css, /\.topic-action-card--mcq\s*\{[^}]*border-radius:\s*9999px/s)
+  assert.match(css, /\.topic-action-card--mcq \.topic-action-card__label\s*\{[^}]*font-weight:\s*800/s)
+  assert.match(css, /\.topic-action-card--mcq:hover,\s*\.topic-action-card--mcq:focus-visible\s*\{[^}]*outline:/s)
+  assert.match(css, /\.topic-action-card--mcq\.topic-action-card--disabled\s*\{[^}]*opacity:\s*0\.45/s)
+  assert.match(css, /@media\s*\(max-width:\s*640px\)\s*\{[\s\S]*?\.topic-action-card--mcq\s*\{[^}]*min-width:\s*76px/s)
+})
+
+test('all touched src/public mirrors are byte-identical and cache versions are synchronized', () => {
+  assert.equal(read('src/main.js'), read('public/src/main.js'), 'main.js mirror must be byte-identical')
+  assert.equal(read('src/style.css'), read('public/src/style.css'), 'style.css mirror must be byte-identical')
+  assert.equal(read('src/sur1-kellawi-mcqs.js'), read('public/src/sur1-kellawi-mcqs.js'), 'sur1-kellawi-mcqs.js mirror must be byte-identical')
+
+  const indexHtml = read('index.html')
+  const profileHtml = read('profile.html')
+  const versionRegex = /main\.js\?v=([a-zA-Z0-9_-]+)/
+
+  const indexMatch = indexHtml.match(versionRegex)
+  const profileMatch = profileHtml.match(versionRegex)
+
+  assert.ok(indexMatch, 'index.html must specify a main.js cache version')
+  assert.ok(profileMatch, 'profile.html must specify a main.js cache version')
+  assert.equal(indexMatch[1], profileMatch[1], 'index.html and profile.html cache versions must be synchronized')
+  assert.match(indexHtml, /style\.css\?v=20260801-mcq-control-biliary-v1/)
+  assert.match(profileHtml, /style\.css\?v=20260801-mcq-control-biliary-v1/)
+})
