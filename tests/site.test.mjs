@@ -84,7 +84,7 @@ test('tracker search splits topics and MCQs with focused question launch', () =>
   assert.match(html, /data-search-mode="mcqs"[^>]*aria-pressed="false"/)
   assert.match(html, /id="mcq-search-results"[^>]*aria-live="polite"[^>]*hidden/)
   assert.match(html, /style\.css\?v=202607/)
-  assert.match(html, /main\.js\?v=202607/)
+  assert.match(html, /main\.js\?v=20260801-lifetime-leaderboard-v1/)
 
   for (const helper of [
     'normalizeMcqSearchText',
@@ -1124,7 +1124,7 @@ test('Google login is mandatory and the academic section is account-bound', () =
   assert.match(mainSource, /\$\{TOPIC_COMPLETION_STORAGE_PREFIX\}::\$\{getProgressStorageOwnerId\(\)\}::\$\{activeUniversityId\}::\$\{section\}/)
   assert.match(schedule, /window\.location\.replace\('\/#schedule'\)/)
   assert.match(html, /style\.css\?v=202607/)
-  assert.match(html, /main\.js\?v=202607/)
+  assert.match(html, /main\.js\?v=20260801-lifetime-leaderboard-v1/)
 })
 
 test('O6U Physical Therapy is selectable, isolated, branded, and has PT-PHYS MCQs', () => {
@@ -1320,7 +1320,7 @@ test('student profile opens as a standalone gamified page', () => {
   assert.match(html, /data-profile-open/)
   assert.match(html, /data-profile-edit-nickname/)
   assert.match(profileHtml, /style\.css\?v=202607/)
-  assert.match(profileHtml, /main\.js\?v=202607/)
+  assert.match(profileHtml, /main\.js\?v=20260801-lifetime-leaderboard-v1/)
   assert.match(profileHtml, /class="profile-auth-visual"/)
   assert.match(profileHtml, /data-auth-panel="checking"[\s\S]*Preparing your profile/)
   assert.match(profileHtml, /data-auth-panel="signed-out"[\s\S]*data-auth-login/)
@@ -1489,7 +1489,7 @@ test('mandatory profile onboarding guides each required control and cannot be sk
   assert.match(style, /\.profile-page\s*\{[\s\S]*overflow-x:\s*hidden/)
 })
 
-test('course points use fresh seasons and the post-midterm reset preserves study history', () => {
+test('course points preserve season audit data and post-midterm study history', () => {
   const mainSource = read('src/main.js')
   const supabaseClient = read('src/supabaseClient.js')
   const migration = read('supabase/migrations/20260726130240_mandatory_profiles_med1_season.sql')
@@ -1507,8 +1507,9 @@ test('course points use fresh seasons and the post-midterm reset preserves study
   assert.match(mainSource, /quizState\.attemptId = createQuizAttemptId\(\)[\s\S]{0,100}clearSavedQuizState/)
   assert.match(mainSource, /function getRankedLeaderboardRows\s*\(\)[\s\S]{0,140}Number\(row\.total_score\) > 0/)
   assert.match(mainSource, /currentLeaderboardEntry\?\.lifetime_score/)
-  assert.match(mainSource, /seasonName \? `🏆 \$\{seasonName\} Leaderboard`/)
-  assert.match(mainSource, /Complete a fresh scoped MCQ attempt to claim #1/)
+  assert.match(mainSource, /Lifetime Leaderboard/)
+  assert.match(mainSource, /All-time MCQ points/)
+  assert.doesNotMatch(mainSource, /Complete a fresh scoped MCQ attempt to claim #1/)
   assert.doesNotMatch(mainSource, /Anonymous Student|You \(Anon/)
 
   assert.match(supabaseClient, /attempt_id, attempt_started_at/)
@@ -1530,6 +1531,49 @@ test('course points use fresh seasons and the post-midterm reset preserves study
   assert.match(postMidtermResetMigration, /'MED 402 Post-Midterm', 'MED 402-2 MCQs'/)
   assert.doesNotMatch(postMidtermResetMigration, /(?:DELETE FROM|UPDATE) public\.user_mcq_progress/i)
   assert.doesNotMatch(postMidtermResetMigration, /DELETE FROM public\.user_season_scores/i)
+})
+
+test('lifetime leaderboard repair rebuilds section-wide scores without touching progress or season history', () => {
+  const mainSource = read('src/main.js')
+  const publicMainSource = read('public/src/main.js')
+  const indexHtml = read('index.html')
+  const profileHtml = read('profile.html')
+  const migration = read('supabase/migrations/20260801053426_restore_lifetime_leaderboard.sql')
+  const leaderboardStart = migration.indexOf('CREATE OR REPLACE FUNCTION public.get_leaderboard')
+  const activityStart = migration.indexOf('CREATE OR REPLACE FUNCTION public.get_recent_mcq_activity')
+  const leaderboardSql = migration.slice(leaderboardStart, activityStart)
+  const activitySql = migration.slice(activityStart)
+
+  assert.match(migration, /LOCK TABLE public\.user_mcq_progress IN SHARE MODE/i)
+  assert.match(migration, /DELETE FROM public\.user_lifetime_scores\s+WHERE section IN \('401', '402'\)/i)
+  assert.match(migration, /INSERT INTO public\.user_lifetime_scores \([\s\S]*user_id,[\s\S]*university_id,[\s\S]*section,[\s\S]*topic_label,[\s\S]*source_id/i)
+  assert.match(migration, /FROM public\.user_mcq_progress progress[\s\S]*progress\.section IN \('401', '402'\)[\s\S]*progress\.completed IS TRUE[\s\S]*progress\.score IS NOT NULL/i)
+  assert.match(migration, /GREATEST\(progress\.score, 0\)/i)
+  assert.match(migration, /ON CONFLICT \(user_id, university_id, section, topic_label, source_id\)/i)
+  assert.doesNotMatch(migration, /(?:DELETE FROM|UPDATE) public\.user_mcq_progress/i)
+  assert.doesNotMatch(migration, /(?:DELETE FROM|UPDATE) public\.user_season_scores/i)
+  assert.doesNotMatch(migration, /(?:DELETE FROM|UPDATE) public\.leaderboard_seasons/i)
+
+  assert.ok(leaderboardStart >= 0 && activityStart > leaderboardStart)
+  assert.match(leaderboardSql, /FROM public\.user_lifetime_scores scores/i)
+  assert.match(leaderboardSql, /scores\.university_id = p_university_id[\s\S]*scores\.section = p_section/i)
+  assert.match(leaderboardSql, /NULL::BIGINT,[\s\S]*NULL::TEXT/i)
+  assert.match(leaderboardSql, /preferences\.selected_university = p_university_id[\s\S]*preferences\.selected_section = p_section/i)
+  assert.match(leaderboardSql, /private\.is_university_scope_authorized\(p_university_id, p_section\)/i)
+  assert.doesNotMatch(leaderboardSql, /user_season_scores|leaderboard_seasons|active_season/i)
+  assert.doesNotMatch(leaderboardSql, /scope_topic_label|GYN 402 MCQs|MED 402-2 MCQs/i)
+
+  assert.match(activitySql, /FROM public\.user_lifetime_scores scores/i)
+  assert.doesNotMatch(activitySql, /user_season_scores|leaderboard_seasons|active_season|scope_topic_label/i)
+  assert.match(migration, /REVOKE ALL ON FUNCTION public\.get_leaderboard\(TEXT, TEXT\) FROM PUBLIC, anon/i)
+  assert.match(migration, /GRANT EXECUTE ON FUNCTION public\.get_leaderboard\(TEXT, TEXT\) TO authenticated/i)
+
+  assert.match(mainSource, /Lifetime Leaderboard/)
+  assert.match(mainSource, /All-time MCQ points/)
+  assert.match(mainSource, /Lifetime scores update automatically/)
+  assert.equal(mainSource, publicMainSource)
+  assert.match(indexHtml, /main\.js\?v=20260801-lifetime-leaderboard-v1/)
+  assert.match(profileHtml, /main\.js\?v=20260801-lifetime-leaderboard-v1/)
 })
 
 test('topic actions are accessible boxless premium icons and legacy PWA state is cleaned up', () => {
@@ -1593,7 +1637,7 @@ test('section selector is the responsive university-first onboarding landing', (
   assert.match(style, /\.home-review-screenshot--fit\s*\{[^}]*object-fit:\s*contain;[^}]*object-position:\s*left center;/s)
   assert.equal((html.match(/review5\.jpg" class="home-review-screenshot home-review-screenshot--fit"/g) || []).length, 2)
   assert.match(html, /style\.css\?v=202607/)
-  assert.match(html, /main\.js\?v=202607/)
+  assert.match(html, /main\.js\?v=20260801-lifetime-leaderboard-v1/)
   assert.match(style, /body\[data-site-mode="selector"\] > main > \.site-footer/)
 
   for (const file of ['review1.jpg', 'review2.jpg', 'review3.jpg', 'review4.jpg', 'review5.jpg', 'review6.png', 'review7.png', 'review8.png']) {

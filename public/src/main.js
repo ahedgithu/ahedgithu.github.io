@@ -2117,17 +2117,12 @@ function renderLeaderboardHtml() {
   if (notSignedInEl) notSignedInEl.hidden = true
   if (errorEl) errorEl.hidden = true
 
-  const seasonName = leaderboardState.rows.find((row) => row.season_name)?.season_name || ''
   const titleEl = document.getElementById('leaderboard-title')
   const eyebrowEl = document.getElementById('leaderboard-eyebrow')
   const noDataCopyEl = document.getElementById('leaderboard-no-data-copy')
-  if (titleEl) titleEl.textContent = seasonName ? `🏆 ${seasonName} Leaderboard` : '🏆 Leaderboard'
-  if (eyebrowEl) eyebrowEl.textContent = seasonName ? 'Fresh points season' : 'Class ranking'
-  if (noDataCopyEl) {
-    noDataCopyEl.textContent = seasonName
-      ? `The ${seasonName} board starts at zero. Complete a fresh scoped MCQ attempt to claim #1.`
-      : `No one's on the board yet — start studying to claim #1!`
-  }
+  if (titleEl) titleEl.textContent = '🏆 Lifetime Leaderboard'
+  if (eyebrowEl) eyebrowEl.textContent = 'All-time MCQ points'
+  if (noDataCopyEl) noDataCopyEl.textContent = `No lifetime scores yet — complete an MCQ to claim #1!`
 
   const rows = getRankedLeaderboardRows()
   if (rows.length === 0) {
@@ -2230,7 +2225,7 @@ function renderLeaderboardHtml() {
 
   if (updatedEl) {
     const timeStr = new Date(leaderboardState.lastFetched).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })
-    updatedEl.textContent = `${seasonName || 'Lifetime'} scores update automatically · Last updated at ${timeStr}`
+    updatedEl.textContent = `Lifetime scores update automatically · Last updated at ${timeStr}`
   }
   renderProfileSection()
 }
