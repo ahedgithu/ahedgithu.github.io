@@ -1,5 +1,5 @@
 -- Admin topic management and required-MCQ completion.
--- Local migration only until explicitly applied to a Supabase project.
+-- Applied to the production Supabase project on 2026-08-02.
 
 create schema if not exists private;
 revoke all on schema private from public, anon, authenticated;

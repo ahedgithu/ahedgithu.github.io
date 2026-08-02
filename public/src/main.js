@@ -31,6 +31,7 @@ import { planQuestionParts, validateCustomPartCounts, normalizeMode } from './qu
 import {
   completeProfileSetup,
   deleteNewsCard,
+  deleteTrackerTopic,
   deleteUserQuizProgress,
   fetchAdminProfile,
   fetchNewsCards,
@@ -1049,6 +1050,11 @@ function renderTrackerAdminUi() {
   if (trackerAdminToolbar) trackerAdminToolbar.hidden = !enabled
   if (trackerAdminEmail) trackerAdminEmail.textContent = enabled ? studentProgressState.user?.email || '' : ''
   if (trackerAdminAddTopic) trackerAdminAddTopic.hidden = !enabled || !activeSubjectCode
+  document.querySelectorAll('[data-admin-add-topic-inline]').forEach((button) => {
+    const track = button.dataset.adminTrack || activeSubjectTrack
+    button.hidden = !enabled || !activeSubjectCode
+    button.textContent = `Add ${track === 'clinical' ? 'Clinical' : 'Theoretical'} topic`
+  })
   if (trackerAdminSubject) {
     trackerAdminSubject.textContent = activeSubjectCode
       ? `${activeSubjectCode} · ${activeSubjectTrack === 'clinical' ? 'Clinical' : 'Theoretical'}`
@@ -1185,7 +1191,10 @@ function openAdminTopicEditor(subjectCode, track, topicLabel) {
         </fieldset>
 
         <p class="admin-edit-form__status" data-admin-topic-status role="status" aria-live="polite"></p>
-        <button class="admin-save-btn" type="submit">${isNew ? 'Create topic' : 'Save topic'}</button>
+        <div class="admin-edit-form__actions">
+          ${isNew ? '' : '<button class="admin-delete-btn" type="button" data-admin-delete-topic>Delete topic</button>'}
+          <button class="admin-save-btn" type="submit">${isNew ? 'Create topic' : 'Save topic'}</button>
+        </div>
       </form>
     </div>`
   trackerAdminEditPanel.hidden = false
@@ -1406,6 +1415,36 @@ function renderQuestionImportSourceFields(form) {
     sourceReference.value = isNew ? (wasDisabled ? '' : sourceReference.value) : (selected.reference_text || '')
   }
   if (selected?.organization) applyQuestionImportOrganizationToForm(form, selected.organization)
+}
+
+async function deleteAdminTopicForm(form) {
+  if (trackerAdminState.saving || form.dataset.isNew === 'true') return
+  const subjectCode = form.dataset.subjectCode
+  const track = form.dataset.track
+  const topicLabel = form.dataset.oldTopicLabel || ''
+  const context = getAdminTopicContext(subjectCode, track, topicLabel)
+  if (!context) return
+  if (!window.confirm(`Delete “${topicLabel}” from ${subjectCode} ${track}? This cannot be undone.`)) return
+
+  trackerAdminState.saving = true
+  setAdminTopicFormStatus(form, 'Deleting topic...')
+  form.querySelectorAll('button, input, select, textarea').forEach((control) => { control.disabled = true })
+
+  try {
+    const deletedRows = await deleteTrackerTopic(makeAdminTopicPayload(context.subject, context.topic, track))
+    if (!deletedRows.length) throw new Error('Supabase did not delete the topic.')
+    const index = context.collection.findIndex((item) => item.label === topicLabel)
+    if (index >= 0) context.collection.splice(index, 1)
+    closeAdminEditor()
+    refreshTrackerAfterRemoteUpdate()
+    showGlobalToast('Topic deleted successfully.')
+  } catch (error) {
+    form.querySelectorAll('button, input, select, textarea').forEach((control) => { control.disabled = false })
+    setAdminTopicFormStatus(form, `Topic was not deleted: ${error.message}`)
+  } finally {
+    trackerAdminState.saving = false
+    renderTrackerAdminUi()
+  }
 }
 
 function applyQuestionImportOrganizationToForm(form, organization) {
@@ -5706,7 +5745,12 @@ function renderTopicCard(subject, topic, index, collection = subject.topics) {
         <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 5.5h10M7 10h10M7 14.5h6M5 3h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-6l-4 3v-3H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <span>Add MCQs</span>
       </button>
-  ` : ''
+  ` : `
+      <button type="button" data-admin-add-mcqs draggable="false" disabled title="MCQ importing is connecting to Supabase" aria-label="Add MCQs to ${escapeHtml(topic.label)}">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 5.5h10M7 10h10M7 14.5h6M5 3h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-6l-4 3v-3H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Add MCQs</span>
+      </button>
+  `
   const adminControls = isTrackerAdmin() ? `
     <span class="tracker-admin-topic-controls" aria-label="Admin controls for ${escapeHtml(topic.label)}">
       ${addMcqsControl}
@@ -5781,6 +5825,20 @@ function renderSubjectTrackTabs(subject) {
   `).join('')
 }
 
+function renderScopedAddTopicControl(subject) {
+  const trackLabel = activeSubjectTrack === 'clinical' ? 'Clinical' : 'Theoretical'
+  return `
+    <button
+      class="subject-track-add-topic"
+      type="button"
+      data-admin-add-topic-inline
+      data-admin-subject="${escapeHtml(subject.code)}"
+      data-admin-track="${activeSubjectTrack}"
+      ${isTrackerAdmin() ? '' : 'hidden'}
+    >Add ${trackLabel} topic</button>
+  `
+}
+
 function renderSubjectRevisionLauncher(subject) {
   if (subject.code !== 'MED-2') return ''
 
@@ -5832,8 +5890,11 @@ function getSubjectGridColumnCount() {
 function renderSubjectInlineDetail(subject) {
   return `
     <div class="subject-inline-detail">
-      <div class="subject-track-tabs subject-track-tabs--inline" role="tablist" aria-label="${subject.code} sections">
-        ${renderSubjectTrackTabs(subject)}
+      <div class="subject-track-admin-row">
+        <div class="subject-track-tabs subject-track-tabs--inline" role="tablist" aria-label="${subject.code} sections">
+          ${renderSubjectTrackTabs(subject)}
+        </div>
+        ${renderScopedAddTopicControl(subject)}
       </div>
       ${renderSubjectRevisionLauncher(subject)}
       <ul class="topic-list topic-list--inline">
@@ -8418,6 +8479,8 @@ function setActiveSubject(code, mobileMode = 'toggle') {
     subjectTrackTabs.innerHTML = renderSubjectTrackTabs(subject)
     bindSubjectTrackTabs(subjectTrackTabs)
   }
+  const subjectTrackAdminAction = document.getElementById('subject-track-admin-action')
+  if (subjectTrackAdminAction) subjectTrackAdminAction.innerHTML = renderScopedAddTopicControl(subject)
   if (subjectRevisionLauncher) {
     const launcherMarkup = renderSubjectRevisionLauncher(subject)
     subjectRevisionLauncher.innerHTML = launcherMarkup
@@ -10549,6 +10612,26 @@ document.addEventListener('click', (event) => {
 
   if (event.target.closest('[data-admin-editor-close]')) {
     closeAdminEditor()
+    return
+  }
+
+  const inlineAddTopicButton = event.target.closest('[data-admin-add-topic-inline]')
+  if (inlineAddTopicButton) {
+    event.preventDefault()
+    if (!isTrackerAdmin()) return
+    openAdminTopicEditor(
+      inlineAddTopicButton.dataset.adminSubject || activeSubjectCode,
+      inlineAddTopicButton.dataset.adminTrack || activeSubjectTrack,
+      ''
+    )
+    return
+  }
+
+  const deleteTopicButton = event.target.closest('[data-admin-delete-topic]')
+  if (deleteTopicButton) {
+    event.preventDefault()
+    const form = deleteTopicButton.closest('[data-tracker-admin-edit-form]')
+    if (form) deleteAdminTopicForm(form)
     return
   }
 

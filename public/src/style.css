@@ -2829,6 +2829,39 @@ body:not([data-site-mode="selector"]):not([data-site-mode="tools"]):not([data-si
   margin: 0;
 }
 
+.subject-track-admin-row {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.subject-track-admin-row .subject-track-tabs {
+  margin-bottom: 0;
+}
+
+.subject-track-add-topic {
+  width: 100%;
+  min-height: 38px;
+  border: 1px dashed rgba(105, 167, 255, 0.46);
+  border-radius: 10px;
+  color: var(--blue);
+  background: rgba(105, 167, 255, 0.08);
+  font: inherit;
+  font-size: 0.76rem;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.subject-track-add-topic:hover {
+  border-style: solid;
+  background: rgba(105, 167, 255, 0.15);
+}
+
+.subject-track-add-topic:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
 .subject-revision-launcher {
   display: flex;
   align-items: center;
@@ -3869,10 +3902,24 @@ body.admin-modal-open {
   resize: vertical;
 }
 
-.admin-save-btn {
+.admin-edit-form__actions {
   position: sticky;
   z-index: 2;
   bottom: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
+  gap: 9px;
+  padding-top: 2px;
+  background: rgba(19, 28, 36, 0.99);
+  box-shadow: 0 -10px 22px rgba(19, 28, 36, 0.92);
+}
+
+.admin-edit-form__actions .admin-save-btn:only-child {
+  grid-column: 1 / -1;
+}
+
+.admin-save-btn,
+.admin-delete-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -3881,14 +3928,25 @@ body.admin-modal-open {
   margin-top: 2px;
   border: 0;
   border-radius: 12px;
-  color: #111820;
-  background: linear-gradient(135deg, #f4d477, var(--gold));
-  box-shadow: 0 -10px 22px rgba(19, 28, 36, 0.92), 0 12px 24px rgba(226, 184, 74, 0.18);
+  font: inherit;
   font-weight: 900;
   cursor: pointer;
 }
 
-.admin-save-btn:disabled {
+.admin-save-btn {
+  color: #111820;
+  background: linear-gradient(135deg, #f4d477, var(--gold));
+  box-shadow: 0 12px 24px rgba(226, 184, 74, 0.18);
+}
+
+.admin-delete-btn {
+  border: 1px solid rgba(255, 107, 107, 0.38);
+  color: #ffb4b4;
+  background: rgba(255, 77, 77, 0.09);
+}
+
+.admin-save-btn:disabled,
+.admin-delete-btn:disabled {
   opacity: 0.72;
   cursor: wait;
 }
@@ -3952,6 +4010,10 @@ body.admin-modal-open {
   }
 
   .admin-edit-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-edit-form__actions {
     grid-template-columns: 1fr;
   }
 }

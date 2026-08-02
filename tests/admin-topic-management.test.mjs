@@ -5,6 +5,7 @@ import test from 'node:test'
 const read = (path) => readFileSync(new URL(`../${path}`, import.meta.url), 'utf8')
 
 const migration = read('supabase/migrations/20260802180000_admin_topic_management_and_required_mcq.sql')
+const cleanupMigration = read('supabase/migrations/20260802210000_drop_duplicate_tracker_topics_id_index.sql')
 const main = read('src/main.js')
 const client = read('src/supabaseClient.js')
 const adapter = read('src/questionDatabaseAdapter.js')
@@ -28,6 +29,7 @@ test('topic management migration defines canonical columns, indexes, and RLS-com
   assert.match(migration, /lower\(btrim\(topic_label\)\)/i)
   assert.match(migration, /create index if not exists tracker_topics_required_mcq_idx/i)
   assert.match(migration, /create index if not exists user_topic_progress_required_source_idx/i)
+  assert.match(cleanupMigration, /drop index if exists public\.tracker_topics_id_uidx/i)
 
   assert.match(migration, /create or replace function public\.save_tracker_topic/i)
   assert.match(migration, /create or replace function public\.sync_required_topic_completion/i)
@@ -39,10 +41,12 @@ test('topic management migration defines canonical columns, indexes, and RLS-com
   assert.match(migration, /grant execute on function public\.save_tracker_topic\(uuid, jsonb, jsonb\)\s+to authenticated/i)
 })
 
-test('frontend integrates toolbar Add Topic, topic editor reuse, required MCQ selector, and atomic rename', () => {
+test('frontend integrates scoped Add Topic, topic editor delete, required MCQ selector, and atomic rename', () => {
   assert.match(index, /id="tracker-admin-add-topic">Add topic<\/button>/i)
   assert.match(main, /trackerAdminAddTopic/i)
   assert.match(main, /openAdminTopicEditor\(activeSubjectCode, activeSubjectTrack, ''\)/i)
+  assert.match(main, /data-admin-add-topic-inline/i)
+  assert.match(main, /Add \$\{trackLabel\} topic/i)
   assert.match(main, /getTopicSelectableRequiredSources/i)
   assert.match(main, /data-is-new="\${isNew}"/i)
   assert.match(main, /name="topic_label"/i)
@@ -50,11 +54,16 @@ test('frontend integrates toolbar Add Topic, topic editor reuse, required MCQ se
   assert.match(main, /name="required_mcq_active"/i)
   assert.match(main, /saveAdminTopicForm/i)
   assert.match(main, /saveTrackerTopic\(topic\.id, payload, requiredMcq\)/i)
+  assert.match(main, /data-admin-delete-topic/i)
+  assert.match(main, /deleteAdminTopicForm/i)
+  assert.match(main, /deleteTrackerTopic/i)
   assert.match(main, /migrateTopicLocalStorage/i)
   assert.match(main, /showGlobalToast\(isNew \? 'Topic created successfully\.' : 'Topic updated successfully\.'\)/i)
   assert.match(style, /\.admin-edit-req-mcq/i)
   assert.match(style, /\.admin-req-warning/i)
   assert.match(style, /\.admin-req-status/i)
+  assert.match(style, /\.subject-track-add-topic/i)
+  assert.match(style, /\.admin-delete-btn/i)
 })
 
 test('required MCQ completion enforcement, grandfathering, and quiz adapter organization round-trip', () => {
