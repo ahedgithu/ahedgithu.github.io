@@ -59,6 +59,8 @@ import {
   removeQuestionImport,
   replaceQuestionImport,
   rejectQuestionImport,
+  saveTrackerTopic,
+  syncRequiredTopicCompletion,
   updateNewsCardOrder,
   upsertNewsCard,
   upsertTrackerTopics,
@@ -469,6 +471,7 @@ let profileAvatarDialogOpener = null
 const trackerAdminToolbar = document.getElementById('tracker-admin-toolbar')
 const trackerAdminEmail = document.getElementById('tracker-admin-email')
 const trackerAdminSubject = document.getElementById('tracker-admin-subject')
+const trackerAdminAddTopic = document.getElementById('tracker-admin-add-topic')
 const trackerAdminSaveOrder = document.getElementById('tracker-admin-save-order')
 const trackerAdminSignOut = document.getElementById('tracker-admin-sign-out')
 const trackerAdminImport = document.getElementById('tracker-admin-import')
@@ -627,7 +630,9 @@ function isValidRemoteTopicState(state) {
 
 function makeRemoteTrackerTopic(row) {
   const topic = {
+    id: row.id || null,
     label: row.topic_label,
+    aliases: Array.isArray(row.legacy_labels) ? [...row.legacy_labels] : [],
     state: isValidRemoteTopicState(row.state) ? row.state : 'remaining',
     stopNote: row.stop_note || '',
     midtermScope: Boolean(row.midterm_scope),
@@ -637,7 +642,12 @@ function makeRemoteTrackerTopic(row) {
       : null,
     updateBatch: row.updated_at ? 'remote-admin' : undefined,
     updatedAt: row.updated_at ? row.updated_at.slice(0, 10) : undefined,
-    createdAt: row.created_at || undefined
+    createdAt: row.created_at || undefined,
+    required_mcq_source_id: row.required_mcq_source_id || null,
+    required_mcq_source_label: row.required_mcq_source_label || null,
+    required_mcq_progress_key: row.required_mcq_progress_key || null,
+    required_mcq_part_ids: Array.isArray(row.required_mcq_part_ids) ? [...row.required_mcq_part_ids] : [],
+    required_mcq_activated_at: row.required_mcq_activated_at || null
   }
 
   if (row.drive_url) {
@@ -649,7 +659,7 @@ function makeRemoteTrackerTopic(row) {
     topic.driveUrl = row.drive_url
   }
 
-    if (row.audio_url) topic.audioUrl = row.audio_url
+  if (row.audio_url) topic.audioUrl = row.audio_url
 
   return topic
 }
@@ -668,15 +678,36 @@ function applyTrackerTopicRows(rows) {
     const collection = row.track === 'clinical' ? subject.clinicalTopics : subject.topics
     if (!collection) return
 
-    const consolidatedTopic = collection.find((item) => item.progressAliases?.includes(row.topic_label))
-    if (consolidatedTopic) return
-
-    const existingTopic = collection.find((item) => item.label === row.topic_label)
+    const remoteTopic = makeRemoteTrackerTopic(row)
+    const existingTopic = collection.find((item) => (
+      (row.id && item.id === row.id)
+      || item.label === row.topic_label
+      || remoteTopic.aliases.includes(item.label)
+      || item.aliases?.includes(row.topic_label)
+      || item.progressAliases?.includes(row.topic_label)
+    ))
     if (!existingTopic) {
-      collection.push({ ...makeRemoteTrackerTopic(row), isNewRemote: true })
+      collection.push({ ...remoteTopic, isNewRemote: true })
       changed = true
       return
     }
+
+    const identityFields = [
+      'id',
+      'label',
+      'aliases',
+      'required_mcq_source_id',
+      'required_mcq_source_label',
+      'required_mcq_progress_key',
+      'required_mcq_part_ids',
+      'required_mcq_activated_at'
+    ]
+    identityFields.forEach((field) => {
+      if (JSON.stringify(existingTopic[field] ?? null) !== JSON.stringify(remoteTopic[field] ?? null)) {
+        existingTopic[field] = remoteTopic[field]
+        changed = true
+      }
+    })
 
     if (isValidRemoteTopicState(row.state) && existingTopic.state !== row.state) {
       existingTopic.state = row.state
@@ -813,9 +844,132 @@ function getAdminTopicKey(subject, topic, track = activeSubjectTrack) {
 
 function getAdminTopicContext(subjectCode, track, topicLabel) {
   const subject = subjects.find(item => item.code === subjectCode)
-  const collection = track === 'clinical' ? getClinicalTopics(subject || {}) : subject?.topics
-  const topic = collection?.find(item => item.label === topicLabel)
-  return subject && topic ? { subject, topic, collection, track } : null
+  if (!subject) return null
+  const collection = track === 'clinical' ? getClinicalTopics(subject) : subject.topics
+  if (!collection) return null
+
+  let topic = topicLabel ? collection.find(item => item.label === topicLabel || item.aliases?.includes(topicLabel)) : null
+  const isNew = !topic
+  if (isNew) {
+    topic = {
+      id: null,
+      label: topicLabel || '',
+      state: 'remaining',
+      displayOrder: (collection.length + 1) * 10,
+      stopNote: '',
+      driveUrl: '',
+      audioUrl: '',
+      midtermScope: false,
+      midtermScopeNote: '',
+      aliases: [],
+      required_mcq_source_id: null,
+      required_mcq_source_label: null,
+      required_mcq_part_ids: [],
+      required_mcq_activated_at: null
+    }
+  }
+
+  return { subject, topic, collection, track, isNew }
+}
+
+function getTopicSelectableRequiredSources() {
+  const sectionQuizzes = getMcqQuizzesForSection()
+  const topicKeys = new Set(Object.keys(sectionQuizzes))
+  const databaseTopics = databaseQuizSourcesByScope.get(getDatabaseQuizScopeKey())
+  databaseTopics?.forEach((_, topicKey) => topicKeys.add(topicKey))
+  const catalog = []
+
+  topicKeys.forEach((progressKey) => {
+    const groupedSources = new Map()
+    getQuizSources(progressKey).forEach((source) => {
+      const collectionParts = getCollectionParts(source)
+      if (collectionParts.length) {
+        catalog.push({
+          optionId: `${encodeURIComponent(progressKey)}@@${encodeURIComponent(source.id)}`,
+          id: source.id,
+          label: source.label || progressKey,
+          progressKey,
+          partIds: collectionParts.map((part) => part.id),
+          totalQuestions: collectionParts.reduce((sum, part) => sum + (part.mcqs?.length || 0), 0)
+        })
+        return
+      }
+
+      const groupId = source.groupId || source.parentSourceId
+      if (!groupId) {
+        catalog.push({
+          optionId: `${encodeURIComponent(progressKey)}@@${encodeURIComponent(source.id)}`,
+          id: source.id,
+          label: source.label || progressKey,
+          progressKey,
+          partIds: [source.id],
+          totalQuestions: source.mcqs?.length || source.questionCount || 0
+        })
+        return
+      }
+
+      const mapKey = `${progressKey}::${groupId}`
+      if (!groupedSources.has(mapKey)) {
+        groupedSources.set(mapKey, {
+          optionId: `${encodeURIComponent(progressKey)}@@${encodeURIComponent(groupId)}`,
+          id: groupId,
+          label: source.groupLabel || source.label || progressKey,
+          progressKey,
+          partIds: [],
+          totalQuestions: 0
+        })
+      }
+      const entry = groupedSources.get(mapKey)
+      if (!entry.partIds.includes(source.id)) entry.partIds.push(source.id)
+      entry.totalQuestions += source.mcqs?.length || source.questionCount || 0
+    })
+    catalog.push(...groupedSources.values())
+  })
+
+  return catalog
+    .filter((source) => source.partIds.length && source.totalQuestions > 0)
+    .sort((a, b) => a.progressKey.localeCompare(b.progressKey) || a.label.localeCompare(b.label))
+}
+
+function moveLocalStorageValue(oldKey, newKey) {
+  const oldValue = localStorage.getItem(oldKey)
+  if (oldValue !== null && localStorage.getItem(newKey) === null) localStorage.setItem(newKey, oldValue)
+  if (oldValue !== null) localStorage.removeItem(oldKey)
+}
+
+function migrateTopicLocalStorage(subjectCode, oldLabel, newLabel) {
+  if (!oldLabel || oldLabel === newLabel) return
+
+  try {
+    moveLocalStorageValue(
+      getTopicCompletionKey(subjectCode, oldLabel),
+      getTopicCompletionKey(subjectCode, newLabel)
+    )
+    moveLocalStorageValue(
+      getUnscopedTopicCompletionKey(subjectCode, oldLabel),
+      getUnscopedTopicCompletionKey(subjectCode, newLabel)
+    )
+    if (activeAcademicSection === '401') {
+      moveLocalStorageValue(
+        getLegacyTopicCompletionKey(subjectCode, oldLabel),
+        getLegacyTopicCompletionKey(subjectCode, newLabel)
+      )
+    }
+
+    const scopedQuizPrefix = `${QUIZ_STORAGE_PREFIX}::${getProgressStorageOwnerId()}::${activeUniversityId}::${activeAcademicSection}::${encodeURIComponent(oldLabel)}::`
+    const unscopedQuizPrefix = `${QUIZ_STORAGE_PREFIX}::${activeAcademicSection}::${encodeURIComponent(oldLabel)}::`
+    const legacyQuizPrefix = `${LEGACY_QUIZ_STORAGE_PREFIX}${encodeURIComponent(oldLabel)}::`
+    const keys = Array.from({ length: localStorage.length }, (_, index) => localStorage.key(index)).filter(Boolean)
+    keys.forEach((key) => {
+      if (key.startsWith(scopedQuizPrefix)) {
+        moveLocalStorageValue(key, key.replace(scopedQuizPrefix, `${QUIZ_STORAGE_PREFIX}::${getProgressStorageOwnerId()}::${activeUniversityId}::${activeAcademicSection}::${encodeURIComponent(newLabel)}::`))
+      } else if (key.startsWith(unscopedQuizPrefix)) {
+        moveLocalStorageValue(key, key.replace(unscopedQuizPrefix, `${QUIZ_STORAGE_PREFIX}::${activeAcademicSection}::${encodeURIComponent(newLabel)}::`))
+      } else if (key.startsWith(legacyQuizPrefix)) {
+        moveLocalStorageValue(key, key.replace(legacyQuizPrefix, `${LEGACY_QUIZ_STORAGE_PREFIX}${encodeURIComponent(newLabel)}::`))
+      }
+    })
+  } catch {}
 }
 
 function makeAdminTopicPayload(subject, topic, track = activeSubjectTrack, overrides = {}) {
@@ -894,6 +1048,7 @@ function renderTrackerAdminUi() {
   }
   if (trackerAdminToolbar) trackerAdminToolbar.hidden = !enabled
   if (trackerAdminEmail) trackerAdminEmail.textContent = enabled ? studentProgressState.user?.email || '' : ''
+  if (trackerAdminAddTopic) trackerAdminAddTopic.hidden = !enabled || !activeSubjectCode
   if (trackerAdminSubject) {
     trackerAdminSubject.textContent = activeSubjectCode
       ? `${activeSubjectCode} · ${activeSubjectTrack === 'clinical' ? 'Clinical' : 'Theoretical'}`
@@ -947,8 +1102,27 @@ function openAdminTopicEditor(subjectCode, track, topicLabel) {
   if (!isTrackerAdmin() || !trackerAdminEditPanel) return
   const context = getAdminTopicContext(subjectCode, track, topicLabel)
   if (!context) return
-  const { subject, topic } = context
+  const { subject, topic, isNew } = context
   const states = ['remaining', 'announced', 'partial', 'taken']
+  const selectableSources = getTopicSelectableRequiredSources()
+
+  const isReqConfigured = Boolean(topic.required_mcq_source_id)
+  const isReqActive = Boolean(topic.required_mcq_activated_at)
+  const sourceExists = !isReqConfigured || selectableSources.some((source) => (
+    source.id === topic.required_mcq_source_id
+    && source.progressKey === (topic.required_mcq_progress_key || topic.label)
+  ))
+
+  let unavailableWarningHtml = ''
+  if (isReqConfigured && !sourceExists) {
+    unavailableWarningHtml = `<div class="admin-req-warning">Warning: Previously configured source (${escapeHtml(topic.required_mcq_source_label || topic.required_mcq_source_id)}) is unavailable.</div>`
+  }
+
+  let activeStatusHtml = ''
+  if (isReqActive) {
+    activeStatusHtml = `<div class="admin-req-status">Required completion active. Student Done badge locked until all required questions/parts are completed.</div>`
+  }
+
   trackerAdminEditPanel.innerHTML = `
     <div class="admin-edit-panel__inner">
       <div class="admin-edit-panel__header">
@@ -956,10 +1130,14 @@ function openAdminTopicEditor(subjectCode, track, topicLabel) {
           <span class="admin-edit-panel__subject">${escapeHtml(subject.code)} / ${escapeHtml(track)}</span>
           <button class="admin-edit-close" type="button" data-admin-editor-close aria-label="Close">×</button>
         </div>
-        <h2 class="admin-edit-panel__title">${escapeHtml(topic.label)}</h2>
+        <h2 class="admin-edit-panel__title">${isNew ? 'Add New Topic' : escapeHtml(topic.label)}</h2>
         <p class="admin-edit-panel__subject-name">${escapeHtml(subject.name)}</p>
       </div>
-      <form class="admin-edit-form" data-tracker-admin-edit-form data-subject-code="${escapeHtml(subject.code)}" data-track="${escapeHtml(track)}" data-topic-label="${escapeHtml(topic.label)}">
+      <form class="admin-edit-form" data-tracker-admin-edit-form data-subject-code="${escapeHtml(subject.code)}" data-track="${escapeHtml(track)}" data-is-new="${isNew}" data-old-topic-label="${escapeHtml(topic.label || '')}">
+        <label class="admin-edit-label">Topic Label / Name
+          <input class="admin-edit-input" type="text" name="topic_label" maxlength="160" value="${escapeHtml(topic.label || '')}" placeholder="e.g. Biliary System" required>
+        </label>
+
         <div class="admin-edit-states">
           ${states.map(state => `
             <label class="admin-state-option admin-state-option--${state}${topic.state === state ? ' is-selected' : ''}">
@@ -968,13 +1146,16 @@ function openAdminTopicEditor(subjectCode, track, topicLabel) {
             </label>
           `).join('')}
         </div>
+
         <label class="admin-edit-label">Where did we stop / notes
-          <textarea class="admin-edit-textarea" name="stop_note" rows="4" placeholder="Optional note">${escapeHtml(topic.stopNote || '')}</textarea>
+          <textarea class="admin-edit-textarea" name="stop_note" rows="3" placeholder="Optional note">${escapeHtml(topic.stopNote || '')}</textarea>
         </label>
+
         <label class="admin-edit-label">
           <span><input type="checkbox" name="midterm_scope" ${topic.midtermScope ? 'checked' : ''}> Included in midterm scope</span>
-          <textarea class="admin-edit-textarea" name="midterm_scope_note" rows="3" placeholder="Optional midterm scope note">${escapeHtml(topic.midtermScopeNote || '')}</textarea>
+          <textarea class="admin-edit-textarea" name="midterm_scope_note" rows="2" placeholder="Optional midterm scope note">${escapeHtml(topic.midtermScopeNote || '')}</textarea>
         </label>
+
         <div class="admin-edit-grid">
           <label class="admin-edit-label">Google Drive Link
             <input class="admin-edit-input" type="url" name="drive_url" value="${escapeHtml(topic.driveUrl || topic.lectureUrls?.[0]?.url || '')}" placeholder="https://drive.google.com/...">
@@ -983,41 +1164,132 @@ function openAdminTopicEditor(subjectCode, track, topicLabel) {
             <input class="admin-edit-input" type="url" name="audio_url" value="${escapeHtml(topic.audioUrl || '')}" placeholder="https://drive.google.com/...">
           </label>
         </div>
-        <button class="admin-save-btn" type="submit">Save topic</button>
+
+        <fieldset class="admin-edit-req-mcq">
+          <legend class="admin-edit-req-mcq__title">Required MCQ Completion</legend>
+          <label class="admin-edit-label">Required Comprehensive MCQ Set
+            <select class="admin-edit-input" name="required_mcq_source_id">
+              <option value="">None (Optional set — completion disabled)</option>
+              ${selectableSources.map(src => `
+                <option value="${escapeHtml(src.optionId)}" data-source-id="${escapeHtml(src.id)}" data-progress-key="${escapeHtml(src.progressKey)}" data-label="${escapeHtml(src.label)}" data-parts="${escapeHtml(JSON.stringify(src.partIds))}" ${topic.required_mcq_source_id === src.id && (topic.required_mcq_progress_key || topic.label) === src.progressKey ? 'selected' : ''}>
+                  ${escapeHtml(src.progressKey)} · ${escapeHtml(src.label)} (${src.totalQuestions} MCQs, ${src.partIds.length} ${src.partIds.length === 1 ? 'part' : 'parts'})
+                </option>
+              `).join('')}
+            </select>
+          </label>
+          <label class="admin-edit-label admin-edit-label--inline">
+            <span><input type="checkbox" name="required_mcq_active" ${isReqActive ? 'checked' : ''} ${selectableSources.length || isReqActive ? '' : 'disabled'}> Require all MCQs for topic Done badge</span>
+          </label>
+          ${unavailableWarningHtml}
+          ${activeStatusHtml}
+        </fieldset>
+
+        <p class="admin-edit-form__status" data-admin-topic-status role="status" aria-live="polite"></p>
+        <button class="admin-save-btn" type="submit">${isNew ? 'Create topic' : 'Save topic'}</button>
       </form>
     </div>`
   trackerAdminEditPanel.hidden = false
   requestAnimationFrame(() => trackerAdminEditPanel.classList.add('is-open'))
 }
 
+function setAdminTopicFormStatus(form, message) {
+  const status = form.querySelector('[data-admin-topic-status]')
+  if (status) status.textContent = message
+}
+
 async function saveAdminTopicForm(form) {
-  const context = getAdminTopicContext(form.dataset.subjectCode, form.dataset.track, form.dataset.topicLabel)
-  if (!context || trackerAdminState.saving) return
-  const { subject, topic, track } = context
+  if (trackerAdminState.saving) return
+  const isNew = form.dataset.isNew === 'true'
+  const oldTopicLabel = form.dataset.oldTopicLabel || ''
+  const subjectCode = form.dataset.subjectCode
+  const track = form.dataset.track
+
+  const context = getAdminTopicContext(subjectCode, track, isNew ? '' : oldTopicLabel)
+  if (!context) return
+  const { subject, topic } = context
+
   const submit = form.querySelector('[type="submit"]')
+  const topicLabelInput = form.querySelector('input[name="topic_label"]')
+  const topicLabel = topicLabelInput ? topicLabelInput.value.trim() : ''
+
+  if (!topicLabel) {
+    setAdminTopicFormStatus(form, 'Topic label is required.')
+    return
+  }
+
   const nextState = form.querySelector('input[name="admin-state"]:checked')?.value || topic.state || 'remaining'
   const stopNote = form.querySelector('[name="stop_note"]').value.trim()
   const driveUrl = form.querySelector('[name="drive_url"]').value.trim()
   const audioUrl = form.querySelector('[name="audio_url"]').value.trim()
   const midtermScope = form.querySelector('[name="midterm_scope"]').checked
   const midtermScopeNote = form.querySelector('[name="midterm_scope_note"]').value.trim()
+
+  const reqSourceSelect = form.querySelector('[name="required_mcq_source_id"]')
+  const selectedOption = reqSourceSelect?.options[reqSourceSelect.selectedIndex]
+  const reqSourceId = selectedOption?.dataset.sourceId || null
+  const reqProgressKey = selectedOption?.dataset.progressKey || null
+  const reqSourceLabel = selectedOption?.dataset.label || null
+  const reqPartIds = selectedOption?.dataset.parts ? JSON.parse(selectedOption.dataset.parts) : []
+  const reqActive = Boolean(form.querySelector('[name="required_mcq_active"]')?.checked)
+
+  if (reqActive && !reqSourceId) {
+    setAdminTopicFormStatus(form, 'Choose a required comprehensive MCQ set before enabling enforcement.')
+    return
+  }
+
   trackerAdminState.saving = true
+  setAdminTopicFormStatus(form, '')
   if (submit) { submit.disabled = true; submit.textContent = 'Saving...' }
+
   try {
-    const rows = await upsertTrackerTopics([makeAdminTopicPayload(subject, topic, track, {
+    const payload = makeAdminTopicPayload(subject, {
+      ...topic,
+      label: topicLabel,
+      state: nextState,
+      stopNote,
+      driveUrl,
+      audioUrl,
+      midtermScope,
+      midtermScopeNote
+    }, track, {
+      id: topic.id || null,
+      old_topic_label: oldTopicLabel,
+      topic_label: topicLabel,
       state: nextState,
       stop_note: stopNote || null,
       drive_url: driveUrl || null,
       audio_url: audioUrl || null,
       midterm_scope: midtermScope,
-      midterm_scope_note: midtermScopeNote || null
-    })])
-    applyTrackerTopicRows(rows)
+      midterm_scope_note: midtermScopeNote || null,
+      legacy_labels: topic.aliases || []
+    })
+
+    const requiredMcq = {
+      enabled: reqActive,
+      topic_key: reqProgressKey,
+      source_id: reqSourceId,
+      source_label: reqSourceLabel,
+      part_ids: reqPartIds
+    }
+    const savedRow = await saveTrackerTopic(topic.id, payload, requiredMcq)
+
+    applyTrackerTopicRows([savedRow])
+
+    const collection = track === 'clinical' ? subject.clinicalTopics : subject.topics
+    if (collection && !collection.some(t => t.label === savedRow.topic_label)) {
+      collection.push(makeRemoteTrackerTopic(savedRow))
+    }
+
+    if (oldTopicLabel && oldTopicLabel !== savedRow.topic_label) {
+      migrateTopicLocalStorage(subject.code, oldTopicLabel, savedRow.topic_label)
+    }
+
     closeAdminEditor()
     refreshTrackerAfterRemoteUpdate()
+    showGlobalToast(isNew ? 'Topic created successfully.' : 'Topic updated successfully.')
   } catch (error) {
-    if (submit) { submit.disabled = false; submit.textContent = 'Save topic' }
-    window.alert(`Topic was not saved: ${error.message}`)
+    if (submit) { submit.disabled = false; submit.textContent = isNew ? 'Create topic' : 'Save topic' }
+    setAdminTopicFormStatus(form, `Topic was not saved: ${error.message}`)
   } finally {
     trackerAdminState.saving = false
     renderTrackerAdminUi()
@@ -1133,6 +1405,29 @@ function renderQuestionImportSourceFields(form) {
     sourceReference.disabled = !isNew
     sourceReference.value = isNew ? (wasDisabled ? '' : sourceReference.value) : (selected.reference_text || '')
   }
+  if (selected?.organization) applyQuestionImportOrganizationToForm(form, selected.organization)
+}
+
+function applyQuestionImportOrganizationToForm(form, organization) {
+  if (!form || !organization || typeof organization !== 'object') return
+  const mode = normalizeMode(organization.mode)
+  const radio = form.querySelector(`input[name="organization_mode"][value="${mode}"]`)
+  if (radio) radio.checked = true
+  if (form.elements.organization_group_label) {
+    form.elements.organization_group_label.value = organization.groupLabel || form.elements.topic_label.value
+  }
+  if (mode === 'balanced' && form.elements.organization_target_size) {
+    const counts = (organization.parts || []).map((part) => Number(part.questionCount)).filter((count) => count > 0)
+    if (counts.length) form.elements.organization_target_size.value = String(Math.max(...counts))
+  }
+  if (mode === 'custom') {
+    const container = form.querySelector('[data-custom-part-rows]')
+    if (container) {
+      const parts = Array.isArray(organization.parts) ? organization.parts : []
+      container.innerHTML = parts.map((part, index) => renderCustomPartRow(part, index, parts.length)).join('')
+    }
+  }
+  updateQuestionImportOrganizationState(questionImportPanel)
 }
 
 async function refreshQuestionImportSources(form) {
@@ -1464,6 +1759,7 @@ async function prepareQuestionImportReplacement(publicId) {
   form.elements.source_id.value = item.source?.public_id || ''
   renderQuestionImportSourceFields(form)
   form.elements.raw_text.value = item.raw_text || ''
+  applyQuestionImportOrganizationToForm(form, item.organization || item.source?.organization)
   ;['subject_code', 'topic_label', 'source_id'].forEach((name) => {
     if (form.elements[name]) form.elements[name].disabled = true
   })
@@ -1646,7 +1942,8 @@ async function saveQuestionImportForm(form) {
         rawText: payload.rawText,
         parserVersion: payload.parserVersion,
         questions: payload.questions,
-        issues: payload.issues
+        issues: payload.issues,
+        organization: payload.organization
       })
       resetQuestionImportReplacement()
       status.textContent = `${count} replacement question${count === 1 ? '' : 's'} published.`
@@ -2926,6 +3223,7 @@ async function syncLocalProgressToCloud(section = activeAcademicSection) {
       if (studentProgressState.topicRows.has(key)) continue
       const localState = getLocalTopicCompletionState(subject.code, topic.label, section)
       if (!localState.studied && !localState.mcqs) continue
+      if (topic.required_mcq_activated_at && topic.required_mcq_source_id) continue
 
       studentProgressState.topicRows.set(key, localState)
       await upsertUserTopicProgress({
@@ -2973,6 +3271,13 @@ async function syncLocalProgressToCloud(section = activeAcademicSection) {
       attempt_started_at: payload.attemptStartedAt || null,
       completed_at: payload.completed ? new Date().toISOString() : null
     })
+  }
+
+  const requiredTopics = sectionSubjects
+    .flatMap((subject) => [...(subject.topics || []), ...(subject.clinicalTopics || [])])
+    .filter((topic) => topic.id && topic.required_mcq_activated_at && topic.required_mcq_source_id)
+  for (const topic of requiredTopics) {
+    await syncRequiredCompletionForTopic(topic)
   }
 }
 
@@ -4263,47 +4568,198 @@ function getQuizProgressRecordKey(universityId, section, topicLabel, sourceId = 
   return `${universityId}::${section}::${topicLabel}::${sourceId || 'current'}`
 }
 
-function getTopicCompletionState(subjectCode, topicLabel) {
-  const emptyState = { studied: false, mcqs: false }
-  const cloudState = studentProgressState.topicRows.get(getTopicProgressRecordKey(activeUniversityId, activeAcademicSection, subjectCode, topicLabel))
-  if (studentProgressState.user && cloudState) {
-    return {
-      ...emptyState,
-      studied: !!cloudState.studied,
-      mcqs: !!cloudState.mcqs
+function isQuizPartFullyCompleted(topicLabel, sourceId) {
+  const recordKey = getQuizProgressRecordKey(activeUniversityId, activeAcademicSection, topicLabel, sourceId)
+  const cloudRow = studentProgressState.quizRows.get(recordKey)
+  if (cloudRow) {
+    const total = cloudRow.total_questions || cloudRow.totalQuestions || cloudRow.progress?.totalQuestions || 0
+    const answered = cloudRow.answered_count || cloudRow.answeredCount || cloudRow.progress?.answeredCount || 0
+    return Boolean(cloudRow.completed && total > 0 && answered >= total)
+  }
+
+  const localPayload = getLocalQuizState(topicLabel, sourceId, activeAcademicSection)
+  if (localPayload) {
+    const total = localPayload.totalQuestions || 0
+    const answered = localPayload.answeredCount || 0
+    return Boolean(localPayload.completed && total > 0 && answered >= total)
+  }
+
+  return false
+}
+
+function isRequiredMcqSourceAvailable(topic) {
+  if (!topic?.required_mcq_source_id) return false
+  const progressKey = topic.required_mcq_progress_key || topic.label
+  const requiredIds = topic.required_mcq_part_ids?.length
+    ? topic.required_mcq_part_ids
+    : [topic.required_mcq_source_id]
+  const availableIds = new Set()
+  getQuizSources(progressKey).forEach((source) => {
+    availableIds.add(source.id)
+    if (source.groupId) availableIds.add(source.groupId)
+    getCollectionParts(source).forEach((part) => availableIds.add(part.id))
+  })
+  return requiredIds.every((id) => availableIds.has(id))
+}
+
+function checkRequiredMcqTopicCompletion(subjectCode, topic) {
+  if (!topic?.required_mcq_activated_at || !topic?.required_mcq_source_id) return null
+  if (!isRequiredMcqSourceAvailable(topic)) return false
+
+  const requiredSourceId = topic.required_mcq_source_id
+  const progressKey = topic.required_mcq_progress_key || topic.label
+  const requiredParts = (Array.isArray(topic.required_mcq_part_ids) && topic.required_mcq_part_ids.length > 0)
+    ? topic.required_mcq_part_ids
+    : [requiredSourceId]
+
+  let allPartsCompleted = true
+  for (const partId of requiredParts) {
+    const isCompleted = isQuizPartFullyCompleted(progressKey, partId)
+    if (!isCompleted) {
+      allPartsCompleted = false
+      break
     }
   }
 
-  try {
-    const savedRaw = localStorage.getItem(getTopicCompletionKey(subjectCode, topicLabel))
-      || (canUseLegacyLocalProgress() ? localStorage.getItem(getUnscopedTopicCompletionKey(subjectCode, topicLabel)) : null)
-      || (canUseLegacyLocalProgress() && activeAcademicSection === '401' ? localStorage.getItem(getLegacyTopicCompletionKey(subjectCode, topicLabel)) : null)
-    const subject = subjects.find((item) => item.code === subjectCode)
-    const topic = [...(subject?.topics || []), ...(subject?.clinicalTopics || [])].find((item) => item.label === topicLabel)
-    const aliasStates = (topic?.progressAliases || []).map((alias) => {
-      const aliasCloudState = studentProgressState.topicRows.get(getTopicProgressRecordKey(activeUniversityId, activeAcademicSection, subjectCode, alias))
-      if (studentProgressState.user && aliasCloudState) return aliasCloudState
-      return getLocalTopicCompletionState(subjectCode, alias)
-    })
-    const savedState = JSON.parse(savedRaw || '{}')
-    return {
-      ...emptyState,
-      studied: !!savedState.studied || aliasStates.some((state) => state.studied),
-      mcqs: !!savedState.mcqs || aliasStates.some((state) => state.mcqs)
+  return allPartsCompleted
+}
+
+async function syncRequiredCompletionForTopic(topic) {
+  if (!studentProgressState.user || !topic?.id) return null
+  const result = await syncRequiredTopicCompletion(topic.id)
+  if (!result) return null
+
+  const subject = subjects.find((item) => (
+    [...(item.topics || []), ...(item.clinicalTopics || [])].includes(topic)
+  ))
+  if (!subject) return result
+
+  const normalizedState = {
+    studied: Boolean(result.completed),
+    mcqs: Boolean(result.completed),
+    completion_provenance: result.origin || null,
+    granting_source: result.completed ? topic.required_mcq_source_id : null
+  }
+  const recordKey = getTopicProgressRecordKey(activeUniversityId, activeAcademicSection, subject.code, topic.label)
+  studentProgressState.topicRows.set(recordKey, normalizedState)
+  localStorage.setItem(getTopicCompletionKey(subject.code, topic.label), JSON.stringify(normalizedState))
+  return result
+}
+
+async function syncRequiredCompletionsForQuizProgress(progressKey, sourceId) {
+  if (!studentProgressState.user) return
+  const matchingTopics = subjects.flatMap((subject) => (
+    [...(subject.topics || []), ...(subject.clinicalTopics || [])]
+  )).filter((topic) => {
+    if (!topic.id || !topic.required_mcq_activated_at || !topic.required_mcq_source_id) return false
+    if ((topic.required_mcq_progress_key || topic.label) !== progressKey) return false
+    const requiredIds = topic.required_mcq_part_ids?.length
+      ? topic.required_mcq_part_ids
+      : [topic.required_mcq_source_id]
+    return requiredIds.includes(sourceId)
+  })
+
+  let changed = false
+  for (const topic of matchingTopics) {
+    const result = await syncRequiredCompletionForTopic(topic)
+    changed ||= Boolean(result?.changed)
+  }
+  if (matchingTopics.length) {
+    refreshTrackerFilters()
+    updateGlobalProgress()
+    if (activeSubjectCode) setActiveSubject(activeSubjectCode, 'open')
+  }
+  return changed
+}
+
+function getTopicCompletionState(subjectCode, topicLabel) {
+  const emptyState = { studied: false, mcqs: false }
+  const subject = subjects.find((item) => item.code === subjectCode)
+  const topic = [...(subject?.topics || []), ...(subject?.clinicalTopics || [])].find((item) => item.label === topicLabel || item.aliases?.includes(topicLabel))
+
+  let baseStudied = false
+  let baseMcqs = false
+  let provenance = null
+
+  const aliases = topic?.aliases || topic?.progressAliases || []
+  const cloudState = [topicLabel, ...aliases]
+    .map((label) => studentProgressState.topicRows.get(getTopicProgressRecordKey(activeUniversityId, activeAcademicSection, subjectCode, label)))
+    .find(Boolean)
+  if (studentProgressState.user && cloudState) {
+    baseStudied = !!cloudState.studied
+    baseMcqs = !!cloudState.mcqs
+    provenance = cloudState.completion_provenance || null
+  } else {
+    try {
+      const savedRaw = localStorage.getItem(getTopicCompletionKey(subjectCode, topicLabel))
+        || (canUseLegacyLocalProgress() ? localStorage.getItem(getUnscopedTopicCompletionKey(subjectCode, topicLabel)) : null)
+        || (canUseLegacyLocalProgress() && activeAcademicSection === '401' ? localStorage.getItem(getLegacyTopicCompletionKey(subjectCode, topicLabel)) : null)
+      const aliasStates = aliases.map((alias) => {
+        const aliasCloudState = studentProgressState.topicRows.get(getTopicProgressRecordKey(activeUniversityId, activeAcademicSection, subjectCode, alias))
+        if (studentProgressState.user && aliasCloudState) return aliasCloudState
+        return getLocalTopicCompletionState(subjectCode, alias)
+      })
+      const savedState = JSON.parse(savedRaw || '{}')
+      baseStudied = !!savedState.studied || aliasStates.some((state) => state.studied)
+      baseMcqs = !!savedState.mcqs || aliasStates.some((state) => state.mcqs)
+      provenance = savedState.completion_provenance || null
+    } catch {
+      localStorage.removeItem(getTopicCompletionKey(subjectCode, topicLabel))
     }
-  } catch {
-    localStorage.removeItem(getTopicCompletionKey(subjectCode, topicLabel))
-    return emptyState
+  }
+
+  const reqCompletion = checkRequiredMcqTopicCompletion(subjectCode, topic)
+  let finalStudied = baseStudied
+  let finalMcqs = baseMcqs
+
+  if (reqCompletion !== null) {
+    if (reqCompletion) {
+      finalStudied = true
+      finalMcqs = true
+      provenance = 'required_mcq'
+    } else {
+      if (provenance === 'manual' || provenance === 'legacy' || ((baseStudied || baseMcqs) && !provenance)) {
+        finalStudied = baseStudied || baseMcqs
+        finalMcqs = baseMcqs
+        provenance ||= 'legacy'
+      } else {
+        finalStudied = false
+        finalMcqs = false
+      }
+    }
+  }
+
+  return {
+    ...emptyState,
+    studied: finalStudied,
+    mcqs: finalMcqs,
+    completion_provenance: provenance
   }
 }
 
 function saveTopicCompletionState(subjectCode, topicLabel, state) {
   if (isResourceFirstSection()) return
 
-  const normalizedState = {
-    studied: !!state.studied,
-    mcqs: !!state.mcqs
+  const subject = subjects.find((item) => item.code === subjectCode)
+  const topic = [...(subject?.topics || []), ...(subject?.clinicalTopics || [])].find((item) => item.label === topicLabel || item.aliases?.includes(topicLabel))
+
+  let targetStudied = !!state.studied
+  let targetMcqs = !!state.mcqs
+  const reqCompletion = checkRequiredMcqTopicCompletion(subjectCode, topic)
+
+  if (reqCompletion !== null) {
+    const currentState = getTopicCompletionState(subjectCode, topicLabel)
+    targetStudied = currentState.studied
+    targetMcqs = currentState.mcqs
+    showGlobalToast(`Topic Done badge locked — complete all MCQs in ${topic.required_mcq_source_label || topic.required_mcq_source_id} to earn it.`)
   }
+
+  const normalizedState = {
+    studied: targetStudied,
+    mcqs: targetMcqs,
+    completion_provenance: state.completion_provenance || ((targetStudied || targetMcqs) ? (reqCompletion ? 'required_mcq' : 'manual') : null)
+  }
+
   const recordKey = getTopicProgressRecordKey(activeUniversityId, activeAcademicSection, subjectCode, topicLabel)
   studentProgressState.topicRows.set(recordKey, normalizedState)
 
@@ -4321,7 +4777,9 @@ function saveTopicCompletionState(subjectCode, topicLabel, state) {
       subject_code: subjectCode,
       topic_label: topicLabel,
       studied: normalizedState.studied,
-      mcqs: normalizedState.mcqs
+      mcqs: normalizedState.mcqs,
+      completion_provenance: normalizedState.completion_provenance,
+      granting_source: topic?.required_mcq_source_id || null
     }).catch((error) => {
       studentProgressState.lastError = error.message
       renderStudentSyncUi()
@@ -4334,18 +4792,21 @@ function renderTopicCompletionControls(subject, topic) {
   if (isResourceFirstSection()) return ''
 
   const state = getTopicCompletionState(subject.code, topic.label)
+  const requiredLocked = Boolean(topic.required_mcq_activated_at && topic.required_mcq_source_id)
+  const requiredLabel = topic.required_mcq_source_label || topic.required_mcq_source_id || 'required MCQs'
   const controls = [{ key: 'studied', label: 'Completed' }]
 
   return `
     <fieldset class="topic-completion" aria-label="${escapeHtml(topic.label)} progress">
       ${controls.map((control) => `
-        <label class="topic-completion__item${state[control.key] ? ' is-checked' : ''}">
+        <label class="topic-completion__item${state[control.key] ? ' is-checked' : ''}${requiredLocked ? ' is-locked' : ''}" ${requiredLocked ? `title="Complete every question in ${escapeHtml(requiredLabel)} to unlock completion"` : ''}>
           <input
             type="checkbox"
             data-topic-completion="${control.key}"
             data-subject-code="${escapeHtml(subject.code)}"
             data-topic-label="${escapeHtml(topic.label)}"
             ${state[control.key] ? 'checked' : ''}
+            ${requiredLocked ? 'disabled aria-disabled="true"' : ''}
           >
           <span>${control.label}</span>
         </label>
@@ -5724,6 +6185,7 @@ function saveQuizState({ confirmLevelUp = false } = {}) {
       attempt_started_at: payload.attemptStartedAt,
       completed_at: payload.completed ? new Date().toISOString() : null
     })
+    await syncRequiredCompletionsForQuizProgress(scoringContext.topicLabel, scoringContext.sourceId)
 
     leaderboardState.lastFetched = 0
     liveActivityState.lastFetched = 0
@@ -10245,6 +10707,10 @@ newsAdminForm?.addEventListener('submit', (event) => {
   saveNewsAdminForm(newsAdminForm)
 })
 
+trackerAdminAddTopic?.addEventListener('click', () => {
+  if (!isTrackerAdmin() || !activeSubjectCode) return
+  openAdminTopicEditor(activeSubjectCode, activeSubjectTrack, '')
+})
 trackerAdminSaveOrder?.addEventListener('click', saveAdminArrangement)
 trackerAdminImport?.addEventListener('click', () => openQuestionImportPanel())
 trackerAdminSignOut?.addEventListener('click', () => {

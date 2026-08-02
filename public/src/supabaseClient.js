@@ -4,6 +4,8 @@ let supabaseClient = null
 let trackerTopicsIncludeOptionalColumns = true
 let trackerTopicsIncludeMidtermColumns = true
 let trackerTopicsIncludeCreatedAt = true
+let trackerTopicsIncludeExtendedColumns = true
+let userTopicProgressIncludesProvenance = true
 let userPreferencesIncludeNickname = true
 let userPreferencesIncludeAvatar = true
 let userPreferencesIncludeProfileSetup = true
@@ -66,6 +68,21 @@ function isMissingMidtermColumnError(error) {
 function isMissingCreatedAtError(error) {
   const message = `${error?.message || ''} ${error?.details || ''} ${error?.hint || ''}`
   return /created_at/i.test(message) && /tracker_topics|schema cache|column/i.test(message)
+}
+
+function isMissingExtendedTopicColumnError(error) {
+  const message = `${error?.message || ''} ${error?.details || ''} ${error?.hint || ''}`
+  return /aliases|required_mcq|id/i.test(message) && /tracker_topics|schema cache|column/i.test(message)
+}
+
+function isMissingUserTopicProgressProvenanceError(error) {
+  const message = `${error?.message || ''} ${error?.details || ''} ${error?.hint || ''}`
+  return /completion_provenance|granting_source/i.test(message) && /user_topic_progress|schema cache|column/i.test(message)
+}
+
+function isMissingRpcError(error) {
+  const message = `${error?.message || ''} ${error?.details || ''} ${error?.hint || ''}`
+  return /function|rpc|routine|does not exist/i.test(message)
 }
 
 function isMissingUserPreferenceNicknameError(error) {
@@ -177,7 +194,7 @@ export async function fetchQuestionSources({ universityId, section, subjectCode,
 
   let query = supabase
     .from('question_sources')
-    .select('public_id, university_id, section, subject_code, topic_label, title, reference_text, created_at')
+    .select('public_id, university_id, section, subject_code, topic_label, title, reference_text, organization, created_at')
     .eq('university_id', universityId)
     .eq('section', section)
     .order('title')
@@ -199,7 +216,7 @@ export async function fetchQuestionImports({ universityId, section, status = '' 
 
   let query = supabase
     .from('question_imports')
-    .select('public_id, university_id, section, subject_code, topic_label, status, raw_text, question_count, blocking_issue_count, warning_count, parser_version, created_at, updated_at, published_at, source:question_sources(public_id, title, reference_text)')
+    .select('public_id, university_id, section, subject_code, topic_label, status, raw_text, question_count, blocking_issue_count, warning_count, parser_version, organization, created_at, updated_at, published_at, source:question_sources(public_id, title, reference_text, organization)')
     .eq('university_id', universityId)
     .eq('section', section)
     .order('created_at', { ascending: false })
@@ -235,7 +252,7 @@ export async function fetchQuestionFingerprintMatches({ universityId, section, f
   return data || []
 }
 
-export async function submitQuestionImport({ scope, source, rawText, parserVersion, questions, issues }) {
+export async function submitQuestionImport({ scope, source, rawText, parserVersion, questions, issues, organization }) {
   const supabase = getSupabaseClient()
   if (!supabase) throw new Error('Supabase is not configured.')
   if (!questionImportSchemaAvailable) throw new Error('Question importing is not enabled on this Supabase project yet.')
@@ -256,12 +273,37 @@ export async function submitQuestionImport({ scope, source, rawText, parserVersi
   const payloadIssues = issues
     .filter((issue) => issue.code !== 'exact_existing_question_match')
     .map((issue) => ({
-    code: issue.code,
-    severity: issue.severity,
-    message: issue.message,
-    question_index: issue.questionIndex,
-    details: { ...issue.details, location: issue.location }
+      code: issue.code,
+      severity: issue.severity,
+      message: issue.message,
+      question_index: issue.questionIndex,
+      details: { ...issue.details, location: issue.location }
     }))
+
+  try {
+    const { data, error } = await supabase.rpc('submit_question_import_v2', {
+      p_scope: {
+        university_id: scope.universityId,
+        section: scope.section,
+        subject_code: scope.subjectCode,
+        topic_label: scope.topicLabel
+      },
+      p_source: {
+        public_id: source.publicId || null,
+        title: source.title,
+        reference_text: source.referenceText || null
+      },
+      p_raw_text: rawText,
+      p_parser_version: parserVersion,
+      p_questions: payloadQuestions,
+      p_issues: payloadIssues,
+      p_organization: organization || null
+    })
+    if (!error && data) return data
+    if (error && !isMissingRpcError(error)) handleQuestionImportError(error, 'Question import could not be saved.')
+  } catch (err) {
+    if (!isMissingRpcError(err)) throw err
+  }
 
   const { data, error } = await supabase.rpc('submit_question_import', {
     p_scope: {
@@ -322,7 +364,7 @@ export async function removeQuestionImport(publicId) {
   return Number(data) || 0
 }
 
-export async function replaceQuestionImport({ publicId, rawText, parserVersion, questions, issues }) {
+export async function replaceQuestionImport({ publicId, rawText, parserVersion, questions, issues, organization }) {
   const supabase = getSupabaseClient()
   if (!supabase) throw new Error('Supabase is not configured.')
 
@@ -349,6 +391,21 @@ export async function replaceQuestionImport({ publicId, rawText, parserVersion, 
       details: { ...issue.details, location: issue.location }
     }))
 
+  try {
+    const { data, error } = await supabase.rpc('replace_question_import_v2', {
+      p_import_public_id: publicId,
+      p_raw_text: rawText,
+      p_parser_version: parserVersion,
+      p_questions: payloadQuestions,
+      p_issues: payloadIssues,
+      p_organization: organization || null
+    })
+    if (!error && data !== null && data !== undefined) return Number(data) || 0
+    if (error && !isMissingRpcError(error)) handleQuestionImportError(error, 'Published question set could not be replaced.')
+  } catch (err) {
+    if (!isMissingRpcError(err)) throw err
+  }
+
   const { data, error } = await supabase.rpc('replace_question_import', {
     p_import_public_id: publicId,
     p_raw_text: rawText,
@@ -366,7 +423,7 @@ export async function fetchPublishedQuestionRows({ universityId, section } = {})
 
   const { data, error } = await supabase
     .from('questions')
-    .select('public_id, university_id, section, subject_code, topic_label, source_order, stem, explanation, stem_fingerprint, published_at, source:question_sources(public_id, title, reference_text), choices:question_choices(choice_key, choice_text, display_order, is_correct)')
+    .select('public_id, university_id, section, subject_code, topic_label, source_order, stem, explanation, stem_fingerprint, published_at, source:question_sources(public_id, title, reference_text, organization), choices:question_choices(choice_key, choice_text, display_order, is_correct)')
     .eq('university_id', universityId)
     .eq('section', section)
     .eq('status', 'published')
@@ -388,8 +445,11 @@ export async function fetchTrackerTopicRows(universityId = 'must') {
   const optionalFields = trackerTopicsIncludeOptionalColumns ? ', drive_url, audio_url, display_order' : ''
   const midtermFields = trackerTopicsIncludeMidtermColumns ? ', midterm_scope, midterm_scope_note' : ''
   const createdAtField = trackerTopicsIncludeCreatedAt ? ', created_at' : ''
+  const extendedFields = trackerTopicsIncludeExtendedColumns
+    ? ', id, legacy_labels, required_mcq_source_id, required_mcq_source_label, required_mcq_progress_key, required_mcq_part_ids, required_mcq_activated_at'
+    : ''
   const universityField = universityIsolationAvailable ? 'university_id, ' : ''
-  const selectFields = `${universityField}section, subject_code, subject_name, track, topic_label, state, stop_note${optionalFields}${midtermFields}${createdAtField}, updated_at`
+  const selectFields = `${universityField}section, subject_code, subject_name, track, topic_label, state, stop_note${optionalFields}${midtermFields}${extendedFields}${createdAtField}, updated_at`
 
   let query = supabase
     .from('tracker_topics')
@@ -401,6 +461,10 @@ export async function fetchTrackerTopicRows(universityId = 'must') {
   if (universityIsolationAvailable) query = query.eq('university_id', universityId)
   const { data, error } = await query
 
+  if (error && trackerTopicsIncludeExtendedColumns && isMissingExtendedTopicColumnError(error)) {
+    trackerTopicsIncludeExtendedColumns = false
+    return fetchTrackerTopicRows(universityId)
+  }
   if (error && trackerTopicsIncludeMidtermColumns && isMissingMidtermColumnError(error)) {
     trackerTopicsIncludeMidtermColumns = false
     return fetchTrackerTopicRows(universityId)
@@ -614,20 +678,68 @@ export async function deleteTrackerTopic(row) {
   return (data || []).map((item) => ({ university_id: row.university_id || 'must', ...item }))
 }
 
+export async function saveTrackerTopic(topicId, topicPayload, requiredMcq) {
+  const supabase = getSupabaseClient()
+  if (!supabase) throw new Error('Supabase is not configured.')
+
+  assertUniversityWriteAvailable(topicPayload.university_id || 'must')
+
+  try {
+    const { data, error } = await supabase.rpc('save_tracker_topic', {
+      p_topic_id: topicId || null,
+      p_topic: topicPayload,
+      p_required_mcq: requiredMcq
+    })
+    if (!error && data) {
+      return data
+    }
+    if (error && !isMissingRpcError(error)) {
+      throw error
+    }
+  } catch (error) {
+    if (!isMissingRpcError(error)) throw error
+  }
+
+  const rows = await upsertTrackerTopics([topicPayload])
+  return rows[0] || topicPayload
+}
+
+export async function syncRequiredTopicCompletion(topicId) {
+  const supabase = getSupabaseClient()
+  if (!supabase || !topicId) return null
+
+  try {
+    const { data, error } = await supabase.rpc('sync_required_topic_completion', {
+      p_topic_id: topicId
+    })
+    if (error && isMissingRpcError(error)) return null
+    if (error) throw error
+    return data || null
+  } catch (error) {
+    if (isMissingRpcError(error)) return null
+    throw error
+  }
+}
+
 export async function fetchUserTopicProgressRows(universityId, section) {
   const supabase = getSupabaseClient()
   if (!supabase) return []
   if (!universityIsolationAvailable && universityId !== 'must') return []
 
+  const provenanceFields = userTopicProgressIncludesProvenance ? ', completion_provenance, granting_source' : ''
   let query = supabase
     .from('user_topic_progress')
     .select(universityIsolationAvailable
-      ? 'university_id, section, subject_code, topic_label, studied, mcqs, updated_at'
-      : 'section, subject_code, topic_label, studied, mcqs, updated_at')
+      ? `university_id, section, subject_code, topic_label, studied, mcqs${provenanceFields}, updated_at`
+      : `section, subject_code, topic_label, studied, mcqs${provenanceFields}, updated_at`)
     .eq('section', section)
   if (universityIsolationAvailable) query = query.eq('university_id', universityId)
   const { data, error } = await query
 
+  if (error && userTopicProgressIncludesProvenance && isMissingUserTopicProgressProvenanceError(error)) {
+    userTopicProgressIncludesProvenance = false
+    return fetchUserTopicProgressRows(universityId, section)
+  }
   if (error && universityIsolationAvailable && isMissingUniversityIsolationError(error)) {
     universityIsolationAvailable = false
     return fetchUserTopicProgressRows(universityId, section)
@@ -642,6 +754,7 @@ export async function upsertUserTopicProgress(row) {
 
   assertUniversityWriteAvailable(row.university_id || 'must')
   const payload = universityIsolationAvailable ? row : stripUniversityField(row)
+  const provenanceFields = userTopicProgressIncludesProvenance ? ', completion_provenance, granting_source' : ''
   const { data, error } = await supabase
     .from('user_topic_progress')
     .upsert(payload, {
@@ -650,10 +763,14 @@ export async function upsertUserTopicProgress(row) {
         : 'user_id,section,subject_code,topic_label'
     })
     .select(universityIsolationAvailable
-      ? 'university_id, section, subject_code, topic_label, studied, mcqs, updated_at'
-      : 'section, subject_code, topic_label, studied, mcqs, updated_at')
+      ? `university_id, section, subject_code, topic_label, studied, mcqs${provenanceFields}, updated_at`
+      : `section, subject_code, topic_label, studied, mcqs${provenanceFields}, updated_at`)
     .single()
 
+  if (error && userTopicProgressIncludesProvenance && isMissingUserTopicProgressProvenanceError(error)) {
+    userTopicProgressIncludesProvenance = false
+    return upsertUserTopicProgress(row)
+  }
   if (error && universityIsolationAvailable && isMissingUniversityIsolationError(error)) {
     universityIsolationAvailable = false
     return upsertUserTopicProgress(row)

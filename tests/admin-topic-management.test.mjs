@@ -1,0 +1,70 @@
+import assert from 'node:assert/strict'
+import { readFileSync } from 'node:fs'
+import test from 'node:test'
+
+const read = (path) => readFileSync(new URL(`../${path}`, import.meta.url), 'utf8')
+
+const migration = read('supabase/migrations/20260802180000_admin_topic_management_and_required_mcq.sql')
+const main = read('src/main.js')
+const client = read('src/supabaseClient.js')
+const adapter = read('src/questionDatabaseAdapter.js')
+const style = read('src/style.css')
+const index = read('index.html')
+
+test('topic management migration defines canonical columns, indexes, and RLS-compatible RPCs', () => {
+  assert.match(migration, /alter table public\.tracker_topics[\s\S]*add column if not exists id uuid/i)
+  assert.match(migration, /add column if not exists legacy_labels text\[\]/i)
+  assert.match(migration, /add column if not exists required_mcq_source_id text/i)
+  assert.match(migration, /add column if not exists required_mcq_part_ids text\[\]/i)
+  assert.match(migration, /add column if not exists required_mcq_activated_at timestamptz/i)
+  assert.match(migration, /alter table public\.user_topic_progress[\s\S]*add column if not exists completion_provenance text/i)
+  assert.match(migration, /add constraint user_topic_progress_completion_provenance_check[\s\S]*check \(/i)
+  assert.match(migration, /completion_provenance in \('manual', 'legacy', 'required_mcq'\)/i)
+  assert.match(migration, /add column if not exists granting_source text/i)
+  assert.match(migration, /alter table public\.question_sources[\s\S]*organization jsonb/i)
+  assert.match(migration, /alter table public\.question_imports[\s\S]*organization jsonb/i)
+
+  assert.match(migration, /create unique index if not exists tracker_topics_scoped_label_lower_idx/i)
+  assert.match(migration, /lower\(btrim\(topic_label\)\)/i)
+  assert.match(migration, /create index if not exists tracker_topics_required_mcq_idx/i)
+  assert.match(migration, /create index if not exists user_topic_progress_required_source_idx/i)
+
+  assert.match(migration, /create or replace function public\.save_tracker_topic/i)
+  assert.match(migration, /create or replace function public\.sync_required_topic_completion/i)
+  assert.match(migration, /create or replace function public\.submit_question_import_v2/i)
+  assert.match(migration, /create or replace function public\.replace_question_import_v2/i)
+
+  assert.match(migration, /create or replace function public\.save_tracker_topic\([\s\S]*?security definer[\s\S]*?set search_path = ''[\s\S]*?is_question_scope_admin\(v_university_id, v_section\)/i)
+  assert.match(migration, /revoke all on function public\.save_tracker_topic\(uuid, jsonb, jsonb\)\s+from public, anon/i)
+  assert.match(migration, /grant execute on function public\.save_tracker_topic\(uuid, jsonb, jsonb\)\s+to authenticated/i)
+})
+
+test('frontend integrates toolbar Add Topic, topic editor reuse, required MCQ selector, and atomic rename', () => {
+  assert.match(index, /id="tracker-admin-add-topic">Add topic<\/button>/i)
+  assert.match(main, /trackerAdminAddTopic/i)
+  assert.match(main, /openAdminTopicEditor\(activeSubjectCode, activeSubjectTrack, ''\)/i)
+  assert.match(main, /getTopicSelectableRequiredSources/i)
+  assert.match(main, /data-is-new="\${isNew}"/i)
+  assert.match(main, /name="topic_label"/i)
+  assert.match(main, /name="required_mcq_source_id"/i)
+  assert.match(main, /name="required_mcq_active"/i)
+  assert.match(main, /saveAdminTopicForm/i)
+  assert.match(main, /saveTrackerTopic\(topic\.id, payload, requiredMcq\)/i)
+  assert.match(main, /migrateTopicLocalStorage/i)
+  assert.match(main, /showGlobalToast\(isNew \? 'Topic created successfully\.' : 'Topic updated successfully\.'\)/i)
+  assert.match(style, /\.admin-edit-req-mcq/i)
+  assert.match(style, /\.admin-req-warning/i)
+  assert.match(style, /\.admin-req-status/i)
+})
+
+test('required MCQ completion enforcement, grandfathering, and quiz adapter organization round-trip', () => {
+  assert.match(main, /checkRequiredMcqTopicCompletion/i)
+  assert.match(main, /isQuizPartFullyCompleted/i)
+  assert.match(main, /provenance === 'manual' \|\| provenance === 'legacy'/i)
+  assert.match(main, /Topic Done badge locked — complete all MCQs in/i)
+  assert.match(client, /saveTrackerTopic/i)
+  assert.match(client, /syncRequiredTopicCompletion/i)
+  assert.match(client, /submit_question_import_v2/i)
+  assert.match(client, /replace_question_import_v2/i)
+  assert.match(adapter, /organization: row\.source\?\.organization \|\| null/i)
+})

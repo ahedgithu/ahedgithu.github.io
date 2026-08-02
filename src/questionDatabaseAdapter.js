@@ -14,7 +14,8 @@ export function mapPublishedQuestionRowsToSources(rows, resolveTopicKey) {
         mcqs: [],
         shuffleQuestions: false,
         shuffleOptions: false,
-        mode: 'standard',
+        mode: row.source?.organization?.mode || 'standard',
+        organization: row.source?.organization || null,
         databaseBacked: true
       })
     }
@@ -26,9 +27,49 @@ export function mapPublishedQuestionRowsToSources(rows, resolveTopicKey) {
       correctOptionId: orderedChoices.find((choice) => choice.is_correct)?.choice_key || '',
       explanation: row.explanation || '',
       source: row.source?.title || '',
+      sourceOrder: Number(row.source_order) || 0,
       section: row.subject_code,
       topicTags: [row.topic_label, row.subject_code]
     })
   })
-  return new Map([...byTopic].map(([topicKey, sources]) => [topicKey, [...sources.values()]]))
+
+  return new Map([...byTopic].map(([topicKey, sources]) => [
+    topicKey,
+    [...sources.values()].map((source) => {
+      source.mcqs.sort((a, b) => a.sourceOrder - b.sourceOrder)
+      const organizationParts = Array.isArray(source.organization?.parts)
+        ? [...source.organization.parts]
+          .filter((part) => part && part.key && Number(part.startOrder) > 0 && Number(part.endOrder) >= Number(part.startOrder))
+          .sort((a, b) => Number(a.displayOrder) - Number(b.displayOrder))
+        : []
+
+      if (organizationParts.length) {
+        const partCount = organizationParts.length
+        const groupId = `${source.id}::group`
+        source.collection = {
+          groups: [{
+            id: groupId,
+            label: source.organization.groupLabel || source.label,
+            parts: organizationParts.map((part, index) => ({
+              id: `${source.id}::${part.key}`,
+              label: part.label || `Part ${index + 1}`,
+              description: part.description || '',
+              mcqs: source.mcqs.filter((question) => (
+                question.sourceOrder >= Number(part.startOrder)
+                && question.sourceOrder <= Number(part.endOrder)
+              )),
+              parentSourceId: source.id,
+              groupId,
+              groupLabel: source.organization.groupLabel || source.label,
+              partIndex: index,
+              partCount,
+              mode: 'standard'
+            }))
+          }]
+        }
+      }
+
+      return source
+    })
+  ]))
 }
