@@ -55,7 +55,7 @@ test('application modules are valid and mirrored', () => {
     execFileSync(process.execPath, ['--check', file], { cwd: new URL('..', import.meta.url) })
   }
 
-  const mirroredFiles = ['main.js', 'data/must-401.js', 'data/must-402.js', 'data/must/101.js', 'data/must/102.js', 'data/must/201.js', 'data/must/202.js', 'data/must/301.js', 'data/must/302.js', 'data/must/drive-manifest.js', 'data/must/sections.js', 'audioFeedback.js', 'admin.js', 'analytics.js', 'knowledgeLibrary.js', 'mcqs.js', 'sur1-kellawi-mcqs.js', 'sur1-past-exam-mcqs.js', 'sur1-matching-questions.js', 'sur402-past-exam-mcqs.js', 'sur402-textbook-mcqs.js', 'sur402-amr-beshry-mcqs.js', 'med402-endocrine-mcqs.js', 'med402-neurology-mcqs.js', 'med402-neuro-extra-mcqs.js', 'med402-old-psychiatry-mcqs.js', 'med402-zatoona-psychiatry-mcqs.js', 'gyn402-nadine-vip-midterm-mcqs.js', 'gyn402-question-bank-mcqs.js', 'gyn402-filtered-master-bank.js', 'med2-cardio-chest-mcqs.js', 'med1-kellawi-mcqs.js', 'med1-mw-ragab-mcqs.js', 'med1-hepatology-final-review-mcqs.js', 'med1-alshamel-mcqs.js', 'o6u-physical-therapy-mcqs.js', 'progress.js', 'style.css', 'supabaseClient.js']
+  const mirroredFiles = ['main.js', 'data/must-401.js', 'data/must-402.js', 'data/must/101.js', 'data/must/102.js', 'data/must/201.js', 'data/must/202.js', 'data/must/301.js', 'data/must/302.js', 'data/must/drive-manifest.js', 'data/must/sections.js', 'audioFeedback.js', 'admin.js', 'analytics.js', 'knowledgeLibrary.js', 'mcqs.js', 'sur1-kellawi-mcqs.js', 'sur1-past-exam-mcqs.js', 'sur1-matching-questions.js', 'sur402-past-exam-mcqs.js', 'sur402-textbook-mcqs.js', 'sur402-amr-beshry-mcqs.js', 'med402-endocrine-mcqs.js', 'med402-neurology-mcqs.js', 'med402-neuro-extra-mcqs.js', 'med402-old-psychiatry-mcqs.js', 'med402-zatoona-psychiatry-mcqs.js', 'gyn402-nadine-vip-midterm-mcqs.js', 'gyn402-question-bank-mcqs.js', 'gyn402-filtered-master-bank.js', 'med2-cardio-chest-mcqs.js', 'med1-kellawi-mcqs.js', 'med1-mw-ragab-mcqs.js', 'med1-hepatology-final-review-mcqs.js', 'med1-alshamel-mcqs.js', 'o6u-physical-therapy-mcqs.js', 'progress.js', 'questionDatabaseAdapter.js', 'questionTextParser.js', 'style.css', 'supabaseClient.js']
   for (const file of mirroredFiles) {
     assert.equal(read(`src/${file}`), read(`public/src/${file}`), `${file} mirror is out of sync`)
   }
@@ -84,7 +84,7 @@ test('tracker search splits topics and MCQs with focused question launch', () =>
   assert.match(html, /data-search-mode="mcqs"[^>]*aria-pressed="false"/)
   assert.match(html, /id="mcq-search-results"[^>]*aria-live="polite"[^>]*hidden/)
   assert.match(html, /style\.css\?v=20260[78]/)
-  assert.match(html, /main\.js\?v=20260801-mcq-control-biliary-v1/)
+  assert.match(html, /main\.js\?v=20260802-question-import-parts-v1/)
 
   for (const helper of [
     'normalizeMcqSearchText',
@@ -1124,7 +1124,7 @@ test('Google login is mandatory and the academic section is account-bound', () =
   assert.match(mainSource, /\$\{TOPIC_COMPLETION_STORAGE_PREFIX\}::\$\{getProgressStorageOwnerId\(\)\}::\$\{activeUniversityId\}::\$\{section\}/)
   assert.match(schedule, /window\.location\.replace\('\/#schedule'\)/)
   assert.match(html, /style\.css\?v=20260[78]/)
-  assert.match(html, /main\.js\?v=20260801-mcq-control-biliary-v1/)
+  assert.match(html, /main\.js\?v=20260802-question-import-parts-v1/)
 })
 
 test('O6U Physical Therapy is selectable, isolated, branded, and has PT-PHYS MCQs', () => {
@@ -1320,7 +1320,7 @@ test('student profile opens as a standalone gamified page', () => {
   assert.match(html, /data-profile-open/)
   assert.match(html, /data-profile-edit-nickname/)
   assert.match(profileHtml, /style\.css\?v=20260[78]/)
-  assert.match(profileHtml, /main\.js\?v=20260801-mcq-control-biliary-v1/)
+  assert.match(profileHtml, /main\.js\?v=20260802-question-import-parts-v1/)
   assert.match(profileHtml, /class="profile-auth-visual"/)
   assert.match(profileHtml, /data-auth-panel="checking"[\s\S]*Preparing your profile/)
   assert.match(profileHtml, /data-auth-panel="signed-out"[\s\S]*data-auth-login/)
@@ -1572,8 +1572,8 @@ test('lifetime leaderboard repair rebuilds section-wide scores without touching 
   assert.match(mainSource, /All-time MCQ points/)
   assert.match(mainSource, /Lifetime scores update automatically/)
   assert.equal(mainSource, publicMainSource)
-  assert.match(indexHtml, /main\.js\?v=20260801-mcq-control-biliary-v1/)
-  assert.match(profileHtml, /main\.js\?v=20260801-mcq-control-biliary-v1/)
+  assert.match(indexHtml, /main\.js\?v=20260802-question-import-parts-v1/)
+  assert.match(profileHtml, /main\.js\?v=20260802-question-import-parts-v1/)
 })
 
 test('topic actions are accessible boxless premium icons and legacy PWA state is cleaned up', () => {
@@ -1637,7 +1637,7 @@ test('section selector is the responsive university-first onboarding landing', (
   assert.match(style, /\.home-review-screenshot--fit\s*\{[^}]*object-fit:\s*contain;[^}]*object-position:\s*left center;/s)
   assert.equal((html.match(/review5\.jpg" class="home-review-screenshot home-review-screenshot--fit"/g) || []).length, 2)
   assert.match(html, /style\.css\?v=20260[78]/)
-  assert.match(html, /main\.js\?v=20260801-mcq-control-biliary-v1/)
+  assert.match(html, /main\.js\?v=20260802-question-import-parts-v1/)
   assert.match(style, /body\[data-site-mode="selector"\] > main > \.site-footer/)
 
   for (const file of ['review1.jpg', 'review2.jpg', 'review3.jpg', 'review4.jpg', 'review5.jpg', 'review6.png', 'review7.png', 'review8.png']) {

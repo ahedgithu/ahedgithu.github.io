@@ -1,0 +1,11 @@
+Q: Short?
+A) Repeated choice
+B) Repeated choice
+C) Third choice
+ANSWER: Z
+Q: Missing separator creates a blocker
+A) First choice
+B) Second choice
+C) Third choice
+D) Fourth choice
+ANSWER: A

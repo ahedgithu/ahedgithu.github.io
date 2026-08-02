@@ -40,7 +40,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&display=swap" rel="stylesheet" />
   <meta name="theme-color" content="#315f72" />
-  <link rel="stylesheet" href="/src/style.css?v=20260801-mcq-control-biliary-v1" />
+  <link rel="stylesheet" href="/src/style.css?v=20260802-question-import-parts-v1" />
 
 </head>
 <body data-auth-state="checking">
@@ -218,6 +218,7 @@
         <span><strong>Admin mode</strong><small id="tracker-admin-email"></small></span>
         <span class="tracker-admin-toolbar__subject" id="tracker-admin-subject">Choose a subject</span>
         <button type="button" id="tracker-admin-save-order" disabled>Save arrangement</button>
+        <button type="button" id="tracker-admin-import" hidden>Manage imports</button>
         <button type="button" id="tracker-admin-sign-out">Student view</button>
       </div>
       <h1 class="sr-only" id="tracker-title">401</h1>
@@ -1225,6 +1226,7 @@
   </main>
 
   <aside class="admin-edit-panel" id="tracker-admin-edit-panel" aria-label="Edit tracker topic" hidden></aside>
+  <aside class="question-import-panel" id="question-import-panel" role="dialog" aria-modal="true" aria-label="Import text MCQs" hidden></aside>
 
   <div class="admin-login-modal" id="admin-login-modal" hidden>
     <button class="admin-login-modal__backdrop" type="button" data-admin-login-close aria-label="Close admin login"></button>
@@ -1303,7 +1305,7 @@
       }
     }
   </script>
-  <script type="module" src="/src/main.js?v=20260801-mcq-control-biliary-v1"></script>
+  <script type="module" src="/src/main.js?v=20260802-question-import-parts-v1"></script>
 
   <script defer src="/pwa.js?v=20260712-pwa-cleanup-v1"></script>
 </body>

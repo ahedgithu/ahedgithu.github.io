@@ -963,6 +963,6 @@ test('all touched src/public mirrors are byte-identical and cache versions are s
   assert.ok(indexMatch, 'index.html must specify a main.js cache version')
   assert.ok(profileMatch, 'profile.html must specify a main.js cache version')
   assert.equal(indexMatch[1], profileMatch[1], 'index.html and profile.html cache versions must be synchronized')
-  assert.match(indexHtml, /style\.css\?v=20260801-mcq-control-biliary-v1/)
-  assert.match(profileHtml, /style\.css\?v=20260801-mcq-control-biliary-v1/)
+  assert.match(indexHtml, /style\.css\?v=20260802-question-import-parts-v1/)
+  assert.match(profileHtml, /style\.css\?v=20260802-question-import-parts-v1/)
 })

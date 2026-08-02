@@ -1,0 +1,16 @@
+Q: Which statement is correct?
+A) First choice
+B) Second choice
+C) Third choice
+D) Fourth choice
+ANSWER: B
+EXPLANATION: Source-faithful explanation.
+---
+Q: Which option is most appropriate next?
+A) First option
+B) Second option
+C) Third option
+D) Fourth option
+E) Fifth option
+ANSWER: D
+EXPLANATION: Another supplied explanation.

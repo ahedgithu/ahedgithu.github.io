@@ -9,6 +9,7 @@ let userPreferencesIncludeAvatar = true
 let userPreferencesIncludeProfileSetup = true
 let userQuizProgressIncludesAttemptMetadata = true
 let universityIsolationAvailable = true
+let questionImportSchemaAvailable = true
 
 export function getSupabaseConfig() {
   const windowConfig = window.SUPABASE_CONFIG || {}
@@ -93,6 +94,23 @@ function isMissingUniversityIsolationError(error) {
     && /schema cache|column|function|parameter|argument/i.test(message)
 }
 
+function isMissingQuestionImportSchemaError(error) {
+  const message = `${error?.message || ''} ${error?.details || ''} ${error?.hint || ''}`
+  return /question_sources|question_imports|question_choices|question_validation_issues|submit_question_import|publish_question_import/i.test(message)
+    && /schema cache|relation|table|function|could not find|does not exist/i.test(message)
+}
+
+function handleQuestionImportError(error, fallbackMessage) {
+  if (isMissingQuestionImportSchemaError(error)) {
+    questionImportSchemaAvailable = false
+    throw new Error('Question importing is not enabled on this Supabase project yet.')
+  }
+  const message = error?.message || fallbackMessage
+  const normalized = new Error(message)
+  normalized.code = error?.code || ''
+  throw normalized
+}
+
 function assertUniversityWriteAvailable(universityId) {
   if (!universityIsolationAvailable && universityId !== 'must') {
     throw new Error('The local university-isolation migration must be applied before non-MUST cloud data can be saved.')
@@ -147,6 +165,219 @@ function stripUnsupportedUserPreferenceFields(row) {
   payload = userPreferencesIncludeProfileSetup ? payload : stripUserPreferenceProfileSetup(payload)
   payload = universityIsolationAvailable ? payload : stripUniversityField(payload)
   return payload
+}
+
+export function isQuestionImportEnabled() {
+  return questionImportSchemaAvailable && isSupabaseConfigured()
+}
+
+export async function fetchQuestionSources({ universityId, section, subjectCode, topicLabel } = {}) {
+  const supabase = getSupabaseClient()
+  if (!supabase || !questionImportSchemaAvailable) return []
+
+  let query = supabase
+    .from('question_sources')
+    .select('public_id, university_id, section, subject_code, topic_label, title, reference_text, created_at')
+    .eq('university_id', universityId)
+    .eq('section', section)
+    .order('title')
+  if (subjectCode) query = query.eq('subject_code', subjectCode)
+  if (topicLabel) query = query.eq('topic_label', topicLabel)
+
+  const { data, error } = await query
+  if (error && isMissingQuestionImportSchemaError(error)) {
+    questionImportSchemaAvailable = false
+    return []
+  }
+  if (error) handleQuestionImportError(error, 'Question sources could not be loaded.')
+  return data || []
+}
+
+export async function fetchQuestionImports({ universityId, section, status = '' } = {}) {
+  const supabase = getSupabaseClient()
+  if (!supabase || !questionImportSchemaAvailable) return []
+
+  let query = supabase
+    .from('question_imports')
+    .select('public_id, university_id, section, subject_code, topic_label, status, raw_text, question_count, blocking_issue_count, warning_count, parser_version, created_at, updated_at, published_at, source:question_sources(public_id, title, reference_text)')
+    .eq('university_id', universityId)
+    .eq('section', section)
+    .order('created_at', { ascending: false })
+    .limit(40)
+  if (status) query = query.eq('status', status)
+
+  const { data, error } = await query
+  if (error && isMissingQuestionImportSchemaError(error)) {
+    questionImportSchemaAvailable = false
+    return []
+  }
+  if (error) handleQuestionImportError(error, 'Question imports could not be loaded.')
+  return data || []
+}
+
+export async function fetchQuestionFingerprintMatches({ universityId, section, fingerprints = [] } = {}) {
+  const supabase = getSupabaseClient()
+  const uniqueFingerprints = [...new Set(fingerprints.filter(Boolean))]
+  if (!supabase || !questionImportSchemaAvailable || !uniqueFingerprints.length) return []
+
+  const { data, error } = await supabase
+    .from('questions')
+    .select('public_id, stem_fingerprint, status, subject_code, topic_label')
+    .eq('university_id', universityId)
+    .eq('section', section)
+    .in('stem_fingerprint', uniqueFingerprints)
+
+  if (error && isMissingQuestionImportSchemaError(error)) {
+    questionImportSchemaAvailable = false
+    return []
+  }
+  if (error) handleQuestionImportError(error, 'Existing questions could not be checked for duplicates.')
+  return data || []
+}
+
+export async function submitQuestionImport({ scope, source, rawText, parserVersion, questions, issues }) {
+  const supabase = getSupabaseClient()
+  if (!supabase) throw new Error('Supabase is not configured.')
+  if (!questionImportSchemaAvailable) throw new Error('Question importing is not enabled on this Supabase project yet.')
+
+  const payloadQuestions = questions.map((question) => ({
+    source_order: question.sourceOrder,
+    stem: question.stem,
+    explanation: question.explanation,
+    stem_fingerprint: question.stemFingerprint,
+    has_blockers: question.hasBlockers,
+    choices: question.choices.map((choice) => ({
+      key: choice.key,
+      text: choice.text,
+      display_order: choice.displayOrder,
+      is_correct: choice.isCorrect
+    }))
+  }))
+  const payloadIssues = issues
+    .filter((issue) => issue.code !== 'exact_existing_question_match')
+    .map((issue) => ({
+    code: issue.code,
+    severity: issue.severity,
+    message: issue.message,
+    question_index: issue.questionIndex,
+    details: { ...issue.details, location: issue.location }
+    }))
+
+  const { data, error } = await supabase.rpc('submit_question_import', {
+    p_scope: {
+      university_id: scope.universityId,
+      section: scope.section,
+      subject_code: scope.subjectCode,
+      topic_label: scope.topicLabel
+    },
+    p_source: {
+      public_id: source.publicId || null,
+      title: source.title,
+      reference_text: source.referenceText || null
+    },
+    p_raw_text: rawText,
+    p_parser_version: parserVersion,
+    p_questions: payloadQuestions,
+    p_issues: payloadIssues
+  })
+
+  if (error) handleQuestionImportError(error, 'Question import could not be saved.')
+  return data
+}
+
+export async function rejectQuestionImport(publicId) {
+  const supabase = getSupabaseClient()
+  if (!supabase) throw new Error('Supabase is not configured.')
+
+  const { data, error } = await supabase
+    .from('question_imports')
+    .update({ status: 'rejected', reviewed_by: (await supabase.auth.getUser()).data.user?.id || null })
+    .eq('public_id', publicId)
+    .select('public_id, status')
+    .single()
+
+  if (error) handleQuestionImportError(error, 'Question import could not be rejected.')
+  return data
+}
+
+export async function publishQuestionImport(publicId) {
+  const supabase = getSupabaseClient()
+  if (!supabase) throw new Error('Supabase is not configured.')
+
+  const { data, error } = await supabase.rpc('publish_question_import', {
+    p_import_public_id: publicId
+  })
+  if (error) handleQuestionImportError(error, 'Question import could not be published.')
+  return Number(data) || 0
+}
+
+export async function removeQuestionImport(publicId) {
+  const supabase = getSupabaseClient()
+  if (!supabase) throw new Error('Supabase is not configured.')
+
+  const { data, error } = await supabase.rpc('remove_question_import', {
+    p_import_public_id: publicId
+  })
+  if (error) handleQuestionImportError(error, 'Published question set could not be removed.')
+  return Number(data) || 0
+}
+
+export async function replaceQuestionImport({ publicId, rawText, parserVersion, questions, issues }) {
+  const supabase = getSupabaseClient()
+  if (!supabase) throw new Error('Supabase is not configured.')
+
+  const payloadQuestions = questions.map((question) => ({
+    source_order: question.sourceOrder,
+    stem: question.stem,
+    explanation: question.explanation,
+    stem_fingerprint: question.stemFingerprint,
+    has_blockers: question.hasBlockers,
+    choices: question.choices.map((choice) => ({
+      key: choice.key,
+      text: choice.text,
+      display_order: choice.displayOrder,
+      is_correct: choice.isCorrect
+    }))
+  }))
+  const payloadIssues = issues
+    .filter((issue) => issue.code !== 'exact_existing_question_match')
+    .map((issue) => ({
+      code: issue.code,
+      severity: issue.severity,
+      message: issue.message,
+      question_index: issue.questionIndex,
+      details: { ...issue.details, location: issue.location }
+    }))
+
+  const { data, error } = await supabase.rpc('replace_question_import', {
+    p_import_public_id: publicId,
+    p_raw_text: rawText,
+    p_parser_version: parserVersion,
+    p_questions: payloadQuestions,
+    p_issues: payloadIssues
+  })
+  if (error) handleQuestionImportError(error, 'Published question set could not be replaced.')
+  return Number(data) || 0
+}
+
+export async function fetchPublishedQuestionRows({ universityId, section } = {}) {
+  const supabase = getSupabaseClient()
+  if (!supabase || !questionImportSchemaAvailable) return []
+
+  const { data, error } = await supabase
+    .from('questions')
+    .select('public_id, university_id, section, subject_code, topic_label, source_order, stem, explanation, stem_fingerprint, published_at, source:question_sources(public_id, title, reference_text), choices:question_choices(choice_key, choice_text, display_order, is_correct)')
+    .eq('university_id', universityId)
+    .eq('section', section)
+    .eq('status', 'published')
+    .order('source_order')
+
+  if (error && isMissingQuestionImportSchemaError(error)) {
+    questionImportSchemaAvailable = false
+    return []
+  }
+  if (error) throw error
+  return data || []
 }
 
 export async function fetchTrackerTopicRows(universityId = 'must') {

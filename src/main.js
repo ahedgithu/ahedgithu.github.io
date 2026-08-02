@@ -21,6 +21,12 @@ import {
   resolvePassage,
   renderSourceReaderMarkup
 } from './knowledgeLibrary.js'
+import {
+  QUESTION_TEXT_PARSER_VERSION,
+  parseQuestionText
+} from './questionTextParser.js'
+import { mapPublishedQuestionRowsToSources } from './questionDatabaseAdapter.js'
+import { planQuestionParts, validateCustomPartCounts, normalizeMode } from './questionPartPlanner.js'
 
 import {
   completeProfileSetup,
@@ -29,6 +35,10 @@ import {
   fetchAdminProfile,
   fetchNewsCards,
   fetchOnlineStudents,
+  fetchPublishedQuestionRows,
+  fetchQuestionFingerprintMatches,
+  fetchQuestionImports,
+  fetchQuestionSources,
   fetchTrackerTopicRows,
   fetchUserQuizProgressRows,
   fetchUserTopicProgressRows,
@@ -37,12 +47,18 @@ import {
   fetchUserPreference,
   upsertUserPreference,
   getCurrentUser,
+  isQuestionImportEnabled,
   isSupabaseConfigured,
   markStudentOnline,
   onAuthStateChange,
   signInAdmin,
   signInWithGoogle,
   signOutUser,
+  submitQuestionImport,
+  publishQuestionImport,
+  removeQuestionImport,
+  replaceQuestionImport,
+  rejectQuestionImport,
   updateNewsCardOrder,
   upsertNewsCard,
   upsertTrackerTopics,
@@ -177,6 +193,7 @@ function getMcqQuizzesForSection(section = activeAcademicSection, universityId =
 }
 
 const dynamicQuizConfigs = new Map()
+const databaseQuizSourcesByScope = new Map()
 let trackerSearchMode = 'topics'
 let renderedMcqSearchResults = []
 const quizState = {
@@ -239,6 +256,15 @@ const trackerAdminState = {
   saving: false,
   dirtyCollections: new Set(),
   draggingKey: ''
+}
+const questionImportState = {
+  available: false,
+  loading: false,
+  parsed: null,
+  imports: [],
+  sources: [],
+  replacingImportPublicId: '',
+  lockedContext: null
 }
 const expandedTopicBreakdowns = new Set()
 
@@ -445,12 +471,14 @@ const trackerAdminEmail = document.getElementById('tracker-admin-email')
 const trackerAdminSubject = document.getElementById('tracker-admin-subject')
 const trackerAdminSaveOrder = document.getElementById('tracker-admin-save-order')
 const trackerAdminSignOut = document.getElementById('tracker-admin-sign-out')
+const trackerAdminImport = document.getElementById('tracker-admin-import')
 const adminLoginModal = document.getElementById('admin-login-modal')
 const adminLoginForm = document.getElementById('tracker-admin-login-form')
 const adminLoginEmail = document.getElementById('tracker-admin-email-input')
 const adminLoginPassword = document.getElementById('tracker-admin-password-input')
 const adminLoginStatus = document.getElementById('tracker-admin-login-status')
 const trackerAdminEditPanel = document.getElementById('tracker-admin-edit-panel')
+const questionImportPanel = document.getElementById('question-import-panel')
 
 const initialParams = new URLSearchParams(window.location.search)
 const LOCAL_TEST_SELECTION_KEY = 'universityLocalTestSelection'
@@ -877,6 +905,7 @@ function renderTrackerAdminUi() {
     trackerAdminSaveOrder.textContent = trackerAdminState.saving && dirty ? 'Saving...' : 'Save arrangement'
   }
   renderNewsAdminToolbar()
+  renderQuestionImportAvailability()
 }
 
 async function refreshTrackerAdminProfile(user) {
@@ -885,6 +914,8 @@ async function refreshTrackerAdminProfile(user) {
     trackerAdminState.enabled = false
     trackerAdminState.dirtyCollections.clear()
     closeAdminEditor()
+    questionImportState.available = false
+    closeQuestionImportPanel()
     renderTrackerAdminUi()
     return
   }
@@ -895,6 +926,7 @@ async function refreshTrackerAdminProfile(user) {
     trackerAdminState.profile = null
     console.warn('Admin profile check failed.', error)
   }
+  await refreshQuestionImportAvailability()
   renderTrackerAdminUi()
   renderStudentSyncUi()
   if (isStandaloneProfilePage) {
@@ -1025,6 +1057,652 @@ async function saveAdminArrangement() {
   } finally {
     trackerAdminState.saving = false
     renderTrackerAdminUi()
+  }
+}
+
+function getQuestionImportTopics(subjectCode) {
+  const subject = subjects.find((item) => item.code === subjectCode)
+  if (!subject) return []
+  return [...(subject.topics || []), ...(subject.clinicalTopics || [])]
+    .filter((topic, index, collection) => collection.findIndex((item) => item.label === topic.label) === index)
+}
+
+function closeQuestionImportPanel() {
+  if (!questionImportPanel) return
+  deactivateManagedModal(questionImportPanel)
+  questionImportPanel.hidden = true
+  document.body.classList.remove('question-import-open')
+  questionImportState.parsed = null
+  questionImportState.replacingImportPublicId = ''
+  questionImportState.lockedContext = null
+}
+
+function renderQuestionImportAvailability() {
+  if (trackerAdminImport) {
+    trackerAdminImport.hidden = !isTrackerAdmin() || !questionImportState.available
+    trackerAdminImport.textContent = 'Manage imports'
+  }
+  if (!questionImportState.available && !questionImportPanel?.hidden) closeQuestionImportPanel()
+}
+
+async function refreshQuestionImportAvailability() {
+  questionImportState.available = false
+  renderQuestionImportAvailability()
+  if (!hasTrackerAdminAccess() || !studentProgressState.user) return false
+
+  try {
+    questionImportState.imports = await fetchQuestionImports({
+      universityId: activeUniversityId,
+      section: activeAcademicSection
+    })
+    questionImportState.available = isQuestionImportEnabled()
+  } catch (error) {
+    console.warn('Question importing is unavailable.', error)
+  }
+  renderQuestionImportAvailability()
+  return questionImportState.available
+}
+
+function renderQuestionImportTopicOptions(form, selectedTopic = '') {
+  const topicSelect = form?.elements.topic_label
+  const subjectCode = form?.elements.subject_code?.value || ''
+  if (!topicSelect) return
+  const topics = getQuestionImportTopics(subjectCode)
+  topicSelect.innerHTML = topics.map((topic) => `
+    <option value="${escapeHtml(topic.label)}" ${topic.label === selectedTopic ? 'selected' : ''}>
+      ${escapeHtml(topic.label)}
+    </option>
+  `).join('')
+}
+
+function renderQuestionImportSourceFields(form) {
+  if (!form) return
+  const sourceSelect = form.elements.source_id
+  const sourceTitle = form.elements.source_title
+  const sourceReference = form.elements.reference_text
+  const selected = questionImportState.sources.find((source) => source.public_id === sourceSelect?.value)
+  const isNew = !selected
+  if (sourceTitle) {
+    const wasDisabled = sourceTitle.disabled
+    sourceTitle.disabled = !isNew
+    sourceTitle.required = isNew
+    sourceTitle.value = isNew ? (wasDisabled ? '' : sourceTitle.value) : selected.title
+  }
+  if (sourceReference) {
+    const wasDisabled = sourceReference.disabled
+    sourceReference.disabled = !isNew
+    sourceReference.value = isNew ? (wasDisabled ? '' : sourceReference.value) : (selected.reference_text || '')
+  }
+}
+
+async function refreshQuestionImportSources(form) {
+  if (!form) return
+  const sourceSelect = form.elements.source_id
+  if (!sourceSelect) return
+  const priorValue = sourceSelect.value
+  questionImportState.sources = await fetchQuestionSources({
+    universityId: activeUniversityId,
+    section: activeAcademicSection,
+    subjectCode: form.elements.subject_code.value,
+    topicLabel: form.elements.topic_label.value
+  })
+  sourceSelect.innerHTML = `
+    <option value="">New source</option>
+    ${questionImportState.sources.map((source) => `
+      <option value="${escapeHtml(source.public_id)}">${escapeHtml(source.title)}</option>
+    `).join('')}
+  `
+  if (questionImportState.sources.some((source) => source.public_id === priorValue)) sourceSelect.value = priorValue
+  renderQuestionImportSourceFields(form)
+}
+
+function renderCustomPartRow(part = {}, index = 0, totalRows = 1) {
+  const label = part.label || `Part ${index + 1}`
+  const description = part.description || ''
+  const questionCount = Number.isInteger(part.questionCount) && part.questionCount > 0
+    ? part.questionCount
+    : Math.max(1, questionImportState.parsed?.questions?.length || 1)
+  const startOrder = part.startOrder || 1
+  const endOrder = part.endOrder || (startOrder + questionCount - 1)
+
+  return `
+    <div class="custom-part-row" data-custom-part-row>
+      <div class="custom-part-row__drag-controls">
+        <button type="button" data-custom-part-move="up" aria-label="Move ${escapeHtml(label)} up" title="Move up" ${index === 0 ? 'disabled' : ''}>↑</button>
+        <button type="button" data-custom-part-move="down" aria-label="Move ${escapeHtml(label)} down" title="Move down" ${index === totalRows - 1 ? 'disabled' : ''}>↓</button>
+      </div>
+      <div class="custom-part-row__inputs">
+        <input type="text" data-custom-part-field="label" placeholder="Part title" value="${escapeHtml(label)}" required>
+        <input type="text" data-custom-part-field="description" placeholder="Optional description" value="${escapeHtml(description)}">
+        <div class="custom-part-row__count-wrap">
+          <label>Q count:
+            <input type="number" data-custom-part-field="questionCount" value="${questionCount}" min="1" required>
+          </label>
+          <span class="custom-part-row__range" data-custom-part-range>Q${startOrder}–Q${endOrder}</span>
+        </div>
+      </div>
+      <button type="button" class="custom-part-row__remove" data-custom-part-remove aria-label="Remove ${escapeHtml(label)}" title="Remove part">×</button>
+    </div>
+  `
+}
+
+function updateQuestionImportOrganizationState(panel) {
+  if (!panel) return
+  const form = panel.querySelector('[data-question-import-form]')
+  if (!form) return
+
+  const selectedModeRadio = form.querySelector('input[name="organization_mode"]:checked')
+  const mode = selectedModeRadio ? selectedModeRadio.value : 'single'
+
+  const balancedPanel = panel.querySelector('[data-org-panel="balanced"]')
+  const customPanel = panel.querySelector('[data-org-panel="custom"]')
+
+  if (balancedPanel) balancedPanel.hidden = mode !== 'balanced'
+  if (customPanel) customPanel.hidden = mode !== 'custom'
+
+  const totalQuestions = questionImportState.parsed?.questions?.length || 0
+
+  if (mode === 'balanced') {
+    const targetSize = parseInt(form.elements.organization_target_size?.value || '30', 10) || 30
+    const summary = panel.querySelector('[data-org-summary]')
+    if (summary) {
+      if (totalQuestions > 0) {
+        const plan = planQuestionParts(totalQuestions, { mode: 'balanced', targetSize })
+        summary.textContent = `Will split ${totalQuestions} questions into ${plan.parts.length} part${plan.parts.length === 1 ? '' : 's'} (~${plan.parts[0]?.questionCount || 0} Qs/part).`
+      } else {
+        summary.textContent = 'Preview MCQs above to see calculated parts.'
+      }
+    }
+  } else if (mode === 'custom') {
+    const rowContainer = panel.querySelector('[data-custom-part-rows]')
+    if (rowContainer && !rowContainer.querySelector('[data-custom-part-row]')) {
+      rowContainer.innerHTML = renderCustomPartRow()
+    }
+    const rows = [...(rowContainer?.querySelectorAll('[data-custom-part-row]') || [])]
+
+    let currentStart = 1
+    let customParts = []
+
+    rows.forEach((row, idx) => {
+      const label = row.querySelector('[data-custom-part-field="label"]')?.value.trim() || `Part ${idx + 1}`
+      const description = row.querySelector('[data-custom-part-field="description"]')?.value.trim() || ''
+      const countInput = row.querySelector('[data-custom-part-field="questionCount"]')
+      const count = parseInt(countInput?.value || '0', 10)
+
+      const startOrder = currentStart
+      const endOrder = count > 0 ? currentStart + count - 1 : currentStart
+      if (count > 0) currentStart = endOrder + 1
+
+      const rangeSpan = row.querySelector('[data-custom-part-range]')
+      if (rangeSpan) {
+        rangeSpan.textContent = count > 0 ? `Q${startOrder}–Q${endOrder}` : 'Q--'
+      }
+
+      const moveUp = row.querySelector('[data-custom-part-move="up"]')
+      const moveDown = row.querySelector('[data-custom-part-move="down"]')
+      if (moveUp) moveUp.disabled = idx === 0
+      if (moveDown) moveDown.disabled = idx === rows.length - 1
+
+      customParts.push({ label, description, questionCount: count, startOrder, endOrder })
+    })
+
+    const customSummary = panel.querySelector('[data-custom-org-summary]')
+    if (customSummary) {
+      const validation = validateCustomPartCounts(customParts, totalQuestions)
+      customSummary.dataset.valid = String(validation.valid)
+      if (totalQuestions === 0) {
+        customSummary.textContent = `${customParts.length} part row${customParts.length === 1 ? '' : 's'} defined. Preview MCQs above to validate.`
+      } else if (validation.valid) {
+        customSummary.textContent = `✓ ${validation.sum} of ${totalQuestions} questions covered across ${customParts.length} part${customParts.length === 1 ? '' : 's'}`
+      } else {
+        customSummary.textContent = `⚠ ${validation.issues.join(' ')}`
+      }
+    }
+  }
+}
+
+function getQuestionImportOrganization(form) {
+  const mode = normalizeMode(form.querySelector('input[name="organization_mode"]:checked')?.value)
+  const groupLabel = form.elements.organization_group_label?.value.trim() || form.elements.topic_label.value
+  const totalQuestions = questionImportState.parsed?.questions?.length || 0
+
+  if (mode === 'balanced') {
+    const rawTarget = form.elements.organization_target_size?.value.trim() || ''
+    const targetSize = Number(rawTarget)
+    if (!Number.isInteger(targetSize) || targetSize <= 0) {
+      return { error: 'Questions per part must be a positive whole number.' }
+    }
+    return { organization: planQuestionParts(totalQuestions, { mode, groupLabel, targetSize }) }
+  }
+
+  if (mode === 'custom') {
+    const rows = [...form.querySelectorAll('[data-custom-part-row]')]
+    const customParts = rows.map((row) => ({
+      label: row.querySelector('[data-custom-part-field="label"]')?.value.trim() || '',
+      description: row.querySelector('[data-custom-part-field="description"]')?.value.trim() || '',
+      questionCount: Number(row.querySelector('[data-custom-part-field="questionCount"]')?.value)
+    }))
+    if (customParts.some((part) => !part.label)) {
+      return { error: 'Every custom part needs a title.' }
+    }
+    const validation = validateCustomPartCounts(customParts, totalQuestions)
+    if (!validation.valid) return { error: validation.issues.join(' ') }
+    return { organization: planQuestionParts(totalQuestions, { mode, groupLabel, customParts }) }
+  }
+
+  return { organization: planQuestionParts(totalQuestions, { mode: 'single', groupLabel }) }
+}
+
+function renderQuestionImportIssues(issues = []) {
+  if (!issues.length) return '<p class="question-import__clean">No validation issues.</p>'
+  return `<ul class="question-import__issues">
+    ${issues.map((issue) => `
+      <li data-severity="${escapeHtml(issue.severity)}">
+        <strong>${issue.severity === 'blocking' ? 'Blocker' : 'Warning'}</strong>
+        <span>${escapeHtml(issue.message)}</span>
+      </li>
+    `).join('')}
+  </ul>`
+}
+
+function renderQuestionImportPreview(result) {
+  const preview = questionImportPanel?.querySelector('[data-question-import-preview]')
+  const saveButton = questionImportPanel?.querySelector('[data-question-import-save]')
+  if (!preview) return
+  questionImportState.parsed = result
+  if (saveButton) saveButton.disabled = false
+
+  preview.innerHTML = `
+    <div class="question-import__summary">
+      <strong>${result.questions.length} question${result.questions.length === 1 ? '' : 's'}</strong>
+      <span>${result.blockingIssues.length} blocker${result.blockingIssues.length === 1 ? '' : 's'}</span>
+      <span>${result.warnings.length} warning${result.warnings.length === 1 ? '' : 's'}</span>
+    </div>
+    ${result.questions.map((question, index) => `
+      <article class="question-import-card" data-question-import-card>
+        <header>
+          <strong>Question ${index + 1}</strong>
+          <small>Lines ${question.location.startLine}-${question.location.endLine}</small>
+        </header>
+        <label>Stem
+          <textarea rows="3" data-question-field="stem">${escapeHtml(question.stem)}</textarea>
+        </label>
+        <div class="question-import-card__choices">
+          ${question.choices.map((choice) => `
+            <label>
+              <span>${choice.key})</span>
+              <input type="text" value="${escapeHtml(choice.text)}" data-question-choice="${choice.key}">
+            </label>
+          `).join('')}
+        </div>
+        <label>Correct answer
+          <select data-question-field="answer">
+            ${question.choices.map((choice) => `<option value="${choice.key}" ${choice.isCorrect ? 'selected' : ''}>${choice.key}</option>`).join('')}
+          </select>
+        </label>
+        <label>Explanation
+          <textarea rows="3" data-question-field="explanation">${escapeHtml(question.explanation)}</textarea>
+        </label>
+        ${renderQuestionImportIssues(question.issues)}
+      </article>
+    `).join('')}
+  `
+  updateQuestionImportOrganizationState(questionImportPanel)
+}
+
+function serializeQuestionImportPreview() {
+  const cards = [...(questionImportPanel?.querySelectorAll('[data-question-import-card]') || [])]
+  return cards.map((card) => {
+    const stem = card.querySelector('[data-question-field="stem"]')?.value.trim() || ''
+    const choices = [...card.querySelectorAll('[data-question-choice]')]
+      .map((input) => `${input.dataset.questionChoice}) ${input.value.trim()}`)
+    const answer = card.querySelector('[data-question-field="answer"]')?.value || ''
+    const explanation = card.querySelector('[data-question-field="explanation"]')?.value.trim() || ''
+    return [`Q: ${stem}`, ...choices, `ANSWER: ${answer}`, `EXPLANATION: ${explanation}`].join('\n')
+  }).join('\n---\n')
+}
+
+async function parseQuestionImportForm({ usePreview = false } = {}) {
+  const form = questionImportPanel?.querySelector('[data-question-import-form]')
+  if (!form) return null
+  const rawText = usePreview && questionImportPanel.querySelector('[data-question-import-card]')
+    ? serializeQuestionImportPreview()
+    : form.elements.raw_text.value
+  if (usePreview) form.elements.raw_text.value = rawText
+  const result = parseQuestionText(rawText)
+  const matches = await fetchQuestionFingerprintMatches({
+    universityId: activeUniversityId,
+    section: activeAcademicSection,
+    fingerprints: result.questions.map((question) => question.stemFingerprint)
+  })
+  const matchFingerprints = new Set(matches.map((match) => match.stem_fingerprint))
+  result.questions.forEach((question, questionIndex) => {
+    if (!matchFingerprints.has(question.stemFingerprint)) return
+    const issue = {
+      code: 'exact_existing_question_match',
+      severity: 'warning',
+      message: 'Question exactly matches an existing normalized stem in this university section.',
+      questionIndex,
+      location: question.location,
+      details: { stemFingerprint: question.stemFingerprint }
+    }
+    question.issues.push(issue)
+    result.issues.push(issue)
+    result.warnings.push(issue)
+  })
+  renderQuestionImportPreview(result)
+  return result
+}
+
+function renderQuestionImportQueue() {
+  const queue = questionImportPanel?.querySelector('[data-question-import-queue]')
+  if (!queue) return
+  const visibleImports = questionImportState.lockedContext
+    ? questionImportState.imports.filter((item) => (
+      item.subject_code === questionImportState.lockedContext.subjectCode
+      && item.topic_label === questionImportState.lockedContext.topicLabel
+    ))
+    : questionImportState.imports
+  if (!visibleImports.length) {
+    queue.innerHTML = '<p class="question-import__empty">No saved imports in this scope.</p>'
+    return
+  }
+  queue.innerHTML = visibleImports.map((item) => `
+    <article class="question-import-row">
+      <div>
+        <strong>${escapeHtml(item.source?.title || item.topic_label)}</strong>
+        <span>${escapeHtml(item.subject_code)} · ${escapeHtml(item.topic_label)}</span>
+        <small>${item.question_count} questions · ${item.blocking_issue_count} blockers · ${item.warning_count} warnings</small>
+      </div>
+      <span class="question-import-row__status" data-status="${escapeHtml(item.status)}">${escapeHtml(item.status.replace('_', ' '))}</span>
+      <div class="question-import-row__actions">
+        ${item.status === 'ready' && item.blocking_issue_count === 0
+          ? `<button type="button" data-question-import-publish="${escapeHtml(item.public_id)}">Publish</button>`
+          : ''}
+        ${['draft', 'needs_review', 'ready'].includes(item.status)
+          ? `<button type="button" data-question-import-reject="${escapeHtml(item.public_id)}">Reject</button>`
+          : ''}
+        ${item.status === 'published'
+          ? `<button type="button" data-question-import-replace="${escapeHtml(item.public_id)}">Replace</button>
+             <button type="button" data-question-import-remove="${escapeHtml(item.public_id)}">Remove</button>`
+          : ''}
+      </div>
+    </article>
+  `).join('')
+}
+
+async function refreshQuestionImportQueue() {
+  questionImportState.imports = await fetchQuestionImports({
+    universityId: activeUniversityId,
+    section: activeAcademicSection
+  })
+  renderQuestionImportQueue()
+}
+
+function resetQuestionImportReplacement() {
+  questionImportState.replacingImportPublicId = ''
+  const form = questionImportPanel?.querySelector('[data-question-import-form]')
+  if (!form) return
+  ;['subject_code', 'topic_label', 'source_id'].forEach((name) => {
+    if (form.elements[name]) form.elements[name].disabled = !!questionImportState.lockedContext && name !== 'source_id'
+  })
+  const saveButton = form.querySelector('[data-question-import-save]')
+  const cancelButton = form.querySelector('[data-question-import-cancel-replace]')
+  if (saveButton) saveButton.textContent = 'Save draft'
+  if (cancelButton) cancelButton.hidden = true
+}
+
+async function prepareQuestionImportReplacement(publicId) {
+  const item = questionImportState.imports.find((candidate) => candidate.public_id === publicId && candidate.status === 'published')
+  const form = questionImportPanel?.querySelector('[data-question-import-form]')
+  if (!item || !form) return
+
+  form.elements.subject_code.value = item.subject_code
+  renderQuestionImportTopicOptions(form, item.topic_label)
+  form.elements.topic_label.value = item.topic_label
+  await refreshQuestionImportSources(form)
+  form.elements.source_id.value = item.source?.public_id || ''
+  renderQuestionImportSourceFields(form)
+  form.elements.raw_text.value = item.raw_text || ''
+  ;['subject_code', 'topic_label', 'source_id'].forEach((name) => {
+    if (form.elements[name]) form.elements[name].disabled = true
+  })
+  questionImportState.replacingImportPublicId = publicId
+  questionImportState.parsed = null
+  const preview = questionImportPanel.querySelector('[data-question-import-preview]')
+  if (preview) preview.innerHTML = ''
+  form.querySelector('[data-question-import-save]').textContent = 'Replace published set'
+  form.querySelector('[data-question-import-cancel-replace]').hidden = false
+  form.querySelector('[data-question-import-status]').textContent = 'Edit and preview this set. Replacement becomes published immediately after validation.'
+  form.scrollIntoView({ behavior: 'smooth', block: 'start' })
+}
+
+async function openQuestionImportPanel(context = null) {
+  if (!isTrackerAdmin() || !questionImportState.available || !questionImportPanel) return
+  const lockedContext = context?.subjectCode && context?.topicLabel
+    ? { subjectCode: context.subjectCode, topicLabel: context.topicLabel }
+    : null
+  questionImportState.lockedContext = lockedContext
+  const defaultSubject = subjects.find((subject) => subject.code === (lockedContext?.subjectCode || activeSubjectCode)) || subjects[0]
+  const panelTitle = lockedContext ? `Add MCQs to ${lockedContext.topicLabel}` : 'Manage MCQ imports'
+  questionImportPanel.innerHTML = `
+    <div class="question-import-panel__inner">
+      <header class="question-import-panel__header">
+        <div>
+          <span class="eyebrow">${escapeHtml(getUniversity().shortName)} · ${escapeHtml(activeAcademicSection)}</span>
+          <h2>${escapeHtml(panelTitle)}</h2>
+          <p>${lockedContext
+            ? `Locked to ${escapeHtml(defaultSubject?.code || '')} · ${escapeHtml(lockedContext.topicLabel)}. Paste MCQs, organize them, then save the draft.`
+            : 'Paste MCQs, organize them, then save the draft or manage saved imports below.'}</p>
+        </div>
+        <button type="button" data-question-import-close aria-label="Close question importer">×</button>
+      </header>
+      <form class="question-import-form" data-question-import-form>
+        <div class="question-import-form__scope">
+          <label>Subject
+            <select name="subject_code" required>
+              ${subjects.map((subject) => `<option value="${escapeHtml(subject.code)}" ${subject.code === defaultSubject?.code ? 'selected' : ''}>${escapeHtml(subject.code)} · ${escapeHtml(subject.name)}</option>`).join('')}
+            </select>
+          </label>
+          <label>Topic
+            <select name="topic_label" required></select>
+          </label>
+          <label>Source
+            <select name="source_id"><option value="">New source</option></select>
+          </label>
+        </div>
+        <div class="question-import-form__source">
+          <label>Source title
+            <input name="source_title" type="text" maxlength="160" required placeholder="e.g. Department revision sheet">
+          </label>
+          <label>Reference note
+            <input name="reference_text" type="text" maxlength="500" placeholder="Optional source detail">
+          </label>
+        </div>
+        <label>MCQ text
+          <textarea name="raw_text" rows="15" required placeholder="Q: Which statement is correct?&#10;A) First choice&#10;B) Second choice&#10;C) Third choice&#10;D) Fourth choice&#10;ANSWER: B&#10;EXPLANATION: Source-faithful explanation."></textarea>
+        </label>
+        <fieldset class="question-import-org">
+          <legend class="question-import-org__legend">Quiz organization</legend>
+          <label>Group label
+            <input name="organization_group_label" type="text" maxlength="160" value="${escapeHtml(lockedContext?.topicLabel || '')}" placeholder="Defaults to the topic name">
+          </label>
+          <div class="question-import-org__modes" role="radiogroup" aria-label="Quiz organization mode">
+            <label class="question-import-org__mode-label"><input type="radio" name="organization_mode" value="single" checked> One set</label>
+            <label class="question-import-org__mode-label"><input type="radio" name="organization_mode" value="balanced"> Split evenly</label>
+            <label class="question-import-org__mode-label"><input type="radio" name="organization_mode" value="custom"> Custom named parts</label>
+          </div>
+          <div class="question-import-org__details" data-org-panel="balanced" hidden>
+            <label>Target questions per part
+              <input name="organization_target_size" type="number" min="1" step="1" value="30" inputmode="numeric">
+            </label>
+            <p class="question-import-org__summary" data-org-summary>Preview MCQs above to see calculated parts.</p>
+          </div>
+          <div class="question-import-org__details" data-org-panel="custom" hidden>
+            <div class="question-import-org__custom-header">
+              <strong>Named parts</strong>
+              <button type="button" data-custom-part-add>Add part</button>
+            </div>
+            <div class="question-import-org__custom-rows" data-custom-part-rows></div>
+            <p class="question-import-org__summary" data-custom-org-summary aria-live="polite"></p>
+          </div>
+        </fieldset>
+        <div class="question-import-form__actions">
+          <button type="button" data-question-import-parse>Preview</button>
+          <button type="button" data-question-import-revalidate>Revalidate edits</button>
+          <button type="submit" data-question-import-save>Save draft</button>
+          <button type="button" data-question-import-cancel-replace hidden>Cancel replacement</button>
+        </div>
+        <p class="question-import-form__status" data-question-import-status aria-live="polite"></p>
+      </form>
+      <section class="question-import__preview" data-question-import-preview></section>
+      <section class="question-import__queue-section">
+        <div class="question-import__queue-heading">
+          <div>
+            <h3>Saved imports</h3>
+            <p>Drafts are not visible to students until you click Publish.</p>
+          </div>
+          <button type="button" data-question-import-refresh>Refresh</button>
+        </div>
+        <div data-question-import-queue></div>
+      </section>
+    </div>
+  `
+  questionImportPanel.hidden = false
+  document.body.classList.add('question-import-open')
+  const form = questionImportPanel.querySelector('[data-question-import-form]')
+  renderQuestionImportTopicOptions(form, lockedContext?.topicLabel || '')
+  if (lockedContext) {
+    form.elements.subject_code.value = lockedContext.subjectCode
+    renderQuestionImportTopicOptions(form, lockedContext.topicLabel)
+    form.elements.topic_label.value = lockedContext.topicLabel
+    form.elements.subject_code.disabled = true
+    form.elements.topic_label.disabled = true
+  }
+  updateQuestionImportOrganizationState(questionImportPanel)
+  try {
+    await Promise.all([refreshQuestionImportSources(form), refreshQuestionImportQueue()])
+  } catch (error) {
+    questionImportPanel.querySelector('[data-question-import-status]').textContent = error.message
+  }
+  activateManagedModal(questionImportPanel, closeQuestionImportPanel, questionImportPanel.querySelector('[data-question-import-close]'))
+}
+
+async function saveQuestionImportForm(form) {
+  if (questionImportState.loading) return
+  const status = form.querySelector('[data-question-import-status]')
+  let parsed
+  try {
+    parsed = await parseQuestionImportForm({ usePreview: true })
+  } catch (error) {
+    status.textContent = error.message
+    return
+  }
+  if (!parsed?.questions.length) {
+    status.textContent = 'No valid question blocks found. Review the preview issues and try again.'
+    return
+  }
+  const replacingImportPublicId = questionImportState.replacingImportPublicId
+  if (replacingImportPublicId && parsed.blockingIssues.length) {
+    status.textContent = 'Replacement not applied. Fix all blocking issues first.'
+    return
+  }
+  const source = questionImportState.sources.find((item) => item.public_id === form.elements.source_id.value)
+  const sourceTitle = source?.title || form.elements.source_title.value.trim()
+  if (!sourceTitle) {
+    status.textContent = 'Source title is required.'
+    return
+  }
+  const { organization, error: organizationError } = getQuestionImportOrganization(form)
+  if (organizationError) {
+    status.textContent = organizationError
+    return
+  }
+
+  questionImportState.loading = true
+  status.textContent = replacingImportPublicId ? 'Replacing published set...' : 'Saving draft...'
+  try {
+    const payload = {
+      scope: {
+        universityId: activeUniversityId,
+        section: activeAcademicSection,
+        subjectCode: form.elements.subject_code.value,
+        topicLabel: form.elements.topic_label.value
+      },
+      source: {
+        publicId: source?.public_id || '',
+        title: sourceTitle,
+        referenceText: source?.reference_text || form.elements.reference_text.value.trim()
+      },
+      rawText: form.elements.raw_text.value,
+      parserVersion: QUESTION_TEXT_PARSER_VERSION,
+      questions: parsed.questions,
+      issues: parsed.issues,
+      organization
+    }
+    if (replacingImportPublicId) {
+      const count = await replaceQuestionImport({
+        publicId: replacingImportPublicId,
+        rawText: payload.rawText,
+        parserVersion: payload.parserVersion,
+        questions: payload.questions,
+        issues: payload.issues
+      })
+      resetQuestionImportReplacement()
+      status.textContent = `${count} replacement question${count === 1 ? '' : 's'} published.`
+      showGlobalToast('Published MCQ set replaced.')
+      await loadPublishedQuestionsForActiveScope()
+    } else {
+      await submitQuestionImport(payload)
+      status.textContent = parsed.blockingIssues.length
+        ? 'Draft saved, but not published. Fix blocking issues before publishing.'
+        : 'Draft saved, but not published yet. Click Publish under Saved imports below.'
+    }
+    await Promise.all([refreshQuestionImportQueue(), refreshQuestionImportSources(form)])
+  } catch (error) {
+    status.textContent = error.message
+  } finally {
+    questionImportState.loading = false
+  }
+}
+
+async function handleQuestionImportAction(button, action) {
+  if (questionImportState.loading) return
+  questionImportState.loading = true
+  button.disabled = true
+  try {
+    if (action === 'publish') {
+      const count = await publishQuestionImport(button.dataset.questionImportPublish)
+      showGlobalToast(`${count} question${count === 1 ? '' : 's'} published.`)
+      await loadPublishedQuestionsForActiveScope()
+    } else {
+      await rejectQuestionImport(button.dataset.questionImportReject)
+      showGlobalToast('Question import rejected.')
+    }
+    await refreshQuestionImportQueue()
+  } catch (error) {
+    window.alert(error.message)
+  } finally {
+    questionImportState.loading = false
+    button.disabled = false
+  }
+}
+
+async function removePublishedQuestionImport(button) {
+  if (questionImportState.loading) return
+  const item = questionImportState.imports.find((candidate) => candidate.public_id === button.dataset.questionImportRemove)
+  if (!item || !window.confirm(`Remove published MCQ set "${item.source?.title || item.topic_label}"? Students will lose access immediately.`)) return
+  questionImportState.loading = true
+  button.disabled = true
+  try {
+    const count = await removeQuestionImport(item.public_id)
+    showGlobalToast(`${count} published question${count === 1 ? '' : 's'} removed.`)
+    await Promise.all([loadPublishedQuestionsForActiveScope(), refreshQuestionImportQueue()])
+  } catch (error) {
+    window.alert(error.message)
+  } finally {
+    questionImportState.loading = false
+    button.disabled = false
   }
 }
 
@@ -4562,8 +5240,15 @@ function renderTopicCard(subject, topic, index, collection = subject.topics) {
   const track = collection === subject.clinicalTopics ? 'clinical' : 'theoretical'
   const breakdownKey = getTopicBreakdownKey(subject.code, topic.label)
   const breakdownExpanded = expandedTopicBreakdowns.has(breakdownKey)
+  const addMcqsControl = questionImportState.available ? `
+      <button type="button" data-admin-add-mcqs draggable="false" aria-label="Add MCQs to ${escapeHtml(topic.label)}">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 5.5h10M7 10h10M7 14.5h6M5 3h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-6l-4 3v-3H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Add MCQs</span>
+      </button>
+  ` : ''
   const adminControls = isTrackerAdmin() ? `
     <span class="tracker-admin-topic-controls" aria-label="Admin controls for ${escapeHtml(topic.label)}">
+      ${addMcqsControl}
       <button type="button" data-admin-move="up" aria-label="Move ${escapeHtml(topic.label)} up" ${topicPosition <= 0 ? 'disabled' : ''}>↑</button>
       <button type="button" data-admin-move="down" aria-label="Move ${escapeHtml(topic.label)} down" ${topicPosition >= collection.length - 1 ? 'disabled' : ''}>↓</button>
       <button type="button" data-admin-edit-topic aria-label="Edit ${escapeHtml(topic.label)}">Edit</button>
@@ -5475,13 +6160,57 @@ function shuffleArray(array) {
   return copy
 }
 
+function getDatabaseQuizScopeKey(universityId = activeUniversityId, section = activeAcademicSection) {
+  return `${universityId}::${section}`
+}
+
+function resolveDatabaseQuizTopicKey(row) {
+  const sectionData = getAcademicSection(row.section, row.university_id)
+  const subject = sectionData?.subjects?.find((item) => item.code === row.subject_code)
+  const topic = [...(subject?.topics || []), ...(subject?.clinicalTopics || [])]
+    .find((item) => item.label === row.topic_label)
+  if (topic) return topic.mcqTopicKey || topic.label
+
+  const sectionQuizzes = getMcqQuizzesForSection(row.section, row.university_id)
+  const conventionalKeys = [`${row.subject_code} MCQs`, `${row.subject_code} Quiz`]
+  const conventionalKey = conventionalKeys.find((key) => sectionQuizzes[key])
+  if (conventionalKey) return conventionalKey
+  const subjectKeys = Object.keys(sectionQuizzes).filter((key) => key.startsWith(row.subject_code))
+  return subjectKeys.length === 1 ? subjectKeys[0] : row.topic_label
+}
+
+async function loadPublishedQuestionsForActiveScope() {
+  if (!studentProgressState.user) return
+  const requestedUniversity = activeUniversityId
+  const requestedSection = activeAcademicSection
+  const scopeKey = getDatabaseQuizScopeKey(requestedUniversity, requestedSection)
+  try {
+    const rows = await fetchPublishedQuestionRows({
+      universityId: requestedUniversity,
+      section: requestedSection
+    })
+    databaseQuizSourcesByScope.set(scopeKey, mapPublishedQuestionRowsToSources(rows, resolveDatabaseQuizTopicKey))
+    if (requestedUniversity === activeUniversityId && requestedSection === activeAcademicSection) {
+      renderSubjects()
+      if (activeSubjectCode) setActiveSubject(activeSubjectCode, 'open')
+      if (trackerSearchMode === 'mcqs' && trackerSearch?.value.trim()) renderMcqSearchResults()
+    }
+  } catch (error) {
+    databaseQuizSourcesByScope.set(scopeKey, new Map())
+    console.warn('Published database questions unavailable; static MCQs remain active.', error)
+  }
+}
+
 function getQuizSources(topicLabel) {
   const sectionQuizzes = getMcqQuizzesForSection()
   const raw = sectionQuizzes[topicLabel]
-  if (!raw) return []
+  const databaseSources = databaseQuizSourcesByScope
+    .get(getDatabaseQuizScopeKey())
+    ?.get(topicLabel) || []
+  if (!raw) return databaseSources
 
   if (raw.sources?.length) {
-    return raw.sources.map((source, index) => ({
+    const staticSources = raw.sources.map((source, index) => ({
       id: source.id || `source-${index}`,
       label: source.label || `MCQ source ${index + 1}`,
       description: source.description || '',
@@ -5498,6 +6227,7 @@ function getQuizSources(topicLabel) {
       partCount: Number.isInteger(source.partCount) ? source.partCount : null,
       mode: source.mode || 'standard'
     })).filter((source) => source.mcqs.length || source.collection)
+    return [...staticSources, ...databaseSources]
   }
 
   if (Array.isArray(raw)) {
@@ -5509,10 +6239,10 @@ function getQuizSources(topicLabel) {
       shuffleQuestions: raw.shuffleQuestions || false,
       shuffleOptions: raw.shuffleOptions || false,
       timeLimitMinutes: raw.timeLimitMinutes || null
-    }]
+    }, ...databaseSources]
   }
 
-  return [{
+  const staticSources = [{
     id: 'current',
     label: raw.label || 'Current MCQs',
     description: raw.description || '',
@@ -5522,6 +6252,7 @@ function getQuizSources(topicLabel) {
     shuffleOptions: raw.shuffleOptions || false,
     timeLimitMinutes: raw.timeLimitMinutes || null
   }].filter((source) => source.mcqs.length)
+  return [...staticSources, ...databaseSources]
 }
 
 function getQuizConfig(topicLabel, sourceId = 'current') {
@@ -5550,7 +6281,7 @@ function registerDynamicQuizConfig(topicLabel, config) {
 
 function shouldShowQuizSourcePicker(topicLabel) {
   const sectionQuizzes = getMcqQuizzesForSection()
-  return Boolean(sectionQuizzes[topicLabel]?.alwaysShowSourcePicker)
+  return Boolean(sectionQuizzes[topicLabel]?.alwaysShowSourcePicker || getQuizSources(topicLabel).length > 1)
 }
 
 function normalizeQuestion(question, index) {
@@ -8743,6 +9474,7 @@ function routeAuthenticatedUser(universityId, section, options = {}) {
     })
   }
   setAuthGateState('ready')
+  loadPublishedQuestionsForActiveScope()
   fetchAndRenderLiveActivity(true)
   sendStudentPresence(true)
   if (initialParams.get('admin') === 'login' && !initialAdminLoginHandled) {
@@ -9404,6 +10136,20 @@ document.addEventListener('click', (event) => {
     return
   }
 
+  const adminAddMcqsButton = event.target.closest('[data-admin-add-mcqs]')
+  if (adminAddMcqsButton) {
+    event.preventDefault()
+    event.stopPropagation()
+    const card = adminAddMcqsButton.closest('[data-admin-topic]')
+    if (card) {
+      openQuestionImportPanel({
+        subjectCode: card.dataset.adminSubject,
+        topicLabel: card.dataset.adminTopic
+      })
+    }
+    return
+  }
+
   const adminEditButton = event.target.closest('[data-admin-edit-topic]')
   if (adminEditButton) {
     event.preventDefault()
@@ -9451,6 +10197,7 @@ adminLoginForm?.addEventListener('submit', async (event) => {
     }
     trackerAdminState.profile = profile
     trackerAdminState.enabled = true
+    await refreshQuestionImportAvailability()
     closeAdminLogin()
     renderTrackerAdminUi()
     renderStudentSyncUi()
@@ -9499,6 +10246,7 @@ newsAdminForm?.addEventListener('submit', (event) => {
 })
 
 trackerAdminSaveOrder?.addEventListener('click', saveAdminArrangement)
+trackerAdminImport?.addEventListener('click', () => openQuestionImportPanel())
 trackerAdminSignOut?.addEventListener('click', () => {
   if (trackerAdminState.dirtyCollections.size) {
     window.alert('Save the topic arrangement before signing out.')
@@ -9506,10 +10254,105 @@ trackerAdminSignOut?.addEventListener('click', () => {
   }
   trackerAdminState.enabled = false
   closeAdminEditor()
+  closeQuestionImportPanel()
   renderTrackerAdminUi()
   renderSubjects()
   if (activeSubjectCode) setActiveSubject(activeSubjectCode, 'open')
   showGlobalToast('Student view on.')
+})
+
+questionImportPanel?.addEventListener('click', async (event) => {
+  if (event.target.closest('[data-question-import-close]')) {
+    closeQuestionImportPanel()
+    return
+  }
+  if (event.target.closest('[data-question-import-parse]')) {
+    await parseQuestionImportForm()
+    return
+  }
+  if (event.target.closest('[data-question-import-revalidate]')) {
+    await parseQuestionImportForm({ usePreview: true })
+    return
+  }
+  if (event.target.closest('[data-question-import-refresh]')) {
+    await refreshQuestionImportQueue()
+    return
+  }
+  if (event.target.closest('[data-question-import-cancel-replace]')) {
+    resetQuestionImportReplacement()
+    return
+  }
+  if (event.target.closest('[data-custom-part-add]')) {
+    const rows = questionImportPanel.querySelector('[data-custom-part-rows]')
+    if (rows) rows.insertAdjacentHTML('beforeend', renderCustomPartRow({}, rows.children.length, rows.children.length + 1))
+    updateQuestionImportOrganizationState(questionImportPanel)
+    return
+  }
+  const removePartButton = event.target.closest('[data-custom-part-remove]')
+  if (removePartButton) {
+    removePartButton.closest('[data-custom-part-row]')?.remove()
+    updateQuestionImportOrganizationState(questionImportPanel)
+    return
+  }
+  const movePartButton = event.target.closest('[data-custom-part-move]')
+  if (movePartButton) {
+    const row = movePartButton.closest('[data-custom-part-row]')
+    const sibling = movePartButton.dataset.customPartMove === 'up' ? row?.previousElementSibling : row?.nextElementSibling
+    if (row && sibling) {
+      if (movePartButton.dataset.customPartMove === 'up') sibling.before(row)
+      else sibling.after(row)
+      updateQuestionImportOrganizationState(questionImportPanel)
+    }
+    return
+  }
+  const publishButton = event.target.closest('[data-question-import-publish]')
+  if (publishButton) {
+    await handleQuestionImportAction(publishButton, 'publish')
+    return
+  }
+  const rejectButton = event.target.closest('[data-question-import-reject]')
+  if (rejectButton) {
+    await handleQuestionImportAction(rejectButton, 'reject')
+    return
+  }
+  const replaceButton = event.target.closest('[data-question-import-replace]')
+  if (replaceButton) {
+    await prepareQuestionImportReplacement(replaceButton.dataset.questionImportReplace)
+    return
+  }
+  const removeButton = event.target.closest('[data-question-import-remove]')
+  if (removeButton) await removePublishedQuestionImport(removeButton)
+})
+
+questionImportPanel?.addEventListener('change', async (event) => {
+  const form = event.target.closest('[data-question-import-form]')
+  if (!form) return
+  if (event.target.name === 'organization_mode') {
+    updateQuestionImportOrganizationState(questionImportPanel)
+  } else if (event.target.name === 'subject_code') {
+    renderQuestionImportTopicOptions(form)
+    await refreshQuestionImportSources(form)
+  } else if (event.target.name === 'topic_label') {
+    if (form.elements.organization_group_label && !form.elements.organization_group_label.value.trim()) {
+      form.elements.organization_group_label.value = form.elements.topic_label.value
+    }
+    await refreshQuestionImportSources(form)
+  } else if (event.target.name === 'source_id') {
+    renderQuestionImportSourceFields(form)
+  }
+})
+
+questionImportPanel?.addEventListener('input', (event) => {
+  if (event.target.matches('[data-custom-part-field], [name="organization_target_size"]')) {
+    updateQuestionImportOrganizationState(questionImportPanel)
+  }
+})
+
+questionImportPanel?.addEventListener('submit', (event) => {
+  const form = event.target.closest('[data-question-import-form]')
+  if (!form) return
+  event.preventDefault()
+  saveQuestionImportForm(form)
 })
 
 document.addEventListener('dragstart', (event) => {

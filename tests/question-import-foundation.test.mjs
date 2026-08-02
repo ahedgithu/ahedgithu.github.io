@@ -1,0 +1,116 @@
+import assert from 'node:assert/strict'
+import { readFileSync } from 'node:fs'
+import test from 'node:test'
+
+const read = (path) => readFileSync(new URL(`../${path}`, import.meta.url), 'utf8')
+
+const foundation = read('supabase/migrations/20260802114030_add_question_import_foundation.sql')
+const hardening = read('supabase/migrations/20260802114023_harden_existing_function_access.sql')
+const foreignKeyIndexes = read('supabase/migrations/20260802114300_cover_question_scope_foreign_keys.sql')
+const management = read('supabase/migrations/20260802155301_manage_published_question_imports.sql')
+const main = read('src/main.js')
+const client = read('src/supabaseClient.js')
+const style = read('src/style.css')
+const index = read('index.html')
+
+test('question foundation defines canonical scoped tables, constraints, indexes, and RLS', () => {
+  for (const table of ['question_sources', 'question_imports', 'questions', 'question_choices', 'question_validation_issues']) {
+    assert.match(foundation, new RegExp(`create table public\\.${table}\\b`, 'i'))
+    assert.match(foundation, new RegExp(`alter table public\\.${table} enable row level security`, 'i'))
+    assert.match(foundation, new RegExp(`revoke all on table public\\.${table} from public, anon, authenticated`, 'i'))
+  }
+
+  assert.match(foundation, /question_type text not null default 'single_best_answer'/i)
+  assert.match(foundation, /status in \('draft', 'needs_review', 'ready', 'published', 'rejected'\)/i)
+  assert.match(foundation, /questions_published_scope_idx[\s\S]*where status = 'published'/i)
+  assert.match(foundation, /questions_fingerprint_idx/i)
+  assert.match(foundation, /questions_import_scope_fkey/i)
+  assert.match(foundation, /question_validation_question_import_fkey/i)
+  assert.match(foreignKeyIndexes, /question_imports_source_scope_idx/i)
+  assert.match(foreignKeyIndexes, /questions_import_scope_idx/i)
+  assert.match(foreignKeyIndexes, /questions_source_scope_idx/i)
+  assert.match(foreignKeyIndexes, /question_validation_question_import_idx/i)
+})
+
+test('question RLS isolates scoped admins and published student reads', () => {
+  assert.match(foundation, /admin_user\.allowed_university_id = p_university_id/i)
+  assert.match(foundation, /admin_user\.allowed_section = p_section/i)
+  assert.match(foundation, /preference\.selected_university = questions\.university_id/i)
+  assert.match(foundation, /preference\.selected_section = questions\.section/i)
+  assert.match(foundation, /status = 'published'/i)
+  assert.match(foundation, /security invoker[\s\S]*submit_question_import/i)
+  assert.match(foundation, /security invoker[\s\S]*publish_question_import/i)
+  assert.doesNotMatch(foundation, /grant[^;]+to anon/i)
+})
+
+test('server publication validates choice count, one answer, duplicate text, and blockers atomically', () => {
+  assert.match(foundation, /choice_summary\.choice_count not in \(4, 5\)/i)
+  assert.match(foundation, /choice_summary\.correct_count <> 1/i)
+  assert.match(foundation, /distinct_choice_count <> choice_summary\.choice_count/i)
+  assert.match(foundation, /severity = 'blocking' and not resolved/i)
+  assert.match(foundation, /exact_existing_question_match/i)
+  assert.match(foundation, /set status = 'published'[\s\S]*published_at = now\(\)/i)
+})
+
+test('security hardening keeps intended scoped RPCs and closes internal function execution', () => {
+  assert.match(hardening, /alter function public\.touch_updated_at\(\) set search_path = ''/i)
+  assert.match(hardening, /alter function public\.set_user_progress_updated_at\(\) set search_path = ''/i)
+  assert.match(hardening, /revoke execute on function public\.handle_new_user\(\) from public, anon, authenticated/i)
+  assert.match(hardening, /revoke execute on function public\.rls_auto_enable\(\) from public, anon, authenticated/i)
+  assert.match(hardening, /grant execute on function public\.get_leaderboard\(text, text\) to authenticated/i)
+  assert.match(hardening, /private\.is_university_scope_authorized/i)
+})
+
+test('admin importer stays schema-gated and student loading preserves static fallback', () => {
+  assert.match(index, /id="tracker-admin-import" hidden/i)
+  assert.match(index, /id="question-import-panel"[\s\S]*aria-modal="true"/i)
+  assert.match(main, /refreshQuestionImportAvailability/i)
+  assert.match(main, /parseQuestionText\(rawText\)/i)
+  assert.match(main, /data-question-import-save>Save draft<\/button>/i)
+  assert.doesNotMatch(main, /data-question-import-save disabled/i)
+  assert.match(main, /No valid question blocks found\. Review the preview issues and try again\./i)
+  assert.match(main, /Draft saved, but not published yet\. Click Publish under Saved imports below\./i)
+  assert.match(main, /Drafts are not visible to students until you click Publish\./i)
+  assert.match(main, /exact_existing_question_match/i)
+  assert.match(main, /return \[\.\.\.staticSources, \.\.\.databaseSources\]/i)
+  assert.match(main, /if \(topic\) return topic\.mcqTopicKey \|\| topic\.label/i)
+  assert.match(main, /Published database questions unavailable; static MCQs remain active/i)
+  assert.match(client, /isMissingQuestionImportSchemaError/i)
+  assert.match(client, /filter\(\(issue\) => issue\.code !== 'exact_existing_question_match'\)/i)
+  assert.match(client, /submit_question_import/i)
+  assert.match(client, /publish_question_import/i)
+  assert.match(client, /remove_question_import/i)
+  assert.match(client, /replace_question_import/i)
+  assert.match(main, /data-question-import-replace/i)
+  assert.match(main, /data-question-import-remove/i)
+  assert.match(style, /\.question-import-panel__inner[\s\S]*color: var\(--ink, #172033\)[\s\S]*color-scheme: light/i)
+  assert.match(style, /\.question-import-row__actions button[\s\S]*color: var\(--ink, #172033\)/i)
+})
+
+test('published import management is scoped, atomic, and soft-removes old sets', () => {
+  assert.match(management, /create or replace function public\.remove_question_import/i)
+  assert.match(management, /create or replace function public\.replace_question_import/i)
+  assert.match(management, /security invoker/gi)
+  assert.match(management, /is_question_scope_admin\(v_import\.university_id, v_import\.section\)/i)
+  assert.match(management, /v_new_import_public_id := public\.submit_question_import/i)
+  assert.match(management, /public\.publish_question_import\(v_new_import_public_id\)/i)
+  assert.match(management, /set status = 'rejected'[\s\S]*published_at = null/i)
+  assert.match(management, /revoke execute on function public\.remove_question_import\(uuid\) from public, anon/i)
+  assert.match(management, /grant execute on function public\.replace_question_import\(uuid, text, text, jsonb, jsonb\) to authenticated/i)
+})
+
+test('topic-scoped admin importing exposes locked context and deterministic organization controls', () => {
+  assert.match(index, /id="tracker-admin-import" hidden>Manage imports<\/button>/i)
+  assert.match(main, /questionImportState\.available \? `[\s\S]*data-admin-add-mcqs[\s\S]*Add MCQs/i)
+  assert.match(main, /openQuestionImportPanel\(\{[\s\S]*subjectCode: card\.dataset\.adminSubject,[\s\S]*topicLabel: card\.dataset\.adminTopic/i)
+  assert.match(main, /form\.elements\.subject_code\.disabled = true[\s\S]*form\.elements\.topic_label\.disabled = true/i)
+  assert.match(main, /Quiz organization[\s\S]*One set[\s\S]*Split evenly[\s\S]*Custom named parts/i)
+  assert.match(main, /data-custom-part-add/i)
+  assert.match(main, /data-custom-part-move/i)
+  assert.match(main, /data-custom-part-remove/i)
+  assert.match(main, /issues: parsed\.issues,[\s\S]*organization/i)
+  assert.match(style, /\[data-admin-add-mcqs\][\s\S]*linear-gradient[\s\S]*translateY\(-1px\)/i)
+  assert.match(style, /\.question-import-org__details\[hidden\]\s*\{[\s\S]*display: none/i)
+  assert.match(style, /@media \(max-width: 640px\)[\s\S]*\.custom-part-row[\s\S]*flex-direction: column/i)
+  assert.match(style, /@media \(prefers-reduced-motion: reduce\)[\s\S]*\.tracker-admin-topic-controls button/i)
+})
